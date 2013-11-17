@@ -1073,31 +1073,18 @@ local function Shared(self, unit)
 		local mhpb = CreateFrame("StatusBar", nil, self.Health)
 		mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		if unit == "player" or unit == "target" then
-			mhpb:SetWidth(217)
-		elseif unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget" then
-			mhpb:SetWidth(105)
-		else
-			mhpb:SetWidth(150)
-		end
 		mhpb:SetStatusBarTexture(C.media.texture)
 		mhpb:SetStatusBarColor(0, 1, 0.5, 0.2)
 
 		local ohpb = CreateFrame("StatusBar", nil, self.Health)
 		ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		ohpb:SetWidth(mhpb:GetWidth())
 		ohpb:SetStatusBarTexture(C.media.texture)
 		ohpb:SetStatusBarColor(0, 1, 0, 0.2)
 
 		self.HealPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
-			maxOverflow = 1,
-			PostUpdate = function(frame)
-				if frame.myBar:GetValue() == 0 then frame.myBar:SetAlpha(0) else frame.myBar:SetAlpha(1) end
-				if frame.otherBar:GetValue() == 0 then frame.otherBar:SetAlpha(0) else frame.otherBar:SetAlpha(1) end
-			end
 		}
 	end
 

@@ -180,33 +180,20 @@ local function Shared(self, unit)
 		local mhpb = CreateFrame("StatusBar", nil, self.Health)
 		if C.raidframe.vertical_health == true then
 			mhpb:SetOrientation("VERTICAL")
-			mhpb:SetPoint("BOTTOM", self.Health:GetStatusBarTexture(), "TOP", 0, 0)
-			mhpb:SetHeight(unit_height)
-		else
-			mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-			mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		end
-		mhpb:SetWidth(unit_width)
 		mhpb:SetStatusBarTexture(C.media.texture)
 		mhpb:SetStatusBarColor(0, 1, 0.5, 0.2)
 
 		local ohpb = CreateFrame("StatusBar", nil, self.Health)
 		if C.raidframe.vertical_health == true then
 			ohpb:SetOrientation("VERTICAL")
-			ohpb:SetPoint("BOTTOM", mhpb:GetStatusBarTexture(), "TOP", 0, 0)
-			ohpb:SetHeight(unit_height)
-		else
-			ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-			ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		end
-		ohpb:SetWidth(unit_width)
 		ohpb:SetStatusBarTexture(C.media.texture)
 		ohpb:SetStatusBarColor(0, 1, 0, 0.2)
 
 		self.HealPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
-			maxOverflow = 1,
 		}
 
 		--self.IncHeal = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)

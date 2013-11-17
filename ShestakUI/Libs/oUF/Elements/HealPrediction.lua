@@ -1,6 +1,33 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local function UpdateFillBar(frame, previousTexture, bar, amount)
+	if amount == 0 then
+		bar:Hide()
+		return previousTexture
+	end
+
+	local totalWidth, totalHeight = frame.Health:GetSize()
+	local _, totalMax = frame.Health:GetMinMaxValues()
+	local orientation = frame.Health:GetOrientation()
+
+	if orientation == "HORIZONTAL" then
+		local barSize = (amount / totalMax) * totalWidth
+		bar:SetWidth(barSize)
+		bar:SetPoint("TOPLEFT", previousTexture, "TOPRIGHT")
+		bar:SetPoint("BOTTOMLEFT", previousTexture, "BOTTOMRIGHT")
+	else
+		local barSize = (amount / totalMax) * totalHeight
+		bar:SetHeight(barSize)
+		bar:SetPoint("BOTTOMRIGHT", previousTexture, "TOPRIGHT")
+		bar:SetPoint("BOTTOMLEFT", previousTexture, "TOPLEFT")
+	end
+
+	bar:Show()
+
+	return bar
+end
+
 local function Update(self, event, unit)
 	if(self.unit ~= unit) then return end
 
@@ -9,10 +36,11 @@ local function Update(self, event, unit)
 
 	local myIncomingHeal = UnitGetIncomingHeals(unit, 'player') or 0
 	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
+
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 
-	if(health + allIncomingHeal > maxHealth * hp.maxOverflow) then
-		allIncomingHeal = maxHealth * hp.maxOverflow - health
+	if(health + allIncomingHeal > maxHealth) then
+		allIncomingHeal = maxHealth - health
 	end
 
 	if(allIncomingHeal < myIncomingHeal) then
@@ -22,17 +50,10 @@ local function Update(self, event, unit)
 		allIncomingHeal = allIncomingHeal - myIncomingHeal
 	end
 
-	if(hp.myBar) then
-		hp.myBar:SetMinMaxValues(0, maxHealth)
-		hp.myBar:SetValue(myIncomingHeal)
-		hp.myBar:Show()
-	end
+	local previousTexture = self.Health:GetStatusBarTexture()
 
-	if(hp.otherBar) then
-		hp.otherBar:SetMinMaxValues(0, maxHealth)
-		hp.otherBar:SetValue(allIncomingHeal)
-		hp.otherBar:Show()
-	end
+	previousTexture = UpdateFillBar(self, previousTexture, hp.myBar, myIncomingHeal)
+	previousTexture = UpdateFillBar(self, previousTexture, hp.otherBar, allIncomingHeal)
 
 	if(hp.PostUpdate) then
 		return hp:PostUpdate(unit)
@@ -56,10 +77,6 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 		self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
-
-		if(not hp.maxOverflow) then
-			hp.maxOverflow = 1.05
-		end
 
 		return true
 	end

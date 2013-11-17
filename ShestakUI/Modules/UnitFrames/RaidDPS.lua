@@ -218,29 +218,16 @@ local function Shared(self, unit)
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
 		local mhpb = CreateFrame("StatusBar", nil, self.Health)
-		mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		if unit == "party" then
-			mhpb:SetWidth(party_width)
-		elseif unit == "raid" then
-			mhpb:SetWidth(unit_width)
-		else
-			mhpb:SetWidth(partytarget_width)
-		end
 		mhpb:SetStatusBarTexture(C.media.texture)
 		mhpb:SetStatusBarColor(0, 1, 0.5, 0.2)
 
 		local ohpb = CreateFrame("StatusBar", nil, self.Health)
-		ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		ohpb:SetWidth(mhpb:GetWidth())
 		ohpb:SetStatusBarTexture(C.media.texture)
 		ohpb:SetStatusBarColor(0, 1, 0, 0.2)
 
 		self.HealPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
-			maxOverflow = 1,
 		}
 	end
 
