@@ -3,6 +3,5 @@
 Discord: https://discord.com/invite/vwHwnTt
 * [Skins] Fixed PremadeGroupsFilter skin.
 * [Skins] Added ckeck in ProfessionsOrders for AllocateBestQualityCheckBox.
-* Commits on Mar 18, 2023
-[Skins] Attemt to fix PvPMatch reward error.
+* [Skins] Attemt to fix PvPMatch reward error.
 * Some cleanup, changes and fixes.
