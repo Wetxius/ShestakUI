@@ -331,12 +331,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		StackSplitFrame.CancelButton:SkinButton()
 
 		if C.skins.blizzard_frames == true then
-			-- Social Browser frame
-			SocialBrowserFrame:StripTextures()
-			SocialBrowserFrame:SetTemplate("Transparent")
-			T.SkinCloseButton(SocialBrowserFrame.CloseButton)
-			SocialBrowserFrame.CloseButton:SetSize(16, 16)
-
 			-- What's new frame
 			SplashFrame:CreateBackdrop("Transparent")
 			SplashFrame.BottomCloseButton:SkinButton()
