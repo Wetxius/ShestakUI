@@ -7,7 +7,7 @@
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
 
-## X-Website: http://shestak.org
+## X-Website: https://github.com/Wetxius/ShestakUI
 ## X-Credits: Haleth, Solor
 ## X-Thanks: Tryllemann, Wetxius
 

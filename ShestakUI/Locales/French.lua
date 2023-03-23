@@ -184,7 +184,7 @@ L_POPUP_ARMORY = "Armurerie"
 
 -- Welcome message
 L_WELCOME_LINE_1 = "Bienvenue sur ShestakUI "
-L_WELCOME_LINE_2_1 = "Tapez /cfg pour configurer l'interface, ou visitez http://shestak.org"
+L_WELCOME_LINE_2_1 = "Tapez /cfg pour configurer l'interface, ou visitez https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 L_WELCOME_LINE_2_2 = "pour plus d'informations"
 
 -- Combat text
