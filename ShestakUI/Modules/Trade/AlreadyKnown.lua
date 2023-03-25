@@ -235,8 +235,7 @@ if IsAddOnLoaded("Blizzard_GuildBankUI") then
 end
 
 -- Auction frame
-local function AuctionHouseFrame_RefreshScrollFrame(self)
-	-- Derived from https://www.townlong-yak.com/framexml/10.0.0/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseItemList.lua#322
+local function _hookNewAH(self)
 	self.ScrollBox:ForEachFrame(function(button)
 		if button.rowData.itemKey.itemID then
 			local itemLink
@@ -253,13 +252,11 @@ local function AuctionHouseFrame_RefreshScrollFrame(self)
 				button.SelectedHighlight:SetAlpha(.2)
 				-- Icon
 				button.cells[2].Icon:SetVertexColor(color.r, color.g, color.b)
-				button.cells[2].IconBorder:SetVertexColor(color.r, color.g, color.b)
 			else
 				-- Highlight
 				button.SelectedHighlight:SetVertexColor(1, 1, 1)
 				-- Icon
 				button.cells[2].Icon:SetVertexColor(1, 1, 1)
-				button.cells[2].IconBorder:SetVertexColor(1, 1, 1)
 			end
 		end
 	end)
@@ -302,7 +299,8 @@ if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard
 			hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
 		elseif addon == "Blizzard_AuctionHouseUI" then
 			isBlizzard_AuctionUILoaded = true
-			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)
+			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", _hookNewAH)
+			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "OnScrollBoxRangeChanged", _hookNewAH)
 		elseif addon == "Blizzard_BlackMarketUI" then
 			isBlizzard_BlackMarketUILoaded = true
 			hooksecurefunc("BlackMarketFrame_UpdateHotItem", BlackMarketFrame_UpdateHotItem)
