@@ -7,4 +7,6 @@
 * Updated AutoAccept quest.
 * Updated AlreadyKnown and fix auction item color.
 * Updated oUF.
+* [Skins] Added color for new type of gems.
+* Fixed BattlefieldMap error.
 * Some cleanup, changes and fixes.
