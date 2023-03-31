@@ -9,4 +9,6 @@
 * Updated oUF.
 * [Skins] Added color for new type of gems.
 * Fixed BattlefieldMap error.
+* Added check for castbar to prevent error with raid reposition.
+* [Filger] Added "Anti-Magic Zone" buff.
 * Some cleanup, changes and fixes.
