@@ -49,7 +49,7 @@ L_MISC_BUY_STACK = "Alt+右键批量购买"
 L_MISC_HEADER_MARK = "鼠标悬停显示团队图标"
 L_MISC_BINDER_OPEN = "鼠标绑定"
 L_MISC_SCROLL = "附魔羊皮纸"
-L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
+L_MISC_HEADER_QUEST = "任务道具按钮"
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "解散团队"
@@ -88,8 +88,8 @@ L_MINIMAP_FARM = "小地图缩放"
 L_MINIMAP_TOGGLE = "动作条自由折叠"
 
 -- Chat
-L_CHAT_WHISPER = "From"
-L_CHAT_BN_WHISPER = "From"
+L_CHAT_WHISPER = "来自"
+L_CHAT_BN_WHISPER = "来自"
 L_CHAT_AFK = "[AFK]"
 L_CHAT_DND = "[DND]"
 L_CHAT_GM = "[GM]"
