@@ -242,9 +242,11 @@ local function LoadSkin()
 	_G["ChatConfigCombatSettingsFiltersCopyFilterButton"]:SetPoint("RIGHT", _G["ChatConfigCombatSettingsFiltersDeleteButton"], "LEFT", -3, 0)
 	_G["ChatConfigCombatSettingsFiltersAddFilterButton"]:SetPoint("RIGHT", _G["ChatConfigCombatSettingsFiltersCopyFilterButton"], "LEFT", -3, 0)
 
-	ChatConfigFrame.ToggleChatButton:SkinButton()
-	ChatConfigFrame.ToggleChatButton:ClearAllPoints()
-	ChatConfigFrame.ToggleChatButton:SetPoint("LEFT", _G["ChatConfigFrameRedockButton"], "RIGHT", 3, 0)
+	if not T.newPatch then
+		ChatConfigFrame.ToggleChatButton:SkinButton()
+		ChatConfigFrame.ToggleChatButton:ClearAllPoints()
+		ChatConfigFrame.ToggleChatButton:SetPoint("LEFT", _G["ChatConfigFrameRedockButton"], "RIGHT", 3, 0)
+	end
 
 	T.SkinCheckBox(TextToSpeechCharacterSpecificButton, 25)
 

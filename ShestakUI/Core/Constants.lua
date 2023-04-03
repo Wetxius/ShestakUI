@@ -3,6 +3,8 @@
 ----------------------------------------------------------------------------------------
 --	ShestakUI variables
 ----------------------------------------------------------------------------------------
+GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+
 T.dummy = function() return end
 T.name = UnitName("player")
 T.class = select(2, UnitClass("player"))
@@ -12,7 +14,7 @@ T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
-T.newPatch = select(4, GetBuildInfo()) >= 100005
+T.newPatch = select(4, GetBuildInfo()) >= 100100
 
 -- BETA
 GetContainerItemInfo = function(bagIndex, slotIndex)

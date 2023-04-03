@@ -43,7 +43,10 @@ local function LoadSkin()
 	}
 
 	for i = 1, #KillTextures do
-		KillTextures[i]:Kill()
+		local frame = KillTextures[i]
+		if frame then
+			frame:Kill()
+		end
 	end
 
 	local buttons = {
@@ -322,9 +325,11 @@ local function LoadSkin()
 	T.SkinCloseButton(LFGDungeonReadyStatusCloseButton, nil, "-")
 	T.SkinCloseButton(LFGDungeonReadyDialogCloseButton, LFGDungeonReadyDialog, "-")
 
-	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
-	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
-	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
+	if not T.newPatch then
+		LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
+		LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
+		LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
+	end
 
 	LFGInvitePopup:StripTextures()
 	LFGInvitePopup:SetTemplate("Transparent")
