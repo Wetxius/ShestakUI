@@ -430,6 +430,8 @@ function T.SkinScrollBar(frame, minimal)
 	local ThumbTexture = frame.ThumbTexture or frame.thumbTexture or _G[frameName and frameName.."ThumbTexture"]
 	local newThumb = frame.Back and frame:GetThumb()
 
+	if T.newPatch then minimal = true end
+
 	if UpButton and DownButton then
 		if not UpButton.icon then
 			T.SkinNextPrevButton(UpButton, nil, "Up")
@@ -483,6 +485,7 @@ function T.SkinScrollBar(frame, minimal)
 				frame.Track:DisableDrawLayer("ARTWORK")
 			end
 			newThumb:DisableDrawLayer("BACKGROUND")
+			newThumb:DisableDrawLayer("ARTWORK")
 			if not frame.thumbbg then
 				frame.thumbbg = CreateFrame("Frame", nil, frame)
 				frame.thumbbg:SetPoint("TOPLEFT", newThumb, "TOPLEFT", 0, -3)
