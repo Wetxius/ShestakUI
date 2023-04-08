@@ -12,4 +12,7 @@
 * [Chat] Possible fix for FadeCombat error.
 * [10.1.0] Communities, EventTrace, Quest skin fixes.
 * [LiteStats] Hide null coords and reposition location inside instance.
+* Change debug message when spell id incorrect.
+* [Skins] Added new AlertFrames.
+* [10.1.0] Fixed Mail and EditorManager skins.
 * Some cleanup, changes and fixes.
