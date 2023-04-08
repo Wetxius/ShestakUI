@@ -1,14 +1,15 @@
-9.2.1 ===> 9.2.2
+9.2.2 ===> 9.2.3
 
-* Removed CheckVersion function.
-* Updated Licenses.
-* Updated GitHub link and replace site page.
-* Updated FogOfWar data.
-* Updated AutoAccept quest.
-* Updated AlreadyKnown and fix auction item color.
-* Updated oUF.
-* [Skins] Added color for new type of gems.
-* Fixed BattlefieldMap error.
-* Added check for castbar to prevent error with raid reposition.
-* [Filger] Added "Anti-Magic Zone" buff.
+* Updated Chinese and Taiwan locales by Joe.
+* [GUI] Adjusted text width for some checkboxes.
+* Prepare for 10.1.0.
+* Removed "Hide Maw Buffs frame in instances" option.
+* More fixes for 10.1.0.
+* Added custom size for ChatBubbles skin. (C.skins.bubbles_offset)
+* Fixed loot in 10.1.0.
+* [10.1.0] Added skin for new AddonList icons. Reduce scrollbar width.
+* [10.1.0] Updated Professions skin.
+* [Chat] Possible fix for FadeCombat error.
+* [10.1.0] Communities, EventTrace, Quest skin fixes.
+* [LiteStats] Hide null coords and reposition location inside instance.
 * Some cleanup, changes and fixes.
