@@ -330,7 +330,7 @@ end
 for spell in pairs(T.RaidSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
+		print("|cffff0000ShestakUI: RaidCD spell ID ["..tostring(spell).."] no longer exists!|r")
 	end
 end
 

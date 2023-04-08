@@ -208,7 +208,7 @@ end
 for spell in pairs(T.DiminishingSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
+		print("|cffff0000ShestakUI: DiminishingCD spell ID ["..tostring(spell).."] no longer exists!|r")
 	end
 end
 
