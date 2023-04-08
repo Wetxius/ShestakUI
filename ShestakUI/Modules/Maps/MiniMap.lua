@@ -410,7 +410,7 @@ if C.minimap.on_top then
 		local positionTable = T.CurrentProfile()
 		if LP_Coords then
 			LP_Coords:ClearAllPoints()
-			LP_Coords:SetPoint("BOTTOMRIGHT", MinimapAnchor, "TOPRIGHT", 0, 5)
+			LP_Coords:SetPoint("BOTTOMRIGHT", MinimapAnchor, "TOPRIGHT", 4, 5)
 		end
 		if TeleportMenu then
 			TeleportMenu:ClearAllPoints()
