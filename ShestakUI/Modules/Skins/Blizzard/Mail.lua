@@ -53,7 +53,9 @@ local function LoadSkin()
 	SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
 	SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
 
-	if not T.newPatch then
+	if T.newPatch then
+		T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
+	else
 		T.SkinScrollBar(SendMailScrollFrameScrollBar)
 	end
 
@@ -125,7 +127,9 @@ local function LoadSkin()
 	OpenMailScrollFrame.backdrop:SetPoint("TOPLEFT", 5, 5)
 	OpenMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, -5)
 
-	if not T.newPatch then
+	if T.newPatch then
+		T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
+	else
 		T.SkinScrollBar(OpenMailScrollFrameScrollBar)
 	end
 
