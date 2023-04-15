@@ -15,4 +15,14 @@
 * Change debug message when spell id incorrect.
 * [Skins] Added new AlertFrames.
 * [10.1.0] Fixed Mail and EditorManager skins.
+* Fixed Valdrakken portal index
+* Updated Mount macro to support dragon riding mouns.
+* [10.1.0] Fixed scroll in Macro skin.
+* [GUI] Tweak width for some text elements.
+* [LiteStats] Prevent division by zero in xp.
+* [ObjectiveTracker] Attempt to hide texture for progressBar.
+* [Announcements] Added "Ethereal Transmorpher".
+* Fixed ComboPoints for Druid.
+* Hide QuestScrollFrame.Edge in 10.1.0.
+* MawBuffsBelowMinimapFrame not exist in 10.1.0.
 * Some cleanup, changes and fixes.
