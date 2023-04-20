@@ -177,7 +177,7 @@ if not NoTaint2_CleanStaticPopups then
         local stack = debugstack(4)
         --call from UIParent.lua if ( not frame or frame:IsShown() ) then
         --different when hooked
-        if stack:find('[string "=[C]"]: in function `ShowUIPanel\'\n', 1, true) then
+        if stack and stack:find('[string "=[C]"]: in function `ShowUIPanel\'\n', 1, true) then
             cleanAll()
         end
     end)
