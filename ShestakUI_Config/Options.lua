@@ -1484,6 +1484,7 @@ do
 		{"omen"},
 		{"opie"},
 		{"ovale"},
+		{"plater"},
 		{"postal"},
 		{"recount"},
 		{"rematch"},
