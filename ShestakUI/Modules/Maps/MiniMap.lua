@@ -55,6 +55,15 @@ frame:SetScript("OnEvent", function(self, event)
 	QueueStatusButton:SetParent(Minimap)
 	QueueStatusButton:SetScale(0.5)
 
+	if T.newPatch then
+		hooksecurefunc(QueueStatusButton, "SetPoint", function(self, _, anchor)
+			if anchor ~= Minimap then
+				self:ClearAllPoints()
+				self:SetPoint("TOP", Minimap, "TOP", 1, -1)
+			end
+		end)
+	end
+
 	-- Invites icon
 	local InviteTexture = GameTimeCalendarInvitesTexture
 	InviteTexture:ClearAllPoints()
