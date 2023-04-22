@@ -785,8 +785,6 @@ C["filger_spells"] = {
 			{spellID = 264735, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fortitude of the Bear
 			{spellID = 272679, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Feign Death
-			{spellID = 5384, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -835,7 +833,7 @@ C["filger_spells"] = {
 			-- Black Arrow
 			{spellID = 194599, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Serpent Sting
-			--{spellID = 87935, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 87935, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Lacerate
 			{spellID = 185855, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- A Murder of Crows
@@ -913,6 +911,8 @@ C["filger_spells"] = {
 			{spellID = 82726, filter = "CD"},
 			-- Misdirection
 			{spellID = 34477, filter = "CD"},
+			-- Feign Death
+			{spellID = 5384, filter = "CD"},
 			-- Explosive Trap
 			{spellID = 13813, filter = "CD"},
 			-- Freezing Trap
