@@ -913,8 +913,6 @@ C["filger_spells"] = {
 			{spellID = 82726, filter = "CD"},
 			-- Misdirection
 			{spellID = 34477, filter = "CD"},
-			-- Feign Death
-			{spellID = 5384, filter = "CD"},
 			-- Explosive Trap
 			{spellID = 13813, filter = "CD"},
 			-- Freezing Trap
