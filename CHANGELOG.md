@@ -21,4 +21,8 @@
 * [CastBar] Show empower texture only for player.
 * [GUI} Added new option "Icon for focus castbar". Possible variants: icon, icon with bar, hide icon.
 * [10.1.0] Added new scrolls for Quest skin.
+* [Skins] Reduce width for new scrollbar and show Blizzard arrows.
+* [Skins] Change ClassTalentFrame.SpecTab.backdrop.overlay color.
+* [Skins] Reduce height for FriendsFrameBattlenetFrame.BroadcastFrame.EditBox.
+* [Skins] Added skin for EncounterJournalMonthlyActivitiesFrame.
 * Some cleanup, changes and fixes.
