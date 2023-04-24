@@ -26,7 +26,7 @@ frame:SetScript("OnEvent", function()
 	_G.ActionBarController:UnregisterAllEvents()
 	_G.ActionBarController:RegisterEvent("SETTINGS_LOADED") -- this is needed for page controller to spawn properly
 	_G.ActionBarController:RegisterEvent("UPDATE_EXTRA_ACTIONBAR") -- this is needed to let the ExtraActionBar show
-	_G.ActionBarActionEventsFrame:UnregisterAllEvents()
+	-- _G.ActionBarActionEventsFrame:UnregisterAllEvents() -- It breaks proc highlight
 
 	if not C.actionbar.micromenu then
 		MicroMenu:Hide()
