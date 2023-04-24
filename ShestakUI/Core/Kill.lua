@@ -6,26 +6,11 @@ local T, C, L, _ = unpack(select(2, ...))
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(_, _, addon)
-	if addon == "Blizzard_AchievementUI" then
-		if C.tooltip.enable then
-			--BETA hooksecurefunc("AchievementFrameCategories_DisplayButton", function(button) button.showTooltipFunc = nil end)
-		end
-	end
-
 	if ClassPowerBar then
 		ClassPowerBar.OnEvent = T.dummy -- Fix error with druid on logon
 	end
 
 	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
-		--BETA InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
-		-- InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
-		-- if not InCombatLockdown() then
-			-- CompactRaidFrameManager:Kill()
-			-- CompactRaidFrameContainer:Kill()
-		-- end
-		-- ShowPartyFrame = T.dummy
-		-- HidePartyFrame = T.dummy
-		-- CompactUnitFrameProfiles_ApplyProfile = T.dummy
 		if CompactRaidFrameManager then
 			local function HideFrames()
 				CompactRaidFrameManager:UnregisterAllEvents()
@@ -47,8 +32,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end
 	end
 
-	--BETA Display_UseUIScale:Kill()
-	-- Display_UIScaleSlider:Kill()
 	TutorialFrameAlertButton:Kill()
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
@@ -56,10 +39,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_TALENT_CHANGES, true)
 
 	SetCVar("countdownForCooldowns", 0)
-	--BETA InterfaceOptionsActionBarsPanelCountdownCooldowns:Hide()
 
 	if C.chat.enable then
-		--BETA InterfaceOptionsSocialPanelChatStyle:Hide()
 		SetCVar("chatStyle", "im")
 	end
 
@@ -67,21 +48,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		if T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune ~= true then
 			RuneFrame:Kill()
 		end
-		--BETA InterfaceOptionsDisplayPanelDisplayDropDown:Hide()
-		--BETA InterfaceOptionsCombatPanelTargetOfTarget:Hide()
 		SetCVar("showPartyBackground", 0)
-	end
-
-	if C.actionbar.enable then
-		--BETA InterfaceOptionsActionBarsPanelBottomLeft:Hide()
-		-- InterfaceOptionsActionBarsPanelBottomRight:Hide()
-		-- InterfaceOptionsActionBarsPanelRight:Hide()
-		-- InterfaceOptionsActionBarsPanelRightTwo:Hide()
-		-- InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Hide()
-		-- InterfaceOptionsActionBarsPanelStackRightBars:Hide()
-		-- if not InCombatLockdown() then
-			-- SetCVar("multiBarRightVerticalLayout", 0) -- removed?
-		-- end
 	end
 
 	if C.nameplate.enable then
@@ -89,7 +56,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.minimap.enable then
-		--BETA InterfaceOptionsDisplayPanelRotateMinimap:Hide()
 		SetCVar("minimapTrackingShowAll", 1)
 	end
 
@@ -99,7 +65,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.combattext.enable then
-		--BETA InterfaceOptionsCombatPanelEnableFloatingCombatText:Hide()
 		if C.combattext.incoming then
 			SetCVar("enableFloatingCombatText", 1)
 		else
