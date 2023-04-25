@@ -22,12 +22,6 @@ frame:SetScript("OnEvent", function()
 	BagsBar:Hide()
 	BagsBar:UnregisterAllEvents()
 
-	-- Fixed possible taints (from NDui)
-	_G.ActionBarController:UnregisterAllEvents()
-	_G.ActionBarController:RegisterEvent("SETTINGS_LOADED") -- this is needed for page controller to spawn properly
-	_G.ActionBarController:RegisterEvent("UPDATE_EXTRA_ACTIONBAR") -- this is needed to let the ExtraActionBar show
-	-- _G.ActionBarActionEventsFrame:UnregisterAllEvents() -- It breaks proc highlight
-
 	if not C.actionbar.micromenu then
 		MicroMenu:Hide()
 	end
@@ -68,6 +62,10 @@ frame:SetScript("OnEvent", function()
 	hooksecurefunc("TalentFrame_LoadUI", function()
 		PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	end)
+
+	-- Fixed SetPointBase and ShowBase taints after finish Pet Battle, entering new combat and summon Hunter pet.
+	ActionBarController:UnregisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	ActionBarController:UnregisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 end)
 
 ----------------------------------------------------------------------------------------
