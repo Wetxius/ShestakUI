@@ -7,5 +7,6 @@ move-folders:
     ShestakUI/ShestakUI_Config: ShestakUI_Config
     
 ignore:
+  - .github/*
   - README.md
   - CHANGELOG.md
