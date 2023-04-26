@@ -1,21 +1,28 @@
-name: Generate changelog
+name: Package addon
 
 on:
   push:
+    branches:
+      - main
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - '*.*.*'
+      - '!*.*.*-*'
+    paths-ignore:
+      - '.github/**'
 
 jobs:
-  generate-changelog:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@v1
-      with:
-        REPO_NAME: '<YourUserName>/<YourRepoName>'
-        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        PATH: 'CHANGELOG.md'
-        COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
-        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
+      - name: Checkout addon
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Package
+        uses: BigWigsMods/packager@master
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
