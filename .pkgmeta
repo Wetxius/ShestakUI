@@ -1,7 +1,5 @@
 package-as: ShestakUI
 
-manual-changelog: CHANGELOG.md
-
 move-folders:
     ShestakUI/ShestakUI: ShestakUI
     ShestakUI/ShestakUI_Config: ShestakUI_Config
@@ -9,4 +7,3 @@ move-folders:
 ignore:
   - .github/*
   - README.md
-  - CHANGELOG.md
