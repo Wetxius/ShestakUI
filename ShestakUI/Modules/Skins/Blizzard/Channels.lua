@@ -18,6 +18,7 @@ local function LoadSkin()
 
 	CreateChannelPopup:StripTextures()
 	CreateChannelPopup:CreateBackdrop("Transparent")
+	CreateChannelPopup.Header:StripTextures()
 
 	CreateChannelPopup.OKButton:SkinButton()
 	CreateChannelPopup.CancelButton:SkinButton()
