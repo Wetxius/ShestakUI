@@ -1,8 +1,8 @@
-## Interface: 100007
+## Interface: 100100
 ## Title: ShestakUI Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 9.24
+## Version: 9.25
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
