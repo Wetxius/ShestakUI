@@ -7,3 +7,5 @@ move-folders:
 ignore:
   - .github/*
   - README.md
+  - */CHANGELOG.md
+  - CHANGELOG.md
