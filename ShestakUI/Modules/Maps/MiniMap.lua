@@ -139,6 +139,8 @@ Minimap:SetQuestBlobRingScalar(0)
 -- Hide Zone Frame
 MinimapCluster.ZoneTextButton:Hide()
 
+AddonCompartmentFrame:Kill()
+
 -- Garrison icon
 if C.minimap.garrison_icon == true then
 	ExpansionLandingPageMinimapButton:SetScale(0.6)
