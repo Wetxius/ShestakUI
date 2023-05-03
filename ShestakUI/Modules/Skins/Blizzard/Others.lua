@@ -32,7 +32,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"LFDReadyCheckPopup",
 			"GuildInviteFrame",
 			"RolePollPopup",
-			"BaudErrorFrame",
 			"OpacityFrame",
 			"GeneralDockManagerOverflowButtonList",
 			"QueueStatusFrame",
@@ -51,18 +50,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			local frame = _G[bgskins[i]]
 			if frame then
 				frame:SetTemplate("Transparent")
-			end
-		end
-
-		local insetskins = {
-			"BaudErrorFrameListScrollBox",
-			"BaudErrorFrameDetailScrollBox"
-		}
-
-		for i = 1, getn(insetskins) do
-			local frame = _G[insetskins[i]]
-			if frame then
-				frame:SetTemplate("Overlay")
 			end
 		end
 
@@ -252,8 +239,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"ReadyCheckFrameNoButton",
 			"ColorPickerOkayButton",
 			"ColorPickerCancelButton",
-			"BaudErrorFrameClearButton",
-			"BaudErrorFrameCloseButton",
 			"GuildInviteFrameJoinButton",
 			"GuildInviteFrameDeclineButton",
 			"RolePollPopupAcceptButton",
@@ -284,24 +269,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end
 		LFDReadyCheckPopup.YesButton:SkinButton(true)
 		LFDReadyCheckPopup.NoButton:SkinButton(true)
-
-		-- Reskin scrollbars
-		local scrollbars = {
-			"BaudErrorFrameListScrollBoxScrollBarScrollBar",
-			"BaudErrorFrameDetailScrollFrameScrollBar"
-		}
-
-		for _, scrollbar in pairs(scrollbars) do
-			local bars = _G[scrollbar]
-			if bars then
-				T.SkinScrollBar(bars)
-			end
-		end
-
-		if T.newPatch then
-			T.SkinScrollBar(BaudErrorFrameDetailScrollFrame.ScrollBar)
-			T.SkinScrollBar(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
-		end
 
 		-- Button position or text
 		_G["ColorPickerOkayButton"]:ClearAllPoints()
