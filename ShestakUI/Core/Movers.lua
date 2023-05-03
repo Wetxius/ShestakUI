@@ -97,7 +97,7 @@ local movers = {}
 local placed = {
 	"Butsu",
 	"UIAltPowerBar",
-	"LootHistoryFrame",
+	"GroupLootHistoryFrame",
 	"stArchaeologyFrame",
 	"StuffingFrameBags",
 	"StuffingFrameBank",
