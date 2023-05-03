@@ -1042,14 +1042,11 @@ if durability.enabled then
 								for id = 1, 18 do
 									local data = C_TooltipInfo.GetInventoryItem(P, id)
 									if data then
-										local argVal = data.args and data.args[7]
-										if argVal and argVal.field == "repairCost" then
-											local cost = argVal.intVal
-											if cost ~= 0 and cost <= GetMoney() then
-												if not InRepairMode() then ShowRepairCursor() end
-												PickupInventoryItem(id)
-												total = total + cost
-											end
+										local cost = data.repairCost
+										if cost and cost ~= 0 and cost <= GetMoney() then
+											if not InRepairMode() then ShowRepairCursor() end
+											PickupInventoryItem(id)
+											total = total + cost
 										end
 									end
 								end
@@ -1084,13 +1081,10 @@ if durability.enabled then
 					local hex = gradient(perc)
 					GameTooltip:AddDoubleLine(durability.gear_icons and format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t %s", GetInventoryItemTexture(P, slot), t_icon, string) or string,format("|cffaaaaaa%s/%s | %s%s%%", dur, dmax, hex, floor(perc * 100)), 1, 1, 1)
 					local data = C_TooltipInfo.GetInventoryItem(P, slot)
-					if data then
-						local argVal = data.args and data.args[7]
-						if argVal and argVal.field == "repairCost" then
-							totalcost = totalcost + argVal.intVal
-							if totalcost > 0 then
-								nodur = false
-							end
+					if data and data.repairCost then
+						totalcost = totalcost + data.repairCost
+						if totalcost > 0 then
+							nodur = false
 						end
 					end
 				end
