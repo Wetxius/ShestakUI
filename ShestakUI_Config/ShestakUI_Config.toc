@@ -6,7 +6,7 @@
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
-## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Healer.tga
+## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Logo.tga
 
 ## X-Website: https://github.com/Wetxius/ShestakUI
 ## X-Credits: Haleth, Solor
