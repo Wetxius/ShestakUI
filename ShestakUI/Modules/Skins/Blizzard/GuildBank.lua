@@ -24,13 +24,8 @@ local function LoadSkin()
 
 	GuildBankFrame.WithdrawButton:SetPoint("RIGHT", GuildBankFrame.DepositButton, "LEFT", -2, 0)
 
-	GuildBankInfoScrollFrame:StripTextures()
-	GuildBankInfoScrollFrame:SetPoint("TOPLEFT", _G.GuildBankInfo, "TOPLEFT", -7, 12)
-	GuildBankInfoScrollFrame:SetWidth(_G.GuildBankInfoScrollFrame:GetWidth() - 8)
-	T.SkinScrollBar(GuildBankInfoScrollFrameScrollBar)
-	T.SkinScrollBar(GuildBankTransactionsScrollFrameScrollBar)
-	GuildBankInfoScrollFrame:SetHeight(GuildBankInfoScrollFrame:GetHeight() - 5)
-	GuildBankTransactionsScrollFrame:SetHeight(GuildBankTransactionsScrollFrame:GetHeight() - 5)
+	T.SkinScrollBar(GuildBankInfoScrollFrame.ScrollBar)
+	T.SkinScrollBar(GuildBankFrame.Log.ScrollBar)
 
 	GuildBankFrame.inset = CreateFrame("Frame", nil, GuildBankFrame)
 	GuildBankFrame.inset:SetTemplate("Overlay")
