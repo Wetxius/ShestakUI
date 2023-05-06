@@ -195,9 +195,12 @@ local function _getRealItemLevel(link, bag, slot)
 end
 
 function Stuffing:SlotUpdate(b)
-	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
-	texture = texture or 0
-	local clink = C_Container.GetContainerItemLink(b.bag, b.slot)
+	local info = C_Container.GetContainerItemInfo(b.bag, b.slot)
+	local count, locked, quality, clink
+	if info then
+		count, locked, quality, clink = info.stackCount, info.isLocked, info.quality, info.hyperlink
+	end
+	local texture = info and info.iconFileID or 0
 	local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	local itemIsUpgrade
@@ -239,13 +242,27 @@ function Stuffing:SlotUpdate(b)
 
 	if clink then
 		b.name, _, _, b.itemlevel, b.level, _, _, _, _, _, _, b.itemClassID, b.itemSubClassID = GetItemInfo(clink)
-		if not b.name then	-- Keystone bug
-			b.name = clink:match("%[(.-)%]") or ""
+
+		if C.bag.ilvl then
+			if info.itemID == 82800 then -- pet
+				local petID, petLevel, petName = strmatch(clink, "|H%w+:(%d+):(%d+):.-|h%[(.-)%]|h")
+				b.name = petName
+				b.itemlevel = petLevel
+				b.frame.text:SetText(b.itemlevel)
+			elseif info.itemID == 180653 or info.itemID == 187786 then -- keystone
+				b.itemlevel, b.name = strmatch(clink, "|H%w+:%d+:%d+:(%d+):.-|h%[(.-)%]|h")
+				b.itemlevel = tonumber(b.itemlevel) or 0
+				b.frame.text:SetText(b.itemlevel)
+			else
+				if b.itemlevel and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
+					b.itemlevel = _getRealItemLevel(clink, b.bag, b.slot) or b.itemlevel
+					b.frame.text:SetText(b.itemlevel)
+				end
+			end
 		end
 
-		if C.bag.ilvl == true and b.itemlevel and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
-			b.itemlevel = _getRealItemLevel(clink, b.bag, b.slot) or b.itemlevel
-			b.frame.text:SetText(b.itemlevel)
+		if not b.name then	-- Keystone bug (FIXME: maybe not needed as check before)
+			b.name = clink:match("%[(.-)%]") or ""
 		end
 
 		if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
