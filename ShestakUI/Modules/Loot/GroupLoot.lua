@@ -186,9 +186,17 @@ local function GetFrame()
 
 	local f = CreateRollFrame()
 	if pos == "TOP" then
-		f:SetPoint("TOPRIGHT", next(frames) and frames[#frames] or LootRollAnchor, "BOTTOMRIGHT", next(frames) and 0 or -2, next(frames) and -7 or -5)
+		if next(frames) then
+			f:SetPoint("TOPRIGHT", frames[#frames], "BOTTOMRIGHT", 0, -7)
+		else
+			f:SetPoint("TOPRIGHT", LootRollAnchor, "TOPRIGHT", -2, -2)
+		end
 	else
-		f:SetPoint("BOTTOMRIGHT", next(frames) and frames[#frames] or LootRollAnchor, "TOPRIGHT", next(frames) and 0 or -2, next(frames) and 7 or 5)
+		if next(frames) then
+			f:SetPoint("BOTTOMRIGHT", frames[#frames], "TOPRIGHT", 0, 7)
+		else
+			f:SetPoint("TOPRIGHT", LootRollAnchor, "TOPRIGHT", -2, -2)
+		end
 	end
 	table.insert(frames, f)
 	return f
@@ -298,7 +306,11 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 		return START_LOOT_ROLL(...)
 	end)
 
-	LootRollAnchor:SetPoint(unpack(C.position.group_loot))
+	if C.unitframe.enable and _G.oUF_Player then
+		LootRollAnchor:SetPoint(unpack(C.position.group_loot))
+	else
+		LootRollAnchor:SetPoint("BOTTOM", UIParent, "BOTTOM", -238, 470)
+	end
 end)
 
 local function testRoll(f)
