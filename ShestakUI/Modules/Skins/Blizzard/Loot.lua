@@ -7,44 +7,100 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	-- Loot History frame
 	GroupLootHistoryFrame:StripTextures()
-	GroupLootHistoryFrame:SetTemplate("Transparent")
+	GroupLootHistoryFrame:CreateBackdrop("Transparent")
 
 	T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
-	T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
 	T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
+	T.SkinDropDownBox(GroupLootHistoryFrame.EncounterDropDown)
 
-	GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
-	GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
-	GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
-	GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
+	GroupLootHistoryFrame.ResizeButton:StripTextures()
+	GroupLootHistoryFrame.ResizeButton:SetHeight(13)
 
-	local function UpdateLoots(self)
-		local numItems = C_LootHistory.GetNumItems()
-		for i = 1, numItems do
-			local frame = self.itemFrames[i]
+	do
+		local line1 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+		line1:SetTexture(C.media.blank)
+		line1:SetVertexColor(0.8, 0.8, 0.8)
+		line1:SetSize(30, T.mult)
+		line1:SetPoint("TOP", 0, -5)
 
-			if not frame.isSkinned then
-				local Icon = frame.Icon:GetTexture()
+		local line2 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+		line2:SetTexture(C.media.blank)
+		line2:SetVertexColor(0.8, 0.8, 0.8)
+		line2:SetSize(20, T.mult)
+		line2:SetPoint("TOP", 0, -8)
 
-				frame:StripTextures()
+		local line3 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+		line3:SetTexture(C.media.blank)
+		line3:SetVertexColor(0.8, 0.8, 0.8)
+		line3:SetSize(10, T.mult)
+		line3:SetPoint("TOP", 0, -11)
 
-				frame:CreateBackdrop("Default")
-				frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
-				frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
+		GroupLootHistoryFrame.ResizeButton:HookScript("OnEnter", function()
+			line1:SetVertexColor(unpack(C.media.classborder_color))
+			line2:SetVertexColor(unpack(C.media.classborder_color))
+			line3:SetVertexColor(unpack(C.media.classborder_color))
+		end)
 
-				frame.Icon:SetTexture(Icon)
-				frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				frame.Icon:SetParent(frame.backdrop)
+		GroupLootHistoryFrame.ResizeButton:HookScript("OnLeave", function()
+			line1:SetVertexColor(0.8, 0.8, 0.8)
+			line2:SetVertexColor(0.8, 0.8, 0.8)
+			line3:SetVertexColor(0.8, 0.8, 0.8)
+		end)
+	end
 
-				frame.isSkinned = true
-			end
+	hooksecurefunc(LootHistoryElementMixin, "Init", function(button)
+		local item = button.Item
+		if item and not item.styled then
+			item:StyleButton()
+			item:SetNormalTexture(0)
+			item:SetTemplate("Default")
+			item:SetSize(35, 35)
+
+			item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			item.icon:ClearAllPoints()
+			item.icon:SetPoint("TOPLEFT", 2, -2)
+			item.icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+			button:CreateBackdrop("Overlay")
+			button.backdrop:SetPoint("TOPLEFT", 0, 0)
+			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+
+			item.IconBorder:SetAlpha(0)
+			button.NameFrame:Hide()
+
+			item.styled = true
 		end
-	end
 
-	if not T.newPatch then
-		hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
-		GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
-	end
+		button.BorderFrame:SetAlpha(0)
+	end)
+
+	-- FIXME local function UpdateLoots(self)
+		-- local numItems = C_LootHistory.GetNumItems()
+		-- for i = 1, numItems do
+			-- local frame = self.itemFrames[i]
+
+			-- if not frame.isSkinned then
+				-- local Icon = frame.Icon:GetTexture()
+
+				-- frame:StripTextures()
+
+				-- frame:CreateBackdrop("Default")
+				-- frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
+				-- frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
+
+				-- frame.Icon:SetTexture(Icon)
+				-- frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				-- frame.Icon:SetParent(frame.backdrop)
+
+				-- frame.isSkinned = true
+			-- end
+		-- end
+	-- end
+
+	-- if not T.newPatch then
+		-- hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
+		-- GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
+	-- end
 
 	-- Master Looter frame
 	MasterLooterFrame:StripTextures()
