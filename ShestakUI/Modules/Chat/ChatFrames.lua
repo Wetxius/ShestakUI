@@ -251,6 +251,8 @@ local function SetupChatPosAndFont()
 				FCF_DockUpdate()
 			end
 		end
+
+		chat:SetScript("OnMouseWheel", FloatingChatFrame_OnMouseScroll)
 	end
 
 	-- Reposition Quick Join Toast and battle.net popup
