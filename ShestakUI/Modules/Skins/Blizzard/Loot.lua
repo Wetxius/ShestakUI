@@ -6,47 +6,54 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	-- Loot History frame
-	GroupLootHistoryFrame:StripTextures()
-	GroupLootHistoryFrame:CreateBackdrop("Transparent")
+	local frame = GroupLootHistoryFrame
+	frame:StripTextures()
+	frame:CreateBackdrop("Transparent")
 
-	T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
-	T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
-	T.SkinDropDownBox(GroupLootHistoryFrame.EncounterDropDown)
+	T.SkinCloseButton(frame.ClosePanelButton)
+	T.SkinScrollBar(frame.ScrollBar)
+	T.SkinDropDownBox(frame.EncounterDropDown)
 
-	GroupLootHistoryFrame.ResizeButton:StripTextures()
-	GroupLootHistoryFrame.ResizeButton:SetHeight(13)
+	frame.Timer:StripTextures()
+	frame.Timer:CreateBackdrop("Default")
+	frame.Timer.Fill:SetTexture(C.media.texture)
+	frame.Timer.Fill:SetVertexColor(1, 0.8, 0)
+	frame.Timer.Fill:SetPoint("LEFT", 0, 0)
+	frame.Timer.Background:SetTexture(C.media.texture)
+	frame.Timer.Background:SetVertexColor(1, 0.8, 0, 0.2)
 
-	do
-		local line1 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
-		line1:SetTexture(C.media.blank)
-		line1:SetVertexColor(0.8, 0.8, 0.8)
-		line1:SetSize(30, T.mult)
-		line1:SetPoint("TOP", 0, -5)
+	frame.ResizeButton:StripTextures()
+	frame.ResizeButton:SetHeight(13)
 
-		local line2 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
-		line2:SetTexture(C.media.blank)
-		line2:SetVertexColor(0.8, 0.8, 0.8)
-		line2:SetSize(20, T.mult)
-		line2:SetPoint("TOP", 0, -8)
-
-		local line3 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
-		line3:SetTexture(C.media.blank)
-		line3:SetVertexColor(0.8, 0.8, 0.8)
-		line3:SetSize(10, T.mult)
-		line3:SetPoint("TOP", 0, -11)
-
-		GroupLootHistoryFrame.ResizeButton:HookScript("OnEnter", function()
-			line1:SetVertexColor(unpack(C.media.classborder_color))
-			line2:SetVertexColor(unpack(C.media.classborder_color))
-			line3:SetVertexColor(unpack(C.media.classborder_color))
-		end)
-
-		GroupLootHistoryFrame.ResizeButton:HookScript("OnLeave", function()
-			line1:SetVertexColor(0.8, 0.8, 0.8)
-			line2:SetVertexColor(0.8, 0.8, 0.8)
-			line3:SetVertexColor(0.8, 0.8, 0.8)
-		end)
+	local lines = {}
+	for i = 1, 3 do
+		local l = frame.ResizeButton:CreateTexture()
+		l:SetTexture(C.media.blank)
+		l:SetVertexColor(0.8, 0.8, 0.8)
+		if i == 1 then
+			l:SetSize(30, T.mult)
+			l:SetPoint("TOP", 0, -5)
+		elseif i == 2 then
+			l:SetSize(20, T.mult)
+			l:SetPoint("TOP", 0, -8)
+		else
+			l:SetSize(10, T.mult)
+			l:SetPoint("TOP", 0, -11)
+		end
+		tinsert(lines, l)
 	end
+
+	frame.ResizeButton:HookScript("OnEnter", function()
+		for i = 1, #lines do
+			lines[i]:SetVertexColor(unpack(C.media.classborder_color))
+		end
+	end)
+
+	frame.ResizeButton:HookScript("OnLeave", function()
+		for i = 1, #lines do
+			lines[i]:SetVertexColor(0.8, 0.8, 0.8)
+		end
+	end)
 
 	hooksecurefunc(LootHistoryElementMixin, "Init", function(button)
 		local item = button.Item
@@ -99,7 +106,7 @@ local function LoadSkin()
 
 	-- if not T.newPatch then
 		-- hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
-		-- GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
+		-- frame:HookScript("OnShow", UpdateLoots)
 	-- end
 
 	-- Master Looter frame
