@@ -112,21 +112,57 @@ local function LoadSkin()
 			f.InnerBorder:SetAlpha(0)
 			f.SwatchBg:SetAlpha(0)
 		end
+
 		f:CreateBackdrop("Overlay")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
 		f.backdrop:SetOutside(f.Color, 2, 2)
 	end
+
+	local function ReskinCombatColourSwatch(f)
+		local SwatchBg = _G[f:GetName().."SwatchBg"]
+		if SwatchBg then
+			SwatchBg:SetAlpha(0)
+		end
+
+		f:CreateBackdrop("Overlay")
+		f:SetFrameLevel(f:GetFrameLevel() + 2)
+		f.backdrop:SetInside(f, 1, 1)
+	end
+
+	hooksecurefunc("ChatConfig_UpdateCheckboxes", function(frame)
+		if not FCF_GetCurrentChatFrame() then return end
+
+		if frame == ChatConfigTextToSpeechChannelSettingsLeft then -- init after
+			local nameString = frame:GetName().."CheckBox"
+			for index in ipairs(frame.checkBoxTable) do
+				local checkBoxName = nameString..index
+				local checkbox = _G[checkBoxName]
+				if checkbox and not checkbox.IsSkinned then
+					checkbox:StripTextures()
+
+					local bg = CreateFrame("Frame", nil, checkbox)
+					bg:SetPoint("TOPLEFT", 2, -1)
+					bg:SetPoint("BOTTOMRIGHT", -2, 1)
+					bg:SetTemplate("Overlay")
+
+					T.SkinCheckBox(_G[checkBoxName.."Check"])
+					checkbox.IsSkinned = true
+				end
+			end
+		end
+	end)
 
 	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
 		if frame.styled then return end
 
 		local checkBoxNameString = frame:GetName().."CheckBox"
 
-		if checkBoxTemplate == "ChatConfigCheckBoxTemplate" or checkBoxTemplate == "ChatConfigCheckBoxSmallTemplate" then
+		if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
 			for index in ipairs(checkBoxTable) do
 				local checkBoxName = checkBoxNameString..index
 				local checkbox = _G[checkBoxName]
 
+				checkbox:StripTextures()
 				local bg = CreateFrame("Frame", nil, checkbox)
 				bg:SetPoint("TOPLEFT", 2, -1)
 				bg:SetPoint("BOTTOMRIGHT", -2, 1)
@@ -155,7 +191,25 @@ local function LoadSkin()
 		frame.styled = true
 	end)
 
-	hooksecurefunc("ChatConfig_CreateColorSwatches", function(frame, swatchTable)
+	hooksecurefunc("ChatConfig_CreateTieredCheckboxes", function(frame, checkBoxTable)
+		if frame.IsSkinned then return end
+
+		local nameString = frame:GetName().."CheckBox"
+		for index, value in ipairs(checkBoxTable) do
+			local checkBoxName = nameString..index
+			T.SkinCheckBox(_G[checkBoxName])
+
+			if value.subTypes then
+				for i in ipairs(value.subTypes) do
+					T.SkinCheckBox(_G[checkBoxName.."_"..i])
+				end
+			end
+		end
+
+		frame.IsSkinned = true
+	end)
+
+	hooksecurefunc("ChatConfig_CreateColorSwatches", function(frame, swatchTable) -- combat log only
 		if frame.styled then return end
 
 		local nameString = frame:GetName().."Swatch"
@@ -164,7 +218,7 @@ local function LoadSkin()
 			local swatchName = nameString..index
 			local swatch = _G[swatchName]
 
-			-- swatch:SetBackdrop(nil)
+			swatch:StripTextures()
 
 			local bg = CreateFrame("Frame", nil, swatch)
 			bg:SetPoint("TOPLEFT", 0, 0)
@@ -178,32 +232,14 @@ local function LoadSkin()
 			bg2:SetPoint("BOTTOMRIGHT", -1, 1)
 			bg2:CreateBorder(true, true)
 
-			ReskinColourSwatch(_G[swatchName.."ColorSwatch"])
+			ReskinCombatColourSwatch(_G[swatchName.."ColorSwatch"])
 		end
 
 		frame.styled = true
 	end)
 
-	ChatConfigBackgroundFrame:SetScript("OnShow", function()
-		ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
-		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
-
-		for i = 1, 4 do
-			for j = 1, 4 do
-				if _G["CombatConfigMessageTypesLeftCheckBox"..i] and _G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j] then
-					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i])
-					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j])
-				end
-			end
-			for j = 1, 10 do
-				if _G["CombatConfigMessageTypesRightCheckBox"..i] and _G["CombatConfigMessageTypesRightCheckBox"..i.."_"..j] then
-					T.SkinCheckBox(_G["CombatConfigMessageTypesRightCheckBox"..i])
-					T.SkinCheckBox(_G["CombatConfigMessageTypesRightCheckBox"..i.."_"..j])
-				end
-			end
-			T.SkinCheckBox(_G["CombatConfigMessageTypesMiscCheckBox"..i])
-		end
-	end)
+	ReskinCombatColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
+	ReskinCombatColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 
 	for i = 1, #COMBAT_CONFIG_TABS do
 		local tab = _G["CombatConfigTab"..i]
