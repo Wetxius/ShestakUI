@@ -7,6 +7,10 @@ local FAILED = _G.FAILED or 'Failed'
 local INTERRUPTED = _G.INTERRUPTED or 'Interrupted'
 local CASTBAR_STAGE_DURATION_INVALID = -1 -- defined in FrameXML/CastingBarFrame.lua
 
+-- Tradeskill block
+local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
+-- end block
+
 local function resetAttributes(self)
 	self.castID = nil
 	self.casting = nil
@@ -190,6 +194,16 @@ local function CastStart(self, event, unit)
 		element.duration = GetTime() - startTime
 	end
 
+	-- Tradeskill block
+	if mergeTradeskill and isTradeSkill and unit == 'player' then
+		element.duration = element.duration + (element.max * tradeskillCurrent)
+		element.max = element.max * tradeskillTotal
+		element.holdTime = 1
+
+		tradeskillCurrent = tradeskillCurrent + 1
+	end
+	-- end block
+
 	element:SetMinMaxValues(0, element.max)
 	element:SetValue(element.duration)
 
@@ -309,6 +323,14 @@ local function CastStop(self, event, unit, castID, spellID)
 		return
 	end
 
+	-- Tradeskill block
+	if mergeTradeskill and UnitIsUnit(unit, 'player') then
+		if tradeskillCurrent == tradeskillTotal then
+			mergeTradeskill = false
+		end
+	end
+	-- end block
+
 	resetAttributes(element)
 
 	--[[ Callback: Castbar:PostCastStop(unit, spellID)
@@ -338,6 +360,12 @@ local function CastFail(self, event, unit, castID, spellID)
 	if(element.Spark) then element.Spark:Hide() end
 
 	element.holdTime = element.timeToHold or 0
+
+	-- Tradeskill block
+	if mergeTradeskill and UnitIsUnit(unit, 'player') then
+		mergeTradeskill = false
+	end
+	-- end block
 
 	resetAttributes(element)
 	element:SetValue(element.max)
@@ -524,5 +552,13 @@ local function Disable(self)
 		end
 	end
 end
+
+-- Tradeskill block
+hooksecurefunc(C_TradeSkillUI, 'CraftRecipe', function(_, num)
+	tradeskillCurrent = 0
+	tradeskillTotal = num or 1
+	mergeTradeskill = true
+end)
+-- end block
 
 oUF:AddElement('Castbar', Update, Enable, Disable)
