@@ -122,6 +122,11 @@ frame:SetScript("OnEvent", function(self, event)
 	end)
 	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
 	MiniMapMailIcon:SetSize(16, 16)
+
+	local Crafting = MinimapCluster.IndicatorFrame.CraftingOrderFrame
+	Crafting:ClearAllPoints()
+	Crafting:SetParent(Minimap)
+	Crafting:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 4)
 end)
 
 -- Adjusting for patch 9.0.1 Minimap.xml
