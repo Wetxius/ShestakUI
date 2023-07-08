@@ -123,10 +123,14 @@ frame:SetScript("OnEvent", function(self, event)
 	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
 	MiniMapMailIcon:SetSize(16, 16)
 
+	-- Move crafting order icon
 	local Crafting = MinimapCluster.IndicatorFrame.CraftingOrderFrame
-	Crafting:ClearAllPoints()
-	Crafting:SetParent(Minimap)
-	Crafting:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 4)
+	hooksecurefunc(Crafting, "SetPoint", function(self, _, anchor)
+		if anchor ~= Minimap then
+			self:ClearAllPoints()
+			self:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 4)
+		end
+	end)
 end)
 
 -- Adjusting for patch 9.0.1 Minimap.xml
