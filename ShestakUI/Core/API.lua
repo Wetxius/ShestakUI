@@ -423,7 +423,7 @@ addAPI(scrollFrame)
 T.SkinFuncs = {}
 T.SkinFuncs["ShestakUI"] = {}
 
-function T.SkinScrollBar(frame)
+function T.SkinScrollBar(frame, isMinimal)
 	frame:StripTextures()
 
 	local frameName = frame.GetName and frame:GetName()
@@ -432,7 +432,7 @@ function T.SkinScrollBar(frame)
 	local ThumbTexture = frame.ThumbTexture or frame.thumbTexture or _G[frameName and frameName.."ThumbTexture"]
 	local newThumb = frame.Back and frame:GetThumb()
 
-	local minimal = frame.GetWidth and frame:GetWidth() < 10
+	local minimal = isMinimal or frame.GetWidth and frame:GetWidth() < 10
 
 	if UpButton and DownButton then
 		if not UpButton.icon and not minimal then
