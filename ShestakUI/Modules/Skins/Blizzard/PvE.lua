@@ -492,21 +492,23 @@ local function LoadSecondarySkin()
 	end)
 
 	local function HandleAffixIcons(self)
-		for _, frame in ipairs(self.Affixes) do
-			frame.Border:SetTexture(nil)
-			frame.Portrait:SetTexture(nil)
+		if self.Affixes then
+			for _, frame in ipairs(self.Affixes) do
+				frame.Border:SetTexture(nil)
+				frame.Portrait:SetTexture(nil)
 
-			if frame.info then
-				frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
-			elseif frame.affixID then
-				local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
-				frame.Portrait:SetTexture(filedataid)
-			end
-			frame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			if not frame.backdrop then
-				frame:CreateBackdrop("Default")
-				frame.backdrop:SetPoint("TOPLEFT", frame.Portrait, "TOPLEFT", -2, 2)
-				frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Portrait, "BOTTOMRIGHT", 2, -2)
+				if frame.info then
+					frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
+				elseif frame.affixID then
+					local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
+					frame.Portrait:SetTexture(filedataid)
+				end
+				frame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				if not frame.backdrop then
+					frame:CreateBackdrop("Default")
+					frame.backdrop:SetPoint("TOPLEFT", frame.Portrait, "TOPLEFT", -2, 2)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Portrait, "BOTTOMRIGHT", 2, -2)
+				end
 			end
 		end
 	end
