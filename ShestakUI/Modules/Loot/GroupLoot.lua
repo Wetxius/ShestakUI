@@ -13,6 +13,7 @@ local LootRollAnchor = CreateFrame("Frame", "LootRollAnchor", UIParent)
 LootRollAnchor:SetSize(313, 26)
 
 local function ClickRoll(frame)
+	if not frame.parent.rollID then return end
 	RollOnLoot(frame.parent.rollID, frame.rolltype)
 end
 
@@ -113,7 +114,8 @@ local function CreateRollFrame()
 	frame:SetFrameLevel(10)
 	frame:SetScript("OnEvent", OnEvent)
 	frame:RegisterEvent("CANCEL_LOOT_ROLL")
-	frame:RegisterEvent('CANCEL_ALL_LOOT_ROLLS')
+	frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
+	frame:RegisterEvent("MAIN_SPEC_NEED_ROLL")
 	frame:Hide()
 
 	local button = CreateFrame("Button", nil, frame)
@@ -146,7 +148,7 @@ local function CreateRollFrame()
 	status.bg:SetAllPoints()
 	status.bg:SetDrawLayer("BACKGROUND", 2)
 
-	local need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 6, -1)
+	local need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 8, -1)
 	local greed, greedText = CreateRollButton(frame, "lootroll-toast-icon-greed-up", "lootroll-toast-icon-greed-highlight", "lootroll-toast-icon-greed-down", 2, GREED, "LEFT", need, "RIGHT", 0, 1)
 	local transmog, transmogText = CreateRollButton(frame, "lootroll-toast-icon-transmog-up", "lootroll-toast-icon-transmog-highlight", "lootroll-toast-icon-transmog-down", 4, TRANSMOGRIFY, "LEFT", need, "RIGHT", -1, 1)
 	local de, deText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-DE-Up", "Interface\\Buttons\\UI-GroupLoot-DE-Highlight", "Interface\\Buttons\\UI-GroupLoot-DE-Down", 3, ROLL_DISENCHANT, "LEFT", greed, "RIGHT", -2, -2)
@@ -319,8 +321,6 @@ local function testRoll(f)
 		f.transmog:Hide()
 		f.greed:Show()
 	end
-
-	f.rollID = 1
 
 	return name
 end
