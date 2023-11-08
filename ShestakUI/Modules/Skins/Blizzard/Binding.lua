@@ -57,7 +57,6 @@ local function LoadSkin()
 	hooksecurefunc(frame.ScrollBox, "Update", HandleScrollChild)
 
 	frame.ScrollBar:StripTextures()
-	frame.ScrollBar.Background:Hide()
 	frame.ScrollBoxBackground:Hide()
 
 	local buttons = {
