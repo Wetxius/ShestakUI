@@ -128,6 +128,7 @@ end)
 ----------------------------------------------------------------------------------------
 if C.general.hide_banner == true then
 	BossBanner.PlayBanner = function() end
+	BossBanner:UnregisterAllEvents()
 end
 
 ----------------------------------------------------------------------------------------
