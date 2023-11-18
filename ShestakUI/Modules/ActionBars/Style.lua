@@ -401,4 +401,12 @@ if C.actionbar.hide_highlight == true then
 	end
 
 	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
+else
+	hooksecurefunc("ActionButton_ShowOverlayGlow", function(button)
+		-- Make proc glow better
+		button.SpellActivationAlert.ProcStartFlipbook:ClearAllPoints()
+		button.SpellActivationAlert.ProcStartFlipbook:SetPoint("TOPLEFT", button, -C.actionbar.button_size * 0.9, C.actionbar.button_size * 0.9)
+		button.SpellActivationAlert.ProcStartFlipbook:SetPoint("BOTTOMRIGHT", button, C.actionbar.button_size * 0.9, -C.actionbar.button_size * 0.9)
+		button.SpellActivationAlert.ProcLoop:Play()
+	end)
 end
