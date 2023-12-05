@@ -86,6 +86,19 @@ local function LoadSkin()
 		UpdateKeybindButtons(self)
 	end
 
+	local function ReskinControlsGroup(controls)
+		for i = 1, controls:GetNumChildren() do
+			local element = select(i, controls:GetChildren())
+			if element.SliderWithSteppers then
+				T.SkinSliderStep(element.SliderWithSteppers)
+			end
+			if element.CheckBox then
+				element.CheckBox:SetSize(28, 28)
+				T.SkinCheckBoxAtlas(element.CheckBox)
+			end
+		end
+	end
+
 	hooksecurefunc(SettingsPanel.Container.SettingsList.ScrollBox, "Update", function(frame)
 		for _, child in next, { frame.ScrollTarget:GetChildren() } do
 			if not child.isSkinned then
@@ -134,6 +147,29 @@ local function LoadSkin()
 				if child.Button1 and child.Button2 then
 					child.Button1:SkinButton()
 					child.Button2:SkinButton()
+				end
+
+				if child.BaseTab then
+					child.BaseTab:StripTextures(true)
+					T.SkinTab(child.BaseTab, true)
+				end
+				if child.RaidTab then
+					child.RaidTab:StripTextures(true)
+					T.SkinTab(child.RaidTab, true)
+				end
+				if child.BaseQualityControls then
+					ReskinControlsGroup(child.BaseQualityControls)
+				end
+				if child.RaidQualityControls then
+					ReskinControlsGroup(child.RaidQualityControls)
+				end
+
+				if child.NineSlice then
+					child.NineSlice:SetAlpha(0)
+					child:CreateBackdrop("Overlay")
+					child.backdrop:SetPoint("TOPLEFT", 15, -31)
+					child.backdrop:SetPoint("BOTTOMRIGHT", -32, -5)
+					child.backdrop.overlay:SetVertexColor(0.2, 0.2, 0.2, 0.5)
 				end
 
 				child.isSkinned = true
