@@ -63,14 +63,26 @@ local function Skin_WeakAuras(frame, type)
 	end
 end
 
-hooksecurefunc(WeakAuras.regionPrototype, "create", function(region)
-	if region.regionType == "icon" or region.regionType == "aurabar" then
-		Skin_WeakAuras(region, region.regionType)
-	end
+if WeakAuras.regionPrototype then
+	hooksecurefunc(WeakAuras.regionPrototype, "create", function(region)
+		if region.regionType == "icon" or region.regionType == "aurabar" then
+			Skin_WeakAuras(region, region.regionType)
+		end
 
-end)
-hooksecurefunc(WeakAuras.regionPrototype, "modifyFinish", function(_, region)
-	if region.regionType == "icon" or region.regionType == "aurabar" then
-		Skin_WeakAuras(region, region.regionType)
-	end
-end)
+	end)
+	hooksecurefunc(WeakAuras.regionPrototype, "modifyFinish", function(_, region)
+		if region.regionType == "icon" or region.regionType == "aurabar" then
+			Skin_WeakAuras(region, region.regionType)
+		end
+	end)
+elseif WeakAuras.SetTextureOrAtlas then
+	hooksecurefunc(WeakAuras, "SetTextureOrAtlas", function(icon)
+		local parent = icon:GetParent()
+		if parent then
+			local region = parent.regionType and parent or parent:GetParent()
+			if region.regionType == "icon" or region.regionType == "aurabar" then
+				Skin_WeakAuras(region, region.regionType)
+			end
+		end
+	end)
+end
