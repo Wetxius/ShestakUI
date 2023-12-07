@@ -23,13 +23,12 @@ frame:SetScript("OnEvent", function(_, _, addon)
 					end
 				end
 			end
-			local hiddenFrame = CreateFrame("Frame")
-			hiddenFrame:Hide()
 			hooksecurefunc("CompactRaidFrameManager_UpdateShown", HideFrames)
 			CompactRaidFrameManager:HookScript("OnShow", HideFrames)
 			CompactRaidFrameContainer:HookScript("OnShow", HideFrames)
 			HideFrames()
 		end
+		CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
 	end
 
 	TutorialFrameAlertButton:Kill()
