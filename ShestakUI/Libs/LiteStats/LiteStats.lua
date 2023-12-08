@@ -1547,7 +1547,8 @@ if coords.enabled then
 				GameTooltip:ClearAllPoints()
 				GameTooltip:SetPoint(modules.Location.tip_anchor, modules.Location.tip_frame, modules.Location.tip_x, modules.Location.tip_y)
 			end
-		end
+		end,
+		OnLeave = function() LP_Location.hovered = false end,
 	})
 end
 
