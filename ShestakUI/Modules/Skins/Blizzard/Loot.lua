@@ -148,7 +148,7 @@ local function LoadSkin()
 	end)
 
 	-- Loot frame
-	if C.loot.lootframe == true or (IsAddOnLoaded("AdiBags") or IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("cargBags_Nivaya") or IsAddOnLoaded("cargBags") or IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") or IsAddOnLoaded("TBag") or IsAddOnLoaded("BaudBag")) then return end
+	if C.loot.lootframe == true or T.anotherBags then return end
 
 	LootFrame:StripTextures(true)
 	LootFrame:SetTemplate("Transparent")
