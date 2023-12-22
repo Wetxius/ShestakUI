@@ -254,7 +254,12 @@ local function OnEvent(_, event, subevent, powerType)
 							xCT3:AddMessage("+"..arg2.." ".._G[arg3], PowerBarColor[arg3].r, PowerBarColor[arg3].g, PowerBarColor[arg3].b)
 						elseif arg3 == "HOLY_POWER" or arg3 == "SOUL_SHARDS" or arg3 == "CHI" or arg3 == "ARCANE_CHARGES" then
 							local numPower = UnitPower("player", GetPowerEnumFromEnergizeString(arg3))
-							xCT3:AddMessage("<"..numPower.." ".._G[arg3]..">", PowerBarColor[arg3].r, PowerBarColor[arg3].g, PowerBarColor[arg3].b)
+							numPower = numPower + tonumber(arg2)
+							if numPower == UnitPowerMax("player", GetPowerEnumFromEnergizeString(arg3)) then
+								xCT3:AddMessage("<"..numPower.." ".._G[arg3]..">", 0, 0.82, 1)
+							else
+								xCT3:AddMessage("<"..numPower.." ".._G[arg3]..">", PowerBarColor[arg3].r, PowerBarColor[arg3].g, PowerBarColor[arg3].b)
+							end
 						end
 					end
 				end
