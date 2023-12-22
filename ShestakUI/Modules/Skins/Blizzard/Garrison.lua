@@ -150,9 +150,6 @@ local function LoadSkin()
 	GarrisonMissionFrameFollowers.MaterialFrame:GetRegions():Hide()
 	GarrisonMissionFrameMissions.MaterialFrame:GetRegions():Hide()
 
-	GarrisonMissionFrameFollowers.ScrollBar:SetPoint("TOPLEFT", GarrisonMissionFrameFollowers.ScrollBox, "TOPRIGHT", -6, 3)
-	GarrisonMissionFrameFollowers.ScrollBar:SetPoint("BOTTOMLEFT", GarrisonMissionFrameFollowers.ScrollBox, "BOTTOMRIGHT", -3, -1)
-
 	GarrisonMissionFrame.FollowerTab:StripTextures()
 	GarrisonMissionFrame.FollowerTab:SetTemplate("Overlay")
 
@@ -434,14 +431,7 @@ local function LoadSkin()
 					reward.backdrop:SetFrameLevel(reward:GetFrameLevel())
 
 					reward.Quantity:SetParent(reward.backdrop)
-					reward.IconBorder:SetAlpha(0)
-					hooksecurefunc(reward.IconBorder, "SetVertexColor", function(self, r, g, b)
-						if r ~= BAG_ITEM_QUALITY_COLORS[1].r ~= r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
-							self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
-						else
-							self:GetParent().backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
-						end
-					end)
+					T.SkinIconBorder(reward.IconBorder, reward.Icon:GetParent().backdrop)
 					i = i + 1
 				end
 			end
