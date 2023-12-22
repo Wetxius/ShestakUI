@@ -371,6 +371,7 @@ L.combattext_blizz_head_numbers = "Aktiviere Blizzard Kampftext"
 L.combattext_blizz_head_numbers_desc = "Blizzard Schaden-/Heilausgabe benutzen (über Spieler/Kreaturen Kopf)"
 L.combattext_damage_style = "Ändert die Standardkampfschriftart"
 L.combattext_damage_style_desc = "Standard Schaden/Heilung Schriftart über Kreaturen/Spieler Köpfen ändern (Neustart von WoW erforderlich um Änderungen zu sehen)"
+L.combattext_subheader_damage = "Damage and healing" -- Need review
 L_GUI_COMBATTEXT_DAMAGE = "Zeige ausgehenden Schaden in einem eigenen Fenster"
 L_GUI_COMBATTEXT_HEALING = "Zeige ausgehende Heilung in einem eigenen Fenster"
 L.combattext_incoming = "Show incoming damage and healing" -- Need review
@@ -399,8 +400,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "Fügt mehrfachen automatischen Angriffsschaden-S
 L.combattext_merge_all = "Merges all spells" -- Needs review
 L_GUI_COMBATTEXT_DISPEL = "Informiert dich über deine Bannungen"
 L_GUI_COMBATTEXT_INTERRUPT = "Informiert dich über deine Unterbrechungen"
-L_GUI_COMBATTEXT_DIRECTION = "Ändert die Bildlaufrichtung von unten nach oben"
+L.combattext_direction = "Ändert die Bildlaufrichtung von unten nach oben" -- Need review
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "Zeige kurze Zahlen an ('25.3k' statt '25342')"
+L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
+L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buff größe"

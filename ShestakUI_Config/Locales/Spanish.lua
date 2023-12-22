@@ -371,6 +371,7 @@ L.combattext_blizz_head_numbers = "Enable Blizzard combat text" -- Need review
 L.combattext_blizz_head_numbers_desc = "Usar la salida de daño/curación de Blizzard (sobre la cabeza del monstruo/jugador)"
 L.combattext_damage_style = "Change default combat font" -- Need review
 L.combattext_damage_style_desc = "Cambiar la fuente de daño/sanación por defecto de encima de los monstruos/jugadores (tendrás que reiniciar WoW para ver los cambios)"
+L.combattext_subheader_damage = "Damage and healing" -- Need review
 L_GUI_COMBATTEXT_DAMAGE = "Mostrar daño saliente en su propio marco"
 L_GUI_COMBATTEXT_HEALING = "Mostrar sanación saliente en su propio marco"
 L.combattext_incoming = "Show incoming damage and healing" -- Need review
@@ -399,8 +400,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "Merges multiple auto attack damage spam" -- Need
 L.combattext_merge_all = "Merges all spells" -- Needs review
 L_GUI_COMBATTEXT_DISPEL = "Mostrar tus disipaciones"
 L_GUI_COMBATTEXT_INTERRUPT = "Mostrar tus interrupciones"
-L_GUI_COMBATTEXT_DIRECTION = "Change scrolling direction from bottom to top" -- Need review
+L.combattext_direction = "Reverse scrolling direction from top to bottom" -- Need review
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "Use short numbers ('25.3k' instead of '25342')" -- Need review
+L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
+L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buffs size" -- Need review

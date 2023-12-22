@@ -445,9 +445,9 @@ C["combattext"] = {
 	["merge_aoe_spam"] = true,					-- Merges multiple aoe damage/heal spam into single message
 	["merge_melee"] = true,						-- Merges multiple auto attack damage spam
 	["merge_all"] = false,						-- Merges all spells
-	["direction"] = true,						-- Change scrolling direction from bottom to top
+	["direction"] = false,						-- Reverse scrolling direction from top to bottom
 	["dk_runes"] = true,						-- Show Death Knight rune recharge
-	["killingblow"] = false,					-- Tells you about your killingblows
+	["killingblow"] = false,					-- Tells you about your killingblows (works only with ["damage"] = true)
 	["scrollable"] = false,						-- Allows you to scroll frame lines with mousewheel
 	["crit_prefix"] = "*",						-- Symbol that will be added before crit
 	["crit_postfix"] = "*",						-- Symbol that will be added after crit

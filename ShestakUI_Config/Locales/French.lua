@@ -371,6 +371,7 @@ L.combattext_blizz_head_numbers = "Activer les textes de combat Blizzard"
 L.combattext_blizz_head_numbers_desc = "Utiliser la sortie des dégâts/soins Blizzard (au-dessus de la tête du mob/joueur)"
 L.combattext_damage_style = "Changer la police par défautt"
 L.combattext_damage_style_desc = "Change la police par défaut des dégâts/soins au dessus de la tête de la cible (Vous devez redémarrer WoW pour valider le changement)"
+L.combattext_subheader_damage = "Damage and healing" -- Need review
 L_GUI_COMBATTEXT_DAMAGE = "Montrer les dommages sortants"
 L_GUI_COMBATTEXT_HEALING = "Montrer les soins sortants"
 L.combattext_incoming = "Montrer les dommages et les soins entrants"
@@ -399,8 +400,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "Rassemble les dégâts multiples en auto attaque
 L.combattext_merge_all = "Fusionne tous les sorts"
 L_GUI_COMBATTEXT_DISPEL = "Affiche les sorts que vous avez dissipé"
 L_GUI_COMBATTEXT_INTERRUPT = "Affiche les sorts que vous avez interrompu"
-L_GUI_COMBATTEXT_DIRECTION = "Changer la direction de défilement de bas en haut"
+L.combattext_direction = "Changer la direction de défilement de bas en haut" -- Need review
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "Rendre plus lisible les nombres ('25.3k' au lieu de '25342')"
+L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
+L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Taille des buffs"

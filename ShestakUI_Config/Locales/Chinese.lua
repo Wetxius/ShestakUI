@@ -371,6 +371,7 @@ L.combattext_blizz_head_numbers = "启用暴雪默认战斗信息"
 L.combattext_blizz_head_numbers_desc = "暴雪默认伤害/治疗模式(需关闭xCT战斗信息)"
 L.combattext_damage_style = "改变默认的显示风格"
 L.combattext_damage_style_desc = "改变模型顶部/玩家头像的伤害/治疗字体"
+L.combattext_subheader_damage = "Damage and healing" -- Need review
 L_GUI_COMBATTEXT_DAMAGE = "独立显示伤害输出"
 L_GUI_COMBATTEXT_HEALING = "独立显示治疗输出"
 L.combattext_incoming = "滚动战斗记录"
@@ -399,8 +400,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "将多个自动攻击伤害合并为一条信息
 L.combattext_merge_all = "合并所有法术"
 L_GUI_COMBATTEXT_DISPEL = "当你驱散成功时提示"
 L_GUI_COMBATTEXT_INTERRUPT = "当你打断成功时提示"
-L_GUI_COMBATTEXT_DIRECTION = "滚动方向从下向上"
+L.combattext_direction = "滚动方向从下向上" -- Need review
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "数值以K为单位显示"
+L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
+L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buff大小"

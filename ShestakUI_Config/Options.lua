@@ -680,7 +680,7 @@ do
 
 	-- Blizzard UI
 	local subheader = ns.addSubCategory(parent, L.general_subheader_blizzard)
-	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, -11)
 
 	local error_filter = ns.CreateDropDown(parent, "error_filter", true, nil, ErrorTable)
 	error_filter:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -749,14 +749,14 @@ do
 
 	-- Normal Font
 	local subheader = ns.addSubCategory(parent, L.media_subheader_normal)
-	subheader:SetPoint("TOPLEFT", texture, "BOTTOMLEFT", 16, -10)
+	subheader:SetPoint("TOPLEFT", texture, "BOTTOMLEFT", 16, -6)
 
 	local normal_font = ns.CreateDropDown(parent, "normal_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	normal_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
 
 	-- Pixel Font
 	local subheader = ns.addSubCategory(parent, L.media_subheader_pixel)
-	subheader:SetPoint("TOPLEFT", normal_font, "BOTTOMLEFT", 16, -10)
+	subheader:SetPoint("TOPLEFT", normal_font, "BOTTOMLEFT", 16, -6)
 
 	local pixel_font = ns.CreateDropDown(parent, "pixel_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	pixel_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1222,7 +1222,7 @@ do
 	unit_frames_font_shadow:SetPoint("LEFT", unit_frames_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_aura)
-	subheader:SetPoint("TOPLEFT", unit_frames_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", unit_frames_font_size, "BOTTOMLEFT", 0, -11)
 
 	local auras_font = ns.CreateDropDown(parent, "auras_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	auras_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1237,7 +1237,7 @@ do
 	auras_font_shadow:SetPoint("LEFT", auras_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_nameplates)
-	subheader:SetPoint("TOPLEFT", auras_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", auras_font_size, "BOTTOMLEFT", 0, -11)
 
 	local nameplates_font = ns.CreateDropDown(parent, "nameplates_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	nameplates_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1252,7 +1252,7 @@ do
 	nameplates_font_shadow:SetPoint("LEFT", nameplates_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_action)
-	subheader:SetPoint("TOPLEFT", nameplates_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", nameplates_font_size, "BOTTOMLEFT", 0, -11)
 
 	local action_bars_font = ns.CreateDropDown(parent, "action_bars_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	action_bars_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1267,7 +1267,7 @@ do
 	action_bars_font_shadow:SetPoint("LEFT", action_bars_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_cooldown)
-	subheader:SetPoint("TOPLEFT", action_bars_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", action_bars_font_size, "BOTTOMLEFT", 0, -11)
 
 	local cooldown_timers_font = ns.CreateDropDown(parent, "cooldown_timers_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	cooldown_timers_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1303,7 +1303,7 @@ do
 	combat_text_font_shadow:SetPoint("LEFT", combat_text_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_filger)
-	subheader:SetPoint("TOPLEFT", combat_text_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", combat_text_font_size, "BOTTOMLEFT", 0, -11)
 
 	local filger_font = ns.CreateDropDown(parent, "filger_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	filger_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1318,7 +1318,7 @@ do
 	filger_font_shadow:SetPoint("LEFT", filger_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_threat)
-	subheader:SetPoint("TOPLEFT", filger_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", filger_font_size, "BOTTOMLEFT", 0, -11)
 
 	local threat_meter_font = ns.CreateDropDown(parent, "threat_meter_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	threat_meter_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1333,7 +1333,7 @@ do
 	threat_meter_font_shadow:SetPoint("LEFT", threat_meter_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_raidcd)
-	subheader:SetPoint("TOPLEFT", threat_meter_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", threat_meter_font_size, "BOTTOMLEFT", 0, -11)
 
 	local raid_cooldowns_font = ns.CreateDropDown(parent, "raid_cooldowns_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	raid_cooldowns_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1348,7 +1348,7 @@ do
 	raid_cooldowns_font_shadow:SetPoint("LEFT", raid_cooldowns_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_loot)
-	subheader:SetPoint("TOPLEFT", raid_cooldowns_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", raid_cooldowns_font_size, "BOTTOMLEFT", 0, -11)
 
 	local loot_font = ns.CreateDropDown(parent, "loot_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	loot_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1381,7 +1381,7 @@ do
 	bags_font_shadow:SetPoint("LEFT", bags_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_chat)
-	subheader:SetPoint("TOPLEFT", bags_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", bags_font_size, "BOTTOMLEFT", 0, -11)
 
 	local chat_font = ns.CreateDropDown(parent, "chat_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	chat_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1393,7 +1393,7 @@ do
 	chat_font_shadow:SetPoint("TOPLEFT", chat_font, "BOTTOMLEFT", 16, -7)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_chat_tabs)
-	subheader:SetPoint("TOPLEFT", chat_font_shadow, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", chat_font_shadow, "BOTTOMLEFT", 0, -11)
 
 	local chat_tabs_font = ns.CreateDropDown(parent, "chat_tabs_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	chat_tabs_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1408,7 +1408,7 @@ do
 	chat_tabs_font_shadow:SetPoint("LEFT", chat_tabs_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_style)
-	subheader:SetPoint("TOPLEFT", chat_tabs_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", chat_tabs_font_size, "BOTTOMLEFT", 0, -11)
 
 	local stylization_font = ns.CreateDropDown(parent, "stylization_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	stylization_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1423,7 +1423,7 @@ do
 	stylization_font_shadow:SetPoint("LEFT", stylization_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_stats)
-	subheader:SetPoint("TOPLEFT", stylization_font_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", stylization_font_size, "BOTTOMLEFT", 0, -11)
 
 	local stats_font = ns.CreateDropDown(parent, "stats_font", true, nil, FontTable, LSM and true, true)
 	stats_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1472,9 +1472,11 @@ do
 	local minimap_buttons_mouseover = ns.CreateCheckBox(parent, "minimap_buttons_mouseover")
 	minimap_buttons_mouseover:SetPoint("TOPLEFT", minimap_buttons, "BOTTOMLEFT", 20, 0)
 
+	minimap_buttons.children = {minimap_buttons_mouseover}
+
 	-- Addons
 	local subheader = ns.addSubCategory(parent, L_GUI_SKINS_SUBHEADER)
-	subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -16)
+	subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -10)
 
 	local ace3 = ns.CreateCheckBox(parent, "ace3")
 	ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1560,7 +1562,7 @@ do
 
 	-- Cast bars
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_CAST)
-	subheader:SetPoint("TOPLEFT", lines, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", lines, "BOTTOMLEFT", 0, -10)
 
 	local unit_castbar = ns.CreateCheckBox(parent, "unit_castbar", L_GUI_UF_UNIT_CASTBAR)
 	unit_castbar:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1579,7 +1581,7 @@ do
 
 	-- Frames
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_FRAMES)
-	subheader:SetPoint("TOPLEFT", castbar_focus_type, "BOTTOMLEFT", 16, -11)
+	subheader:SetPoint("TOPLEFT", castbar_focus_type, "BOTTOMLEFT", 16, -6)
 
 	local show_pet = ns.CreateCheckBox(parent, "show_pet", L_GUI_UF_SHOW_PET)
 	show_pet:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1618,7 +1620,7 @@ do
 
 	-- Portraits
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_PORTRAIT)
-	subheader:SetPoint("TOPLEFT", icons_resting, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", icons_resting, "BOTTOMLEFT", 0, -10)
 
 	local portrait_enable = ns.CreateCheckBox(parent, "portrait_enable", L_GUI_UF_PORTRAIT_ENABLE)
 	portrait_enable:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1637,7 +1639,7 @@ do
 
 	-- Plugins
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_PLUGINS)
-	subheader:SetPoint("TOPLEFT", portrait_height, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", portrait_height, "BOTTOMLEFT", 0, -11)
 
 	local plugins_gcd = ns.CreateCheckBox(parent, "plugins_gcd", L_GUI_UF_PLUGINS_GCD)
 	plugins_gcd:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1682,7 +1684,7 @@ do
 	player_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
 
 	local subheader = ns.addSubCategory(parent, L.unitframe_subheader_boss_width)
-	subheader:SetPoint("TOPLEFT", player_width, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", player_width, "BOTTOMLEFT", 0, -11)
 
 	local boss_width = ns.CreateNumberSlider(parent, "boss_width", nil, nil, 105, 300, 1, true, L.unitframe_player_width)
 	boss_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
@@ -1697,7 +1699,7 @@ do
 	extra_power_height:SetPoint("LEFT", extra_health_height, "RIGHT", 120, 0)
 
 	local subheader = ns.addSubCategory(parent, L.unitframe_subheader_castbar)
-	subheader:SetPoint("TOPLEFT", extra_health_height, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", extra_health_height, "BOTTOMLEFT", 0, -11)
 
 	local castbar_width = ns.CreateNumberSlider(parent, "castbar_width", nil, nil, 190, 450, 1, true, L.unitframe_player_width)
 	castbar_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
@@ -1900,6 +1902,8 @@ do
 	local plugins_over_heal_absorb = ns.CreateCheckBox(parent, "plugins_over_heal_absorb")
 	plugins_over_heal_absorb:SetPoint("TOPLEFT", plugins_over_absorb, "BOTTOMLEFT", 0, 0)
 
+	plugins_healcomm.children = {plugins_over_absorb, plugins_over_heal_absorb}
+
 	local plugins_auto_resurrection = ns.CreateCheckBox(parent, "plugins_auto_resurrection")
 	plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_over_heal_absorb, "BOTTOMLEFT", -20, 0)
 
@@ -1927,7 +1931,7 @@ do
 
 	-- DPS layout size
 	local subheader = ns.addSubCategory(parent, L.raidframe_subheader_dps_size)
-	subheader:SetPoint("TOPLEFT", heal_party_power_height, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", heal_party_power_height, "BOTTOMLEFT", 0, -11)
 
 	local dps_party_width = ns.CreateNumberSlider(parent, "dps_party_width", nil, nil, 80, 300, 1, true)
 	dps_party_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -30)
@@ -1979,7 +1983,7 @@ do
 
 	-- Debuffs
 	local subheader = ns.addSubCategory(parent, L.aura_subheader_debuffs)
-	subheader:SetPoint("TOPLEFT", player_buff_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", player_buff_size, "BOTTOMLEFT", 0, -11)
 
 	local target_auras = ns.CreateCheckBox(parent, "target_auras", L_GUI_AURA_TARGET_AURAS)
 	target_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
@@ -2009,7 +2013,7 @@ do
 
 	-- Boss auras
 	local subheader = ns.addSubCategory(parent, L.aura_subheader_boss)
-	subheader:SetPoint("TOPLEFT", debuff_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", debuff_size, "BOTTOMLEFT", 0, -11)
 
 	local boss_auras = ns.CreateCheckBox(parent, "boss_auras", ENABLE)
 	boss_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
@@ -2271,7 +2275,7 @@ do
 
 	-- Plugins
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_PLUGINS)
-	subheader:SetPoint("TOPLEFT", hide_combat, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", hide_combat, "BOTTOMLEFT", 0, -10)
 
 	local title = ns.CreateCheckBox(parent, "title")
 	title:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -2293,6 +2297,8 @@ do
 
 	local show_shift = ns.CreateCheckBox(parent, "show_shift")
 	show_shift:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 20, 0)
+
+	average_lvl.children = {show_shift}
 
 	local raid_icon = ns.CreateCheckBox(parent, "raid_icon")
 	raid_icon:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", -20, 0)
@@ -2568,9 +2574,17 @@ do
 	damage_style:SetPoint("TOPLEFT", blizz_head_numbers, "BOTTOMLEFT", 20, 0)
 
 	blizz_head_numbers.children = {damage_style}
+	enable.children = {blizz_head_numbers, damage_style}
+
+	-- Damage and healing
+	local subheader = ns.addSubCategory(parent, L.combattext_subheader_damage)
+	subheader:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, -10)
+
+	local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
+	incoming:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
 	local damage = ns.CreateCheckBox(parent, "damage", L_GUI_COMBATTEXT_DAMAGE)
-	damage:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, 0)
+	damage:SetPoint("TOPLEFT", incoming, "BOTTOMLEFT", 0, 0)
 
 	local pet_damage = ns.CreateCheckBox(parent, "pet_damage", L_GUI_COMBATTEXT_PET_DAMAGE)
 	pet_damage:SetPoint("TOPLEFT", damage, "BOTTOMLEFT", 20, 0)
@@ -2587,20 +2601,10 @@ do
 	local show_overhealing = ns.CreateCheckBox(parent, "show_overhealing", L_GUI_COMBATTEXT_OVERHEALING)
 	show_overhealing:SetPoint("TOPLEFT", show_hots, "BOTTOMLEFT", 0, 0)
 
-	local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
-	incoming:SetPoint("TOPLEFT", show_overhealing, "BOTTOMLEFT", -20, 0)
-
-	local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
-	damage_color:SetPoint("TOPLEFT", incoming, "BOTTOMLEFT", 0, 0)
-
-	local dispel = ns.CreateCheckBox(parent, "dispel", L_GUI_COMBATTEXT_DISPEL)
-	dispel:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
-
-	local interrupt = ns.CreateCheckBox(parent, "interrupt", L_GUI_COMBATTEXT_INTERRUPT)
-	interrupt:SetPoint("TOPLEFT", dispel, "BOTTOMLEFT", 0, 0)
+	healing.children = {show_hots, show_overhealing}
 
 	local icons = ns.CreateCheckBox(parent, "icons", L_GUI_COMBATTEXT_ICONS)
-	icons:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 0, 0)
+	icons:SetPoint("TOPLEFT", show_overhealing, "BOTTOMLEFT", -20, 0)
 
 	local icon_size = ns.CreateNumberSlider(parent, "icon_size", nil, nil, 0, 40, 1, true, L_GUI_COMBATTEXT_ICON_SIZE, L_GUI_COMBATTEXT_ICON_SIZE_DESC)
 	icon_size:SetPoint("TOPLEFT", icons, "BOTTOMLEFT", 0, -20)
@@ -2611,8 +2615,11 @@ do
 	local time_visible = ns.CreateNumberSlider(parent, "time_visible", nil, nil, 0, 10, 1, true, L_GUI_COMBATTEXT_TIME_VISIBLE, L_GUI_COMBATTEXT_TIME_VISIBLE_DESC)
 	time_visible:SetPoint("LEFT", max_lines, "RIGHT", 120, 0)
 
+	local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
+	damage_color:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -10)
+
 	local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
-	short_numbers:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -8)
+	short_numbers:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
 
 	local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam")
 	merge_aoe_spam:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
@@ -2647,23 +2654,19 @@ do
 	local merge_all = ns.CreateCheckBox(parent, "merge_all")
 	merge_all:SetPoint("TOPLEFT", merge_melee, "BOTTOMLEFT", 0, 0)
 
-	local direction = ns.CreateCheckBox(parent, "direction", L_GUI_COMBATTEXT_DIRECTION)
+	merge_aoe_spam.children = {merge_melee, merge_all}
+
+	local direction = ns.CreateCheckBox(parent, "direction")
 	direction:SetPoint("TOPLEFT", merge_all, "BOTTOMLEFT", -20, 0)
+
+	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
+	scrollable:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 2
 	local parent = ShestakUIOptionsPanel.combattext2
 
-	local dk_runes = ns.CreateCheckBox(parent, "dk_runes", L_GUI_COMBATTEXT_DK_RUNES)
-	dk_runes:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
-
-	local killingblow = ns.CreateCheckBox(parent, "killingblow", L_GUI_COMBATTEXT_KILLINGBLOW)
-	killingblow:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", 0, 0)
-
-	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
-	scrollable:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
-
 	local crit_prefix = ns.CreateEditBox(parent, "crit_prefix", true, L_GUI_COMBATTEXT_CRIT_PREFIX)
-	crit_prefix:SetPoint("TOPLEFT", scrollable, "BOTTOMLEFT", 6, -8)
+	crit_prefix:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 6, -8)
 
 	local crit_postfix = ns.CreateEditBox(parent, "crit_postfix", true, L_GUI_COMBATTEXT_CRIT_POSTFIX)
 	crit_postfix:SetPoint("TOPLEFT", crit_prefix, "BOTTOMLEFT", 0, -10)
@@ -2673,6 +2676,30 @@ do
 
 	local heal_treshold = ns.CreateEditBox(parent, "heal_treshold", true, L_GUI_COMBATTEXT_HEAL_TRESHOLD, true)
 	heal_treshold:SetPoint("TOPLEFT", treshold, "BOTTOMLEFT", 0, -10)
+
+	-- Various messages
+	local subheader = ns.addSubCategory(parent, L.combattext_subheader_combat_module_top)
+	subheader:SetPoint("TOPLEFT", heal_treshold, "BOTTOMLEFT", -6, -15)
+
+	local dispel = ns.CreateCheckBox(parent, "dispel", L_GUI_COMBATTEXT_DISPEL)
+	dispel:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+
+	local interrupt = ns.CreateCheckBox(parent, "interrupt", L_GUI_COMBATTEXT_INTERRUPT)
+	interrupt:SetPoint("TOPLEFT", dispel, "BOTTOMLEFT", 0, 0)
+
+	local killingblow = ns.CreateCheckBox(parent, "killingblow", L_GUI_COMBATTEXT_KILLINGBLOW)
+	killingblow:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 0, 0)
+
+	local dk_runes = ns.CreateCheckBox(parent, "dk_runes", L_GUI_COMBATTEXT_DK_RUNES)
+	dk_runes:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
+
+	damage.children = {pet_damage, dot_damage, dispel, interrupt, killingblow}
+
+	local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	status:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", -30, -15)
+	status:SetWidth(600)
+	status:SetTextColor(0.9, 0.9, 0.9)
+	status:SetText(L.combattext_subheader_combat_module_top_extra)
 end
 
 -- Bag
@@ -2731,7 +2758,7 @@ do
 
 	-- Other
 	local subheader = ns.addSubCategory(parent, OTHER)
-	subheader:SetPoint("TOPLEFT", toggle_menu, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", toggle_menu, "BOTTOMLEFT", 0, -10)
 
 	local bg_map_stylization = ns.CreateCheckBox(parent, "bg_map_stylization")
 	bg_map_stylization:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -2831,7 +2858,7 @@ do
 
 	-- Testing
 	local subheader = ns.addSubCategory(parent, L.filger_subheader_test)
-	subheader:SetPoint("TOPLEFT", cooldown_size, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", cooldown_size, "BOTTOMLEFT", 0, -11)
 
 	local test_mode = ns.CreateCheckBox(parent, "test_mode", L_GUI_FILGER_TEST_MODE)
 	test_mode:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
@@ -2841,7 +2868,7 @@ do
 
 	-- Spell List
 	local subheader = ns.addSubCategory(parent, L.filger_subheader_spells)
-	subheader:SetPoint("TOPLEFT", max_test_icon, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", max_test_icon, "BOTTOMLEFT", 0, -11)
 
 	local category_list = ns.CreateDropDown(parent, "category_list", true, L.filger_category_list, FilgerTable)
 	category_list:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -3014,7 +3041,7 @@ do
 
 	-- Raid buffs
 	local subheader = ns.addSubCategory(parent, L_GUI_REMINDER_SUBHEADER)
-	subheader:SetPoint("TOPLEFT", solo_buffs_size, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", solo_buffs_size, "BOTTOMLEFT", 0, -11)
 
 	local raid_buffs_enable = ns.CreateCheckBox(parent, "raid_buffs_enable", L_GUI_REMINDER_RAID_ENABLE)
 	raid_buffs_enable:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -3189,7 +3216,7 @@ do
 
 	-- Filtering list
 	local subheader = ns.addSubCategory(parent, L.pulsecooldown_subheader_whitelist)
-	subheader:SetPoint("TOPLEFT", threshold, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", threshold, "BOTTOMLEFT", 0, -11)
 
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -15)
@@ -3228,7 +3255,7 @@ do
 	bar_rows:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -20)
 
 	local hide_solo = ns.CreateCheckBox(parent, "hide_solo", L_GUI_THREAT_HIDE_SOLO)
-	hide_solo:SetPoint("TOPLEFT", bar_rows, "BOTTOMLEFT", 0, -20)
+	hide_solo:SetPoint("TOPLEFT", bar_rows, "BOTTOMLEFT", 0, -10)
 end
 
 -- Top Panel
@@ -3293,7 +3320,7 @@ do
 
 	-- Currency
 	local currency = ns.addSubCategory(parent, L_GUI_STATS_SUBHEADER_CURRENCY)
-	currency:SetPoint("TOPLEFT", bottom_line, "BOTTOMLEFT", 0, -16)
+	currency:SetPoint("TOPLEFT", bottom_line, "BOTTOMLEFT", 0, -10)
 
 	local currency_archaeology = ns.CreateCheckBox(parent, "currency_archaeology", L_GUI_STATS_CURRENCY_ARCHAEOLOGY)
 	currency_archaeology:SetPoint("TOPLEFT", currency, "BOTTOMLEFT", 0, -8)

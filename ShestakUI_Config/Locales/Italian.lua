@@ -371,6 +371,7 @@ L.combattext_blizz_head_numbers = "Enable Blizzard combat text" -- Need review
 L.combattext_blizz_head_numbers_desc = "Usa il testo di combattimento della Blizzard per danni/cure"
 L.combattext_damage_style = "Change default combat font" -- Need review
 L.combattext_damage_style_desc = "Cambia il carattere di base per danni/cure (è necessario riavviare il gioco)"
+L.combattext_subheader_damage = "Damage and healing" -- Need review
 L_GUI_COMBATTEXT_DAMAGE = "Mostra i danni in un proprio riquadro dedicato"
 L_GUI_COMBATTEXT_HEALING = "Mostra le cure in un proprio riquadro dedicato"
 L.combattext_incoming = "Show incoming damage and healing" -- Need review
@@ -399,8 +400,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "Unifica lo spam di attacchi automatici multipli"
 L.combattext_merge_all = "Merges all spells" -- Needs review
 L_GUI_COMBATTEXT_DISPEL = "Comunica le tue dissoluzioni (dispels)"
 L_GUI_COMBATTEXT_INTERRUPT = "Comunica le tue interruzioni (interrupts)"
-L_GUI_COMBATTEXT_DIRECTION = "Change scrolling direction from bottom to top" -- Need review
+L.combattext_direction = "Reverse scrolling direction from top to bottom" -- Need review
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "Usa abbreviazioni numeriche ('25.3k' invece di '25342')"
+L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
+L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buffs size" -- Need review
