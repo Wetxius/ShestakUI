@@ -20,6 +20,8 @@ L_GUI_TIME_INPUT = "时间"
 L_GUI_EXPERT_MODE = "专家模式"
 L_GUI_EXPERT_MODE_DESC = "编写你的插件代码"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左键重置列表"
+L_GUI_INFO = "信息与帮助"
+L_GUI_WIKI_URL = "https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 
 -- Profile
 L.profile = "设定档"
@@ -371,7 +373,7 @@ L.combattext_blizz_head_numbers = "启用暴雪默认战斗信息"
 L.combattext_blizz_head_numbers_desc = "暴雪默认伤害/治疗模式(需关闭xCT战斗信息)"
 L.combattext_damage_style = "改变默认的显示风格"
 L.combattext_damage_style_desc = "改变模型顶部/玩家头像的伤害/治疗字体"
-L.combattext_subheader_damage = "Damage and healing" -- Need review
+L.combattext_subheader_damage = "伤害与治疗"
 L_GUI_COMBATTEXT_DAMAGE = "独立显示伤害输出"
 L_GUI_COMBATTEXT_HEALING = "独立显示治疗输出"
 L.combattext_incoming = "滚动战斗记录"
@@ -400,10 +402,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "将多个自动攻击伤害合并为一条信息
 L.combattext_merge_all = "合并所有法术"
 L_GUI_COMBATTEXT_DISPEL = "当你驱散成功时提示"
 L_GUI_COMBATTEXT_INTERRUPT = "当你打断成功时提示"
-L.combattext_direction = "滚动方向从下向上" -- Need review
+L.combattext_direction = "从上向下反向滚动"
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "数值以K为单位显示"
-L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
-L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
+L.combattext_subheader_combat_module_top = "信息提示"
+L.combattext_subheader_combat_module_top_extra = "额外的信息提示设置，请安装 AdvancedInterfaceOptions"
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buff大小"
@@ -422,7 +424,7 @@ L_GUI_AURA_PLAYER_AURA_ONLY = "目标只显示自身施放的DeBuff"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "DeBuff按法术类型着色"
 L_GUI_AURA_CAST_BY = "提示Buff/DeBuff提供者"
 L_GUI_AURA_CLASSCOLOR_BORDER = "自身Buff图标边框按职业着色"
-L.aura_player_buff_mouseover = "On mouseover" -- Needs review
+L.aura_player_buff_mouseover = "鼠标悬停显示"
 L.aura_subheader_buffs = "玩家Buff"
 L.aura_subheader_debuffs = "Debuffs"
 
@@ -655,10 +657,10 @@ L.misc_shift_marking_desc = "鼠标指向目标Shift+左键显示团队标记菜
 L.misc_afk_spin_camera = "AFK时旋转镜头"
 L.misc_quest_auto_button = "任务/道具自动按钮"
 L.misc_quest_auto_button_desc = "任务/道具自动按钮"
-L.misc_raid_tools = "团队工具"
-L.misc_raid_tools_desc = "团队管理便捷功能: 右键就位确认，中键角色检查，左键展开更多功能(仅限队长/助手)"
 L.misc_item_level = "角色界面显示物品等级"
 L.misc_item_level_desc = "角色界面显示武器装备的物品等级"
+L.misc_raid_tools = "团队工具"
+L.misc_raid_tools_desc = "团队管理便捷功能: 右键就位确认，中键角色检查，左键展开更多功能(仅限队长/助手)"
 L.misc_click_cast = "简单的点击施法绑定"
 L.misc_click_cast_desc = "开启后法术书有鼠标绑定界面可以进行设置"
 L.misc_click_cast_filter = "忽略玩家/目标框架点击施法"

@@ -20,6 +20,8 @@ L_GUI_TIME_INPUT = "時間"
 L_GUI_EXPERT_MODE = "專家模式"
 L_GUI_EXPERT_MODE_DESC = "編寫你的插件代碼"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左鍵重置列表"
+L_GUI_INFO = "信息與幫助"
+L_GUI_WIKI_URL = "https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 
 -- Profile
 L.profile = "設定檔"
@@ -371,7 +373,7 @@ L.combattext_blizz_head_numbers = "開啟暴雪默認戰鬥信息"
 L.combattext_blizz_head_numbers_desc = "暴雪默認傷害/治療模式(需關閉xCT戰鬥信息)"
 L.combattext_damage_style = "改變默認的顯示風格"
 L.combattext_damage_style_desc = "改變模型頂部/玩家頭像的傷害/治療字體"
-L.combattext_subheader_damage = "Damage and healing" -- Need review
+L.combattext_subheader_damage = "傷害與治療"
 L_GUI_COMBATTEXT_DAMAGE = "獨立顯示傷害輸出"
 L_GUI_COMBATTEXT_HEALING = "獨立顯示治療輸出"
 L.combattext_incoming = "自己的戰鬥文字捲動"
@@ -400,10 +402,10 @@ L_GUI_COMBATTEXT_MERGE_MELEE = "將多個自動攻擊傷害合併為一條信息
 L.combattext_merge_all = "合併所有法術"
 L_GUI_COMBATTEXT_DISPEL = "當你驅散成功時提示"
 L_GUI_COMBATTEXT_INTERRUPT = "當你斷法成功時提示"
-L.combattext_direction = "滾動方向從下向上" -- Need review
+L.combattext_direction = "從上向下反向滾動"
 L_GUI_COMBATTEXT_SHORT_NUMBERS = "數值以K為單位顯示"
-L.combattext_subheader_combat_module_top = "Information Alerts" -- Need review
-L.combattext_subheader_combat_module_top_extra = "For extra settings of alerts, install AdvancedInterfaceOptions addon" -- Need review
+L.combattext_subheader_combat_module_top = "信息提示"
+L.combattext_subheader_combat_module_top_extra = "額外的信息提示設置, 請安裝插件 AdvancedInterfaceOptions"
 
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buff大小"
@@ -422,7 +424,7 @@ L_GUI_AURA_PLAYER_AURA_ONLY = "目標只顯示自身施放的DeBuff"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "DeBuff按法術類型著色"
 L_GUI_AURA_CAST_BY = "提示Buff/DeBuff提供者"
 L_GUI_AURA_CLASSCOLOR_BORDER = "自身Buff圖標邊框按職業著色"
-L.aura_player_buff_mouseover = "On mouseover" -- Needs review
+L.aura_player_buff_mouseover = "滑鼠懸停顯示"
 L.aura_subheader_buffs = "玩家Buff"
 L.aura_subheader_debuffs = "DeBuff"
 
@@ -655,10 +657,10 @@ L.misc_shift_marking_desc = "滑鼠指向目標Shift+左鍵顯示團隊標記菜
 L.misc_afk_spin_camera = "AFK時旋轉鏡頭"
 L.misc_quest_auto_button = "任務/道具自動按鈕"
 L.misc_quest_auto_button_desc = "任務/道具自動按鈕"
-L.misc_raid_tools = "團隊工具"
-L.misc_raid_tools_desc = "團隊管理便捷功能: 右鍵就位確認，中鍵角色檢查，左鍵展開更多功能(僅限隊長/助手)"
 L.misc_item_level = "人物界面顯示物品等級"
 L.misc_item_level_desc = "人物界面顯示武器裝備的物品等級"
+L.misc_raid_tools = "團隊工具"
+L.misc_raid_tools_desc = "團隊管理便捷功能: 右鍵就位確認，中鍵角色檢查，左鍵展開更多功能(僅限隊長/助手)"
 L.misc_click_cast = "簡單的點擊施法綁定"
 L.misc_click_cast_desc = "開啟後法術書有滑鼠綁定界面可以進行設置"
 L.misc_click_cast_filter = "忽略玩家/目標框架點擊施法"
