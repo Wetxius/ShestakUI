@@ -73,9 +73,6 @@ local function LoadSkin()
 	T.SkinEditBox(MountJournalSearchBox, nil, 18)
 	T.SkinScrollBar(MountJournal.ScrollBar)
 
-	MountJournal.ScrollBar:SetPoint("TOPLEFT", MountJournal.ScrollBox, "TOPRIGHT", 1, 35)
-	MountJournal.ScrollBar:SetPoint("BOTTOMLEFT", MountJournal.ScrollBox, "BOTTOMRIGHT", 1, 0)
-
 	MountJournalFilterButton:SetPoint("TOPLEFT", MountJournalSearchBox, "TOPRIGHT", 5, 2)
 	T.SkinCloseButton(_G.MountJournalFilterButton.ResetButton)
 	_G.MountJournalFilterButton.ResetButton:ClearAllPoints()
@@ -171,8 +168,6 @@ local function LoadSkin()
 	PetJournalLoadoutBorderSlotHeaderText:SetParent(PetJournal)
 	PetJournalLoadoutBorderSlotHeaderText:SetPoint("CENTER", PetJournalLoadoutBorderTop, "TOP", 0, 4)
 
-	PetJournal.ScrollBar:SetPoint("TOPLEFT", PetJournal.ScrollBox, "TOPRIGHT", 1, 35)
-	PetJournal.ScrollBar:SetPoint("BOTTOMLEFT", PetJournal.ScrollBox, "BOTTOMRIGHT", 1, -2)
 	T.SkinScrollBar(PetJournal.ScrollBar)
 
 	hooksecurefunc(PetJournal.ScrollBox, "Update", function(frame)
@@ -539,8 +534,6 @@ local function LoadSkin()
 	WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame.backdrop:SetPoint("BOTTOMRIGHT", 1, 4)
 	WardrobeSetsCollectionVariantSetsButton:SkinButton()
 	T.SkinScrollBar(WardrobeCollectionFrame.SetsCollectionFrame.ListContainer.ScrollBar)
-	WardrobeCollectionFrame.SetsCollectionFrame.ListContainer.ScrollBar:SetPoint("TOPLEFT", WardrobeCollectionFrame.SetsCollectionFrame.ListContainer, "TOPRIGHT", 2, 33)
-	WardrobeCollectionFrame.SetsCollectionFrame.ListContainer.ScrollBar:SetPoint("BOTTOMLEFT", WardrobeCollectionFrame.SetsCollectionFrame.ListContainer, "BOTTOMRIGHT", 2, -4)
 
 	local function SetItemQuality(_, itemFrame)
 		if (itemFrame.backdrop) then
@@ -651,6 +644,9 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc(WardrobeCollectionFrame.SetsCollectionFrame, "DisplaySet", SkinSetItemButtons)
+
+	WardrobeCollectionFrame.InfoButton.Ring:Hide()
+	WardrobeCollectionFrame.InfoButton:SetPoint("TOPLEFT", WardrobeCollectionFrame, "TOPLEFT", -5, 10)
 
 	-- Help box
 	local HelpBox = {

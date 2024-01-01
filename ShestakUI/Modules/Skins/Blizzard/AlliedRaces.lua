@@ -10,21 +10,16 @@ local function LoadSkin()
 
 	AlliedRacesFramePortrait:SetAlpha(0)
 
-	AlliedRacesFrame.ModelFrame:StripTextures()
-	AlliedRacesFrame.ModelFrame:CreateBackdrop("Transparent")
-	AlliedRacesFrame.ModelFrame.backdrop:SetFrameLevel(1)
-	AlliedRacesFrame.ModelFrame.backdrop:SetPoint("TOPLEFT", -2, 2)
-	AlliedRacesFrame.ModelFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
+	AlliedRacesFrame.ModelScene:StripTextures()
+	AlliedRacesFrame.ModelScene:CreateBackdrop("Transparent")
+	AlliedRacesFrame.ModelScene.backdrop:SetFrameLevel(1)
+	AlliedRacesFrame.ModelScene.backdrop:SetPoint("TOPLEFT", -2, 2)
+	AlliedRacesFrame.ModelScene.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
 
-	AlliedRacesFrame.ModelFrame:SetSize(313, 575)
-	AlliedRacesFrame.ModelFrame:SetPoint("LEFT", 10, -6)
+	AlliedRacesFrame.ModelScene:SetSize(313, 575)
+	AlliedRacesFrame.ModelScene:SetPoint("LEFT", 10, -6)
 
 	local scrollFrame = AlliedRacesFrame.RaceInfoFrame.ScrollFrame
-	scrollFrame.ScrollBar.Border:Hide()
-	scrollFrame.ScrollBar.ScrollUpBorder:Hide()
-	scrollFrame.ScrollBar.ScrollDownBorder:Hide()
-	scrollFrame.ScrollBar.Track:Hide()
-
 	AlliedRacesFrame.RaceInfoFrame.AlliedRacesRaceName:SetTextColor(1, .8, 0)
 	scrollFrame.Child.RaceDescriptionText:SetTextColor(1, 1, 1)
 	scrollFrame.Child.RacialTraitsLabel:SetTextColor(1, .8, 0)
