@@ -24,7 +24,9 @@ local function InstallUI()
 	SetCVar("buffDurations", 1)
 	SetCVar("autoOpenLootHistory", 0)
 	SetCVar("lossOfControl", 0)
+	SetCVar("nameplateShowAll", 1)
 	SetCVar("nameplateShowSelf", 0)
+	SetCVar("nameplateShowFriendlyNPCs", 1)
 
 	-- Setting chat frames
 	if C.chat.enable == true and not (IsAddOnLoaded("Prat-3.0") or IsAddOnLoaded("Chatter")) then
