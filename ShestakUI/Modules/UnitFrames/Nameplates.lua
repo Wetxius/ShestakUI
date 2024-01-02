@@ -54,8 +54,9 @@ function frame:PLAYER_LOGIN()
 	SetCVar("nameplatePlayerMaxDistance", 60)
 
 	if C.nameplate.only_name then
-		SetCVar("nameplateShowOnlyNames", 1)
+		-- SetCVar("nameplateShowOnlyNames", 1) -- This option bugged new Afflicted affix
 	end
+	SetCVar("nameplateShowOnlyNames", 0)
 
 	local function changeFont(self, size)
 		local mult = size or 1
