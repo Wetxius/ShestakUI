@@ -1492,7 +1492,6 @@ do
 		{"details"},
 		{"dominos"},
 		{"flyout_button"},
-		{"ls_toasts"},
 		{"mage_nuggets"},
 		{"my_role_play"},
 		{"npcscan"},

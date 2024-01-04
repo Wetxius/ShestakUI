@@ -68,7 +68,6 @@ C["skins"] = {
 	["details"] = false,						-- Details skin
 	["dominos"] = false,						-- Dominos skin
 	["flyout_button"] = false,					-- FlyoutButtonCustom skin
-	["ls_toasts"] = false,						-- Is: Toasts skin
 	["mage_nuggets"] = false,					-- MageNuggets skin
 	["my_role_play"] = false,					-- MyRolePlay skin
 	["npcscan"] = false,						-- NPCScan skin
