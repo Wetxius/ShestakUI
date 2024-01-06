@@ -67,7 +67,6 @@ local function LoadSkin()
 
 			T.SkinCheckBox(_G["GuildControlBankTab"..i.."OwnedViewCheck"])
 			T.SkinCheckBox(_G["GuildControlBankTab"..i.."OwnedDepositCheck"])
-			T.SkinCheckBox(_G["GuildControlBankTab"..i.."OwnedUpdateInfoCheck"])
 			T.SkinEditBox(editbox)
 
 			if purchase:GetNumRegions() < 9 then
