@@ -214,6 +214,7 @@ L_GUI_UF_ICONS_READY_CHECK = "Icône d'appel"
 L_GUI_UF_ICONS_LEADER = "Icône de Chef de raid et assistant"
 L_GUI_UF_ICONS_SUMON = "Icône d’invocation"
 L.raidframe_icons_phase = "Icône de Phase"
+L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- Need review
 L.raidframe_plugins_debuffhighlight_icon = "Afficher l’icône d'affaiblissement dispellable"
 L.raidframe_plugins_aura_watch = "Icônes d'affaiblissement de raid (de la liste)"
 L.raidframe_plugins_aura_watch_timer = "Durée sur les icônes d'affaiblissement du raid"

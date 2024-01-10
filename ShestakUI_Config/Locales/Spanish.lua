@@ -214,6 +214,7 @@ L_GUI_UF_ICONS_READY_CHECK = "Iconos de comprobación"
 L_GUI_UF_ICONS_LEADER = "Iconos de líder, ayudantes en los marcos"
 L_GUI_UF_ICONS_SUMON = "Sumon icons" -- Need review
 L.raidframe_icons_phase = "Phase" -- Need review
+L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- Need review
 L.raidframe_plugins_debuffhighlight_icon = "Remarcar textura de desventajas + icono" -- Need review
 L.raidframe_plugins_aura_watch = "'BANDA' Ver las auras"
 L.raidframe_plugins_aura_watch_timer = "Temporizador en los iconos de perjuicios de la banda"

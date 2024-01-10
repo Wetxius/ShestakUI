@@ -1854,8 +1854,11 @@ do
 	-- Panel 2
 	local parent = ShestakUIOptionsPanel.raidframe2
 
+	local plugins_debuffhighlight = ns.CreateCheckBox(parent, "plugins_debuffhighlight")
+	plugins_debuffhighlight:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
 	local plugins_aura_watch = ns.CreateCheckBox(parent, "plugins_aura_watch")
-	plugins_aura_watch:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	plugins_aura_watch:SetPoint("TOPLEFT", plugins_debuffhighlight, "BOTTOMLEFT", 0, 0)
 
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("LEFT", plugins_aura_watch, "RIGHT", 400, 0)

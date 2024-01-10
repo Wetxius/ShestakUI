@@ -1,12 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C.unitframe.enable ~= true then return end
 
-----------------------------------------------------------------------------------------
---	Based on oUF_DebuffHighlight(by Ammo)
-----------------------------------------------------------------------------------------
-local _, ns = ...
-local oUF = ns.oUF
-
 T.CanDispel = {
 	DRUID = {Magic = false, Curse = true, Poison = true},
 	EVOKER = {Magic = false, Curse = true, Poison = true, Disease = true},
@@ -16,6 +10,13 @@ T.CanDispel = {
 	PRIEST = {Magic = false, Disease = true},
 	SHAMAN = {Magic = false, Curse = true}
 }
+
+if C.raidframe.plugins_debuffhighlight ~= true then return end
+----------------------------------------------------------------------------------------
+--	Based on oUF_DebuffHighlight(by Ammo)
+----------------------------------------------------------------------------------------
+local _, ns = ...
+local oUF = ns.oUF
 
 local dispellist = T.CanDispel[T.class] or {}
 local origColors = {}

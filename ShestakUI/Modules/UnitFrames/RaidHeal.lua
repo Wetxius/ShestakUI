@@ -218,7 +218,7 @@ local function Shared(self, unit)
 	end
 
 	-- Debuff highlight
-	if not (suffix == "target" or suffix == "targettarget") then
+	if C.raidframe.plugins_debuffhighlight and not (suffix == "target" or suffix == "targettarget") then
 		self.DebuffHighlight = self.Health:CreateTexture(nil, "OVERLAY")
 		self.DebuffHighlight:SetAllPoints(self.Health)
 		self.DebuffHighlight:SetTexture(C.media.highlight)

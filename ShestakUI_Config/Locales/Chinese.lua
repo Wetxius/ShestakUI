@@ -216,6 +216,7 @@ L_GUI_UF_ICONS_READY_CHECK = "就绪确认标记"
 L_GUI_UF_ICONS_LEADER = "队长/助手标记"
 L_GUI_UF_ICONS_SUMON = "召唤标记"
 L.raidframe_icons_phase = "相位标记"
+L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- Need review
 L.raidframe_plugins_debuffhighlight_icon = "高亮DeBuff图标"
 L.raidframe_plugins_aura_watch = "团队法术监视"
 L.raidframe_plugins_aura_watch_timer = "团队减益时间"

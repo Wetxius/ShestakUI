@@ -214,6 +214,7 @@ L_GUI_UF_ICONS_READY_CHECK = "Bereitschaftschecksymbole"
 L_GUI_UF_ICONS_LEADER = "Anführer/Assistent an den Fenstern anzeigen"
 L_GUI_UF_ICONS_SUMON = "Sumon-Symbole"
 L.raidframe_icons_phase = "Phase"
+L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- Need review
 L.raidframe_plugins_debuffhighlight_icon = "Debufftextur und Symbol hervorheben" -- Need review
 L.raidframe_plugins_aura_watch = "'RAID' Buffüberwachung"
 L.raidframe_plugins_aura_watch_timer = "Timer auf Schlachtzugsdebuff Icons"

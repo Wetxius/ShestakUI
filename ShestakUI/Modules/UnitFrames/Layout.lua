@@ -1121,7 +1121,7 @@ local function Shared(self, unit)
 	end
 
 	-- Debuff highlight
-	if unit ~= "arenatarget" then
+	if C.raidframe.plugins_debuffhighlight and unit ~= "arenatarget" then
 		self.DebuffHighlight = self.Health:CreateTexture(nil, "OVERLAY")
 		self.DebuffHighlight:SetAllPoints(self.Health)
 		self.DebuffHighlight:SetTexture(C.media.highlight)
