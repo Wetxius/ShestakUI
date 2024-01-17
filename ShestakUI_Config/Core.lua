@@ -447,9 +447,9 @@ local function onColourSwatchClicked(self, button)
 		oldColours[self] = {r, g, b}
 	end
 
-	ColorPickerFrame:SetColorRGB(r, g, b)
+	ColorPickerFrame.Content.ColorPicker:SetColorRGB(r, g, b)
 	ColorPickerFrame.previousValues = {originalR, originalG, originalB}
-	ColorPickerFrame.func = setColour
+	ColorPickerFrame.swatchFunc = setColour
 	ColorPickerFrame.cancelFunc = resetColour
 	ColorPickerFrame:Hide()
 	ColorPickerFrame:Show()

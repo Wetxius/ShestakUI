@@ -241,8 +241,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"GameMenuButtonWhatsNew",
 			"ReadyCheckFrameYesButton",
 			"ReadyCheckFrameNoButton",
-			"ColorPickerOkayButton",
-			"ColorPickerCancelButton",
 			"GuildInviteFrameJoinButton",
 			"GuildInviteFrameDeclineButton",
 			"RolePollPopupAcceptButton",
@@ -274,11 +272,16 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		LFDReadyCheckPopup.YesButton:SkinButton(true)
 		LFDReadyCheckPopup.NoButton:SkinButton(true)
 
-		-- Button position or text
-		_G["ColorPickerOkayButton"]:ClearAllPoints()
-		_G["ColorPickerOkayButton"]:SetPoint("BOTTOMLEFT", _G["ColorPickerFrame"], "BOTTOMLEFT", 6, 6)
-		_G["ColorPickerCancelButton"]:ClearAllPoints()
-		_G["ColorPickerCancelButton"]:SetPoint("BOTTOMRIGHT", _G["ColorPickerFrame"], "BOTTOMRIGHT", -6, 6)
+		-- ColorPickerFrame
+		ColorPickerFrame.Footer.OkayButton:SkinButton(true)
+		ColorPickerFrame.Footer.CancelButton:SkinButton(true)
+		T.SkinEditBox(ColorPickerFrame.Content.HexBox, nil, 18)
+		_G.ColorPickerFrame.Footer.OkayButton:ClearAllPoints()
+		_G.ColorPickerFrame.Footer.OkayButton:SetPoint("BOTTOMLEFT", _G["ColorPickerFrame"], "BOTTOMLEFT", 6, 6)
+		_G.ColorPickerFrame.Footer.CancelButton:ClearAllPoints()
+		_G.ColorPickerFrame.Footer.CancelButton:SetPoint("BOTTOMRIGHT", _G["ColorPickerFrame"], "BOTTOMRIGHT", -6, 6)
+
+		-- ReadyCheckFrame
 		_G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
 		_G["ReadyCheckFrameYesButton"]:ClearAllPoints()
 		_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
