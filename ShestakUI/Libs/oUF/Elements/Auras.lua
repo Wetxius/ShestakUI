@@ -252,7 +252,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			auras.activeBuffs = table.wipe(auras.activeBuffs or {})
 			buffsChanged = true
 
-			local slots = {UnitAuraSlots(unit, buffFilter)}
+			local slots = {C_UnitAuras.GetAuraSlots(unit, buffFilter)}
 			for i = 2, #slots do -- #1 return is continuationToken, we don't care about it
 				local data = processData(auras, unit, C_UnitAuras.GetAuraDataBySlot(unit, slots[i]))
 				auras.allBuffs[data.auraInstanceID] = data
@@ -277,7 +277,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			auras.activeDebuffs = table.wipe(auras.activeDebuffs or {})
 			debuffsChanged = true
 
-			slots = {UnitAuraSlots(unit, debuffFilter)}
+			slots = {C_UnitAuras.GetAuraSlots(unit, debuffFilter)}
 			for i = 2, #slots do
 				local data = processData(auras, unit, C_UnitAuras.GetAuraDataBySlot(unit, slots[i]))
 				auras.allDebuffs[data.auraInstanceID] = data
@@ -519,7 +519,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			buffs.active = table.wipe(buffs.active or {})
 			buffsChanged = true
 
-			local slots = {UnitAuraSlots(unit, buffFilter)}
+			local slots = {C_UnitAuras.GetAuraSlots(unit, buffFilter)}
 			for i = 2, #slots do
 				local data = processData(buffs, unit, C_UnitAuras.GetAuraDataBySlot(unit, slots[i]))
 				buffs.all[data.auraInstanceID] = data
@@ -628,7 +628,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			debuffs.active = table.wipe(debuffs.active or {})
 			debuffsChanged = true
 
-			local slots = {UnitAuraSlots(unit, debuffFilter)}
+			local slots = {C_UnitAuras.GetAuraSlots(unit, debuffFilter)}
 			for i = 2, #slots do
 				local data = processData(debuffs, unit, C_UnitAuras.GetAuraDataBySlot(unit, slots[i]))
 				debuffs.all[data.auraInstanceID] = data
