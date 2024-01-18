@@ -194,6 +194,25 @@ local function _getRealItemLevel(link, bag, slot)
 	return realItemLevel
 end
 
+local itemSpellID = {
+	-- Deposit Anima: Infuse (value) stored Anima into your covenant's Reservoir.
+	[347555] = 3,
+	[345706] = 5,
+	[336327] = 35,
+	[336456] = 250,
+
+	-- Deliver Relic: Submit your findings to Archivist Roh-Suir to generate (value) Cataloged Research.
+	[356931] = 6,
+	[356933] = 1,
+	[356934] = 8,
+	[356935] = 16,
+	[356936] = 48,
+	[356937] = 26,
+	[356938] = 100,
+	[356939] = 150,
+	[356940] = 300
+}
+
 function Stuffing:SlotUpdate(b)
 	local info = C_Container.GetContainerItemInfo(b.bag, b.slot)
 	local count, locked, quality, clink
@@ -242,6 +261,7 @@ function Stuffing:SlotUpdate(b)
 
 	if clink then
 		b.name, _, _, b.itemlevel, b.level, _, _, _, _, _, _, b.itemClassID, b.itemSubClassID = GetItemInfo(clink)
+		_, b.spellID = GetItemSpell(clink) -- for anima
 
 		if C.bag.ilvl then
 			if info.itemID == 82800 then -- pet
@@ -310,6 +330,12 @@ function Stuffing:SlotUpdate(b)
 	SetItemButtonTexture(b.frame, texture)
 	SetItemButtonCount(b.frame, count)
 	SetItemButtonDesaturated(b.frame, locked)
+
+	local mult = itemSpellID[b.spellID]
+	if mult and count then
+		b.count:SetText(mult * count) -- replace item count with anima count
+		b.count:SetTextColor(1, 1, 0)
+	end
 
 	if C.bag.new_items then
 		local IsNewItem = C_NewItems.IsNewItem(b.bag, b.slot)

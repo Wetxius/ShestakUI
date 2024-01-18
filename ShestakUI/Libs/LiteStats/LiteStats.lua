@@ -1852,6 +1852,49 @@ if gold.enabled then
 				Currency(2003)	-- Dragon Isles Supplies
 			end
 
+			-- Anima (Shadownlands currency as items in bags credits to StoredAnimaCounter by Falx)
+			do
+				local function GetAnimaForQuality(quality)
+					if quality == 4 then -- Epic
+						return 250
+					elseif quality == 3 then -- Rare
+						return 35
+					elseif quality == 2 then -- Uncommon
+						return 5
+					else -- Everything else
+						return 0
+					end
+				end
+
+				local function countAnima(bag, slot)
+					local itemId = C_Container.GetContainerItemID(bag, slot)
+					local animaCount = 0
+					if itemId ~= nil and C_Item.IsAnimaItemByID(itemId) then
+						local _, itemCount, _, itemQuality = GetContainerItemInfo(bag, slot)
+						if itemQuality == 2 and itemId == 183727 then -- If warmode bonus item
+							animaCount = (itemCount or 1) * 3
+						else -- Normal item
+							animaCount = (itemCount or 1) * GetAnimaForQuality(itemQuality)
+						end
+					end
+					return animaCount
+				end
+
+				local total = 0
+				for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
+					local slots = C_Container.GetContainerNumSlots(bag)
+					for slot = 1, slots do
+						total = total + countAnima(bag, slot)
+					end
+				end
+
+				if total > 0 then
+					local info = C_CurrencyInfo.GetCurrencyInfo(1813)
+					local name = GetSpellInfo(325995)
+					GameTooltip:AddDoubleLine(name, format("%s |T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t", total, info.iconFileID, t_icon), 1, 1, 1, 1, 1, 1)
+				end
+			end
+
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddDoubleLine(" ", L_STATS_AUTO_SELL..": "..(conf.AutoSell and "|cff55ff55"..L_STATS_ON or "|cffff5555"..strupper(OFF)), 1, 1, 1, ttsubh.r, ttsubh.g, ttsubh.b)
 			GameTooltip:Show()
