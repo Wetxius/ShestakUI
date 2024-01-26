@@ -682,6 +682,7 @@ T.OpenItems = {
 	[208090] = true,	-- Contained Paracausality
 	[210063] = true,	-- Invader's Satchel of Helpful Goods
 	[210872] = true,	-- Satchel of Dreams
+	[210992] = true,	-- Overflowing Dream Warden Trove
 	[211303] = true,	-- Dryad's Supply Pouch
 	[211373] = true,	-- Bag of Many Wonders
 	[211389] = true,	-- Cache of Overblooming Treasures
