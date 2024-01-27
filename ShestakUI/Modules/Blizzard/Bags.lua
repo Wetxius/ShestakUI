@@ -1465,6 +1465,7 @@ function Stuffing:ADDON_LOADED(addon)
 	BankFrame:UnregisterAllEvents()
 	BankFrame:SetScale(0.00001)
 	BankFrame:SetAlpha(0)
+	BankFrame:ClearAllPoints()
 	BankFrame:SetPoint("TOPLEFT")
 end
 

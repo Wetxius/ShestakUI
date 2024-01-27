@@ -300,7 +300,7 @@ if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard
 		elseif addon == "Blizzard_AuctionHouseUI" then
 			isBlizzard_AuctionUILoaded = true
 			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", _hookNewAH)
-			-- hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "OnScrollBoxRangeChanged", _hookNewAH)
+			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "OnScrollBoxScroll", _hookNewAH)
 		elseif addon == "Blizzard_BlackMarketUI" then
 			isBlizzard_BlackMarketUILoaded = true
 			hooksecurefunc("BlackMarketFrame_UpdateHotItem", BlackMarketFrame_UpdateHotItem)
