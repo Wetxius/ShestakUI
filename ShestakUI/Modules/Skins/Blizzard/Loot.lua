@@ -81,7 +81,9 @@ local function LoadSkin()
 			item.styled = true
 		end
 
-		button.BorderFrame:SetAlpha(0)
+		if button.BorderFrame then
+			button.BorderFrame:SetAlpha(0)
+		end
 	end)
 
 	-- FIXME local function UpdateLoots(self)
