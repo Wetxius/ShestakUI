@@ -73,7 +73,10 @@ local function LoadSkin()
 			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 
 			item.IconBorder:SetAlpha(0)
-			button.NameFrame:Hide()
+
+			if button.NameFrame then
+				button.NameFrame:Hide()
+			end
 
 			item.styled = true
 		end
