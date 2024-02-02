@@ -326,7 +326,8 @@ local function OnEvent(_, event, subevent, powerType)
 		end
 	elseif event == "RUNE_POWER_UPDATE" then
 		local arg1 = subevent
-		if GetRuneCooldown(arg1) ~= 0 then return end
+		local validRuneType = arg1 and type(arg1) == "number" and arg1 >= 0 and arg1 <= 6
+		if not validRuneType or GetRuneCooldown(arg1) ~= 0 then return end
 		xCT3:AddMessage("+"..COMBAT_TEXT_RUNE_DEATH, 0.75, 0, 0)
 	elseif event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITING_VEHICLE" then
 		local arg1 = subevent
