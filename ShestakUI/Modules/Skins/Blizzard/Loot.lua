@@ -74,15 +74,12 @@ local function LoadSkin()
 
 			item.IconBorder:SetAlpha(0)
 
-			if button.NameFrame then
-				button.NameFrame:Hide()
-			end
-
 			item.styled = true
 		end
 
-		if button.BorderFrame then
-			button.BorderFrame:SetAlpha(0)
+		if button.BackgroundArtFrame then
+			button.BackgroundArtFrame.NameFrame:SetAlpha(0)
+			button.BackgroundArtFrame.BorderFrame:SetAlpha(0)
 		end
 	end)
 
