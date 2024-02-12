@@ -72,6 +72,8 @@ local function LoadSkin()
 		EncounterJournalMonthlyActivitiesFrame.FilterList:StripTextures()
 		EncounterJournalMonthlyActivitiesFrame.FilterList:SetTemplate("Overlay")
 		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.ScrollBar)
+		monthlyActivities.HelpButton.Ring:Hide()
+		monthlyActivities.HelpButton:SetPoint("TOPLEFT", EncounterJournalMonthlyActivitiesFrame, "TOPLEFT", -15, 70)
 	end
 
 	local mainTabs = {
