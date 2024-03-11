@@ -77,6 +77,7 @@ C["skins"] = {
 	["ovale"] = false,							-- OvaleSpellPriority skin
 	["plater"] = false,							-- Plater skin
 	["postal"] = false,							-- Postal skin
+	["rarescanner"] = false,					-- RareScanner skin
 	["recount"] = false,						-- Recount skin
 	["rematch"] = false,						-- Rematch skin
 	["skada"] = false,							-- Skada skin

@@ -1501,6 +1501,7 @@ do
 		{"ovale"},
 		{"plater"},
 		{"postal"},
+		{"rarescanner"},
 		{"recount"},
 		{"rematch"},
 		{"skada"},
