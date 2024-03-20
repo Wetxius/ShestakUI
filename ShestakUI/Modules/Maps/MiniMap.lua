@@ -362,9 +362,9 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 		end
 	elseif button == "MiddleButton" then
 		if position:match("LEFT") then
-			ToggleDropDownMenu(1, nil, MinimapCluster.Tracking.DropDown, "cursor", 0, 0, "MENU", 2)
+			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, "cursor", 0, 0, "MENU", 2)
 		else
-			ToggleDropDownMenu(1, nil, MinimapCluster.Tracking.DropDown, "cursor", -160, 0, "MENU", 2)
+			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, "cursor", -160, 0, "MENU", 2)
 		end
 	elseif button == "LeftButton" then
 		Minimap.OnClick(self)
@@ -400,21 +400,21 @@ end
 --	Tracking icon
 ----------------------------------------------------------------------------------------
 if C.minimap.tracking_icon then
-	MinimapCluster.Tracking.Background:Hide()
-	MinimapCluster.Tracking.Button:ClearAllPoints()
-	MinimapCluster.Tracking.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
-	MinimapCluster.Tracking.Button:SetHighlightTexture(0)
-	MinimapCluster.Tracking.Button:SetSize(16, 16)
+	MinimapCluster.TrackingFrame.Background:Hide()
+	MinimapCluster.TrackingFrame.Button:ClearAllPoints()
+	MinimapCluster.TrackingFrame.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
+	MinimapCluster.TrackingFrame.Button:SetHighlightTexture(0)
+	MinimapCluster.TrackingFrame.Button:SetSize(16, 16)
 
-	MinimapCluster.Tracking.Button:SetScript("OnMouseDown", function(self, button)
+	MinimapCluster.TrackingFrame.Button:SetScript("OnMouseDown", function(self, button)
 		Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
 	end)
 
-	MinimapCluster.Tracking:CreateBackdrop("ClassColor")
-	MinimapCluster.Tracking.backdrop:SetPoint("TOPLEFT", MinimapCluster.Tracking.Button, -2, 2)
-	MinimapCluster.Tracking.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.Tracking.Button, 2, -2)
+	MinimapCluster.TrackingFrame:CreateBackdrop("ClassColor")
+	MinimapCluster.TrackingFrame.backdrop:SetPoint("TOPLEFT", MinimapCluster.TrackingFrame.Button, -2, 2)
+	MinimapCluster.TrackingFrame.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.TrackingFrame.Button, 2, -2)
 else
-	MinimapCluster.Tracking:Hide()
+	MinimapCluster.TrackingFrame:Hide()
 end
 
 ----------------------------------------------------------------------------------------
