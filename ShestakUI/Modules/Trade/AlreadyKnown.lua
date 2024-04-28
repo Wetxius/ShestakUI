@@ -236,7 +236,9 @@ end
 
 -- Auction frame
 local function _hookNewAH(self)
-	self.ScrollBox:ForEachFrame(function(button)
+	local children = {self.ScrollTarget:GetChildren()}
+	for i = 1, #children do
+		local button = children[i]
 		if button.rowData.itemKey.itemID then
 			local itemLink
 			if button.rowData.itemKey.itemID == 82800 then -- BattlePet
@@ -259,7 +261,7 @@ local function _hookNewAH(self)
 				button.cells[2].Icon:SetVertexColor(1, 1, 1)
 			end
 		end
-	end)
+	end
 end
 
 -- Black market frame
@@ -299,8 +301,7 @@ if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard
 			hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
 		elseif addon == "Blizzard_AuctionHouseUI" then
 			isBlizzard_AuctionUILoaded = true
-			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", _hookNewAH)
-			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "OnScrollBoxScroll", _hookNewAH)
+			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList.ScrollBox, "Update", _hookNewAH)
 		elseif addon == "Blizzard_BlackMarketUI" then
 			isBlizzard_BlackMarketUILoaded = true
 			hooksecurefunc("BlackMarketFrame_UpdateHotItem", BlackMarketFrame_UpdateHotItem)
