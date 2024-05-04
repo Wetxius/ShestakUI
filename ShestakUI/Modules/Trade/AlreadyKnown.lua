@@ -239,7 +239,7 @@ local function _hookNewAH(self)
 	local children = {self.ScrollTarget:GetChildren()}
 	for i = 1, #children do
 		local button = children[i]
-		if button.rowData.itemKey.itemID then
+		if button and button.rowData and button.rowData.itemKey.itemID then
 			local itemLink
 			if button.rowData.itemKey.itemID == 82800 then -- BattlePet
 				itemLink = format("|Hbattlepet:%d::::::|h[Dummy]|h", button.rowData.itemKey.battlePetSpeciesID)
