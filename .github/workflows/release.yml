@@ -32,3 +32,14 @@ jobs:
         with:
           bot_token: '${{ secrets.BOT_TOKEN }}'
           chat_id: '${{ secrets.CHAT_ID }}'
+          
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.BOT_TOKEN }}
+          token: ${{ secrets.CHAT_ID }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
