@@ -20,13 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Package
-        uses: BigWigsMods/packager@master
-        env:
-          CF_API_KEY: ${{ secrets.CF_API_KEY }}
-          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
-          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Notify the commit on Telegram
         uses: EverythingSuckz/github-telegram-notify@main
         with:
@@ -43,3 +36,10 @@ jobs:
             Commit message: ${{ github.event.commits[0].message }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+      - name: Package
+        uses: BigWigsMods/packager@master
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
