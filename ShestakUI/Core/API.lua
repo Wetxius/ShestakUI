@@ -1140,3 +1140,13 @@ LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addon)
 		end
 	end
 end)
+
+function T.SkinModelControl(frame)
+	for i = 1, 5 do
+		local button = select(i, frame.ControlFrame:GetChildren())
+		if button.NormalTexture then
+			button.NormalTexture:SetAlpha(0)
+			button.PushedTexture:SetAlpha(0)
+		end
+	end
+end

@@ -100,6 +100,8 @@ local function LoadSkin()
 		button:StripTextures()
 	end
 
+	T.SkinModelControl(CharacterModelScene)
+
 	EquipmentFlyoutFrameHighlight:Kill()
 	EquipmentFlyoutFrame.NavigationFrame:StripTextures()
 	EquipmentFlyoutFrame.NavigationFrame.BottomBackground:Hide()

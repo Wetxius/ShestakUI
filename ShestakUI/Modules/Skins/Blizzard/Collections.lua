@@ -69,6 +69,7 @@ local function LoadSkin()
 	MountJournal.MountDisplay:CreateBackdrop("Overlay")
 	MountJournal.MountDisplay.backdrop:SetPoint("TOPLEFT", 2, -2)
 	MountJournal.MountDisplay.backdrop:SetPoint("BOTTOMRIGHT", 1, -2)
+	T.SkinModelControl(MountJournal.MountDisplay.ModelScene)
 
 	T.SkinEditBox(MountJournalSearchBox, nil, 18)
 	T.SkinScrollBar(MountJournal.ScrollBar)
