@@ -5,50 +5,37 @@ if C.skins.blizzard_frames ~= true then return end
 --	PetStable skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local frame = PetStableFrame
+	local frame = StableFrame
 	T.SkinFrame(frame)
 
-	PetStableFrameInset:SetTemplate("Overlay")
+	local list = StableFrame.StabledPetList
+	list:StripTextures()
+	list.ListCounter:StripTextures()
 
-	T.SkinNextPrevButton(PetStablePrevPageButton, nil, "Any")
-	T.SkinNextPrevButton(PetStableNextPageButton, nil, "Any")
+	T.SkinEditBox(list.FilterBar.SearchBox, nil, 20)
+	list.FilterBar.FilterButton:SkinButton()
+	T.SkinCloseButton(list.FilterBar.FilterButton.ResetButton)
+	list.FilterBar.FilterButton.ResetButton:ClearAllPoints()
+	list.FilterBar.FilterButton.ResetButton:SetPoint("CENTER", list.FilterBar.FilterButton, "TOPRIGHT", 0, 0)
+	T.SkinScrollBar(list.ScrollBar)
 
-	for i = 1, NUM_PET_ACTIVE_SLOTS do
-		local button = _G["PetStableActivePet"..i]
-		local icon = _G["PetStableActivePet"..i.."IconTexture"]
+	hooksecurefunc(StableFrame.PetModelScene.PetInfo.Type, "SetText", T.ReplaceIconString)
 
-		button:StripTextures()
-		button:StyleButton()
-		button:SetTemplate("Default")
-
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+	local list = StableFrame.PetModelScene.AbilitiesList
+	if list then
+		hooksecurefunc(list, "Layout", function(self)
+			for frame in self.abilityPool:EnumerateActive() do
+				if not frame.styled then
+					frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					frame.styled = true
+				end
+			end
+		end)
 	end
+	T.SkinModelControl(StableFrame.PetModelScene)
 
-	for i = 1, NUM_PET_STABLE_SLOTS do
-		local button = _G["PetStableStabledPet"..i]
-		local icon = _G["PetStableStabledPet"..i.."IconTexture"]
-
-		button:StripTextures()
-		button:StyleButton()
-		button:SetTemplate("Default")
-
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
-	end
-
-	PetStableSelectedPetIcon:SkinIcon()
-
-	PetStableDiet:StripTextures()
-	PetStableDiet:SetSize(20, 20)
-	PetStableDiet:SetPoint("TOPRIGHT", -9, -2)
-
-	PetStableDietTexture:SetTexture(132165)
-	PetStableDietTexture:SkinIcon()
+	StableFrame.StableTogglePetButton:SkinButton()
+	StableFrame.ReleasePetButton:SkinButton()
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
