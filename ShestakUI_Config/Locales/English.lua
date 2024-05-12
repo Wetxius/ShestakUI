@@ -329,6 +329,7 @@ L.tooltip_mount = "Source of mount"
 -- Chat options
 L.chat_subtext = "Here you can change the settings of the chat window."
 L.chat_enable = "Enable chat"
+L.chat_second_frame = "Enable second frame on right side"
 L.chat_background = "Enable chat background"
 L.chat_background_alpha = "Alpha of chat background"
 L.chat_filter = "Removing some systems spam"

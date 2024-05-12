@@ -135,6 +135,25 @@ if C.chat.enable then
 		local leftpanel = CreateFrame("Frame", "LeftPanel", UIParent)
 		leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 1, "BOTTOMLEFT", BottomPanel, "LEFT", 0, 0)
 	end
+
+	if C.chat.second_frame then
+		if C.chat.background == true then
+			local chatbd = CreateFrame("Frame", "ChatBackgroundRight", UIParent)
+			chatbd:CreatePanel("Transparent", C.chat.width + 7, C.chat.height + 4, "TOPLEFT", ChatFrame4, "TOPLEFT", -3, 1)
+			chatbd:SetBackdropBorderColor(unpack(C.media.classborder_color))
+			chatbd:SetBackdropColor(0, 0, 0, C.chat.background_alpha)
+
+			if C.chat.tabs_mouseover ~= true then
+				local chattabs = CreateFrame("Frame", "ChatTabsPanelRight", UIParent)
+				chattabs:CreatePanel("Transparent", chatbd:GetWidth(), 20, "BOTTOM", chatbd, "TOP", 0, 3)
+				chattabs:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				chattabs:SetBackdropColor(0, 0, 0, C.chat.background_alpha)
+			end
+		elseif C.stats.bottom_line then
+			local leftpanel = CreateFrame("Frame", "RightPanel", UIParent)
+			leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 1, "BOTTOMRIGHT", BottomPanel, "RIGHT", 0, 0)
+		end
+	end
 end
 
 ----------------------------------------------------------------------------------------

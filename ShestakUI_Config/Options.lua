@@ -38,7 +38,7 @@ tinsert(ns.buttons, CloseButton)
 tinsert(ns.buttons, OkayButton)
 
 local reloadText = options:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-reloadText:SetPoint("BOTTOM", 0, 11)
+reloadText:SetPoint("BOTTOM", 0, 12)
 reloadText:SetText("|cffff2735"..L_GUI_NEED_RELOAD.."|r")
 reloadText:Hide()
 options.reloadText = reloadText
@@ -2342,8 +2342,11 @@ do
 	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 300, 1, true)
 	height:SetPoint("LEFT", width, "RIGHT", 120, 0)
 
+	local second_frame = ns.CreateCheckBox(parent, "second_frame")
+	second_frame:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -10)
+
 	local background = ns.CreateCheckBox(parent, "background")
-	background:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -10)
+	background:SetPoint("TOPLEFT", second_frame, "BOTTOMLEFT", 0, 0)
 
 	local background_alpha = ns.CreateNumberSlider(parent, "background_alpha", nil, nil, 0, 1, 0.05, true)
 	background_alpha:SetPoint("TOPLEFT", background, "BOTTOMLEFT", 0, -20)
@@ -2398,7 +2401,7 @@ do
 	custom_time_color:SetPoint("TOPLEFT", hide_combat, "BOTTOMLEFT", 0, 0)
 
 	local time_color = ns.CreateColourPicker(parent, "time_color", true)
-	time_color:SetPoint("TOPLEFT", custom_time_color, "BOTTOMLEFT", 24, -4)
+	time_color:SetPoint("LEFT", custom_time_color, "RIGHT", 260, 0)
 end
 
 -- Nameplate

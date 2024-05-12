@@ -38,7 +38,8 @@ T.MoverFrames = {
 	T_DE_BUFF_BAR_Anchor,
 	SplitBarLeft,
 	SplitBarRight,
-	UIWidgetPowerBarAnchor
+	UIWidgetPowerBarAnchor,
+	ChatFrameRightAnchor
 }
 
 if C.actionbar.bar7_enable then

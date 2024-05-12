@@ -303,6 +303,7 @@ L.tooltip_mount = "Source of mount" -- Needs review
 -- Chat options
 L.chat_subtext = "Here you can change the settings of the chat window." -- Need review
 L.chat_enable = "Attiva chat"
+L.chat_second_frame = "Enable second frame on right side" -- Need review
 L.chat_background = "Attiva lo sfondo della chat"
 L.chat_background_alpha = "Trasparenza sfondo della chat"
 L.chat_filter = "Rimozione di un po' di spam di sistema"

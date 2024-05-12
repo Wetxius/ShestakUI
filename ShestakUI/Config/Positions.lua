@@ -58,6 +58,7 @@ C["position"] = {
 	["archaeology"] = {"BOTTOMRIGHT", Minimap, "TOPRIGHT", 2, 5},					-- Archaeology frame
 	["auto_button"] = {"BOTTOMLEFT", Minimap, "TOPLEFT", -2, 27},					-- Quest Item auto button
 	["chat"] = {"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 24, 23},						-- Chat
+	["chat_right"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -25, 23},				-- Chat on right side
 	["bn_popup"] = {"BOTTOMLEFT", ChatFrame1, "TOPLEFT", -3, 27},					-- Battle.net popup
 	["map"] = {"BOTTOM", UIParent, "BOTTOM", 0, 320},								-- Map
 	["quest"] = {"TOPLEFT", UIParent, "TOPLEFT", 21, -2},							-- Quest log

@@ -295,15 +295,16 @@ local function SetupChatPosAndFont()
 	end)
 end
 
-for i = 3, NUM_CHAT_WINDOWS do
-	local tab = _G[format("ChatFrame%sTab", i)]
-	hooksecurefunc(tab, "SetPoint", function(self, point, anchor, attachTo, x, y)
-		if anchor == GeneralDockManagerScrollFrameChild and y == -1 then
-			self:ClearAllPoints()
-			self:SetPoint(point, anchor, attachTo, x, -2)
-		end
-	end)
-end
+-- Reposition 3 chat frame tab if it don't fit to 1
+-- for i = 3, NUM_CHAT_WINDOWS do
+	-- local tab = _G[format("ChatFrame%sTab", i)]
+	-- hooksecurefunc(tab, "SetPoint", function(self, point, anchor, attachTo, x, y)
+		-- if anchor == GeneralDockManagerScrollFrameChild and y == -1 then
+			-- self:ClearAllPoints()
+			-- self:SetPoint(point, anchor, attachTo, x, -2)
+		-- end
+	-- end)
+-- end
 
 GeneralDockManagerOverflowButton:SetPoint("BOTTOMRIGHT", ChatFrame1, "TOPRIGHT", 0, 5)
 hooksecurefunc(GeneralDockManagerScrollFrame, "SetPoint", function(self, point, anchor, attachTo, x, y)
@@ -459,5 +460,33 @@ hooksecurefunc(ChatFrame1, "SetPoint", function(self, _, _, _, x)
 		else
 			self:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5])
 		end
+	end
+end)
+
+----------------------------------------------------------------------------------------
+--	Right chat frame
+----------------------------------------------------------------------------------------
+if not C.chat.second_frame then return end
+local rightAnchor = CreateFrame("Frame", "ChatFrameRightAnchor", UIParent)
+rightAnchor:SetSize(C.chat.width, C.chat.height)
+if C.minimap.on_top then
+	if C.chat.background == true then
+		rightAnchor:SetPoint(C.position.chat_right[1], C.position.chat_right[2], C.position.chat_right[3], C.position.chat_right[4], C.position.chat_right[5] + 4)
+	else
+		rightAnchor:SetPoint(unpack(C.position.chat_right))
+	end
+else
+	if C.chat.background == true then
+		rightAnchor:SetPoint(C.position.chat_right[1], C.position.chat_right[2], C.position.chat_right[3], C.position.chat_right[4] - C.minimap.size - 23, C.position.chat_right[5] + 4)
+	else
+		rightAnchor:SetPoint(C.position.chat_right[1], C.position.chat_right[2], C.position.chat_right[3], C.position.chat_right[4] - C.minimap.size - 23, C.position.chat_right[5])
+	end
+end
+
+hooksecurefunc(ChatFrame4, "SetPoint", function(self, _, _, _, x)
+	if x ~= C.position.chat_right[4] then
+		self:ClearAllPoints()
+		self:SetSize(C.chat.width, C.chat.height)
+		self:SetAllPoints(rightAnchor)
 	end
 end)

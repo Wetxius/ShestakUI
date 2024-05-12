@@ -306,6 +306,7 @@ L.tooltip_mount = "Источник средства передвижения"
 -- Chat options
 L.chat_subtext = "Здесь можно изменить настройки окна чата."
 L.chat_enable = "Включить чат"
+L.chat_second_frame = "Включить второй чат на правой стороне"
 L.chat_background = "Включить фон чата"
 L.chat_background_alpha = "Прозрачность фона"
 L.chat_filter = "Удаление системных сообщений"
