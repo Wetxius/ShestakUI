@@ -70,8 +70,15 @@ function hcic:Init()
 				if C.chat.background == true then
 					tinsert(chatMouseover.Frames, ChatBackground)
 					tinsert(chatMouseover.Frames, ChatTabsPanel)
+					if C.chat.second_frame then
+						tinsert(chatMouseover.Frames, ChatBackgroundRight)
+						tinsert(chatMouseover.Frames, ChatTabsPanelRight)
+					end
 				elseif C.stats.bottom_line then
 					tinsert(chatMouseover.Frames, LeftPanel)
+					if C.chat.second_frame then
+						tinsert(chatMouseover.Frames, RightPanel)
+					end
 				end
 
 				if C.chat.chat_bar and C.chat.chat_bar_mouseover ~= true then
