@@ -23,7 +23,7 @@ function stArch:OnLoad(self)
 	stArch["title"]["text"] = stArch["title"]:CreateFontString()
 	stArch["title"]["text"]:SetPoint("CENTER", stArch["title"], "CENTER", 0, 0)
 	stArch["title"]["text"]:SetJustifyH("CENTER")
-	stArch["title"]["text"]:SetJustifyV("CENTER")
+	stArch["title"]["text"]:SetJustifyV("MIDDLE")
 	stArch["title"]["text"]:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 	stArch["title"]["text"]:SetText(PROFESSIONS_ARCHAEOLOGY)
 
