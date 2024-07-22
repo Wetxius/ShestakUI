@@ -157,7 +157,6 @@ local function registerStyle(myProfile)
 	if BigWigsLoader and myProfile and myProfile.barStyle == "ShestakUI" then
 		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_FrameCreated", function()
 			BigWigsProximityAnchor:SetTemplate("Transparent")
-			BigWigsInfoBox:SetTemplate("Transparent")
 		end)
 
 		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_BarEmphasized", function(_, _, bar)
@@ -271,18 +270,17 @@ SlashCmdList.BWTEST = function(msg)
 		SlashCmdList["BigWigs"]()
 		HideUIPanel(InterfaceOptionsFrame)
 		StaticPopup_Show("SETTINGS_BIGWIGS")
-	elseif msg == "test" then
-		SlashCmdList["BigWigs"]()
-		BigWigs:GetPlugin("Proximity").Test(BigWigs:GetPlugin("Proximity"))
-		HideUIPanel(InterfaceOptionsFrame)
-		BigWigs:Test()
-		BigWigs:Test()
-		BigWigs:Test()
-		BigWigs:Test()
-		BigWigs:Test()
+	-- elseif msg == "test" then
+		-- SlashCmdList["BigWigs"]()
+		-- HideUIPanel(InterfaceOptionsFrame)
+		-- BigWigs:Test()
+		-- BigWigs:Test()
+		-- BigWigs:Test()
+		-- BigWigs:Test()
+		-- BigWigs:Test()
 	else
 		print("|cffffff00Type /bwtest apply to apply BigWigs settings.|r")
-		print("|cffffff00Type /bwtest test to launch BigWigs testmode.|r")
+		-- print("|cffffff00Type /bwtest test to launch BigWigs testmode.|r")
 	end
 end
 SLASH_BWTEST1 = "/bwtest"
