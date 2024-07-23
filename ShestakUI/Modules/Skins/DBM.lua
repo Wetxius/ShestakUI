@@ -165,35 +165,39 @@ DBMSkin:SetScript("OnEvent", function()
 	end
 	if IsAddOnLoaded("DBM-GUI") then
 		tinsert(UISpecialFrames, "DBM_GUI_OptionsFrame")
+		_G["DBM_GUI_OptionsFrame"]:StripTextures()
 		_G["DBM_GUI_OptionsFrame"]:SetTemplate("Transparent")
 		_G["DBM_GUI_OptionsFramePanelContainer"]:SetTemplate("Overlay")
 
 		_G["DBM_GUI_OptionsFrameTab1"]:ClearAllPoints()
-		_G["DBM_GUI_OptionsFrameTab1"]:SetPoint("TOPLEFT", _G["DBM_GUI_OptionsFrameList"], "TOPLEFT", 10, 27)
+		_G["DBM_GUI_OptionsFrameTab1"]:SetPoint("TOPLEFT", _G["DBM_GUI_OptionsFrameList"], "TOPLEFT", 10, 30)
 		_G["DBM_GUI_OptionsFrameTab2"]:ClearAllPoints()
 		_G["DBM_GUI_OptionsFrameTab2"]:SetPoint("TOPLEFT", _G["DBM_GUI_OptionsFrameTab1"], "TOPRIGHT", 6, 0)
-		_G["DBM_GUI_OptionsFrameTab1Text"]:ClearAllPoints()
-		_G["DBM_GUI_OptionsFrameTab1Text"]:SetPoint("CENTER", _G["DBM_GUI_OptionsFrameTab1"], "CENTER", 0, 0)
-		_G["DBM_GUI_OptionsFrameTab2Text"]:ClearAllPoints()
-		_G["DBM_GUI_OptionsFrameTab2Text"]:SetPoint("CENTER", _G["DBM_GUI_OptionsFrameTab2"], "CENTER", 0, 0)
 
 		_G["DBM_GUI_OptionsFrameList"]:HookScript("OnShow", function(self) self:SetTemplate("Overlay") end)
 		_G["DBM_GUI_OptionsFrameDBMOptions"]:HookScript("OnShow", function(self) self:SetTemplate("Overlay") end)
-		_G["DBM_GUI_OptionsFrameHeader"]:SetTexture("")
-		_G["DBM_GUI_OptionsFrameHeader"]:ClearAllPoints()
-		_G["DBM_GUI_OptionsFrameHeader"]:SetPoint("TOP", DBM_GUI_OptionsFrame, 0, 7)
+
+		if DBM_GUI_OptionsFrameClosePanelButton then
+			T.SkinCloseButton(DBM_GUI_OptionsFrameClosePanelButton)
+		end
 
 		local dbmbskins = {
 			"DBM_GUI_OptionsFrameWebsiteButton",
 			"DBM_GUI_OptionsFrameOkay",
 			"DBM_GUI_OptionsFrameTab1",
-			"DBM_GUI_OptionsFrameTab2"
+			"DBM_GUI_OptionsFrameTab2",
+			"DBM_GUI_OptionsFrameTab3",
+			"DBM_GUI_OptionsFrameTab4",
+			"DBM_GUI_OptionsFrameTab5"
 		}
 
 		for i = 1, getn(dbmbskins) do
 			local buttons = _G[dbmbskins[i]]
 			if buttons and not buttons.overlay then
 				buttons:SkinButton(true)
+				if i > 2 then
+					buttons:SetHeight(26)
+				end
 			end
 		end
 	end
