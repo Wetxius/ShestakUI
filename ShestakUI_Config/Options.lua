@@ -3491,17 +3491,14 @@ end
 ----------------------------------------------------------------------------------------
 --	Button in GameMenuButton frame
 ----------------------------------------------------------------------------------------
-local menuButton = CreateFrame("Button", "GameMenuButtonSettingsUI", GameMenuFrame, "GameMenuButtonTemplate")
-menuButton:SetText("ShestakUI")
---FIXME menuButton:SetPoint("TOP", GetLocale() ~= "koKR" and "GameMenuButtonAddons" or "GameMenuButtonRatings", "BOTTOM", 0, -1)
-
-GameMenuFrame:HookScript("OnShow", function(self)
-	self:SetHeight(self:GetHeight() + menuButton:GetHeight())
-	-- GameMenuButtonLogout:SetPoint("TOP", menuButton, "BOTTOM", 0, -16)
-end)
-
-menuButton:SetScript("OnClick", function()
+local function openGUI()
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 	HideUIPanel(GameMenuFrame)
 	options:Show()
+end
+
+hooksecurefunc(GameMenuFrame, "InitButtons", function(self)
+	self:AddButton("ShestakUI", openGUI)
 end)
+
+GameMenuFrame:SetScale(0.8)
