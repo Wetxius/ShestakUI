@@ -18,25 +18,26 @@ hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
 end)
 
 local headers = {
-	SCENARIO_CONTENT_TRACKER_MODULE,
-	BONUS_OBJECTIVE_TRACKER_MODULE,
-	UI_WIDGET_TRACKER_MODULE,
-	CAMPAIGN_QUEST_TRACKER_MODULE,
-	QUEST_TRACKER_MODULE,
-	ACHIEVEMENT_TRACKER_MODULE,
-	WORLD_QUEST_TRACKER_MODULE,
-	PROFESSION_RECIPE_TRACKER_MODULE,
-	MONTHLY_ACTIVITIES_TRACKER_MODULE
+	ScenarioObjectiveTracker,
+	UIWidgetObjectiveTracker,
+	CampaignQuestObjectiveTracker,
+	QuestObjectiveTracker,
+	AdventureObjectiveTracker,
+	AchievementObjectiveTracker,
+	MonthlyActivitiesObjectiveTracker,
+	ProfessionsRecipeTracker,
+	BonusObjectiveTracker,
+	WorldQuestObjectiveTracker,
 }
 
 for i = 1, #headers do
 	local header = headers[i].Header
 	if header then
-		header.Background:Hide()
+		header.Background:SetTexture(nil)
 	end
 end
 
---FIXME ObjectiveTrackerFrame.HeaderMenu.Title:SetAlpha(0)
+ObjectiveTrackerFrame.Header.Background:SetTexture(nil)
 
 ----------------------------------------------------------------------------------------
 --	Skin ObjectiveTrackerFrame item buttons
@@ -205,7 +206,7 @@ end)
 --	Skin ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
 ----------------------------------------------------------------------------------------
 if C.skins.blizzard_frames == true then
-	local button = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
+	local button = ObjectiveTrackerFrame.Header.MinimizeButton
 	button:SetSize(17, 17)
 	button:StripTextures()
 	button:SetTemplate("Overlay")
@@ -224,27 +225,27 @@ if C.skins.blizzard_frames == true then
 	button:HookScript("OnLeave", T.SetOriginalBackdrop)
 
 	button.plus:Hide()
-	hooksecurefunc("ObjectiveTracker_Collapse", function()
-		button.plus:Show()
-		button:SetNormalTexture(0)
-		button:SetPushedTexture(0)
-		if C.general.minimize_mouseover then
-			button:SetAlpha(0)
-			button:HookScript("OnEnter", function() button:SetAlpha(1) end)
-			button:HookScript("OnLeave", function() button:SetAlpha(0) end)
-		end
-	end)
+	-- hooksecurefunc("ObjectiveTracker_Collapse", function()
+		-- button.plus:Show()
+		-- button:SetNormalTexture(0)
+		-- button:SetPushedTexture(0)
+		-- if C.general.minimize_mouseover then
+			-- button:SetAlpha(0)
+			-- button:HookScript("OnEnter", function() button:SetAlpha(1) end)
+			-- button:HookScript("OnLeave", function() button:SetAlpha(0) end)
+		-- end
+	-- end)
 
-	hooksecurefunc("ObjectiveTracker_Expand", function()
-		button.plus:Hide()
-		button:SetNormalTexture(0)
-		button:SetPushedTexture(0)
-		if C.general.minimize_mouseover then
-			button:SetAlpha(1)
-			button:HookScript("OnEnter", function() button:SetAlpha(1) end)
-			button:HookScript("OnLeave", function() button:SetAlpha(1) end)
-		end
-	end)
+	-- hooksecurefunc("ObjectiveTracker_Expand", function()
+		-- button.plus:Hide()
+		-- button:SetNormalTexture(0)
+		-- button:SetPushedTexture(0)
+		-- if C.general.minimize_mouseover then
+			-- button:SetAlpha(1)
+			-- button:HookScript("OnEnter", function() button:SetAlpha(1) end)
+			-- button:HookScript("OnLeave", function() button:SetAlpha(1) end)
+		-- end
+	-- end)
 
 	local function SkinSmallMinimizeButton(button)
 		button:SetSize(15, 15)
@@ -266,21 +267,21 @@ if C.skins.blizzard_frames == true then
 
 		button.plus:Hide()
 
-		hooksecurefunc(button, "SetCollapsed", function(self, collapsed)
-			if collapsed then
-				button.plus:Show()
-			else
-				button.plus:Hide()
-			end
-			button:SetNormalTexture(0)
-			button:SetPushedTexture(0)
-		end)
+		-- hooksecurefunc(button, "SetCollapsed", function(self, collapsed)
+			-- if collapsed then
+				-- button.plus:Show()
+			-- else
+				-- button.plus:Hide()
+			-- end
+			-- button:SetNormalTexture(0)
+			-- button:SetPushedTexture(0)
+		-- end)
 	end
 
 	for i = 1, #headers do
 		local button = headers[i].Header.MinimizeButton
 		if button then
-			SkinSmallMinimizeButton(button)
+			--FIXME SkinSmallMinimizeButton(button)
 		end
 	end
 end
@@ -389,11 +390,11 @@ local function SkinProgressBar(_, _, line)
 	if bar.newIconBg then bar.newIconBg:SetShown(icon:IsShown()) end
 end
 
-hooksecurefunc(QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
-hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
-hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
-hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
-hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+--FIXME hooksecurefunc(QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+-- hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+-- hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+-- hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+-- hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
 
 ----------------------------------------------------------------------------------------
 --	Skin Timer bar
@@ -413,33 +414,33 @@ local function SkinTimer(_, _, line)
 	end
 end
 
-hooksecurefunc(QUEST_TRACKER_MODULE, "AddTimerBar", SkinTimer)
-hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddTimerBar", SkinTimer)
-hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", SkinTimer)
-hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "AddTimerBar", SkinTimer)
+-- hooksecurefunc(QUEST_TRACKER_MODULE, "AddTimerBar", SkinTimer)
+-- hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddTimerBar", SkinTimer)
+-- hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", SkinTimer)
+-- hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "AddTimerBar", SkinTimer)
 
 ----------------------------------------------------------------------------------------
 --	Set tooltip depending on position
 ----------------------------------------------------------------------------------------
-hooksecurefunc("BonusObjectiveTracker_ShowRewardsTooltip", function(block)
-	if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
-		GameTooltip:ClearAllPoints()
-		GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
-	end
-end)
+-- hooksecurefunc("BonusObjectiveTracker_ShowRewardsTooltip", function(block)
+	-- if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
+		-- GameTooltip:ClearAllPoints()
+		-- GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
+	-- end
+-- end)
 
-ScenarioStageBlock:HookScript("OnEnter", function(self)
-	if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
-		GameTooltip:ClearAllPoints()
-		GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
-	end
-end)
+-- ScenarioStageBlock:HookScript("OnEnter", function(self)
+	-- if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
+		-- GameTooltip:ClearAllPoints()
+		-- GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
+	-- end
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Kill reward animation when finished dungeon or bonus objectives
 ----------------------------------------------------------------------------------------
-ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
-BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
+--FIXME ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
+-- BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 
 --BETA hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
 	-- ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
@@ -449,35 +450,35 @@ BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
 ----------------------------------------------------------------------------------------
-local StageBlock = _G["ScenarioStageBlock"]
-StageBlock:CreateBackdrop("Overlay")
-StageBlock.backdrop:SetPoint("TOPLEFT", ScenarioStageBlock.NormalBG, 3, -3)
-StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 5)
+--FIXME local StageBlock = _G["ScenarioStageBlock"]
+-- StageBlock:CreateBackdrop("Overlay")
+-- StageBlock.backdrop:SetPoint("TOPLEFT", ScenarioStageBlock.NormalBG, 3, -3)
+-- StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 5)
 
-StageBlock.NormalBG:SetAlpha(0)
-StageBlock.FinalBG:SetAlpha(0)
-StageBlock.GlowTexture:SetTexture("")
+-- StageBlock.NormalBG:SetAlpha(0)
+-- StageBlock.FinalBG:SetAlpha(0)
+-- StageBlock.GlowTexture:SetTexture("")
 
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
 ----------------------------------------------------------------------------------------
-local ChallengeBlock = _G["ScenarioChallengeModeBlock"]
-ChallengeBlock:CreateBackdrop("Overlay")
-ChallengeBlock.backdrop:SetPoint("TOPLEFT", ChallengeBlock, 3, -3)
-ChallengeBlock.backdrop:SetPoint("BOTTOMRIGHT", ChallengeBlock, -6, 3)
-ChallengeBlock.backdrop.overlay:SetVertexColor(0.12, 0.12, 0.12, 1)
+--FIXME local ChallengeBlock = _G["ScenarioChallengeModeBlock"]
+-- ChallengeBlock:CreateBackdrop("Overlay")
+-- ChallengeBlock.backdrop:SetPoint("TOPLEFT", ChallengeBlock, 3, -3)
+-- ChallengeBlock.backdrop:SetPoint("BOTTOMRIGHT", ChallengeBlock, -6, 3)
+-- ChallengeBlock.backdrop.overlay:SetVertexColor(0.12, 0.12, 0.12, 1)
 
-local bg = select(3, ChallengeBlock:GetRegions())
-bg:SetAlpha(0)
+-- local bg = select(3, ChallengeBlock:GetRegions())
+-- bg:SetAlpha(0)
 
-ChallengeBlock.TimerBGBack:SetAlpha(0)
-ChallengeBlock.TimerBG:SetAlpha(0)
+-- ChallengeBlock.TimerBGBack:SetAlpha(0)
+-- ChallengeBlock.TimerBG:SetAlpha(0)
 
-ChallengeBlock.StatusBar:SetStatusBarTexture(C.media.texture)
-ChallengeBlock.StatusBar:CreateBackdrop("Overlay")
-ChallengeBlock.StatusBar.backdrop:SetFrameLevel(ChallengeBlock.backdrop:GetFrameLevel() + 1)
-ChallengeBlock.StatusBar:SetStatusBarColor(0, 0.6, 1)
-ChallengeBlock.StatusBar:SetFrameLevel(ChallengeBlock.StatusBar:GetFrameLevel() + 3)
+-- ChallengeBlock.StatusBar:SetStatusBarTexture(C.media.texture)
+-- ChallengeBlock.StatusBar:CreateBackdrop("Overlay")
+-- ChallengeBlock.StatusBar.backdrop:SetFrameLevel(ChallengeBlock.backdrop:GetFrameLevel() + 1)
+-- ChallengeBlock.StatusBar:SetStatusBarColor(0, 0.6, 1)
+-- ChallengeBlock.StatusBar:SetFrameLevel(ChallengeBlock.StatusBar:GetFrameLevel() + 3)
 
 -- Not tested TODO
 -- hooksecurefunc("Scenario_ChallengeMode_SetUpAffixes", function(self)
@@ -501,72 +502,72 @@ ChallengeBlock.StatusBar:SetFrameLevel(ChallengeBlock.StatusBar:GetFrameLevel() 
 ----------------------------------------------------------------------------------------
 --	Skin MawBuffsBlock
 ----------------------------------------------------------------------------------------
-TopScenarioWidgetContainerBlock.WidgetContainer:ClearAllPoints()
-TopScenarioWidgetContainerBlock.WidgetContainer:SetPoint("TOP", ScenarioStageBlock.backdrop, "BOTTOM", 0, -3)
+--FIXME TopScenarioWidgetContainerBlock.WidgetContainer:ClearAllPoints()
+-- TopScenarioWidgetContainerBlock.WidgetContainer:SetPoint("TOP", ScenarioStageBlock.backdrop, "BOTTOM", 0, -3)
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function()
-	C_Timer.After(0.1, function()
-		local list = ScenarioBlocksFrame.MawBuffsBlock.Container.List
-		if list then
-			list:ClearAllPoints()
-			if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
-				list:SetPoint("TOPLEFT", ScenarioBlocksFrame.MawBuffsBlock.Container, "TOPRIGHT", 15, 0)
-			else
-				list:SetPoint("TOPRIGHT", ScenarioBlocksFrame.MawBuffsBlock.Container, "TOPLEFT", -15, 0)
-			end
-		end
-		ObjectiveTracker_Update()	-- Fixed position of MinimizeButton if frame on right side
+-- local frame = CreateFrame("Frame")
+-- frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+-- frame:SetScript("OnEvent", function()
+	-- C_Timer.After(0.1, function()
+		-- local list = ScenarioBlocksFrame.MawBuffsBlock.Container.List
+		-- if list then
+			-- list:ClearAllPoints()
+			-- if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
+				-- list:SetPoint("TOPLEFT", ScenarioBlocksFrame.MawBuffsBlock.Container, "TOPRIGHT", 15, 0)
+			-- else
+				-- list:SetPoint("TOPRIGHT", ScenarioBlocksFrame.MawBuffsBlock.Container, "TOPLEFT", -15, 0)
+			-- end
+		-- end
+		-- ObjectiveTracker_Update()	-- Fixed position of MinimizeButton if frame on right side
 
-		-- TODO check
-		-- BottomScenarioWidgetContainerBlock.WidgetContainer:ClearAllPoints()
-		-- BottomScenarioWidgetContainerBlock.WidgetContainer:SetPoint("TOPLEFT", ScenarioStageBlock.backdrop, "TOPRIGHT", 10, 0)
-	end)
-end)
+		-- -- TODO check
+		-- -- BottomScenarioWidgetContainerBlock.WidgetContainer:ClearAllPoints()
+		-- -- BottomScenarioWidgetContainerBlock.WidgetContainer:SetPoint("TOPLEFT", ScenarioStageBlock.backdrop, "TOPRIGHT", 10, 0)
+	-- end)
+-- end)
 
-local Maw = ScenarioBlocksFrame.MawBuffsBlock.Container
-Maw:SkinButton()
-Maw:ClearAllPoints()
-Maw:SetPoint("TOPLEFT", ScenarioStageBlock.backdrop, "BOTTOMLEFT", 0, -35)
-Maw.List.button:SetSize(234, 30)
-Maw.List:StripTextures()
-Maw.List:SetTemplate("Overlay")
+-- local Maw = ScenarioBlocksFrame.MawBuffsBlock.Container
+-- Maw:SkinButton()
+-- Maw:ClearAllPoints()
+-- Maw:SetPoint("TOPLEFT", ScenarioStageBlock.backdrop, "BOTTOMLEFT", 0, -35)
+-- Maw.List.button:SetSize(234, 30)
+-- Maw.List:StripTextures()
+-- Maw.List:SetTemplate("Overlay")
 
-Maw.List:HookScript("OnShow", function(self)
-	self.button:SetPushedTexture(0)
-	self.button:SetHighlightTexture(0)
-	self.button:SetWidth(234)
-	self.button:SetButtonState("NORMAL")
-	self.button:SetPushedTextOffset(0, 0)
-	self.button:SetButtonState("PUSHED", true)
-end)
+-- Maw.List:HookScript("OnShow", function(self)
+	-- self.button:SetPushedTexture(0)
+	-- self.button:SetHighlightTexture(0)
+	-- self.button:SetWidth(234)
+	-- self.button:SetButtonState("NORMAL")
+	-- self.button:SetPushedTextOffset(0, 0)
+	-- self.button:SetButtonState("PUSHED", true)
+-- end)
 
-Maw.List:HookScript("OnHide", function(self)
-	self.button:SetPushedTexture(0)
-	self.button:SetHighlightTexture(0)
-	self.button:SetWidth(234)
-end)
+-- Maw.List:HookScript("OnHide", function(self)
+	-- self.button:SetPushedTexture(0)
+	-- self.button:SetHighlightTexture(0)
+	-- self.button:SetWidth(234)
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Ctrl+Click to abandon a quest or Alt+Click to share a quest(by Suicidal Katt)
 ----------------------------------------------------------------------------------------
-hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
-	if IsControlKeyDown() then
-		CloseDropDownMenus()
-		QuestMapQuestOptions_AbandonQuest(self.questID)
-	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
-		CloseDropDownMenus()
-		QuestMapQuestOptions_ShareQuest(self.questID)
-	end
-end)
+-- hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
+	-- if IsControlKeyDown() then
+		-- CloseDropDownMenus()
+		-- QuestMapQuestOptions_AbandonQuest(self.questID)
+	-- elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
+		-- CloseDropDownMenus()
+		-- QuestMapQuestOptions_ShareQuest(self.questID)
+	-- end
+-- end)
 
-hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderClick", function(_, block)
-	if IsControlKeyDown() then
-		CloseDropDownMenus()
-		QuestMapQuestOptions_AbandonQuest(block.id)
-	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
-		CloseDropDownMenus()
-		QuestMapQuestOptions_ShareQuest(block.id)
-	end
-end)
+-- hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderClick", function(_, block)
+	-- if IsControlKeyDown() then
+		-- CloseDropDownMenus()
+		-- QuestMapQuestOptions_AbandonQuest(block.id)
+	-- elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
+		-- CloseDropDownMenus()
+		-- QuestMapQuestOptions_ShareQuest(block.id)
+	-- end
+-- end)
