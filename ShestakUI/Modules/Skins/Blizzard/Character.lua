@@ -304,14 +304,14 @@ local function LoadSkin()
 		end
 	end)
 
-	ReputationDetailFrame:StripTextures()
-	ReputationDetailFrame:SetTemplate("Transparent")
-	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
-	T.SkinCloseButton(ReputationDetailCloseButton)
-	T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
-	T.SkinCheckBox(ReputationDetailInactiveCheckBox)
-	T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-	ReputationDetailViewRenownButton:SkinButton()
+	--FIXME ReputationDetailFrame:StripTextures()
+	-- ReputationDetailFrame:SetTemplate("Transparent")
+	-- ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
+	-- T.SkinCloseButton(ReputationDetailCloseButton)
+	-- T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
+	-- T.SkinCheckBox(ReputationDetailInactiveCheckBox)
+	-- T.SkinCheckBox(ReputationDetailAtWarCheckBox)
+	-- ReputationDetailViewRenownButton:SkinButton()
 
 	-- Currency
 	TokenFramePopup:StripTextures()
@@ -320,8 +320,8 @@ local function LoadSkin()
 	if TokenFramePopup.CloseButton then
 		T.SkinCloseButton(TokenFramePopup.CloseButton)
 	end
-	T.SkinCheckBox(TokenFramePopup.InactiveCheckBox)
-	T.SkinCheckBox(TokenFramePopup.BackpackCheckBox)
+	-- T.SkinCheckBox(TokenFramePopup.InactiveCheckBox)
+	-- T.SkinCheckBox(TokenFramePopup.BackpackCheckBox)
 
 	hooksecurefunc(_G.TokenFrame.ScrollBox, "Update", function(frame)
 		for _, child in next, {frame.ScrollTarget:GetChildren()} do

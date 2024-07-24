@@ -161,15 +161,15 @@ local function startScanningBags()
 end
 
 -- Add all items from quest to our table
-hooksecurefunc("QuestObjectiveItem_Initialize", function(_, questLogIndex)
-	local link = GetQuestLogSpecialItemInfo(questLogIndex)
-	if link then
-		local _, itemID = strsplit(":", link)
-		itemID = tonumber(itemID)
-		T.ABItems[itemID] = true
-		startScanningBags()
-	end
-end)
+--FIXME hooksecurefunc("QuestObjectiveItem_Initialize", function(_, questLogIndex)
+	-- local link = GetQuestLogSpecialItemInfo(questLogIndex)
+	-- if link then
+		-- local _, itemID = strsplit(":", link)
+		-- itemID = tonumber(itemID)
+		-- T.ABItems[itemID] = true
+		-- startScanningBags()
+	-- end
+-- end)
 
 local Scanner = CreateFrame("Frame")
 Scanner:RegisterEvent("BAG_UPDATE")

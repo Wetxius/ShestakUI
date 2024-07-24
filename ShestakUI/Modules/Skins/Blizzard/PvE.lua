@@ -246,12 +246,12 @@ local function LoadSkin()
 	RaidFinderQueueFramePartyBackfill.backdrop:SetPoint("TOPLEFT", 2, 6)
 	RaidFinderQueueFramePartyBackfill.backdrop:SetPoint("BOTTOMRIGHT", 0, 8)
 
-	T.SkinDropDownBox(LFDQueueFrameTypeDropDown, 300)
-	LFDQueueFrameTypeDropDown.backdrop:SetParent(LFDQueueFrame) -- fixed SetFrameLevel raise to 10000
-	LFDQueueFrameTypeDropDown:SetPoint("RIGHT", -10, 0)
+	--FIXME T.SkinDropDownBox(LFDQueueFrameTypeDropDown, 300)
+	-- LFDQueueFrameTypeDropDown.backdrop:SetParent(LFDQueueFrame) -- fixed SetFrameLevel raise to 10000
+	-- LFDQueueFrameTypeDropDown:SetPoint("RIGHT", -10, 0)
 
-	T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown, 300)
-	RaidFinderQueueFrameSelectionDropDown:SetPoint("RIGHT", -10, 0)
+	-- T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown, 300)
+	-- RaidFinderQueueFrameSelectionDropDown:SetPoint("RIGHT", -10, 0)
 
 	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
 	LFGListFrame.NothingAvailable:StripTextures()
@@ -395,8 +395,8 @@ local function LoadSkin()
 	T.SkinEditBox(LFGListFrame.EntryCreation.ItemLevel.EditBox, nil, 17)
 	T.SkinEditBox(LFGListFrame.EntryCreation.VoiceChat.EditBox, nil, 17)
 	T.SkinEditBox(LFGListFrame.EntryCreation.Description)
-	T.SkinDropDownBox(LFGListFrame.EntryCreation.GroupDropDown)
-	T.SkinDropDownBox(LFGListFrame.EntryCreation.ActivityDropDown)
+	--FIXME T.SkinDropDownBox(LFGListFrame.EntryCreation.GroupDropDown)
+	-- T.SkinDropDownBox(LFGListFrame.EntryCreation.ActivityDropDown)
 	T.SkinCheckBox(LFGListFrame.EntryCreation.VoiceChat.CheckButton)
 	T.SkinCheckBox(LFGListFrame.EntryCreation.ItemLevel.CheckButton)
 	T.SkinCheckBox(LFGListFrame.EntryCreation.PrivateGroup.CheckButton)
@@ -404,7 +404,7 @@ local function LoadSkin()
 	LFGListFrame.EntryCreation.ListGroupButton:SkinButton()
 	LFGListFrame.EntryCreation.CancelButton:SkinButton()
 
-	T.SkinDropDownBox(LFGListEntryCreationPlayStyleDropdown)
+	-- T.SkinDropDownBox(LFGListEntryCreationPlayStyleDropdown)
 	T.SkinCheckBox(LFGListFrame.EntryCreation.MythicPlusRating.CheckButton)
 	T.SkinEditBox(LFGListFrame.EntryCreation.MythicPlusRating.EditBox, nil, 17)
 

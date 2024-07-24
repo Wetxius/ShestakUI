@@ -250,7 +250,7 @@ elseif T.class == "HUNTER" then
 		T.aoespam[203525] = 2		-- Talon Strike
 		T.aoespam[17253] = 6		-- Bite
 		T.aoespam[185855] = 6		-- Lacerate
-		T.aoespam[194279] = 6		-- Caltrops
+		--FIXME T.aoespam[194279] = 6		-- Caltrops
 		T.aoespam[19434] = 1		-- Trick Shot (Aimed Shot)
 		T.aoespam[191070] = 1		-- Call of the Hunter (Marked Shot)
 		T.aoespam[191043] = 1		-- Legacy of the Windrunners (Aimed Shot)

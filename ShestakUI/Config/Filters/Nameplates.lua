@@ -34,7 +34,7 @@ T.DebuffWhiteList = {
 	[SpellName(360806)] = true,	-- Sleep Walk
 	-- Hunter
 	[SpellName(3355)] = true,	-- Freezing Trap
-	[SpellName(194279)] = true,	-- Caltrops
+	--FIXME [SpellName(194279)] = true,	-- Caltrops
 	[SpellName(13812)] = true,	-- Explosive Trap
 	[SpellName(217200)] = true,	-- Barbed Shot
 	-- Mage

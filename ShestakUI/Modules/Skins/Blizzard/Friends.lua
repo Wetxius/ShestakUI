@@ -137,11 +137,11 @@ local function LoadSkin()
 	RecruitAFriendRewardsFrame:SetTemplate("Transparent")
 	T.SkinCloseButton(RecruitAFriendRewardsFrame.CloseButton)
 
-	for object in pairs(RecruitAFriendRewardsFrame.rewardPool.activeObjects) do
-		object.Button.Icon:SkinIcon()
-		object.Button.IconBorder:SetAlpha(0)
-		object.Button:StyleButton(true, 0)
-	end
+	--FIXME for object in pairs(RecruitAFriendRewardsFrame.rewardPool.activeObjects) do
+		-- object.Button.Icon:SkinIcon()
+		-- object.Button.IconBorder:SetAlpha(0)
+		-- object.Button:StyleButton(true, 0)
+	-- end
 
 	RecruitAFriendFrame.RewardClaiming.NextRewardButton.Icon:SkinIcon()
 	RecruitAFriendFrame.RewardClaiming.NextRewardButton.CircleMask:Hide()
@@ -197,7 +197,7 @@ local function LoadSkin()
 	end
 
 	FriendsFrame:SetTemplate("Transparent")
-	FriendsFrameStatusDropDown:SetPoint("TOPLEFT", 1, -27)
+	--FIXME FriendsFrameStatusDropDown:SetPoint("TOPLEFT", 1, -27)
 
 	local function ReskinFriendButton(button)
 		if button.styled then return end
@@ -247,9 +247,9 @@ local function LoadSkin()
 	end)
 
 	T.SkinCloseButton(FriendsFrameCloseButton)
-	T.SkinDropDownBox(WhoFrameDropDown, 150)
-	T.SkinDropDownBox(FriendsFrameStatusDropDown, 70)
-	T.SkinDropDownBox(FriendsFriendsFrameDropDown)
+	--FIXME T.SkinDropDownBox(WhoFrameDropDown, 150)
+	-- T.SkinDropDownBox(FriendsFrameStatusDropDown, 70)
+	-- T.SkinDropDownBox(FriendsFriendsFrameDropDown)
 
 	-- Bottom Tabs
 	for i = 1, 4 do

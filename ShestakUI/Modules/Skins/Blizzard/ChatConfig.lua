@@ -197,11 +197,11 @@ local function LoadSkin()
 		local nameString = frame:GetName().."CheckBox"
 		for index, value in ipairs(checkBoxTable) do
 			local checkBoxName = nameString..index
-			T.SkinCheckBox(_G[checkBoxName])
+			--FIXME T.SkinCheckBox(_G[checkBoxName])
 
 			if value.subTypes then
 				for i in ipairs(value.subTypes) do
-					T.SkinCheckBox(_G[checkBoxName.."_"..i])
+					-- T.SkinCheckBox(_G[checkBoxName.."_"..i])
 				end
 			end
 		end
@@ -307,8 +307,8 @@ local function LoadSkin()
 	TextToSpeechFramePlaySampleButton:SkinButton()
 	TextToSpeechFramePlaySampleAlternateButton:SkinButton()
 
-	T.SkinDropDownBox(TextToSpeechFrameTtsVoiceDropdown)
-	T.SkinDropDownBox(TextToSpeechFrameTtsVoiceAlternateDropdown)
+	--FIXME T.SkinDropDownBox(TextToSpeechFrameTtsVoiceDropdown)
+	-- T.SkinDropDownBox(TextToSpeechFrameTtsVoiceAlternateDropdown)
 
 	T.SkinSlider(TextToSpeechFrameAdjustRateSlider)
 	T.SkinSlider(TextToSpeechFrameAdjustVolumeSlider)

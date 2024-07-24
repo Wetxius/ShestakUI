@@ -36,7 +36,7 @@ for i = 1, #headers do
 	end
 end
 
-ObjectiveTrackerFrame.HeaderMenu.Title:SetAlpha(0)
+--FIXME ObjectiveTrackerFrame.HeaderMenu.Title:SetAlpha(0)
 
 ----------------------------------------------------------------------------------------
 --	Skin ObjectiveTrackerFrame item buttons
@@ -62,79 +62,79 @@ local function HotkeyColor(self, r)
 	end
 end
 
-hooksecurefunc("QuestObjectiveSetupBlockButton_Item", function(block)
-	local item = block and block.itemButton
+--FIXME hooksecurefunc("QuestObjectiveSetupBlockButton_Item", function(block)
+	-- local item = block and block.itemButton
 
-	if item and not item.skinned then
-		item:SetSize(25, 25)
-		item:SetTemplate("Default")
-		item:StyleButton()
+	-- if item and not item.skinned then
+		-- item:SetSize(25, 25)
+		-- item:SetTemplate("Default")
+		-- item:StyleButton()
 
-		item:SetNormalTexture(0)
+		-- item:SetNormalTexture(0)
 
-		item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		item.icon:SetPoint("TOPLEFT", item, 2, -2)
-		item.icon:SetPoint("BOTTOMRIGHT", item, -2, 2)
+		-- item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		-- item.icon:SetPoint("TOPLEFT", item, 2, -2)
+		-- item.icon:SetPoint("BOTTOMRIGHT", item, -2, 2)
 
-		item.Cooldown:SetAllPoints(item.icon)
+		-- item.Cooldown:SetAllPoints(item.icon)
 
-		item.Count:ClearAllPoints()
-		item.Count:SetPoint("TOPLEFT", 1, -1)
-		item.Count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
-		item.Count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		-- item.Count:ClearAllPoints()
+		-- item.Count:SetPoint("TOPLEFT", 1, -1)
+		-- item.Count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
+		-- item.Count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 
-		local rangeOverlay = item:CreateTexture(nil, "OVERLAY")
-		rangeOverlay:SetTexture(C.media.texture)
-		rangeOverlay:SetInside()
-		rangeOverlay:SetVertexColor(1, 0.3, 0.1, 0.6)
-		item.rangeOverlay = rangeOverlay
+		-- local rangeOverlay = item:CreateTexture(nil, "OVERLAY")
+		-- rangeOverlay:SetTexture(C.media.texture)
+		-- rangeOverlay:SetInside()
+		-- rangeOverlay:SetVertexColor(1, 0.3, 0.1, 0.6)
+		-- item.rangeOverlay = rangeOverlay
 
-		hooksecurefunc(item.HotKey, "Show", HotkeyShow)
-		hooksecurefunc(item.HotKey, "Hide", HotkeyHide)
-		hooksecurefunc(item.HotKey, "SetVertexColor", HotkeyColor)
-		HotkeyColor(item.HotKey, item.HotKey:GetTextColor())
-		item.HotKey:SetAlpha(0)
+		-- hooksecurefunc(item.HotKey, "Show", HotkeyShow)
+		-- hooksecurefunc(item.HotKey, "Hide", HotkeyHide)
+		-- hooksecurefunc(item.HotKey, "SetVertexColor", HotkeyColor)
+		-- HotkeyColor(item.HotKey, item.HotKey:GetTextColor())
+		-- item.HotKey:SetAlpha(0)
 
-		item.skinned = true
-	end
-end)
+		-- item.skinned = true
+	-- end
+-- end)
 
-hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
-	if block.groupFinderButton and not block.groupFinderButton.styled then
-		local icon = block.groupFinderButton
-		icon:SetSize(26, 26)
-		icon:SetNormalTexture(0)
-		icon:SetHighlightTexture(0)
-		icon:SetPushedTexture(0)
-		icon.b = CreateFrame("Frame", nil, icon)
-		icon.b:SetTemplate("Overlay")
-		icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", 2, -3)
-		icon.b:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -4, 3)
-		icon.b:SetFrameLevel(1)
+-- hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
+	-- if block.groupFinderButton and not block.groupFinderButton.styled then
+		-- local icon = block.groupFinderButton
+		-- icon:SetSize(26, 26)
+		-- icon:SetNormalTexture(0)
+		-- icon:SetHighlightTexture(0)
+		-- icon:SetPushedTexture(0)
+		-- icon.b = CreateFrame("Frame", nil, icon)
+		-- icon.b:SetTemplate("Overlay")
+		-- icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", 2, -3)
+		-- icon.b:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -4, 3)
+		-- icon.b:SetFrameLevel(1)
 
-		icon:HookScript("OnEnter", function(self)
-			if self:IsEnabled() then
-				self.b:SetBackdropBorderColor(unpack(C.media.classborder_color))
-				if self.b.overlay then
-					self.b.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
-				end
-			end
-		end)
+		-- icon:HookScript("OnEnter", function(self)
+			-- if self:IsEnabled() then
+				-- self.b:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				-- if self.b.overlay then
+					-- self.b.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+				-- end
+			-- end
+		-- end)
 
-		icon:HookScript("OnLeave", function(self)
-			self.b:SetBackdropBorderColor(unpack(C.media.border_color))
-			if self.b.overlay then
-				self.b.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
-			end
-		end)
+		-- icon:HookScript("OnLeave", function(self)
+			-- self.b:SetBackdropBorderColor(unpack(C.media.border_color))
+			-- if self.b.overlay then
+				-- self.b.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
+			-- end
+		-- end)
 
-		hooksecurefunc(icon, "Show", function(self)
-			self.b:SetFrameLevel(1)
-		end)
+		-- hooksecurefunc(icon, "Show", function(self)
+			-- self.b:SetFrameLevel(1)
+		-- end)
 
-		icon.styled = true
-	end
-end)
+		-- icon.styled = true
+	-- end
+-- end)
 
 -- WorldQuestsList button skin
 local frame = CreateFrame("Frame")
@@ -172,34 +172,34 @@ end)
 ----------------------------------------------------------------------------------------
 --	Difficulty color for ObjectiveTrackerFrame lines
 ----------------------------------------------------------------------------------------
-hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function()
-	for i = 1, C_QuestLog.GetNumQuestWatches() do
-		local questID = C_QuestLog.GetQuestIDForQuestWatchIndex(i)
-		if not questID then
-			break
-		end
-		local col = GetDifficultyColor(C_PlayerInfo.GetContentDifficultyQuestForPlayer(questID))
-		local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
-		if block then
-			block.HeaderText:SetTextColor(col.r, col.g, col.b)
-			block.HeaderText.col = col
-		end
-	end
-end)
+-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function()
+	-- for i = 1, C_QuestLog.GetNumQuestWatches() do
+		-- local questID = C_QuestLog.GetQuestIDForQuestWatchIndex(i)
+		-- if not questID then
+			-- break
+		-- end
+		-- local col = GetDifficultyColor(C_PlayerInfo.GetContentDifficultyQuestForPlayer(questID))
+		-- local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
+		-- if block then
+			-- block.HeaderText:SetTextColor(col.r, col.g, col.b)
+			-- block.HeaderText.col = col
+		-- end
+	-- end
+-- end)
 
-hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(_, block)
-	if block.module == ACHIEVEMENT_TRACKER_MODULE then
-		block.HeaderText:SetTextColor(0.75, 0.61, 0)
-		block.HeaderText.col = nil
-	end
-end)
+-- hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(_, block)
+	-- if block.module == ACHIEVEMENT_TRACKER_MODULE then
+		-- block.HeaderText:SetTextColor(0.75, 0.61, 0)
+		-- block.HeaderText.col = nil
+	-- end
+-- end)
 
-hooksecurefunc("ObjectiveTrackerBlockHeader_OnLeave", function(self)
-	local block = self:GetParent()
-	if block.HeaderText.col then
-		block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
-	end
-end)
+-- hooksecurefunc("ObjectiveTrackerBlockHeader_OnLeave", function(self)
+	-- local block = self:GetParent()
+	-- if block.HeaderText.col then
+		-- block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
+	-- end
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Skin ObjectiveTrackerFrame.HeaderMenu.MinimizeButton

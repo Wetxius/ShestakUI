@@ -37,8 +37,8 @@ local function LoadSkin()
 	QuestScrollFrame:ClearAllPoints()
 	QuestScrollFrame:SetPoint("TOP", WorldMapFrame.backdrop, "TOP", 0, -3)
 	QuestScrollFrame:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 4, 0)
-	QuestScrollFrame.DetailFrame:StripTextures()
-	QuestScrollFrame.DetailFrame.BottomDetail:Hide()
+	--FIXME QuestScrollFrame.DetailFrame:StripTextures()
+	-- QuestScrollFrame.DetailFrame.BottomDetail:Hide()
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame:SetSize(259, 463)
 	QuestScrollFrame.Edge:Hide()
@@ -84,16 +84,16 @@ local function LoadSkin()
 	QuestMapDetailsScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapDetailsScrollFrame, "TOPRIGHT", 0, -18)
 	T.SkinScrollBar(QuestMapDetailsScrollFrame.ScrollBar)
 
-	QuestMapFrame.Background:SetAlpha(0)
+	--FIXME QuestMapFrame.Background:SetAlpha(0)
 
 	QuestMapFrame.DetailsFrame:StripTextures()
-	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
+	-- QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.Bg:Hide()
 
-	QuestMapFrame.DetailsFrame.BackButton:SkinButton()
-	QuestMapFrame.DetailsFrame.BackButton:ClearAllPoints()
-	QuestMapFrame.DetailsFrame.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
-	QuestMapFrame.DetailsFrame.BackButton:SetSize(284, 23)
+	-- QuestMapFrame.DetailsFrame.BackButton:SkinButton()
+	-- QuestMapFrame.DetailsFrame.BackButton:ClearAllPoints()
+	-- QuestMapFrame.DetailsFrame.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+	-- QuestMapFrame.DetailsFrame.BackButton:SetSize(284, 23)
 
 	local AbandonButton = QuestMapFrame.DetailsFrame.AbandonButton
 	AbandonButton:SkinButton()
@@ -112,9 +112,9 @@ local function LoadSkin()
 	ShareButton:SetPoint("LEFT", AbandonButton, "RIGHT", 3, 0)
 	ShareButton:SetPoint("RIGHT", TrackButton, "LEFT", -3, 0)
 
-	QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
-	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton(true)
-	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SetPoint("TOP", 0, 4)
+	--FIXME QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
+	-- QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton(true)
+	-- QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SetPoint("TOP", 0, 4)
 
 	-- Quests Buttons
 	for i = 1, 2 do
@@ -150,7 +150,7 @@ local function LoadSkin()
 
 	-- Floor Dropdown
 	local function WorldMapFloorNavigationDropDown(frame)
-		T.SkinDropDownBox(frame)
+		-- T.SkinDropDownBox(frame)
 		frame:SetPoint("TOPLEFT", -15, -67)
 	end
 
@@ -160,7 +160,7 @@ local function LoadSkin()
 		shadow:Hide()
 
 		button.Background:Hide()
-		button.IconOverlay:SetAlpha(0)
+		-- button.IconOverlay:SetAlpha(0)
 		button.Border:Hide()
 
 		local tex = button:GetHighlightTexture()

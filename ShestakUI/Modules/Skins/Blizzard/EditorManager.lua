@@ -12,7 +12,7 @@ local function LoadSkin()
 
 	frame.RevertAllChangesButton:SkinButton()
 	frame.SaveChangesButton:SkinButton()
-	T.SkinDropDownBox(frame.LayoutDropdown.DropDownMenu, 240)
+	--FIXME T.SkinDropDownBox(frame.LayoutDropdown.DropDownMenu, 240)
 
 	T.SkinCheckBox(frame.ShowGridCheckButton.Button, 30)
 	T.SkinCheckBox(frame.EnableSnapCheckButton.Button, 30)

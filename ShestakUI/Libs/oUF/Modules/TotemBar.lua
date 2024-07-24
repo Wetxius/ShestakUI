@@ -90,9 +90,9 @@ local function Enable(self)
 		self:RegisterEvent("PLAYER_TOTEM_UPDATE", Event, true)
 		element.colors = setmetatable(element.colors or {}, {__index = colors})
 		if element.Destroy then
-			anchorTotems(element)
+			--FIXME anchorTotems(element)
 			hooksecurefunc(TotemFrame, "Update", function()
-				anchorTotems(element)
+				-- anchorTotems(element)
 			end)
 		end
 		return true

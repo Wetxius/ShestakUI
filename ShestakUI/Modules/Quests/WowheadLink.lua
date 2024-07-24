@@ -60,41 +60,41 @@ StaticPopupDialogs.WATCHFRAME_URL = {
 	preferredIndex = 5,
 }
 
-hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
-	local id = self.activeFrame.id
-	local info = UIDropDownMenu_CreateInfo()
-	info.text = L_WATCH_WOWHEAD_LINK
-	info.func = function()
-		local text = linkQuest:format(id)
-		StaticPopup_Show("WATCHFRAME_URL", _, _, text)
-	end
-	info.notCheckable = true
-	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-end)
+--FIXME hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
+	-- local id = self.activeFrame.id
+	-- local info = UIDropDownMenu_CreateInfo()
+	-- info.text = L_WATCH_WOWHEAD_LINK
+	-- info.func = function()
+		-- local text = linkQuest:format(id)
+		-- StaticPopup_Show("WATCHFRAME_URL", _, _, text)
+	-- end
+	-- info.notCheckable = true
+	-- UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+-- end)
 
-hooksecurefunc("BonusObjectiveTracker_OnOpenDropDown", function(self)
-	local id = self.activeFrame.TrackedQuest.questID
-	local info = UIDropDownMenu_CreateInfo()
-	info.text = L_WATCH_WOWHEAD_LINK
-	info.func = function()
-		local text = linkQuest:format(id)
-		StaticPopup_Show("WATCHFRAME_URL", _, _, text)
-	end
-	info.notCheckable = true
-	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-end)
+-- hooksecurefunc("BonusObjectiveTracker_OnOpenDropDown", function(self)
+	-- local id = self.activeFrame.TrackedQuest.questID
+	-- local info = UIDropDownMenu_CreateInfo()
+	-- info.text = L_WATCH_WOWHEAD_LINK
+	-- info.func = function()
+		-- local text = linkQuest:format(id)
+		-- StaticPopup_Show("WATCHFRAME_URL", _, _, text)
+	-- end
+	-- info.notCheckable = true
+	-- UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+-- end)
 
-hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
-	local id = self.activeFrame.id
-	local info = UIDropDownMenu_CreateInfo()
-	info.text = L_WATCH_WOWHEAD_LINK
-	info.func = function()
-		local text = linkAchievement:format(id)
-		StaticPopup_Show("WATCHFRAME_URL", _, _, text)
-	end
-	info.notCheckable = true
-	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-end)
+-- hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
+	-- local id = self.activeFrame.id
+	-- local info = UIDropDownMenu_CreateInfo()
+	-- info.text = L_WATCH_WOWHEAD_LINK
+	-- info.func = function()
+		-- local text = linkAchievement:format(id)
+		-- StaticPopup_Show("WATCHFRAME_URL", _, _, text)
+	-- end
+	-- info.notCheckable = true
+	-- UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+-- end)
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")

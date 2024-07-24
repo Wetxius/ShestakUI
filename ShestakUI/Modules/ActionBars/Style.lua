@@ -228,16 +228,16 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		icon:SetDrawLayer("BACKGROUND", 7)
 
 		if pet then
-			local autocast = button.AutoCastable
-			autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
-			autocast:ClearAllPoints()
-			autocast:SetPoint("CENTER", button, 0, 0)
+			--FIXME local autocast = button.AutoCastable
+			-- autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
+			-- autocast:ClearAllPoints()
+			-- autocast:SetPoint("CENTER", button, 0, 0)
 
-			local shine = _G[name.."Shine"]
-			shine:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+			-- local shine = _G[name.."Shine"]
+			-- shine:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 
-			local cooldown = _G[name.."Cooldown"]
-			cooldown:SetSize(C.actionbar.button_size - 2, C.actionbar.button_size - 2)
+			-- local cooldown = _G[name.."Cooldown"]
+			-- cooldown:SetSize(C.actionbar.button_size - 2, C.actionbar.button_size - 2)
 		end
 
 		if normal then
@@ -278,7 +278,7 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function(self, event)
+frame:SetScript("OnEvent", function()
 	for i = 1, 12 do
 		StyleNormalButton(_G["ActionButton"..i], C.actionbar.editor and C.actionbar.bar1_size)
 		StyleNormalButton(_G["MultiBarBottomLeftButton"..i], C.actionbar.editor and C.actionbar.bar2_size)

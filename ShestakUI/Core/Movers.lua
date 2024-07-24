@@ -559,8 +559,8 @@ StaticPopupDialogs.MOVEUI_RESET = {
 }
 
 -- Replace EditMode with our moving system
-GameMenuButtonEditMode:SetScript("OnClick", function()
-	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
-	SlashCmdList.MOVING()
-	HideUIPanel(GameMenuFrame)
-end)
+--FIXME GameMenuButtonEditMode:SetScript("OnClick", function()
+	-- PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+	-- SlashCmdList.MOVING()
+	-- HideUIPanel(GameMenuFrame)
+-- end)

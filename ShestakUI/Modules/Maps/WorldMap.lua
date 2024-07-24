@@ -9,7 +9,7 @@ MapQuestInfoRewardsFrame.XPFrame.Name:SetFont(C.media.normal_font, 13, "")
 --	Change position
 ----------------------------------------------------------------------------------------
 hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-	if CharacterFrame:IsShown() or SpellBookFrame:IsShown() or (PlayerTalentFrame and PlayerTalentFrame:IsShown()) or (ChannelFrame and ChannelFrame:IsShown()) or PVEFrame:IsShown() or (MacroFrame and MacroFrame:IsShown()) or (GarrisonLandingPage and GarrisonLandingPage:IsShown()) then return end
+	if CharacterFrame:IsShown() or (PlayerTalentFrame and PlayerSpellsFrame:IsShown()) or (PlayerTalentFrame and PlayerTalentFrame:IsShown()) or (ChannelFrame and ChannelFrame:IsShown()) or PVEFrame:IsShown() or (MacroFrame and MacroFrame:IsShown()) or (GarrisonLandingPage and GarrisonLandingPage:IsShown()) then return end
 	if not WorldMapFrame:IsMaximized() then
 		WorldMapFrame:ClearAllPoints()
 		WorldMapFrame:SetPoint(unpack(C.position.map))
@@ -112,58 +112,58 @@ end)
 ----------------------------------------------------------------------------------------
 --	Added options to map tracking button
 ----------------------------------------------------------------------------------------
-hooksecurefunc(WorldMapFrame.overlayFrames[2], "InitializeDropDown", function(self)
-	UIDropDownMenu_AddSeparator()
-	local info = UIDropDownMenu_CreateInfo()
+--FIXME hooksecurefunc(WorldMapFrame.overlayFrames[2], "InitializeDropDown", function(self)
+	-- UIDropDownMenu_AddSeparator()
+	-- local info = UIDropDownMenu_CreateInfo()
 
-	info.isTitle = true
-	info.notCheckable = true
-	info.text = "ShestakUI"
+	-- info.isTitle = true
+	-- info.notCheckable = true
+	-- info.text = "ShestakUI"
 
-	UIDropDownMenu_AddButton(info)
-	info.text = nil
+	-- UIDropDownMenu_AddButton(info)
+	-- info.text = nil
 
-	info.isTitle = nil
-	info.disabled = nil
-	info.notCheckable = nil
-	info.isNotRadio = true
-	info.keepShownOnClick = true
+	-- info.isTitle = nil
+	-- info.disabled = nil
+	-- info.notCheckable = nil
+	-- info.isNotRadio = true
+	-- info.keepShownOnClick = true
 
-	info.text = L_MAP_COORDS
-	info.checked = function()
-		return ShestakUISettingsPerChar.Coords == true
-	end
+	-- info.text = L_MAP_COORDS
+	-- info.checked = function()
+		-- return ShestakUISettingsPerChar.Coords == true
+	-- end
 
-	info.func = function()
-		if ShestakUISettingsPerChar.Coords == true then
-			ShestakUISettingsPerChar.Coords = false
-			coords:SetAlpha(0)
-		else
-			ShestakUISettingsPerChar.Coords = true
-			coords:SetAlpha(1)
-		end
-	end
-	UIDropDownMenu_AddButton(info)
+	-- info.func = function()
+		-- if ShestakUISettingsPerChar.Coords == true then
+			-- ShestakUISettingsPerChar.Coords = false
+			-- coords:SetAlpha(0)
+		-- else
+			-- ShestakUISettingsPerChar.Coords = true
+			-- coords:SetAlpha(1)
+		-- end
+	-- end
+	-- UIDropDownMenu_AddButton(info)
 
-	if C.minimap.fog_of_war == true then
-		info.text = L_MAP_FOG
-		info.checked = function()
-			return ShestakUISettingsPerChar.FogOfWar == true
-		end
+	-- if C.minimap.fog_of_war == true then
+		-- info.text = L_MAP_FOG
+		-- info.checked = function()
+			-- return ShestakUISettingsPerChar.FogOfWar == true
+		-- end
 
-		info.func = function()
-			if ShestakUISettingsPerChar.FogOfWar == true then
-				ShestakUISettingsPerChar.FogOfWar = false
-				for i = 1, #T.overlayTextures do
-					T.overlayTextures[i]:Hide()
-				end
-			else
-				ShestakUISettingsPerChar.FogOfWar = true
-				for i = 1, #T.overlayTextures do
-					T.overlayTextures[i]:Show()
-				end
-			end
-		end
-		UIDropDownMenu_AddButton(info)
-	end
-end)
+		-- info.func = function()
+			-- if ShestakUISettingsPerChar.FogOfWar == true then
+				-- ShestakUISettingsPerChar.FogOfWar = false
+				-- for i = 1, #T.overlayTextures do
+					-- T.overlayTextures[i]:Hide()
+				-- end
+			-- else
+				-- ShestakUISettingsPerChar.FogOfWar = true
+				-- for i = 1, #T.overlayTextures do
+					-- T.overlayTextures[i]:Show()
+				-- end
+			-- end
+		-- end
+		-- UIDropDownMenu_AddButton(info)
+	-- end
+-- end)

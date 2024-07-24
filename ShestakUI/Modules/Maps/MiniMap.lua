@@ -30,9 +30,9 @@ frame:SetScript("OnEvent", function(self, event)
 	MinimapCluster.InstanceDifficulty:SetParent(Minimap)
 	MinimapCluster.InstanceDifficulty:ClearAllPoints()
 	MinimapCluster.InstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 1, 3)
-	MinimapCluster.InstanceDifficulty.Instance.Border:Hide()
-	MinimapCluster.InstanceDifficulty.Instance.Background:SetSize(28, 28)
-	MinimapCluster.InstanceDifficulty.Instance.Background:SetVertexColor(0.6, 0.3, 0)
+	--FIXME MinimapCluster.InstanceDifficulty.Instance.Border:Hide()
+	-- MinimapCluster.InstanceDifficulty.Instance.Background:SetSize(28, 28)
+	-- MinimapCluster.InstanceDifficulty.Instance.Background:SetVertexColor(0.6, 0.3, 0)
 
 	-- Guild Instance Difficulty icon
 	MinimapCluster.InstanceDifficulty.Guild.Border:Hide()
@@ -399,23 +399,23 @@ end
 ----------------------------------------------------------------------------------------
 --	Tracking icon
 ----------------------------------------------------------------------------------------
-if C.minimap.tracking_icon then
-	MinimapCluster.TrackingFrame.Background:Hide()
-	MinimapCluster.TrackingFrame.Button:ClearAllPoints()
-	MinimapCluster.TrackingFrame.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
-	MinimapCluster.TrackingFrame.Button:SetHighlightTexture(0)
-	MinimapCluster.TrackingFrame.Button:SetSize(16, 16)
+--FIXME if C.minimap.tracking_icon then
+	-- MinimapCluster.TrackingFrame.Background:Hide()
+	-- MinimapCluster.TrackingFrame.Button:ClearAllPoints()
+	-- MinimapCluster.TrackingFrame.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
+	-- MinimapCluster.TrackingFrame.Button:SetHighlightTexture(0)
+	-- MinimapCluster.TrackingFrame.Button:SetSize(16, 16)
 
-	MinimapCluster.TrackingFrame.Button:SetScript("OnMouseDown", function(self, button)
-		Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
-	end)
+	-- MinimapCluster.TrackingFrame.Button:SetScript("OnMouseDown", function(self, button)
+		-- Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
+	-- end)
 
-	MinimapCluster.TrackingFrame:CreateBackdrop("ClassColor")
-	MinimapCluster.TrackingFrame.backdrop:SetPoint("TOPLEFT", MinimapCluster.TrackingFrame.Button, -2, 2)
-	MinimapCluster.TrackingFrame.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.TrackingFrame.Button, 2, -2)
-else
-	MinimapCluster.TrackingFrame:Hide()
-end
+	-- MinimapCluster.TrackingFrame:CreateBackdrop("ClassColor")
+	-- MinimapCluster.TrackingFrame.backdrop:SetPoint("TOPLEFT", MinimapCluster.TrackingFrame.Button, -2, 2)
+	-- MinimapCluster.TrackingFrame.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.TrackingFrame.Button, 2, -2)
+-- else
+	-- MinimapCluster.TrackingFrame:Hide()
+-- end
 
 ----------------------------------------------------------------------------------------
 --	Move minimap on top

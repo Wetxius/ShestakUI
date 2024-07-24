@@ -56,7 +56,7 @@ T.ArenaControl = {
 	[SpellName(605)] = 5,		-- Dominate Mind
 	[SpellName(8122)] = 5,		-- Psychic Scream
 	[SpellName(64044)] = 5,		-- Psychic Horror
-	[SpellName(205369)] = 5,	-- Mind Bomb
+	--FIXME [SpellName(205369)] = 5,	-- Mind Bomb
 	[SpellName(200196)] = 5,	-- Holy Word: Chastise
 	[SpellName(87204)] = 5,		-- Sin and Punishment
 	-- Rogue

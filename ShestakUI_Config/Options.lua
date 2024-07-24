@@ -3493,11 +3493,11 @@ end
 ----------------------------------------------------------------------------------------
 local menuButton = CreateFrame("Button", "GameMenuButtonSettingsUI", GameMenuFrame, "GameMenuButtonTemplate")
 menuButton:SetText("ShestakUI")
-menuButton:SetPoint("TOP", GetLocale() ~= "koKR" and "GameMenuButtonAddons" or "GameMenuButtonRatings", "BOTTOM", 0, -1)
+--FIXME menuButton:SetPoint("TOP", GetLocale() ~= "koKR" and "GameMenuButtonAddons" or "GameMenuButtonRatings", "BOTTOM", 0, -1)
 
 GameMenuFrame:HookScript("OnShow", function(self)
 	self:SetHeight(self:GetHeight() + menuButton:GetHeight())
-	GameMenuButtonLogout:SetPoint("TOP", menuButton, "BOTTOM", 0, -16)
+	-- GameMenuButtonLogout:SetPoint("TOP", menuButton, "BOTTOM", 0, -16)
 end)
 
 menuButton:SetScript("OnClick", function()

@@ -24,8 +24,8 @@ frame:SetScript("OnEvent", function()
 
 	if not C.actionbar.micromenu then
 		MicroMenu:Hide()
-		TalentMicroButton:ClearAllPoints()
-		TalentMicroButton:SetPoint("TOP", UIParent, "TOP", 0, 100) -- hide missing talent alert
+		--FIXME TalentMicroButton:ClearAllPoints()
+		-- TalentMicroButton:SetPoint("TOP", UIParent, "TOP", 0, 100) -- hide missing talent alert
 	end
 
 	MainMenuBar:SetMovable(true)
@@ -519,17 +519,17 @@ T.PetBarUpdate = function()
 			end
 		end
 
-		if autoCastAllowed then
-			petAutoCastableTexture:Show()
-		else
-			petAutoCastableTexture:Hide()
-		end
+		--FIXME if autoCastAllowed then
+			-- petAutoCastableTexture:Show()
+		-- else
+			-- petAutoCastableTexture:Hide()
+		-- end
 
-		if autoCastEnabled then
-			AutoCastShine_AutoCastStart(petAutoCastShine)
-		else
-			AutoCastShine_AutoCastStop(petAutoCastShine)
-		end
+		-- if autoCastEnabled then
+			-- AutoCastShine_AutoCastStart(petAutoCastShine)
+		-- else
+			-- AutoCastShine_AutoCastStop(petAutoCastShine)
+		-- end
 
 		if name then
 			if not C.actionbar.show_grid then
