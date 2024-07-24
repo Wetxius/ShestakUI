@@ -235,11 +235,11 @@ local micromenu = {
 		if InCombatLockdown() then
 			print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
 		end
-		ToggleFrame(SpellBookFrame)
+		PlayerSpellsUtil.ToggleSpellBookFrame()
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
 		if T.level >= 10 then
-			ToggleTalentFrame()
+			PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
 		else
 			if C.general.error_filter ~= "WHITELIST" then
 				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
