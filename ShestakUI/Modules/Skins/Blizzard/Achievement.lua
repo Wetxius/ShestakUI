@@ -49,9 +49,9 @@ local function LoadSkin()
 	AchievementFrameComparison.StatContainer.backdrop:SetPoint("BOTTOMRIGHT", 1, -3)
 
 	T.SkinCloseButton(AchievementFrameCloseButton, AchievementFrame.backdrop)
-	T.SkinDropDownBox(AchievementFrameFilterDropDown)
-	AchievementFrameFilterDropDown:ClearAllPoints()
-	AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
+	--FIXME T.SkinDropDownBox(AchievementFrameFilterDropDown)
+	-- AchievementFrameFilterDropDown:ClearAllPoints()
+	-- AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("ADDON_LOADED")

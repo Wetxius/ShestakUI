@@ -53,8 +53,8 @@ local function LoadSkin()
 	EncounterJournalNavBar.backdrop:SetPoint("TOPLEFT", -3, 1)
 	EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT", 0, -1)
 	EncounterJournalNavBarHomeButton:SkinButton(true)
-	EncounterJournalEncounterFrameInfoFilterToggle:SkinButton(true)
-	EncounterJournalEncounterFrameInfoSlotFilterToggle:SkinButton(true)
+	--FIXME EncounterJournalEncounterFrameInfoFilterToggle:SkinButton(true)
+	-- EncounterJournalEncounterFrameInfoSlotFilterToggle:SkinButton(true)
 	EncounterJournalEncounterFrameInfoClassFilterClearFrame:GetRegions():SetAlpha(0)
 	EncounterJournalEncounterFrameInfoDifficulty:SkinButton(true)
 	EncounterJournalEncounterFrameInfoDifficulty:SetWidth(95)
@@ -93,7 +93,7 @@ local function LoadSkin()
 
 	T.SkinEditBox(EncounterJournalSearchBox)
 	T.SkinCloseButton(EncounterJournalCloseButton)
-	T.SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
+	--FIXME T.SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
 
 	EncounterJournalInstanceSelectBG:SetAlpha(0)
 	EncounterJournalInstanceSelect.bg:SetAlpha(0)
@@ -422,14 +422,14 @@ local function LoadSkin()
 
 	local LootJournal = EncounterJournal.LootJournal
 	LootJournal:DisableDrawLayer("BACKGROUND")
-	LootJournal.ClassDropDownButton:SkinButton(true)
-	LootJournal.RuneforgePowerFilterDropDownButton:SkinButton(true)
+	--FIXME LootJournal.ClassDropDownButton:SkinButton(true)
+	-- LootJournal.RuneforgePowerFilterDropDownButton:SkinButton(true)
 
 	EncounterJournal.LootJournalItems:DisableDrawLayer("BACKGROUND")
-	T.SkinDropDownBox(EncounterJournalLootJournalViewDropDown)
+	-- T.SkinDropDownBox(EncounterJournalLootJournalViewDropDown)
 
 	local itemSetsFrame = EncounterJournal.LootJournalItems.ItemSetsFrame
-	itemSetsFrame.ClassButton:SkinButton(true)
+	-- itemSetsFrame.ClassButton:SkinButton(true)
 	T.SkinScrollBar(itemSetsFrame.ScrollBar)
 
 	hooksecurefunc(itemSetsFrame.ScrollBox, "Update", function(self)
