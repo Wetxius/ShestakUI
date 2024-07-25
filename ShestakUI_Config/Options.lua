@@ -3500,5 +3500,3 @@ end
 hooksecurefunc(GameMenuFrame, "InitButtons", function(self)
 	self:AddButton("ShestakUI", openGUI)
 end)
-
-GameMenuFrame:SetScale(0.8)

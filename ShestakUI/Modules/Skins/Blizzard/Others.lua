@@ -53,6 +53,20 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 		end
 
+		hooksecurefunc(GameMenuFrame, "InitButtons", function(self)
+			if not self.buttonPool then return end
+
+			for button in self.buttonPool:EnumerateActive() do
+				if not button.styled then
+					button:SkinButton()
+					-- button:SetSize(150, 26)
+					button.styled = true
+				end
+				button:HookScript("OnEnter", T.SetModifiedBackdrop)
+				button:HookScript("OnLeave", T.SetOriginalBackdrop)
+			end
+		end)
+
 		-- Reskin popups
 		for i = 1, 4 do
 			for j = 1, 4 do
