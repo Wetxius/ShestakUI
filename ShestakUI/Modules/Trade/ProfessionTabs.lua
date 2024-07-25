@@ -212,7 +212,7 @@ local function HandleProfession(object, professionID, hat)
 				if defaults[skillID][index] then
 					local name = GetSpellBookItemName(offset + index, "profession")
 					local rank = GetProfessionRank(currentSkill, skillLineName)
-					local texture = GetSpellBookItemTexture(offset + index, "profession")
+					local texture = C_SpellBook.GetSpellBookItemTexture(offset + index, 0)
 
 					if name and rank and texture then
 						UpdateTab(object, name, rank, texture)
