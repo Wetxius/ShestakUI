@@ -118,8 +118,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 
 	-- Quest tracker
 	if C.font.quest_tracker_font_mult > 1 then
-		SetFont(GameFontNormalMed2, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest tracker
-		SetFont(ObjectiveFont, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest title and objectives
+		SetFont(ObjectiveTrackerHeaderFont, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest title and objectives
+		SetFont(ObjectiveTrackerLineFont, NORMAL, 12 * C.font.quest_tracker_font_mult) -- Quest tracker
 	end
 end)
 
