@@ -559,35 +559,35 @@ local function Shared(self, unit)
 		end
 
 		-- Reputation bar
-		if C.unitframe.plugins_reputation_bar == true then
-			self.Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
-			self.Reputation:CreateBackdrop("Default")
-			self.Reputation:EnableMouse(true)
-			if C.unitframe.portrait_enable == true then
-				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
-				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
-				end
-			else
-				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
-				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
-				end
-			end
-			self.Reputation:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
-			self.Reputation:SetOrientation("Vertical")
-			self.Reputation:SetStatusBarTexture(C.media.texture)
+		--FIXME if C.unitframe.plugins_reputation_bar == true then
+			-- self.Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
+			-- self.Reputation:CreateBackdrop("Default")
+			-- self.Reputation:EnableMouse(true)
+			-- if C.unitframe.portrait_enable == true then
+				-- if self.Experience and self.Experience:IsShown() then
+					-- self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
+				-- else
+					-- self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
+				-- end
+			-- else
+				-- if self.Experience and self.Experience:IsShown() then
+					-- self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
+				-- else
+					-- self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
+				-- end
+			-- end
+			-- self.Reputation:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
+			-- self.Reputation:SetOrientation("Vertical")
+			-- self.Reputation:SetStatusBarTexture(C.media.texture)
 
-			self.Reputation.bg = self.Reputation:CreateTexture(nil, "BORDER")
-			self.Reputation.bg:SetAllPoints()
-			self.Reputation.bg:SetTexture(C.media.texture)
+			-- self.Reputation.bg = self.Reputation:CreateTexture(nil, "BORDER")
+			-- self.Reputation.bg:SetAllPoints()
+			-- self.Reputation.bg:SetTexture(C.media.texture)
 
-			self.Reputation.inAlpha = 1
-			self.Reputation.outAlpha = 0
-			self.Reputation.colorStanding = true
-		end
+			-- self.Reputation.inAlpha = 1
+			-- self.Reputation.outAlpha = 0
+			-- self.Reputation.colorStanding = true
+		-- end
 
 		-- GCD spark
 		if C.unitframe.plugins_gcd == true then
