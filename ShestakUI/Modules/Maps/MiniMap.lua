@@ -361,10 +361,12 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 			EasyMenu(micromenu, menuFrame, "cursor", -160, 0, "MENU")
 		end
 	elseif button == "MiddleButton" then
+		MinimapCluster.Tracking.Button:OpenMenu()
+		MinimapCluster.Tracking.Button.menu:ClearAllPoints()
 		if position:match("LEFT") then
-			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, "cursor", 0, 0, "MENU", 2)
+			MinimapCluster.Tracking.Button.menu:SetPoint("TOPLEFT", Minimap, "RIGHT", 4, 0)
 		else
-			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, "cursor", -160, 0, "MENU", 2)
+			MinimapCluster.Tracking.Button.menu:SetPoint("TOPRIGHT", Minimap, "LEFT", -4, 0)
 		end
 	elseif button == "LeftButton" then
 		Minimap.OnClick(self)
@@ -399,23 +401,23 @@ end
 ----------------------------------------------------------------------------------------
 --	Tracking icon
 ----------------------------------------------------------------------------------------
---FIXME if C.minimap.tracking_icon then
-	-- MinimapCluster.TrackingFrame.Background:Hide()
-	-- MinimapCluster.TrackingFrame.Button:ClearAllPoints()
-	-- MinimapCluster.TrackingFrame.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
-	-- MinimapCluster.TrackingFrame.Button:SetHighlightTexture(0)
-	-- MinimapCluster.TrackingFrame.Button:SetSize(16, 16)
+local trackButton = MinimapCluster.Tracking.Button
+trackButton:ClearAllPoints()
+trackButton:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
 
-	-- MinimapCluster.TrackingFrame.Button:SetScript("OnMouseDown", function(self, button)
-		-- Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
-	-- end)
+if C.minimap.tracking_icon then
+	MinimapCluster.Tracking.Background:Hide()
 
-	-- MinimapCluster.TrackingFrame:CreateBackdrop("ClassColor")
-	-- MinimapCluster.TrackingFrame.backdrop:SetPoint("TOPLEFT", MinimapCluster.TrackingFrame.Button, -2, 2)
-	-- MinimapCluster.TrackingFrame.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.TrackingFrame.Button, 2, -2)
--- else
-	-- MinimapCluster.TrackingFrame:Hide()
--- end
+	trackButton:SetHighlightTexture(0)
+	trackButton:SetSize(16, 16)
+
+	MinimapCluster.Tracking:CreateBackdrop("ClassColor")
+	MinimapCluster.Tracking.backdrop:SetPoint("TOPLEFT", trackButton, -2, 2)
+	MinimapCluster.Tracking.backdrop:SetPoint("BOTTOMRIGHT", trackButton, 2, -2)
+else
+	trackButton:ClearAllPoints()
+	trackButton:SetPoint("TOP", UIParent, "BOTTOM")
+end
 
 ----------------------------------------------------------------------------------------
 --	Move minimap on top
