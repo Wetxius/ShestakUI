@@ -702,6 +702,25 @@ function T.SkinEditBox(frame, width, height)
 end
 
 function T.SkinDropDownBox(frame, width, pos)
+	if frame.Arrow then
+		frame.Background:SetTexture(nil)
+		frame:SetTemplate("Overlay")
+		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
+		frame.Arrow:SetAlpha(0)
+
+		local tex = frame:CreateTexture(nil, "ARTWORK")
+		tex:SetPoint("RIGHT", frame, -4, 0)
+		tex:SetSize(17, 17)
+		tex:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+		tex:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+
+		local f = CreateFrame("Frame", nil, frame)
+		f:SetOutside(tex)
+		f:SetTemplate("Default")
+		tex:SetParent(f)
+	return
+	end
+
 	local frameName = frame.GetName and frame:GetName()
 	local button = frame.Button or frameName and (_G[frameName.."Button"] or _G[frameName.."_Button"])
 	local text = frameName and _G[frameName.."Text"] or frame.Text
