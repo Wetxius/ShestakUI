@@ -520,7 +520,7 @@ local function LoadSkin()
 			local child = select(i, QuestMapFrame.QuestsFrame.Contents:GetChildren())
 			if child and child.ButtonText and not child.Text then
 				if not child.isSkinned then
-					SkinExpandOrCollapse(child)
+					-- SkinExpandOrCollapse(child)
 					child.isSkinned = true
 				end
 			end
@@ -537,7 +537,7 @@ local function LoadSkin()
 					campaignHeader.HighlightTexture:SetAlpha(0)
 					campaignHeader.Background:SetAlpha(0)
 					campaignHeader.TopFiligree:Hide()
-					SkinExpandOrCollapse(campaignHeader.CollapseButton)
+					-- SkinExpandOrCollapse(campaignHeader.CollapseButton)
 				end
 				if campaignHeader.backdrop then
 					if campaignColor[campaign.uiTextureKit] then
@@ -563,7 +563,7 @@ local function LoadSkin()
 		end
 		for header in QuestScrollFrame.campaignHeaderMinimalFramePool:EnumerateActive() do
 			if not header.CollapseButton.styled then
-				SkinExpandOrCollapse(header.CollapseButton)
+				-- SkinExpandOrCollapse(header.CollapseButton)
 				header.CollapseButton.styled = true
 			end
 		end
