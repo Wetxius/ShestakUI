@@ -319,6 +319,7 @@ local function SkinButton(f, strip)
 	if f.MiddleRight then f.MiddleRight:Hide() end
 	if f.BottomMiddle then f.BottomMiddle:Hide() end
 	if f.MiddleMiddle then f.MiddleMiddle:Hide() end
+	if f.Background then f.Background:Hide() end
 
 	f:SetTemplate("Overlay")
 	f:HookScript("OnEnter", T.SetModifiedBackdrop)
@@ -704,13 +705,15 @@ end
 function T.SkinDropDownBox(frame, width, pos)
 	if frame.Arrow then
 		frame.Background:SetTexture(nil)
-		frame:SetTemplate("Overlay")
+		frame:CreateBackdrop("Overlay")
+		frame.backdrop:SetPoint("TOPLEFT", -2, -1)
+		frame.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
 		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 		frame.Arrow:SetAlpha(0)
 
 		local tex = frame:CreateTexture(nil, "ARTWORK")
 		tex:SetPoint("RIGHT", frame, -4, 0)
-		tex:SetSize(17, 17)
+		tex:SetSize(15, 15)
 		tex:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 		tex:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
 

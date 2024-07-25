@@ -30,15 +30,27 @@ local function LoadSkin()
 		MountJournalMountButton,
 		PetJournalSummonButton,
 		PetJournalFindBattle,
-		PetJournalFilterButton,
-		MountJournalFilterButton,
-		-- HeirloomsJournal.FilterButton,
-		ToyBoxFilterButton,
-		-- WardrobeCollectionFrame.FilterButton
+		PetJournalFilterButton
 	}
 
 	for i = 1, #buttons do
 		buttons[i]:SkinButton()
+	end
+
+	local filterButtons = {
+		MountJournal.FilterDropdown,
+		PetJournal.FilterDropdown,
+		HeirloomsJournal.FilterDropdown,
+		ToyBox.FilterDropdown,
+		WardrobeCollectionFrame.FilterButton
+	}
+
+	for i = 1, #filterButtons do
+		filterButtons[i]:SkinButton()
+		T.SkinCloseButton(filterButtons[i].ResetButton)
+		filterButtons[i].ResetButton:ClearAllPoints()
+		filterButtons[i].ResetButton:SetPoint("CENTER", filterButtons[i], "TOPRIGHT", 0, 0)
+		filterButtons[i]:SetHeight(22)
 	end
 
 	for i = 1, 3 do
@@ -74,10 +86,7 @@ local function LoadSkin()
 	T.SkinEditBox(MountJournalSearchBox, nil, 18)
 	T.SkinScrollBar(MountJournal.ScrollBar)
 
-	--FIXME MountJournalFilterButton:SetPoint("TOPLEFT", MountJournalSearchBox, "TOPRIGHT", 5, 2)
-	-- T.SkinCloseButton(_G.MountJournalFilterButton.ResetButton)
-	-- _G.MountJournalFilterButton.ResetButton:ClearAllPoints()
-	-- _G.MountJournalFilterButton.ResetButton:SetPoint("CENTER", _G.MountJournalFilterButton, "TOPRIGHT", 0, 0)
+	MountJournal.FilterDropdown:SetPoint("TOPLEFT", MountJournalSearchBox, "TOPRIGHT", 5, 2)
 
 	-- New Mount Equip. 8.2
 	MountJournal.BottomLeftInset:StripTextures()
@@ -162,9 +171,6 @@ local function LoadSkin()
 	T.SkinEditBox(PetJournalSearchBox, nil, 18)
 
 	PetJournal.FilterDropdown:SetPoint("TOPLEFT", PetJournalSearchBox, "TOPRIGHT", 5, 2)
-	T.SkinCloseButton(PetJournal.FilterDropdown.ResetButton)
-	PetJournal.FilterDropdown.ResetButton:ClearAllPoints()
-	PetJournal.FilterDropdown.ResetButton:SetPoint("CENTER", PetJournal.FilterDropdown, "TOPRIGHT", 0, 0)
 
 	PetJournalLoadoutBorderSlotHeaderText:SetParent(PetJournal)
 	PetJournalLoadoutBorderSlotHeaderText:SetPoint("CENTER", PetJournalLoadoutBorderTop, "TOP", 0, 4)
@@ -387,10 +393,7 @@ local function LoadSkin()
 	ToyBox.progressBar:SetStatusBarTexture(C.media.texture)
 	ToyBox.progressBar:SetFrameLevel(ToyBox.progressBar:GetFrameLevel() + 2)
 
-	--FIXME ToyBoxFilterButton:SetPoint("TOPLEFT", ToyBox.searchBox, "TOPRIGHT", 5, 2)
-	-- T.SkinCloseButton(_G.ToyBoxFilterButton.ResetButton)
-	-- _G.ToyBoxFilterButton.ResetButton:ClearAllPoints()
-	-- _G.ToyBoxFilterButton.ResetButton:SetPoint("CENTER", _G.ToyBoxFilterButton, "TOPRIGHT", 0, 0)
+	ToyBox.FilterDropdown:SetPoint("TOPLEFT", ToyBox.searchBox, "TOPRIGHT", 5, 2)
 
 	for i = 1, 18 do
 		ToyBox.iconsFrame["spellButton"..i].slotFrameCollected:SetTexture("")
@@ -421,12 +424,9 @@ local function LoadSkin()
 	HeirloomsJournal.progressBar:CreateBackdrop("Overlay")
 	HeirloomsJournal.progressBar:SetStatusBarTexture(C.media.texture)
 	HeirloomsJournal.progressBar:SetFrameLevel(HeirloomsJournal.progressBar:GetFrameLevel() + 2)
-	-- T.SkinDropDownBox(HeirloomsJournalClassDropDown, 170)
+	T.SkinDropDownBox(HeirloomsJournal.ClassDropdown, 170)
 
-	--FIXME HeirloomsJournal.FilterButton:SetPoint("TOPLEFT", HeirloomsJournal.SearchBox, "TOPRIGHT", 5, 2)
-	-- T.SkinCloseButton(_G.HeirloomsJournal.FilterButton.ResetButton)
-	-- _G.HeirloomsJournal.FilterButton.ResetButton:ClearAllPoints()
-	-- _G.HeirloomsJournal.FilterButton.ResetButton:SetPoint("CENTER", _G.HeirloomsJournal.FilterButton, "TOPRIGHT", 0, 0)
+	HeirloomsJournal.FilterDropdown:SetPoint("TOPLEFT", HeirloomsJournal.SearchBox, "TOPRIGHT", 5, 2)
 
 	hooksecurefunc(HeirloomsJournal, "LayoutCurrentPage", function(self)
 		for i = 1, #self.heirloomHeaderFrames do
@@ -475,7 +475,7 @@ local function LoadSkin()
 
 	-- Wardrobe
 	T.SkinFrame(WardrobeFrame)
-	-- T.SkinDropDownBox(WardrobeOutfitDropDown)
+	T.SkinDropDownBox(WardrobeCollectionFrame.ClassDropdown)
 	-- WardrobeOutfitDropDown:SetSize(221, 34)
 	-- WardrobeOutfitDropDown.SaveButton:SkinButton()
 	-- WardrobeOutfitDropDown.SaveButton:SetPoint("TOPLEFT", WardrobeOutfitDropDown, "TOPRIGHT", -2, -2)
@@ -488,9 +488,6 @@ local function LoadSkin()
 	T.SkinCheckBox(WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox)
 
 	WardrobeCollectionFrame.FilterButton:SetPoint("TOPLEFT", WardrobeCollectionFrameSearchBox, "TOPRIGHT", 5, 2)
-	T.SkinCloseButton(WardrobeCollectionFrame.FilterButton.ResetButton)
-	WardrobeCollectionFrame.FilterButton.ResetButton:ClearAllPoints()
-	WardrobeCollectionFrame.FilterButton.ResetButton:SetPoint("CENTER", WardrobeCollectionFrame.FilterButton, "TOPRIGHT", 0, 0)
 	WardrobeCollectionFrame.FilterButton:SetWidth(90)
 
 	for i = 1, #WardrobeTransmogFrame.SlotButtons do
@@ -521,7 +518,7 @@ local function LoadSkin()
 	WardrobeCollectionFrame.progressBar:SetFrameLevel(WardrobeCollectionFrame.progressBar:GetFrameLevel() + 2)
 	T.SkinEditBox(WardrobeCollectionFrameSearchBox, nil, 18)
 	WardrobeCollectionFrameSearchBox:SetFrameLevel(WardrobeCollectionFrameSearchBox:GetFrameLevel() + 2)
-	-- T.SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown, 170)
+	T.SkinDropDownBox(WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame.VariantSetsDropdown)
 	T.SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
 	T.SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
 	T.SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
