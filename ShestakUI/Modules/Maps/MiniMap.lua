@@ -404,10 +404,9 @@ end
 local trackButton = MinimapCluster.Tracking.Button
 trackButton:ClearAllPoints()
 trackButton:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
+MinimapCluster.Tracking.Background:Hide()
 
 if C.minimap.tracking_icon then
-	MinimapCluster.Tracking.Background:Hide()
-
 	trackButton:SetHighlightTexture(0)
 	trackButton:SetSize(16, 16)
 
