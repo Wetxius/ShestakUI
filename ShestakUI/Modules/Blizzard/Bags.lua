@@ -255,8 +255,8 @@ function Stuffing:SlotUpdate(b)
 	end
 
 	if IsAddOnLoaded("CanIMogIt") then
-		CIMI_AddToFrame(b.frame, ContainerFrameItemButton_CIMIUpdateIcon)
-		ContainerFrameItemButton_CIMIUpdateIcon(b.frame.CanIMogItOverlay)
+		CIMI_AddToFrame(b.frame, ContainerFrame_CIMIUpdateIcon)
+		ContainerFrame_CIMIUpdateIcon(b.frame.CanIMogItOverlay)
 	end
 
 	if clink then
