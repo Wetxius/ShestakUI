@@ -567,12 +567,12 @@ local function LoadSkin()
 				button.HighlightTexture:SetTexture(nil)
 				button.SelectedTexture:SetTexture(nil)
 
-				--FIXME button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				button.IconFrame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 				button.border = CreateFrame("Frame", nil, button)
 				button.border:CreateBackdrop("Default")
-				button.border.backdrop:SetPoint("TOPLEFT", button.Icon, -2, 2)
-				button.border.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, 2, -2)
+				button.border.backdrop:SetPoint("TOPLEFT", button.IconFrame.Icon, -2, 2)
+				button.border.backdrop:SetPoint("BOTTOMRIGHT", button.IconFrame.Icon, 2, -2)
 
 				button.ProgressBar:SetPoint("TOPLEFT", button.backdrop, "BOTTOMLEFT", 2, 4)
 
