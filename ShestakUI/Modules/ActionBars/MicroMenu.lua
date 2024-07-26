@@ -16,8 +16,8 @@ end
 
 local MICRO_BUTTONS = {
 	"CharacterMicroButton",
-	"SpellbookMicroButton",
-	"TalentMicroButton",
+	"ProfessionMicroButton",
+	"PlayerSpellsMicroButton",
 	"AchievementMicroButton",
 	"QuestLogMicroButton",
 	"GuildMicroButton",
