@@ -113,6 +113,11 @@ local function LoadSkin()
 	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameLevel(2000)
 
 	-- SpellBook
+	PlayerSpellsFrame.SpellBookFrame.TopBar:SetAlpha(0)
+
+	for _, tab in next, {PlayerSpellsFrame.SpellBookFrame.CategoryTabSystem:GetChildren()} do
+		T.SkinTab(tab, true)
+	end
 
 	T.SkinEditBox(PlayerSpellsFrame.SpellBookFrame.SearchBox, 250, 22)
 	T.SkinCheckBox(PlayerSpellsFrame.SpellBookFrame.HidePassivesCheckButton.Button)
