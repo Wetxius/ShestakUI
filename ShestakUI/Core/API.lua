@@ -306,6 +306,7 @@ local function SkinButton(f, strip)
 	if f.Left then f.Left:SetAlpha(0) end
 	if f.Right then f.Right:SetAlpha(0) end
 	if f.Middle then f.Middle:SetAlpha(0) end
+	if f.Center then f.Center:SetAlpha(0) end
 	if f.LeftSeparator then f.LeftSeparator:SetAlpha(0) end
 	if f.RightSeparator then f.RightSeparator:SetAlpha(0) end
 	if f.Flash then f.Flash:SetAlpha(0) end

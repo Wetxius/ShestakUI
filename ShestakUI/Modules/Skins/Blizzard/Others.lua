@@ -53,19 +53,69 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 		end
 
+		local function SetModifiedBackdrop(self)
+			if self:IsEnabled() then
+				self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				if self.backdrop.overlay then
+					self.backdrop.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+				end
+			end
+		end
+
+		local function SetOriginalBackdrop(self)
+			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+			if self.backdrop.overlay then
+				self.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
+			end
+		end
+
+		local function SkinButton(f, strip)
+			if f.SetNormalTexture then f:SetNormalTexture(0) end
+			if f.SetHighlightTexture then f:SetHighlightTexture(0) end
+			if f.SetPushedTexture then f:SetPushedTexture(0) end
+			if f.SetDisabledTexture then f:SetDisabledTexture(0) end
+
+			if f.Left then f.Left:SetAlpha(0) end
+			if f.Right then f.Right:SetAlpha(0) end
+			if f.Middle then f.Middle:SetAlpha(0) end
+			if f.Center then f.Center:SetAlpha(0) end
+			if f.LeftSeparator then f.LeftSeparator:SetAlpha(0) end
+			if f.RightSeparator then f.RightSeparator:SetAlpha(0) end
+			if f.Flash then f.Flash:SetAlpha(0) end
+
+			if f.TopLeft then f.TopLeft:Hide() end
+			if f.TopRight then f.TopRight:Hide() end
+			if f.BottomLeft then f.BottomLeft:Hide() end
+			if f.BottomRight then f.BottomRight:Hide() end
+			if f.TopMiddle then f.TopMiddle:Hide() end
+			if f.MiddleLeft then f.MiddleLeft:Hide() end
+			if f.MiddleRight then f.MiddleRight:Hide() end
+			if f.BottomMiddle then f.BottomMiddle:Hide() end
+			if f.MiddleMiddle then f.MiddleMiddle:Hide() end
+			if f.Background then f.Background:Hide() end
+
+			f:CreateBackdrop("Overlay")
+			f:HookScript("OnEnter", SetModifiedBackdrop)
+			f:HookScript("OnLeave", SetOriginalBackdrop)
+		end
+
 		hooksecurefunc(GameMenuFrame, "InitButtons", function(self)
 			if not self.buttonPool then return end
 
 			for button in self.buttonPool:EnumerateActive() do
 				if not button.styled then
-					button:SkinButton()
-					-- button:SetSize(150, 26)
+					SkinButton(button)
+					button.backdrop:SetInside(button, 2, 2)
 					button.styled = true
 				end
-				button:HookScript("OnEnter", T.SetModifiedBackdrop)
-				button:HookScript("OnLeave", T.SetOriginalBackdrop)
+				button:HookScript("OnEnter", SetModifiedBackdrop)
+				button:HookScript("OnLeave", SetOriginalBackdrop)
 			end
 		end)
+		if GameMenuFrame.ShestakUI then
+			SkinButton(GameMenuFrame.ShestakUI)
+			GameMenuFrame.ShestakUI.backdrop:SetInside(button, 2, 2)
+		end
 
 		-- Reskin popups
 		for i = 1, 4 do
