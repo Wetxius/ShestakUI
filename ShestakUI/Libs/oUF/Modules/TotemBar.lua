@@ -72,7 +72,7 @@ local function Event(self, event, ...)
 end
 
 local function anchorTotems(element)
-	for t in next, _G.TotemFrame.totemPool.activeObjects do
+	for t in _G.TotemFrame.totemPool:EnumerateActive() do
 		local i = t.slot
 		t:ClearAllPoints()
 		t:SetParent(element[i])
@@ -90,9 +90,9 @@ local function Enable(self)
 		self:RegisterEvent("PLAYER_TOTEM_UPDATE", Event, true)
 		element.colors = setmetatable(element.colors or {}, {__index = colors})
 		if element.Destroy then
-			--FIXME anchorTotems(element)
+			anchorTotems(element)
 			hooksecurefunc(TotemFrame, "Update", function()
-				-- anchorTotems(element)
+				anchorTotems(element)
 			end)
 		end
 		return true
