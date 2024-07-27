@@ -125,7 +125,6 @@ T.DiminishingSpells = {
 	[10326] = {"disorient"},		-- Turn Evil (For Lichborne?)
 	[605] = {"disorient"},			-- Mind Control
 	[8122] = {"disorient"},			-- Psychic Scream
-	--FIXME [226943] = {"disorient"},		-- Mind Bomb
 	[2094] = {"disorient"},			-- Blind
 	[118699] = {"disorient"},		-- Fear
 	[5484] = {"disorient"},			-- Howl of Terror

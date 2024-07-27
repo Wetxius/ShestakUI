@@ -250,7 +250,6 @@ elseif T.class == "HUNTER" then
 		T.aoespam[203525] = 2		-- Talon Strike
 		T.aoespam[17253] = 6		-- Bite
 		T.aoespam[185855] = 6		-- Lacerate
-		--FIXME T.aoespam[194279] = 6		-- Caltrops
 		T.aoespam[19434] = 1		-- Trick Shot (Aimed Shot)
 		T.aoespam[191070] = 1		-- Call of the Hunter (Marked Shot)
 		T.aoespam[191043] = 1		-- Legacy of the Windrunners (Aimed Shot)
@@ -343,7 +342,6 @@ elseif T.class == "MONK" then
 		T.aoespam[124081] = 3		-- Zen Pulse
 		T.aoespam[116670] = 0		-- Uplift
 		T.aoespam[178173] = 3		-- Gift of the Ox
-		--FIXME T.aoespam[191840] = 3		-- Essence Font
 		T.aoespam[162530] = 3		-- Refreshing Jade Wind
 		-- Damaging spells
 		T.aoespam[228649] = 1		-- Blackout Kick (x3)
