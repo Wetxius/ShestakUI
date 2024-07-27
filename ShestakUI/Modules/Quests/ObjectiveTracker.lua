@@ -296,44 +296,44 @@ if C.automation.auto_collapse ~= "NONE" then
 		if C.automation.auto_collapse == "RAID" then
 			if IsInInstance() then
 				C_Timer.After(0.1, function()
-					ObjectiveTracker_Collapse()
+					--FIXME ObjectiveTracker_Collapse()
 				end)
 			elseif ObjectiveTrackerFrame.collapsed and not InCombatLockdown() then
-				ObjectiveTracker_Expand()
+				-- ObjectiveTracker_Expand()
 			end
 		elseif C.automation.auto_collapse == "SCENARIO" then
 			local inInstance, instanceType = IsInInstance()
 			if inInstance then
 				if instanceType == "party" or instanceType == "scenario" then
-					C_Timer.After(0.1, function() -- for some reason it got error after reload in instance
-						for i = 3, #headers do
-							local button = headers[i].Header.MinimizeButton
-							if button and not headers[i].collapsed then
-								button:Click()
-							end
-						end
-					end)
+					-- C_Timer.After(0.1, function() -- for some reason it got error after reload in instance
+						-- for i = 3, #headers do
+							-- local button = headers[i].Header.MinimizeButton
+							-- if button and not headers[i].collapsed then
+								-- button:Click()
+							-- end
+						-- end
+					-- end)
 				else
 					C_Timer.After(0.1, function()
-						ObjectiveTracker_Collapse()
+						-- ObjectiveTracker_Collapse()
 					end)
 				end
 			else
 				if not InCombatLockdown() then
-					for i = 3, #headers do
-						local button = headers[i].Header.MinimizeButton
-						if button and headers[i].collapsed then
-							button:Click()
-						end
-					end
+					-- for i = 3, #headers do
+						-- local button = headers[i].Header.MinimizeButton
+						-- if button and headers[i].collapsed then
+							-- button:Click()
+						-- end
+					-- end
 					if ObjectiveTrackerFrame.collapsed then
-						ObjectiveTracker_Expand()
+						-- ObjectiveTracker_Expand()
 					end
 				end
 			end
 		elseif C.automation.auto_collapse == "RELOAD" then
 			C_Timer.After(0.1, function()
-				ObjectiveTracker_Collapse()
+				-- ObjectiveTracker_Collapse()
 			end)
 		end
 	end)
