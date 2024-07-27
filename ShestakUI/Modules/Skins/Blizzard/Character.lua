@@ -279,14 +279,51 @@ local function LoadSkin()
 	end
 	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
 
+	local oldAtlas = {
+		Options_ListExpand_Right = 1,
+		Options_ListExpand_Right_Expanded = 1
+	}
+
+	local function updateCollapse(texture, atlas)
+		if not atlas or oldAtlas[atlas] then
+			local parent = texture:GetParent()
+			if parent:IsCollapsed() then
+				texture:SetAtlas("Soulbinds_Collection_CategoryHeader_Expand")
+			else
+				texture:SetAtlas("Soulbinds_Collection_CategoryHeader_Collapse")
+			end
+		end
+	end
+
+	local function updateToggleCollapse(button)
+		if button:GetHeader():IsCollapsed() then
+			button.bg.plus:Show()
+		else
+			button.bg.plus:Hide()
+		end
+	end
+
 	-- Reputation
 	hooksecurefunc(_G.ReputationFrame.ScrollBox, "Update", function(frame)
 		for _, child in next, { frame.ScrollTarget:GetChildren() } do
 			if child and not child.IsSkinned then
-				-- child:StripTextures()
+				if child.Right then
+					child:StripTextures()
+					child:CreateBackdrop("Overlay")
+					child.backdrop:SetInside(child)
+					updateCollapse(child.Right)
+					updateCollapse(child.HighlightRight)
+
+					hooksecurefunc(child.Right, "SetAtlas", updateCollapse)
+					hooksecurefunc(child.HighlightRight, "SetAtlas", updateCollapse)
+				end
 
 				if child.ToggleCollapseButton then
-					-- FIXME T.SkinExpandOrCollapse(child.ToggleCollapseButton)
+					child.ToggleCollapseButton:GetNormalTexture():SetAlpha(0)
+					child.ToggleCollapseButton:GetPushedTexture():SetAlpha(0)
+					T.SkinExpandOrCollapse(child.ToggleCollapseButton)
+					updateToggleCollapse(child.ToggleCollapseButton)
+					hooksecurefunc(child.ToggleCollapseButton, "RefreshIcon", updateToggleCollapse)
 				end
 
 				local repbar = child.Content and child.Content.ReputationBar
@@ -329,14 +366,25 @@ local function LoadSkin()
 			local child = select(i, self.ScrollTarget:GetChildren())
 			if child and not child.styled then
 				if child.Right then
+					child:StripTextures()
+					child:CreateBackdrop("Overlay")
+					child.backdrop:SetInside(child)
+					updateCollapse(child.Right)
+					updateCollapse(child.HighlightRight)
 
+					hooksecurefunc(child.Right, "SetAtlas", updateCollapse)
+					hooksecurefunc(child.HighlightRight, "SetAtlas", updateCollapse)
 				end
 				local icon = child.Content and child.Content.CurrencyIcon
 				if icon then
 					icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				end
 				if child.ToggleCollapseButton then
-
+					child.ToggleCollapseButton:GetNormalTexture():SetAlpha(0)
+					child.ToggleCollapseButton:GetPushedTexture():SetAlpha(0)
+					T.SkinExpandOrCollapse(child.ToggleCollapseButton)
+					updateToggleCollapse(child.ToggleCollapseButton)
+					hooksecurefunc(child.ToggleCollapseButton, "RefreshIcon", updateToggleCollapse)
 				end
 
 				child.styled = true
