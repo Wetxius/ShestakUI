@@ -231,11 +231,11 @@ local micromenu = {
 	{text = CHARACTER_BUTTON, notCheckable = 1, func = function()
 		ToggleCharacter("PaperDollFrame")
 	end},
-	{text = SPELLBOOK_ABILITIES_BUTTON, notCheckable = 1, func = function()
+	{text = PROFESSIONS_BUTTON, notCheckable = 1, func = function()
 		if InCombatLockdown() then
 			print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
 		end
-		PlayerSpellsUtil.ToggleSpellBookFrame()
+		ToggleProfessionsBook()
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
 		if T.level >= 10 then
