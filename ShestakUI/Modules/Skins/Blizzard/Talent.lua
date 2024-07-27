@@ -5,25 +5,25 @@ if C.skins.blizzard_frames ~= true then return end
 --	TalentUI skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local frame = ClassTalentFrame
+	local frame = PlayerSpellsFrame
 	T.SkinFrame(frame)
 
-	ClassTalentFrame.TalentsTab.BlackBG:SetAlpha(0)
-	ClassTalentFrame.TalentsTab.BottomBar:SetAlpha(0)
+	PlayerSpellsFrame.TalentsFrame.BlackBG:SetAlpha(0)
+	PlayerSpellsFrame.TalentsFrame.BottomBar:SetAlpha(0)
 
-	ClassTalentFrame.TalentsTab.ApplyButton:SkinButton(true)
+	PlayerSpellsFrame.TalentsFrame.ApplyButton:SkinButton(true)
 
-	T.SkinDropDownBox(ClassTalentFrame.TalentsTab.LoadoutDropDown.DropDownControl.DropDownMenu, 190)
+	T.SkinDropDownBox(PlayerSpellsFrame.TalentsFrame.LoadSystem.Dropdown, 190)
 
-	T.SkinEditBox(ClassTalentFrame.TalentsTab.SearchBox)
-	ClassTalentFrame.TalentsTab.SearchBox.backdrop:SetPoint("TOPLEFT", -4, -4)
-	ClassTalentFrame.TalentsTab.SearchBox.backdrop:SetPoint("BOTTOMRIGHT", 0, 5)
-	ClassTalentFrame.TalentsTab.SearchPreviewContainer:StripTextures()
-	ClassTalentFrame.TalentsTab.SearchPreviewContainer:CreateBackdrop("Transparent")
+	T.SkinEditBox(PlayerSpellsFrame.TalentsFrame.SearchBox)
+	PlayerSpellsFrame.TalentsFrame.SearchBox.backdrop:SetPoint("TOPLEFT", -4, -4)
+	PlayerSpellsFrame.TalentsFrame.SearchBox.backdrop:SetPoint("BOTTOMRIGHT", 0, 5)
+	PlayerSpellsFrame.TalentsFrame.SearchPreviewContainer:StripTextures()
+	PlayerSpellsFrame.TalentsFrame.SearchPreviewContainer:CreateBackdrop("Transparent")
 
-	ClassTalentFrame.TalentsTab.InspectCopyButton:SkinButton()
+	PlayerSpellsFrame.TalentsFrame.InspectCopyButton:SkinButton()
 
-	for _, tab in next, {ClassTalentFrame.TabSystem:GetChildren()} do
+	for _, tab in next, {PlayerSpellsFrame.TabSystem:GetChildren()} do
 		T.SkinTab(tab)
 	end
 
@@ -73,13 +73,13 @@ local function LoadSkin()
 	end
 
 	-- Spec tab
-	ClassTalentFrame.SpecTab:CreateBackdrop("Overlay")
-	ClassTalentFrame.SpecTab.backdrop:SetPoint("TOPLEFT", 4, -4)
-	ClassTalentFrame.SpecTab.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
-	ClassTalentFrame.SpecTab.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
-	ClassTalentFrame.SpecTab.Background:SetAlpha(0)
-	ClassTalentFrame.SpecTab.BlackBG:SetAlpha(0)
-	hooksecurefunc(ClassTalentFrame.SpecTab, "UpdateSpecFrame", function(frame)
+	PlayerSpellsFrame.SpecFrame:CreateBackdrop("Overlay")
+	PlayerSpellsFrame.SpecFrame.backdrop:SetPoint("TOPLEFT", 4, -4)
+	PlayerSpellsFrame.SpecFrame.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
+	PlayerSpellsFrame.SpecFrame.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
+	PlayerSpellsFrame.SpecFrame.Background:SetAlpha(0)
+	PlayerSpellsFrame.SpecFrame.BlackBG:SetAlpha(0)
+	hooksecurefunc(PlayerSpellsFrame.SpecFrame, "UpdateSpecFrame", function(frame)
 		for specContentFrame in frame.SpecContentFramePool:EnumerateActive() do
 			if not specContentFrame.isSkinned then
 				specContentFrame.ActivateButton:SkinButton()
@@ -107,10 +107,44 @@ local function LoadSkin()
 	end)
 
 	-- PvP
-	ClassTalentFrame.TalentsTab.PvPTalentList:StripTextures()
-	ClassTalentFrame.TalentsTab.PvPTalentList:CreateBackdrop("Overlay")
-	ClassTalentFrame.TalentsTab.PvPTalentList.backdrop:SetFrameStrata(ClassTalentFrame.TalentsTab.PvPTalentList:GetFrameStrata())
-	ClassTalentFrame.TalentsTab.PvPTalentList.backdrop:SetFrameLevel(2000)
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList:StripTextures()
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList:CreateBackdrop("Overlay")
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameStrata(PlayerSpellsFrame.TalentsFrame.PvPTalentList:GetFrameStrata())
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameLevel(2000)
+
+	-- SpellBook
+
+	T.SkinEditBox(PlayerSpellsFrame.SpellBookFrame.SearchBox, 250, 22)
+	T.SkinCheckBox(PlayerSpellsFrame.SpellBookFrame.HidePassivesCheckButton.Button)
+
+	T.SkinMaxMinFrame(PlayerSpellsFrame.MaxMinButtonFrame, PlayerSpellsFrameCloseButton)
+
+	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.PrevPageButton)
+	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.NextPageButton )
+
+	-- Clique skin
+	if CliqueSpellbookTabButton then
+		CliqueSpellbookTabButton:GetRegions():SetSize(0.1, 0.1)
+		CliqueSpellbookTabButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		CliqueSpellbookTabButton:GetNormalTexture():ClearAllPoints()
+		CliqueSpellbookTabButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
+		CliqueSpellbookTabButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
+		CliqueSpellbookTabButton:CreateBackdrop("Default")
+		CliqueSpellbookTabButton.backdrop:SetAllPoints()
+		CliqueSpellbookTabButton:StyleButton()
+	end
+
 end
 
-T.SkinFuncs["Blizzard_ClassTalentUI"] = LoadSkin
+local LoadTootlipSkin = CreateFrame("Frame")
+LoadTootlipSkin:RegisterEvent("ADDON_LOADED")
+LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
+	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora")  then
+		self:UnregisterEvent("ADDON_LOADED")
+		return
+	end
+
+	if addon == "Blizzard_PlayerSpells" then
+		LoadSkin()
+	end
+end)
