@@ -98,7 +98,8 @@ if not NoTaint2_CleanStaticPopups then
     end
 
     function NoTaint2_CleanDropDownList()
-        local frameToShow = LFDQueueFrameTypeDropDown
+        local frameToShow = LFDQueueFrameTypeDropdown
+        if not frameToShow then return end
         local parent = frameToShow:GetParent()
         frameToShow:SetParent(nil) --to show
         --RequestLFDPlayerLockInfo() --to trigger LFG_LOCK_INFO_RECEIVED
