@@ -1230,43 +1230,47 @@ if experience.enabled then
 				playedtotal, playedlevel = ...
 				playedmsg = GetTime()
 			elseif (event == "UPDATE_FACTION" or event == "PLAYER_LOGIN") and conf.ExpMode == "rep" then
-				local standing, factionID, standingText
-				repname, standing, minrep, maxrep, currep, factionID = GetWatchedFactionInfo()
-				local reputationInfo = C_GossipInfo.GetFriendshipReputation(factionID)
-				local friendshipID = reputationInfo and reputationInfo.friendshipFactionID
-				if friendshipID and friendshipID > 0 then
-					local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
-					local currentRank = rankInfo and rankInfo.currentLevel
-					local maxRank = rankInfo and rankInfo.maxLevel
-					local rankText
-					if currentRank and maxRank and currentRank > 0 and maxRank > 0 then
-						rankText = (' %s / %s'):format(currentRank, maxRank)
-					end
-					local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
-					standingText = repInfo.reaction..rankText
-					if repInfo.nextThreshold then
-						minrep, maxrep, currep = repInfo.reactionThreshold, repInfo.nextThreshold, repInfo.standing
+				local standing, factionID, standingText = 0, 0
+				repname, standing, minrep, maxrep, currep = NONE, 0, 0, 0, 0, 0
+				local data = C_Reputation.GetWatchedFactionData()
+				if data then
+					repname, standing, minrep, maxrep, currep, factionID = data.name, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.factionID
+					if not factionID then factionID = 0 end
+					local reputationInfo = C_GossipInfo.GetFriendshipReputation(factionID)
+					local friendshipID = reputationInfo and reputationInfo.friendshipFactionID
+					if friendshipID and friendshipID > 0 then
+						local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
+						local currentRank = rankInfo and rankInfo.currentLevel
+						local maxRank = rankInfo and rankInfo.maxLevel
+						local rankText
+						if currentRank and maxRank and currentRank > 0 and maxRank > 0 then
+							rankText = (' %s / %s'):format(currentRank, maxRank)
+						end
+						local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
+						standingText = repInfo.reaction..rankText
+						if repInfo.nextThreshold then
+							minrep, maxrep, currep = repInfo.reactionThreshold, repInfo.nextThreshold, repInfo.standing
+						else
+							minrep, maxrep, currep = 0, 1, 1
+						end
+						standing = 5
+					elseif C_Reputation.IsMajorFaction(factionID) then
+						local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
+						minrep, maxrep = 0, majorFactionData.renownLevelThreshold
+						currep = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
+						standing = 7
+						standingText = RENOWN_LEVEL_LABEL..majorFactionData.renownLevel
 					else
-						minrep, maxrep, currep = 0, 1, 1
-					end
-					standing = 5
-				elseif C_Reputation.IsMajorFaction(factionID) then
-					local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
-					minrep, maxrep = 0, majorFactionData.renownLevelThreshold
-					currep = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
-					standing = 7
-					standingText = RENOWN_LEVEL_LABEL..majorFactionData.renownLevel
-				else
-					local value, nextThreshold = C_Reputation.GetFactionParagonInfo(factionID)
-					if value then
-						currep = value % nextThreshold
-						minrep = 0
-						maxrep = nextThreshold
-						standing = 8
-						standingText = PARAGON
+						local value, nextThreshold = C_Reputation.GetFactionParagonInfo(factionID)
+						if value then
+							currep = value % nextThreshold
+							minrep = 0
+							maxrep = nextThreshold
+							standing = 8
+							standingText = PARAGON
+						end
 					end
 				end
-				if not repname then repname = NONE end
 				local color = {}
 				if standing == 0 then
 					color.r, color.g, color.b = GetItemQualityColor(0)
@@ -1335,8 +1339,8 @@ if experience.enabled then
 			elseif conf.ExpMode == "rep" then
 				if repname == NONE then GameTooltip:Hide() return end
 				local desc, war, watched
-				for i = 1, GetNumFactions() do
-					_, desc, _, _, _, _, war, _, _, _, _, watched = GetFactionInfo(i)
+				for i = 1, C_Reputation.GetNumFactions() do
+					_, desc, _, _, _, _, war, _, _, _, _, watched = C_Reputation.GetFactionDataByIndex(i)
 					if watched then break end
 				end
 				GameTooltip:AddLine(repname, tthead.r, tthead.g, tthead.b)
@@ -1486,7 +1490,7 @@ if talents.enabled then
 			end
 			if b == "LeftButton" then
 				if IsShiftKeyDown() then
-					ToggleTalentFrame()
+					PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
 				else
 					for index = 1, 4 do
 						local id, name, _, texture = GetSpecializationInfo(index)
