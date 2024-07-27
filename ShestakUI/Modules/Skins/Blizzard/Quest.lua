@@ -527,6 +527,34 @@ local function LoadSkin()
 				end
 			end
 		end
+		for button in _G.QuestScrollFrame.headerFramePool:EnumerateActive() do
+			if button.ButtonText and not button.IsSkinned then
+				button:StripTextures()
+				button:CreateBackdrop("Overlay")
+				local r, g, b = unpack(C.media.border_color)
+				button:GetHighlightTexture():SetColorTexture(r, g, b, .25)
+				button.ButtonText:SetFont(C.media.normal_font, 16)
+				button.IsSkinned = true
+			end
+		end
+		for button in _G.QuestScrollFrame.titleFramePool:EnumerateActive() do
+			if not button.IsSkinned then
+				if button.Checkbox then
+					button.Checkbox:DisableDrawLayer('BACKGROUND')
+					button.Checkbox:CreateBackdrop("Overlay")
+				end
+
+				button.IsSkinned = true
+			end
+		end
+		for header in _G.QuestScrollFrame.campaignHeaderFramePool:EnumerateActive() do
+			if header.Text and not header.IsSkinned then
+				header.Text:SetFont(C.media.normal_font, 16)
+				header.Progress:SetFont(C.media.normal_font, 16)
+
+				header.IsSkinned = true
+			end
+		end
 		for campaignHeader in QuestScrollFrame.campaignHeaderFramePool:EnumerateActive() do
 			local campaign = campaignHeader:GetCampaign()
 			if campaign then
