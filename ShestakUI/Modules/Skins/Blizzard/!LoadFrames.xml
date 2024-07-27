@@ -66,6 +66,7 @@
 	<Script file="PetStable.lua"/>
 	<Script file="PlayerChoice.lua"/>
 	<Script file="Professions.lua"/>
+	<Script file="ProfessionsBook.lua"/>
 	<Script file="ProfessionsOrders.lua"/>
 	<Script file="PvE.lua"/>
 	<Script file="PvP.lua"/>
@@ -77,7 +78,6 @@
 	<Script file="Runeforge.lua"/>
 	<Script file="Scrapping.lua"/>
 	<Script file="Soulbinds.lua"/>
-	<Script file="SpellBook.lua"/>
 	<Script file="Subscription.lua"/>
 	<Script file="Tabard.lua"/>
 	<Script file="Talent.lua"/>
