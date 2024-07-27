@@ -94,7 +94,7 @@ local function LoadSkin()
 
 	QuestScrollFrame.BorderFrame:StripTextures()
 
-	QuestMapDetailsScrollFrame:SetHeight(463)
+	QuestMapDetailsScrollFrame:SetHeight(340)
 	QuestMapDetailsScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.DetailsFrame, "TOPLEFT", 1, -35)
 
 	QuestMapFrame.DetailsFrame:StripTextures()
@@ -162,8 +162,8 @@ local function LoadSkin()
 
 	-- Floor Dropdown
 	local function WorldMapFloorNavigationDropDown(frame)
-		-- T.SkinDropDownBox(frame)
-		frame:SetPoint("TOPLEFT", -15, -67)
+		T.SkinDropDownBox(frame)
+		frame:SetPoint("TOPLEFT", 6, -68)
 	end
 
 	-- Tracking Button
