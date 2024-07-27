@@ -24,7 +24,7 @@ local maxQuest = 35
 local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
 numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 if C.skins.blizzard_frames then
-	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 80, -21)
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 80, -20)
 else
 	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -17)
 end
@@ -112,58 +112,79 @@ end)
 ----------------------------------------------------------------------------------------
 --	Added options to map tracking button
 ----------------------------------------------------------------------------------------
---FIXME hooksecurefunc(WorldMapFrame.overlayFrames[2], "InitializeDropDown", function(self)
-	-- UIDropDownMenu_AddSeparator()
-	-- local info = UIDropDownMenu_CreateInfo()
+local MapFrame = CreateFrame("Frame", nil, UIParent)
+local WorldMap_DDMenu = CreateFrame("Frame")
+WorldMap_DDMenu.displayMode = "MENU"
+WorldMap_DDMenu.info = {}
 
-	-- info.isTitle = true
-	-- info.notCheckable = true
-	-- info.text = "ShestakUI"
+local Close = CreateFrame("Button", "WorldMapUIButton", WorldMapFrame, "UIPanelCloseButton")
+T.SkinCloseButton(Close, nil, "-", true)
+Close:ClearAllPoints()
+Close:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 5, -45)
+Close:SetSize(15, 15)
+Close:RegisterForClicks("AnyUp")
+Close:SetScript("OnClick", function(self, btn)
+	if WorldMap_DDMenu.initialize ~= MapFrame.Menu then
+		CloseDropDownMenus()
+		WorldMap_DDMenu.initialize = MapFrame.Menu
+	end
+	ToggleDropDownMenu(nil, nil, WorldMap_DDMenu, self:GetName(), 0, 0)
+	return
+end)
 
-	-- UIDropDownMenu_AddButton(info)
-	-- info.text = nil
+function MapFrame.Menu(self, level)
+	if not level then return end
 
-	-- info.isTitle = nil
-	-- info.disabled = nil
-	-- info.notCheckable = nil
-	-- info.isNotRadio = true
-	-- info.keepShownOnClick = true
+	local info = self.info
 
-	-- info.text = L_MAP_COORDS
-	-- info.checked = function()
-		-- return ShestakUISettingsPerChar.Coords == true
-	-- end
+	info.isTitle = true
+	info.notCheckable = true
+	info.text = "ShestakUI"
 
-	-- info.func = function()
-		-- if ShestakUISettingsPerChar.Coords == true then
-			-- ShestakUISettingsPerChar.Coords = false
-			-- coords:SetAlpha(0)
-		-- else
-			-- ShestakUISettingsPerChar.Coords = true
-			-- coords:SetAlpha(1)
-		-- end
-	-- end
-	-- UIDropDownMenu_AddButton(info)
+	UIDropDownMenu_AddButton(info)
+	info.text = nil
 
-	-- if C.minimap.fog_of_war == true then
-		-- info.text = L_MAP_FOG
-		-- info.checked = function()
-			-- return ShestakUISettingsPerChar.FogOfWar == true
-		-- end
+	info.isTitle = nil
+	info.disabled = nil
+	info.notCheckable = nil
+	info.isNotRadio = true
+	info.keepShownOnClick = true
 
-		-- info.func = function()
-			-- if ShestakUISettingsPerChar.FogOfWar == true then
-				-- ShestakUISettingsPerChar.FogOfWar = false
-				-- for i = 1, #T.overlayTextures do
-					-- T.overlayTextures[i]:Hide()
-				-- end
-			-- else
-				-- ShestakUISettingsPerChar.FogOfWar = true
-				-- for i = 1, #T.overlayTextures do
-					-- T.overlayTextures[i]:Show()
-				-- end
-			-- end
-		-- end
-		-- UIDropDownMenu_AddButton(info)
-	-- end
--- end)
+	info.text = L_MAP_COORDS
+	info.checked = function()
+		return ShestakUISettingsPerChar.Coords == true
+	end
+
+	info.func = function()
+		if ShestakUISettingsPerChar.Coords == true then
+			ShestakUISettingsPerChar.Coords = false
+			coords:SetAlpha(0)
+		else
+			ShestakUISettingsPerChar.Coords = true
+			coords:SetAlpha(1)
+		end
+	end
+	UIDropDownMenu_AddButton(info)
+
+	if C.minimap.fog_of_war == true then
+		info.text = L_MAP_FOG
+		info.checked = function()
+			return ShestakUISettingsPerChar.FogOfWar == true
+		end
+
+		info.func = function()
+			if ShestakUISettingsPerChar.FogOfWar == true then
+				ShestakUISettingsPerChar.FogOfWar = false
+				for i = 1, #T.overlayTextures do
+					T.overlayTextures[i]:Hide()
+				end
+			else
+				ShestakUISettingsPerChar.FogOfWar = true
+				for i = 1, #T.overlayTextures do
+					T.overlayTextures[i]:Show()
+				end
+			end
+		end
+		UIDropDownMenu_AddButton(info)
+	end
+end
