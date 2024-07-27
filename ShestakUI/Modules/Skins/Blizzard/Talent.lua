@@ -123,17 +123,18 @@ local function LoadSkin()
 	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.NextPageButton )
 
 	-- Clique skin
-	if CliqueSpellbookTabButton then
-		CliqueSpellbookTabButton:GetRegions():SetSize(0.1, 0.1)
-		CliqueSpellbookTabButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		CliqueSpellbookTabButton:GetNormalTexture():ClearAllPoints()
-		CliqueSpellbookTabButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-		CliqueSpellbookTabButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-		CliqueSpellbookTabButton:CreateBackdrop("Default")
-		CliqueSpellbookTabButton.backdrop:SetAllPoints()
-		CliqueSpellbookTabButton:StyleButton()
-	end
-
+	C_Timer.After(0.1, function()
+		if CliqueSpellbookTabButton then
+			CliqueSpellbookTabButton:GetRegions():SetSize(0.1, 0.1)
+			CliqueSpellbookTabButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			CliqueSpellbookTabButton:GetNormalTexture():ClearAllPoints()
+			CliqueSpellbookTabButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
+			CliqueSpellbookTabButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
+			CliqueSpellbookTabButton:CreateBackdrop("Default")
+			CliqueSpellbookTabButton.backdrop:SetAllPoints()
+			CliqueSpellbookTabButton:StyleButton(true)
+		end
+	end)
 end
 
 local LoadTootlipSkin = CreateFrame("Frame")
