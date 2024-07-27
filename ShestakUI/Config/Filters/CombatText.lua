@@ -343,7 +343,7 @@ elseif T.class == "MONK" then
 		T.aoespam[124081] = 3		-- Zen Pulse
 		T.aoespam[116670] = 0		-- Uplift
 		T.aoespam[178173] = 3		-- Gift of the Ox
-		T.aoespam[191840] = 3		-- Essence Font
+		--FIXME T.aoespam[191840] = 3		-- Essence Font
 		T.aoespam[162530] = 3		-- Refreshing Jade Wind
 		-- Damaging spells
 		T.aoespam[228649] = 1		-- Blackout Kick (x3)

@@ -31,7 +31,7 @@ T.RaidBuffs = {
 		{115175, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Soothing Mist
 		{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},			-- Enveloping Mist
 		{325209, "BOTTOM", {0.3, 0.6, 0.6}},				-- Enveloping Breath
-		{191840, "TOPLEFT", {0.1, 0.4, 0.9}},				-- Essence Font
+		--FIXME {191840, "TOPLEFT", {0.1, 0.4, 0.9}},				-- Essence Font
 		{116849, "LEFT", {0.81, 0.85, 0.1}, true},			-- Life Cocoon
 	},
 	PALADIN = {
