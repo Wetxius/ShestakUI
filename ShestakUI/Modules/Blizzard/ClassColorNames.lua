@@ -130,7 +130,7 @@ local function whoFrame(self)
 			local c = classColorRaw[class]
 			nameText:SetTextColor(c.r, c.g, c.b)
 			levelText:SetText(diffColor[level]..level)
-			variableText:SetText(columnTable[UIDropDownMenu_GetSelectedID(_G.WhoFrameDropDown)])
+			variableText:SetText(columnTable[UIDropDownMenu_GetSelectedID(_G.WhoFrameDropdown)])
 		end
 	end
 end
