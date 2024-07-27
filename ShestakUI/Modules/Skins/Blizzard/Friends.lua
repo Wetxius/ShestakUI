@@ -197,7 +197,6 @@ local function LoadSkin()
 	end
 
 	FriendsFrame:SetTemplate("Transparent")
-	--FIXME FriendsFrameStatusDropDown:SetPoint("TOPLEFT", 1, -27)
 
 	local function ReskinFriendButton(button)
 		if button.styled then return end
@@ -247,9 +246,13 @@ local function LoadSkin()
 	end)
 
 	T.SkinCloseButton(FriendsFrameCloseButton)
-	--FIXME T.SkinDropDownBox(WhoFrameDropDown, 150)
-	-- T.SkinDropDownBox(FriendsFrameStatusDropDown, 70)
-	-- T.SkinDropDownBox(FriendsFriendsFrameDropDown)
+	T.SkinDropDownBox(WhoFrameDropdown, 150)
+	T.SkinDropDownBox(FriendsFrameStatusDropdown, 70)
+	T.SkinDropDownBox(FriendsFriendsFrameDropdown)
+
+	FriendsFrameStatusDropdown:ClearAllPoints()
+	FriendsFrameStatusDropdown:SetPoint("TOPLEFT", FriendsFrame, "TOPLEFT", 22, -27)
+	FriendsFrameStatusDropdown.Text:SetFont(C.media.normal_font, 12, "")
 
 	-- Bottom Tabs
 	for i = 1, 4 do

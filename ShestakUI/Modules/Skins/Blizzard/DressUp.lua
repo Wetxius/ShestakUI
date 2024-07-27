@@ -59,11 +59,10 @@ local function LoadSkin()
 	DressUpFrame.LinkButton:SkinButton()
 	DressUpFrame.LinkButton:SetPoint("BOTTOMLEFT", 4, 4)
 
-	--FIXME T.SkinDropDownBox(DressUpFrameOutfitDropDown)
-	-- DressUpFrameOutfitDropDown:SetSize(195, 34)
-	-- DressUpFrameOutfitDropDown.SaveButton:SkinButton()
-	-- DressUpFrameOutfitDropDown.SaveButton:ClearAllPoints()
-	-- DressUpFrameOutfitDropDown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropDown, 86, 4)
+	T.SkinDropDownBox(DressUpFrameOutfitDropdown, 195, 21)
+	DressUpFrameOutfitDropdown.SaveButton:SkinButton()
+	DressUpFrameOutfitDropdown.SaveButton:ClearAllPoints()
+	DressUpFrameOutfitDropdown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropdown, 91, 0)
 
 	T.SkinCloseButton(DressUpFrameCloseButton, DressUpFrame.backdrop)
 

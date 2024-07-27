@@ -53,13 +53,11 @@ local function LoadSkin()
 	EncounterJournalNavBar.backdrop:SetPoint("TOPLEFT", -3, 1)
 	EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT", 0, -1)
 	EncounterJournalNavBarHomeButton:SkinButton(true)
-	--FIXME EncounterJournalEncounterFrameInfoFilterToggle:SkinButton(true)
-	-- EncounterJournalEncounterFrameInfoSlotFilterToggle:SkinButton(true)
+	T.SkinDropDownBox(EncounterJournalEncounterFrameInfo.LootContainer.filter)
+	T.SkinDropDownBox(EncounterJournalEncounterFrameInfo.LootContainer.slotFilter)
 	EncounterJournalEncounterFrameInfoClassFilterClearFrame:GetRegions():SetAlpha(0)
-	EncounterJournalEncounterFrameInfoDifficulty:SkinButton(true)
-	EncounterJournalEncounterFrameInfoDifficulty:SetWidth(95)
-	EncounterJournalEncounterFrameInfoDifficulty:SetPoint("TOPRIGHT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", -7, -13)
-	-- EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetPoint("TOPLEFT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", -349, -13)
+	T.SkinDropDownBox(EncounterJournalEncounterFrameInfoDifficulty)
+
 	hooksecurefunc(EncounterJournalEncounterFrameInfoResetButton, "SetPoint", function(self, _, _, _, x)
 		if x == -10 then
 			self:SetPoint("RIGHT", EncounterJournalEncounterFrameInfoDifficulty, "LEFT", -5, 0)
@@ -93,7 +91,7 @@ local function LoadSkin()
 
 	T.SkinEditBox(EncounterJournalSearchBox)
 	T.SkinCloseButton(EncounterJournalCloseButton)
-	--FIXME T.SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
+	T.SkinDropDownBox(EncounterJournalInstanceSelect.ExpansionDropdown )
 
 	EncounterJournalInstanceSelectBG:SetAlpha(0)
 	EncounterJournalInstanceSelect.bg:SetAlpha(0)
@@ -422,14 +420,16 @@ local function LoadSkin()
 
 	local LootJournal = EncounterJournal.LootJournal
 	LootJournal:DisableDrawLayer("BACKGROUND")
-	--FIXME LootJournal.ClassDropDownButton:SkinButton(true)
-	-- LootJournal.RuneforgePowerFilterDropDownButton:SkinButton(true)
+
+	T.SkinDropDownBox(EncounterJournal.LootJournalViewDropdown)
+	T.SkinDropDownBox(EncounterJournal.LootJournal.RuneforgePowerDropdown)
+	T.SkinDropDownBox(EncounterJournal.LootJournal.ClassDropdown)
 
 	EncounterJournal.LootJournalItems:DisableDrawLayer("BACKGROUND")
-	-- T.SkinDropDownBox(EncounterJournalLootJournalViewDropDown)
 
 	local itemSetsFrame = EncounterJournal.LootJournalItems.ItemSetsFrame
-	-- itemSetsFrame.ClassButton:SkinButton(true)
+	T.SkinDropDownBox(EncounterJournal.LootJournalItems.ItemSetsFrame.ClassDropdown)
+
 	T.SkinScrollBar(itemSetsFrame.ScrollBar)
 
 	hooksecurefunc(itemSetsFrame.ScrollBox, "Update", function(self)
