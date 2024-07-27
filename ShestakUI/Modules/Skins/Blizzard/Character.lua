@@ -52,8 +52,8 @@ local function LoadSkin()
 		"SecondaryHandSlot"
 	}
 
-	select(16, CharacterMainHandSlot:GetRegions()):Hide()
-	select(16, CharacterSecondaryHandSlot:GetRegions()):Hide()
+	select(17, CharacterMainHandSlot:GetRegions()):Hide()
+	select(17, CharacterSecondaryHandSlot:GetRegions()):Hide()
 
 	for _, i in pairs(slots) do
 		_G["Character"..i.."Frame"]:Hide()
@@ -91,8 +91,7 @@ local function LoadSkin()
 		CharacterFrameInset,
 		CharacterStatsPane,
 		CharacterFrameInsetRight,
-		PaperDollSidebarTabs,
-		-- PaperDollEquipmentManagerPane
+		PaperDollSidebarTabs
 	}
 
 	for i = 1, #charframe do
@@ -283,35 +282,37 @@ local function LoadSkin()
 	-- Reputation
 	hooksecurefunc(_G.ReputationFrame.ScrollBox, "Update", function(frame)
 		for _, child in next, { frame.ScrollTarget:GetChildren() } do
-			local container = child.Container
-			if container and not container.IsSkinned then
-				container:StripTextures()
+			if child and not child.IsSkinned then
+				-- child:StripTextures()
 
-				if container.ExpandOrCollapseButton then
-					T.SkinExpandOrCollapse(container.ExpandOrCollapseButton)
+				if child.ToggleCollapseButton then
+					-- FIXME T.SkinExpandOrCollapse(child.ToggleCollapseButton)
 				end
 
-				if container.ReputationBar then
-					container.ReputationBar:StripTextures()
-					container.ReputationBar:SetStatusBarTexture(C.media.texture)
-					if not container.ReputationBar.backdrop then
-						container.ReputationBar:CreateBackdrop("Overlay")
+				local repbar = child.Content and child.Content.ReputationBar
+				if repbar then
+					repbar:StripTextures()
+					repbar:SetStatusBarTexture(C.media.texture)
+					if not repbar.backdrop then
+						repbar:CreateBackdrop("Overlay")
 					end
 				end
 
-				container.IsSkinned = true
+				child.IsSkinned = true
 			end
 		end
 	end)
 
-	--FIXME ReputationDetailFrame:StripTextures()
-	-- ReputationDetailFrame:SetTemplate("Transparent")
-	-- ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
-	-- T.SkinCloseButton(ReputationDetailCloseButton)
-	-- T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
-	-- T.SkinCheckBox(ReputationDetailInactiveCheckBox)
-	-- T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-	-- ReputationDetailViewRenownButton:SkinButton()
+	ReputationFrame.ReputationDetailFrame:StripTextures()
+	ReputationFrame.ReputationDetailFrame:SetTemplate("Transparent")
+	ReputationFrame.ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
+	T.SkinCloseButton(ReputationFrame.ReputationDetailFrame.CloseButton)
+	T.SkinCheckBox(ReputationFrame.ReputationDetailFrame.WatchFactionCheckbox)
+	T.SkinCheckBox(ReputationFrame.ReputationDetailFrame.MakeInactiveCheckbox)
+	T.SkinCheckBox(ReputationFrame.ReputationDetailFrame.AtWarCheckbox)
+	ReputationFrame.ReputationDetailFrame.ViewRenownButton:SkinButton()
+
+	T.SkinDropDownBox(ReputationFrame.filterDropdown)
 
 	-- Currency
 	TokenFramePopup:StripTextures()
@@ -320,18 +321,23 @@ local function LoadSkin()
 	if TokenFramePopup.CloseButton then
 		T.SkinCloseButton(TokenFramePopup.CloseButton)
 	end
-	-- T.SkinCheckBox(TokenFramePopup.InactiveCheckBox)
-	-- T.SkinCheckBox(TokenFramePopup.BackpackCheckBox)
+	T.SkinCheckBox(TokenFramePopup.InactiveCheckbox)
+	T.SkinCheckBox(TokenFramePopup.BackpackCheckbox)
 
-	hooksecurefunc(_G.TokenFrame.ScrollBox, "Update", function(frame)
-		for _, child in next, {frame.ScrollTarget:GetChildren()} do
-			if child.Highlight and not child.styled then
-				child.CategoryLeft:SetAlpha(0)
-				child.CategoryRight:SetAlpha(0)
-				child.CategoryMiddle:SetAlpha(0)
-				child.Highlight:Kill()
+	hooksecurefunc(TokenFrame.ScrollBox, "Update", function(self)
+		for i = 1, self.ScrollTarget:GetNumChildren() do
+			local child = select(i, self.ScrollTarget:GetChildren())
+			if child and not child.styled then
+				if child.Right then
 
-				child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				end
+				local icon = child.Content and child.Content.CurrencyIcon
+				if icon then
+					icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				end
+				if child.ToggleCollapseButton then
+
+				end
 
 				child.styled = true
 			end

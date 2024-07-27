@@ -711,6 +711,7 @@ function T.SkinDropDownBox(frame, width, pos)
 		frame.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
 		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 		frame.Arrow:SetAlpha(0)
+		if frame.TabHighlight then frame.TabHighlight:SetAlpha(0) end
 
 		local tex = frame:CreateTexture(nil, "ARTWORK")
 		tex:SetPoint("RIGHT", frame, -4, 0)
