@@ -113,7 +113,7 @@ local function LoadSkin()
 	T.SkinCloseButton(MerchantFrameCloseButton, MerchantFrame.backdrop)
 	T.SkinNextPrevButton(MerchantNextPageButton)
 	T.SkinNextPrevButton(MerchantPrevPageButton)
-	--FIXME T.SkinDropDownBox(MerchantFrameLootFilter)
+	T.SkinDropDownBox(MerchantFrame.FilterDropdown)
 
 	-- Reposition tabs
 	MerchantFrameTab1:ClearAllPoints()
