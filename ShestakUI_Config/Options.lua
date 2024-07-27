@@ -3521,6 +3521,15 @@ local function PositionGameMenuButton()
 			local point, anchor, point2, x, y = button:GetPoint()
 			button:SetPoint(point, anchor, point2, x, y - 35)
 		end
+
+		-- Replace EditMode with our moving system
+		if text and text == HUD_EDIT_MODE_MENU then
+			button:SetScript("OnClick", function()
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+				SlashCmdList.MOVING()
+				HideUIPanel(GameMenuFrame)
+			end)
+		end
 	end
 
 	GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + 35)

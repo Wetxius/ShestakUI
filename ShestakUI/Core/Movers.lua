@@ -557,10 +557,3 @@ StaticPopupDialogs.MOVEUI_RESET = {
 	hideOnEscape = true,
 	preferredIndex = 5,
 }
-
--- Replace EditMode with our moving system
---FIXME GameMenuButtonEditMode:SetScript("OnClick", function()
-	-- PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
-	-- SlashCmdList.MOVING()
-	-- HideUIPanel(GameMenuFrame)
--- end)
