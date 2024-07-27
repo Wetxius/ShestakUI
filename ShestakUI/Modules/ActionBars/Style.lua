@@ -20,7 +20,7 @@ local function StyleNormalButton(button, size)
 		local isFlyout = name:match("Flyout")
 		local flyoutBorder = _G[name.."FlyoutBorder"]
 		local flyoutBorderShadow = _G[name.."FlyoutBorderShadow"]
-		local autocast = button.AutoCastable
+		local autocast = button.AutoCastOverlay
 		local shine = _G[name.."Shine"]
 		local spellAlert = button.SpellActivationAlert
 
@@ -162,9 +162,7 @@ local function StyleNormalButton(button, size)
 		end
 
 		if autocast then
-			autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
-			autocast:ClearAllPoints()
-			autocast:SetPoint("CENTER", button, 0, 0)
+			autocast:SetSize(C.actionbar.button_size * 1.05, C.actionbar.button_size * 1.05)
 		end
 
 		if shine then
@@ -228,16 +226,8 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		icon:SetDrawLayer("BACKGROUND", 7)
 
 		if pet then
-			--FIXME local autocast = button.AutoCastable
-			-- autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
-			-- autocast:ClearAllPoints()
-			-- autocast:SetPoint("CENTER", button, 0, 0)
-
-			-- local shine = _G[name.."Shine"]
-			-- shine:SetSize(C.actionbar.button_size, C.actionbar.button_size)
-
-			-- local cooldown = _G[name.."Cooldown"]
-			-- cooldown:SetSize(C.actionbar.button_size - 2, C.actionbar.button_size - 2)
+			local autocast = button.AutoCastOverlay
+			autocast:SetSize(C.actionbar.button_size * 1.05, C.actionbar.button_size * 1.05)
 		end
 
 		if normal then
