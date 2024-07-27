@@ -160,6 +160,17 @@ local function LoadSkin()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:Kill()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:Kill()
 
+	QuestMapFrame.MapLegend.BorderFrame:StripTextures()
+	QuestMapFrame.MapLegend.BackButton:SkinButton()
+	QuestMapFrame.MapLegend.BackButton:ClearAllPoints()
+	QuestMapFrame.MapLegend.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+	QuestMapFrame.MapLegend.BackButton:SetSize(326, 23)
+
+	MapLegendScrollFrame.Background:Hide()
+	MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", 2, -18)
+	MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", 2, 15)
+	T.SkinScrollBar(MapLegendScrollFrame.ScrollBar)
+
 	-- Floor Dropdown
 	local function WorldMapFloorNavigationDropDown(frame)
 		T.SkinDropDownBox(frame)
@@ -175,8 +186,13 @@ local function LoadSkin()
 		-- button.IconOverlay:SetAlpha(0)
 		button.Border:Hide()
 
+		T.SkinCloseButton(button.ResetButton, nil, nil, true)
+		button.ResetButton:SetSize(15, 15)
+		button.ResetButton:ClearAllPoints()
+		button.ResetButton:SetPoint("CENTER", button, "TOPRIGHT", -4, -4)
+
 		local tex = button:GetHighlightTexture()
-		tex:SetTexture([[Interface\Minimap\Tracking\None]], "ADD")
+		tex:SetAtlas("Map-Filter-Button")
 		tex:SetAllPoints(button.Icon)
 	end
 
@@ -191,6 +207,20 @@ local function LoadSkin()
 
 		local tex = button:GetHighlightTexture()
 		tex:SetAtlas("Waypoint-MapPin-Untracked")
+		tex:SetAllPoints(button.Icon)
+	end
+
+	-- Legend
+	local function WorldMapLegendButton(button)
+		local shadow = button:GetRegions()
+		shadow:Hide()
+
+		button.Background:Hide()
+		button.IconOverlay:SetAlpha(0)
+		button.Border:Hide()
+
+		local tex = button:GetHighlightTexture()
+		tex:SetAtlas("QuestNormal")
 		tex:SetAllPoints(button.Icon)
 	end
 
@@ -211,6 +241,7 @@ local function LoadSkin()
 	WorldMapFloorNavigationDropDown(WorldMapFrame.overlayFrames[1])
 	WorldMapTrackingOptionsButton(WorldMapFrame.overlayFrames[2])
 	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
+	WorldMapLegendButton(WorldMapFrame.overlayFrames[4])
 
 	for i = 1, 10 do
 		local button = _G["Krowi_WorldMapButtons"..i]
