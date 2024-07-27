@@ -193,15 +193,7 @@ local function RefreshList(self)
 	end
 end
 
-local loaded = false
---FIXME hooksecurefunc("Communities_LoadUI", function()
-	-- if loaded then
-		-- return
-	-- else
-		-- loaded = true
-		-- hooksecurefunc(CommunitiesMemberListEntryMixin, "RefreshExpandedColumns", RefreshList)
-	-- end
--- end)
+hooksecurefunc(CommunitiesMemberListEntryMixin, "RefreshExpandedColumns", RefreshList)
 
 -- FriendsList
 local FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%%d", "%%s")
