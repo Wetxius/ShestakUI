@@ -30,13 +30,6 @@ local headers = {
 	WorldQuestObjectiveTracker,
 }
 
-for i = 1, #headers do
-	local header = headers[i].Header
-	if header then
-		header.Background:SetTexture(nil)
-	end
-end
-
 ObjectiveTrackerFrame.Header.Background:SetTexture(nil)
 
 ----------------------------------------------------------------------------------------
@@ -63,42 +56,42 @@ local function HotkeyColor(self, r)
 	end
 end
 
---FIXME hooksecurefunc("QuestObjectiveSetupBlockButton_Item", function(block)
-	-- local item = block and block.itemButton
+local function SkinQuestIcons(_, block)
+	local item = block and block.ItemButton
 
-	-- if item and not item.skinned then
-		-- item:SetSize(25, 25)
-		-- item:SetTemplate("Default")
-		-- item:StyleButton()
+	if item and not item.skinned then
+		item:SetSize(25, 25)
+		item:SetTemplate("Default")
+		item:StyleButton()
 
-		-- item:SetNormalTexture(0)
+		item:SetNormalTexture(0)
 
-		-- item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		-- item.icon:SetPoint("TOPLEFT", item, 2, -2)
-		-- item.icon:SetPoint("BOTTOMRIGHT", item, -2, 2)
+		item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		item.icon:SetPoint("TOPLEFT", item, 2, -2)
+		item.icon:SetPoint("BOTTOMRIGHT", item, -2, 2)
 
-		-- item.Cooldown:SetAllPoints(item.icon)
+		item.Cooldown:SetAllPoints(item.icon)
 
-		-- item.Count:ClearAllPoints()
-		-- item.Count:SetPoint("TOPLEFT", 1, -1)
-		-- item.Count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
-		-- item.Count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		item.Count:ClearAllPoints()
+		item.Count:SetPoint("BOTTOMRIGHT", 0, 2)
+		item.Count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
+		item.Count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 
-		-- local rangeOverlay = item:CreateTexture(nil, "OVERLAY")
-		-- rangeOverlay:SetTexture(C.media.texture)
-		-- rangeOverlay:SetInside()
-		-- rangeOverlay:SetVertexColor(1, 0.3, 0.1, 0.6)
-		-- item.rangeOverlay = rangeOverlay
+		local rangeOverlay = item:CreateTexture(nil, "OVERLAY")
+		rangeOverlay:SetTexture(C.media.texture)
+		rangeOverlay:SetInside()
+		rangeOverlay:SetVertexColor(1, 0.3, 0.1, 0.6)
+		item.rangeOverlay = rangeOverlay
 
-		-- hooksecurefunc(item.HotKey, "Show", HotkeyShow)
-		-- hooksecurefunc(item.HotKey, "Hide", HotkeyHide)
-		-- hooksecurefunc(item.HotKey, "SetVertexColor", HotkeyColor)
-		-- HotkeyColor(item.HotKey, item.HotKey:GetTextColor())
-		-- item.HotKey:SetAlpha(0)
+		hooksecurefunc(item.HotKey, "Show", HotkeyShow)
+		hooksecurefunc(item.HotKey, "Hide", HotkeyHide)
+		hooksecurefunc(item.HotKey, "SetVertexColor", HotkeyColor)
+		HotkeyColor(item.HotKey, item.HotKey:GetTextColor())
+		item.HotKey:SetAlpha(0)
 
-		-- item.skinned = true
-	-- end
--- end)
+		item.skinned = true
+	end
+end
 
 -- hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
 	-- if block.groupFinderButton and not block.groupFinderButton.styled then
@@ -342,11 +335,11 @@ end
 ----------------------------------------------------------------------------------------
 --	Skin quest objective progress bar
 ----------------------------------------------------------------------------------------
-local function SkinProgressBar(_, _, line)
-	local progressBar = line.ProgressBar
-	local bar = progressBar.Bar
-	local label = bar.Label
-	local icon = bar.Icon
+local function SkinProgressBar(tracker, key)
+	local progressBar = tracker.usedProgressBars[key]
+	local bar = progressBar and progressBar.Bar
+	local label = bar and bar.Label
+	local icon = bar and bar.Icon
 
 	if not progressBar.styled then
 		if bar.BarFrame then bar.BarFrame:Hide() end
@@ -390,18 +383,12 @@ local function SkinProgressBar(_, _, line)
 	if bar.newIconBg then bar.newIconBg:SetShown(icon:IsShown()) end
 end
 
---FIXME hooksecurefunc(QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
--- hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
--- hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
--- hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
--- hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
-
 ----------------------------------------------------------------------------------------
 --	Skin Timer bar
 ----------------------------------------------------------------------------------------
-local function SkinTimer(_, _, line)
-	local timerBar = line.TimerBar
-	local bar = timerBar.Bar
+local function SkinTimer(tracker, key)
+	local timerBar = tracker.usedTimerBars[key]
+	local bar = timerBar and timerBar.Bar
 
 	if not timerBar.styled then
 		if bar.BorderLeft then bar.BorderLeft:SetAlpha(0) end
@@ -414,10 +401,19 @@ local function SkinTimer(_, _, line)
 	end
 end
 
--- hooksecurefunc(QUEST_TRACKER_MODULE, "AddTimerBar", SkinTimer)
--- hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddTimerBar", SkinTimer)
--- hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", SkinTimer)
--- hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "AddTimerBar", SkinTimer)
+for i = 1, #headers do
+	local header = headers[i].Header
+	if header then
+		header.Background:SetTexture(nil)
+	end
+
+	local tracker = headers[i]
+	if tracker then
+		hooksecurefunc(tracker, "AddBlock", SkinQuestIcons)
+		hooksecurefunc(tracker, "GetProgressBar", SkinProgressBar)
+		hooksecurefunc(tracker, "GetTimerBar", SkinTimer)
+	end
+end
 
 ----------------------------------------------------------------------------------------
 --	Set tooltip depending on position
