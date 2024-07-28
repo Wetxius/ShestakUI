@@ -50,7 +50,7 @@ local function UpdateData()
 	wipe(collapsed)
 end
 hooksecurefunc(BackpackTokenFrame, "Update", UpdateData)
-hooksecurefunc("TokenFrame_Update", UpdateData)
+hooksecurefunc(TokenFrame.ScrollBox, "Update", UpdateData)
 
 local function AddTooltipInfo(tooltip, currency, includePlayer)
 	local spaced
