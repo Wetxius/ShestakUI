@@ -355,15 +355,15 @@ local function LoadSkin()
 	TokenFramePopup:StripTextures()
 	TokenFramePopup:SetTemplate("Transparent")
 	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
-	
+
 	local TokenPopupClose = _G.TokenFramePopup['$parent.CloseButton']
 	if TokenPopupClose then
 		T.SkinCloseButton(TokenPopupClose)
 	end
-	
+
 	T.SkinCheckBox(TokenFramePopup.InactiveCheckbox)
 	T.SkinCheckBox(TokenFramePopup.BackpackCheckbox)
-	
+
 	TokenFramePopup.CurrencyTransferToggleButton:SkinButton()
 
 	local currencyTransfer = _G.CurrencyTransferMenu
@@ -374,7 +374,9 @@ local function LoadSkin()
 	T.SkinEditBox(currencyTransfer.AmountSelector.InputBox)
 	currencyTransfer.ConfirmButton:SkinButton()
 	currencyTransfer.CancelButton:SkinButton()
-	
+
+	T.SkinFrame(CurrencyTransferLog)
+
 	hooksecurefunc(TokenFrame.ScrollBox, "Update", function(self)
 		for i = 1, self.ScrollTarget:GetNumChildren() do
 			local child = select(i, self.ScrollTarget:GetChildren())
