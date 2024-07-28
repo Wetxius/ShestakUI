@@ -30,9 +30,9 @@ frame:SetScript("OnEvent", function(self, event)
 	MinimapCluster.InstanceDifficulty:SetParent(Minimap)
 	MinimapCluster.InstanceDifficulty:ClearAllPoints()
 	MinimapCluster.InstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 1, 3)
-	--FIXME MinimapCluster.InstanceDifficulty.Instance.Border:Hide()
-	-- MinimapCluster.InstanceDifficulty.Instance.Background:SetSize(28, 28)
-	-- MinimapCluster.InstanceDifficulty.Instance.Background:SetVertexColor(0.6, 0.3, 0)
+	MinimapCluster.InstanceDifficulty.Default.Border:Hide()
+	MinimapCluster.InstanceDifficulty.Default.Background:SetSize(28, 28)
+	MinimapCluster.InstanceDifficulty.Default.Background:SetVertexColor(0.6, 0.3, 0)
 
 	-- Guild Instance Difficulty icon
 	MinimapCluster.InstanceDifficulty.Guild.Border:Hide()
