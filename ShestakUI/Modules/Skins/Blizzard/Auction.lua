@@ -26,7 +26,9 @@ local function LoadSkin()
 		Frame.MaxLevel.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
 	end
 
-	SkinEditBoxes(AuctionHouseFrame.SearchBar.FilterButton.LevelRangeFrame)
+	--FIDME SkinEditBoxes(AuctionHouseFrame.SearchBar.FilterButton.LevelRangeFrame)
+
+	AuctionHouseFrame.SearchBar.FilterButton:SetHeight(22)
 
 	local buttons = {
 		AuctionHouseFrame.SearchBar.SearchButton,
@@ -227,8 +229,8 @@ local function LoadSkin()
 			SkinMoneyBox(frame.SecondaryPriceInput.MoneyInputFrame.SilverBox)
 		end
 
-		T.SkinDropDownBox(frame.DurationDropDown.DropDown)
-		frame.DurationDropDown.DropDown.backdrop:SetPoint("TOPLEFT", 20, -1)
+		T.SkinDropDownBox(frame.Duration.Dropdown)
+		frame.Duration.Dropdown.backdrop:SetPoint("TOPLEFT", 20, -1)
 	end
 
 	T.SkinCheckBox(AuctionHouseFrame.ItemSellFrame.BuyoutModeCheckButton, 25)
