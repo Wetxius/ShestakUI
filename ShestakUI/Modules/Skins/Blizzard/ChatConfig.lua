@@ -129,35 +129,35 @@ local function LoadSkin()
 		f.backdrop:SetInside(f, 1, 1)
 	end
 
-	hooksecurefunc("ChatConfig_UpdateCheckboxes", function(frame)
-		if not FCF_GetCurrentChatFrame() then return end
+	-- hooksecurefunc("ChatConfig_UpdateCheckboxes", function(frame) -- not sure it needed
+		-- if not FCF_GetCurrentChatFrame() then return end
 
-		if frame == ChatConfigTextToSpeechChannelSettingsLeft then -- init after
-			local nameString = frame:GetName().."CheckBox"
-			for index in ipairs(frame.checkBoxTable) do
-				local checkBoxName = nameString..index
-				local checkbox = _G[checkBoxName]
-				if checkbox and not checkbox.IsSkinned then
-					checkbox:StripTextures()
+		-- if frame == ChatConfigTextToSpeechChannelSettingsLeft then -- init after
+			-- local nameString = frame:GetName().."Checkbox"
+			-- for index in ipairs(frame.checkBoxTable) do
+				-- local checkBoxName = nameString..index
+				-- local checkbox = _G[checkBoxName]
+				-- if checkbox and not checkbox.IsSkinned then
+					-- checkbox:StripTextures()
 
-					local bg = CreateFrame("Frame", nil, checkbox)
-					bg:SetPoint("TOPLEFT", 2, -1)
-					bg:SetPoint("BOTTOMRIGHT", -2, 1)
-					bg:SetTemplate("Overlay")
+					-- local bg = CreateFrame("Frame", nil, checkbox)
+					-- bg:SetPoint("TOPLEFT", 2, -1)
+					-- bg:SetPoint("BOTTOMRIGHT", -2, 1)
+					-- bg:SetTemplate("Overlay")
 
-					T.SkinCheckBox(_G[checkBoxName.."Check"])
-					checkbox.IsSkinned = true
-				end
-			end
-		end
-	end)
+					-- T.SkinCheckBox(_G[checkBoxName.."Check"])
+					-- checkbox.IsSkinned = true
+				-- end
+			-- end
+		-- end
+	-- end)
 
 	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
 		if frame.styled then return end
 
-		local checkBoxNameString = frame:GetName().."CheckBox"
+		local checkBoxNameString = frame:GetName().."Checkbox"
 
-		if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
+		if checkBoxTemplate == "ChatConfigCheckboxTemplate" then
 			for index in ipairs(checkBoxTable) do
 				local checkBoxName = checkBoxNameString..index
 				local checkbox = _G[checkBoxName]
@@ -170,7 +170,7 @@ local function LoadSkin()
 
 				T.SkinCheckBox(_G[checkBoxName.."Check"])
 			end
-		elseif checkBoxTemplate == "ChatConfigCheckBoxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckBoxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckBoxWithSwatchTemplate" then
+		elseif checkBoxTemplate == "ChatConfigCheckboxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckboxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckboxWithSwatchTemplate" then
 			for index in ipairs(checkBoxTable) do
 				local checkBoxName = checkBoxNameString..index
 				local checkbox = _G[checkBoxName]
@@ -191,17 +191,17 @@ local function LoadSkin()
 		frame.styled = true
 	end)
 
-	hooksecurefunc("ChatConfig_CreateTieredCheckboxes", function(frame, checkBoxTable)
+	hooksecurefunc("ChatConfig_CreateTieredCheckboxes", function(frame, checkBoxTable) -- combat log type of message
 		if frame.IsSkinned then return end
 
-		local nameString = frame:GetName().."CheckBox"
+		local nameString = frame:GetName().."Checkbox"
 		for index, value in ipairs(checkBoxTable) do
 			local checkBoxName = nameString..index
-			--FIXME T.SkinCheckBox(_G[checkBoxName])
+			T.SkinCheckBox(_G[checkBoxName])
 
 			if value.subTypes then
 				for i in ipairs(value.subTypes) do
-					-- T.SkinCheckBox(_G[checkBoxName.."_"..i])
+					T.SkinCheckBox(_G[checkBoxName.."_"..i])
 				end
 			end
 		end
@@ -209,7 +209,7 @@ local function LoadSkin()
 		frame.IsSkinned = true
 	end)
 
-	hooksecurefunc("ChatConfig_CreateColorSwatches", function(frame, swatchTable) -- combat log only
+	hooksecurefunc("ChatConfig_CreateColorSwatches", function(frame, swatchTable) -- combat log color
 		if frame.styled then return end
 
 		local nameString = frame:GetName().."Swatch"
