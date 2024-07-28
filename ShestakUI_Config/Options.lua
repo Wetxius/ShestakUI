@@ -3499,7 +3499,7 @@ end
 
 local button = CreateFrame("Button", "ShestakUI_GameMenuButton", GameMenuFrame, "MainMenuFrameButtonTemplate")
 button:SetScript("OnClick", openGUI)
-button:SetSize(200, 35)
+button:SetSize(150, 28)
 button:SetText("ShestakUI")
 
 GameMenuFrame.ShestakUI = button
@@ -3532,7 +3532,7 @@ local function PositionGameMenuButton()
 		end
 	end
 
-	GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + 35)
+	GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + 14)
 end
 
 hooksecurefunc(GameMenuFrame, "Layout", PositionGameMenuButton)

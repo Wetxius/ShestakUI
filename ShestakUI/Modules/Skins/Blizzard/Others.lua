@@ -104,6 +104,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 
 			for button in self.buttonPool:EnumerateActive() do
 				if not button.styled then
+					button:SetSize(150, 28)
 					SkinButton(button)
 					button.backdrop:SetInside(button, 2, 2)
 					button.styled = true
