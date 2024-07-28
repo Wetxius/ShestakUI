@@ -124,14 +124,14 @@ hooksecurefunc(GameTooltip, "SetLFGDungeonShortageReward", function(tooltip, dun
 end)
 
 hooksecurefunc(GameTooltip, "SetQuestCurrency", function(tooltip, type, id)
-	local name = GetQuestCurrencyInfo(type, id)
+	--FIXME local name = GetQuestCurrencyInfo(type, id)
 	if name then
 		AddTooltipInfo(tooltip, nameToID[name], true)
 	end
 end)
 
 hooksecurefunc(GameTooltip, "SetQuestLogCurrency", function(tooltip, type, id)
-	local name = GetQuestCurrencyInfo(type, id)
+	-- local name = GetQuestCurrencyInfo(type, id)
 	if name then
 		AddTooltipInfo(tooltip, nameToID[name], true)
 	end
