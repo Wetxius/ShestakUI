@@ -19,6 +19,7 @@ end)
 
 local headers = {
 	ScenarioObjectiveTracker,
+	BonusObjectiveTracker,
 	UIWidgetObjectiveTracker,
 	CampaignQuestObjectiveTracker,
 	QuestObjectiveTracker,
@@ -26,7 +27,6 @@ local headers = {
 	AchievementObjectiveTracker,
 	MonthlyActivitiesObjectiveTracker,
 	ProfessionsRecipeTracker,
-	BonusObjectiveTracker,
 	WorldQuestObjectiveTracker,
 }
 
@@ -218,65 +218,26 @@ if C.skins.blizzard_frames == true then
 	button:HookScript("OnLeave", T.SetOriginalBackdrop)
 
 	button.plus:Hide()
-	-- hooksecurefunc("ObjectiveTracker_Collapse", function()
-		-- button.plus:Show()
-		-- button:SetNormalTexture(0)
-		-- button:SetPushedTexture(0)
-		-- if C.general.minimize_mouseover then
-			-- button:SetAlpha(0)
-			-- button:HookScript("OnEnter", function() button:SetAlpha(1) end)
-			-- button:HookScript("OnLeave", function() button:SetAlpha(0) end)
-		-- end
-	-- end)
 
-	-- hooksecurefunc("ObjectiveTracker_Expand", function()
-		-- button.plus:Hide()
-		-- button:SetNormalTexture(0)
-		-- button:SetPushedTexture(0)
-		-- if C.general.minimize_mouseover then
-			-- button:SetAlpha(1)
-			-- button:HookScript("OnEnter", function() button:SetAlpha(1) end)
-			-- button:HookScript("OnLeave", function() button:SetAlpha(1) end)
-		-- end
-	-- end)
-
-	local function SkinSmallMinimizeButton(button)
-		button:SetSize(15, 15)
-		button:StripTextures()
-		button:SetTemplate("Overlay")
-
-		button.minus = button:CreateTexture(nil, "OVERLAY")
-		button.minus:SetSize(5, 1)
-		button.minus:SetPoint("CENTER")
-		button.minus:SetTexture(C.media.blank)
-
-		button.plus = button:CreateTexture(nil, "OVERLAY")
-		button.plus:SetSize(1, 5)
-		button.plus:SetPoint("CENTER")
-		button.plus:SetTexture(C.media.blank)
-
-		button:HookScript("OnEnter", T.SetModifiedBackdrop)
-		button:HookScript("OnLeave", T.SetOriginalBackdrop)
-
-		button.plus:Hide()
-
-		-- hooksecurefunc(button, "SetCollapsed", function(self, collapsed)
-			-- if collapsed then
-				-- button.plus:Show()
-			-- else
-				-- button.plus:Hide()
-			-- end
-			-- button:SetNormalTexture(0)
-			-- button:SetPushedTexture(0)
-		-- end)
-	end
-
-	for i = 1, #headers do
-		local button = headers[i].Header.MinimizeButton
-		if button then
-			--FIXME SkinSmallMinimizeButton(button)
+	hooksecurefunc(ObjectiveTrackerFrame, "SetCollapsed", function(self, collapsed)
+		if collapsed then
+			button.plus:Show()
+			if C.general.minimize_mouseover then
+				button:SetAlpha(0)
+				button:HookScript("OnEnter", function() button:SetAlpha(1) end)
+				button:HookScript("OnLeave", function() button:SetAlpha(0) end)
+			end
+		else
+			button.plus:Hide()
+			if C.general.minimize_mouseover then
+				button:SetAlpha(1)
+				button:HookScript("OnEnter", function() button:SetAlpha(1) end)
+				button:HookScript("OnLeave", function() button:SetAlpha(1) end)
+			end
 		end
-	end
+		button:SetNormalTexture(0)
+		button:SetPushedTexture(0)
+	end)
 end
 
 ----------------------------------------------------------------------------------------
@@ -289,44 +250,36 @@ if C.automation.auto_collapse ~= "NONE" then
 		if C.automation.auto_collapse == "RAID" then
 			if IsInInstance() then
 				C_Timer.After(0.1, function()
-					--FIXME ObjectiveTracker_Collapse()
+					ObjectiveTrackerFrame:SetCollapsed(true)
 				end)
-			elseif ObjectiveTrackerFrame.collapsed and not InCombatLockdown() then
-				-- ObjectiveTracker_Expand()
+			elseif not InCombatLockdown() then
+				ObjectiveTrackerFrame:SetCollapsed(false)
 			end
 		elseif C.automation.auto_collapse == "SCENARIO" then
 			local inInstance, instanceType = IsInInstance()
 			if inInstance then
 				if instanceType == "party" or instanceType == "scenario" then
-					-- C_Timer.After(0.1, function() -- for some reason it got error after reload in instance
-						-- for i = 3, #headers do
-							-- local button = headers[i].Header.MinimizeButton
-							-- if button and not headers[i].collapsed then
-								-- button:Click()
-							-- end
-						-- end
-					-- end)
+					C_Timer.After(0.1, function() -- for some reason it got error after reload in instance
+						for i = 3, #headers do
+							headers[i]:SetCollapsed(true)
+						end
+					end)
 				else
 					C_Timer.After(0.1, function()
-						-- ObjectiveTracker_Collapse()
+						ObjectiveTrackerFrame:SetCollapsed(true)
 					end)
 				end
 			else
 				if not InCombatLockdown() then
-					-- for i = 3, #headers do
-						-- local button = headers[i].Header.MinimizeButton
-						-- if button and headers[i].collapsed then
-							-- button:Click()
-						-- end
-					-- end
-					if ObjectiveTrackerFrame.collapsed then
-						-- ObjectiveTracker_Expand()
+					for i = 3, #headers do
+						headers[i]:SetCollapsed(false)
 					end
+					ObjectiveTrackerFrame:SetCollapsed(false)
 				end
 			end
 		elseif C.automation.auto_collapse == "RELOAD" then
 			C_Timer.After(0.1, function()
-				-- ObjectiveTracker_Collapse()
+				ObjectiveTrackerFrame:SetCollapsed(true)
 			end)
 		end
 	end)
@@ -425,12 +378,12 @@ end
 	-- end
 -- end)
 
--- ScenarioStageBlock:HookScript("OnEnter", function(self)
-	-- if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
-		-- GameTooltip:ClearAllPoints()
-		-- GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
-	-- end
--- end)
+ScenarioObjectiveTracker.StageBlock:HookScript("OnEnter", function(self)
+	if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
+		GameTooltip:ClearAllPoints()
+		GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
+	end
+end)
 
 ----------------------------------------------------------------------------------------
 --	Kill reward animation when finished dungeon or bonus objectives
@@ -446,54 +399,59 @@ end
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
 ----------------------------------------------------------------------------------------
---FIXME local StageBlock = _G["ScenarioStageBlock"]
--- StageBlock:CreateBackdrop("Overlay")
--- StageBlock.backdrop:SetPoint("TOPLEFT", ScenarioStageBlock.NormalBG, 3, -3)
--- StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 5)
+hooksecurefunc(ScenarioObjectiveTracker.StageBlock, "UpdateStageBlock", function(block)
+	if not block.backdrop then
+		block:CreateBackdrop("Overlay")
+		block.backdrop:SetPoint("TOPLEFT", block.NormalBG, 3, -3)
+		block.backdrop:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 5)
 
--- StageBlock.NormalBG:SetAlpha(0)
--- StageBlock.FinalBG:SetAlpha(0)
--- StageBlock.GlowTexture:SetTexture("")
+		block.NormalBG:SetAlpha(0)
+		block.FinalBG:SetAlpha(0)
+		block.GlowTexture:SetTexture("")
+	end
+end)
 
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
 ----------------------------------------------------------------------------------------
---FIXME local ChallengeBlock = _G["ScenarioChallengeModeBlock"]
--- ChallengeBlock:CreateBackdrop("Overlay")
--- ChallengeBlock.backdrop:SetPoint("TOPLEFT", ChallengeBlock, 3, -3)
--- ChallengeBlock.backdrop:SetPoint("BOTTOMRIGHT", ChallengeBlock, -6, 3)
--- ChallengeBlock.backdrop.overlay:SetVertexColor(0.12, 0.12, 0.12, 1)
+hooksecurefunc(ScenarioObjectiveTracker.ChallengeModeBlock, "Activate", function(block)
+	if not block.backdrop then
+		block:CreateBackdrop("Overlay")
+		block.backdrop:SetPoint("TOPLEFT", block, 3, -3)
+		block.backdrop:SetPoint("BOTTOMRIGHT", block, -6, 3)
+		block.backdrop.overlay:SetVertexColor(0.12, 0.12, 0.12, 1)
 
--- local bg = select(3, ChallengeBlock:GetRegions())
--- bg:SetAlpha(0)
+		local bg = select(3, block:GetRegions())
+		bg:SetAlpha(0)
 
--- ChallengeBlock.TimerBGBack:SetAlpha(0)
--- ChallengeBlock.TimerBG:SetAlpha(0)
+		block.TimerBGBack:SetAlpha(0)
+		block.TimerBG:SetAlpha(0)
 
--- ChallengeBlock.StatusBar:SetStatusBarTexture(C.media.texture)
--- ChallengeBlock.StatusBar:CreateBackdrop("Overlay")
--- ChallengeBlock.StatusBar.backdrop:SetFrameLevel(ChallengeBlock.backdrop:GetFrameLevel() + 1)
--- ChallengeBlock.StatusBar:SetStatusBarColor(0, 0.6, 1)
--- ChallengeBlock.StatusBar:SetFrameLevel(ChallengeBlock.StatusBar:GetFrameLevel() + 3)
+		block.StatusBar:SetStatusBarTexture(C.media.texture)
+		block.StatusBar:CreateBackdrop("Overlay")
+		block.StatusBar.backdrop:SetFrameLevel(block.backdrop:GetFrameLevel() + 1)
+		block.StatusBar:SetStatusBarColor(0, 0.6, 1)
+		block.StatusBar:SetFrameLevel(block.StatusBar:GetFrameLevel() + 3)
+	end
+end)
 
--- Not tested TODO
--- hooksecurefunc("Scenario_ChallengeMode_SetUpAffixes", function(self)
-	-- for _, frame in ipairs(self.Affixes) do
-		-- frame.Border:SetTexture(nil)
-		-- frame.Portrait:SetTexture(nil)
-		-- if not frame.styled then
-			-- frame.Portrait:SkinIcon()
-			-- frame.styled = true
-		-- end
+hooksecurefunc(ScenarioObjectiveTracker.ChallengeModeBlock, "SetUpAffixes", function(self)
+	for frame in self.affixPool:EnumerateActive() do
+		frame.Border:SetTexture(nil)
+		frame.Portrait:SetTexture(nil)
+		if not frame.styled then
+			frame.Portrait:SkinIcon()
+			frame.styled = true
+		end
 
-		-- if frame.info then
-			-- frame.Portrait:SetTexture(_G.CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
-		-- elseif frame.affixID then
-			-- local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
-			-- frame.Portrait:SetTexture(filedataid)
-		-- end
-	-- end
--- end)
+		if frame.info then
+			frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
+		elseif frame.affixID then
+			local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
+			frame.Portrait:SetTexture(filedataid)
+		end
+	end
+end)
 
 ----------------------------------------------------------------------------------------
 --	Skin MawBuffsBlock
