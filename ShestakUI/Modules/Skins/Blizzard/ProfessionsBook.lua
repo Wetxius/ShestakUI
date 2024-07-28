@@ -8,6 +8,9 @@ local function LoadSkin()
 	local frame = _G.ProfessionsBookFrame
 	T.SkinFrame(frame)
 
+	ProfessionsBookFrameTutorialButton.Ring:Hide()
+	ProfessionsBookFrameTutorialButton:SetPoint("TOPLEFT", ProfessionsBookFrame, "TOPLEFT", -10, 15)
+
 	local headers = {
 		"PrimaryProfession1",
 		"PrimaryProfession2",

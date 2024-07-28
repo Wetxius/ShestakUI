@@ -115,6 +115,9 @@ local function LoadSkin()
 	-- SpellBook
 	PlayerSpellsFrame.SpellBookFrame.TopBar:SetAlpha(0)
 
+	PlayerSpellsFrame.SpellBookFrame.HelpPlateButton.Ring:Hide()
+	PlayerSpellsFrame.SpellBookFrame.HelpPlateButton:SetPoint("TOPLEFT", PlayerSpellsFrame.SpellBookFrame, "TOPLEFT", -10, 37)
+
 	for _, tab in next, {PlayerSpellsFrame.SpellBookFrame.CategoryTabSystem:GetChildren()} do
 		T.SkinTab(tab, true)
 	end
@@ -125,7 +128,7 @@ local function LoadSkin()
 	T.SkinMaxMinFrame(PlayerSpellsFrame.MaxMinButtonFrame, PlayerSpellsFrameCloseButton)
 
 	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.PrevPageButton)
-	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.NextPageButton )
+	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.NextPageButton)
 
 	-- Clique skin
 	C_Timer.After(0.1, function()
