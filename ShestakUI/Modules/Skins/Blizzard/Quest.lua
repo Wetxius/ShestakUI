@@ -549,8 +549,8 @@ local function LoadSkin()
 		end
 		for header in _G.QuestScrollFrame.campaignHeaderFramePool:EnumerateActive() do
 			if header.Text and not header.IsSkinned then
-				header.Text:SetFont(C.media.normal_font, 16)
-				header.Progress:SetFont(C.media.normal_font, 16)
+				header.Text:SetFont(C.media.normal_font, 15)
+				header.Progress:SetFont(C.media.normal_font, 14)
 
 				header.IsSkinned = true
 			end
