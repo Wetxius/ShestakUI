@@ -376,6 +376,15 @@ local function LoadSkin()
 	currencyTransfer.CancelButton:SkinButton()
 
 	T.SkinFrame(CurrencyTransferLog)
+	T.SkinScrollBar(CurrencyTransferLog.ScrollBar)
+    do
+        local bu = TokenFrame.CurrencyTransferLogToggleButton
+        bu:SkinButton()
+
+        bu.t = bu:CreateTexture(nil, "OVERLAY")
+        bu.t:SetTexture(134331)
+        bu.t:CropIcon()
+    end
 
 	hooksecurefunc(TokenFrame.ScrollBox, "Update", function(self)
 		for i = 1, self.ScrollTarget:GetNumChildren() do
