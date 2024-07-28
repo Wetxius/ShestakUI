@@ -89,17 +89,8 @@ local function LoadSkin()
 	end
 
 	InspectPVPFrame.BG:Kill()
-
-	InspectPaperDollItemsFrame.InspectTalents:SkinButton()
-
-	SpecializationRing:Hide()
-	SpecializationSpecIcon:SkinIcon()
-	SpecializationSpecIcon:SetTexCoord(.15, .85, .15, .85)
-	SpecializationSpecName:SetFont(C.media.normal_font, 20, "")
-	InspectTalentFrame:DisableDrawLayer("BACKGROUND")
-	InspectTalentFrame:DisableDrawLayer("BORDER")
-
 	InspectGuildFrameBG:Kill()
+	InspectPaperDollItemsFrame.InspectTalents:SkinButton()
 end
 
 T.SkinFuncs["Blizzard_InspectUI"] = LoadSkin
