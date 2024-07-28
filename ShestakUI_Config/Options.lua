@@ -3516,7 +3516,7 @@ local function PositionGameMenuButton()
 
 		local lastIndex = gameMenuLastButtons[text]
 		if lastIndex == anchorIndex and GameMenuFrame.ShestakUI then
-			GameMenuFrame.ShestakUI:SetPoint("TOPLEFT", button, "BOTTOMLEFT", 0, -46)
+			GameMenuFrame.ShestakUI:SetPoint("TOPLEFT", button, "BOTTOMLEFT", 0, -41)
 		elseif not lastIndex then
 			local point, anchor, point2, x, y = button:GetPoint()
 			button:SetPoint(point, anchor, point2, x, y - 35)
@@ -3530,6 +3530,9 @@ local function PositionGameMenuButton()
 				HideUIPanel(GameMenuFrame)
 			end)
 		end
+
+		local fstring = button:GetFontString()
+		fstring:SetFont(C.media.normal_font, 14)
 	end
 
 	GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + 14)
