@@ -12,7 +12,7 @@ local function LoadSkin()
 
 	T.SkinCloseButton(frame.ClosePanelButton)
 	T.SkinScrollBar(frame.ScrollBar)
-	--FIXME T.SkinDropDownBox(frame.EncounterDropDown)
+	T.SkinDropDownBox(frame.EncounterDropdown)
 
 	frame.Timer:StripTextures()
 	frame.Timer:CreateBackdrop("Default")
