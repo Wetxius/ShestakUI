@@ -540,7 +540,7 @@ local function LoadSkin()
 		for button in _G.QuestScrollFrame.titleFramePool:EnumerateActive() do
 			if not button.IsSkinned then
 				if button.Checkbox then
-					button.Checkbox:DisableDrawLayer('BACKGROUND')
+					button.Checkbox:DisableDrawLayer("BACKGROUND")
 					button.Checkbox:CreateBackdrop("Overlay")
 				end
 
@@ -553,6 +553,19 @@ local function LoadSkin()
 				header.Progress:SetFont(C.media.normal_font, 14)
 
 				header.IsSkinned = true
+			end
+		end
+		-- Fixme // Need better way to skin the headers & Auto collapsed as default?
+		for header in QuestScrollFrame.campaignHeaderMinimalFramePool:EnumerateActive() do
+			if header.CollapseButton and not header.CollapseButton.styled then
+					header:StripTextures()
+					header:CreateBackdrop("Overlay")
+					header.backdrop:SetPoint("TOPLEFT", header.Background, -4, 0)
+					header.backdrop:SetPoint("BOTTOMRIGHT", header.Background, 0, 0)
+					local r, g, b = unpack(C.media.border_color)
+					header.Highlight:SetColorTexture(r, g, b, 0.75)
+				-- SkinExpandOrCollapse(header.CollapseButton)
+				header.CollapseButton.styled = true
 			end
 		end
 		for campaignHeader in QuestScrollFrame.campaignHeaderFramePool:EnumerateActive() do
@@ -589,12 +602,6 @@ local function LoadSkin()
 				callingHeader.HighlightBackground:SetAlpha(0)
 				callingHeader.SelectedTexture:SetAlpha(0)
 				callingHeader.Divider:SetAlpha(0)
-			end
-		end
-		for header in QuestScrollFrame.campaignHeaderMinimalFramePool:EnumerateActive() do
-			if not header.CollapseButton.styled then
-				-- SkinExpandOrCollapse(header.CollapseButton)
-				header.CollapseButton.styled = true
 			end
 		end
 	end)
