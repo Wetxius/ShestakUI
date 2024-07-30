@@ -1525,6 +1525,8 @@ C["filger_spells"] = {
 			{spellID = 200183, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blessing of T'uure
 			{spellID = 196644, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dark Ascension
+			{spellID = 391109, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit of Redemption
 			{spellID = 20711, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divinity
@@ -1537,12 +1539,8 @@ C["filger_spells"] = {
 			{spellID = 15286, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Focused Will
 			{spellID = 45242, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Spectral Guise
-			{spellID = 112833, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fade
 			{spellID = 586, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Spirit Shell
-			{spellID = 109964, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Power Word: Shield
 			{spellID = 17, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Renew
@@ -1663,8 +1661,6 @@ C["filger_spells"] = {
 			{spellID = 88625, filter = "CD"},
 			-- Holy Word: Serenity
 			{spellID = 2050, filter = "CD"},
-			-- Spectral Guise
-			{spellID = 112833, filter = "CD"},
 			-- Fade
 			{spellID = 586, filter = "CD"},
 			-- Halo
@@ -1677,14 +1673,14 @@ C["filger_spells"] = {
 			{spellID = 15487, filter = "CD"},
 			-- Leap of Faith
 			{spellID = 73325, filter = "CD"},
+			-- Dark Ascension
+			{spellID = 391109, filter = "CD"},
 			-- Power Infusion
 			{spellID = 10060, filter = "CD"},
 			-- Dispersion
 			{spellID = 47585, filter = "CD"},
 			-- Desperate Prayer
 			{spellID = 19236, filter = "CD"},
-			-- Shining Force
-			{spellID = 204263, filter = "CD"},
 			-- Pain Suppression
 			{spellID = 33206, filter = "CD"},
 			-- Guardian Spirit
@@ -1703,18 +1699,12 @@ C["filger_spells"] = {
 			{spellID = 228260, filter = "CD"},
 			-- Light of T'uure
 			{spellID = 208065, filter = "CD"},
-			-- Light's Wrath
-			{spellID = 207946, filter = "CD"},
 			-- Vampiric Embrace
 			{spellID = 15286, filter = "CD"},
 			-- Power Word: Radiance
 			{spellID = 194509, filter = "CD"},
-			-- Schism
-			{spellID = 214621, filter = "CD"},
 			-- Rapture
 			{spellID = 47536, filter = "CD"},
-			-- Shadow Covenant
-			{spellID = 314867, filter = "CD"},
 		},
 	},
 	["ROGUE"] = {
