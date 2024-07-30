@@ -30,7 +30,7 @@ local function LoadSkin()
 	AchievementFrame.backdrop:SetPoint("TOPLEFT", 0, 7)
 	AchievementFrame.backdrop:SetPoint("BOTTOMRIGHT")
 	AchievementFrame.Header.Title:ClearAllPoints()
-	AchievementFrame.Header.Title:SetPoint("TOPLEFT", AchievementFrame.backdrop, "TOPLEFT", -22, -8)
+	AchievementFrame.Header.Title:SetPoint("TOPLEFT", AchievementFrame.backdrop, "TOPLEFT", 13, -2)
 	AchievementFrame.Header.Points:ClearAllPoints()
 	AchievementFrame.Header.Points:SetPoint("LEFT", AchievementFrame.Header.Title, "RIGHT", -2, 0)
 
@@ -49,23 +49,24 @@ local function LoadSkin()
 	AchievementFrameComparison.StatContainer.backdrop:SetPoint("BOTTOMRIGHT", 1, -3)
 
 	T.SkinCloseButton(AchievementFrameCloseButton, AchievementFrame.backdrop)
-	--FIXME T.SkinDropDownBox(AchievementFrameFilterDropDown)
-	-- AchievementFrameFilterDropDown:ClearAllPoints()
-	-- AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
+
+	T.SkinFilter(AchievementFrameFilterDropdown, true)
+	AchievementFrameFilterDropdown:ClearAllPoints()
+	AchievementFrameFilterDropdown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", 5, 21)
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("ADDON_LOADED")
 	frame:SetScript("OnEvent", function()
 		if not IsAddOnLoaded("Overachiever") then return end
-		AchievementFrameFilterDropDownButton:SetWidth(17)
-		AchievementFrameFilterDropDown:ClearAllPoints()
-		AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
+		-- AchievementFrameFilterDropDownButton:SetWidth(17)
+		AchievementFrameFilterDropdown:ClearAllPoints()
+		AchievementFrameFilterDropdown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
 	end)
 
 	T.SkinEditBox(AchievementFrame.SearchBox)
 	AchievementFrame.SearchBox:SetHeight(15)
 	AchievementFrame.SearchBox:ClearAllPoints()
-	AchievementFrame.SearchBox:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -51, 0)
+	AchievementFrame.SearchBox:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -52, 0)
 
 	AchievementFrame.SearchPreviewContainer:StripTextures()
 	AchievementFrame.SearchPreviewContainer:CreateBackdrop("Transparent")
@@ -84,8 +85,8 @@ local function LoadSkin()
 	T.SkinScrollBar(AchievementFrameComparison.StatContainer.ScrollBar)
 	T.SkinScrollBar(AchievementFrame.SearchResults.ScrollBar)
 
-	AchievementFrameCategories.ScrollBar:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPRIGHT", -1, 3)
-	AchievementFrameCategories.ScrollBar:SetPoint("BOTTOMLEFT", AchievementFrameCategories, "BOTTOMRIGHT", -1, -7)
+	AchievementFrameCategories.ScrollBar:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPRIGHT", 8, 0)
+	AchievementFrameCategories.ScrollBar:SetPoint("BOTTOMLEFT", AchievementFrameCategories, "BOTTOMRIGHT", 8, -3)
 
 	-- Tabs
 	for i = 1, 3 do

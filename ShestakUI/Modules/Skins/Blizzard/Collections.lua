@@ -46,11 +46,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, #filterButtons do
-		filterButtons[i]:SkinButton()
-		T.SkinCloseButton(filterButtons[i].ResetButton)
-		filterButtons[i].ResetButton:ClearAllPoints()
-		filterButtons[i].ResetButton:SetPoint("CENTER", filterButtons[i], "TOPRIGHT", 0, 0)
-		filterButtons[i]:SetHeight(22)
+		T.SkinFilter(filterButtons[i], true)
 	end
 
 	for i = 1, 3 do
