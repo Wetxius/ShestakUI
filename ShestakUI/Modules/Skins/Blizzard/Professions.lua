@@ -15,12 +15,10 @@ local function LoadSkin()
 	ProfessionsFrame.CraftingPage.TutorialButton:SetPoint("TOPLEFT", frame, "TOPLEFT", -5, 10)
 
 	T.SkinEditBox(frame.CraftingPage.RecipeList.SearchBox, nil, 16)
-	frame.CraftingPage.RecipeList.FilterDropdown:SkinButton()
+
+	T.SkinFilter(frame.CraftingPage.RecipeList.FilterDropdown)
 	frame.CraftingPage.RecipeList.FilterDropdown:SetHeight(20)
 	frame.CraftingPage.RecipeList.FilterDropdown:SetPoint("TOPRIGHT", ProfessionsFrame.CraftingPage.RecipeList, "TOPRIGHT", -8, -6)
-	T.SkinCloseButton(ProfessionsFrame.CraftingPage.RecipeList.FilterDropdown.ResetButton)
-	ProfessionsFrame.CraftingPage.RecipeList.FilterDropdown.ResetButton:ClearAllPoints()
-	ProfessionsFrame.CraftingPage.RecipeList.FilterDropdown.ResetButton:SetPoint("CENTER", ProfessionsFrame.CraftingPage.RecipeList.FilterDropdown, "TOPRIGHT", 0, 0)
 
 	local RankBar = frame.CraftingPage.RankBar
 	RankBar.Border:Hide()
@@ -46,6 +44,18 @@ local function LoadSkin()
 			button:SetPushedTexture(0)
 		end
 	end
+
+	hooksecurefunc(_G.ProfessionsFrame.CraftingPage.RecipeList.ScrollBox, "Update", function(frame)
+		for _, child in next, {frame.ScrollTarget:GetChildren()} do
+			if child.CenterPiece and not child.isSkinned then
+				child:DisableDrawLayer("BACKGROUND")
+				child:CreateBackdrop("Overlay")
+				child.backdrop:SetPoint("TOPLEFT", child, 6, 0)
+				child.backdrop:SetPoint("BOTTOMRIGHT", child, -6, 4)
+				child.isSkinned = true
+			end
+		end
+	end)
 
 	local RecipeList = frame.CraftingPage.RecipeList
 	RecipeList:StripTextures()
