@@ -1,5 +1,7 @@
+local T, C, L = unpack(ShestakUI)
 local _E
 local hooked
+if C.skins.blizzard_frames == true then return end
 
 local updateContents = function(self)
 	if not IsAddOnLoaded("Blizzard_VoidStorageUI") then return end
@@ -42,7 +44,7 @@ local function hookCheck(self)
 		end)
 		hooked = true
 
-		self:UnregisterEvent("VOID_STORAGE_OPEN", hookCheck)
+		-- self:UnregisterEvent("VOID_STORAGE_OPEN", hookCheck)
 	end
 end
 

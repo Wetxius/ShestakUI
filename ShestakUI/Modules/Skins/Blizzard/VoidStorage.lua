@@ -75,7 +75,7 @@ local function LoadSkin()
 
 		button:StyleButton()
 		button:SetTemplate("Default")
-		button.IconBorder:Kill()
+		T.SkinIconBorder(button.IconBorder, button)
 
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		icon:ClearAllPoints()
