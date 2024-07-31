@@ -77,7 +77,7 @@
 	<Script file="Modules\Trade\AlreadyKnown.lua"/>
 	<Script file="Modules\Trade\Archaeology.lua"/>
 	<Script file="Modules\Trade\Merchant.lua"/>
-	<!-- <Script file="Modules\Trade\OneClickDisenchanting.lua"/> -->
+	<Script file="Modules\Trade\OneClickDisenchanting.lua"/>
 	<Script file="Modules\Trade\OneClickEnchantScroll.lua"/>
 	<Script file="Modules\Trade\ProfessionTabs.lua"/>
 	<Script file="Modules\Trade\SumAucBuyouts.lua"/>

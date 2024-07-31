@@ -4,7 +4,85 @@ if C.trade.disenchanting ~= true then return end
 ----------------------------------------------------------------------------------------
 --	One-click Milling, Prospecting and Disenchanting(Molinari by p3lim)
 ----------------------------------------------------------------------------------------
-local button = CreateFrame("Button", "OneClickMPD", UIParent, "SecureActionButtonTemplate, AutoCastShineTemplate")
+
+-- AutoCastShine was removed from the game in 11.x, this is just a fork
+local sparkles = CreateFrame("Frame")
+sparkles:Hide()
+sparkles.orbs = {}
+
+for _ = 1, 4 do
+	for mult = 3, 0, -1 do
+		local orb = sparkles:CreateTexture(nil, "OVERLAY")
+		orb:SetPoint("CENTER")
+		orb:SetSize(12 + (9 * mult), 12 + (9 * mult)) -- 3x larger than the original template
+		orb:SetTexture([[Interface\ItemSocketingFrame\UI-ItemSockets]])
+		orb:SetTexCoord(0.3984375, 0.4453125, 0.40234375, 0.44921875)
+		orb:SetBlendMode("ADD")
+		table.insert(sparkles.orbs, orb)
+	end
+end
+
+local timers = {0, 0, 0, 0}
+local speeds = {2, 4, 6, 8}
+sparkles:SetScript("OnUpdate", function(self, elapsed)
+	for index in next, timers do
+		timers[index] = timers[index] + elapsed
+
+		if timers[index] > speeds[index] * 4 then
+			timers[index] = 0
+		end
+	end
+
+	local parent = self:GetParent()
+	local distance = parent:GetWidth()
+	for index = 1, 4 do
+		local timer = timers[index]
+		local speed = speeds[index]
+
+		if timer <= speed then
+			local position = timer / speed * distance
+			self.orbs[0 + index]:SetPoint("CENTER", parent, "TOPLEFT", position, 0)
+			self.orbs[4 + index]:SetPoint("CENTER", parent, "BOTTOMRIGHT", -position, 0)
+			self.orbs[8 + index]:SetPoint("CENTER", parent, "TOPRIGHT", 0, -position)
+			self.orbs[12 + index]:SetPoint("CENTER", parent, "BOTTOMLEFT", 0, position)
+		elseif timer <= speed * 2 then
+			local position = (timer - speed) / speed * distance
+			self.orbs[0 + index]:SetPoint("CENTER", parent, "TOPRIGHT", 0, -position)
+			self.orbs[4 + index]:SetPoint("CENTER", parent, "BOTTOMLEFT", 0, position)
+			self.orbs[8 + index]:SetPoint("CENTER", parent, "BOTTOMRIGHT", -position, 0)
+			self.orbs[12 + index]:SetPoint("CENTER", parent, "TOPLEFT", position, 0)
+		elseif timer <= speed * 3 then
+			local position = (timer - speed * 2) / speed * distance
+			self.orbs[0 + index]:SetPoint("CENTER", parent, "BOTTOMRIGHT", -position, 0)
+			self.orbs[4 + index]:SetPoint("CENTER", parent, "TOPLEFT", position, 0)
+			self.orbs[8 + index]:SetPoint("CENTER", parent, "BOTTOMLEFT", 0, position)
+			self.orbs[12 + index]:SetPoint("CENTER", parent, "TOPRIGHT", 0, -position)
+		else
+			local position = (timer - speed * 3) / speed * distance
+			self.orbs[0 + index]:SetPoint("CENTER", parent, "BOTTOMLEFT", 0, position)
+			self.orbs[4 + index]:SetPoint("CENTER", parent, "TOPRIGHT", 0, -position)
+			self.orbs[8 + index]:SetPoint("CENTER", parent, "TOPLEFT", position, 0)
+			self.orbs[12 + index]:SetPoint("CENTER", parent, "BOTTOMRIGHT", -position, 0)
+		end
+	end
+end)
+
+local function StartSparkles(parent, r, g, b)
+	sparkles:SetParent(parent)
+	sparkles:SetAllPoints()
+
+	for _, orb in next, sparkles.orbs do
+		orb:SetVertexColor(r, g, b)
+	end
+
+	sparkles:Show()
+end
+
+local function StopSparkles()
+	sparkles:Hide()
+end
+
+local button = CreateFrame("Button", "OneClickMPD", UIParent, "SecureActionButtonTemplate")
 button:RegisterForClicks("AnyUp", "AnyDown")
 button:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 button:RegisterEvent("PLAYER_LOGIN")
@@ -53,7 +131,7 @@ function button:PLAYER_LOGIN()
 		rogue = ITEM_MIN_SKILL:gsub("%%s", (T.client == "ruRU" and "Взлом замков" or GetSpellInfo(1809))):gsub("%%d", "%(.*%)")
 	end
 
-	local function OnTooltipSetUnit(self)
+	local function OnTooltipSetUnit(self, data)
 		if self ~= GameTooltip or self:IsForbidden() then return end
 		local _, link = TooltipUtil.GetDisplayedItem(self)
 
@@ -83,12 +161,19 @@ function button:PLAYER_LOGIN()
 				end
 			end
 
-			local bag, slot = GetMouseFoci():GetParent(), GetMouseFoci()
-			if spell and C_Container.GetContainerItemLink(bag:GetID(), slot:GetID()) == link then
-				button:SetAttribute("macrotext", string.format("/cast %s\n/use %s %s", spell, bag:GetID(), slot:GetID()))
-				button:SetAllPoints(slot)
-				button:Show()
-				AutoCastShine_AutoCastStart(button, r, g, b)
+			if data.guid then
+				local location = C_Item.GetItemLocation(data.guid)
+				if location and location:IsBagAndSlot() then
+					local bagID, slotID = location:GetBagAndSlot()
+					if spell and C_Container.GetContainerItemLink(bagID, slotID) == link then
+						button:SetAttribute("macrotext", string.format("/cast %s\n/use %s %s", spell, bagID, slotID))
+						local slot = self:GetOwner()
+						button:SetPoint("TOPLEFT", slot, "TOPLEFT", 2, 0)
+						button:SetPoint("BOTTOMRIGHT", slot, "BOTTOMRIGHT", 2, 0)
+						button:Show()
+						StartSparkles(button, r, g, b)
+					end
+				end
 			end
 		end
 	end
@@ -101,11 +186,6 @@ function button:PLAYER_LOGIN()
 
 	self:RegisterEvent("MODIFIER_STATE_CHANGED")
 	self:Hide()
-
-	for _, sparks in pairs(self.sparkles) do
-		sparks:SetHeight(sparks:GetHeight() * 3)
-		sparks:SetWidth(sparks:GetWidth() * 3)
-	end
 end
 
 function button:MODIFIER_STATE_CHANGED(key)
@@ -118,7 +198,7 @@ function button:MODIFIER_STATE_CHANGED(key)
 		self:ClearAllPoints()
 		self:SetAlpha(1)
 		self:Hide()
-		AutoCastShine_AutoCastStop(self)
+		StopSparkles(self)
 	end
 end
 
