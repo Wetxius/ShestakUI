@@ -168,12 +168,15 @@ local function LoadSkin()
 	hooksecurefunc("OpenProfessionsItemFlyout", function(_, parent)
 		for i = 1, parent:GetNumChildren() do
 			local frame = select(i, parent:GetChildren())
-			if frame.HideUnownedCheckBox and not frame.backdrop then
+			if frame.HideUnownedCheckbox and not frame.backdrop then
 				frame:StripTextures()
 				frame:CreateBackdrop("Transparent")
 				frame.backdrop:SetFrameLevel(2)
+				hooksecurefunc(frame, "SetParent", function(self)
+					frame.backdrop:SetFrameStrata("LOW")
+				end)
 				frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, 2)
-				T.SkinCheckBox(frame.HideUnownedCheckBox, 24)
+				T.SkinCheckBox(frame.HideUnownedCheckbox, 24)
 				hooksecurefunc(frame.ScrollBox, "Update", function(self)
 					for i = 1, self.ScrollTarget:GetNumChildren() do
 						local button = select(i, self.ScrollTarget:GetChildren())
