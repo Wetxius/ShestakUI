@@ -760,8 +760,7 @@ function T.SkinFilter(frame, height)
 	local tex = frame:CreateTexture(nil, "ARTWORK")
 	tex:SetPoint("RIGHT", frame, -4, 0)
 	tex:SetSize(14, 14)
-	tex:SetAtlas("CovenantSanctum-Renown-Arrow")
-	tex:SetRotation(rad(180))
+	tex:SetTexture("Interface\\ChatFrame\\ChatFrameExpandArrow")
 
 	if frame.ResetButton then
 		T.SkinCloseButton(frame.ResetButton)
