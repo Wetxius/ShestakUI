@@ -116,7 +116,7 @@ local function UpdateSelectedTabs(object)
 
 	for index = 1, #tabs[object] do
 		local tab = tabs[object][index]
-		tab:SetChecked(IsCurrentSpell(tab.name))
+		tab:SetChecked(C_Spell.IsCurrentSpell(tab.name))
 	end
 end
 
@@ -130,7 +130,7 @@ end
 
 local function UpdateTab(object, name, rank, texture, hat)
 	local index = tabs[object].index + 1
-	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SpellBookSkillLineTabTemplate, SecureActionButtonTemplate")
+	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate")
 	tab:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 
 	tab:ClearAllPoints()
