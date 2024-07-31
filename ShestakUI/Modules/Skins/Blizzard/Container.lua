@@ -7,6 +7,28 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	if C.bag.enable == true or T.anotherBags then return end
 
+	local function SkinBagSlots(self)
+		for button in self.itemButtonPool:EnumerateActive() do
+			if not button.styled then
+				local icon = button.icon
+
+				button.IconBorder:SetAlpha(0)
+
+				button:SetNormalTexture(0)
+				button:StyleButton()
+				button:SetTemplate("Default")
+
+				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				icon:ClearAllPoints()
+				icon:SetPoint("TOPLEFT", 2, -2)
+				icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+				button.IconQuestTexture:SetAlpha(0)
+				button.styled = true
+			end
+		end
+	end
+
 	-- Container Frame
 	BagItemSearchBox:StripTextures(true)
 	BagItemSearchBox:CreateBackdrop("Overlay")
@@ -60,6 +82,9 @@ local function LoadSkin()
 		end
 	end
 
+	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItemSlots", SkinBagSlots)
+	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", updateQuestItems)
+
 	for i = 1, NUM_CONTAINER_FRAMES do
 		local frame = _G["ContainerFrame"..i]
 		local close = _G["ContainerFrame"..i].CloseButton
@@ -84,30 +109,8 @@ local function LoadSkin()
 
 		T.SkinCloseButton(close, frame.backdrop)
 
-		for j = 1, 36 do
-			local item = _G["ContainerFrame"..i.."Item"..j]
-			local icon = _G["ContainerFrame"..i.."Item"..j.."IconTexture"]
-			local quest = _G["ContainerFrame"..i.."Item"..j.."IconQuestTexture"]
-			local border = _G["ContainerFrame"..i.."Item"..j].IconBorder
-
-			border:SetAlpha(0)
-
-			item:SetNormalTexture(0)
-			item:StyleButton()
-			item:SetTemplate("Default")
-
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-			quest:SetAlpha(0)
-		end
-
-		-- Color QuestItem
-		hooksecurefunc(frame, "UpdateItems", function(self)
-			updateQuestItems(self)
-		end)
+		hooksecurefunc(frame, "UpdateItemSlots", SkinBagSlots)
+		hooksecurefunc(frame, "UpdateItems", updateQuestItems)
 	end
 
 	BackpackTokenFrame:StripTextures(true)
@@ -142,9 +145,6 @@ local function LoadSkin()
 	BankItemAutoSortButton:GetNormalTexture():ClearAllPoints()
 	BankItemAutoSortButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
 	BankItemAutoSortButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-
-	BankFrameMoneyFrameInset:StripTextures()
-	BankFrameMoneyFrameBorder:StripTextures()
 
 	BankFramePurchaseButton:SkinButton()
 	T.SkinCloseButton(BankFrameCloseButton, BankFrame.backdrop)
@@ -228,10 +228,6 @@ local function LoadSkin()
 		end
 	end)
 
-	-- Color QuestItem
-	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", function(self)
-		updateQuestItems(self)
-	end)
 
 	hooksecurefunc("BankFrameItemButton_Update", function(frame)
 		if not frame.isBag and frame.IconQuestTexture:IsShown() then
