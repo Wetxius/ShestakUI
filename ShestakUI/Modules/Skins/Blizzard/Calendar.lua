@@ -42,7 +42,7 @@ local function LoadSkin()
 	T.SkinNextPrevButton(CalendarNextMonthButton)
 
 	-- Dropdown button
-	CalendarFrame.FilterButton:SkinButton()
+	T.SkinFilter(CalendarFrame.FilterButton, true)
 
 	-- Backdrop
 	local bg = CreateFrame("Frame", "CalendarFrameBackdrop", CalendarFrame)

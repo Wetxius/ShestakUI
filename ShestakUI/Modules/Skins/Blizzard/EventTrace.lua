@@ -11,7 +11,7 @@ local function LoadSkin()
 	frame:StripTextures()
 	frame:SetTemplate("Transparent")
 
-	EventTrace.SubtitleBar.OptionsDropDown:SkinButton()
+	T.SkinFilter(EventTrace.SubtitleBar.OptionsDropdown)
 	T.SkinEditBox(EventTrace.Log.Bar.SearchBox, nil, 16)
 
 	if EventTrace.Log.Events.ScrollBar.Background then
