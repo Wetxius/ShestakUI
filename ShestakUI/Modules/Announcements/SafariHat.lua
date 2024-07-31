@@ -31,7 +31,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		button.icon:SetTexture(774766)
 
 		button:SetScript("OnEnter", function(self)
-			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 5, 0)
 			GameTooltip:SetToyByItemID(92738)
 		end)
 

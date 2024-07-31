@@ -128,42 +128,35 @@ local function ResetTabs(object)
 	tabs[object].index = 0
 end
 
-local function UpdateTab(object, name, rank, texture, hat)
+local function UpdateTab(object, name, texture, hat)
 	local index = tabs[object].index + 1
-	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate")
+	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate, ActionButtonTemplate")
 	tab:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 
+	tab:SetSize(36, 36)
 	tab:ClearAllPoints()
-
 	if IsAddOnLoaded("Aurora") then
 		tab:SetPoint("TOPLEFT", object, "TOPRIGHT", 11, (-44 * index) + 10)
 
-		tab:DisableDrawLayer("BACKGROUND")
-		tab:SetNormalTexture(texture)
-		tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		tab:SetNormalTexture(0)
 
 		local F, C = unpack(Aurora)
-		tab:SetCheckedTexture(C.media.checked)
-		tab:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-		tab:GetHighlightTexture():SetAllPoints(tab:GetNormalTexture())
 		F.CreateBG(tab)
 	elseif C.skins.blizzard_frames == true then
 		tab:SetPoint("TOPLEFT", object, "TOPRIGHT", 1, (-44 * index) + 44)
 
-		tab:DisableDrawLayer("BACKGROUND")
-		tab:SetNormalTexture(texture)
-		tab:GetNormalTexture():ClearAllPoints()
-		tab:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-		tab:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-		tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-		tab:CreateBackdrop("Default")
-		tab.backdrop:SetAllPoints()
-		tab:StyleButton(true)
+		tab:SetTemplate("Default")
+		tab:StyleButton()
+		tab:SetNormalTexture(0)
+		tab.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		tab.icon:ClearAllPoints()
+		tab.icon:SetPoint("TOPLEFT", 2, -2)
+		tab.icon:SetPoint("BOTTOMRIGHT", -2, 2)
 	else
 		tab:SetPoint("TOPLEFT", object, "TOPRIGHT", 0, (-44 * index) + 18)
-		tab:SetNormalTexture(texture)
 	end
+
+	tab.icon:SetTexture(texture)
 
 	if hat then
 		tab:SetAttribute("type", "toy")
@@ -179,7 +172,17 @@ local function UpdateTab(object, name, rank, texture, hat)
 	tab:Show()
 
 	tab.name = name
-	tab.tooltip = rank and (rank ~= "" and rank ~= name) and format("%s (%s)", name, rank) or name
+	-- tab.tooltip = rank and (rank ~= "" and rank ~= name) and format("%s (%s)", name, rank) or name
+
+	tab:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 5, -7)
+		GameTooltip:SetText(name)
+		GameTooltip:Show()
+	end)
+
+	tab:SetScript("OnLeave", function()
+		GameTooltip:Hide()
+	end)
 
 	tabs[object][index] = tabs[object][index] or tab
 	tabs[object].index = tabs[object].index + 1
@@ -210,19 +213,18 @@ local function HandleProfession(object, professionID, hat)
 		if defaults[skillID] then
 			for index = 1, numAbilities do
 				if defaults[skillID][index] then
-					local name = GetSpellBookItemName(offset + index, "profession")
-					local rank = GetProfessionRank(currentSkill, skillLineName)
+					local name = C_SpellBook.GetSpellBookItemName(offset + index, 0)
 					local texture = C_SpellBook.GetSpellBookItemTexture(offset + index, 0)
 
-					if name and rank and texture then
-						UpdateTab(object, name, rank, texture)
+					if name and texture then
+						UpdateTab(object, name, texture)
 					end
 				end
 			end
 		end
 
 		if hat and PlayerHasToy(134020) and C_ToyBox.IsToyUsable(134020) then
-			UpdateTab(object, GetSpellInfo(67556), nil, 236571, true)
+			UpdateTab(object, GetSpellInfo(67556), 236571, true)
 		end
 	end
 end
@@ -246,8 +248,8 @@ local function HandleTabs(object)
 
 		for index = 1, #spells do
 			if IsSpellKnown(spells[index]) then
-				local name, rank, texture = GetSpellInfo(spells[index])
-				UpdateTab(object, name, rank, texture)
+				local name, _, texture = GetSpellInfo(spells[index])
+				UpdateTab(object, name, texture)
 			end
 		end
 	end
