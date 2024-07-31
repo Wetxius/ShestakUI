@@ -12,7 +12,7 @@ LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 	end
 
 	if addon == "Blizzard_PVPUI" then
-		ConquestTooltip:SetTemplate("Transparent")
+		ConquestTooltip.NineSlice:SetTemplate("Transparent")
 	end
 end)
 
@@ -64,8 +64,8 @@ local function LoadSkin()
 	T.SkinDropDownBox(HonorFrameTypeDropdown, 165)
 	HonorFrameTypeDropdown:SetPoint("BOTTOMRIGHT", HonorFrame.Inset, "TOPRIGHT", -14, -1)
 	T.SkinScrollBar(HonorFrame.SpecificScrollBar)
-	--HonorFrame.SpecificScrollBar:SetPoint("TOPLEFT", HonorFrameSpecificFrame, "TOPRIGHT", 0, -15)
-	--HonorFrame.SpecificScrollBar:SetPoint("BOTTOMLEFT", HonorFrameSpecificFrame, "BOTTOMRIGHT", 0, 15)
+	HonorFrame.SpecificScrollBar:SetPoint("TOPLEFT", HonorFrame, "TOPRIGHT", -19, -92)
+	HonorFrame.SpecificScrollBar:SetPoint("BOTTOMLEFT", HonorFrame, "BOTTOMRIGHT", -19, 27)
 	HonorFrameQueueButton:SkinButton(true)
 
 	PVPQueueFrame.HonorInset:StripTextures()
@@ -203,7 +203,7 @@ local function LoadSkin()
 	ConquestFrame.Inset:StripTextures()
 	ConquestFrame.ShadowOverlay:StripTextures()
 
-	for _, button in pairs({ConquestFrame.RatedSoloShuffle, ConquestFrame.Arena2v2, ConquestFrame.Arena3v3, ConquestFrame.RatedBG}) do
+	for _, button in pairs({ConquestFrame.RatedSoloShuffle, ConquestFrame.Arena2v2, ConquestFrame.Arena3v3, ConquestFrame.RatedBG, ConquestFrame.RatedBGBlitz}) do
 		button:StripTextures()
 		button:SetTemplate("Overlay")
 		button:StyleButton()
