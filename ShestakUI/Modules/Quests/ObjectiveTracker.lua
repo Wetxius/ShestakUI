@@ -453,6 +453,33 @@ hooksecurefunc(ScenarioObjectiveTracker.ChallengeModeBlock, "SetUpAffixes", func
 	end
 end)
 
+hooksecurefunc(ScenarioObjectiveTracker.StageBlock, "UpdateWidgetRegistration", function(self)
+	local widgetContainer = self.WidgetContainer
+	if widgetContainer.widgetFrames then
+		for _, widgetFrame in pairs(widgetContainer.widgetFrames) do
+			if widgetFrame.Frame then widgetFrame.Frame:SetAlpha(0) end
+
+			local bar = widgetFrame.TimerBar
+			if bar and not bar.styled then
+				bar:SetStatusBarTexture(C.media.texture)
+				bar:CreateBackdrop("Overlay")
+				bar:SetStatusBarColor(0, 0.6, 1)
+				bar:SetFrameLevel(bar:GetFrameLevel() + 3)
+				bar.styled = true
+			end
+
+			if widgetFrame.CurrencyContainer then
+				for currencyFrame in widgetFrame.currencyPool:EnumerateActive() do
+					if not currencyFrame.styled then
+						currencyFrame.Icon:SkinIcon()
+						currencyFrame.styled = true
+					end
+				end
+			end
+		end
+	end
+end)
+
 ----------------------------------------------------------------------------------------
 --	Skin MawBuffsBlock
 ----------------------------------------------------------------------------------------
