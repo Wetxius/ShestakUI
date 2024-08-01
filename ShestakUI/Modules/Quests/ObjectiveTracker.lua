@@ -17,6 +17,15 @@ hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
 	end
 end)
 
+local height = T.screenHeight / 1.6
+ObjectiveTrackerFrame:SetHeight(height)
+
+hooksecurefunc(ObjectiveTrackerFrame, "SetHeight", function(_, h)
+	if h ~= height then
+		ObjectiveTrackerFrame:SetHeight(height)
+	end
+end)
+
 local headers = {
 	ScenarioObjectiveTracker,
 	BonusObjectiveTracker,
