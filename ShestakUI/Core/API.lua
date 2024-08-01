@@ -183,6 +183,7 @@ local StripTexturesBlizzFrames = {
 	"Portrait",
 	"portrait",
 	"ScrollFrameBorder",
+	"EdgeShadows"
 }
 
 local function StripTextures(object, kill)
@@ -974,11 +975,44 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 		if texture then
 			button.Icon:SetTexture(texture)
 		end
+		button.styled = true
 	end
 
 	local dropdown = frame.BorderBox.IconTypeDropdown
 	if dropdown then
 		T.SkinDropDownBox(dropdown)
+	end
+
+	if frame.DepositSettingsMenu then
+		frame.DepositSettingsMenu:DisableDrawLayer("OVERLAY")
+		for _, child in pairs({frame.DepositSettingsMenu:GetChildren()}) do
+			if child:IsObjectType("CheckButton") then
+				T.SkinCheckBox(child, 22)
+			elseif child.Arrow then
+				T.SkinDropDownBox(child)
+			end
+		end
+
+		hooksecurefunc(frame.IconSelector.ScrollBox, "Update", function(self)
+			for i = 1, self.ScrollTarget:GetNumChildren() do
+				local child = select(i, self.ScrollTarget:GetChildren())
+				if child.Icon and not child.styled then
+					local texture = child.Icon:GetTexture()
+					child:StripTextures()
+					child:StyleButton(true)
+					child:SetTemplate("Default")
+
+					child.Icon:ClearAllPoints()
+					child.Icon:SetPoint("TOPLEFT", 2, -2)
+					child.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+					child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					if texture then
+						child.Icon:SetTexture(texture)
+					end
+					child.styled = true
+				end
+			end
+		end)
 	end
 end
 
