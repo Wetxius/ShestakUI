@@ -323,12 +323,9 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"RaidUtilityCloseButton",
 			"RaidUtilityDisbandButton",
 			"RaidUtilityRaidControlButton",
+			"RaidUtilityMarkerToggle",
 			"BasicScriptErrorsButton"
 		}
-
-		if C.misc.raid_tools == true then
-			tinsert(BlizzardButtons, "CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton")
-		end
 
 		for i = 1, getn(BlizzardButtons) do
 			local buttons = _G[BlizzardButtons[i]]

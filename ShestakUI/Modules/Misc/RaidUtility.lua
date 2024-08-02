@@ -101,21 +101,53 @@ CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemp
 RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() DoReadyCheck() end)
 
 -- World Marker button
---FIXME CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:ClearAllPoints()
--- CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetPoint("TOPRIGHT", RaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, -5)
--- CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetParent(RaidUtilityPanel)
--- CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetHeight(18)
--- CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetWidth(RaidUtilityRoleButton:GetWidth() * 0.22)
--- CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:StripTextures(true)
+CreateButton("RaidUtilityMarkerToggle", RaidUtilityPanel, "UIPanelButtonTemplate", 18, 18, "TOPRIGHT", RaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, -5)
+local MarkTexture = RaidUtilityMarkerToggle:CreateTexture(nil, "OVERLAY")
+MarkTexture:SetTexture("Interface\\RaidFrame\\Raid-WorldPing")
+MarkTexture:SetPoint("CENTER", 0, -1)
 
--- local MarkTexture = CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:CreateTexture(nil, "OVERLAY")
--- MarkTexture:SetTexture("Interface\\RaidFrame\\Raid-WorldPing")
--- MarkTexture:SetPoint("CENTER", 0, -1)
+local markersFrame = CreateFrame("Frame", "RaidUtilityPanelmarkers", RaidUtilityPanel)
+markersFrame:SetSize(100, 200)
+markersFrame:SetPoint("TOPLEFT", RaidUtilityMarkerToggle, "TOPRIGHT")
+markersFrame:Hide()
+RaidUtilityMarkerToggle:SetScript("OnMouseUp", function() markersFrame:SetShown(not markersFrame:IsShown()) end)
+
+local ground = {5, 6, 3, 2, 7, 1, 4, 8}
+local iconTexture = {
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_1",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_2",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_3",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_4",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_5",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_6",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_7",
+	"Interface\\TargetingFrame\\UI-RaidTargetingIcon_8",
+	"Interface\\Buttons\\UI-GroupLoot-Pass-Up",
+}
+
+local prev
+for i = 1, 9 do
+	local b = CreateFrame("Button", "RaidUtilityPanelRaidMarkers", markersFrame, "SecureActionButtonTemplate")
+	b:ClearAllPoints()
+	if i == 1 then
+		b:SetPoint("TOPLEFT", RaidUtilityPanel, "TOPRIGHT", 5, -3)
+	else
+		b:SetPoint("TOP", prev, "BOTTOM", 0, -5)
+	end
+	b:SetSize(13, 13)
+	b:CreateBackdrop("Overlay")
+	b:SetNormalTexture(iconTexture[i])
+	b:RegisterForClicks("AnyUp", "AnyDown")
+	b:SetAttribute("type", "macro")
+	b:SetAttribute("macrotext", format(i == 9 and "/cwm 0" or "/cwm %d\n/wm %d", ground[i], ground[i]))
+
+	prev = b
+end
 
 -- Raid Control Panel
 CreateButton("RaidUtilityRaidControlButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityRoleButton:GetWidth(), 18, "TOPLEFT", RaidUtilityReadyCheckButton, "BOTTOMLEFT", 0, -5, RAID_CONTROL)
 RaidUtilityRaidControlButton:SetScript("OnMouseUp", function()
-	ToggleFriendsFrame(4)
+	ToggleFriendsFrame(3)
 end)
 
 local function ToggleRaidUtil(self, event)
