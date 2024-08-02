@@ -36,5 +36,5 @@ frame:SetScript("OnEvent", function()
 		destIcon = GetRaidIcon(destRaidFlags)
 	end
 
-	SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destIcon..destName..": "..GetSpellLink(spellID), T.CheckChat())
+	SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destIcon..destName..": "..C_Spell.GetSpellLink(spellID), T.CheckChat())
 end)

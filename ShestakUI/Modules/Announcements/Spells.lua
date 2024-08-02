@@ -18,9 +18,9 @@ frame:SetScript("OnEvent", function()
 
 		if T.AnnounceSpells[spellID] then
 			if destName == nil then
-				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, GetSpellLink(spellID)), T.CheckChat())
+				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
 			else
-				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, GetSpellLink(spellID).." -> "..destName), T.CheckChat())
+				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID).." -> "..destName), T.CheckChat())
 			end
 		end
 	else
@@ -28,9 +28,9 @@ frame:SetScript("OnEvent", function()
 
 		if T.AnnounceSpells[spellID] then
 			if destName == nil then
-				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, GetSpellLink(spellID)), T.CheckChat())
+				SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
 			else
-				SendChatMessage(GetSpellLink(spellID).." -> "..destName, T.CheckChat())
+				SendChatMessage(C_Spell.GetSpellLink(spellID).." -> "..destName, T.CheckChat())
 			end
 		end
 	end
