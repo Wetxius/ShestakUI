@@ -7,29 +7,37 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	if C.bag.enable == true or T.anotherBags then return end
 
-	local function SkinBagSlots(self)
-		for button in self.itemButtonPool:EnumerateActive() do
-			if not button.styled then
-				local icon = button.icon
+	local function SkinBagSlots(button)
+		if not button.styled then
+			local icon = button.icon
 
-				button.IconBorder:SetAlpha(0)
+			button.IconBorder:SetAlpha(0)
 
-				button:SetNormalTexture(0)
-				button:StyleButton()
-				button:SetTemplate("Default")
+			button:SetNormalTexture(0)
+			button:StyleButton()
+			button:SetTemplate("Default")
 
-				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				icon:ClearAllPoints()
-				icon:SetPoint("TOPLEFT", 2, -2)
-				icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			icon:ClearAllPoints()
+			icon:SetPoint("TOPLEFT", 2, -2)
+			icon:SetPoint("BOTTOMRIGHT", -2, 2)
 
-				button.IconQuestTexture:SetAlpha(0)
-				if button.Background then
-					button.Background:SetAlpha(0)
-				end
+			button.Count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+			button.Count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
+			button.Count:SetPoint("BOTTOMRIGHT", 1, 1)
 
-				button.styled = true
+			button.IconQuestTexture:SetAlpha(0)
+			if button.Background then
+				button.Background:SetAlpha(0)
 			end
+
+			button.styled = true
+		end
+	end
+
+	local function SkinItemSlots(self)
+		for button in self.itemButtonPool:EnumerateActive() do
+			SkinBagSlots(button)
 		end
 	end
 
@@ -86,7 +94,7 @@ local function LoadSkin()
 		end
 	end
 
-	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItemSlots", SkinBagSlots)
+	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItemSlots", SkinItemSlots)
 	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", updateQuestItems)
 
 	for i = 1, NUM_CONTAINER_FRAMES do
@@ -113,7 +121,7 @@ local function LoadSkin()
 
 		T.SkinCloseButton(close, frame.backdrop)
 
-		hooksecurefunc(frame, "UpdateItemSlots", SkinBagSlots)
+		hooksecurefunc(frame, "UpdateItemSlots", SkinItemSlots)
 		hooksecurefunc(frame, "UpdateItems", updateQuestItems)
 	end
 
@@ -159,24 +167,7 @@ local function LoadSkin()
 
 	for i = 1, 28 do
 		local item = _G["BankFrameItem"..i]
-		local icon = _G["BankFrameItem"..i.."IconTexture"]
-		local quest = _G["BankFrameItem"..i].IconQuestTexture
-		local border = _G["BankFrameItem"..i].IconBorder
-
-		border:SetAlpha(0)
-
-		item:SetNormalTexture(0)
-		item:StyleButton()
-		item:SetTemplate("Default")
-
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-		if quest then
-			quest:SetAlpha(0)
-		end
+		SkinBagSlots(item)
 	end
 
 	for i = 1, 7 do
@@ -218,19 +209,7 @@ local function LoadSkin()
 	ReagentBankFrame:HookScript("OnShow", function()
 		for i = 1, 98 do
 			local item = _G["ReagentBankFrameItem"..i]
-			local icon = _G["ReagentBankFrameItem"..i].icon
-			local border = _G["ReagentBankFrameItem"..i].IconBorder
-
-			border:SetAlpha(0)
-
-			item:SetNormalTexture(0)
-			item:StyleButton()
-			item:SetTemplate("Default")
-
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			SkinBagSlots(item)
 		end
 	end)
 
@@ -321,7 +300,7 @@ local function LoadSkin()
 	-- Warband
 	AccountBankPanel:StripTextures()
 
-	hooksecurefunc(AccountBankPanel, "GenerateItemSlotsForSelectedTab", SkinBagSlots)
+	hooksecurefunc(AccountBankPanel, "GenerateItemSlotsForSelectedTab", SkinItemSlots)
 
 	local function SkinBankTab(button)
 		if not button.styled then
