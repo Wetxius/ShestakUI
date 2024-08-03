@@ -322,7 +322,8 @@ local function LoadSkin()
 	local tabs = {
 		Orders.BrowseFrame.PublicOrdersButton,
 		Orders.BrowseFrame.GuildOrdersButton,
-		Orders.BrowseFrame.PersonalOrdersButton
+		Orders.BrowseFrame.PersonalOrdersButton,
+		Orders.BrowseFrame.NpcOrdersButton
 	}
 
 	for i = 1, #tabs do
