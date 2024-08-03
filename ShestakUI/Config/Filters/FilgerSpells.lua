@@ -1173,8 +1173,6 @@ C["filger_spells"] = {
 			{spellID = 122278, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nimble Brew
 			{spellID = 213664, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Serenity
-			{spellID = 152173, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Storm, Earth, and Fire
 			{spellID = 137639, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mana Tea
@@ -1297,8 +1295,6 @@ C["filger_spells"] = {
 			{spellID = 115288, filter = "CD"},
 			-- Diffuse Magic
 			{spellID = 122783, filter = "CD"},
-			-- Serenity
-			{spellID = 152173, filter = "CD"},
 			-- Touch of Karma
 			{spellID = 122470, filter = "CD"},
 			-- Touch of Death
@@ -1309,8 +1305,6 @@ C["filger_spells"] = {
 			{spellID = 116849, filter = "CD"},
 			-- Invoke Xuen, the White Tiger
 			{spellID = 123904, filter = "CD"},
-			-- Essence Font
-			{spellID = 191837, filter = "CD"},
 			-- Refreshing Jade Wind
 			{spellID = 162530, filter = "CD"},
 			-- Fortifying Brew
