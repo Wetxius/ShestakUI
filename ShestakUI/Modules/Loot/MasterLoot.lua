@@ -172,4 +172,4 @@ local function init()
 	end
 end
 
-UIDropDownMenu_Initialize(GroupLootDropDown, init, "MENU")
+--FIXME UIDropDownMenu_Initialize(GroupLootDropDown, init, "MENU")
