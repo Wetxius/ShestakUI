@@ -71,7 +71,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 
 			if spellmacro == "SPELL" then
 				self.button.id = SpellBook_GetSpellBookSlot(self.button)
-				self.button.name = GetSpellBookItemName(self.button.id, SpellBookFrame.bookType)
+				self.button.name = C_SpellBook.GetSpellBookItemName(self.button.id, Enum.SpellBookSpellBank.Player)
 
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
@@ -340,10 +340,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 			b:HookScript("OnEnter", function(self) bind:Update(self, "PET") end)
 		end
 
-		for i = 1, 12 do
-			local b = _G["SpellButton"..i]
-			b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
-		end
+		--FIXME for i = 1, 12 do
+			-- local b = _G["SpellButton"..i]
+			-- b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
+		-- end
 
 		ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
 
