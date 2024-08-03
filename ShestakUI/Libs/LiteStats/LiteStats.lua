@@ -1799,6 +1799,11 @@ if gold.enabled then
 				GameTooltip:AddDoubleLine(v[1], v[2], 1, 1, 1, 1, 1, 1)
 				total = total + v[3]
 			end
+			local accountmoney = C_Bank.FetchDepositedMoney(Enum.BankType.Account)
+			if accountmoney and accountmoney > 0 then
+				GameTooltip:AddDoubleLine(ACCOUNT_BANK_PANEL_TITLE, formatgold(5, accountmoney), 1, 1, 1, 1, 1, 1)
+				total = total + accountmoney
+			end
 			GameTooltip:AddDoubleLine(" ", "-----------------", 1, 1, 1, 0.5, 0.5, 0.5)
 			GameTooltip:AddDoubleLine(TOTAL, formatgold(5, total), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			GameTooltip:AddLine(" ")
