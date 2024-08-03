@@ -242,6 +242,7 @@ function Stuffing:SlotUpdate(b)
 	b.frame.Azerite:Hide()
 	b.frame.Conduit:Hide()
 	b.frame.Conduit2:Hide()
+	b.frame.Cosmetic:Hide()
 	b.frame.profQuality:Hide()
 
 	b.frame:UpdateItemContextMatching() -- Update Scrap items
@@ -275,7 +276,7 @@ function Stuffing:SlotUpdate(b)
 				b.itemlevel = tonumber(b.itemlevel) or 0
 				b.frame.text:SetText(b.itemlevel)
 			else
-				if b.itemlevel and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
+				if b.itemlevel and b.itemlevel > 1 and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
 					b.itemlevel = _getRealItemLevel(clink, b.bag, b.slot) or b.itemlevel
 					b.frame.text:SetText(b.itemlevel)
 				end
@@ -289,6 +290,8 @@ function Stuffing:SlotUpdate(b)
 		if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
 			b.frame.Azerite:SetAtlas("AzeriteIconFrame")
 			b.frame.Azerite:Show()
+		elseif C_Item.IsCosmeticItem(clink) then
+			b.frame.Cosmetic:Show()
 		elseif C_Soulbinds.IsItemConduitByItemInfo(clink) then
 			b.frame.Conduit:SetAtlas("ConduitIconFrame")
 			b.frame.Conduit:Show()
@@ -850,6 +853,12 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame.Conduit2:SetPoint("TOPLEFT", ret.frame, 2, -2)
 		ret.frame.Conduit2:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
 		ret.frame.Conduit2:Hide()
+
+		ret.frame.Cosmetic = ret.frame:CreateTexture(nil, "ARTWORK")
+		ret.frame.Cosmetic:SetAtlas("CosmeticIconFrame")
+		ret.frame.Cosmetic:SetPoint("TOPLEFT", ret.frame, 2, -2)
+		ret.frame.Cosmetic:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+		ret.frame.Cosmetic:Hide()
 
 		ret.frame.profQuality = ret.frame:CreateTexture(nil, "ARTWORK")
 		ret.frame.profQuality:SetPoint("TOPLEFT", ret.frame, 0, 0)
