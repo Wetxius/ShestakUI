@@ -533,10 +533,19 @@ end
 
 function Stuffing:SkinWarbandContainer()
 	local warbandFrame = CreateFrame("Frame", "StuffingFrameWarband", UIParent)
-	warbandFrame:SetSize(650, 410)
-	-- warbandFrame:SetPoint("BOTTOMLEFT", _G["StuffingFrameBank"], "BOTTOMLEFT", 0, 5)
+	warbandFrame:SetWidth(((C.bag.button_size + C.bag.button_space) * 14) + 17)
+	warbandFrame:SetHeight(((C.bag.button_size + C.bag.button_space) * (7 + 1) + 70) - C.bag.button_space)
 	warbandFrame:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	warbandFrame:SetTemplate("Transparent")
+
+	AccountBankPanel.Header.Text:SetFont(C.media.normal_font, 12)
+	AccountBankPanel.Header:SetPoint("TOP", AccountBankPanel, "TOP", 0, -3)
+
+	AccountBankPanel.ItemDepositFrame.DepositButton:SetWidth(200)
+	AccountBankPanel.ItemDepositFrame.DepositButton:ClearAllPoints()
+	AccountBankPanel.ItemDepositFrame.DepositButton:SetPoint("BOTTOMLEFT", AccountBankPanel, "BOTTOMLEFT", 10, 38)
+
+	AccountBankPanel.MoneyFrame:SetPoint("BOTTOMRIGHT", AccountBankPanel, "BOTTOMRIGHT", -10, 3)
 
 	local SwitchBankButton = CreateFrame("Button", nil, warbandFrame)
 	SwitchBankButton:SetSize(80, 20)
@@ -586,7 +595,6 @@ function Stuffing:SkinWarbandContainer()
 				button:SetNormalTexture(0)
 				button:StyleButton()
 				button:SetTemplate("Default")
-				button:SetSize(30, 30)
 
 				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				icon:ClearAllPoints()
@@ -607,6 +615,18 @@ function Stuffing:SkinWarbandContainer()
 				if button.Background then
 					button.Background:SetAlpha(0)
 				end
+
+				-- Reposition
+				button:SetSize(C.bag.button_size, C.bag.button_size)
+				hooksecurefunc(button, "SetPoint", function(self, point, anchor, attachTo, x, y)
+					if x == 8 or x == 19 then
+						self:SetPoint(point, anchor, attachTo, 3, y)
+					elseif y == -10 then
+						self:SetPoint(point, anchor, attachTo, x, -3)
+					elseif y == -63 then
+						self:SetPoint(point, anchor, attachTo, 10, -27)
+					end
+				end)
 
 				button.styled = true
 			end
@@ -651,10 +671,9 @@ function Stuffing:SkinWarbandContainer()
 	AccountBankPanel.MoneyFrame.DepositButton:SkinButton()
 
 	AccountBankPanel.PurchasePrompt:StripTextures()
-	AccountBankPanel.PurchasePrompt:CreateBackdrop("Overlay")
-	AccountBankPanel.PurchasePrompt.backdrop:SetPoint("TOPLEFT", 4, -2)
-	AccountBankPanel.PurchasePrompt.backdrop:SetPoint("BOTTOMRIGHT", -4, 2)
-	AccountBankPanel.PurchasePrompt.backdrop:SetFrameLevel(AccountBankPanel.PurchasePrompt.backdrop:GetFrameLevel() + 1)
+	AccountBankPanel.PurchasePrompt:SetTemplate("Overlay")
+	AccountBankPanel.PurchasePrompt:SetAllPoints(warbandFrame)
+	AccountBankPanel.PurchasePrompt:SetFrameStrata("FULLSCREEN")
 
 	AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SkinButton()
 	AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SetFrameLevel(AccountBankPanel.PurchasePrompt:GetFrameLevel() + 3)
