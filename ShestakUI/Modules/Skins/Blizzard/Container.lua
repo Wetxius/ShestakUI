@@ -11,8 +11,6 @@ local function LoadSkin()
 		if not button.styled then
 			local icon = button.icon
 
-			button.IconBorder:SetAlpha(0)
-
 			button:SetNormalTexture(0)
 			button:StyleButton()
 			button:SetTemplate("Default")
@@ -25,6 +23,8 @@ local function LoadSkin()
 			button.Count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 			button.Count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
 			button.Count:SetPoint("BOTTOMRIGHT", 1, 1)
+
+			T.SkinIconBorder(button.IconBorder, button)
 
 			button.IconQuestTexture:SetAlpha(0)
 			if button.Background then
@@ -210,9 +210,9 @@ local function LoadSkin()
 		for i = 1, 98 do
 			local item = _G["ReagentBankFrameItem"..i]
 			SkinBagSlots(item)
+			BankFrameItemButton_Update(item)
 		end
 	end)
-
 
 	hooksecurefunc("BankFrameItemButton_Update", function(frame)
 		if not frame.isBag and frame.IconQuestTexture:IsShown() then
@@ -220,10 +220,6 @@ local function LoadSkin()
 				frame:SetBackdropBorderColor(1, 0.3, 0.3)
 			else
 				frame:SetBackdropBorderColor(1, 1, 0)
-			end
-		else
-			if frame.SetBackdropBorderColor then -- ReagentBank
-				frame:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
 		end
 	end)

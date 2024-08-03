@@ -153,6 +153,9 @@ local function Stuffing_OnHide()
 	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		C_Bank.CloseBankFrame()
 	end
+	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
+		C_Bank.CloseBankFrame()
+	end
 	if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		Stuffing.bankFrame:Hide()
 	end
@@ -567,17 +570,17 @@ function Stuffing:SkinWarbandContainer()
 	Close:SetSize(15, 15)
 	Close:RegisterForClicks("AnyUp")
 	Close:SetScript("OnClick", function(self, btn)
-		-- if btn == "RightButton" then
-			-- if Stuffing_DDMenu.initialize ~= Stuffing.Menu then
-				-- CloseDropDownMenus()
-				-- Stuffing_DDMenu.initialize = Stuffing.Menu
-			-- end
-			-- ToggleDropDownMenu(nil, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
-			-- return
-		-- else
+		if btn == "RightButton" then
+			if Stuffing_DDMenu.initialize ~= Stuffing.Menu then
+				CloseDropDownMenus()
+				Stuffing_DDMenu.initialize = Stuffing.Menu
+			end
+			ToggleDropDownMenu(nil, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
+			return
+		else
 			warbandFrame:Hide()
 			StuffingBank_OnHide()
-		-- end
+		end
 	end)
 
 	AccountBankPanel:StripTextures()
@@ -590,11 +593,11 @@ function Stuffing:SkinWarbandContainer()
 			if not button.styled then
 				local icon = button.icon
 
-				button.IconBorder:SetAlpha(0)
-
 				button:SetNormalTexture(0)
 				button:StyleButton()
 				button:SetTemplate("Default")
+
+				T.SkinIconBorder(button.IconBorder, button)
 
 				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				icon:ClearAllPoints()
@@ -1891,6 +1894,8 @@ function Stuffing:SortBags()
 	local bagList
 	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		bagList = {-3}
+	elseif _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
+		bagList = {13, 14, 15, 16, 17}
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		bagList = {12, 11, 10, 9, 8, 7, 6, -1}
 	else
@@ -2118,6 +2123,8 @@ function Stuffing.Menu(self, level)
 	info.func = function()
 		if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 			C_Container.SortReagentBankBags()
+		elseif _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
+			C_Container.SortAccountBankBags()
 		elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 			C_Container.SortBankBags()
 		else
