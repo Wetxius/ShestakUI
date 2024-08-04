@@ -16,8 +16,9 @@ local function LoadSkin()
 
 	AuctionHouseFrame.SearchBar.FavoritesSearchButton:SetSize(22, 22)
 	T.SkinEditBox(AuctionHouseFrame.SearchBar.SearchBox, nil, 18)
+	T.SkinFilter(AuctionHouseFrame.SearchBar.FilterButton)
 	T.SkinCloseButton(AuctionHouseFrame.SearchBar.FilterButton.ClearFiltersButton)
-	AuctionHouseFrame.SearchBar.FilterButton.ClearFiltersButton:SetPoint("TOPRIGHT", 3, 6)
+	AuctionHouseFrame.SearchBar.FilterButton.ClearFiltersButton:SetPoint("TOPRIGHT", 5, 8)
 
 	local function SkinEditBoxes(Frame)
 		T.SkinEditBox(Frame.MinLevel)
@@ -32,7 +33,6 @@ local function LoadSkin()
 
 	local buttons = {
 		AuctionHouseFrame.SearchBar.SearchButton,
-		AuctionHouseFrame.SearchBar.FilterButton,
 		AuctionHouseFrame.SearchBar.FavoritesSearchButton,
 		AuctionHouseFrame.ItemSellFrame.QuantityInput.MaxButton,
 		AuctionHouseFrame.ItemSellFrame.PostButton,
@@ -86,6 +86,8 @@ local function LoadSkin()
 
 	T.SkinTab(AuctionHouseFrameAuctionsFrameAuctionsTab, true)
 	T.SkinTab(AuctionHouseFrameAuctionsFrameBidsTab, true)
+
+	AuctionHouseFrameAuctionsFrame.SummaryList:SetPoint("TOP", AuctionHouseFrameAuctionsFrameAuctionsTab, "BOTTOM", 0, -2)
 
 	AuctionHouseFrameBuyTab:ClearAllPoints()
 	AuctionHouseFrameBuyTab:SetPoint("BOTTOMLEFT", AuctionHouseFrame, "BOTTOMLEFT", 0, -32)
