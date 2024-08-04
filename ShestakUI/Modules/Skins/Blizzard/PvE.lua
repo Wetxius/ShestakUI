@@ -250,8 +250,8 @@ local function LoadSkin()
 	LFDQueueFrameTypeDropdown.backdrop:SetParent(LFDQueueFrame) -- fixed SetFrameLevel raise to 10000
 	LFDQueueFrameTypeDropdown:SetPoint("RIGHT", -10, 0)
 
-	-- T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown, 300)
-	-- RaidFinderQueueFrameSelectionDropDown:SetPoint("RIGHT", -10, 0)
+	T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropdown, 300)
+	RaidFinderQueueFrameSelectionDropdown:SetPoint("RIGHT", -10, 0)
 
 	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
 	LFGListFrame.NothingAvailable:StripTextures()
