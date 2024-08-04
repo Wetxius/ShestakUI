@@ -635,7 +635,7 @@ local function LoadSkin()
 	T.SkinCloseButton(GarrisonRecruiterFrame.CloseButton)
 	GarrisonRecruiterFrame.UnavailableFrame:GetChildren():SkinButton()
 	GarrisonRecruiterFrame.Pick.ChooseRecruits:SkinButton()
-	T.SkinDropDownBox(GarrisonRecruiterFrame.Pick.ThreatDropDown)
+	T.SkinDropDownBox(GarrisonRecruiterFrame.Pick.ThreatDropdown)
 	T.SkinCheckBox(GarrisonRecruiterFrame.Pick.Radio1)
 	T.SkinCheckBox(GarrisonRecruiterFrame.Pick.Radio2)
 
