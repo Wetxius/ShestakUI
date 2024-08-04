@@ -266,9 +266,6 @@ if IsWetxius then
 	C["position"].unitframes.arena = {"BOTTOMRIGHT", UIParent, "RIGHT", -55, -70}
 	C["position"].stance_bar = {"TOPRIGHT", "ActionBarAnchor", "TOPLEFT", -3, 0}
 
-	local anchor = _G["oUF_Player"] or ChatFrame1
-	C["position"].auto_button = {"BOTTOMLEFT", anchor, "TOPRIGHT", 33, 83}
-
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:SetScript("OnEvent", function()
@@ -282,6 +279,12 @@ if IsWetxius then
 			PTR_IssueReporter:SetScale(0.001)
 		end
 		SetCVar("lootUnderMouse", 1)
+		local anchor = _G["oUF_Player"] or ChatFrame1
+		C["position"].auto_button = {"BOTTOMLEFT", anchor, "TOPRIGHT", 33, 83}
+		if AutoButtonAnchor then
+			AutoButtonAnchor:ClearAllPoints()
+			AutoButtonAnchor:SetPoint(unpack(C.position.auto_button))
+		end
 	end)
 
 	T.CustomFilgerSpell = {
