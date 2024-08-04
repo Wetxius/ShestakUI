@@ -175,32 +175,31 @@ end)
 ----------------------------------------------------------------------------------------
 --	Difficulty color for ObjectiveTrackerFrame lines
 ----------------------------------------------------------------------------------------
--- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function()
-	-- for i = 1, C_QuestLog.GetNumQuestWatches() do
-		-- local questID = C_QuestLog.GetQuestIDForQuestWatchIndex(i)
-		-- if not questID then
-			-- break
-		-- end
-		-- local col = GetDifficultyColor(C_PlayerInfo.GetContentDifficultyQuestForPlayer(questID))
-		-- local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
-		-- if block then
-			-- block.HeaderText:SetTextColor(col.r, col.g, col.b)
-			-- block.HeaderText.col = col
-		-- end
-	-- end
--- end)
+hooksecurefunc(QuestObjectiveTracker, "Update", function()
+	for i = 1, C_QuestLog.GetNumQuestWatches() do
+		local questID = C_QuestLog.GetQuestIDForQuestWatchIndex(i)
+		if not questID then
+			break
+		end
+		local col = GetDifficultyColor(C_PlayerInfo.GetContentDifficultyQuestForPlayer(questID))
+		local block = QuestObjectiveTracker:GetExistingBlock(questID)
+		if block then
+			block.HeaderText:SetTextColor(col.r, col.g, col.b)
+			block.HeaderText.col = col
+		end
+	end
+end)
+
+hooksecurefunc(QuestObjectiveTracker, "OnBlockHeaderLeave", function(_, block)
+	if block.HeaderText.col then
+		block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
+	end
+end)
 
 -- hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(_, block)
 	-- if block.module == ACHIEVEMENT_TRACKER_MODULE then
 		-- block.HeaderText:SetTextColor(0.75, 0.61, 0)
 		-- block.HeaderText.col = nil
-	-- end
--- end)
-
--- hooksecurefunc("ObjectiveTrackerBlockHeader_OnLeave", function(self)
-	-- local block = self:GetParent()
-	-- if block.HeaderText.col then
-		-- block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
 	-- end
 -- end)
 
@@ -363,6 +362,9 @@ local function SkinTimer(tracker, key)
 	end
 end
 
+----------------------------------------------------------------------------------------
+--	Skin and hook all trackers
+----------------------------------------------------------------------------------------
 for i = 1, #headers do
 	local header = headers[i].Header
 	if header then
@@ -374,6 +376,16 @@ for i = 1, #headers do
 		hooksecurefunc(tracker, "AddBlock", SkinQuestIcons)
 		hooksecurefunc(tracker, "GetProgressBar", SkinProgressBar)
 		hooksecurefunc(tracker, "GetTimerBar", SkinTimer)
+
+		hooksecurefunc(tracker, "OnBlockHeaderClick", function(_, block)
+			if IsControlKeyDown() then
+				-- CloseDropDownMenus()
+				QuestMapQuestOptions_AbandonQuest(block.id)
+			elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
+				-- CloseDropDownMenus()
+				QuestMapQuestOptions_ShareQuest(block.id)
+			end
+		end)
 	end
 end
 
@@ -542,22 +554,12 @@ end)
 ----------------------------------------------------------------------------------------
 --	Ctrl+Click to abandon a quest or Alt+Click to share a quest(by Suicidal Katt)
 ----------------------------------------------------------------------------------------
--- hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
-	-- if IsControlKeyDown() then
+hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
+	if IsControlKeyDown() then
 		-- CloseDropDownMenus()
-		-- QuestMapQuestOptions_AbandonQuest(self.questID)
-	-- elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
+		QuestMapQuestOptions_AbandonQuest(self.questID)
+	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
 		-- CloseDropDownMenus()
-		-- QuestMapQuestOptions_ShareQuest(self.questID)
-	-- end
--- end)
-
--- hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderClick", function(_, block)
-	-- if IsControlKeyDown() then
-		-- CloseDropDownMenus()
-		-- QuestMapQuestOptions_AbandonQuest(block.id)
-	-- elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
-		-- CloseDropDownMenus()
-		-- QuestMapQuestOptions_ShareQuest(block.id)
-	-- end
--- end)
+		QuestMapQuestOptions_ShareQuest(self.questID)
+	end
+end)
