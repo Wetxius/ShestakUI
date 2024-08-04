@@ -87,6 +87,7 @@ local function LoadSkin()
 	-- QuestLog
 	QuestLogPopupDetailFrameInset:StripTextures()
 	QuestLogPopupDetailFrame:StripTextures()
+	QuestLogPopupDetailFrame:DisableDrawLayer("BACKGROUND")
 	QuestLogPopupDetailFrame:CreateBackdrop("Transparent")
 	QuestLogPopupDetailFrame.backdrop:SetPoint("TOPLEFT", 0, 0)
 	QuestLogPopupDetailFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
