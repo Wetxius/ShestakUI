@@ -152,6 +152,29 @@ local function LoadSkin()
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
 
+	local function SkinDynamicButton(button, i)
+		if button.Border then button.Border:Hide() end
+
+		if i == 1 then
+			select(i, button:GetRegions()):SkinIcon()
+			button:SetPushedTexture(0)
+			button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
+		else
+			select(i, button:GetRegions()):CropIcon()
+			button:StyleButton()
+		end
+		button:SetNormalTexture(0)
+	end
+	SkinDynamicButton(MountJournal.ToggleDynamicFlightFlyoutButton, 1)
+
+	local flyout = MountJournal.DynamicFlightFlyout
+	flyout.Background:Hide()
+	flyout:CreateBackdrop("Default")
+	flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
+	flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
+	SkinDynamicButton(flyout.OpenDynamicFlightSkillTreeButton, 4)
+	SkinDynamicButton(flyout.DynamicFlightModeButton, 4)
+
 	-- PetJournal
 	PetJournal.LeftInset:StripTextures()
 	PetJournal.RightInset:StripTextures()
@@ -644,7 +667,7 @@ local function LoadSkin()
 	hooksecurefunc(WardrobeCollectionFrame.SetsCollectionFrame, "DisplaySet", SkinSetItemButtons)
 
 	WardrobeCollectionFrame.InfoButton.Ring:Hide()
-	WardrobeCollectionFrame.InfoButton:SetPoint("TOPLEFT", WardrobeCollectionFrame, "TOPLEFT", -5, 10)
+	WardrobeCollectionFrame.InfoButton:SetPoint("TOPLEFT", WardrobeCollectionFrame, "TOPLEFT", -10, 12)
 
 	-- Help box
 	local HelpBox = {
