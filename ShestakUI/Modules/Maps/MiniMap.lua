@@ -330,7 +330,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("GARRISON_SHOW_LANDING_PAGE")
 frame:SetScript("OnEvent", function()
 	local textTitle
-	if ExpansionLandingPageMinimapButton.garrisonMode then
+	if ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.Garrison then
 		local garrisonType = C_Garrison.GetLandingPageGarrisonType()
 		if garrisonType == Enum.GarrisonType.Type_6_0 then
 			textTitle = GARRISON_LANDING_PAGE_TITLE
@@ -345,9 +345,12 @@ frame:SetScript("OnEvent", function()
 		if textTitle then
 			tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
 		end
-	else
+	elseif ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.ExpansionOverlay then
 		textTitle = DRAGONFLIGHT_LANDING_PAGE_TITLE
 		tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() ToggleExpansionLandingPage() end})
+	elseif ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.MajorFactionRenown then
+		textTitle = WOW_LABS_VIEW_REWARDS
+		tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() ToggleMajorFactionRenown(Constants.MajorFactionsConsts.PLUNDERSTORM_MAJOR_FACTION_ID) end})
 	end
 	frame:UnregisterAllEvents()
 end)
