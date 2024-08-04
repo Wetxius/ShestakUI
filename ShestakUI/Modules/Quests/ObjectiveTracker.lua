@@ -196,13 +196,6 @@ hooksecurefunc(QuestObjectiveTracker, "OnBlockHeaderLeave", function(_, block)
 	end
 end)
 
--- hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(_, block)
-	-- if block.module == ACHIEVEMENT_TRACKER_MODULE then
-		-- block.HeaderText:SetTextColor(0.75, 0.61, 0)
-		-- block.HeaderText.col = nil
-	-- end
--- end)
-
 ----------------------------------------------------------------------------------------
 --	Skin ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
 ----------------------------------------------------------------------------------------
@@ -379,11 +372,19 @@ for i = 1, #headers do
 
 		hooksecurefunc(tracker, "OnBlockHeaderClick", function(_, block)
 			if IsControlKeyDown() then
-				-- CloseDropDownMenus()
+				ToggleGameMenu()
 				QuestMapQuestOptions_AbandonQuest(block.id)
 			elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
-				-- CloseDropDownMenus()
+				ToggleGameMenu()
 				QuestMapQuestOptions_ShareQuest(block.id)
+			end
+		end)
+
+		hooksecurefunc(tracker, "OnBlockHeaderEnter", function(_, block)
+			if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
+				GameTooltip:ClearAllPoints()
+				GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
+				GameTooltip:Show()
 			end
 		end)
 	end
@@ -392,13 +393,6 @@ end
 ----------------------------------------------------------------------------------------
 --	Set tooltip depending on position
 ----------------------------------------------------------------------------------------
--- hooksecurefunc("BonusObjectiveTracker_ShowRewardsTooltip", function(block)
-	-- if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
-		-- GameTooltip:ClearAllPoints()
-		-- GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
-	-- end
--- end)
-
 ScenarioObjectiveTracker.StageBlock:HookScript("OnEnter", function(self)
 	if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
 		GameTooltip:ClearAllPoints()
@@ -556,10 +550,10 @@ end)
 ----------------------------------------------------------------------------------------
 hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
 	if IsControlKeyDown() then
-		-- CloseDropDownMenus()
+		ToggleGameMenu()
 		QuestMapQuestOptions_AbandonQuest(self.questID)
 	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
-		-- CloseDropDownMenus()
+		ToggleGameMenu()
 		QuestMapQuestOptions_ShareQuest(self.questID)
 	end
 end)
