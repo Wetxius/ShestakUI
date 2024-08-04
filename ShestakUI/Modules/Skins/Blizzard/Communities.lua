@@ -200,13 +200,13 @@ local function LoadSkin()
 	ClubFinderGuildFinderFrame.ClubFinderSearchTab:SetPoint("TOPLEFT", CommunitiesFrame, "TOPRIGHT", 5, -30)
 	ClubFinderCommunityAndGuildFinderFrame.ClubFinderSearchTab:SetPoint("TOPLEFT", CommunitiesFrame, "TOPRIGHT", 5, -30)
 
-	-- T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.TankRoleFrame.CheckBox)
-	-- T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.HealerRoleFrame.CheckBox)
-	-- T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.DpsRoleFrame.CheckBox)
+	T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.TankRoleFrame.Checkbox)
+	T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.HealerRoleFrame.Checkbox)
+	T.SkinCheckBox(ClubFinderGuildFinderFrame.OptionsList.DpsRoleFrame.Checkbox)
 
-	-- T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.TankRoleFrame.CheckBox)
-	-- T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.HealerRoleFrame.CheckBox)
-	-- T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.DpsRoleFrame.CheckBox)
+	T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.TankRoleFrame.Checkbox)
+	T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.HealerRoleFrame.Checkbox)
+	T.SkinCheckBox(ClubFinderCommunityAndGuildFinderFrame.OptionsList.DpsRoleFrame.Checkbox)
 
 	ClubFinderCommunityAndGuildFinderFrame.OptionsList.Search:ClearAllPoints()
 	ClubFinderCommunityAndGuildFinderFrame.OptionsList.Search:SetPoint("TOP", ClubFinderCommunityAndGuildFinderFrame.OptionsList.SearchBox, "BOTTOM", 0, -3)
@@ -266,9 +266,9 @@ local function LoadSkin()
 
 		hooksecurefunc(t, "Initialize", function(self)
 			for button in self.SpecsPool:EnumerateActive() do
-				if button.CheckBox then
-					T.SkinCheckBox(button.CheckBox)
-					button.CheckBox:SetSize(26, 26)
+				if button.Checkbox then
+					T.SkinCheckBox(button.Checkbox)
+					button.Checkbox:SetSize(26, 26)
 				end
 			end
 		end)
