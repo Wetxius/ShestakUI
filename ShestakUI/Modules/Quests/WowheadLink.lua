@@ -5,32 +5,32 @@ local T, C, L = unpack(ShestakUI)
 ----------------------------------------------------------------------------------------
 local linkQuest, linkAchievement
 if T.client == "ruRU" then
-	linkQuest = "http://ru.wowhead.com/quest=%d"
-	linkAchievement = "http://ru.wowhead.com/achievement=%d"
+	linkQuest = "http://ru.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://ru.wowhead.com/achievement=%d#comments"
 elseif T.client == "frFR" then
-	linkQuest = "http://fr.wowhead.com/quest=%d"
-	linkAchievement = "http://fr.wowhead.com/achievement=%d"
+	linkQuest = "http://fr.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://fr.wowhead.com/achievement=%d#comments"
 elseif T.client == "deDE" then
-	linkQuest = "http://de.wowhead.com/quest=%d"
-	linkAchievement = "http://de.wowhead.com/achievement=%d"
+	linkQuest = "http://de.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://de.wowhead.com/achievement=%d#comments"
 elseif T.client == "esES" or T.client == "esMX" then
-	linkQuest = "http://es.wowhead.com/quest=%d"
-	linkAchievement = "http://es.wowhead.com/achievement=%d"
+	linkQuest = "http://es.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://es.wowhead.com/achievement=%d#comments"
 elseif T.client == "ptBR" or T.client == "ptPT" then
-	linkQuest = "http://pt.wowhead.com/quest=%d"
-	linkAchievement = "http://pt.wowhead.com/achievement=%d"
+	linkQuest = "http://pt.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://pt.wowhead.com/achievement=%d#comments"
 elseif T.client == "itIT" then
-	linkQuest = "http://it.wowhead.com/quest=%d"
-	linkAchievement = "http://it.wowhead.com/achievement=%d"
+	linkQuest = "http://it.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://it.wowhead.com/achievement=%d#comments"
 elseif T.client == "koKR" then
-	linkQuest = "http://ko.wowhead.com/quest=%d"
-	linkAchievement = "http://ko.wowhead.com/achievement=%d"
+	linkQuest = "http://ko.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://ko.wowhead.com/achievement=%d#comments"
 elseif T.client == "zhTW" or T.client == "zhCN" then
-	linkQuest = "http://cn.wowhead.com/quest=%d"
-	linkAchievement = "http://cn.wowhead.com/achievement=%d"
+	linkQuest = "http://cn.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://cn.wowhead.com/achievement=%d#comments"
 else
-	linkQuest = "http://www.wowhead.com/quest=%d"
-	linkAchievement = "http://www.wowhead.com/achievement=%d"
+	linkQuest = "http://www.wowhead.com/quest=%d#comments"
+	linkAchievement = "http://www.wowhead.com/achievement=%d#comments"
 end
 
 local selfText
