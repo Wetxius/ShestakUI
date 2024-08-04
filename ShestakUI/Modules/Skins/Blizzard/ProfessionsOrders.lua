@@ -13,7 +13,6 @@ local function LoadSkin()
 
 	local buttons = {
 		frame.BrowseOrders.SearchBar.SearchButton,
-		frame.BrowseOrders.SearchBar.FilterButton,
 		frame.BrowseOrders.SearchBar.FavoritesSearchButton,
 		frame.Form.BackButton,
 		frame.Form.PaymentContainer.ListOrderButton,
@@ -53,8 +52,7 @@ local function LoadSkin()
 	local orders = frame.BrowseOrders
 	orders.SearchBar.FavoritesSearchButton:SetSize(22, 22)
 	T.SkinEditBox(orders.SearchBar.SearchBox, nil, 18)
-	T.SkinCloseButton(orders.SearchBar.FilterButton.ClearFiltersButton)
-	orders.SearchBar.FilterButton.ClearFiltersButton:SetPoint("TOPRIGHT", 3, 6)
+	T.SkinFilter(orders.SearchBar.FilterDropdown)
 
 	orders.CategoryList:StripTextures()
 
@@ -138,24 +136,26 @@ local function LoadSkin()
 	form.LeftPanelBackground:StripTextures()
 	form.RightPanelBackground:StripTextures()
 
-	T.SkinCheckBox(form.TrackRecipeCheckBox.Checkbox, 20)
-	if form.AllocateBestQualityCheckBox then
-		T.SkinCheckBox(form.AllocateBestQualityCheckBox)
+	T.SkinCheckBox(form.TrackRecipeCheckbox.Checkbox, 20)
+	if form.AllocateBestQualityCheckbox then
+		T.SkinCheckBox(form.AllocateBestQualityCheckbox)
 	end
-	T.SkinDropDownBox(form.OrderRecipientDropDown)
+	T.SkinDropDownBox(form.OrderRecipientDropdown)
 
-	form.OrderRecipientDropDown:SetPoint("TOPRIGHT", form, "TOPRIGHT", -3, -10)
+	form.OrderRecipientDropdown:SetPoint("TOPRIGHT", form, "TOPRIGHT", -11, -10)
 
 	T.SkinEditBox(form.OrderRecipientTarget)
 	form.OrderRecipientTarget.backdrop:SetPoint("TOPLEFT", -3, -2)
-	form.OrderRecipientTarget.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
-	T.SkinDropDownBox(form.MinimumQuality.DropDown)
+	form.OrderRecipientTarget.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
+	T.SkinDropDownBox(form.MinimumQuality.Dropdown)
 
 	local OutputIcon = form.OutputIcon
 	OutputIcon.Icon:SkinIcon()
 	T.SkinIconBorder(OutputIcon.IconBorder, OutputIcon.Icon:GetParent().backdrop)
 	OutputIcon:GetHighlightTexture():Hide()
 	OutputIcon.CircleMask:Hide()
+	OutputIcon.Count:ClearAllPoints()
+	OutputIcon.Count:SetPoint("BOTTOMRIGHT", 1, 1)
 
 	local qualityDialog = form.QualityDialog
 	qualityDialog:StripTextures()
@@ -196,6 +196,7 @@ local function LoadSkin()
 				button:SetPushedTexture(0)
 				button:GetHighlightTexture():Hide()
 				T.SkinIconBorder(button.IconBorder, button.Icon:GetParent().backdrop)
+				button.IconBorder:SetVertexColor(button.IconBorder:GetVertexColor())
 
 				button.HighlightTexture:SetColorTexture(1, 0.8, 0, 0.4)
 				button.HighlightTexture:SetAllPoints(button)
@@ -205,16 +206,19 @@ local function LoadSkin()
 				end
 
 				T.SkinCheckBox(slot.Checkbox)
-				button.styled = true
-			end
 
-			if button then
-				button:SetNormalTexture(0)
-				button:SetPushedTexture(0)
-				button:GetHighlightTexture():Hide()
+				hooksecurefunc(button, "Update", function(button)
+					button:SetNormalTexture(0)
+					button:SetPushedTexture(0)
+					button:GetHighlightTexture():Hide()
+				end)
+
+				button.styled = true
 			end
 		end
 	end)
+
+	hooksecurefunc("OpenProfessionsItemFlyout", T.SkinProfessionsFlyout)
 
 	local payment = form.PaymentContainer
 	payment.NoteEditBox:StripTextures()
@@ -240,7 +244,7 @@ local function LoadSkin()
 	tex:SetAllPoints()
 	tex:SetTexture("Interface\\CURSOR\\Crosshair\\Repair")
 
-	T.SkinDropDownBox(payment.DurationDropDown)
+	T.SkinDropDownBox(payment.DurationDropdown)
 
 	local currentListings = frame.Form.CurrentListings
 	currentListings:StripTextures()
