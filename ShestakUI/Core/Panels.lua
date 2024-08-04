@@ -90,7 +90,11 @@ end
 
 StanceAnchor:RegisterEvent("PLAYER_LOGIN")
 StanceAnchor:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player")
-StanceAnchor:SetScript("OnEvent", function()
+StanceAnchor:SetScript("OnEvent", function(self, event)
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return
+	end
 	local forms = GetNumShapeshiftForms()
 	if forms > 0 then
 		if C.actionbar.stancebar_horizontal == true then
@@ -102,6 +106,9 @@ StanceAnchor:SetScript("OnEvent", function()
 	if not StanceAnchor.hook then
 		RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
 		StanceAnchor.hook = true
+	end
+	if event == "PLAYER_REGEN_ENABLED" then
+		self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 	end
 end)
 
