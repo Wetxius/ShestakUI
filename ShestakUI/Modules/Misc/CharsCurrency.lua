@@ -123,15 +123,19 @@ hooksecurefunc(GameTooltip, "SetLFGDungeonShortageReward", function(tooltip, dun
 	end
 end)
 
-hooksecurefunc(GameTooltip, "SetQuestCurrency", function(tooltip, type, id)
-	--FIXME local name = GetQuestCurrencyInfo(type, id)
+hooksecurefunc(GameTooltip, "SetQuestCurrency", function(tooltip, _, id)
+	local questID = C_QuestLog.GetSelectedQuest()
+	local info = C_QuestLog.GetQuestRewardCurrencyInfo(questID, id, false)
+	local name = info and info.name
 	if name then
 		AddTooltipInfo(tooltip, nameToID[name], true)
 	end
 end)
 
-hooksecurefunc(GameTooltip, "SetQuestLogCurrency", function(tooltip, type, id)
-	-- local name = GetQuestCurrencyInfo(type, id)
+hooksecurefunc(GameTooltip, "SetQuestLogCurrency", function(tooltip, _, id)
+	local questID = C_QuestLog.GetSelectedQuest()
+	local info = C_QuestLog.GetQuestRewardCurrencyInfo(questID, id, false)
+	local name = info and info.name
 	if name then
 		AddTooltipInfo(tooltip, nameToID[name], true)
 	end
