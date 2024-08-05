@@ -50,9 +50,6 @@ local function LoadSkin()
 	bg:SetPoint("TOPLEFT", 10, -72)
 	bg:SetPoint("BOTTOMRIGHT", -8, 3)
 
-	--FIXME CalendarContextMenu.NineSlice:SetTemplate("Transparent")
-	-- CalendarInviteStatusContextMenu.NineSlice:SetTemplate("Transparent")
-
 	-- Boost frame levels
 	for i = 1, 42 do
 		_G["CalendarDayButton"..i]:SetFrameLevel(_G["CalendarDayButton"..i]:GetFrameLevel() + 1)

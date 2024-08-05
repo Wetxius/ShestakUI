@@ -74,7 +74,7 @@ local function LoadSkin()
 	SchematicForm.MinimalBackground:SetAlpha(0)
 
 	T.SkinCheckBox(SchematicForm.TrackRecipeCheckbox, 24)
-	--FIXME T.SkinCheckBox(SchematicForm.AllocateBestQualityCheckBox, 24)
+	T.SkinCheckBox(SchematicForm.AllocateBestQualityCheckbox, 24)
 
 	local function skinDetails(frame)
 		frame:SetFrameLevel(frame:GetFrameLevel() + 1)
@@ -380,7 +380,7 @@ local function LoadSkin()
 	OrderDetails.Background:SetInside(OrderDetails.backdrop)
 
 	local OrderSchematicForm = OrderDetails.SchematicForm
-	--FIXME T.SkinCheckBox(OrderSchematicForm.AllocateBestQualityCheckBox)
+	T.SkinCheckBox(OrderSchematicForm.AllocateBestQualityCheckbox)
 	skinDetails(OrderSchematicForm.Details)
 
 	hooksecurefunc(OrderSchematicForm, "Init", function(frame)

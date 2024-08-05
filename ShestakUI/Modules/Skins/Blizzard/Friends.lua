@@ -137,11 +137,19 @@ local function LoadSkin()
 	RecruitAFriendRewardsFrame:SetTemplate("Transparent")
 	T.SkinCloseButton(RecruitAFriendRewardsFrame.CloseButton)
 
-	--FIXME for object in pairs(RecruitAFriendRewardsFrame.rewardPool.activeObjects) do
-		-- object.Button.Icon:SkinIcon()
-		-- object.Button.IconBorder:SetAlpha(0)
-		-- object.Button:StyleButton(true, 0)
-	-- end
+	RecruitAFriendRewardsFrame:HookScript("OnShow", function(self)
+		for i = 1, self:GetNumChildren() do
+			local child = select(i, self:GetChildren())
+			local button = child and child.Button
+			if button and not button.styled then
+				button.IconSkinIcon()
+				button.IconBorder:SetAlpha(0)
+				button:StyleButton(true, 0)
+
+				button.styled = true
+			end
+		end
+	end)
 
 	RecruitAFriendFrame.RewardClaiming.NextRewardButton.Icon:SkinIcon()
 	RecruitAFriendFrame.RewardClaiming.NextRewardButton.CircleMask:Hide()

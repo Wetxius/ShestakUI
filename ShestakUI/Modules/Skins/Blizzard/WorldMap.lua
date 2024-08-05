@@ -124,10 +124,6 @@ local function LoadSkin()
 	ShareButton:SetPoint("LEFT", AbandonButton, "RIGHT", 3, 0)
 	ShareButton:SetPoint("RIGHT", TrackButton, "LEFT", -3, 0)
 
-	--FIXME QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
-	-- QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton(true)
-	-- QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SetPoint("TOP", 0, 4)
-
 	-- Quests Buttons
 	for i = 1, 2 do
 		local button = i == 1 and WorldMapFrame.SidePanelToggle.CloseButton or WorldMapFrame.SidePanelToggle.OpenButton
