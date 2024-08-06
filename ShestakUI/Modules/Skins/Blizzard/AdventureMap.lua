@@ -10,7 +10,11 @@ local function LoadSkin()
 	AdventureMapQuestChoiceDialog.backdrop:SetFrameStrata("LOW")
 
 	local function SkinRewards()
-		for reward in pairs(AdventureMapQuestChoiceDialog.rewardPool.activeObjects) do
+		local pool = _G.AdventureMapQuestChoiceDialog.rewardPool
+		local objects = pool and pool.activeObjects
+		if not objects then return end
+
+		for reward in pairs(objects) do
 			if not reward.isSkinned then
 				reward.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				reward.ItemNameBG:Hide()
