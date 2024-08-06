@@ -286,7 +286,7 @@ function Stuffing:SlotUpdate(b)
 			end
 		end
 
-		if not b.name then	-- Keystone bug (FIXME: maybe not needed as check before)
+		if not b.name then	-- Keystone bug (NOTE: maybe not needed as check before)
 			b.name = clink:match("%[(.-)%]") or ""
 		end
 

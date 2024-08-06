@@ -20,11 +20,8 @@ local function LoadSkin()
 		CommunitiesFrame.NotificationSettingsDialog.ScrollFrame.ScrollBar,
 		CommunitiesFrame.RecruitmentDialog.RecruitmentMessageFrame.RecruitmentMessageInput.ScrollBar,
 		CommunitiesFrameCommunitiesList.ScrollBar,
-		CommunitiesFrameGuildDetailsFrameInfoScrollBar,
 		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
 		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
-		CommunitiesGuildLogFrameScrollBar,
-		CommunitiesGuildTextEditFrameScrollBar,
 		CommunitiesFrame.ApplicantList.ScrollBar,
 		CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar
 	}
@@ -566,16 +563,6 @@ local function LoadSkin()
 	backdrop4:SetFrameLevel(CommunitiesFrameGuildDetailsFrameInfo:GetFrameLevel() - 1)
 	backdrop4:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo, "TOPLEFT", 591, -22)
 	backdrop4:SetPoint("BOTTOMRIGHT", CommunitiesFrameGuildDetailsFrameInfo, "BOTTOMRIGHT", 20, -1)
-
-	if CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar then -- BETA
-		CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "TOPRIGHT", 0, -12)
-		CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "BOTTOMRIGHT", 0, 12)
-	end
-
-	if CommunitiesFrameGuildDetailsFrameInfoScrollBar then -- BETA
-		CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "TOPRIGHT", 0, -12)
-		CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "BOTTOMRIGHT", 0, 13)
-	end
 
 	-- Guild Message EditBox
 	CommunitiesGuildTextEditFrame:StripTextures()

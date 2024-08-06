@@ -481,7 +481,6 @@ local function LoadSkin()
 				header.IsSkinned = true
 			end
 		end
-		-- Fixme // Need better way to skin the headers & Auto collapsed as default?
 		for header in QuestScrollFrame.campaignHeaderMinimalFramePool:EnumerateActive() do
 			if header.CollapseButton and not header.CollapseButton.styled then
 				header:StripTextures()

@@ -244,8 +244,6 @@ local function LoadSkin()
 		if counters then
 			for _, counter in next, counters do
 				if counter and not counter.styled then
-					-- counter:SetTemplate("Default") -- FIXME looks ugly, not pixelperfect
-
 					if counter.Border then
 						counter.Border:SetTexture("")
 					end

@@ -705,7 +705,6 @@ if friends.enabled then
 			end
 		end,
 		OnEnter = function(self)
-			-- C_FriendList.ShowFriends() --FIXME not needed?
 			self.hovered = true
 			local online, total = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
 			local status, classc, levelc, zone_r, zone_g, zone_b, grouped, realm_r, realm_g, realm_b
