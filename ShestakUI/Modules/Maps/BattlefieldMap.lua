@@ -11,40 +11,35 @@ tinymap:RegisterEvent("ADDON_LOADED")
 tinymap:SetScript("OnEvent", function(_, _, addon)
 	if addon ~= "Blizzard_BattlefieldMap" then return end
 
-	BattlefieldMapFrame:SetSize(223, 150)
-	BattlefieldMapFrame:CreateBackdrop("ClassColor")
-	BattlefieldMapFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
-	BattlefieldMapFrame.backdrop:SetPoint("TOPLEFT", -2, 4)
-	BattlefieldMapFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
+	local frame = BattlefieldMapFrame
+	frame:SetSize(223, 150)
+	frame:CreateBackdrop("ClassColor")
+	frame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+	frame.backdrop:SetPoint("TOPLEFT", -2, 4)
+	frame.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
 
-	BattlefieldMapFrame.BorderFrame:DisableDrawLayer("BORDER")
-	BattlefieldMapFrame.BorderFrame:DisableDrawLayer("ARTWORK")
+	frame.BorderFrame:DisableDrawLayer("BORDER")
+	frame.BorderFrame:DisableDrawLayer("ARTWORK")
 
-	BattlefieldMapFrame.BorderFrame.CloseButton:Hide()
+	frame.BorderFrame.CloseButton:Hide()
 
-	BattlefieldMapTab:SetParent(tinymap)
+	frame:SetClampedToScreen(true)
 
-	BattlefieldMapFrame.ScrollContainer:HookScript("OnMouseUp", function(_, btn)
+	frame:SetScript("OnUpdate", _G.MapCanvasMixin.OnUpdate)
+	T.SkinSlider(OpacityFrameSlider)
+
+	frame.ScrollContainer:HookScript("OnMouseUp", function(_, btn)
 		if btn == "LeftButton" then
 			BattlefieldMapTab:StopMovingOrSizing()
-			if OpacityFrame:IsShown() then OpacityFrame:Hide() end
 		elseif btn == "RightButton" then
-			local function InitializeOptionsDropDown(BattlefieldMapFrame)
-				BattlefieldMapFrame:GetParent():InitializeOptionsDropDown()
-			end
-			UIDropDownMenu_Initialize(BattlefieldMapTab.OptionsDropDown, InitializeOptionsDropDown, "MENU")
-			ToggleDropDownMenu(nil, nil, BattlefieldMapTab.OptionsDropDown, "cursor", 0, -4)
-			if OpacityFrame:IsShown() then OpacityFrame:Hide() end
+			BattlefieldMapTab:Click("RightButton")
 		end
+		if OpacityFrame and OpacityFrame:IsShown() then OpacityFrame:Hide() end
 	end)
 
-	BattlefieldMapFrame.ScrollContainer:HookScript("OnMouseDown", function(_, btn)
-		if btn == "LeftButton" then
-			if BattlefieldMapOptions and BattlefieldMapOptions.locked then
-				return
-			else
-				BattlefieldMapTab:StartMoving()
-			end
+	frame.ScrollContainer:HookScript("OnMouseDown", function(_, btn)
+		if btn == "LeftButton" and (BattlefieldMapOptions and not BattlefieldMapOptions.locked) then
+			BattlefieldMapTab:StartMoving()
 		end
 	end)
 end)
