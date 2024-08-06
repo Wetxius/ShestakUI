@@ -83,34 +83,6 @@ local function LoadSkin()
 		end
 	end)
 
-	-- FIXME local function UpdateLoots(self)
-		-- local numItems = C_LootHistory.GetNumItems()
-		-- for i = 1, numItems do
-			-- local frame = self.itemFrames[i]
-
-			-- if not frame.isSkinned then
-				-- local Icon = frame.Icon:GetTexture()
-
-				-- frame:StripTextures()
-
-				-- frame:CreateBackdrop("Default")
-				-- frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
-				-- frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
-
-				-- frame.Icon:SetTexture(Icon)
-				-- frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				-- frame.Icon:SetParent(frame.backdrop)
-
-				-- frame.isSkinned = true
-			-- end
-		-- end
-	-- end
-
-	-- if not T.newPatch then
-		-- hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
-		-- frame:HookScript("OnShow", UpdateLoots)
-	-- end
-
 	-- Master Looter frame
 	MasterLooterFrame:StripTextures()
 	MasterLooterFrame:SetTemplate("Transparent")

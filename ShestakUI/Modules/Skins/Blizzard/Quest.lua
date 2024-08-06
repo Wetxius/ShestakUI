@@ -439,72 +439,6 @@ local function LoadSkin()
 		QuestModelScene:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x, y)
 	end)
 
-	-- Expand amd Collapse buttons
-	local function SkinExpandOrCollapse(f)
-		local bg = CreateFrame("Frame", nil, f)
-		bg:SetSize(13, 13)
-		bg:SetPoint("TOPLEFT", f:GetNormalTexture(), 0, -1)
-		bg:SetTemplate("Overlay")
-		f.bg = bg
-
-		bg.minus = bg:CreateTexture(nil, "OVERLAY")
-		bg.minus:SetSize(5, 1)
-		bg.minus:SetPoint("CENTER")
-		bg.minus:SetTexture(C.media.blank)
-
-		bg.plus = bg:CreateTexture(nil, "OVERLAY")
-		bg.plus:SetSize(1, 5)
-		bg.plus:SetPoint("CENTER")
-		bg.plus:SetTexture(C.media.blank)
-		bg.plus:Hide()
-
-		hooksecurefunc(f, "SetNormalAtlas", function(self, texture)
-			if self.settingTexture then return end
-			self.settingTexture = true
-			self:SetNormalTexture(0)
-
-			if texture and texture ~= "" then
-				if texture:find("Closed") then
-					self.bg.plus:Show()
-				elseif texture:find("Open") then
-					self.bg.plus:Hide()
-				end
-				self.bg:Show()
-			else
-				self.bg:Hide()
-			end
-			self.settingTexture = nil
-		end)
-
-		hooksecurefunc(f, "SetPushedAtlas", function(self)
-			if self.settingTexture then return end
-			self.settingTexture = true
-			self:SetPushedTexture(0)
-
-			self.settingTexture = nil
-		end)
-
-		hooksecurefunc(f, "SetHighlightTexture", function(self, texture)
-			if texture == "Interface\\Buttons\\UI-PlusButton-Hilight" then
-				self:SetHighlightTexture(0)
-			end
-		end)
-
-		f:HookScript("OnEnter", function(self)
-			self.bg:SetBackdropBorderColor(unpack(C.media.classborder_color))
-			if self.bg.overlay then
-				self.bg.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
-			end
-		end)
-
-		f:HookScript("OnLeave", function(self)
-			self.bg:SetBackdropBorderColor(unpack(C.media.border_color))
-			if self.bg.overlay then
-				self.bg.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
-			end
-		end)
-	end
-
 	-- Campaign
 	local campaignColor = {
 		Bastion = {0.45, 0.4, 0.4, 1},
@@ -519,15 +453,6 @@ local function LoadSkin()
 	}
 
 	hooksecurefunc("QuestLogQuests_Update", function()
-		for i = 1, QuestMapFrame.QuestsFrame.Contents:GetNumChildren() do
-			local child = select(i, QuestMapFrame.QuestsFrame.Contents:GetChildren())
-			if child and child.ButtonText and not child.Text then
-				if not child.isSkinned then
-					-- SkinExpandOrCollapse(child)
-					child.isSkinned = true
-				end
-			end
-		end
 		for button in _G.QuestScrollFrame.headerFramePool:EnumerateActive() do
 			if button.ButtonText and not button.IsSkinned then
 				button:StripTextures()
@@ -559,13 +484,12 @@ local function LoadSkin()
 		-- Fixme // Need better way to skin the headers & Auto collapsed as default?
 		for header in QuestScrollFrame.campaignHeaderMinimalFramePool:EnumerateActive() do
 			if header.CollapseButton and not header.CollapseButton.styled then
-					header:StripTextures()
-					header:CreateBackdrop("Overlay")
-					header.backdrop:SetPoint("TOPLEFT", header.Background, -4, 0)
-					header.backdrop:SetPoint("BOTTOMRIGHT", header.Background, 0, 0)
-					local r, g, b = unpack(C.media.border_color)
-					header.Highlight:SetColorTexture(r, g, b, 0.75)
-				-- SkinExpandOrCollapse(header.CollapseButton)
+				header:StripTextures()
+				header:CreateBackdrop("Overlay")
+				header.backdrop:SetPoint("TOPLEFT", header.Background, -4, 0)
+				header.backdrop:SetPoint("BOTTOMRIGHT", header.Background, 0, 0)
+				local r, g, b = unpack(C.media.border_color)
+				header.Highlight:SetColorTexture(r, g, b, 0.75)
 				header.CollapseButton.styled = true
 			end
 		end
@@ -581,7 +505,6 @@ local function LoadSkin()
 					campaignHeader.HighlightTexture:SetAlpha(0)
 					campaignHeader.Background:SetAlpha(0)
 					campaignHeader.TopFiligree:Hide()
-					-- SkinExpandOrCollapse(campaignHeader.CollapseButton)
 				end
 				if campaignHeader.backdrop then
 					if campaignColor[campaign.uiTextureKit] then
