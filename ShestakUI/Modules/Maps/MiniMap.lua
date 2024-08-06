@@ -218,6 +218,10 @@ MinimapAnchor:SetScript("OnEvent", function(_, _, addon)
 		HybridMinimap.MapCanvas:SetUseMaskTexture(false)
 		HybridMinimap.CircleMask:SetTexture("Interface\\BUTTONS\\WHITE8X8")
 		HybridMinimap.MapCanvas:SetUseMaskTexture(true)
+		C_Timer.After(0.5, function()
+			Minimap:SetFrameStrata("LOW")
+			Minimap:SetFrameLevel(2)
+		end)
 	end
 end)
 
