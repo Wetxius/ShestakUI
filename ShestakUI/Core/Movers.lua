@@ -106,29 +106,6 @@ local placed = {
 	"UIWidgetBelowAnchor"
 }
 
-local function MergeOldPositions()	-- TODO delete after while
-	if ShestakUIOptionsGlobal[T.realm][T.name] then
-		if not ShestakUIPositionsPerChar then
-			ShestakUIPositionsPerChar = ShestakUIPositions
-		end
-		if not ShestakUIPositionsPerChar.merged then
-			local backup = ShestakUIPositions
-			ShestakUIPositionsPerChar = {}
-			ShestakUIPositionsPerChar["1"] = backup
-			ShestakUIPositionsPerChar.merged = true
-			ShestakUIPositionsPerChar["1"]["1"] = nil -- T.CurrentProfile calls early and create empty table so remove this
-		end
-	else
-		if not ShestakUIPositions.merged then
-			local backup = ShestakUIPositions
-			ShestakUIPositions = {}
-			ShestakUIPositions["1"] = backup
-			ShestakUIPositions.merged = true
-			ShestakUIPositions["1"]["1"] = nil
-		end
-	end
-end
-
 local SaveDefaultPosition = function(mover)
 	local ap, p, rp, x, y = mover.frame:GetPoint()
 	local positionTable = T.CurrentProfile()
@@ -490,7 +467,6 @@ local RestoreUI = function(self)
 		end)
 		return
 	end
-	MergeOldPositions()	-- TODO delete after while
 	local positionTable = T.CurrentProfile()
 	if positionTable then
 		for frame_name, point in pairs(positionTable) do

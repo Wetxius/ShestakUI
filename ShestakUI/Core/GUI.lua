@@ -46,25 +46,11 @@ if ShestakUIOptionsGlobal[T.realm][T.name] == true then
 		ShestakUIOptionsGlobal[T.realm]["Current_Profile"][T.name] = ShestakUIOptionsGlobal["Current_Profile"] or 1
 	end
 
-	if not ShestakUIOptionsPerChar.merged and not ShestakUIOptionsPerChar["1"] then	-- TODO delete after while
-		local backup = ShestakUIOptionsPerChar
-		ShestakUIOptionsPerChar = {}
-		ShestakUIOptionsPerChar["1"] = backup
-		ShestakUIOptionsPerChar.merged = true
-	end
-
 	ShestakUIOptionsGlobal[T.realm]["Current_Profile"][T.name] = ShestakUIOptionsGlobal[T.realm]["Current_Profile"][T.name] or 1
 	local i = tostring(ShestakUIOptionsGlobal[T.realm]["Current_Profile"][T.name])
 	ShestakUIOptionsPerChar[i] = ShestakUIOptionsPerChar[i] or {}
 	profile = ShestakUIOptionsPerChar[i]
 else
-	if not ShestakUIOptions.merged and not ShestakUIOptions["1"] then	-- TODO delete after while
-		local backup = ShestakUIOptions
-		ShestakUIOptions = {}
-		ShestakUIOptions["1"] = backup
-		ShestakUIOptions.merged = true
-	end
-
 	ShestakUIOptionsGlobal["Current_Profile"] = ShestakUIOptionsGlobal["Current_Profile"] or 1
 	local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
 	ShestakUIOptions[i] = ShestakUIOptions[i] or {}
