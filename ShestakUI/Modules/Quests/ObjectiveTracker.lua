@@ -305,6 +305,7 @@ local function SkinProgressBar(tracker, key)
 		if bar.BorderLeft then bar.BorderLeft:SetAlpha(0) end
 		if bar.BorderRight then bar.BorderRight:SetAlpha(0) end
 		if bar.BorderMid then bar.BorderMid:SetAlpha(0) end
+		if progressBar.PlayFlareAnim then progressBar.PlayFlareAnim  = T.dummy end -- hide animation
 
 		bar:SetSize(200, 16)
 		bar:SetStatusBarTexture(C.media.texture)
@@ -399,17 +400,6 @@ ScenarioObjectiveTracker.StageBlock:HookScript("OnEnter", function(self)
 		GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
 	end
 end)
-
-----------------------------------------------------------------------------------------
---	Kill reward animation when finished dungeon or bonus objectives
-----------------------------------------------------------------------------------------
---FIXME ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
--- BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
-
---BETA hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
-	-- ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
-	-- ObjectiveTrackerBonusRewardsFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, 90)
--- end)
 
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
