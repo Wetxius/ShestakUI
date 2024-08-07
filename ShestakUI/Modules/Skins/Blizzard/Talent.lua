@@ -113,22 +113,66 @@ local function LoadSkin()
 	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameLevel(2000)
 
 	-- SpellBook
-	PlayerSpellsFrame.SpellBookFrame.TopBar:SetAlpha(0)
+	local page = PlayerSpellsFrame.SpellBookFrame
+	page.TopBar:SetAlpha(0)
 
-	PlayerSpellsFrame.SpellBookFrame.HelpPlateButton.Ring:Hide()
-	PlayerSpellsFrame.SpellBookFrame.HelpPlateButton:SetPoint("TOPLEFT", PlayerSpellsFrame.SpellBookFrame, "TOPLEFT", -10, 37)
+	page.HelpPlateButton.Ring:Hide()
+	page.HelpPlateButton:SetPoint("TOPLEFT", page, "TOPLEFT", -10, 37)
 
-	for _, tab in next, {PlayerSpellsFrame.SpellBookFrame.CategoryTabSystem:GetChildren()} do
+	for _, tab in next, {page.CategoryTabSystem:GetChildren()} do
 		T.SkinTab(tab, true)
+		tab.backdrop:SetPoint("TOPLEFT", 2, -5)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", -2, 0)
 	end
 
-	T.SkinEditBox(PlayerSpellsFrame.SpellBookFrame.SearchBox, 250, 22)
-	T.SkinCheckBox(PlayerSpellsFrame.SpellBookFrame.HidePassivesCheckButton.Button)
+	T.SkinEditBox(page.SearchBox, 250, 22)
+	page.SearchPreviewContainer:StripTextures()
+	page.SearchPreviewContainer:CreateBackdrop("Transparent")
+	T.SkinCheckBox(page.HidePassivesCheckButton.Button)
 
 	T.SkinMaxMinFrame(PlayerSpellsFrame.MaxMinButtonFrame, PlayerSpellsFrameCloseButton)
 
-	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.PrevPageButton)
-	T.SkinNextPrevButton(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame.PagingControls.NextPageButton)
+	T.SkinNextPrevButton(page.PagedSpellsFrame.PagingControls.PrevPageButton)
+	T.SkinNextPrevButton(page.PagedSpellsFrame.PagingControls.NextPageButton)
+
+	page.PagedSpellsFrame.PagingControls.PageText:SetTextColor(0.6, 0.6, 0.6)
+
+	page:DisableDrawLayer("BACKGROUND")
+	hooksecurefunc(page.PagedSpellsFrame, "DisplayViewsForCurrentPage", function(self)
+		for _, frame in self:EnumerateFrames() do
+			if not frame.styled then
+				if frame.Button then
+					frame.Button.Border:Hide()
+
+					frame.Button.IconMask:Hide()
+					hooksecurefunc(frame.Button.IconMask, "Show", function()
+						frame.Button.IconMask:Hide()
+					end)
+
+					frame.Button.BorderSheen:Hide()
+					hooksecurefunc(frame.Button.BorderSheen, "Show", function()
+						frame.Button.BorderSheen:Hide()
+					end)
+
+					frame.Button.Icon:SkinIcon()
+					frame.Button.Icon:StyleButton()
+				end
+				if frame.Text then
+					frame.Text:SetTextColor(1, 0.8, 0)
+				end
+				if frame.Name then
+					frame.Name:SetTextColor(1, 1, 1)
+				end
+				if frame.SubName then
+					frame.SubName:SetTextColor(0.6, 0.6, 0.6)
+				end
+				if frame.Backplate then frame.Backplate:Hide() end
+				if frame.Border then frame.Border:Hide() end
+
+				frame.styled = true
+			end
+		end
+	end)
 
 	-- Clique skin
 	C_Timer.After(0.1, function()
