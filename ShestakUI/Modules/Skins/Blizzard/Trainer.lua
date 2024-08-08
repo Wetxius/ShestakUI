@@ -35,9 +35,7 @@ local function LoadSkin()
 	ClassTrainerFrame.backdrop:SetPoint("TOPLEFT", ClassTrainerFrame, "TOPLEFT")
 	ClassTrainerFrame.backdrop:SetPoint("BOTTOMRIGHT", ClassTrainerFrame, "BOTTOMRIGHT")
 
-	ClassTrainerFrame.FilterDropdown:SkinButton()
-	ClassTrainerFrame.FilterDropdown:ClearAllPoints()
-	ClassTrainerFrame.FilterDropdown:SetPoint("TOPRIGHT", ClassTrainerFrame.backdrop, "TOPRIGHT", -14, -30)
+	T.SkinFilter(ClassTrainerFrame.FilterDropdown, true)
 
 	T.SkinCloseButton(ClassTrainerFrameCloseButton, ClassTrainerFrame)
 
