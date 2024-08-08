@@ -1733,6 +1733,9 @@ function Stuffing:BANKFRAME_OPENED()
 			end
 		end
 	end
+	if not C_Bank.CanViewBank(Enum.BankType.Character) and C_Bank.CanViewBank(Enum.BankType.Account) then
+		StuffingWarbandButtonBank:Click()
+	end
 end
 
 function Stuffing:BANKFRAME_CLOSED()
