@@ -8,7 +8,11 @@ local top, below, power = _G["UIWidgetTopCenterContainerFrame"], _G["UIWidgetBel
 -- Top Widget
 local topAnchor = CreateFrame("Frame", "UIWidgetTopAnchor", UIParent)
 topAnchor:SetSize(200, 30)
-topAnchor:SetPoint(unpack(C.position.uiwidget_top))
+if C.toppanel.enable then
+	topAnchor:SetPoint(C.position.uiwidget_top[1], C.position.uiwidget_top[2], C.position.uiwidget_top[3], C.position.uiwidget_top[4], C.position.uiwidget_top[5] - 20)
+else
+	topAnchor:SetPoint(unpack(C.position.uiwidget_top))
+end
 
 top:ClearAllPoints()
 top:SetPoint("TOP", topAnchor)
