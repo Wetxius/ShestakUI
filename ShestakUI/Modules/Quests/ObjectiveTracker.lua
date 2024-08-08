@@ -101,7 +101,7 @@ local function SkinQuestIcons(_, block)
 		item.skinned = true
 	end
 
-	local finder = block and block.Icon
+	local finder = block and block.rightEdgeFrame
 	if finder and not finder.skinned then
 		finder:SetSize(26, 26)
 		finder:SetNormalTexture(0)
