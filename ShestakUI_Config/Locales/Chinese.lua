@@ -305,7 +305,7 @@ L.tooltip_mount = "坐骑来源"
 -- Chat options
 L.chat_subtext = "这里可以设置你的聊天框"
 L.chat_enable = "聊天框增强"
-L.chat_second_frame = "Enable second frame on right side" -- Need review
+L.chat_second_frame = "第二个聊天框在右侧"
 L.chat_background = "聊天框背景"
 L.chat_background_alpha = "聊天框背景透明度"
 L.chat_filter = "屏蔽无用系统信息"
