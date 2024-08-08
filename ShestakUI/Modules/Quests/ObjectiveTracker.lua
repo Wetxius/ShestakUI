@@ -100,44 +100,42 @@ local function SkinQuestIcons(_, block)
 
 		item.skinned = true
 	end
+
+	local finder = block and block.Icon
+	if finder and not finder.skinned then
+		finder:SetSize(26, 26)
+		finder:SetNormalTexture(0)
+		finder:SetHighlightTexture(0)
+		finder:SetPushedTexture(0)
+		finder.b = CreateFrame("Frame", nil, finder)
+		finder.b:SetTemplate("Overlay")
+		finder.b:SetPoint("TOPLEFT", finder, "TOPLEFT", 2, -3)
+		finder.b:SetPoint("BOTTOMRIGHT", finder, "BOTTOMRIGHT", -4, 3)
+		finder.b:SetFrameLevel(1)
+
+		finder:HookScript("OnEnter", function(self)
+			if self:IsEnabled() then
+				self.b:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				if self.b.overlay then
+					self.b.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+				end
+			end
+		end)
+
+		finder:HookScript("OnLeave", function(self)
+			self.b:SetBackdropBorderColor(unpack(C.media.border_color))
+			if self.b.overlay then
+				self.b.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
+			end
+		end)
+
+		hooksecurefunc(finder, "Show", function(self)
+			self.b:SetFrameLevel(1)
+		end)
+
+		finder.skinned = true
+	end
 end
-
--- hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
-	-- if block.groupFinderButton and not block.groupFinderButton.styled then
-		-- local icon = block.groupFinderButton
-		-- icon:SetSize(26, 26)
-		-- icon:SetNormalTexture(0)
-		-- icon:SetHighlightTexture(0)
-		-- icon:SetPushedTexture(0)
-		-- icon.b = CreateFrame("Frame", nil, icon)
-		-- icon.b:SetTemplate("Overlay")
-		-- icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", 2, -3)
-		-- icon.b:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -4, 3)
-		-- icon.b:SetFrameLevel(1)
-
-		-- icon:HookScript("OnEnter", function(self)
-			-- if self:IsEnabled() then
-				-- self.b:SetBackdropBorderColor(unpack(C.media.classborder_color))
-				-- if self.b.overlay then
-					-- self.b.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
-				-- end
-			-- end
-		-- end)
-
-		-- icon:HookScript("OnLeave", function(self)
-			-- self.b:SetBackdropBorderColor(unpack(C.media.border_color))
-			-- if self.b.overlay then
-				-- self.b.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
-			-- end
-		-- end)
-
-		-- hooksecurefunc(icon, "Show", function(self)
-			-- self.b:SetFrameLevel(1)
-		-- end)
-
-		-- icon.styled = true
-	-- end
--- end)
 
 -- WorldQuestsList button skin
 local frame = CreateFrame("Frame")
