@@ -242,6 +242,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Auto collapse Objective Tracker
 ----------------------------------------------------------------------------------------
+-- NOTE: SetCollapsed() cause UseQuestLogSpecialItem() taint
 if C.automation.auto_collapse ~= "NONE" then
 	local collapse = CreateFrame("Frame")
 	collapse:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -252,7 +253,9 @@ if C.automation.auto_collapse ~= "NONE" then
 					ObjectiveTrackerFrame:SetCollapsed(true)
 				end)
 			elseif not InCombatLockdown() then
-				ObjectiveTrackerFrame:SetCollapsed(false)
+				if ObjectiveTrackerFrame.isCollapsed then
+					ObjectiveTrackerFrame:SetCollapsed(false)
+				end
 			end
 		elseif C.automation.auto_collapse == "SCENARIO" then
 			local inInstance, instanceType = IsInInstance()
@@ -271,9 +274,13 @@ if C.automation.auto_collapse ~= "NONE" then
 			else
 				if not InCombatLockdown() then
 					for i = 3, #headers do
-						headers[i]:SetCollapsed(false)
+						if headers[i].isCollapsed then
+							headers[i]:SetCollapsed(false)
+						end
 					end
-					ObjectiveTrackerFrame:SetCollapsed(false)
+					if ObjectiveTrackerFrame.isCollapsed then
+						ObjectiveTrackerFrame:SetCollapsed(false)
+					end
 				end
 			end
 		elseif C.automation.auto_collapse == "RELOAD" then
