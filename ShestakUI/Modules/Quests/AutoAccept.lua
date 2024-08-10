@@ -304,6 +304,10 @@ local function IsQuestIgnored(questID)
 		return true
 	end
 
+	if C_QuestLog.IsWorldQuest(questID) then
+		return true
+	end
+
 	local questTitle = tonumber(questID) and C_QuestLog.GetTitleForQuestID(questID) or ''
 	for key in next, QuickQuestDB.blocklist.quests do
 		if key == questID or questTitle:lower():find(tostring(key):lower()) then
