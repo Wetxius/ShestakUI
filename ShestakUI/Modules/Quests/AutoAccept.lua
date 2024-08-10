@@ -9,7 +9,7 @@ local QuickQuestDB = {
 	general = {
 		share = false,
 		skipgossip = true,
-		skipgossipwhen = 1,
+		skipgossipwhen = 2,
 		paydarkmoonfaire = true,
 		pausekey = 'SHIFT',
 		pausekeyreverse = false,
@@ -240,12 +240,7 @@ function ns.GetNPCID(unit)
 end
 
 function ns.ShouldAcceptTrivialQuests()
-	for index = 1, GetNumTrackingTypes() do
-		local name, _, isActive = GetTrackingInfo(index)
-		if name == MINIMAP_TRACKING_TRIVIAL_QUESTS then
-			return isActive
-		end
-	end
+	return C_Minimap.IsTrackingHiddenQuests()
 end
 
 function ns.tLength(t)
@@ -275,17 +270,33 @@ local cashRewards = {
 	[138125] = 16, -- Crystal Clear Gemstone, 16 copper
 	[138133] = 27, -- Elixir of Endless Wonder, 27 copper
 }
-local darkmoonNPCs = {
-	-- Darkmoon Faire teleporation NPCs
-	[57850] = true, -- Teleportologist Fozlebub
-	[55382] = true, -- Darkmoon Faire Mystic Mage (Horde)
-	[54334] = true, -- Darkmoon Faire Mystic Mage (Alliance)
+local DARKMOON_GOSSIP = {
+	[40007] = true, -- Darkmoon Faire Mystic Mage (Horde)
+	[40457] = true, -- Darkmoon Faire Mystic Mage (Alliance)
 }
-local rogueNPCs = {
-	-- Rogue class hall doors
-	[97004] = true, -- "Red" Jack Findle
-	[96782] = true, -- Lucian Trias
-	[93188] = true, -- Mongar
+
+local QUEST_GOSSIP = {
+	-- usually only addeed if they're repeatable
+	[109275] = true, -- Soridormi - begin time rift
+	[120619] = true, -- Big Dig task
+	[120620] = true, -- Big Dig task
+
+	-- Darkmoon Faire
+	[40563] = true, -- whack
+	[28701] = true, -- cannon
+	[31202] = true, -- shoot
+	[39245] = true, -- tonk
+	[40224] = true, -- ring toss
+	[43060] = true, -- firebird
+	[52651] = true, -- dance
+	[41759] = true, -- pet battle 1
+	[42668] = true, -- pet battle 2
+	[40872] = true, -- cannon return (Teleportologist Fozlebub)
+}
+
+local IGNORE_GOSSIP = {
+	-- when we don't want to automate gossip because it's counter-intuitive
+	[122442] = true, -- leave the dungeon in remix
 }
 
 local function IsQuestIgnored(questID)
@@ -328,51 +339,70 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		return
 	end
 
-	if C_Map.GetBestMapForUnit('player') == DARKMOON_ISLE_MAP_ID then
-		-- we want to auto-accept the dialogues from Darkmoon Faire NPCs
-		for index, info in next, C_GossipInfo.GetOptions() do
-			if info.name:find('FF008E8') then
-				-- See if there is something else than the color we can easily match with
-				C_GossipInfo.SelectOption(index)
-				return
-			end
+	if C_PlayerInteractionManager.IsInteractingWithNpcOfType(Enum.PlayerInteractionType.TaxiNode) then
+		-- don't annoy taxi addons
+		return
+	end
+
+	local gossip = C_GossipInfo.GetOptions()
+	for _, info in next, gossip do
+		if DARKMOON_GOSSIP[info.gossipOptionID] and QuickQuestDB.general.paydarkmoonfaire then
+			C_GossipInfo.SelectOption(info.gossipOptionID, '', true)
+		elseif QUEST_GOSSIP[info.gossipOptionID] and QuickQuestDB.general.skipgossip then
+			C_GossipInfo.SelectOption(info.gossipOptionID)
+		elseif FlagsUtil.IsSet(info.flags, Enum.GossipOptionRecFlags.QuestLabelPrepend) and QuickQuestDB.general.skipgossip then
+			C_GossipInfo.SelectOption(info.gossipOptionID)
 		end
 	end
 
-	if C_GossipInfo.GetNumActiveQuests() > 0 or C_GossipInfo.GetNumAvailableQuests() > 0 then
-		-- bail if there is more than just dialogue
+	if (C_GossipInfo.GetNumActiveQuests() + C_GossipInfo.GetNumAvailableQuests()) > 0 then
+		-- don't automate misc gossip if the NPC is a quest giver
 		return
 	end
 
-	if rogueNPCs[npcID] then
-		-- automatically open doors to the rogue class hall in Dalaran
-		C_GossipInfo.SelectOption(1)
+	if #gossip ~= 1 then
+		-- more than 1 option
 		return
 	end
 
-	if QuickQuestDB.general.paydarkmoonfaire and npcID == DARKMOON_FAIRE_TELEPORT_NPC_ID then
-		C_GossipInfo.SelectOption(1)
+	if not gossip[1].gossipOptionID then
+		-- intentionally blocked gossip
 		return
 	end
 
-	if #C_GossipInfo.GetOptions() == 1 and QuickQuestDB.general.skipgossip then
-		-- automatically skip single dialogue under certain conditions
-		local _, instanceType = GetInstanceInfo()
-		if instanceType == 'raid' and QuickQuestDB.general.skipgossipwhen > 0 then
-			if GetNumGroupMembers() <= 1 or QuickQuestDB.general.skipgossipwhen == 2 then
-				-- select dialogue if alone or when configured to "Always" while in a raid
-				C_GossipInfo.SelectOption(1)
-				return
-			end
-		elseif instanceType ~= 'raid' then
-			-- always select single dialogue while outside a raid
-			C_GossipInfo.SelectOption(1)
-			return
+	if IGNORE_GOSSIP[gossip[1].gossipOptionID] then
+		return
+	end
+
+	local _, instanceType = GetInstanceInfo()
+	if instanceType == 'raid' and addon:GetOption('skipgossipwhen') > 1 then
+		if GetNumGroupMembers() <= 1 or addon:GetOption('skipgossipwhen') == 3 then
+			C_GossipInfo.SelectOption(gossip[1].gossipOptionID)
 		end
+	elseif instanceType ~= 'raid' then
+		C_GossipInfo.SelectOption(gossip[1].gossipOptionID)
 	end
 end)
 
-EventHandler:Register('GOSSIP_SHOW', function()
+local questQueue = {}
+EventHandler:Register('QUEST_DATA_LOAD_RESULT', function(questID)
+	-- TODO: deal with unsuccessful queries
+	if questQueue[questID] then
+		questQueue[questID]()
+		questQueue[questID] = nil
+	end
+end)
+
+function EventHandler:WaitForQuestData(questID, callback)
+	questQueue[questID] = callback
+	C_QuestLog.RequestLoadQuestByID(questID)
+end
+
+function EventHandler:WaitForItemData(itemID, callback)
+	Item:CreateFromItemID(itemID):ContinueOnItemLoad(callback)
+end
+
+local function handleGossipQuests()
 	-- triggered when the player interacts with an NPC that presents dialogue
 	if paused then
 		return
@@ -382,24 +412,30 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		return
 	end
 
-	-- turn in all completed quests
-	for index, info in next, C_GossipInfo.GetActiveQuests() do
-		if not IsQuestIgnored(info.questID) then
-			if info.isComplete and not C_QuestLog.IsWorldQuest(info.questID) then
-				C_GossipInfo.SelectActiveQuest(index)
-			end
+	for _, questInfo in next, C_GossipInfo.GetActiveQuests() do
+		if not questInfo.questLevel or questInfo.questLevel == 0 then
+			-- not cached yet
+			EventHandler:WaitForQuestData(questInfo.questID, handleGossipQuests)
+		elseif IsQuestIgnored(questInfo.questID) then
+			-- ignore
+		elseif questInfo.isComplete then
+			C_GossipInfo.SelectActiveQuest(questInfo.questID)
 		end
 	end
 
-	-- accept all available quests
-	for index, info in next, C_GossipInfo.GetAvailableQuests() do
-		if not IsQuestIgnored(info.questID) then
-			if not info.isTrivial or ns.ShouldAcceptTrivialQuests() then
-				C_GossipInfo.SelectAvailableQuest(index)
-			end
+	for _, questInfo in next, C_GossipInfo.GetAvailableQuests() do
+		if not questInfo.questLevel or questInfo.questLevel == 0 then
+			-- not cached yet
+			EventHandler:WaitForQuestData(questInfo.questID, handleGossipQuests)
+		elseif questInfo.isRepeatable then
+			-- ignore
+		elseif not IsQuestIgnored(questInfo.questID) then
+			C_GossipInfo.SelectAvailableQuest(questInfo.questID)
 		end
 	end
-end)
+end
+
+EventHandler:Register('GOSSIP_SHOW', handleGossipQuests)
 
 EventHandler:Register('QUEST_GREETING', function()
 	-- triggered when the player interacts with an NPC that hands in/out quests
