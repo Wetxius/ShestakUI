@@ -74,6 +74,9 @@ local QuickQuestDB = {
 			-- misc
 			[103792] = true, -- Griftah (his quests are scams)
 			[143925] = true, -- Dark Iron Mole Machine (Dark Iron Dwarf racial)
+			[121602] = true, -- Manapoof in Dalaran
+			[147666] = true, -- Manapoof in Boralus
+			[147642] = true, -- Manapoof in Dazar'alor
 
 			-- Bodyguards
 			[86945] = true, -- Aeda Brightdawn (Horde)
@@ -94,6 +97,16 @@ local QuickQuestDB = {
 			[95146] = true,
 			[95200] = true,
 			[95201] = true,
+
+			-- accidental resource waste
+			[87391] = true, -- Fate-Twister Seress (gold, currencies)
+			[88570] = true, -- Fate-Twister Tiklal (gold, currencies)
+			[78495] = true, -- Shadow Hunter Ukambe (garrison missives)
+			[81152] = true, -- Scout Valdez (garrison missives)
+			[111243] = true, -- Archmage Lan'dalock (gold, currencies)
+			[141584] = true, -- Zurvan (gold, currencies)
+			[142063] = true, -- Tezran (gold, currencies)
+			[193110] = true, -- Khadin (Dragon Shard of Knowledge)
 		},
 		quests = {
 			-- 6.0 coins
@@ -239,26 +252,12 @@ function ns.GetNPCID(unit)
 	end
 end
 
-function ns.ShouldAcceptTrivialQuests()
-	return C_Minimap.IsTrackingHiddenQuests()
-end
-
-function ns.tLength(t)
-	local count = 0
-	for _ in next, t do
-		count = count + 1
-	end
-	return count
-end
-
 local EventHandler = ns.EventHandler
 local paused
 
-local DARKMOON_ISLE_MAP_ID = 407
-local DARKMOON_FAIRE_TELEPORT_NPC_ID = 57850 -- Teleportologist Fozlebub
-
 local ignoredQuests = {}
-local cashRewards = {
+local ITEM_CASH_REWARDS = {
+	-- some items have hidden values, like pouches
 	[45724] = 1e5, -- Champion's Purse, 10 gold
 	[64491] = 2e6, -- Royal Reward, 200 gold
 
@@ -270,6 +269,7 @@ local cashRewards = {
 	[138125] = 16, -- Crystal Clear Gemstone, 16 copper
 	[138133] = 27, -- Elixir of Endless Wonder, 27 copper
 }
+
 local DARKMOON_GOSSIP = {
 	[40007] = true, -- Darkmoon Faire Mystic Mage (Horde)
 	[40457] = true, -- Darkmoon Faire Mystic Mage (Alliance)
@@ -299,12 +299,16 @@ local IGNORE_GOSSIP = {
 	[122442] = true, -- leave the dungeon in remix
 }
 
-local function IsQuestIgnored(questID)
+local function isQuestIgnored(questID)
 	if ignoredQuests[questID] then
 		return true
 	end
 
 	if C_QuestLog.IsWorldQuest(questID) then
+		return true
+	end
+
+	if C_QuestLog.IsQuestTrivial(questID) and not C_Minimap.IsTrackingHiddenQuests() then
 		return true
 	end
 
@@ -317,20 +321,6 @@ local function IsQuestIgnored(questID)
 
 	return false
 end
-
-EventHandler:Register('GOSSIP_CONFIRM', function(index)
-	-- triggered when a gossip confirm prompt is displayed
-	if paused then
-		return
-	end
-
-	if QuickQuestDB.general.paydarkmoonfaire and darkmoonNPCs[ns.GetNPCID()] then
-		C_GossipInfo.SelectOption(index, '', true)
-
-		-- this is considered an intrusive action, as we're modifying the UI
-		StaticPopup_Hide('GOSSIP_CONFIRM')
-	end
-end)
 
 EventHandler:Register('GOSSIP_SHOW', function()
 	-- triggered when the player interacts with an NPC that presents dialogue
@@ -379,8 +369,8 @@ EventHandler:Register('GOSSIP_SHOW', function()
 	end
 
 	local _, instanceType = GetInstanceInfo()
-	if instanceType == 'raid' and addon:GetOption('skipgossipwhen') > 1 then
-		if GetNumGroupMembers() <= 1 or addon:GetOption('skipgossipwhen') == 3 then
+	if instanceType == 'raid' and QuickQuestDB.general.skipgossipwhen > 1 then
+		if GetNumGroupMembers() <= 1 or QuickQuestDB.general.skipgossipwhen == 3 then
 			C_GossipInfo.SelectOption(gossip[1].gossipOptionID)
 		end
 	elseif instanceType ~= 'raid' then
@@ -420,7 +410,7 @@ local function handleGossipQuests()
 		if not questInfo.questLevel or questInfo.questLevel == 0 then
 			-- not cached yet
 			EventHandler:WaitForQuestData(questInfo.questID, handleGossipQuests)
-		elseif IsQuestIgnored(questInfo.questID) then
+		elseif isQuestIgnored(questInfo.questID) then
 			-- ignore
 		elseif questInfo.isComplete then
 			C_GossipInfo.SelectActiveQuest(questInfo.questID)
@@ -433,7 +423,7 @@ local function handleGossipQuests()
 			EventHandler:WaitForQuestData(questInfo.questID, handleGossipQuests)
 		elseif questInfo.isRepeatable then
 			-- ignore
-		elseif not IsQuestIgnored(questInfo.questID) then
+		elseif not isQuestIgnored(questInfo.questID) then
 			C_GossipInfo.SelectAvailableQuest(questInfo.questID)
 		end
 	end
@@ -441,7 +431,7 @@ end
 
 EventHandler:Register('GOSSIP_SHOW', handleGossipQuests)
 
-EventHandler:Register('QUEST_GREETING', function()
+local function handleQuestList()
 	-- triggered when the player interacts with an NPC that hands in/out quests
 	if paused then
 		return
@@ -451,56 +441,67 @@ EventHandler:Register('QUEST_GREETING', function()
 		return
 	end
 
-	-- turn in all completed quests
 	for index = 1, GetNumActiveQuests() do
-		if not IsQuestIgnored(GetActiveQuestID(index)) then
-			local _, isComplete = GetActiveTitle(index)
-			if isComplete and not C_QuestLog.IsWorldQuest(GetActiveQuestID(index)) then
-				SelectActiveQuest(index)
-			end
+		local questID = GetActiveQuestID(index)
+		local title, isComplete = GetActiveTitle(index)
+		if isComplete and not isQuestIgnored(questID) then
+			SelectActiveQuest(index)
 		end
 	end
 
-	-- accept all available quests
 	for index = 1, GetNumAvailableQuests() do
-		local isTrivial, _, _, _, questID = GetAvailableQuestInfo(index)
-		if not IsQuestIgnored(questID) then
-			if not isTrivial or ns.ShouldAcceptTrivialQuests() then
-				SelectAvailableQuest(index)
-			end
+		local _, _, isRepeatable, _, questID = GetAvailableQuestInfo(index)
+		local questLevel = GetAvailableLevel(index)
+		if not questLevel or questLevel == 0 then
+			-- not cached yet, invalid isTrivial flag
+			EventHandler:WaitForQuestData(questID, handleQuestList)
+		elseif isQuestIgnored(questID) then
+			-- ignore
+		elseif isRepeatable then
+			-- ignore
+		else
+			SelectAvailableQuest(index)
 		end
 	end
-end)
+end
 
-EventHandler:Register('QUEST_DETAIL', function(questItemID)
+EventHandler:Register('QUEST_GREETING', handleQuestList) -- quest list without gossips
+
+local function handleQuestDetail()
 	-- triggered when the information about an available quest is available
 	if paused then
 		return
 	end
 
-	if QuestIsFromAreaTrigger() then
-		-- this type of quest is automatically accepted, but the dialogue is presented in a way that
-		-- the player seems to have a choice to decline it, which they don't, so just accept it
-		AcceptQuest()
-	elseif QuestGetAutoAccept() then
-		-- this type of quest is automatically accepted, but the dialogue persists
-		AcknowledgeAutoAcceptQuest()
-	elseif not C_QuestLog.IsQuestTrivial(GetQuestID()) or ns.ShouldAcceptTrivialQuests() then
-		if IsQuestIgnored(GetQuestID()) then
-			CloseQuest()
-		else
-			AcceptQuest()
-		end
-	end
-end)
-
-EventHandler:Register('QUEST_PROGRESS', function()
-	-- triggered when an active quest is selected during turn-in
-	if paused then
+	local questID = GetQuestID()
+	if not questID or questID == 0 then
 		return
 	end
 
-	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+	local questLevel = C_QuestLog.GetQuestDifficultyLevel(questID)
+	if not questLevel or questLevel == 0 then
+		EventHandler:WaitForQuestData(questID, handleQuestDetail)
+		return
+	end
+
+	if QuestGetAutoAccept() then
+		-- these kinds of quests are already accepted, the popup only exists to notify the user
+		AcknowledgeAutoAcceptQuest()
+		RemoveAutoQuestPopUp(questID)
+	elseif QuestIsFromAreaTrigger() then
+		-- when not triggered in combination with QuestGetAutoAccept-style quests this is just
+		-- a normal quest popup, as if it was shared by an unknown player, so we'll just accept it
+		AcceptQuest()
+	elseif not isQuestIgnored(questID) then
+		AcceptQuest()
+	end
+end
+
+EventHandler:Register('QUEST_DETAIL', handleQuestDetail) -- quest details before accepting
+
+local function handleQuestProgress()
+	-- triggered when an active quest is selected during turn-in
+	if paused then
 		return
 	end
 
@@ -508,110 +509,102 @@ EventHandler:Register('QUEST_PROGRESS', function()
 		return
 	end
 
-	-- iterate through the items part of the quest
+	local questID = GetQuestID()
+	if ignoredQuests[questID] then
+		return
+	end
+
+	-- make sure the quest doesn't contain an ignored item
 	for index = 1, GetNumQuestItems() do
-		local itemLink = GetQuestItemLink('required', index)
-		if itemLink then
-			-- check to see if the item is blocked
-			local questItemID = GetItemInfoFromHyperlink(itemLink)
-			if QuickQuestDB.blocklist.items[questItemID] then
-				-- item is blocked, prevent this quest from opening again and close it
-				ignoredQuests[GetQuestID()] = true
-				CloseQuest()
+		local _, _, _, _, _, itemID = GetQuestItemInfo('required', index)
+		if itemID then
+			if QuickQuestDB.blocklist.items[itemID] then
+				-- ignore this quest to prevent it from being selected again
+				ignoredQuests[questID] = true
 				return
 			end
-		else
-			-- item is not cached yet, trigger the item and wait for the cache to populate
-			EventHandler:Register('QUEST_ITEM_UPDATE', 'QUEST_PROGRESS')
-			GetQuestItemInfo('required', index)
-			return
 		end
 	end
 
 	CompleteQuest()
-	EventHandler:Unregister('QUEST_ITEM_UPDATE', 'QUEST_PROGRESS')
-end)
+end
 
-EventHandler:Register('QUEST_COMPLETE', function()
+EventHandler:Register('QUEST_PROGRESS', handleQuestProgress) -- quest details when delivering
+
+local function handleQuestComplete()
 	-- triggered when an active quest is ready to be completed
 	if paused then
 		return
 	end
 
-	if GetNumQuestChoices() <= 1 then
-		-- complete the quest by accepting the first item
+	local numChoices = GetNumQuestChoices()
+	if numChoices <= 1 then
 		GetQuestReward(1)
 	end
-end)
 
-EventHandler:Register('QUEST_COMPLETE', function()
-	-- triggered when an active quest is ready to be completed
-	local numItemRewards = GetNumQuestChoices()
-	if numItemRewards <= 1 then
-		-- no point iterating over a single item or none at all
-		return
-	end
-
-	local highestItemValue, highestItemValueIndex = 0
-
-	-- iterate through the item rewards and automatically select the one worth the most
-	for index = 1, numItemRewards do
-		local itemLink = GetQuestItemLink('choice', index)
-		if itemLink then
-			-- check the value on the item and compare it to the others
-			local _, _, _, _, _, _, _, _, _, _, itemValue = GetItemInfo(itemLink)
-			local itemID = GetItemInfoFromHyperlink(itemLink)
-
-			-- some items are containers that contains currencies of worth
-			itemValue = cashRewards[itemID] or itemValue
-
-			-- compare the values
-			if itemValue > highestItemValue then
-				highestItemValue = itemValue
-				highestItemValueIndex = index
-			end
+	local highestValue, highestValueIndex = 0
+	for index = 1, numChoices do
+		local _, _, _, _, _, itemID = GetQuestItemInfo('choice', index)
+		local isCached, _, _, _, _, _, _, _, _, _, itemValue = C_Item.GetItemInfo(itemID)
+		if not isCached then
+			EventHandler:WaitForItemData(itemID, handleQuestComplete)
 		else
-			-- item is not cached yet, trigger the item and wait for the cache to populate
-			EventHandler:Register('QUEST_ITEM_UPDATE', 'QUEST_COMPLETE')
-			GetQuestItemInfo('choice', index)
-			return
+			itemValue = ITEM_CASH_REWARDS[itemID] or itemValue
+
+			if itemValue > highestValue then
+				highestValue = itemValue
+				highestValueIndex = index
+			end
 		end
 	end
 
-	if highestItemValueIndex then
-		-- this is considered an intrusive action, as we're modifying the UI
-		QuestInfoItem_OnClick(QuestInfoRewardsFrame.RewardButtons[highestItemValueIndex])
+	if highestValueIndex then
+		-- "intrusive" action
+		QuestInfoItem_OnClick(QuestInfoRewardsFrame.RewardButtons[highestValueIndex])
 	end
+end
 
-	EventHandler:Unregister('QUEST_ITEM_UPDATE', 'QUEST_COMPLETE')
-end)
+EventHandler:Register('QUEST_COMPLETE', handleQuestComplete) -- quest details when completing
 
-EventHandler:Register('QUEST_WATCH_LIST_CHANGED', function()
+local function handleQuestPopup()
 	-- triggered when the player's quest log has been altered
 	if paused then
 		return
 	end
 
-	-- check for quest popups whenever the quest log is updated, which also happens on login, and
-	-- when the player loots an item that starts a quest
-	if GetNumAutoQuestPopUps() > 0 then
-		if UnitIsDeadOrGhost('player') then
-			-- can't accept quests while we're dead
-			EventHandler:Register('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
-			return
-		end
+	if WorldMapFrame:IsShown() then
+		-- https://github.com/p3lim-wow/QuickQuest/issues/45
+		return
+	end
 
-		EventHandler:Unregister('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
+	if QuestFrame:IsShown() then
+		-- don't try to deal with quests while we already deal with one
+		return
+	end
 
-		-- this is considered an intrusive action, as we're modifying the UI
-		local questID, questType = GetAutoQuestPopUp(1)
+	local numPopups = GetNumAutoQuestPopUps()
+	if numPopups == 0 then
+		return
+	end
+
+	if UnitIsDeadOrGhost('player') then
+		-- can't accept quests while dead
+		EventHandler:Register('PLAYER_REGEN_ENABLED', 'QUEST_LOG_UPDATE')
+		return
+	end
+	EventHandler:Unregister('PLAYER_REGEN_ENABLED', 'QUEST_LOG_UPDATE')
+
+	for index = 1, numPopups do
+		local questID, questType = GetAutoQuestPopUp(index)
 		if questType == 'OFFER' then
 			ShowQuestOffer(questID)
-		else
+		elseif questType == 'COMPLETE' then
 			ShowQuestComplete(questID)
 		end
 	end
-end)
+end
+
+EventHandler:Register('QUEST_LOG_UPDATE', handleQuestPopup) -- popups
 
 EventHandler:Register('QUEST_ACCEPT_CONFIRM', function()
 	-- triggered when a quest is shared in the party, but requires confirmation (like escorts)
@@ -619,7 +612,7 @@ EventHandler:Register('QUEST_ACCEPT_CONFIRM', function()
 		return
 	end
 
-	AcceptQuest()
+	ConfirmAcceptQuest()
 end)
 
 EventHandler:Register('QUEST_ACCEPTED', function(questID)
