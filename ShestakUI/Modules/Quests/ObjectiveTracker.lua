@@ -161,6 +161,7 @@ local function colorQuest(_, block)
 		local poi = block.poiButton
 		if poi then
 			poi:SetScale(0.85)
+			poi:SetPoint("TOP")
 			if poi.Glow and poi.Glow:IsShown() then -- quest is selected
 				poi:SetAlpha(1)
 			else
