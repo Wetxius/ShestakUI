@@ -156,6 +156,35 @@ hooksecurefunc(QuestObjectiveTracker, "Update", function()
 	end
 end)
 
+local function colorQuest(_, block)
+	C_Timer.After(0.01, function()
+		local poi = block.poiButton
+		if poi then
+			poi:SetScale(0.85)
+			if poi.Glow and poi.Glow:IsShown() then -- quest is selected
+				poi:SetAlpha(1)
+			else
+				poi:SetAlpha(0.7)
+			end
+			local style = poi:GetStyle()
+			if style == POIButtonUtil.Style.WorldQuest then
+				local questID = poi:GetQuestID()
+				local info = C_QuestLog.GetQuestTagInfo(questID)
+				if info then
+					local col = {r = 1, g = 1, b = 1}
+					if info.quality == Enum.WorldQuestQuality.Epic then
+						col = BAG_ITEM_QUALITY_COLORS[4]
+					elseif info.quality == Enum.WorldQuestQuality.Rare then
+						col = BAG_ITEM_QUALITY_COLORS[3]
+					end
+					block.HeaderText:SetTextColor(col.r, col.g, col.b)
+					block.HeaderText.col = col
+				end
+			end
+		end
+	end)
+end
+
 ----------------------------------------------------------------------------------------
 --	Skin quest item buttons
 ----------------------------------------------------------------------------------------
@@ -394,33 +423,13 @@ for i = 1, #headers do
 				GameTooltip:Show()
 			end
 		end)
+
 		hooksecurefunc(tracker, "OnBlockHeaderLeave", function(_, block)
 			if block.HeaderText and block.HeaderText.col then
 				block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
 			end
 		end)
-		hooksecurefunc(tracker, "AddBlock", function(_, block)
-			C_Timer.After(0.01, function()
-				local poi = block.poiButton
-				if poi then
-					local style = poi:GetStyle()
-					if style == POIButtonUtil.Style.WorldQuest then
-						local questID = poi:GetQuestID()
-						local info = C_QuestLog.GetQuestTagInfo(questID)
-						if info then
-							local col = {r = 1, g = 1, b = 1}
-							if info.quality == Enum.WorldQuestQuality.Epic then
-								col = BAG_ITEM_QUALITY_COLORS[4]
-							elseif info.quality == Enum.WorldQuestQuality.Rare then
-								col = BAG_ITEM_QUALITY_COLORS[3]
-							end
-							block.HeaderText:SetTextColor(col.r, col.g, col.b)
-							block.HeaderText.col = col
-						end
-					end
-				end
-			end)
-		end)
+		hooksecurefunc(tracker, "AddBlock", colorQuest)
 	end
 end
 
