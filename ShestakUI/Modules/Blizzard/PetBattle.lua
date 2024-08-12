@@ -391,9 +391,9 @@ hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", function(self)
 	if self:GetName() == "PetBattlePrimaryUnitTooltip" then isTooltip = true end
 
 	-- Set the color for the Glow
-	local nQuality = C_PetBattles.GetBreedQuality(self.petOwner, self.petIndex) - 1
-	local r, g, b, hex = GetItemQualityColor(nQuality)
-	if nQuality >= 2 and not isTooltip and self.IconBackdrop then
+	local quality = C_PetBattles.GetBreedQuality(self.petOwner, self.petIndex) or 1
+	local r, g, b, hex = GetItemQualityColor(quality)
+	if quality >= 2 and not isTooltip and self.IconBackdrop then
 		self.IconBackdrop:SetBackdropBorderColor(r, g, b)
 	elseif self.IconBackdrop then
 		self.IconBackdrop:SetBackdropBorderColor(unpack(C.media.border_color))
