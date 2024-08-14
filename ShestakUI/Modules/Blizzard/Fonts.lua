@@ -119,10 +119,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetFont(NumberFontNormalSmall, NORMAL, 11, "OUTLINE")
 
 	-- Quest tracker
-	if C.font.quest_tracker_font_mult > 1 then
-		SetFont(ObjectiveTrackerHeaderFont, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest title and objectives
-		SetFont(ObjectiveTrackerLineFont, NORMAL, 12 * C.font.quest_tracker_font_mult) -- Quest tracker
-	end
+	SetFont(ObjectiveTrackerHeaderFont, NORMAL, 14 * C.font.quest_tracker_font_mult) -- Quest title and objectives
+	SetFont(ObjectiveTrackerLineFont, NORMAL, 12 * C.font.quest_tracker_font_mult) -- Quest tracker
 end)
 
 -- Registering fonts in LibSharedMedia
