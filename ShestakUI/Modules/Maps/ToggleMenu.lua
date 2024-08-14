@@ -307,7 +307,7 @@ local lastMainAddonID = 0
 if not addonInfo then
 	addonInfo = {{}}
 	for i = 1, C_AddOns.GetNumAddOns() do
-		local name, _, _, enabled = GetAddOnInfo(i)
+		local name, _, _, enabled = C_AddOns.GetAddOnInfo(i)
 		if name and enabled then
 			addonInfo[i] = {["enabled"] = true, ["is_main"] = false, collapsed = true, ["parent"] = i}
 		else
@@ -325,7 +325,7 @@ if not addonInfo then
 				else
 					addonInfo[i].parent = lastMainAddonID
 					for j = 1, C_AddOns.GetNumAddOns() do
-						local name_j = GetAddOnInfo(j)
+						local name_j = C_AddOns.GetAddOnInfo(j)
 						if name_j == value then
 							addonInfo[i].parent = j
 						end
@@ -361,7 +361,7 @@ local function addonEnableToggle(_, i)
 end
 
 local function addonFrameToggle(_, i)
-	local name = GetAddOnInfo(i)
+	local name = C_AddOns.GetAddOnInfo(i)
 	if C.toggleaddons[name] then
 		if C_AddOns.IsAddOnLoaded(i) then
 			C.toggleaddons[name]()
@@ -374,7 +374,7 @@ local addonToggleOnly = true
 local function refreshAddOnMenu()
 	menusize = mainmenusize
 	for i = 1, C_AddOns.GetNumAddOns() do
-		local name = GetAddOnInfo(i)
+		local name = C_AddOns.GetAddOnInfo(i)
 		if addonInfo[i].is_main or (addonInfo[i].parent == i) or not addonInfo[addonInfo[i].parent].collapsed then
 			if not addonToggleOnly or (C.toggleaddons[name] and C_AddOns.IsAddOnLoaded(i)) then
 				menusize = menusize + 1
@@ -388,7 +388,7 @@ local function refreshAddOnMenu()
 	menusize = mainmenusize
 	for i = 1, C_AddOns.GetNumAddOns() do
 		local j = totalmainmenusize + i
-		local name = GetAddOnInfo(i)
+		local name = C_AddOns.GetAddOnInfo(i)
 		addonmenuitems[j]:Hide()
 		if addonInfo[i].is_main or addonInfo[i].parent == i or not addonInfo[addonInfo[i].parent].collapsed then
 			if (not addonToggleOnly or (C.toggleaddons[name] and C_AddOns.IsAddOnLoaded(i))) then
@@ -430,7 +430,7 @@ end)
 
 for i = 1, C_AddOns.GetNumAddOns() do
 	local j = totalmainmenusize + i
-	local name = GetAddOnInfo(i)
+	local name = C_AddOns.GetAddOnInfo(i)
 	addonmenuitems[j] = CreateFrame("CheckButton", "AddonMenu"..j, AddonBG)
 	addonmenuitems[j]:CreatePanel("Overlay", buttonwidth(1), buttonheight(1), "BOTTOM", AddonBG, "BOTTOM", 0, buttonspacing(1))
 	addonmenuitems[j]:EnableMouse(true)
@@ -465,7 +465,7 @@ for i = 1, C_AddOns.GetNumAddOns() do
 	Text = addonmenuitems[j]:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 	Text:SetPoint("CENTER", addonmenuitems[j], 1, 0)
-	Text:SetText(select(2, GetAddOnInfo(i)))
+	Text:SetText(select(2, C_AddOns.GetAddOnInfo(i)))
 	Text:SetWidth(buttonwidth(1) - buttonspacing(1))
 	Text:SetHeight(C.media.pixel_font_size)
 	if addonInfo[i].is_main then

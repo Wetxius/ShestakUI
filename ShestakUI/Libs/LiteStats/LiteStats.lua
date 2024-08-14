@@ -392,7 +392,7 @@ if fps.enabled then
 		wipe(memoryt)
 		for i = 1, C_AddOns.GetNumAddOns() do
 			local memory = GetAddOnMemoryUsage(i)
-			local addon, name = GetAddOnInfo(i)
+			local addon, name = C_AddOns.GetAddOnInfo(i)
 			if C_AddOns.IsAddOnLoaded(i) then tinsert(memoryt, {name or addon, memory}) end
 			totalMemory = totalMemory + memory
 		end
@@ -415,7 +415,7 @@ if fps.enabled then
 		wipe(cput)
 		for i = 1, C_AddOns.GetNumAddOns() do
 			local cpu = GetAddOnCPUUsage(i)
-			local addon, name = GetAddOnInfo(i)
+			local addon, name = C_AddOns.GetAddOnInfo(i)
 			local cpus = cpu / (GetTime() - startTime)
 			local cpur = cpu - (lastCPU[i] and lastCPU[i] or cpu)
 			lastCPU[i] = cpu
