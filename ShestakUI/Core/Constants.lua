@@ -22,6 +22,21 @@ GetContainerItemInfo = function(bagIndex, slotIndex)
 	end
 end
 
+UnitAura = function(unit, auraIndex, filter)
+	return AuraUtil.UnpackAuraData(C_UnitAuras.GetAuraDataByIndex(unit, auraIndex, filter))
+end
+
+UnitBuff = function(unit, auraIndex, filter)
+	return AuraUtil.UnpackAuraData(C_UnitAuras.GetBuffDataByIndex(unit, auraIndex, filter))
+end
+
+GetSpellInfo = function(data)
+	local spellInfo = C_Spell.GetSpellInfo(data)
+	if spellInfo then
+		return spellInfo.name, nil, spellInfo.iconID, spellInfo.castTime, spellInfo.minRange, spellInfo.maxRange, spellInfo.spellID, spellInfo.originalIconID
+	end
+end
+
 local function EasyMenu_Initialize( frame, level, menuList )
 	for index = 1, #menuList do
 		local value = menuList[index]
