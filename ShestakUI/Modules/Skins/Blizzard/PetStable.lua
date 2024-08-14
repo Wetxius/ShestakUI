@@ -12,11 +12,11 @@ local function LoadSkin()
 	list:StripTextures()
 	list.ListCounter:StripTextures()
 
+	StableFrame.MainHelpButton.Ring:Hide()
+	StableFrame.MainHelpButton:SetPoint("TOPLEFT", StableFrame, "TOPLEFT", -10, 15)
+
 	T.SkinEditBox(list.FilterBar.SearchBox, nil, 20)
-	list.FilterBar.FilterDropdown:SkinButton()
-	T.SkinCloseButton(list.FilterBar.FilterDropdown.ResetButton)
-	list.FilterBar.FilterDropdown.ResetButton:ClearAllPoints()
-	list.FilterBar.FilterDropdown.ResetButton:SetPoint("CENTER", list.FilterBar.FilterDropdown, "TOPRIGHT", 0, 0)
+	T.SkinFilter(list.FilterBar.FilterDropdown, true)
 	T.SkinScrollBar(list.ScrollBar)
 
 	hooksecurefunc(StableFrame.PetModelScene.PetInfo.Type, "SetText", T.ReplaceIconString)
