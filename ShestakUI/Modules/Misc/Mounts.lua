@@ -15,7 +15,7 @@ function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 		VehicleExit()
 		return
 	end
-	if IsUsableSpell(59569) ~= true then
+	if C_Spell.IsSpellUsable(59569) ~= true then
 		nofly = true
 	end
 	if not nofly and IsFlyableArea() then

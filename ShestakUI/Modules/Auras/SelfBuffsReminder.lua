@@ -19,7 +19,7 @@ local function OnEvent(self, event, arg1)
 
 	for i = 1, #group.spells do
 		local name, icon = unpack(group.spells[i])
-		local usable, nomana = IsUsableSpell(name)
+		local usable, nomana = C_Spell.IsSpellUsable(name)
 		if usable or nomana or group.level then
 			self.icon:SetTexture(icon)
 			break
