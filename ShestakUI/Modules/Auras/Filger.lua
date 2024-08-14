@@ -518,7 +518,8 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				if T.FilgerIgnoreSpell[name] and not data[j].custom then
 					table.insert(jdx, j)
 				else
-					local id = data[j].absID and data[j].spellID or GetSpellInfo(data[j].spellID) or data[j].slotID
+					local info = data[j].spellID and C_Spell.GetSpellInfo(data[j].spellID)
+					local id = data[j].absID and data[j].spellID or (info and info.spellID) or data[j].slotID
 					data[j].sort = j
 					group.spells[id] = data[j]
 				end
