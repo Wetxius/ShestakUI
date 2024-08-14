@@ -69,7 +69,7 @@ local function LoadSkin()
 	HonorFrameQueueButton:SkinButton(true)
 
 	PVPQueueFrame.HonorInset:StripTextures()
-	PVPQueueFrame.HonorInset.RatedPanel.Label:SetWidth(160)
+	--FIXME PVPQueueFrame.HonorInset.RatedPanel.Label:SetWidth(160)
 
 	local RewardFrameSeason = PVPQueueFrame.HonorInset.RatedPanel.SeasonRewardFrame
 	RewardFrameSeason.Ring:Hide()
