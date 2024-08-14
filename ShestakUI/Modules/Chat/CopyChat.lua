@@ -112,7 +112,7 @@ for i = 1, NUM_CHAT_WINDOWS do
 
 	button:SetScript("OnMouseUp", function(_, btn)
 		if btn == "RightButton" then
-			--FIXME ToggleFrame(ChatMenu)
+			ChatFrameMenuButton:OpenMenu()
 		elseif btn == "MiddleButton" then
 			RandomRoll(1, 100)
 		else
@@ -122,6 +122,13 @@ for i = 1, NUM_CHAT_WINDOWS do
 	button:SetScript("OnEnter", function() button:FadeIn() end)
 	button:SetScript("OnLeave", function() button:FadeOut() end)
 end
+
+-- Hide chat bubble menu button
+ChatFrameMenuButton:SetAlpha(0)
+ChatFrameMenuButton:EnableMouse(false)
+ChatFrameMenuButton:SetParent(UIParent)
+ChatFrameMenuButton:ClearAllPoints()
+ChatFrameMenuButton:SetPoint("TOPLEFT", ButtonCF1, "TOPRIGHT")
 
 SlashCmdList.COPY_CHAT = function()
 	Copy(_G["ChatFrame1"])
