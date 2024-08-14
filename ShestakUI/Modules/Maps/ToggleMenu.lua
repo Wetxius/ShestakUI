@@ -306,7 +306,7 @@ local menusize
 local lastMainAddonID = 0
 if not addonInfo then
 	addonInfo = {{}}
-	for i = 1, GetNumAddOns() do
+	for i = 1, C_AddOns.GetNumAddOns() do
 		local name, _, _, enabled = GetAddOnInfo(i)
 		if name and enabled then
 			addonInfo[i] = {["enabled"] = true, ["is_main"] = false, collapsed = true, ["parent"] = i}
@@ -324,7 +324,7 @@ if not addonInfo then
 					addonInfo[i].is_main = true
 				else
 					addonInfo[i].parent = lastMainAddonID
-					for j = 1, GetNumAddOns() do
+					for j = 1, C_AddOns.GetNumAddOns() do
 						local name_j = GetAddOnInfo(j)
 						if name_j == value then
 							addonInfo[i].parent = j
@@ -348,7 +348,7 @@ end
 
 local function addonEnableToggle(_, i)
 	local was_enabled = addonInfo[i].enabled
-	for j = 1, GetNumAddOns() do
+	for j = 1, C_AddOns.GetNumAddOns() do
 		if (addonInfo[j].parent == i and addonInfo[i].collapsed) or (i == j and not addonInfo[addonInfo[i].parent].collapsed) then
 			if was_enabled then
 				DisableAddOn(j)
@@ -373,7 +373,7 @@ local addonToggleOnly = true
 
 local function refreshAddOnMenu()
 	menusize = mainmenusize
-	for i = 1, GetNumAddOns() do
+	for i = 1, C_AddOns.GetNumAddOns() do
 		local name = GetAddOnInfo(i)
 		if addonInfo[i].is_main or (addonInfo[i].parent == i) or not addonInfo[addonInfo[i].parent].collapsed then
 			if not addonToggleOnly or (C.toggleaddons[name] and C_AddOns.IsAddOnLoaded(i)) then
@@ -386,7 +386,7 @@ local function refreshAddOnMenu()
 
 	local lastMenuEntryID = lastMainMenuEntryID
 	menusize = mainmenusize
-	for i = 1, GetNumAddOns() do
+	for i = 1, C_AddOns.GetNumAddOns() do
 		local j = totalmainmenusize + i
 		local name = GetAddOnInfo(i)
 		addonmenuitems[j]:Hide()
@@ -428,7 +428,7 @@ expandbutton:SetScript("OnMouseUp", function(self)
 	refreshAddOnMenu()
 end)
 
-for i = 1, GetNumAddOns() do
+for i = 1, C_AddOns.GetNumAddOns() do
 	local j = totalmainmenusize + i
 	local name = GetAddOnInfo(i)
 	addonmenuitems[j] = CreateFrame("CheckButton", "AddonMenu"..j, AddonBG)

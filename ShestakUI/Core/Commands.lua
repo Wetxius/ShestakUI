@@ -69,7 +69,7 @@ SLASH_ENABLE_ADDON1 = "/en"
 SLASH_ENABLE_ADDON2 = "/enable"
 
 SlashCmdList.ONLY_UI = function()
-	for i = 1, GetNumAddOns() do
+	for i = 1, C_AddOns.GetNumAddOns() do
 		local name = GetAddOnInfo(i)
 		if name ~= "ShestakUI" and name ~= "ShestakUI_Config" and name ~= "!BaudErrorFrame" and GetAddOnEnableState(T.name, name) == 2 then
 			DisableAddOn(name, T.name)
