@@ -336,13 +336,13 @@ frame:SetScript("OnEvent", function()
 	local textTitle
 	if ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.Garrison then
 		local garrisonType = C_Garrison.GetLandingPageGarrisonType()
-		if garrisonType == Enum.GarrisonType.Type_6_0 then
+		if garrisonType == Enum.GarrisonType.Type_6_0_Garrison then
 			textTitle = GARRISON_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_7_0 then
+		elseif garrisonType == Enum.GarrisonType.Type_7_0_Garrison then
 			textTitle = ORDER_HALL_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_8_0 then
+		elseif garrisonType == Enum.GarrisonType.Type_8_0_Garrison then
 			textTitle = GARRISON_TYPE_8_0_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_9_0 then
+		elseif garrisonType == Enum.GarrisonType.Type_9_0_Garrison then
 			textTitle = GARRISON_TYPE_9_0_LANDING_PAGE_TITLE
 		end
 
