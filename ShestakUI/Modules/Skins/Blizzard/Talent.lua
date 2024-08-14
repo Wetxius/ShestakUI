@@ -91,7 +91,7 @@ local function LoadSkin()
 						end
 
 						if button.spellID then
-							local texture = GetSpellTexture(button.spellID)
+							local texture = C_Spell.GetSpellTexture(button.spellID)
 							if texture then
 								button.Icon:SetTexture(texture)
 							end
