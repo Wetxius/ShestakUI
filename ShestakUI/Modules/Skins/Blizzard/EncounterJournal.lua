@@ -58,11 +58,11 @@ local function LoadSkin()
 	EncounterJournalEncounterFrameInfoClassFilterClearFrame:GetRegions():SetAlpha(0)
 	T.SkinDropDownBox(EncounterJournalEncounterFrameInfoDifficulty)
 
-	hooksecurefunc(EncounterJournalEncounterFrameInfoResetButton, "SetPoint", function(self, _, _, _, x)
-		if x == -10 then
-			self:SetPoint("RIGHT", EncounterJournalEncounterFrameInfoDifficulty, "LEFT", -5, 0)
-		end
-	end)
+	--FIXME hooksecurefunc(EncounterJournalEncounterFrameInfoResetButton, "SetPoint", function(self, _, _, _, x)
+		-- if x == -10 then
+			-- self:SetPoint("RIGHT", EncounterJournalEncounterFrameInfoDifficulty, "LEFT", -5, 0)
+		-- end
+	-- end)
 
 	local monthlyActivities = EncounterJournalMonthlyActivitiesFrame
 	if monthlyActivities then
@@ -110,10 +110,10 @@ local function LoadSkin()
 	EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetFont(C.media.normal_font, 16, "")
 	EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1, 1, 1)
 	EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild.overviewDescription.Text:SetTextColor("P", 1, 1, 1)
-	EncounterJournal.encounter.info.reset:StripTextures()
-	EncounterJournal.encounter.info.reset:SkinButton()
-	EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexture("Interface\\EncounterJournal\\UI-EncounterJournalTextures")
-	EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexCoord(0.90625000, 0.94726563, 0.00097656, 0.02050781)
+	--FIXME EncounterJournal.encounter.info.reset:StripTextures()
+	-- EncounterJournal.encounter.info.reset:SkinButton()
+	-- EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexture("Interface\\EncounterJournal\\UI-EncounterJournalTextures")
+	-- EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexCoord(0.90625000, 0.94726563, 0.00097656, 0.02050781)
 
 	local tabs = {
 		EncounterJournalEncounterFrameInfoOverviewTab,
