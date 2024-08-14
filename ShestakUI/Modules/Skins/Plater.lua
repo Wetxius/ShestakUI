@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if C.skins.plater ~= true or not IsAddOnLoaded("Plater") then return end
+if C.skins.plater ~= true or not C_AddOns.IsAddOnLoaded("Plater") then return end
 
 ----------------------------------------------------------------------------------------
 --	Plater skin

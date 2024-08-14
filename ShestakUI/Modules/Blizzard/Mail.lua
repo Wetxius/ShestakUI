@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if IsAddOnLoaded("OpenAll") or IsAddOnLoaded("Postal") or IsAddOnLoaded("TradeSkillMaster_Mailing") then return end
+if C_AddOns.IsAddOnLoaded("OpenAll") or C_AddOns.IsAddOnLoaded("Postal") or C_AddOns.IsAddOnLoaded("TradeSkillMaster_Mailing") then return end
 
 ----------------------------------------------------------------------------------------
 --	Grab mail in 1 button(OpenAll by Kemayo)

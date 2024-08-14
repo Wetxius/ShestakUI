@@ -170,7 +170,7 @@ local function QuestInfo_ShowRewards()
 	end
 end
 
-if IsAddOnLoaded("Pawn") then
+if C_AddOns.IsAddOnLoaded("Pawn") then
 	hooksecurefunc("PawnUI_OnQuestInfo_ShowRewards", QuestInfo_ShowRewards)
 else
 	hooksecurefunc("QuestInfo_ShowRewards", QuestInfo_ShowRewards)
@@ -197,7 +197,7 @@ local function GuildRewards_Update()
 end
 
 local isBlizzard_GuildUILoaded
-if IsAddOnLoaded("Blizzard_GuildUI") then
+if C_AddOns.IsAddOnLoaded("Blizzard_GuildUI") then
 	isBlizzard_GuildUILoaded = true
 	hooksecurefunc("GuildRewards_Update", GuildRewards_Update)
 	hooksecurefunc(GuildRewardsContainer, "update", GuildRewards_Update)
@@ -229,7 +229,7 @@ local function GuildBankFrame_Update()
 end
 
 local isBlizzard_GuildBankUILoaded
-if IsAddOnLoaded("Blizzard_GuildBankUI") then
+if C_AddOns.IsAddOnLoaded("Blizzard_GuildBankUI") then
 	isBlizzard_GuildBankUILoaded = true
 	hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
 end
@@ -283,7 +283,7 @@ local function BlackMarketScrollFrame_Update(self, elementData)
 end
 
 local isBlizzard_BlackMarketUILoaded
-if IsAddOnLoaded("Blizzard_BlackMarketUI") then
+if C_AddOns.IsAddOnLoaded("Blizzard_BlackMarketUI") then
 	isBlizzard_BlackMarketUILoaded = true
 	hooksecurefunc("BlackMarketFrame_UpdateHotItem", BlackMarketFrame_UpdateHotItem)
 	hooksecurefunc(BlackMarketItemMixin, "Init", BlackMarketScrollFrame_Update)

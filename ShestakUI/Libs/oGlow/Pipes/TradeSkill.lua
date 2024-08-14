@@ -36,7 +36,7 @@ end
 
 local update = function(self)
 	local id = GetTradeSkillSelectionIndex()
-	if id and IsAddOnLoaded("Blizzard_TradeSkillUI") then
+	if id and C_AddOns.IsAddOnLoaded("Blizzard_TradeSkillUI") then
 		return pipe(id)
 	end
 end
@@ -44,7 +44,7 @@ end
 local enable = function(self)
 	_E = true
 
-	if IsAddOnLoaded("Blizzard_TradeSkillUI") then
+	if C_AddOns.IsAddOnLoaded("Blizzard_TradeSkillUI") then
 		doHook()
 	else
 		self:RegisterEvent("ADDON_LOADED", ADDON_LOADED)

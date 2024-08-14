@@ -35,7 +35,7 @@ local floor = math.floor
 local unpack = unpack
 local pairs = pairs
 local ipairs = ipairs
-local IsAddOnLoaded = IsAddOnLoaded
+local C_AddOns.IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 local hooksecurefunc = hooksecurefunc
 
 local r, is = function(n, dec) return floor(n * (10 ^ (dec or 0)) + 0.5) end, function(v, t) return type(v) == t end
@@ -136,7 +136,7 @@ function lpanels:MakePanel(f)
 	panel.width, panel.height = f.width, f.height
 
 	-- Hide dependant frames, will show later for late loading addons
-	if f.require and not IsAddOnLoaded(f.require) then deps[f.name] = f.require panel:Hide() end
+	if f.require and not C_AddOns.IsAddOnLoaded(f.require) then deps[f.name] = f.require panel:Hide() end
 
 	-- Set positions
 	panel:SetParent(f.parent)
@@ -282,7 +282,7 @@ function lpanels.OnEvent(_, event)
 		lpanels = lpanels:Exit()
 	elseif event == "ADDON_LOADED" and deps then
 		for frame, addon in pairs(deps) do
-			if IsAddOnLoaded(addon) then _G[frame]:Show() frame = nil end
+			if C_AddOns.IsAddOnLoaded(addon) then _G[frame]:Show() frame = nil end
 		end
 	end
 end

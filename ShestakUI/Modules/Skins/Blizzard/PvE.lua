@@ -557,7 +557,7 @@ end
 
 T.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin
 
-if IsAddOnLoaded("PremadeGroupsFilter") then
+if C_AddOns.IsAddOnLoaded("PremadeGroupsFilter") then
 	PremadeGroupsFilterDialog:StripTextures()
 	PremadeGroupsFilterDialog:CreateBackdrop("Transparent")
 	PremadeGroupsFilterDialog.backdrop:SetPoint("TOPLEFT", 3, 0)

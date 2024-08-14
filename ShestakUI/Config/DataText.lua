@@ -4,7 +4,7 @@ local T, C, L = unpack(ShestakUI)
 --	LiteStats configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!
 ----------------------------------------------------------------------------------------
-local cBN = IsAddOnLoaded("cargBags_Nivaya")
+local cBN = C_AddOns.IsAddOnLoaded("cargBags_Nivaya")
 local function class(string)
 	return format("|cff%02x%02x%02x%s|r", C.media.classborder_color[1] * 255, C.media.classborder_color[2] * 255, C.media.classborder_color[3] * 255, string or "")
 end

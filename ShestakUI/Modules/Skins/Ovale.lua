@@ -7,7 +7,7 @@ if C.skins.ovale ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("Ovale") then return end
+	if not C_AddOns.IsAddOnLoaded("Ovale") then return end
 
 	if not OvaleDB then OvaleDB = {} end
 	if not OvaleDB["profiles"] then OvaleDB["profiles"] = {} end

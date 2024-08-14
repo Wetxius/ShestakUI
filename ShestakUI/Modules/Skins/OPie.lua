@@ -1,5 +1,5 @@
 local T, C = unpack(ShestakUI)
-if C.skins.opie ~= true or not IsAddOnLoaded("OPie") then return end
+if C.skins.opie ~= true or not C_AddOns.IsAddOnLoaded("OPie") then return end
 
 ----------------------------------------------------------------------------------------
 --	OPie skin (OPie Masque)

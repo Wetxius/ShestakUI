@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if C.skins.recount ~= true or not IsAddOnLoaded("Recount") then return end
+if C.skins.recount ~= true or not C_AddOns.IsAddOnLoaded("Recount") then return end
 
 ----------------------------------------------------------------------------------------
 --	Recount skin

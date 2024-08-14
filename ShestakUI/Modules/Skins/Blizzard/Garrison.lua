@@ -6,7 +6,7 @@ local T, C, L = unpack(ShestakUI)
 local LoadTootlipSkin = CreateFrame("Frame")
 LoadTootlipSkin:RegisterEvent("ADDON_LOADED")
 LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
-	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") or not C.tooltip.enable then
+	if C_AddOns.IsAddOnLoaded("Skinner") or C_AddOns.IsAddOnLoaded("Aurora") or not C.tooltip.enable then
 		self:UnregisterEvent("ADDON_LOADED")
 		return
 	end
@@ -296,7 +296,7 @@ local function LoadSkin()
 			if firstRegion then firstRegion:Hide() end
 
 			reward:ClearAllPoints()
-			if IsAddOnLoaded("GarrisonMissionManager") then
+			if C_AddOns.IsAddOnLoaded("GarrisonMissionManager") then
 				reward:SetPoint("TOPRIGHT", -T.mult * 65 + (index * -65), -T.mult)
 			else
 				reward:SetPoint("TOPRIGHT", -T.mult + (index * -65), -T.mult)
@@ -818,7 +818,7 @@ local function LoadSkin()
 			GarrisonMissionFrameFollowers.SearchBox:SetSize(270, 20)
 		end
 
-		if IsAddOnLoaded("MasterPlan") then
+		if C_AddOns.IsAddOnLoaded("MasterPlan") then
 			skinMasterPlan()
 		else
 			local f = CreateFrame("Frame")
@@ -1120,7 +1120,7 @@ local function LoadSkin()
 	----------------------------------------------------------------------------------------
 	--	KayrCovenantMissions AddOn skin
 	----------------------------------------------------------------------------------------
-	if IsAddOnLoaded("KayrCovenantMissions") then
+	if C_AddOns.IsAddOnLoaded("KayrCovenantMissions") then
 		hooksecurefunc(CovenantMissionFrame, "SetupTabs", function()
 			if KayrCovenantMissionsAdvice then
 				KayrCovenantMissionsAdvice:StripTextures()

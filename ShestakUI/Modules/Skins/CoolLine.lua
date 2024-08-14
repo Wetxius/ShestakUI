@@ -7,7 +7,7 @@ if C.skins.cool_line ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("CoolLine") then return end
+	if not C_AddOns.IsAddOnLoaded("CoolLine") then return end
 
 	CoolLineDB.border = "None"
 	CoolLineDB.bgcolor.a = 0

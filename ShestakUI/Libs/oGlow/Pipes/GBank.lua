@@ -35,7 +35,7 @@ local function ADDON_LOADED(self, event, addon)
 end
 
 local update = function(self)
-	if(IsAddOnLoaded("Blizzard_GuildBankUI")) then
+	if(C_AddOns.IsAddOnLoaded("Blizzard_GuildBankUI")) then
 		return pipe()
 	end
 end
@@ -43,7 +43,7 @@ end
 local enable = function(self)
 	_E = true
 
-	if(IsAddOnLoaded("Blizzard_GuildBankUI")) then
+	if(C_AddOns.IsAddOnLoaded("Blizzard_GuildBankUI")) then
 		doHook()
 	else
 		self:RegisterEvent("ADDON_LOADED", ADDON_LOADED)

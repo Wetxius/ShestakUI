@@ -181,7 +181,7 @@ LeadershipCheck:RegisterEvent("GROUP_ROSTER_UPDATE")
 LeadershipCheck:SetScript("OnEvent", ToggleRaidUtil)
 
 -- Support Aurora
-if IsAddOnLoaded("Aurora") then
+if C_AddOns.IsAddOnLoaded("Aurora") then
 	local F = unpack(Aurora)
 	RaidUtilityPanel:SetBackdropColor(0, 0, 0, 0)
 	RaidUtilityPanel:SetBackdropBorderColor(0, 0, 0, 0)

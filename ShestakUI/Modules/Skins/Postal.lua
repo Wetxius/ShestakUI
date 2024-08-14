@@ -7,7 +7,7 @@ if C.skins.postal ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("Postal") then return end
+	if not C_AddOns.IsAddOnLoaded("Postal") then return end
 	T.SkinRotateButton(Postal_ModuleMenuButton)
 	Postal_ModuleMenuButton:ClearAllPoints()
 	Postal_ModuleMenuButton:SetWidth(18)

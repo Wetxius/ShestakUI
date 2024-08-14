@@ -1,6 +1,6 @@
 ﻿local T, C, L = unpack(ShestakUI)
 
-if IsAddOnLoaded("yClassColor") then return end
+if C_AddOns.IsAddOnLoaded("yClassColor") then return end
 
 ----------------------------------------------------------------------------------------
 --	Class color guild/friends/etc list(yClassColor by Yleaf)

@@ -7,7 +7,7 @@ if C.skins.capping ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("Capping") then return end
+	if not C_AddOns.IsAddOnLoaded("Capping") then return end
 
 	local db = CappingFrame.db.profile
 	db.barTexture = "Smooth!"

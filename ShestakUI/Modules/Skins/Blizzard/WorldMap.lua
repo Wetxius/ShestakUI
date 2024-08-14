@@ -5,7 +5,7 @@ if C.skins.blizzard_frames ~= true then return end
 --	WorldMap skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if IsAddOnLoaded("Mapster") then return end
+	if C_AddOns.IsAddOnLoaded("Mapster") then return end
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("VARIABLES_LOADED")

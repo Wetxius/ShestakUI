@@ -7,7 +7,7 @@ if C.skins.npcscan ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("_NPCScan") then return end
+	if not C_AddOns.IsAddOnLoaded("_NPCScan") then return end
 	_NPCScanButton:StripTextures()
 	_NPCScanButton:SetTemplate("Transparent")
 	_NPCScanButton:SetScale(1)

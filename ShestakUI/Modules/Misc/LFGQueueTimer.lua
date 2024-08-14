@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if IsAddOnLoaded("DBM-Core") or IsAddOnLoaded("BigWigs") then return end
+if C_AddOns.IsAddOnLoaded("DBM-Core") or C_AddOns.IsAddOnLoaded("BigWigs") then return end
 
 ----------------------------------------------------------------------------------------
 --	Queue timer on LFGDungeonReadyDialog

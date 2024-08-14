@@ -7,7 +7,7 @@ if C.skins.blood_shield_tracker ~= true or T.class ~= "DEATHKNIGHT" then return 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("BloodShieldTracker") then return end
+	if not C_AddOns.IsAddOnLoaded("BloodShieldTracker") then return end
 
 	if not BloodShieldTrackerDB["profiles"]["Default"]["bars"] then BloodShieldTrackerDB["profiles"]["Default"]["bars"] = {} end
 	if not BloodShieldTrackerDB["profiles"]["Default"]["bars"]["AMSBar"] then BloodShieldTrackerDB["profiles"]["Default"]["bars"]["AMSBar"] = {} end

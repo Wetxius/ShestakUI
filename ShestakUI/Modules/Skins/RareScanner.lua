@@ -7,7 +7,7 @@ if C.skins.rarescanner ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("RareScanner") then return end
+	if not C_AddOns.IsAddOnLoaded("RareScanner") then return end
 	scanner_button:StripTextures()
 	scanner_button:CreateBackdrop("Transparent")
 

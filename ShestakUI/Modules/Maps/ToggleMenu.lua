@@ -363,7 +363,7 @@ end
 local function addonFrameToggle(_, i)
 	local name = GetAddOnInfo(i)
 	if C.toggleaddons[name] then
-		if IsAddOnLoaded(i) then
+		if C_AddOns.IsAddOnLoaded(i) then
 			C.toggleaddons[name]()
 		end
 	end
@@ -376,7 +376,7 @@ local function refreshAddOnMenu()
 	for i = 1, GetNumAddOns() do
 		local name = GetAddOnInfo(i)
 		if addonInfo[i].is_main or (addonInfo[i].parent == i) or not addonInfo[addonInfo[i].parent].collapsed then
-			if not addonToggleOnly or (C.toggleaddons[name] and IsAddOnLoaded(i)) then
+			if not addonToggleOnly or (C.toggleaddons[name] and C_AddOns.IsAddOnLoaded(i)) then
 				menusize = menusize + 1
 			end
 		end
@@ -391,7 +391,7 @@ local function refreshAddOnMenu()
 		local name = GetAddOnInfo(i)
 		addonmenuitems[j]:Hide()
 		if addonInfo[i].is_main or addonInfo[i].parent == i or not addonInfo[addonInfo[i].parent].collapsed then
-			if (not addonToggleOnly or (C.toggleaddons[name] and IsAddOnLoaded(i))) then
+			if (not addonToggleOnly or (C.toggleaddons[name] and C_AddOns.IsAddOnLoaded(i))) then
 				addonmenuitems[j]:ClearAllPoints()
 				if menusize % menuheight == 0 then
 					addonmenuitems[j]:SetPoint("BOTTOMRIGHT", addonmenuitems[lastMenuEntryID], "BOTTOMLEFT", buttonspacing(-1), (buttonheight(-menuheight + 1) + buttonspacing(-menuheight + 1)))
@@ -453,7 +453,7 @@ for i = 1, GetNumAddOns() do
 		GameTooltip:AddLine(L_TOGGLE_ADDON..name)
 		GameTooltip:AddLine("|cffffffff"..L_TOGGLE_RCLICK..name.."\n"..L_TOGGLE_RELOAD)
 		if C.toggleaddons[name] then
-			if IsAddOnLoaded(i) then
+			if C_AddOns.IsAddOnLoaded(i) then
 				GameTooltip:AddLine("|cffffffff"..L_TOGGLE_LCLICK..name)
 			end
 		end

@@ -377,10 +377,10 @@ StaticPopupDialogs.SETTINGS_ALL = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		if IsAddOnLoaded("DBM-Core") and C.skins.dbm then T.UploadDBM() end
-		if IsAddOnLoaded("BigWigs") and C.skins.bigwigs then T.UploadBW() end
-		if IsAddOnLoaded("MikScrollingBattleText") then UploadMSBT() end
-		if IsAddOnLoaded("Skada") then UploadSkada() end
+		if C_AddOns.IsAddOnLoaded("DBM-Core") and C.skins.dbm then T.UploadDBM() end
+		if C_AddOns.IsAddOnLoaded("BigWigs") and C.skins.bigwigs then T.UploadBW() end
+		if C_AddOns.IsAddOnLoaded("MikScrollingBattleText") then UploadMSBT() end
+		if C_AddOns.IsAddOnLoaded("Skada") then UploadSkada() end
 		ReloadUI()
 	end,
 	timeout = 0,
@@ -391,7 +391,7 @@ StaticPopupDialogs.SETTINGS_ALL = {
 
 SlashCmdList.SETTINGS = function(msg)
 	if msg == "dbm" then
-		if IsAddOnLoaded("DBM-Core") then
+		if C_AddOns.IsAddOnLoaded("DBM-Core") then
 			if C.skins.dbm == true then
 				StaticPopup_Show("SETTINGS_DBM")
 			else
@@ -401,7 +401,7 @@ SlashCmdList.SETTINGS = function(msg)
 			print("|cffffff00DBM"..L_INFO_NOT_INSTALLED.."|r")
 		end
 	elseif msg == "bw" then
-		if IsAddOnLoaded("BigWigs") then
+		if C_AddOns.IsAddOnLoaded("BigWigs") then
 			if C.skins.bigwigs == true then
 				StaticPopup_Show("SETTINGS_BIGWIGS")
 			else
@@ -411,14 +411,14 @@ SlashCmdList.SETTINGS = function(msg)
 			print("|cffffff00BigWigs"..L_INFO_NOT_INSTALLED.."|r")
 		end
 	elseif msg == "msbt" then
-		if IsAddOnLoaded("MikScrollingBattleText") then
+		if C_AddOns.IsAddOnLoaded("MikScrollingBattleText") then
 			UploadMSBT()
 			ReloadUI()
 		else
 			print("|cffffff00MSBT"..L_INFO_NOT_INSTALLED.."|r")
 		end
 	elseif msg == "skada" then
-		if IsAddOnLoaded("Skada") then
+		if C_AddOns.IsAddOnLoaded("Skada") then
 			UploadSkada()
 			ReloadUI()
 		else

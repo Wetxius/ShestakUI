@@ -24,7 +24,7 @@ C.general.choose_profile = 1
 C.general.profile_name = "1"
 C.options = {}
 
-if not IsAddOnLoaded("ShestakUI_Config") then return end
+if not C_AddOns.IsAddOnLoaded("ShestakUI_Config") then return end
 
 ----------------------------------------------------------------------------------------
 --	This Module loads new user settings if ShestakUI_Config is loaded

@@ -259,7 +259,7 @@ function Stuffing:SlotUpdate(b)
 		b.frame.UpgradeIcon:SetShown(itemIsUpgrade or false)
 	end
 
-	if IsAddOnLoaded("CanIMogIt") then
+	if C_AddOns.IsAddOnLoaded("CanIMogIt") then
 		CIMI_AddToFrame(b.frame, ContainerFrame_CIMIUpdateIcon)
 		ContainerFrame_CIMIUpdateIcon(b.frame.CanIMogItOverlay)
 	end

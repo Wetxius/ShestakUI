@@ -7,7 +7,7 @@ if C.skins.tiny_dps ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("TinyDPS") then return end
+	if not C_AddOns.IsAddOnLoaded("TinyDPS") then return end
 
 	tdps.width = 221
 	tdps.barHeight = 12

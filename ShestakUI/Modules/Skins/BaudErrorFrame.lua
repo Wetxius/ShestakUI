@@ -6,7 +6,7 @@
 local AuroraSkin = CreateFrame("Frame")
 AuroraSkin:RegisterEvent("PLAYER_LOGIN")
 AuroraSkin:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("!BaudErrorFrame") then return end
+	if not C_AddOns.IsAddOnLoaded("!BaudErrorFrame") then return end
 
 	BaudErrorFrame:SetTemplate("Transparent")
 	BaudErrorFrameListScrollBox:SetTemplate("Overlay")

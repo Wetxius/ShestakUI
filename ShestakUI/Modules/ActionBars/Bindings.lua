@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if IsAddOnLoaded("ncHoverBind") then return end
+if C_AddOns.IsAddOnLoaded("ncHoverBind") then return end
 
 ----------------------------------------------------------------------------------------
 --	Binding buttons(ncHoverBind by Nightcracker)
@@ -360,7 +360,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
 
-		if not IsAddOnLoaded("Blizzard_MacroUI") then
+		if not C_AddOns.IsAddOnLoaded("Blizzard_MacroUI") then
 			hooksecurefunc("LoadAddOn", function(addon)
 				if addon == "Blizzard_MacroUI" then
 					registermacro()
@@ -381,10 +381,10 @@ SLASH_MOUSEOVERBIND1 = "/bindkey"
 SLASH_MOUSEOVERBIND2 = "/hoverbind"
 SLASH_MOUSEOVERBIND3 = "/bk"
 
-if not IsAddOnLoaded("Bartender4") and not IsAddOnLoaded("Dominos") then
+if not C_AddOns.IsAddOnLoaded("Bartender4") and not C_AddOns.IsAddOnLoaded("Dominos") then
 	SLASH_MOUSEOVERBIND4 = "/kb"
 end
 
-if not IsAddOnLoaded("HealBot") then
+if not C_AddOns.IsAddOnLoaded("HealBot") then
 	SLASH_MOUSEOVERBIND5 = "/hb"
 end

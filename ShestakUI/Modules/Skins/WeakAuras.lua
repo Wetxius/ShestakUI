@@ -4,7 +4,7 @@ if C.skins.weak_auras ~= true then return end
 ----------------------------------------------------------------------------------------
 --	WeakAuras skin
 ----------------------------------------------------------------------------------------
-if not IsAddOnLoaded("WeakAuras") then return end
+if not C_AddOns.IsAddOnLoaded("WeakAuras") then return end
 
 local i = 0
 local function Skin_WeakAuras(frame, type)

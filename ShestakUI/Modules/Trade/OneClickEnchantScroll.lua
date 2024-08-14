@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.trade.enchantment_scroll ~= true or IsAddOnLoaded("OneClickEnchantScroll") then return end
+if C.trade.enchantment_scroll ~= true or C_AddOns.IsAddOnLoaded("OneClickEnchantScroll") then return end
 
 ----------------------------------------------------------------------------------------
 --	Enchantment scroll on TradeSkill frame(OneClickEnchantScroll by Sara.Festung)

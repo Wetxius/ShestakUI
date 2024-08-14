@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.minimap.bg_map_stylization ~= true or IsAddOnLoaded("Capping") or IsAddOnLoaded("Aurora") or IsAddOnLoaded("EnhanceBattlefieldMinimap") then return end
+if C.minimap.bg_map_stylization ~= true or C_AddOns.IsAddOnLoaded("Capping") or C_AddOns.IsAddOnLoaded("Aurora") or C_AddOns.IsAddOnLoaded("EnhanceBattlefieldMinimap") then return end
 
 ----------------------------------------------------------------------------------------
 --	BattlefieldMap style

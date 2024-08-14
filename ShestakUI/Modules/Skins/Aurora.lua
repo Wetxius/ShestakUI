@@ -6,7 +6,7 @@
 local AuroraSkin = CreateFrame("Frame")
 AuroraSkin:RegisterEvent("PLAYER_LOGIN")
 AuroraSkin:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("Aurora") then return end
+	if not C_AddOns.IsAddOnLoaded("Aurora") then return end
 	local F = unpack(Aurora)
 
 	local buttons = {
@@ -55,7 +55,7 @@ AuroraSkin:SetScript("OnEvent", function()
 		end
 	end
 
-	if IsAddOnLoaded("!BaudErrorFrame") then
+	if C_AddOns.IsAddOnLoaded("!BaudErrorFrame") then
 		F.ReskinScroll(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
 		F.ReskinScroll(BaudErrorFrameDetailScrollFrame.ScrollBar)
 	end

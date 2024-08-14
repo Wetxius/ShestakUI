@@ -133,7 +133,7 @@ if C.misc.raid_tools == true then
 	button:SetWidth(RaidUtilityRoleButton:GetWidth())
 	button:SetHeight(18)
 	button:SetPoint("TOP", RaidUtilityRaidControlButton, "BOTTOM", 0, -5)
-	if IsAddOnLoaded("Aurora") then
+	if C_AddOns.IsAddOnLoaded("Aurora") then
 		local F = unpack(Aurora)
 		F.Reskin(button)
 	else

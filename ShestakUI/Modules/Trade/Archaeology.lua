@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.trade.archaeology ~= true or IsAddOnLoaded("stArchaeologist") then return end
+if C.trade.archaeology ~= true or C_AddOns.IsAddOnLoaded("stArchaeologist") then return end
 
 ----------------------------------------------------------------------------------------
 --	Archaeology tracker(stArchaeologist by Safturento)
@@ -126,7 +126,7 @@ function stArch:OnLoad(self)
 	archSkill["bar"]:SetPoint("BOTTOMLEFT", archSkill["frame"], "BOTTOMLEFT", 2, 2)
 	archSkill["bar"]:SetStatusBarColor(0, 0.4, 0.8)
 	archSkill["bar"]:SetScript("OnMouseUp", function()
-		if IsAddOnLoaded("Blizzard_ArchaeologyUI") then
+		if C_AddOns.IsAddOnLoaded("Blizzard_ArchaeologyUI") then
 			ToggleFrame(ArchaeologyFrame)
 		else
 			local loaded = LoadAddOn("Blizzard_ArchaeologyUI")

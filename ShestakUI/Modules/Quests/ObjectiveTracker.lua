@@ -286,7 +286,7 @@ end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("WorldQuestsList") then return end
+	if not C_AddOns.IsAddOnLoaded("WorldQuestsList") then return end
 
 	local orig = _G.WorldQuestList.ObjectiveTracker_Update_hook
 	local function orig_hook(...)

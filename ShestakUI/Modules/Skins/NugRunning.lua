@@ -7,7 +7,7 @@ if C.skins.nug_running ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("NugRunning") then return end
+	if not C_AddOns.IsAddOnLoaded("NugRunning") then return end
 
 	local NugRunning = NugRunning
 	local TimerBar = NugRunning and NugRunning.TimerBar

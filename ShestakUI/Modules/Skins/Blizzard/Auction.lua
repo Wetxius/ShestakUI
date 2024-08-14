@@ -260,7 +260,7 @@ local function LoadSkin()
 	TokenTutorial.Bg:SetAlpha(0)
 
 	-- Auctionator skin (from AddOnSkins)
-	if IsAddOnLoaded("Auctionator") then
+	if C_AddOns.IsAddOnLoaded("Auctionator") then
 		C_Timer.After(0.05, function()
 			local list = _G.AuctionatorShoppingFrame
 			if not list then return end

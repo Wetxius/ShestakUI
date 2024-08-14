@@ -13,7 +13,7 @@ local DBMSkin = CreateFrame("Frame")
 DBMSkin:RegisterEvent("PLAYER_LOGIN")
 DBMSkin:RegisterEvent("ADDON_LOADED")
 DBMSkin:SetScript("OnEvent", function()
-	if IsAddOnLoaded("DBM-Core") then
+	if C_AddOns.IsAddOnLoaded("DBM-Core") then
 		local function SkinBars(self)
 			for bar in self:GetBarIterator() do
 				if not bar.injected then
@@ -163,7 +163,7 @@ DBMSkin:SetScript("OnEvent", function()
 			return old(noticeFrame, textString, colorInfo)
 		end
 	end
-	if IsAddOnLoaded("DBM-GUI") then
+	if C_AddOns.IsAddOnLoaded("DBM-GUI") then
 		tinsert(UISpecialFrames, "DBM_GUI_OptionsFrame")
 		_G["DBM_GUI_OptionsFrame"]:StripTextures()
 		_G["DBM_GUI_OptionsFrame"]:SetTemplate("Transparent")
@@ -207,7 +207,7 @@ end)
 --	DBM settings(by ALZA and help from Affli)
 ----------------------------------------------------------------------------------------
 function T.UploadDBM()
-	if IsAddOnLoaded("DBM-Core") then
+	if C_AddOns.IsAddOnLoaded("DBM-Core") then
 		DBM_UseDualProfile = false
 		DBM_AllSavedOptions["Default"].Enabled = true
 		DBM_AllSavedOptions["Default"].ShowMinimapButton = C.skins.minimap_buttons and true or false
@@ -290,7 +290,7 @@ OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	if IsAddOnLoaded("DBM-Core") then
+	if C_AddOns.IsAddOnLoaded("DBM-Core") then
 		if DBM_AllSavedOptions["Default"].InstalledBars ~= C.actionbar.bottombars then
 			StaticPopup_Show("SETTINGS_DBM")
 		end

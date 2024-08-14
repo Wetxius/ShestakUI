@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if C.skins.omen ~= true or not IsAddOnLoaded("Omen") then return end
+if C.skins.omen ~= true or not C_AddOns.IsAddOnLoaded("Omen") then return end
 
 ----------------------------------------------------------------------------------------
 --	Omen skin

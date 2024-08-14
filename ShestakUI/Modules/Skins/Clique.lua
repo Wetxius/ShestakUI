@@ -5,7 +5,7 @@ if C.skins.blizzard_frames ~= true or C.skins.clique ~= true then return end
 --	Clique skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if not IsAddOnLoaded("Clique") then return end
+	if not C_AddOns.IsAddOnLoaded("Clique") then return end
 	C_Timer.After(0.25, function()
 	-- CliqueUIBindingFrame:StripTextures()
 	-- CliqueUIBindingFrame:SetTemplate("Transparent")
@@ -66,7 +66,7 @@ end
 local LoadTootlipSkin = CreateFrame("Frame")
 LoadTootlipSkin:RegisterEvent("ADDON_LOADED")
 LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
-	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora")  then
+	if C_AddOns.IsAddOnLoaded("Skinner") or C_AddOns.IsAddOnLoaded("Aurora")  then
 		self:UnregisterEvent("ADDON_LOADED")
 		return
 	end

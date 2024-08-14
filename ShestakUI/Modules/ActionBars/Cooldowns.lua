@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if IsAddOnLoaded("OmniCC") or IsAddOnLoaded("ncCooldown") or IsAddOnLoaded("tullaCC") then return end
+if C_AddOns.IsAddOnLoaded("OmniCC") or C_AddOns.IsAddOnLoaded("ncCooldown") or C_AddOns.IsAddOnLoaded("tullaCC") then return end
 
 ----------------------------------------------------------------------------------------
 --	Cooldown count(tullaCC by Tuller)

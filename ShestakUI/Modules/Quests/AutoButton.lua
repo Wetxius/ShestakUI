@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.misc.quest_auto_button ~= true or IsAddOnLoaded("ExtraQuestButton") then return end
+if C.misc.quest_auto_button ~= true or C_AddOns.IsAddOnLoaded("ExtraQuestButton") then return end
 
 ----------------------------------------------------------------------------------------
 --	AutoButton for used items(by Elv22) (use macro /click AutoButton)

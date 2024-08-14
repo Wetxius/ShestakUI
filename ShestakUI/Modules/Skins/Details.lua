@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.skins.details ~= true or not IsAddOnLoaded("Details") then return end
+if C.skins.details ~= true or not C_AddOns.IsAddOnLoaded("Details") then return end
 
 ----------------------------------------------------------------------------------------
 --	Details skin

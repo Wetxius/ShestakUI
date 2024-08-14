@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.skins.rematch ~= true or not IsAddOnLoaded("Rematch") then return end
+if C.skins.rematch ~= true or not C_AddOns.IsAddOnLoaded("Rematch") then return end
 
 ----------------------------------------------------------------------------------------
 --	Rematch skin

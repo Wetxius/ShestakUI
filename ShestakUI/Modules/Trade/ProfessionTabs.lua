@@ -135,7 +135,7 @@ local function UpdateTab(object, name, texture, hat)
 
 	tab:SetSize(36, 36)
 	tab:ClearAllPoints()
-	if IsAddOnLoaded("Aurora") then
+	if C_AddOns.IsAddOnLoaded("Aurora") then
 		tab:SetPoint("TOPLEFT", object, "TOPRIGHT", 11, (-44 * index) + 10)
 
 		tab:SetNormalTexture(0)
@@ -261,7 +261,7 @@ local isLoaded
 function handler:TRADE_SKILL_SHOW(event)
 	local owner = ATSWFrame or MRTSkillFrame or SkilletFrame or ProfessionsFrame
 
-	if IsAddOnLoaded("TradeSkillDW") and owner == ProfessionsFrame then
+	if C_AddOns.IsAddOnLoaded("TradeSkillDW") and owner == ProfessionsFrame then
 		self:UnregisterEvent(event)
 	else
 		HandleTabs(owner)

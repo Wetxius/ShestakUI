@@ -1,4 +1,4 @@
-if IsAddOnLoaded("Fizzle") then return end
+if C_AddOns.IsAddOnLoaded("Fizzle") then return end
 
 local _E
 local hook

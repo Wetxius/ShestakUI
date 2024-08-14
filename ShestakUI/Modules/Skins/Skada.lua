@@ -7,7 +7,7 @@ if C.skins.skada ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not IsAddOnLoaded("Skada") then return end
+	if not C_AddOns.IsAddOnLoaded("Skada") then return end
 
 	local barmod = Skada.displays["bar"]
 

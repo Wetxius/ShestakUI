@@ -127,7 +127,7 @@ ZoneAbilityFrame.Style:SetAlpha(0)
 ------------------------------------------------------------------------------------------
 --	Skin ExtraQuestButton
 ------------------------------------------------------------------------------------------
-if IsAddOnLoaded("ExtraQuestButton") then
+if C_AddOns.IsAddOnLoaded("ExtraQuestButton") then
 	local button = ExtraQuestButton
 	ExtraQuestButtonArtwork:Hide()
 	button:StyleButton()
