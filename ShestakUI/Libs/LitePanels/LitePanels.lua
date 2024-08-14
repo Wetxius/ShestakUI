@@ -35,7 +35,6 @@ local floor = math.floor
 local unpack = unpack
 local pairs = pairs
 local ipairs = ipairs
-local C_AddOns.IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 local hooksecurefunc = hooksecurefunc
 
 local r, is = function(n, dec) return floor(n * (10 ^ (dec or 0)) + 0.5) end, function(v, t) return type(v) == t end
