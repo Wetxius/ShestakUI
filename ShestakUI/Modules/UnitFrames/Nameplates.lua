@@ -426,7 +426,7 @@ local function castColor(self)
 		self.bg:SetColorTexture(0.78, 0.25, 0.25, 0.2)
 	else
 		if C.nameplate.kick_color then
-			local start = GetSpellCooldown(kickID)
+			local start = C_Spell.GetSpellCooldown(kickID)
 			if start ~= 0 then
 				self:SetStatusBarColor(1, 0.5, 0)
 				self.bg:SetColorTexture(1, 0.5, 0, 0.2)

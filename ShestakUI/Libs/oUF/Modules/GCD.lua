@@ -33,7 +33,7 @@ end
 
 local function Update(self)
 	local bar = self.GCD
-	local start, dur = GetSpellCooldown(61304)
+	local start, dur = C_Spell.GetSpellCooldown(61304)
 	if dur and dur > 0 and dur <= 2 then
 		usingspell = 1
 		starttime = start

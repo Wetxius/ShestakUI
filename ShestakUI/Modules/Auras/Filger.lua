@@ -395,9 +395,9 @@ function Filger:OnEvent(event, unit, _, castID)
 					name, _, icon = GetSpellInfo(data.spellID)
 					if name then
 						if data.absID then
-							start, duration = GetSpellCooldown(data.spellID)
+							start, duration = C_Spell.GetSpellCooldown(data.spellID)
 						else
-							start, duration = GetSpellCooldown(name)
+							start, duration = C_Spell.GetSpellCooldown(name)
 						end
 						spid = data.spellID
 					end
