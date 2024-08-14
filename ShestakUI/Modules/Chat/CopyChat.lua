@@ -112,7 +112,7 @@ for i = 1, NUM_CHAT_WINDOWS do
 
 	button:SetScript("OnMouseUp", function(_, btn)
 		if btn == "RightButton" then
-			ToggleFrame(ChatMenu)
+			--FIXME ToggleFrame(ChatMenu)
 		elseif btn == "MiddleButton" then
 			RandomRoll(1, 100)
 		else
