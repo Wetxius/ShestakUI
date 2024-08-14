@@ -89,7 +89,7 @@ local function _updateItems(unit, frame)
 					end
 				end
 
-				local info = GetItemStats(itemLink)
+				local info = C_Item.GetItemStats(itemLink)
 				local numSocket = info["EMPTY_SOCKET_PRISMATIC"] or 0
 				local numGem = 0
 
