@@ -46,7 +46,7 @@ SLASH_UIHELP3 = "/гшрудз"
 SlashCmdList.DISABLE_ADDON = function(addon)
 	local _, _, _, _, _, reason = C_AddOns.GetAddOnInfo(addon)
 	if reason ~= "MISSING" then
-		DisableAddOn(addon)
+		C_AddOns.DisableAddOn(addon)
 		ReloadUI()
 	else
 		print("|cffffff00"..L_TOGGLE_ADDON.."'"..addon.."'"..L_TOGGLE_NOT_FOUND.."|r")
@@ -58,7 +58,7 @@ SLASH_DISABLE_ADDON2 = "/disable"
 SlashCmdList.ENABLE_ADDON = function(addon)
 	local _, _, _, _, _, reason = C_AddOns.GetAddOnInfo(addon)
 	if reason ~= "MISSING" then
-		EnableAddOn(addon)
+		C_AddOns.EnableAddOn(addon)
 		LoadAddOn(addon)
 		ReloadUI()
 	else
@@ -72,7 +72,7 @@ SlashCmdList.ONLY_UI = function()
 	for i = 1, C_AddOns.GetNumAddOns() do
 		local name = C_AddOns.GetAddOnInfo(i)
 		if name ~= "ShestakUI" and name ~= "ShestakUI_Config" and name ~= "!BaudErrorFrame" and GetAddOnEnableState(T.name, name) == 2 then
-			DisableAddOn(name, T.name)
+			C_AddOns.DisableAddOn(name, T.name)
 		end
 	end
 	ReloadUI()

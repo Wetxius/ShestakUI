@@ -351,9 +351,9 @@ local function addonEnableToggle(_, i)
 	for j = 1, C_AddOns.GetNumAddOns() do
 		if (addonInfo[j].parent == i and addonInfo[i].collapsed) or (i == j and not addonInfo[addonInfo[i].parent].collapsed) then
 			if was_enabled then
-				DisableAddOn(j)
+				C_AddOns.DisableAddOn(j)
 			else
-				EnableAddOn(j)
+				C_AddOns.EnableAddOn(j)
 			end
 			addonInfo[j].enabled = not was_enabled
 		end

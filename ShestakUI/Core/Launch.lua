@@ -102,7 +102,7 @@ local function InstallUI()
 end
 
 local function DisableUI()
-	DisableAddOn("ShestakUI")
+	C_AddOns.DisableAddOn("ShestakUI")
 	ReloadUI()
 end
 
