@@ -197,7 +197,8 @@ SlashCmdList.FRAME = function(arg)
 	if arg ~= "" then
 		arg = _G[arg]
 	else
-		arg = GetMouseFoci()
+		local frames = GetMouseFoci()
+		arg = frames and frames[1]
 	end
 	if arg ~= nil then _G.FRAME = arg end
 	if arg ~= nil and not arg:IsForbidden() and arg:GetName() ~= nil then
