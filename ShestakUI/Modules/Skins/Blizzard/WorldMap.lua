@@ -225,7 +225,7 @@ local function LoadSkin()
 		shadow:Hide()
 
 		button.Background:Hide()
-		button.IconOverlay:SetAlpha(0)
+		if button.IconOverlay then button.IconOverlay:SetAlpha(0) end
 		button.Border:Hide()
 
 		local tex = button:GetHighlightTexture()
@@ -239,7 +239,7 @@ local function LoadSkin()
 	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
 	WorldMapLegendButton(WorldMapFrame.overlayFrames[4])
 
-	for i = 1, 10 do
+	for i = 1, 15 do
 		local button = _G["Krowi_WorldMapButtons"..i]
 		if button then
 			HandyNotesButton(button)
