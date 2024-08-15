@@ -14,7 +14,7 @@ T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.newPatch = select(4, GetBuildInfo()) >= 110000
 
--- BETA
+-- NOTE: Restore old function
 GetContainerItemInfo = function(bagIndex, slotIndex)
 	local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
 	if info then
@@ -37,20 +37,20 @@ GetSpellInfo = function(data)
 	end
 end
 
-local function EasyMenu_Initialize( frame, level, menuList )
+local function EasyMenu_Initialize(frame, level, menuList)
 	for index = 1, #menuList do
 		local value = menuList[index]
-		if (value.text) then
-			value.index = index;
-			UIDropDownMenu_AddButton( value, level );
+		if value.text then
+			value.index = index
+			UIDropDownMenu_AddButton(value, level)
 		end
 	end
 end
 
-function EasyMenu(menuList, menuFrame, anchor, x, y, displayMode, autoHideDelay )
-	if ( displayMode == "MENU" ) then
-		menuFrame.displayMode = displayMode;
+function EasyMenu(menuList, menuFrame, anchor, x, y, displayMode, autoHideDelay)
+	if displayMode == "MENU"  then
+		menuFrame.displayMode = displayMode
 	end
-	UIDropDownMenu_Initialize(menuFrame, EasyMenu_Initialize, displayMode, nil, menuList);
-	ToggleDropDownMenu(1, nil, menuFrame, anchor, x, y, menuList, nil, autoHideDelay);
+	UIDropDownMenu_Initialize(menuFrame, EasyMenu_Initialize, displayMode, nil, menuList)
+	ToggleDropDownMenu(1, nil, menuFrame, anchor, x, y, menuList, nil, autoHideDelay)
 end
