@@ -26,8 +26,11 @@ _G.PARAGON = paragonStrings[GetLocale()] or 'Paragon'
 
 local function GetReputation()
 	local pendingReward, standingText
-	local name, standingID, min, max, cur, factionID = GetWatchedFactionInfo()
-
+	local name, standingID, min, max, cur, factionID
+	local data = C_Reputation.GetWatchedFactionData()
+	if data then
+		name, standingID, min, max, cur, factionID = data.name, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.factionID
+	end
 	local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
 	local friendshipID = repInfo and repInfo.friendshipFactionID
 
@@ -179,7 +182,7 @@ local function Visibility(self, event, unit, selectedFactionIndex)
 		if(selectedFactionIndex > 0) then
 			shouldEnable = true
 		end
-	elseif(not not (GetWatchedFactionInfo())) then
+	elseif(not not (C_Reputation.GetWatchedFactionData())) then
 		shouldEnable = true
 	end
 
@@ -204,11 +207,11 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		hooksecurefunc('SetWatchedFactionIndex', function(selectedFactionIndex)
-			if(self:IsElementEnabled('Reputation')) then
-				VisibilityPath(self, 'SetWatchedFactionIndex', 'player', selectedFactionIndex or 0)
-			end
-		end)
+		-- hooksecurefunc('SetWatchedFactionIndex', function(selectedFactionIndex)
+			-- if(self:IsElementEnabled('Reputation')) then
+				-- VisibilityPath(self, 'SetWatchedFactionIndex', 'player', selectedFactionIndex or 0)
+			-- end
+		-- end)
 
 		if(not element:GetStatusBarTexture()) then
 			element:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
