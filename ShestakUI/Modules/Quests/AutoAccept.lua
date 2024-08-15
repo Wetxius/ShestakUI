@@ -338,15 +338,32 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		return
 	end
 
+	-- need to iterate all the options first before we can select them
+	local gossipQuests = {}
+	local gossipSkips = {}
+
 	local gossip = C_GossipInfo.GetOptions()
 	for _, info in next, gossip do
 		if DARKMOON_GOSSIP[info.gossipOptionID] and QuickQuestDB.general.paydarkmoonfaire then
+			-- we can select this one directly since it never interferes with the others
 			C_GossipInfo.SelectOption(info.gossipOptionID, '', true)
-		elseif QUEST_GOSSIP[info.gossipOptionID] and QuickQuestDB.general.skipgossip then
-			C_GossipInfo.SelectOption(info.gossipOptionID)
-		elseif FlagsUtil.IsSet(info.flags, Enum.GossipOptionRecFlags.QuestLabelPrepend) and QuickQuestDB.general.skipgossip then
-			C_GossipInfo.SelectOption(info.gossipOptionID)
+			return
+		elseif QUEST_GOSSIP[info.gossipOptionID] then
+			table.insert(gossipQuests, info.gossipOptionID)
+		elseif FlagsUtil.IsSet(info.flags, Enum.GossipOptionRecFlags.QuestLabelPrepend) then
+			table.insert(gossipQuests, info.gossipOptionID)
+		elseif info.name:sub(1, 11) == '|cFFFF0000<' then
+			-- TODO: this might get a flag in the future
+			table.insert(gossipSkips, info.gossipOptionID)
 		end
+	end
+
+	if #gossipSkips > 0 then
+		C_GossipInfo.SelectOption(gossipSkips[1])
+		return
+	elseif #gossipQuests > 0 then
+		C_GossipInfo.SelectOption(gossipQuests[1])
+		return
 	end
 
 	if (C_GossipInfo.GetNumActiveQuests() + C_GossipInfo.GetNumAvailableQuests()) > 0 then
@@ -538,7 +555,7 @@ local function handleQuestComplete()
 	end
 
 	local numChoices = GetNumQuestChoices()
-	if numChoices <= 1 then
+	if numChoices <= 1 and not isQuestIgnored(GetQuestID() then
 		GetQuestReward(1)
 	end
 
