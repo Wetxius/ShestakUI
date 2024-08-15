@@ -555,7 +555,7 @@ local function handleQuestComplete()
 	end
 
 	local numChoices = GetNumQuestChoices()
-	if numChoices <= 1 and not isQuestIgnored(GetQuestID() then
+	if numChoices <= 1 and not isQuestIgnored(GetQuestID()) then
 		GetQuestReward(1)
 	end
 
