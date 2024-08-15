@@ -120,7 +120,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 
 	-- Quest tracker
 	SetFont(ObjectiveTrackerHeaderFont, NORMAL, 14 * C.font.quest_tracker_font_mult) -- Quest title and objectives
-	SetFont(ObjectiveTrackerLineFont, NORMAL, 12 * C.font.quest_tracker_font_mult) -- Quest tracker
+	SetFont(ObjectiveTrackerLineFont, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest tracker
 end)
 
 -- Registering fonts in LibSharedMedia
