@@ -97,7 +97,11 @@ local StopTimer = function(bar)
 end
 
 local UpdateCharges = function(bar)
-	local curCharges, maxCharges, start, duration = GetSpellCharges(20484)
+	local curCharges, maxCharges, start, duration
+	local chargeInfo = C_Spell.GetSpellCharges(20484)
+	if chargeInfo then
+		curCharges, maxCharges, start, duration = chargeInfo.currentCharges, chargeInfo.maxCharges, chargeInfo.cooldownStartTime, chargeInfo.cooldownDuration
+	end
 	if curCharges == maxCharges then
 		bar.startTime = 0
 		bar.endTime = GetTime()
@@ -198,7 +202,11 @@ local StartTimer = function(name, spellId)
 	local bar = CreateBar()
 	local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2, UnitClass(name))]
 	if charges and spellId == 20484 then
-		local curCharges, _, start, duration = GetSpellCharges(20484)
+		local curCharges, start, duration
+		local chargeInfo = C_Spell.GetSpellCharges(20484)
+		if chargeInfo then
+			curCharges, start, duration = chargeInfo.currentCharges, chargeInfo.cooldownStartTime, chargeInfo.cooldownDuration
+		end
 		currentNumResses = curCharges
 		bar.startTime = start
 		bar.endTime = start + duration
@@ -284,7 +292,10 @@ local OnEvent = function(self, event)
 		end
 	end
 	if event == "SPELL_UPDATE_CHARGES" then
-		charges = GetSpellCharges(20484)
+		local chargeInfo = C_Spell.GetSpellCharges(20484)
+		if chargeInfo then
+			charges =  chargeInfo.currentCharges
+		end
 		if charges then
 			if not inBossCombat then
 				inBossCombat = true
