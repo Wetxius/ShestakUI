@@ -377,14 +377,18 @@ local function LoadSkin()
 
 	T.SkinFrame(CurrencyTransferLog)
 	T.SkinScrollBar(CurrencyTransferLog.ScrollBar)
-    do
-        local bu = TokenFrame.CurrencyTransferLogToggleButton
-        bu:SkinButton()
 
-        bu.t = bu:CreateTexture(nil, "OVERLAY")
-        bu.t:SetTexture(134331)
-        bu.t:CropIcon()
-    end
+	do
+		local button = TokenFrame.CurrencyTransferLogToggleButton
+		button:SetNormalTexture(134331)
+		button:SetPushedTexture(134331)
+		button:StyleButton(true)
+		button:SetTemplate("Default")
+		button:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		button:GetNormalTexture():SetInside()
+		button:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		button:GetPushedTexture():SetInside()
+	end
 
 	hooksecurefunc(TokenFrame.ScrollBox, "Update", function(self)
 		for i = 1, self.ScrollTarget:GetNumChildren() do
