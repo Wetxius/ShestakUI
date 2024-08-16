@@ -25,12 +25,13 @@ paragonStrings.zhTW = paragonStrings.zhCN
 _G.PARAGON = paragonStrings[GetLocale()] or 'Paragon'
 
 local function GetReputation()
-	local pendingReward, standingText
-	local name, standingID, min, max, cur, factionID
 	local data = C_Reputation.GetWatchedFactionData()
-	if data then
-		name, standingID, min, max, cur, factionID = data.name, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.factionID
+	if not data or data.factionID == 0 then
+		return
 	end
+
+	local pendingReward, standingText
+	local name, standingID, min, max, cur, factionID = data.name, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.factionID
 	local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
 	local friendshipID = repInfo and repInfo.friendshipFactionID
 
