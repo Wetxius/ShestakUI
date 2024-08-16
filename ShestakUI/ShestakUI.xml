@@ -63,7 +63,7 @@
 
 	<Script file="Modules\Misc\BattlefieldScore.lua"/>
 	<Script file="Modules\Misc\CharsCurrency.lua"/>
-	<!-- <Script file="Modules\Misc\ClickCast.lua"/> -->
+	<Script file="Modules\Misc\ClickCast.lua"/>
 	<Script file="Modules\Misc\LFGQueueTimer.lua"/>
 	<Script file="Modules\Misc\MagePortals.lua"/>
 	<Script file="Modules\Misc\Marking.lua"/>
