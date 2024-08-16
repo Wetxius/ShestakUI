@@ -183,7 +183,8 @@ local StripTexturesBlizzFrames = {
 	"Portrait",
 	"portrait",
 	"ScrollFrameBorder",
-	"EdgeShadows"
+	"EdgeShadows",
+	"Background"
 }
 
 local function StripTextures(object, kill)
