@@ -158,6 +158,11 @@ local function LoadSkin()
 						frame.Button.IconMask:Hide()
 					end)
 
+					if frame.Button.Cooldown then
+						frame.Button.Cooldown:SetPoint("TOPLEFT", 2, -2)
+						frame.Button.Cooldown:SetPoint("BOTTOMRIGHT", -2, 2)
+					end
+
 					frame.Button.BorderSheen:Hide()
 					hooksecurefunc(frame.Button.BorderSheen, "Show", function()
 						frame.Button.BorderSheen:Hide()
