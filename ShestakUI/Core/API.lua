@@ -1224,6 +1224,16 @@ function T.ReplaceIconString(frame, text)
 	if count > 0 then frame:SetFormattedText("%s", newText) end
 end
 
+function T.SkinModelControl(frame)
+	for i = 1, 5 do
+		local button = select(i, frame.ControlFrame:GetChildren())
+		if button.NormalTexture then
+			button.NormalTexture:SetAlpha(0)
+			button.PushedTexture:SetAlpha(0)
+		end
+	end
+end
+
 local LoadBlizzardSkin = CreateFrame("Frame")
 LoadBlizzardSkin:RegisterEvent("ADDON_LOADED")
 LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addon)
@@ -1250,13 +1260,3 @@ LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addon)
 		end
 	end
 end)
-
-function T.SkinModelControl(frame)
-	for i = 1, 5 do
-		local button = select(i, frame.ControlFrame:GetChildren())
-		if button.NormalTexture then
-			button.NormalTexture:SetAlpha(0)
-			button.PushedTexture:SetAlpha(0)
-		end
-	end
-end
