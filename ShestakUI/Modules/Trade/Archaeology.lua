@@ -129,7 +129,7 @@ function stArch:OnLoad(self)
 		if C_AddOns.IsAddOnLoaded("Blizzard_ArchaeologyUI") then
 			ToggleFrame(ArchaeologyFrame)
 		else
-			local loaded = LoadAddOn("Blizzard_ArchaeologyUI")
+			local loaded = C_AddOns.LoadAddOn("Blizzard_ArchaeologyUI")
 			if loaded then
 				ShowUIPanel(ArchaeologyFrame)
 			end
