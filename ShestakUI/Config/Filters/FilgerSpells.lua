@@ -1712,7 +1712,7 @@ C["filger_spells"] = {
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
 			-- Slice and Dice
-			{spellID = 5171, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 315496, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Adrenaline Rush
 			{spellID = 13750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Evasion
