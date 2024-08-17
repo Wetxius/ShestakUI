@@ -70,7 +70,6 @@ SlashCmdList.MOUSEOVERBIND = function()
 			ShoppingTooltip1:Hide()
 
 			if spellmacro == "SPELL" then
-				self.button.id = SpellBook_GetSpellBookSlot(self.button)
 				self.button.name = C_SpellBook.GetSpellBookItemName(self.button.id, Enum.SpellBookSpellBank.Player)
 
 				GameTooltip:Show()
@@ -340,18 +339,13 @@ SlashCmdList.MOUSEOVERBIND = function()
 			b:HookScript("OnEnter", function(self) bind:Update(self, "PET") end)
 		end
 
-		--FIXME for i = 1, 12 do
-			-- local b = _G["SpellButton"..i]
-			-- b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
-		-- end
-
 		ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
 
 		local function registermacro()
 			hooksecurefunc(MacroFrame, "Update", function(frame)
 				for _, button in next, {frame.MacroSelector.ScrollBox.ScrollTarget:GetChildren()} do
 					if button and not button.hook then
-						button:HookScript("OnEnter", function(self) bind:Update(button, "MACRO") end)
+						button:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
 						button.hook = true
 					end
 				end
@@ -360,14 +354,33 @@ SlashCmdList.MOUSEOVERBIND = function()
 			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
 
-		if not C_AddOns.IsAddOnLoaded("Blizzard_MacroUI") then
-			--FIXME hooksecurefunc("LoadAddOn", function(addon)
-				-- if addon == "Blizzard_MacroUI" then
-					-- registermacro()
-				-- end
-			-- end)
-		else
+		local function registerspell()
+			hooksecurefunc(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame, "DisplayViewsForCurrentPage", function(self)
+				for _, frame in self:EnumerateFrames() do
+					if frame.Button and not frame.Button.hook then
+						frame.Button.id = frame.slotIndex
+						frame.Button:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
+						frame.Button.hook = true
+					end
+				end
+			end)
+		end
+
+		if not C_AddOns.IsAddOnLoaded("Blizzard_MacroUI") or not C_AddOns.IsAddOnLoaded("Blizzard_PlayerSpells") then
+			local Load = CreateFrame("Frame")
+			Load:RegisterEvent("ADDON_LOADED")
+			Load:SetScript("OnEvent", function(self, _, addon)
+				if addon == "Blizzard_MacroUI" then
+					registermacro()
+				elseif addon == "Blizzard_PlayerSpells" then
+					registerspell()
+				end
+			end)
+		end
+		if C_AddOns.IsAddOnLoaded("Blizzard_MacroUI") then
 			registermacro()
+		elseif C_AddOns.IsAddOnLoaded("Blizzard_PlayerSpells") then
+			registerspell()
 		end
 		bind.loaded = 1
 	end
