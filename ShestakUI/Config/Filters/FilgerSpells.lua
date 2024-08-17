@@ -1803,7 +1803,7 @@ C["filger_spells"] = {
 			-- Hemorrhage
 			{spellID = 16511, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Find Weakness
-			{spellID = 91021, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 316220, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Vendetta
 			{spellID = 79140, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Nightblade
