@@ -98,6 +98,7 @@ local function StyleNormalButton(button, size)
 			hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 			hotkey:SetWidth(C.actionbar.button_size - 1)
 			hotkey:SetHeight(C.font.action_bars_font_size)
+			hotkey:SetParent(button)
 			hooksecurefunc(hotkey, "SetVertexColor", function(_, _, g)
 				if g < 0.8 then
 					hotkey:SetVertexColor(ACTIONBAR_HOTKEY_FONT_COLOR:GetRGB())
