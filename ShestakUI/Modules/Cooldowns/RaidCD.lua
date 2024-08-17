@@ -97,11 +97,10 @@ local StopTimer = function(bar)
 end
 
 local UpdateCharges = function(bar)
-	local curCharges, maxCharges, start, duration
 	local chargeInfo = C_Spell.GetSpellCharges(20484)
-	if chargeInfo then
-		curCharges, maxCharges, start, duration = chargeInfo.currentCharges, chargeInfo.maxCharges, chargeInfo.cooldownStartTime, chargeInfo.cooldownDuration
-	end
+	if not chargeInfo then return end
+
+	local curCharges, maxCharges, start, duration = chargeInfo.currentCharges, chargeInfo.maxCharges, chargeInfo.cooldownStartTime, chargeInfo.cooldownDuration
 	if curCharges == maxCharges then
 		bar.startTime = 0
 		bar.endTime = GetTime()
