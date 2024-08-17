@@ -60,12 +60,12 @@ function CheckBuffs()
 	if specSpells then
 		for name in pairs(specSpells) do
 			if name and not T.CheckPlayerBuff(name) then
-				if C_Spell.GetSpellCooldown(name) == 0 then
+				if GetSpellCooldown(name) == 0 then
 					btn:SetAttribute("spell", name)
 					SetOverrideBindingClick(btn, true, "MOUSEWHEELUP", "AutoBuffButton")
 					SetOverrideBindingClick(btn, true, "MOUSEWHEELDOWN", "AutoBuffButton")
 				else
-					local _, duration = C_Spell.GetSpellCooldown(name)
+					local _, duration = GetSpellCooldown(name)
 					if duration == nil or duration > 1.5 then return end
 					frame:SetScript("OnUpdate", WaitForGC)
 				end

@@ -37,6 +37,13 @@ GetSpellInfo = function(data)
 	end
 end
 
+GetSpellCooldown = function(data)
+	local info = C_Spell.GetSpellCooldown(data)
+	if info then
+		return info.startTime, info.duration, info.isEnabled, info.modRate
+	end
+end
+
 local function EasyMenu_Initialize(frame, level, menuList)
 	for index = 1, #menuList do
 		local value = menuList[index]

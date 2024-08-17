@@ -77,7 +77,7 @@ local function OnUpdate(_, update)
 				local getCooldownDetails
 				if v[2] == "spell" then
 					getCooldownDetails = memoize(function()
-                        local start, duration, enabled = C_Spell.GetSpellCooldown(v[3])
+                        local start, duration, enabled = GetSpellCooldown(v[3])
                         return {
                             name = GetSpellInfo(v[3]),
                             texture = C_Spell.GetSpellTexture(v[3]),
