@@ -277,8 +277,8 @@ local function Load()
 						if not button.Glow then
 							local Glow = button:CreateTexture(nil, "ARTWORK")
 							Glow:SetAtlas("UI-HUD-ActionBar-Proc-Loop-Flipbook")
-							Glow:SetPoint("TOPLEFT", -10, 10)
-							Glow:SetPoint("BOTTOMRIGHT", 10, -10)
+							Glow:SetPoint("TOPLEFT", -11, 11)
+							Glow:SetPoint("BOTTOMRIGHT", 11, -11)
 							button.Glow = Glow
 
 							local Animation = button:CreateAnimationGroup()
