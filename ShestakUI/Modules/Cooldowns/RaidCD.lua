@@ -292,9 +292,7 @@ local OnEvent = function(self, event)
 	end
 	if event == "SPELL_UPDATE_CHARGES" then
 		local chargeInfo = C_Spell.GetSpellCharges(20484)
-		if chargeInfo then
-			charges =  chargeInfo.currentCharges
-		end
+		charges = chargeInfo.currentCharges
 		if charges then
 			if not inBossCombat then
 				inBossCombat = true
