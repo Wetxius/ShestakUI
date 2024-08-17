@@ -309,8 +309,6 @@ local function Load()
 		if SpellBinder:IsVisible() then SpellBinder.OpenButton:SetChecked(true) else SpellBinder.OpenButton:SetChecked(false) end
 	end
 
-	--FIXME hooksecurefunc("SpellBookFrame_Update", function() if SpellBinder.sbOpen then SpellBinder:ToggleButtons() end end)
-
 	SpellBinder.OpenButton = CreateFrame("CheckButton", "SpellBinderOpenButton", PlayerSpellsFrame.SpellBookFrame, "ActionButtonTemplate")
 	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
 	SpellBinder.OpenButton:SetSize(40, 40)
