@@ -33,7 +33,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 					if professionInfo and professionInfo.parentProfessionID == 333 then
 						button:Show()
 						local isEnchantingRecipe = currentRecipeInfo.isEnchantingRecipe
-						local numScrollsAvailable = GetItemCount(38682)
+						local numScrollsAvailable = C_Item.GetItemCount(38682)
 						button:SetText(L_MISC_SCROLL.." ("..numScrollsAvailable..")")
 						 if numScrollsAvailable == 0 then
 							isEnchantingRecipe = false

@@ -50,7 +50,7 @@ frame:SetScript("OnEvent", function(_, _, msg)
 		local artifact, _, rare, _, _, stones = GetSelectedArtifactInfo()
 		if not artifact then return end
 
-		for index = 1, math.min(stones, GetItemCount(stone)) do
+		for index = 1, math.min(stones, C_Item.GetItemCount(stone)) do
 			if not ItemAddedToArtifact(index) then
 				SocketItemToArtifact()
 			end
