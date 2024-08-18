@@ -1077,9 +1077,9 @@ function T.SkinExpandOrCollapse(f)
 		self:SetNormalTexture(0)
 
 		if texture and texture ~= "" then
-			if texture:find("Plus") then
+			if texture:find("Plus") or texture:find("closed") then
 				self.bg.plus:Show()
-			elseif texture:find("Minus") then
+			elseif texture:find("Minus") or texture:find("open") then
 				self.bg.plus:Hide()
 			end
 			self.bg:Show()
