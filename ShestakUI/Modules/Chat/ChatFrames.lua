@@ -487,3 +487,15 @@ hooksecurefunc(ChatFrame4, "SetPoint", function(self, _, _, _, x)
 		self:SetAllPoints(rightAnchor)
 	end
 end)
+
+C_Timer.After(0.1, function()
+	if not ChatFrame4 then
+		FCF_OpenNewWindow(LOOT)
+	end
+	if ChatFrame4 then
+		FCF_UnDockFrame(ChatFrame4)
+		ChatFrame4:SetAllPoints(rightAnchor)
+		FCF_SetTabPosition(ChatFrame4, 0)
+		FCF_CheckShowChatFrame(ChatFrame4)
+	end
+end)
