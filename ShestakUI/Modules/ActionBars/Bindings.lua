@@ -70,7 +70,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			ShoppingTooltip1:Hide()
 
 			if spellmacro == "SPELL" then
-				self.button.name = C_SpellBook.GetSpellBookItemName(self.button.id, Enum.SpellBookSpellBank.Player)
+				self.button.name = C_SpellBook.GetSpellBookItemName(self.button.id, self.button.bank)
 
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
@@ -357,10 +357,13 @@ SlashCmdList.MOUSEOVERBIND = function()
 		local function registerspell()
 			hooksecurefunc(PlayerSpellsFrame.SpellBookFrame.PagedSpellsFrame, "DisplayViewsForCurrentPage", function(self)
 				for _, frame in self:EnumerateFrames() do
-					if frame.Button and not frame.Button.hook then
+					if frame.Button then
 						frame.Button.id = frame.slotIndex
-						frame.Button:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
-						frame.Button.hook = true
+						frame.Button.bank = frame.spellBank
+						if not frame.Button.hook then
+							frame.Button:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
+							frame.Button.hook = true
+						end
 					end
 				end
 			end)

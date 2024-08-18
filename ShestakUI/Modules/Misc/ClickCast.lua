@@ -272,7 +272,7 @@ local function Load()
 			if SpellBinder.sbOpen then
 				local slot = button.slot
 				if slot then
-					local spellname = C_SpellBook.GetSpellBookItemName(slot, Enum.SpellBookSpellBank.Player)
+					local spellname = C_SpellBook.GetSpellBookItemName(slot, button.spellBank)
 					if spellname and not button.passive then
 						if not button.Glow then
 							local Glow = button:CreateTexture(nil, "ARTWORK")
@@ -352,8 +352,8 @@ local function Load()
 	local addSpell = function(self, button)
 		if SpellBinder.sbOpen then
 			local slot = self.slot
-			local spellname = C_SpellBook.GetSpellBookItemName(slot, Enum.SpellBookSpellBank.Player)
-			local texture = C_SpellBook.GetSpellBookItemTexture(slot, Enum.SpellBookSpellBank.Player)
+			local spellname = C_SpellBook.GetSpellBookItemName(slot, self.spellBank)
+			local texture = C_SpellBook.GetSpellBookItemTexture(slot, self.spellBank)
 			if spellname ~= 0 then
 				local originalbutton = button
 				local modifier = ""
@@ -362,7 +362,7 @@ local function Load()
 				if IsControlKeyDown() then modifier = "Ctrl-"..modifier end
 				if IsAltKeyDown() then modifier = "Alt-"..modifier end
 
-				if C_SpellBook.IsSpellBookItemHarmful(slot, Enum.SpellBookSpellBank.Player) then
+				if C_SpellBook.IsSpellBookItemHarmful(slot, self.spellBank) then
 					button = format("%s%d", "harmbutton", SecureButton_GetButtonSuffix(button))
 					originalbutton = "|cffff2222(harm)|r "..originalbutton
 				else
@@ -385,6 +385,7 @@ local function Load()
 
 					button.slot = frame.slotIndex
 					button.passive = false
+					button.spellBank = frame.spellBank
 					button:SetID(frame.slotIndex)
 					button:RegisterForClicks("AnyDown")
 					button:SetAllPoints(frame.Button)
@@ -398,6 +399,7 @@ local function Load()
 				else
 					frame.click.slot = frame.slotIndex
 					frame.click.passive = frame.spellBookItemInfo.isPassive
+					frame.click.spellBank = frame.spellBank
 					if SpellBinder:IsVisible() then
 						SpellBinder:ToggleButtons()
 					end
