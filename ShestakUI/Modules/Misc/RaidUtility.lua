@@ -112,7 +112,7 @@ markersFrame:SetPoint("TOPLEFT", RaidUtilityMarkerToggle, "TOPRIGHT")
 markersFrame:Hide()
 
 RaidUtilityMarkerToggle:RegisterForClicks("AnyUp")
-RaidUtilityMarkerToggle:SetFrameRef("RaidUtilityMarkerToggle", RaidUtilityMarkerToggle)
+RaidUtilityMarkerToggle:SetFrameRef("RaidUtilityPanelMarkers", RaidUtilityPanelMarkers)
 RaidUtilityMarkerToggle:SetAttribute("_onclick", [=[
 	local frame = self:GetFrameRef("RaidUtilityPanelMarkers");
 	if frame:IsShown() then
@@ -121,7 +121,6 @@ RaidUtilityMarkerToggle:SetAttribute("_onclick", [=[
 		frame:Show()
 	end
 ]=])
-RaidUtilityMarkerToggle:SetFrameRef("RaidUtilityPanelMarkers", RaidUtilityPanelMarkers)
 
 local ground = {5, 6, 3, 2, 7, 1, 4, 8}
 local iconTexture = {
