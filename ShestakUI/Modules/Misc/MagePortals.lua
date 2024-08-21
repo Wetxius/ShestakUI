@@ -86,7 +86,7 @@ end
 
 local learnSpell = CreateFrame("Frame")
 learnSpell:RegisterEvent("PLAYER_LOGIN")
-learnSpell:RegisterEvent("LEARNED_SPELL_IN_TAB")
+learnSpell:RegisterEvent("LEARNED_SPELL_IN_SKILL_LINE")
 learnSpell:SetScript("OnEvent", function()
 	for i, spell in pairs(spells) do
 		if not IsSpellKnown(spell[1]) then
