@@ -1,282 +1,342 @@
-﻿-- local T, C, L = unpack(ShestakUI)
--- if C.general.color_picker ~= true then return end
+﻿local T, C, L = unpack(ShestakUI)
+if C.general.color_picker ~= true then return end
 
--- ----------------------------------------------------------------------------------------
--- --	Improved ColorPicker(ColorPickerPlus by Jaslm)
--- ----------------------------------------------------------------------------------------
--- local colorBuffer = {}
--- local editingText
+----------------------------------------------------------------------------------------
+--	Improved ColorPicker(ColorPickerPlus by Jaslm)
+----------------------------------------------------------------------------------------
+local colorBuffer = {}
+local editingText
 
--- local function UpdateAlphaText()
-	-- local a = OpacitySliderFrame:GetValue()
-	-- a = (1 - a) * 100
-	-- a = math.floor(a + 0.05)
-	-- ColorPPBoxA:SetText(string.format("%d", a))
--- end
+local delayFunc
+local function delayCall()
+	if delayFunc then
+		delayFunc()
+		delayFunc = nil
+	end
+end
 
--- local function UpdateAlpha(tbox)
-	-- local a = tbox:GetNumber()
-	-- if a > 100 then
-		-- a = 100
-		-- ColorPPBoxA:SetText(string.format("%d", a))
-	-- end
-	-- a = 1 - (a / 100)
-	-- editingText = true
-	-- OpacitySliderFrame:SetValue(a)
-	-- editingText = nil
--- end
+local function alphaValue(num)
+	return num and floor((num * 100) + .05) or 0
+end
 
--- local function UpdateColorTexts(r, g, b)
-	-- if not r then r, g, b = ColorPickerFrame:GetColorRGB() end
-	-- r = math.floor (r * 255 + 0.5)
-	-- g = math.floor (g * 255 + 0.5)
-	-- b = math.floor (b * 255 + 0.5)
-	-- ColorPPBoxR:SetText(string.format("%d", r))
-	-- ColorPPBoxG:SetText(string.format("%d", g))
-	-- ColorPPBoxB:SetText(string.format("%d", b))
-	-- ColorPPBoxH:SetText(string.format("%.2x", r)..string.format("%.2x", g)..string.format("%.2x", b))
--- end
+local function UpdateAlphaText(alpha)
+	if not alpha then
+		alpha = alphaValue(ColorPickerFrame:GetColorAlpha())
+	end
 
--- local function UpdateColor(tbox)
-	-- local r, g, b = ColorPickerFrame:GetColorRGB()
-	-- local id = tbox:GetID()
+	_G.ColorPPBoxA:SetText(alpha)
+end
 
-	-- if id == 1 then
-		-- r = string.format("%d", tbox:GetNumber())
-		-- if not r then r = 0 end
-		-- r = r / 255
-	-- elseif id == 2 then
-		-- g = string.format("%d", tbox:GetNumber())
-		-- if not g then g = 0 end
-		-- g = g / 255
-	-- elseif id == 3 then
-		-- b = string.format("%d", tbox:GetNumber())
-		-- if not b then b = 0 end
-		-- b = b / 255
-	-- elseif id == 4 then
-		-- -- hex values
-		-- if tbox:GetNumLetters() == 6 then
-			-- local rgb = tbox:GetText()
-			-- r, g, b = tonumber("0x"..strsub(rgb, 0, 2)), tonumber("0x"..strsub(rgb, 3, 4)), tonumber("0x"..strsub(rgb, 5, 6))
-			-- if not r then r = 0 else r = r / 255 end
-			-- if not g then g = 0 else g = g / 255 end
-			-- if not b then b = 0 else b = b / 255 end
-		-- else
-			-- return
-		-- end
-	-- end
+local last = { r = 0, g = 0, b = 0, a = 0 }
+local function onAlphaValueChanged(_, value)
+	local alpha = alphaValue(value)
+	if last.a ~= alpha then
+		last.a = alpha
+	else -- alpha matched so we don't need to update
+		return
+	end
 
-	-- -- This takes care of updating the hex entry when changing rgb fields and vice versa
-	-- UpdateColorTexts(r, g, b)
+	UpdateAlphaText(alpha)
 
-	-- editingText = true
-	-- ColorPickerFrame:SetColorRGB(r, g, b)
-	-- ColorSwatch:SetColorTexture(r, g, b)
-	-- editingText = nil
--- end
+	if not _G.ColorPickerFrame:IsVisible() then
+		delayCall()
+	else
+		local opacityFunc = ColorPickerFrame.opacityFunc
+		if delayFunc and (delayFunc ~= opacityFunc) then
+			delayFunc = opacityFunc
+		elseif not delayFunc then
+			delayFunc = opacityFunc
+			C_Timer.After(0.15, function()
+				delayCall()
+			end)
+		end
+	end
+end
 
--- local load = CreateFrame("Frame")
--- load:RegisterEvent("PLAYER_ENTERING_WORLD")
--- load:SetScript("OnEvent", function(self)
-	-- self:UnregisterAllEvents()
+local function UpdateAlpha(tbox)
+	local num = tbox:GetNumber()
+	if num > 100 then
+		tbox:SetText(100)
+		num = 100
+	end
 
-	-- if C_AddOns.IsAddOnLoaded("ColorPickerPlus") then return end
+	local value = num * 0.01
+	ColorPickerFrame.Content.ColorPicker:SetColorAlpha(value)
+	onAlphaValueChanged(nil, value)
+end
 
-	-- ColorPickerFrame:HookScript("OnShow", function()
-		-- -- Get color that will be replaced
-		-- local r, g, b = ColorPickerFrame:GetColorRGB()
-		-- ColorPPOldColorSwatch:SetColorTexture(r, g, b)
+local function expandFromThree(r, g, b)
+	return strjoin("",r,r,g,g,b,b)
+end
 
-		-- -- Show/hide the alpha box
-		-- if ColorPickerFrame.hasOpacity then
-			-- ColorPPBoxA:Show()
-			-- ColorPPBoxLabelA:Show()
-			-- ColorPPBoxH:SetScript("OnTabPressed", function() ColorPPBoxA:SetFocus() end)
-			-- UpdateAlphaText()
-		-- else
-			-- ColorPPBoxA:Hide()
-			-- ColorPPBoxLabelA:Hide()
-			-- ColorPPBoxH:SetScript("OnTabPressed", function() ColorPPBoxR:SetFocus() end)
-		-- end
-	-- end)
+local function extendToSix(str)
+	for _=1, 6-strlen(str) do str=str..0 end
+	return str
+end
 
-	-- ColorPickerFrame:HookScript("OnColorSelect", function(_, r, g, b)
-		-- ColorSwatch:SetColorTexture(r, g, b)
-		-- if not editingText then
-			-- UpdateColorTexts(r, g, b)
-		-- end
-	-- end)
+local function GetHexColor(box)
+	local rgb, rgbSize = box:GetText(), box:GetNumLetters()
+	if rgbSize == 3 then
+		rgb = gsub(rgb, "(%x)(%x)(%x)$", expandFromThree)
+	elseif rgbSize < 6 then
+		rgb = gsub(rgb, "(.+)$", extendToSix)
+	end
 
-	-- OpacitySliderFrame:HookScript("OnValueChanged", function()
-		-- if not editingText then
-			-- UpdateAlphaText()
-		-- end
-	-- end)
+	local r, g, b = tonumber(strsub(rgb,0,2),16) or 0, tonumber(strsub(rgb,3,4),16) or 0, tonumber(strsub(rgb,5,6),16) or 0
 
-	-- -- Make the Color Picker dialog a bit taller, to make room for edit boxes
-	-- ColorPickerFrame:SetHeight(ColorPickerFrame:GetHeight() + 40)
+	return r/255, g/255, b/255
+end
 
-	-- -- Move the Color Swatch
-	-- ColorSwatch:ClearAllPoints()
-	-- ColorSwatch:SetPoint("TOPLEFT", ColorPickerFrame, "TOPLEFT", 230, -45)
+local function UpdateColorTexts(r, g, b, box)
+	if not (r and g and b) then
+		r, g, b = _G.ColorPickerFrame:GetColorRGB()
 
-	-- -- Add Color Swatch for original color
-	-- local t = ColorPickerFrame:CreateTexture("ColorPPOldColorSwatch")
-	-- local w, h = ColorSwatch:GetSize()
-	-- t:SetSize(w * 0.75, h * 0.75)
-	-- t:SetColorTexture(0, 0, 0)
+		if box then
+			if box == ColorPickerFrame.Content.HexBox then
+				r, g, b = GetHexColor(box)
+			else
+				local num = box:GetNumber()
+				if num > 255 then
+					num = 255
+				end
 
-	-- -- OldColorSwatch to appear beneath ColorSwatch
-	-- t:SetDrawLayer("BORDER")
-	-- t:SetPoint("BOTTOMLEFT", "ColorSwatch", "TOPRIGHT", -(w / 2), -(h / 3))
+				local c = num/255
+				if box == _G.ColorPPBoxR then
+					r = c
+				elseif box == _G.ColorPPBoxG then
+					g = c
+				elseif box == _G.ColorPPBoxB then
+					b = c
+				end
+			end
+		end
+	end
 
-	-- -- Add Color Swatch for the copied color
-	-- t = ColorPickerFrame:CreateTexture("ColorPPCopyColorSwatch")
-	-- t:SetSize(w, h)
-	-- t:SetColorTexture(0, 0, 0)
-	-- t:Hide()
+	-- we want those /255 values
+	r, g, b = T.Round(r*255), T.Round(g*255), T.Round(b*255)
 
-	-- -- Add copy button to the ColorPickerFrame
-	-- local b = CreateFrame("Button", "ColorPPCopy", ColorPickerFrame, "UIPanelButtonTemplate")
-	-- b:SkinButton()
-	-- b:SetText(CALENDAR_COPY_EVENT)
-	-- b:SetWidth(85)
-	-- b:SetHeight(22)
-	-- b:SetPoint("TOPLEFT", "ColorSwatch", "BOTTOMLEFT", -15, -5)
+	ColorPickerFrame.Content.HexBox:SetText(format("%.2x%.2x%.2x", r, g, b))
+	_G.ColorPPBoxR:SetText(r)
+	_G.ColorPPBoxG:SetText(g)
+	_G.ColorPPBoxB:SetText(b)
+end
 
-	-- -- Copy color into buffer on button click
-	-- b:SetScript("OnClick", function()
-		-- -- Copy current dialog colors into buffer
-		-- colorBuffer.r, colorBuffer.g, colorBuffer.b = ColorPickerFrame:GetColorRGB()
+local function UpdateColor()
+	local r, g, b = GetHexColor(ColorPickerFrame.Content.HexBox)
+	ColorPickerFrame.Content.ColorPicker:SetColorRGB(r, g, b)
+	ColorPickerFrame.Content.ColorSwatchCurrent:SetColorTexture(r, g, b)
+end
 
-		-- -- Enable Paste button and display copied color into swatch
-		-- ColorPPPaste:Enable()
-		-- ColorPPCopyColorSwatch:SetColorTexture(colorBuffer.r, colorBuffer.g, colorBuffer.b)
-		-- ColorPPCopyColorSwatch:Show()
+local function onColorSelect(frame, r, g, b)
+	if frame.noColorCallback then
+		return -- prevent error from E:GrabColorPickerValues, better note in that function
+	elseif r ~= last.r or g ~= last.g or b ~= last.b then
+		last.r, last.g, last.b = r, g, b
+	else -- colors match so we don"t need to update, most likely mouse is held down
+		return
+	end
 
-		-- if ColorPickerFrame.hasOpacity then
-			-- colorBuffer.a = OpacitySliderFrame:GetValue()
-		-- else
-			-- colorBuffer.a = nil
-		-- end
-	-- end)
+	ColorPickerFrame.Content.ColorSwatchCurrent:SetColorTexture(r, g, b)
+	UpdateColorTexts(r, g, b)
+	UpdateAlphaText()
 
-	-- -- Paste button
-	-- b = CreateFrame("Button", "ColorPPPaste", ColorPickerFrame, "UIPanelButtonTemplate")
-	-- b:SetText(CALENDAR_PASTE_EVENT)
-	-- b:SkinButton()
-	-- b:SetWidth(85)
-	-- b:SetHeight(22)
-	-- b:SetPoint("TOPLEFT", "ColorPPCopy", "BOTTOMLEFT", 0, -7)
-	-- b:Disable()
+	if not frame:IsVisible() then
+		delayCall()
+	elseif not delayFunc then
+		delayFunc = ColorPickerFrame.swatchFunc
 
-	-- -- Paste color on button click, updating frame components
-	-- b:SetScript("OnClick", function()
-		-- ColorPickerFrame:SetColorRGB(colorBuffer.r, colorBuffer.g, colorBuffer.b)
-		-- ColorSwatch:SetColorTexture(colorBuffer.r, colorBuffer.g, colorBuffer.b)
-		-- if ColorPickerFrame.hasOpacity then
-			-- if colorBuffer.a then -- Color copied had an alpha value
-				-- OpacitySliderFrame:SetValue(colorBuffer.a)
-			-- end
-		-- end
-	-- end)
+		if delayFunc then
+			C_Timer.After(0.15, function()
+				delayCall()
+			end)
+		end
+	end
+end
 
-	-- -- ClassColor button
-	-- b = CreateFrame("Button", "ColorPPClass", ColorPickerFrame, "UIPanelButtonTemplate")
-	-- b:SkinButton()
-	-- b:SetText(CLASS)
-	-- b:SetWidth(b:GetWidth() + 10)
-	-- b:SetHeight(22)
-	-- b:SetPoint("TOPRIGHT", "ColorPPPaste", "BOTTOMRIGHT", 0, -7)
+local load = CreateFrame("Frame")
+load:RegisterEvent("PLAYER_ENTERING_WORLD")
+load:SetScript("OnEvent", function(self)
+	self:UnregisterAllEvents()
 
-	-- b:SetScript("OnClick", function()
-		-- ColorPickerFrame:SetColorRGB(T.color.r, T.color.g, T.color.b)
-		-- ColorSwatch:SetColorTexture(T.color.r, T.color.g, T.color.b)
-		-- if ColorPickerFrame.hasOpacity then
-			-- OpacitySliderFrame:SetValue(0)
-		-- end
-	-- end)
+	if C_AddOns.IsAddOnLoaded("ColorPickerPlus") then return end
 
-	-- -- Locate Color Swatch for copy color
-	-- ColorPPCopyColorSwatch:SetPoint("LEFT", "ColorSwatch", "LEFT")
-	-- ColorPPCopyColorSwatch:SetPoint("TOP", "ColorPPPaste", "BOTTOM", 0, -5)
+	ColorPickerFrame:HookScript("OnShow", function(frame)
+		-- Get color that will be replaced
+		local r, g, b = frame:GetColorRGB()
+		frame.Content.ColorSwatchOriginal:SetColorTexture(r, g, b)
 
-	-- -- Move the Opacity Slider Frame to align with bottom of Copy ColorSwatch
-	-- OpacitySliderFrame:ClearAllPoints()
-	-- OpacitySliderFrame:SetPoint("BOTTOM", "ColorPPCopyColorSwatch", "BOTTOM", 0, 23)
-	-- OpacitySliderFrame:SetPoint("RIGHT", "ColorPickerFrame", "RIGHT", -35, 18)
+		-- Show/hide the alpha box
+		if frame.hasOpacity then
+			ColorPPBoxA:Show()
+			ColorPPBoxLabelA:Show()
+			frame.Content.HexBox:SetScript("OnTabPressed", function() ColorPPBoxA:SetFocus() end)
+			UpdateAlphaText()
+		else
+			ColorPPBoxA:Hide()
+			ColorPPBoxLabelA:Hide()
+			frame.Content.HexBox:SetScript("OnTabPressed", function() ColorPPBoxR:SetFocus() end)
+		end
 
-	-- -- Set up edit box frames and interior label and text areas
-	-- local boxes = {"R", "G", "B", "H", "A"}
-	-- for i = 1, table.getn(boxes) do
-		-- local rgb = boxes[i]
-		-- local box = CreateFrame("EditBox", "ColorPPBox"..rgb, ColorPickerFrame, "InputBoxTemplate")
-		-- T.SkinEditBox(box)
-		-- box:SetID(i)
-		-- box:SetFrameStrata("DIALOG")
-		-- box:SetAutoFocus(false)
-		-- box:SetTextInsets(0, 7, 1, 0)
-		-- box:SetJustifyH("RIGHT")
-		-- box:SetHeight(14)
+		UpdateColorTexts(nil, nil, nil, ColorPickerFrame.Content.HexBox)
+	end)
 
-		-- if i == 4 then
-			-- -- Hex entry box
-			-- box:SetMaxLetters(6)
-			-- box:SetWidth(60)
-			-- box:SetNumeric(false)
-		-- else
-			-- box:SetMaxLetters(3)
-			-- box:SetWidth(40)
-			-- box:SetNumeric(true)
-		-- end
-		-- box:SetPoint("TOP", "ColorPickerWheel", "BOTTOM", 0, -15)
+	ColorPickerFrame.Content.ColorPicker:SetScript("OnColorSelect", onColorSelect)
 
-		-- -- Label
-		-- local label = box:CreateFontString("ColorPPBoxLabel"..rgb, "ARTWORK", "GameFontNormalSmall")
-		-- label:SetTextColor(1, 1, 1)
-		-- label:SetPoint("RIGHT", "ColorPPBox"..rgb, "LEFT", -5, 0)
-		-- if i == 4 then
-			-- label:SetText("#")
-		-- else
-			-- label:SetText(rgb)
-		-- end
+	-- Make the Color Picker dialog a bit taller, to make room for edit boxes
+	ColorPickerFrame:SetHeight(ColorPickerFrame:GetHeight() + 40)
 
-		-- -- Set up scripts to handle event appropriately
-		-- if i == 5 then
-			-- box:SetScript("OnEscapePressed", function(self) self:ClearFocus() UpdateAlphaText() end)
-			-- box:SetScript("OnEnterPressed", function(self) self:ClearFocus() UpdateAlphaText() end)
-			-- box:SetScript("OnTextChanged", function(self) UpdateAlpha(self) end)
-		-- else
-			-- box:SetScript("OnEscapePressed", function(self) self:ClearFocus() UpdateColorTexts() end)
-			-- box:SetScript("OnEnterPressed", function(self) self:ClearFocus() UpdateColorTexts() end)
-			-- box:SetScript("OnTextChanged", function(self) UpdateColor(self) end)
-		-- end
+	ColorPickerFrame.Content.ColorSwatchOriginal:ClearAllPoints()
+	ColorPickerFrame.Content.ColorSwatchOriginal:SetPoint("TOPLEFT", ColorPickerFrame.Content.ColorSwatchCurrent, "BOTTOMLEFT", 0, -2)
 
-		-- box:SetScript("OnEditFocusGained", function(self) self:SetCursorPosition(0) self:HighlightText() end)
-		-- box:SetScript("OnEditFocusLost", function(self) self:HighlightText(0, 0) end)
-		-- box:SetScript("OnTextSet", function(self) self:ClearFocus() end)
-		-- box:Show()
-	-- end
+	ColorPickerFrame.Content.HexBox:SetSize(78, 18)
 
-	-- -- Finish up with placement
-	-- ColorPPBoxR:SetPoint("BOTTOMLEFT", "ColorPickerOkayButton", "TOPLEFT", 13, 24)
-	-- ColorPPBoxG:SetPoint("LEFT", "ColorPPBoxR", "RIGHT", 18, 0)
-	-- ColorPPBoxB:SetPoint("LEFT", "ColorPPBoxG", "RIGHT", 18, 0)
-	-- ColorPPBoxH:SetPoint("LEFT", "ColorPPBoxB", "RIGHT", 18, 0)
-	-- ColorPPBoxA:SetPoint("LEFT", "ColorPPBoxH", "RIGHT", 18, 0)
+	-- Add Color Swatch for the copied color
+	local t = ColorPickerFrame:CreateTexture("ColorPPCopyColorSwatch")
+	local w, h = ColorPickerFrame.Content.ColorSwatchCurrent:GetSize()
+	t:SetSize(w, h)
+	t:SetColorTexture(0, 0, 0)
+	t:Hide()
+	t:SetPoint("LEFT", ColorPickerFrame.Content.ColorSwatchCurrent, "RIGHT", 2, -13)
 
-	-- -- Define the order of tab cursor movement
-	-- ColorPPBoxR:SetScript("OnTabPressed", function() ColorPPBoxG:SetFocus() end)
-	-- ColorPPBoxG:SetScript("OnTabPressed", function() ColorPPBoxB:SetFocus() end)
-	-- ColorPPBoxB:SetScript("OnTabPressed", function() ColorPPBoxH:SetFocus() end)
-	-- ColorPPBoxA:SetScript("OnTabPressed", function() ColorPPBoxR:SetFocus() end)
+	-- Add copy button to the ColorPickerFrame
+	local b = CreateFrame("Button", "ColorPPCopy", ColorPickerFrame, "UIPanelButtonTemplate")
+	b:SkinButton()
+	b:SetText(CALENDAR_COPY_EVENT)
+	b:SetWidth(85)
+	b:SetHeight(22)
+	b:SetPoint("TOPLEFT", ColorPickerFrame.Content.ColorSwatchOriginal, "BOTTOMLEFT", -6, -5)
 
-	-- -- Make the color picker movable
-	-- local mover = CreateFrame("Frame", nil, ColorPickerFrame)
-	-- mover:SetPoint("TOPLEFT", ColorPickerFrame, "TOPLEFT", 0, 0)
-	-- mover:SetPoint("BOTTOMRIGHT", ColorPickerFrame, "TOPRIGHT", 0, -15)
-	-- mover:EnableMouse(true)
-	-- mover:SetScript("OnMouseDown", function() ColorPickerFrame:StartMoving() end)
-	-- mover:SetScript("OnMouseUp", function() ColorPickerFrame:StopMovingOrSizing() end)
-	-- ColorPickerFrame:EnableKeyboard(false)
--- end)
+	-- Copy color into buffer on button click
+	b:SetScript("OnClick", function()
+		-- Copy current dialog colors into buffer
+		colorBuffer.r, colorBuffer.g, colorBuffer.b = ColorPickerFrame:GetColorRGB()
+
+		-- Enable Paste button and display copied color into swatch
+		ColorPPPaste:Enable()
+		ColorPPCopyColorSwatch:SetColorTexture(colorBuffer.r, colorBuffer.g, colorBuffer.b)
+		ColorPPCopyColorSwatch:Show()
+
+		if ColorPickerFrame.hasOpacity then
+			colorBuffer.a = ColorPickerFrame:GetColorAlpha()
+		else
+			colorBuffer.a = nil
+		end
+	end)
+
+	local alphaUpdater = CreateFrame('Frame', '$parent_AlphaUpdater', ColorPickerFrame)
+	alphaUpdater:SetScript('OnUpdate', function()
+		if ColorPickerFrame.Content.ColorPicker.Alpha:IsMouseOver() then
+			onAlphaValueChanged(nil, ColorPickerFrame:GetColorAlpha())
+		end
+	end)
+
+	-- Paste button
+	b = CreateFrame("Button", "ColorPPPaste", ColorPickerFrame, "UIPanelButtonTemplate")
+	b:SetText(CALENDAR_PASTE_EVENT)
+	b:SkinButton()
+	b:SetWidth(85)
+	b:SetHeight(22)
+	b:SetPoint("TOPLEFT", "ColorPPCopy", "BOTTOMLEFT", 0, -7)
+	b:Disable()
+
+	-- Paste color on button click, updating frame components
+	b:SetScript("OnClick", function()
+		ColorPickerFrame.Content.ColorPicker:SetColorRGB(colorBuffer.r, colorBuffer.g, colorBuffer.b)
+		ColorPickerFrame.Content.ColorSwatchCurrent:SetColorTexture(colorBuffer.r, colorBuffer.g, colorBuffer.b)
+
+		if ColorPickerFrame.hasOpacity and colorBuffer.a then -- color copied had an alpha value
+			ColorPickerFrame.Content.ColorPicker:SetColorAlpha(colorBuffer.a)
+		end
+	end)
+
+	-- ClassColor button
+	b = CreateFrame("Button", "ColorPPClass", ColorPickerFrame, "UIPanelButtonTemplate")
+	b:SkinButton()
+	b:SetText(CLASS)
+	b:SetWidth(b:GetWidth() + 10)
+	b:SetHeight(22)
+	b:SetPoint("TOPRIGHT", "ColorPPPaste", "BOTTOMRIGHT", 0, -7)
+
+	b:SetScript("OnClick", function()
+		ColorPickerFrame.Content.ColorPicker:SetColorRGB(T.color.r, T.color.g, T.color.b)
+		ColorPickerFrame.Content.ColorSwatchCurrent:SetColorTexture(T.color.r, T.color.g, T.color.b)
+		if ColorPickerFrame.hasOpacity then
+			ColorPickerFrame.Content.ColorPicker:SetColorAlpha(0)
+		end
+	end)
+
+	-- Set up edit box frames and interior label and text areas
+	local boxes = {"R", "G", "B", "A"}
+	for i = 1, table.getn(boxes) do
+		local rgb = boxes[i]
+		local box = CreateFrame("EditBox", "ColorPPBox"..rgb, ColorPickerFrame, "InputBoxTemplate")
+		T.SkinEditBox(box)
+		box:SetID(i)
+		box:SetFrameStrata("DIALOG")
+		box:SetAutoFocus(false)
+		box:SetTextInsets(0, 7, 1, 0)
+		box:SetJustifyH("RIGHT")
+		box:SetHeight(18)
+		box:SetMaxLetters(3)
+		box:SetWidth(40)
+		box:SetNumeric(true)
+		box:SetPoint("TOP", ColorPickerFrame.Content.ColorSwatchOriginal, "BOTTOM", 0, -99)
+
+		-- Label
+		local label = box:CreateFontString("ColorPPBoxLabel"..rgb, "ARTWORK", "GameFontNormal")
+		label:SetTextColor(1, 1, 1)
+		label:SetPoint("RIGHT", "ColorPPBox"..rgb, "LEFT", -4, 0)
+		label:SetText(rgb)
+
+		-- Set up scripts to handle event appropriately
+		if i == 4 then
+			box:SetScript("OnKeyUp", function(eb, key)
+				local copyPaste = IsControlKeyDown() and key == "V"
+				if key == "BACKSPACE" or copyPaste or (strlen(key) == 1 and not IsModifierKeyDown()) then
+					UpdateAlpha(eb)
+				elseif key == "ENTER" or key == "ESCAPE" then
+					eb:ClearFocus()
+					UpdateAlpha(eb)
+				end
+			end)
+		else
+			-- set up scripts to handle event appropriately
+			box:SetScript("OnKeyUp", function(eb, key)
+				local copyPaste = IsControlKeyDown() and key == "V"
+				if key == "BACKSPACE" or copyPaste or (strlen(key) == 1 and not IsModifierKeyDown()) then
+					UpdateColorTexts(nil, nil, nil, eb)
+					UpdateColor()
+				elseif key == "ENTER" or key == "ESCAPE" then
+					eb:ClearFocus()
+					UpdateColorTexts(nil, nil, nil, eb)
+					UpdateColor()
+				end
+			end)
+		end
+
+		box:SetScript("OnEditFocusGained", function(self) self:SetCursorPosition(0) self:HighlightText() end)
+		box:SetScript("OnEditFocusLost", function(self) self:HighlightText(0, 0) end)
+		box:Show()
+	end
+
+	-- Finish up with placement
+	ColorPPBoxR:SetPoint("LEFT", ColorPickerFrame.Content, 25, 0)
+	ColorPPBoxG:SetPoint("LEFT", "ColorPPBoxR", "RIGHT", 22, 0)
+	ColorPPBoxB:SetPoint("LEFT", "ColorPPBoxG", "RIGHT", 22, 0)
+	ColorPPBoxA:SetPoint("LEFT", "ColorPPBoxB", "RIGHT", 22, 0)
+
+	-- Define the order of tab cursor movement
+	ColorPPBoxR:SetScript("OnTabPressed", function() ColorPPBoxG:SetFocus() end)
+	ColorPPBoxG:SetScript("OnTabPressed", function() ColorPPBoxB:SetFocus() end)
+	ColorPPBoxB:SetScript("OnTabPressed", function() ColorPickerFrame.Content.HexBox:SetFocus() end)
+	ColorPPBoxA:SetScript("OnTabPressed", function() ColorPPBoxR:SetFocus() end)
+
+	-- Make the color picker movable
+	local mover = CreateFrame("Frame", nil, ColorPickerFrame)
+	mover:SetPoint("TOPLEFT", ColorPickerFrame, "TOPLEFT", 0, 0)
+	mover:SetPoint("BOTTOMRIGHT", ColorPickerFrame, "TOPRIGHT", 0, -15)
+	mover:EnableMouse(true)
+	mover:SetScript("OnMouseDown", function() ColorPickerFrame:StartMoving() end)
+	mover:SetScript("OnMouseUp", function() ColorPickerFrame:StopMovingOrSizing() end)
+	ColorPickerFrame:EnableKeyboard(false)
+end)
