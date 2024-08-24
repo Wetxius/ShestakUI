@@ -219,7 +219,7 @@ local function LoadSkin()
 
 	HandleGarrisonPortrait(GarrisonMissionFrame.FollowerTab.PortraitFrame)
 
-	hooksecurefunc("GarrisonFollowerList_InitButton", function(frame, elementData)
+	hooksecurefunc("GarrisonFollowerList_InitButton", function(frame)
 		local follower = frame.Follower
 		if follower and not follower.backdrop then
 			follower:CreateBackdrop("Overlay")
@@ -567,7 +567,7 @@ local function LoadSkin()
 	GarrisonShipyardFrame.FollowerTab:SetTemplate("Overlay")
 	T.SkinScrollBar(GarrisonShipyardFrameFollowers.ScrollBar)
 
-	hooksecurefunc("GarrisonShipyardFollowerList_InitButton", function(button, elementData)
+	hooksecurefunc("GarrisonShipyardFollowerList_InitButton", function(button)
 		if button and not button.backdrop then
 			button:CreateBackdrop("Overlay")
 			button.backdrop:SetPoint("TOPLEFT", -1, 1)

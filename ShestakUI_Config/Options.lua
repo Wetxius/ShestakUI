@@ -529,6 +529,7 @@ do
 
 	tinsert(ns.buttons, CancelButton)
 
+	local selfText
 	StaticPopupDialogs.LINK_URL = {
 		text = COMMUNITIES_INVITE_MANAGER_COPY,
 		button1 = OKAY,
@@ -959,7 +960,6 @@ do
 	end
 
 	local selfTextImport
-	local importVar = "General"
 	StaticPopupDialogs.SHESTAKUI_IMPORT_PROFILE = {
 		text = L.profile_import,
 		button1 = ACCEPT,

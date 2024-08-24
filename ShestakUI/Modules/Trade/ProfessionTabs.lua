@@ -4,10 +4,6 @@ if C.trade.profession_tabs ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Professions tabs on tradeskill frame(ProfessionTabs by Beoko)
 ----------------------------------------------------------------------------------------
-local IsCurrentSpell = IsCurrentSpell
-local format = string.format
-local next = next
-local ranks = PROFESSION_RANKS
 local tabs, spells = {}, {}
 
 local handler = CreateFrame("Frame")
@@ -172,7 +168,6 @@ local function UpdateTab(object, name, texture, hat)
 	tab:Show()
 
 	tab.name = name
-	-- tab.tooltip = rank and (rank ~= "" and rank ~= name) and format("%s (%s)", name, rank) or name
 
 	tab:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 5, -7)
@@ -188,27 +183,9 @@ local function UpdateTab(object, name, texture, hat)
 	tabs[object].index = tabs[object].index + 1
 end
 
-local function GetProfessionRank(currentSkill, skillLineName)
-	if skillLineName then
-		return skillLineName
-	end
-
-	if currentSkill <= 74 then
-		return APPRENTICE
-	end
-
-	for index = #ranks, 1, -1 do
-		local requiredSkill, title = ranks[index][1], ranks[index][2]
-
-		if currentSkill >= requiredSkill then
-			return title
-		end
-	end
-end
-
 local function HandleProfession(object, professionID, hat)
 	if professionID then
-		local _, _, currentSkill, _, numAbilities, offset, skillID, _, _, _, skillLineName = GetProfessionInfo(professionID)
+		local _, _, _, _, numAbilities, offset, skillID = GetProfessionInfo(professionID)
 
 		if defaults[skillID] then
 			for index = 1, numAbilities do

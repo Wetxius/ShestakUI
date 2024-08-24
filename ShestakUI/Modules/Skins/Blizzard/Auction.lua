@@ -19,16 +19,6 @@ local function LoadSkin()
 	T.SkinFilter(AuctionHouseFrame.SearchBar.FilterButton)
 	T.SkinCloseButton(AuctionHouseFrame.SearchBar.FilterButton.ClearFiltersButton)
 	AuctionHouseFrame.SearchBar.FilterButton.ClearFiltersButton:SetPoint("TOPRIGHT", 5, 8)
-
-	local function SkinEditBoxes(Frame)
-		T.SkinEditBox(Frame.MinLevel)
-		T.SkinEditBox(Frame.MaxLevel)
-		Frame.MinLevel.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
-		Frame.MaxLevel.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
-	end
-
-	--FIDME SkinEditBoxes(AuctionHouseFrame.SearchBar.FilterButton.LevelRangeFrame)
-
 	AuctionHouseFrame.SearchBar.FilterButton:SetHeight(22)
 
 	local buttons = {

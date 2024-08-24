@@ -19,7 +19,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			local currentRecipeInfo = ProfessionsFrame.CraftingPage.SchematicForm:GetRecipeInfo()
 			if currentRecipeInfo then
 				C_TradeSkillUI.CraftRecipe(currentRecipeInfo.recipeID)
-				UseItemByName(38682)
+				C_Item.UseItemByName(38682)
 			end
 		end)
 

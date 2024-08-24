@@ -393,7 +393,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
 ----------------------------------------------------------------------------------------
-hooksecurefunc(TooltipComparisonManager, "AnchorShoppingTooltips", function(self, primaryShown, secondaryItemShown)
+hooksecurefunc(TooltipComparisonManager, "AnchorShoppingTooltips", function(self, _, secondaryItemShown)
 	local tooltip = self.tooltip;
 	local shoppingTooltip1 = tooltip.shoppingTooltips[1];
 	local shoppingTooltip2 = tooltip.shoppingTooltips[2];

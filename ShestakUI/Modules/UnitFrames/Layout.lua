@@ -428,7 +428,6 @@ local function Shared(self, unit)
 		-- Essence bar
 		if C.unitframe_class_bar.essence == true and T.class == "EVOKER" then
 			self.Essence = CreateFrame("Frame", self:GetName().."_Essence", self, "BackdropTemplate", "BackdropTemplate")
-			local maxEssence = UnitPowerMax(self.unit, Enum.PowerType.Essence)
 			self.Essence:CreateBackdrop("Default")
 			self.Essence:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.Essence:SetSize(player_width, 7)

@@ -35,18 +35,18 @@ local update = function(self)
 	return updateContents(self)
 end
 
-local function hookCheck(self)
-	if not (C_AddOns.IsAddOnLoaded("Blizzard_VoidStorageUI") and oGlow:IsPipeEnabled"voidstore") then return end
+-- local function hookCheck(self)
+	-- if not (C_AddOns.IsAddOnLoaded("Blizzard_VoidStorageUI") and oGlow:IsPipeEnabled"voidstore") then return end
 
-	if not hooked then
-		hooksecurefunc("VoidStorage_SetPageNumber", function()
-			updateContents(self)
-		end)
-		hooked = true
+	-- if not hooked then
+		-- hooksecurefunc("VoidStorage_SetPageNumber", function()
+			-- updateContents(self)
+		-- end)
+		-- hooked = true
 
-		-- self:UnregisterEvent("VOID_STORAGE_OPEN", hookCheck)
-	end
-end
+		-- -- self:UnregisterEvent("VOID_STORAGE_OPEN", hookCheck)
+	-- end
+-- end
 
 local enable = function(self)
 	_E = true

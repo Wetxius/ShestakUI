@@ -270,7 +270,7 @@ function Stuffing:SlotUpdate(b)
 
 		if C.bag.ilvl then
 			if info.itemID == 82800 then -- pet
-				local petID, petLevel, petName = strmatch(clink, "|H%w+:(%d+):(%d+):.-|h%[(.-)%]|h")
+				local _, petLevel, petName = strmatch(clink, "|H%w+:(%d+):(%d+):.-|h%[(.-)%]|h")
 				b.name = petName
 				b.itemlevel = petLevel
 				b.frame.text:SetText(b.itemlevel)

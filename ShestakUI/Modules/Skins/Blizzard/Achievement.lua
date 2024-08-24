@@ -281,7 +281,7 @@ local function LoadSkin()
 
 	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
 		local numCriteria = GetAchievementNumCriteria(id)
-		local textStrings, metas = 0, 0
+		local textStrings, metas, criteria, object = 0, 0
 		for i = 1, numCriteria do
 			local _, criteriaType, completed, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, i)
 			if assetID and criteriaType == _G.CRITERIA_TYPE_ACHIEVEMENT then

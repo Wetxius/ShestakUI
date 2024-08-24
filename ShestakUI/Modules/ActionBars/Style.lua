@@ -11,9 +11,10 @@ local function StyleNormalButton(button, size)
 		local count = _G[name.."Count"]
 		local flash = _G[name.."Flash"]
 		local hotkey = _G[name.."HotKey"]
-		local border = button.Border or _G[name..'Border']
+		local border = button.Border or _G[name.."Border"]
 		local btname = _G[name.."Name"]
-		local normal = _G[name.."NormalTexture"]
+		local normal = button.NormalTexture or _G[name.."NormalTexture"]
+		local normal2 = button:GetNormalTexture()
 		local float = _G[name.."FloatingBG"]
 		local highlight = button.SpellHighlightTexture
 		local isExtraAction = name:match("ExtraAction")
@@ -23,9 +24,6 @@ local function StyleNormalButton(button, size)
 		local autocast = button.AutoCastOverlay
 		local shine = _G[name.."Shine"]
 		local spellAlert = button.SpellActivationAlert
-
-		local normal = button.NormalTexture or _G[name..'NormalTexture']
-		local normal2 = button:GetNormalTexture()
 
 		if button.IconMask then
 			button.IconMask:Hide()

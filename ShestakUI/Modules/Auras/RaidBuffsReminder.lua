@@ -282,7 +282,7 @@ end
 
 function UpdatePositions()
 	local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
-	local first
+	local first, previousBuff
 	for i = 1, #icons do
 		local buff = icons[i]
 		buff:ClearAllPoints()

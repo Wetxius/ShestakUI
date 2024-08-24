@@ -5,7 +5,7 @@ if C.trade.already_known ~= true then return end
 --	Colorizes recipes/mounts/pets/toys that is already known(AlreadyKnown by Villiv)
 ----------------------------------------------------------------------------------------
 local color = {r = 0.1, g = 1, b = 0.1}
-local knowns, lines = {}, {}
+local knowns = {}
 local recipe = Enum.ItemClass.Recipe
 local pet = Enum.ItemMiscellaneousSubclass.CompanionPet
 local mount = Enum.ItemMiscellaneousSubclass.Mount

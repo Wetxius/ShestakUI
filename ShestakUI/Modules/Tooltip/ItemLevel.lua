@@ -324,11 +324,6 @@ local function DecorateTooltip(guid, isInspect)
 		local averageItemLevel = cache.ilevel or 0
 		local r1, g1, b1 = ColorDiff(ourEquippedItemLevel, averageItemLevel)
 
-		local _, unitID = GameTooltip:GetUnit()
-		if isInspect then
-			unitID = "target"
-		end
-
 		local levelText = format("|cff%2x%2x%2x%.1f|r", r1 * 255, g1 * 255, b1 * 255, averageItemLevel)
 
 		if isInspect and averageItemLevel > 0 then

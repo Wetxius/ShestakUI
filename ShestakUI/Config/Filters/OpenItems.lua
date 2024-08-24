@@ -586,7 +586,6 @@ T.OpenItems = {
 	[185990] = true,	-- Harvester's War Chest
 	[185992] = true,	-- War Chest of the Undying Army
 	[185993] = true,	-- Ascended War Chest
-	[185990] = true,	-- Harvester's War Chest
 	[185993] = true,	-- Ascended War Chest
 	[186196] = true,	-- Death's Advance War Chest
 	[186531] = true,	-- Cache of Sanctum Treasures

@@ -585,7 +585,6 @@ if C_AddOns.IsAddOnLoaded("PremadeGroupsFilter") then
 	local RaidPanel = _G.PremadeGroupsFilterRaidPanel
 	local RolePanel = _G.PremadeGroupsFilterRolePanel
 	local MiniPanel = _G.PremadeGroupsFilterMiniPanel
-	local PGFDialog = _G.PremadeGroupsFilterDialog
 
 	local names = {"Difficulty", "MPRating", "Members", "Tanks", "Heals", "DPS", "Partyfit", "BLFit", "BRFit", "Defeated", "MatchingId", "PvPRating"}
 
