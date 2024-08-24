@@ -628,7 +628,6 @@ T.OpenItems = {
 	[201754] = true,	-- Obsidian Forgemaster's Cache
 	[201817] = true,	-- Twilight Cache
 	[202052] = true,	-- Timewatcher's Patience
-	[202142] = true,	-- Dragonbane Keep Strongbox
 	[202097] = true,	-- Bulging Box of Skins and Scales
 	[202098] = true,	-- Crowded Crate of Mined Materials
 	[202099] = true,	-- Stocked Sack of Hale Herbs

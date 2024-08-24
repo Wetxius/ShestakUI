@@ -2,7 +2,7 @@
 --	Initiation of ShestakUI
 ----------------------------------------------------------------------------------------
 -- Including system
-local addon, engine = ...
+local _, engine = ...
 engine[1] = {}	-- T, Functions
 engine[2] = {}	-- C, Config
 engine[3] = {}	-- L, Localization
