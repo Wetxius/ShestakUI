@@ -131,9 +131,9 @@ local function LoadSkin()
 		end
 
 		if rewardTexture then
-			-- local r, g, b = C_Item.GetItemQualityColor(rewardQuaility)
+			local r, g, b = C_Item.GetItemQualityColor(rewardQuaility)
 			rewardFrame.Icon:SetTexture(rewardTexture)
-			--rewardFrame.Icon.backdrop:SetBackdropBorderColor(r, g, b)
+			rewardFrame:SetBackdropBorderColor(r, g, b)
 		end
 	end)
 
