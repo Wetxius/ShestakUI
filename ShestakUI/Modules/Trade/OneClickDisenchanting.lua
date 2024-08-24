@@ -136,7 +136,7 @@ function button:PLAYER_LOGIN()
 		local _, link = TooltipUtil.GetDisplayedItem(self)
 
 		if link and not InCombatLockdown() and IsAltKeyDown() and not (AuctionHouseFrame and AuctionHouseFrame:IsShown()) then
-			local itemID = C_Item.GetItemInfoFromHyperlink(link)
+			local itemID = GetItemInfoFromHyperlink(link)
 			if not itemID then return end
 			local spell, r, g, b
 			if disenchanter then
