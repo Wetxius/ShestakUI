@@ -8,9 +8,9 @@ local queuedMessages = {}
 local function GetLinkColor(data)
 	local type, arg1, arg2, arg3 = string.split(":", data)
 	if type == "item" then
-		local _, _, quality = GetItemInfo(arg1)
+		local _, _, quality = C_Item.GetItemInfo(arg1)
 		if quality then
-			local _, _, _, color = GetItemQualityColor(quality)
+			local _, _, _, color = C_Item.GetItemQualityColor(quality)
 			return "|c"..color
 		else
 			return nil, true
@@ -30,13 +30,13 @@ local function GetLinkColor(data)
 		end
 	elseif type == "battlepet" then
 		if arg3 ~= -1 then
-			local _, _, _, color = GetItemQualityColor(arg3)
+			local _, _, _, color = C_Item.GetItemQualityColor(arg3)
 			return "|c"..color
 		else
 			return "|cffffd200"
 		end
 	elseif type == "garrfollower" then
-		local _, _, _, color = GetItemQualityColor(arg2)
+		local _, _, _, color = C_Item.GetItemQualityColor(arg2)
 		return "|c"..color
 	elseif type == "spell" then
 		return "|cff71d5ff"

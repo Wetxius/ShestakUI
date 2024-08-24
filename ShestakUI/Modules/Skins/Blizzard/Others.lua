@@ -69,7 +69,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 		end
 
-		local function SkinButton(f, strip)
+		local function SkinButton(f)
 			if f.SetNormalTexture then f:SetNormalTexture(0) end
 			if f.SetHighlightTexture then f:SetHighlightTexture(0) end
 			if f.SetPushedTexture then f:SetPushedTexture(0) end

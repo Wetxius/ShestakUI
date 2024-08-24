@@ -431,7 +431,7 @@ end
 --	Auto change raid frame layout
 ----------------------------------------------------------------------------------------
 if C.raidframe.layout == "AUTO" then
-	local function CheckSpec(self, event, unit)
+	local function CheckSpec(self)
 		if T.IsHealerSpec() then
 			-- Disable DPS
 			for _, party in pairs({oUF_PartyDPS, oUF_PartyTargetDPS, oUF_PartyPetDPS}) do

@@ -8,7 +8,7 @@ end
 local colorTable = setmetatable(
 	{},
 	{__index = function(self, val)
-		local r, g, b = GetItemQualityColor(val)
+		local r, g, b = C_Item.GetItemQualityColor(val)
 		rawset(self, val, {r, g, b})
 
 		return self[val]

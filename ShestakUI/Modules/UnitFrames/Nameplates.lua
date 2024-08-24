@@ -220,7 +220,7 @@ local function SetColorBorder(frame, r, g, b)
 end
 
 -- Auras functions
-local AurasCustomFilter = function(element, unit, data)
+local AurasCustomFilter = function(_, unit, data)
 	local allow = false
 
 	if not UnitIsFriend("player", unit) then

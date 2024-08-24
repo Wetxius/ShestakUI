@@ -62,7 +62,7 @@ local conditions = setmetatable({
 		end
 	end,
 	Casting = function(_, unit) return unit and (UnitCastingInfo(unit) or UnitChannelInfo(unit)) end,
-	Arena = function(_, unit) return unit and GetZonePVPInfo() == "arena" end,
+	Arena = function(_, unit) return unit and C_PvP.GetZonePVPInfo() == "arena" end,
 	Instance = function(_, unit) return unit and IsInInstance() == true end,
 }, {__index = function(t, k)
 	local cond = strmatch(k, "not(.+)")

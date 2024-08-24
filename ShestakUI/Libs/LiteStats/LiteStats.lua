@@ -1272,11 +1272,11 @@ if experience.enabled then
 				end
 				local color = {}
 				if standing == 0 then
-					color.r, color.g, color.b = GetItemQualityColor(0)
+					color.r, color.g, color.b = C_Item.GetItemQualityColor(0)
 				elseif standing == 7 then
-					color.r, color.g, color.b = GetItemQualityColor(3)
+					color.r, color.g, color.b = C_Item.GetItemQualityColor(3)
 				elseif standing == 8 then
-					color.r, color.g, color.b = GetItemQualityColor(4)
+					color.r, color.g, color.b = C_Item.GetItemQualityColor(4)
 				else
 					color = FACTION_BAR_COLORS[standing]
 				end
@@ -1573,7 +1573,7 @@ if location.enabled then
 			self.neutral = {"", {1, 0.93, 0.76}}
 		end,
 		OnEvent = function(self, event)
-			self.subzone, self.zone, self.pvp = GetSubZoneText(), GetZoneText(), {GetZonePVPInfo()}
+			self.subzone, self.zone, self.pvp = GetSubZoneText(), GetZoneText(), {C_PvP.GetZonePVPInfo()}
 			if not self.pvp[1] then self.pvp[1] = "neutral" end
 			local label = (self.subzone ~= "" and location.subzone) and self.subzone or self.zone
 			local r, g, b = unpack(self.pvp[1] and (self[self.pvp[1]][2] or self.other) or self.other)
@@ -1659,7 +1659,7 @@ if damage.enabled then
 				end
 			end
 		},
-		OnClick = function(self, button)
+		OnClick = function()
 			if C_AddOns.IsAddOnLoaded("Details") then
 				_detalhes:ToggleWindows()
 			elseif C_AddOns.IsAddOnLoaded("Numeration") then
@@ -1741,7 +1741,7 @@ if gold.enabled then
 							for _, exception in pairs(ShestakUIStats.JunkIgnore) do
 								if exception == itemstring then ignore = true break end
 							end
-							local _, _, itemRarity, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(link)
+							local _, _, itemRarity, _, _, _, _, _, _, _, itemSellPrice = C_Item.GetItemInfo(link)
 							-- local _, itemCount = GetContainerItemInfo(bag, slot)
 							if itemSellPrice and itemSellPrice > 0 and ((itemRarity == 0 and not ignore) or (ignore and itemRarity ~= 0)) then
 								-- profit = profit + (itemSellPrice * itemCount)
@@ -1922,7 +1922,7 @@ if gold.enabled then
 		if action == "list" then
 			print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_ADDITIONS, (#ShestakUIStats.JunkIgnore == 0 and NONE or "")))
 			for i, id in pairs(ShestakUIStats.JunkIgnore) do
-				local _, link = GetItemInfo(id)
+				local _, link = C_Item.GetItemInfo(id)
 				print("- ["..i.."]", link)
 			end
 		elseif action == "clear" then
@@ -1932,7 +1932,7 @@ if gold.enabled then
 			local _, mouselink = GameTooltip:GetItem()
 			for id in s:gmatch("|Hitem:(%d-):") do
 				mouselink = nil
-				local _, link = GetItemInfo(id)
+				local _, link = C_Item.GetItemInfo(id)
 				if action == "add" then
 					if not tContains(ShestakUIStats.JunkIgnore,id) then
 						tinsert(ShestakUIStats.JunkIgnore, id)

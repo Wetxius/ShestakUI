@@ -123,7 +123,7 @@ Close:ClearAllPoints()
 Close:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 5, -45)
 Close:SetSize(15, 15)
 Close:RegisterForClicks("AnyUp")
-Close:SetScript("OnClick", function(self, btn)
+Close:SetScript("OnClick", function(self)
 	if WorldMap_DDMenu.initialize ~= MapFrame.Menu then
 		CloseDropDownMenus()
 		WorldMap_DDMenu.initialize = MapFrame.Menu

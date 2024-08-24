@@ -4,7 +4,7 @@ if C.skins.rematch ~= true or not C_AddOns.IsAddOnLoaded("Rematch") then return 
 ----------------------------------------------------------------------------------------
 --	Rematch skin
 ----------------------------------------------------------------------------------------
-local _,skin = ...
+local _, skin = ...
 Skin = skin
 
 local rematch = Rematch

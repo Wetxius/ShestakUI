@@ -46,7 +46,7 @@ local function IsKnown(itemLink)
 		return true
 	end
 
-	local _, _, _, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(itemID)
+	local _, _, _, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
 	if not (knowables[class] or knowables[subClass]) then return end
 
 	tooltip:ClearLines()
@@ -187,7 +187,7 @@ local function GuildRewards_Update()
 		if button and button:IsShown() then
 			local achievementID, itemID, itemName, _, repLevel = GetGuildRewardInfo(offset + i)
 			if itemName and not (achievementID and achievementID > 0) and repLevel <= standingID then
-				local _, itemLink = GetItemInfo(itemID)
+				local _, itemLink = C_Item.GetItemInfo(itemID)
 				if IsKnown(itemLink) then
 					button.icon:SetVertexColor(color.r, color.g, color.b)
 				end
@@ -276,7 +276,7 @@ local function BlackMarketFrame_UpdateHotItem(self)
 end
 
 local function BlackMarketScrollFrame_Update(self, elementData)
-	local name, _, _, _, usable, _, _, _, _, _, _, _, _, _, link = C_BlackMarket.GetItemInfoByIndex(elementData.index)
+	local name, _, _, _, usable, _, _, _, _, _, _, _, _, _, link = C_BlackMarket.C_Item.GetItemInfoByIndex(elementData.index)
 	if name and usable and IsKnown(link) then
 		self.Item.IconTexture:SetVertexColor(color.r, color.g, color.b)
 	end
@@ -290,6 +290,7 @@ if C_AddOns.IsAddOnLoaded("Blizzard_BlackMarketUI") then
 end
 
 -- LoD addons
+local isBlizzard_AuctionUILoaded
 if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded and isBlizzard_BlackMarketUILoaded) then
 	local function OnEvent(self, event, addon)
 		if addon == "Blizzard_GuildUI" then

@@ -184,11 +184,12 @@ local function StyleNormalButton(button, size)
 	end
 end
 
-local function StyleSmallButton(normal, button, icon, name, pet)
+local function StyleSmallButton(button, name, isPet)
 	if not button.isSkinned then
+		local normal = _G[name.."NormalTexture"]
 		local flash = _G[name.."Flash"]
 		local hotkey = _G[name.."HotKey"]
-		local normal = _G[name.."NormalTexture"]
+		local icon = _G[name.."Icon"]
 
 		button:SetNormalTexture(0)
 
@@ -229,7 +230,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		icon:CropIcon()
 		icon:SetDrawLayer("BACKGROUND", 7)
 
-		if pet then
+		if isPet then
 			local autocast = button.AutoCastOverlay
 			autocast:SetSize(C.actionbar.button_size * 1.05, C.actionbar.button_size * 1.05)
 		end
@@ -254,9 +255,7 @@ function T.StyleShift()
 	for i = 1, 10 do
 		local name = "StanceButton"..i
 		local button = _G[name]
-		local icon = _G[name.."Icon"]
-		local normal = _G[name.."NormalTexture"]
-		StyleSmallButton(normal, button, icon, name)
+		StyleSmallButton(button, name)
 	end
 end
 
@@ -264,9 +263,7 @@ function T.StylePet()
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local name = "PetActionButton"..i
 		local button = _G[name]
-		local icon = _G[name.."Icon"]
-		local normal = _G[name.."NormalTexture2"]
-		StyleSmallButton(normal, button, icon, name, true)
+		StyleSmallButton(button, name, true)
 	end
 end
 

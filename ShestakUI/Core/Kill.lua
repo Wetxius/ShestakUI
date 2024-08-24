@@ -5,7 +5,7 @@ local T, C, L = unpack(ShestakUI)
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function(_, _, addon)
+frame:SetScript("OnEvent", function()
 	if ClassPowerBar then
 		ClassPowerBar.OnEvent = T.dummy -- Fix error with druid on logon
 	end

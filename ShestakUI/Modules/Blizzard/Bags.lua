@@ -104,7 +104,7 @@ end
 
 local function IsItemUnusable(...)
 	if ... then
-		local slot, _,_, class, subclass = select(9, GetItemInfo(...))
+		local slot, _,_, class, subclass = select(9, C_Item.GetItemInfo(...))
 		return IsClassUnusable(class, subclass, slot)
 	end
 end
@@ -265,8 +265,8 @@ function Stuffing:SlotUpdate(b)
 	end
 
 	if clink then
-		b.name, _, _, b.itemlevel, b.level, _, _, _, _, _, _, b.itemClassID, b.itemSubClassID = GetItemInfo(clink)
-		_, b.spellID = GetItemSpell(clink) -- for anima
+		b.name, _, _, b.itemlevel, b.level, _, _, _, _, _, _, b.itemClassID, b.itemSubClassID = C_Item.GetItemInfo(clink)
+		_, b.spellID = C_Item.GetItemSpell(clink) -- for anima
 
 		if C.bag.ilvl then
 			if info.itemID == 82800 then -- pet
@@ -321,7 +321,7 @@ function Stuffing:SlotUpdate(b)
 
 		-- Color slot according to item quality
 		if not b.frame.lock and quality and quality > 1 and not (isQuestItem or questId) then
-			local R, G, B = GetItemQualityColor(quality)
+			local R, G, B = C_Item.GetItemQualityColor(quality)
 			if b.frame then
 				b.frame:SetBackdropBorderColor(R, G, B)
 			end
@@ -495,7 +495,7 @@ function Stuffing:CreateReagentContainer()
 		local clink = C_Container.GetContainerItemLink(-3, i)
 		if clink then
 			if quality and quality > 1 then
-				local r, g, b = GetItemQualityColor(quality)
+				local r, g, b = C_Item.GetItemQualityColor(quality)
 				button:SetBackdropBorderColor(r, g, b)
 			end
 		end
@@ -789,7 +789,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 	-- C_Timer.After(2, function()
 	if ret.frame.quality and ret.frame.quality > 1 then
-		local r, g, b = GetItemQualityColor(ret.frame.quality)
+		local r, g, b = C_Item.GetItemQualityColor(ret.frame.quality)
 		ret.frame:SetBackdropBorderColor(r, g, b)
 	end
 	-- end)
@@ -987,7 +987,7 @@ function Stuffing:SearchUpdate(str)
 			if ilink then
 				local _, setName = C_Container.GetContainerItemEquipmentSetInfo(b.bag, b.slot)
 				setName = setName or ""
-				local _, _, _, _, minLevel, class, subclass, _, equipSlot, _, _, _, _, bindType = GetItemInfo(ilink)
+				local _, _, _, _, minLevel, class, subclass, _, equipSlot, _, _, _, _, bindType = C_Item.GetItemInfo(ilink)
 				class = class or ""
 				subclass = subclass or ""
 				equipSlot = equipSlot or ""
@@ -1031,7 +1031,7 @@ function Stuffing:SearchUpdate(str)
 			local _, _, _, _, _, _, ilink = GetContainerItemInfo(-3, slotID)
 			local button = _G["ReagentBankFrameItem"..slotID]
 			if ilink then
-				local name, _, _, _, minLevel, class, subclass = GetItemInfo(ilink)
+				local name, _, _, _, minLevel, class, subclass = C_Item.GetItemInfo(ilink)
 				class = class or ""
 				subclass = subclass or ""
 				minLevel = minLevel or 1
@@ -1314,10 +1314,10 @@ function Stuffing:InitBags()
 
 	local buttons = {}
 	local filterTable = {
-		[1] = {3566860, GetItemClassInfo(0)},	-- Consumable
-		[2] = {135280, GetItemClassInfo(2)},	-- Weapon
-		[3] = {132341, GetItemClassInfo(4)},	-- Armor
-		[4] = {132281, GetItemClassInfo(7)},	-- Tradeskill
+		[1] = {3566860, C_Item.GetItemClassInfo(0)},	-- Consumable
+		[2] = {135280, C_Item.GetItemClassInfo(2)},	-- Weapon
+		[3] = {132341, C_Item.GetItemClassInfo(4)},	-- Armor
+		[4] = {132281, C_Item.GetItemClassInfo(7)},	-- Tradeskill
 		[5] = {236667, ITEM_BIND_QUEST},		-- Quest
 		[6] = {133784, ITEM_BIND_ON_EQUIP},		-- BoE
 	}
@@ -1667,7 +1667,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 	ToggleBackpack()
 end
 
-function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
+function Stuffing:PLAYERBANKSLOTS_CHANGED()
 	if self.bankFrame and self.bankFrame:IsShown() then
 		self:BagSlotUpdate(-1)
 	end
@@ -1682,7 +1682,7 @@ function Stuffing:PLAYERREAGENTBANKSLOTS_CHANGED(id)
 	if clink then
 		local _, _, _, quality = GetContainerItemInfo(-3, id)
 		if quality and quality > 1 then
-			local r, g, b = GetItemQualityColor(quality)
+			local r, g, b = C_Item.GetItemQualityColor(quality)
 			button:SetBackdropBorderColor(r, g, b)
 		end
 	end
@@ -1818,9 +1818,9 @@ function Stuffing:BAG_CONTAINER_UPDATE()
 			local slotLink = GetInventoryItemLink("player", v.frame.ID)
 			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
 			if slotLink then
-				local _, _, quality = GetItemInfo(slotLink)
+				local _, _, quality = C_Item.GetItemInfo(slotLink)
 				if quality and quality > 1 then
-					local r, g, b = GetItemQualityColor(quality)
+					local r, g, b = C_Item.GetItemQualityColor(quality)
 					v.frame:SetBackdropBorderColor(r, g, b)
 				end
 			end
@@ -1931,14 +1931,14 @@ function Stuffing:SortBags()
 				if itemLink ~= nil then
 					local newItem = {}
 
-					local n, _, q, iL, rL, c1, c2, _, Sl, _, _, classID = GetItemInfo(itemLink)
+					local n, _, q, iL, rL, c1, c2, _, Sl, _, _, classID = C_Item.GetItemInfo(itemLink)
 					local p = 1
 					-- Hearthstone
-					if n == GetItemInfo(6948) or n == GetItemInfo(110560) or n == GetItemInfo(140192) then
+					if n == C_Item.GetItemInfo(6948) or n == C_Item.GetItemInfo(110560) or n == C_Item.GetItemInfo(140192) then
 						p = 99
-					elseif n == GetItemInfo(141605) then -- Flight Master's Whistle
+					elseif n == C_Item.GetItemInfo(141605) then -- Flight Master's Whistle
 						p = 98
-					elseif n == GetItemInfo(128353) then -- Admiral's Compass
+					elseif n == C_Item.GetItemInfo(128353) then -- Admiral's Compass
 						p = 97
 					end
 					-- Fix for battle pets
@@ -2020,7 +2020,7 @@ function Stuffing:Restack()
 		for slotID = 1, 98 do
 			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(-3, slotID)
 			if clink then
-				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
+				local n, _, _, _, _, _, _, s = C_Item.GetItemInfo(clink)
 
 				if n and cnt ~= s then
 					if not sr[clink] then
@@ -2054,7 +2054,7 @@ function Stuffing:Restack()
 			if InBags(v.bag) then
 				local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
 				if clink then
-					local n, _, _, _, _, _, _, s = GetItemInfo(clink)
+					local n, _, _, _, _, _, _, s = C_Item.GetItemInfo(clink)
 
 					if n and cnt ~= s then
 						if not st[clink] then

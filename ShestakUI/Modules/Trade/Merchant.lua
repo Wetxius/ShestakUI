@@ -9,7 +9,7 @@ hooksecurefunc("MerchantItemButton_OnModifiedClick", function(self)
 		local itemLink = GetMerchantItemLink(id)
 		if not itemLink then return end
 
-		local maxStack = select(8, GetItemInfo(itemLink))
+		local maxStack = select(8, C_Item.GetItemInfo(itemLink))
 		if maxStack and maxStack > 1 then
 			local numAvailable = select(5, GetMerchantItemInfo(id))
 			if numAvailable > -1 then
@@ -46,7 +46,7 @@ local function MerchantItemlevel()
 
 			local itemLink = GetMerchantItemLink(index)
 			if itemLink then
-				local _, _, quality, itemlevel, _, _, _, _, _, _, _, itemClassID = GetItemInfo(itemLink)
+				local _, _, quality, itemlevel, _, _, _, _, _, _, _, itemClassID = C_Item.GetItemInfo(itemLink)
 				if (itemlevel and itemlevel > 1) and (quality and quality > 1) and (itemClassID == Enum.ItemClass.Weapon or itemClassID == Enum.ItemClass.Armor) then
 					button.text:SetText(itemlevel)
 				end

@@ -76,10 +76,10 @@ function stArch:OnLoad(self)
 				local r, g, b
 				if artifactRarity == 1 then
 					artifactRarity = ITEM_QUALITY3_DESC
-					r, g, b = GetItemQualityColor(3)
+					r, g, b = C_Item.GetItemQualityColor(3)
 				else
 					artifactRarity = ITEM_QUALITY1_DESC
-					r, g, b = GetItemQualityColor(1)
+					r, g, b = C_Item.GetItemQualityColor(1)
 				end
 				GameTooltip:AddLine(artifactName, r, g, b, 1)
 				GameTooltip:AddLine(artifactRarity, r, g, b, r, g, b)

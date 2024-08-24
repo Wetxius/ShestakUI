@@ -5,7 +5,7 @@ local quality = function(...)
 		local itemLink = select(i, ...)
 
 		if itemLink then
-			local _, _, itemQuality = GetItemInfo(itemLink)
+			local _, _, itemQuality = C_Item.GetItemInfo(itemLink)
 
 			if itemQuality then
 				quality = math.max(quality, itemQuality)

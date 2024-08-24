@@ -700,7 +700,7 @@ T.PostUpdateIcon = function(_, button, unit, data)
 	button.first = true
 end
 
-T.CustomFilter = function(element, unit, data)
+T.CustomFilter = function(_, unit, data)
 	if C.aura.player_aura_only then
 		if data.isHarmful then
 			if not UnitIsFriend("player", unit) and not playerUnits[data.sourceUnit] then
@@ -711,7 +711,7 @@ T.CustomFilter = function(element, unit, data)
 	return true
 end
 
-T.CustomFilterBoss = function(element, unit, data)
+T.CustomFilterBoss = function(_, unit, data)
 	if data.isHarmful then
 		if (playerUnits[data.sourceUnit] or data.sourceUnit == unit) then
 			if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then

@@ -46,8 +46,8 @@ local function Melee(self)
 		local itemId = GetInventoryItemID("player", 17)
 
 		if itemId ~= nil then
-			local _, _, _, _, _, itemType = GetItemInfo(itemId)
-			local _, _, _, _, _, weaponType = GetItemInfo(25)
+			local _, _, _, _, _, itemType = C_Item.GetItemInfo(itemId)
+			local _, _, _, _, _, weaponType = C_Item.GetItemInfo(25)
 			if itemType ~= weaponType then -- Worn Shortsword, little "hack" for language support
 				bar:Show()
 				bar:SetMinMaxValues(bar.min, bar.max)

@@ -95,7 +95,7 @@ local function LoadSkin()
 	-- Icon selection frame
 	MacroPopupFrame:HookScript("OnShow", function(frame)
 		if not frame.isSkinned then
-			T.SkinIconSelectionFrame(frame, nil, nil, "MacroPopup")
+			T.SkinIconSelectionFrame(frame, "MacroPopup")
 			frame.isSkinned = true
 		end
 	end)

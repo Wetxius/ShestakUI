@@ -90,7 +90,7 @@ local function OnUpdate(_, update)
 					getCooldownDetails = memoize(function()
                         local start, duration, enabled = C_Item.GetItemCooldown(i)
                         return {
-                            name = GetItemInfo(i),
+                            name = C_Item.GetItemInfo(i),
                             texture = v[3],
                             start = start,
                             duration = duration,

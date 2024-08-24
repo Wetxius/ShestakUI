@@ -303,7 +303,7 @@ local function FindAuras(self, unit)
 				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
 					if data.slotID then
 						local slotLink = GetInventoryItemLink("player", data.slotID)
-						_, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
+						_, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
 					end
 					self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = data.duration, spid = spid, sort = data.sort}
 				end
@@ -405,7 +405,7 @@ function Filger:OnEvent(event, unit, _, castID)
 					spid = data.slotID
 					local slotLink = GetInventoryItemLink("player", data.slotID)
 					if slotLink then
-						name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
+						name, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
 						start, duration = GetInventoryItemCooldown("player", data.slotID)
 					end
 				end
@@ -511,7 +511,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 			else
 				local slotLink = GetInventoryItemLink("player", data[j].slotID)
 				if slotLink then
-					name = GetItemInfo(slotLink)
+					name = C_Item.GetItemInfo(slotLink)
 				end
 			end
 			if name or data[j].slotID then
@@ -586,7 +586,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 					elseif data.slotID then
 						local slotLink = GetInventoryItemLink("player", data.slotID)
 						if slotLink then
-							name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
+							name, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
 						end
 					end
 					frame.actives[j] = {data = data, name = name, icon = icon, count = 9, start = 0, duration = 0, spid = data.spellID or data.slotID, sort = data.sort}

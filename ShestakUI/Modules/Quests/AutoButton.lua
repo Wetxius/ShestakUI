@@ -124,9 +124,9 @@ local function startScanningBags()
 			local itemID = C_Container.GetContainerItemID(b, s)
 			itemID = tonumber(itemID)
 			if T.ABItems[itemID] and not T.ABItemsIgnore[itemID] then
-				local itemName = GetItemInfo(itemID)
+				local itemName = C_Item.GetItemInfo(itemID)
 				local count = C_Item.GetItemCount(itemID)
-				local itemIcon = GetItemIcon(itemID)
+				local itemIcon = C_Item.GetItemIconByID(itemID)
 
 				-- Set our texture to the item found in bags
 				AutoButton.t:SetTexture(itemIcon)

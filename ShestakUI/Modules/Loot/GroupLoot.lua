@@ -59,7 +59,7 @@ local function LootClick(frame)
 	if IsControlKeyDown() then
 		DressUpItemLink(frame.link)
 	elseif IsShiftKeyDown() then
-		local _, item = GetItemInfo(frame.link)
+		local _, item = C_Item.GetItemInfo(frame.link)
 		if ChatEdit_GetActiveWindow() then
 			ChatEdit_InsertLink(item)
 		else
@@ -295,8 +295,8 @@ end)
 local function testRoll(f)
 	local items = {32837, 34196, 33820, 84004}
 	local item = items[math.random(1, #items)]
-	local name, _, quality, _, _, _, _, _, _, texture = GetItemInfo(item)
-	local r, g, b = GetItemQualityColor(quality or 1)
+	local name, _, quality, _, _, _, _, _, _, texture = C_Item.GetItemInfo(item)
+	local r, g, b = C_Item.GetItemQualityColor(quality or 1)
 
 	f.button.icon:SetTexture(texture)
 	f.button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)

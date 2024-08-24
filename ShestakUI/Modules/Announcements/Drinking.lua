@@ -13,7 +13,7 @@ local drinkSpell = {
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 frame:SetScript("OnEvent", function(_, event, ...)
-	if not (event == "UNIT_SPELLCAST_SUCCEEDED" and GetZonePVPInfo() == "arena") then return end
+	if not (event == "UNIT_SPELLCAST_SUCCEEDED" and C_PvP.GetZonePVPInfo() == "arena") then return end
 
 	local unit, _, spellID = ...
 	if UnitIsEnemy("player", unit) and drinkSpell[GetSpellInfo(spellID)] then

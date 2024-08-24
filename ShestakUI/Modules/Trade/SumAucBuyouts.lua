@@ -31,11 +31,11 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			end
 
 			if totalBid > 0 and totalBuyout > 0 then
-				text:SetText(BIDS..": "..GetCoinTextureString(totalBid).."     "..BUYOUT..": "..GetCoinTextureString(totalBuyout))
+				text:SetText(BIDS..": "..C_CurrencyInfo.GetCoinTextureString(totalBid).."     "..BUYOUT..": "..C_CurrencyInfo.GetCoinTextureString(totalBuyout))
 			elseif totalBid > 0 and totalBuyout == 0 then
-				text:SetText(BIDS..": "..GetCoinTextureString(totalBid))
+				text:SetText(BIDS..": "..C_CurrencyInfo.GetCoinTextureString(totalBid))
 			elseif totalBid == 0 and totalBuyout > 0 then
-				text:SetText(BUYOUT..": "..GetCoinTextureString(totalBuyout))
+				text:SetText(BUYOUT..": "..C_CurrencyInfo.GetCoinTextureString(totalBuyout))
 			else
 				text:SetText("")
 			end

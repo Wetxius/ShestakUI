@@ -924,7 +924,7 @@ function T.SkinSliderStep(frame, minimal)
 	end
 end
 
-function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
+function T.SkinIconSelectionFrame(frame, frameNameOverride)
 	local frameName = frameNameOverride or frame:GetName()
 	local editBox = frame.BorderBox.IconSelectorEditBox
 	local okayButton = frame.OkayButton or frame.BorderBox.OkayButton or _G[frameName.."Okay"]

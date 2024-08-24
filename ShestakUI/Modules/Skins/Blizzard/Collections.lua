@@ -559,7 +559,7 @@ local function LoadSkin()
 
 	local function SetItemQuality(_, itemFrame)
 		if (itemFrame.backdrop) then
-			local _, _, quality = GetItemInfo(itemFrame.itemID);
+			local _, _, quality = C_Item.GetItemInfo(itemFrame.itemID);
 			local alpha = 1
 			if (not itemFrame.collected) then
 				alpha = 0.4

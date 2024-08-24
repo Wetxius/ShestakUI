@@ -11,13 +11,11 @@ local buttons = {}
 local prototype = {}
 local STATE_USABLE, STATE_NOMANA, STATE_NORANGE, STATE_UNUSABLE = 0, 1, 2, 3
 
-function prototype:SetIcon(texture, aspect)
-	-- Not sure if we need to handle the aspect here
+function prototype:SetIcon(texture)
 	self.Icon:SetTexture(texture)
 end
 
-function prototype:SetIconAtlas(atlas, aspect)
-	-- Not sure if we need to handle the aspect here
+function prototype:SetIconAtlas(atlas)
 	self.Icon:SetAtlas(atlas)
 end
 
@@ -119,7 +117,7 @@ function prototype:SetCooldown(remain, duration, usable)
 	end
 end
 
-function prototype:SetCooldownFormattedText(pattern, ...)
+function prototype:SetCooldownFormattedText()
 	-- do nothing
 end
 
@@ -167,7 +165,7 @@ function prototype:SetQualityOverlay(quality)
 	end
 end
 
-local function CreateIndicator(name, parent, size, ghost)
+local function CreateIndicator(name, parent, size)
 	id = id + 1
 	name = name or "OPieSliceButton"..id
 	parent = parent or UIParent

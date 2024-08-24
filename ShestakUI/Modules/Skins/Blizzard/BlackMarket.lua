@@ -60,7 +60,7 @@ local function LoadSkin()
 			button.skinned = true
 		end
 
-		local name, texture = C_BlackMarket.GetItemInfoByIndex(elementData.index)
+		local name, texture = C_BlackMarket.C_Item.GetItemInfoByIndex(elementData.index)
 		if name then
 			button.Item.IconTexture:SetTexture(texture)
 		end

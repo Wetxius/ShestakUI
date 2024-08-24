@@ -12,7 +12,7 @@ frame:SetScript("OnEvent", function(_, event)
 		if T.AnnounceBadGear[i] then
 			local id = GetInventoryItemID("player", i) or 0
 			if T.AnnounceBadGear[i][id] then
-				local _, itemLink = GetItemInfo(id)
+				local _, itemLink = C_Item.GetItemInfo(id)
 				PlaySound(SOUNDKIT.RAID_WARNING, "Master")
 				RaidNotice_AddMessage(RaidWarningFrame, format("%s %s", CURRENTLY_EQUIPPED, itemLink.."!"), ChatTypeInfo["RAID_WARNING"])
 				print(format("|cffff3300%s %s", CURRENTLY_EQUIPPED, itemLink.."|cffff3300!|r"))
