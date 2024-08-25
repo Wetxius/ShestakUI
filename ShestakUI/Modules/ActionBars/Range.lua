@@ -152,16 +152,10 @@ local function actionButton_UpdateColor(button)
 	end
 end
 
-local function actionButton_UpdateUsable(button)
-	if button:IsVisible() then
-		actionButton_UpdateColor(button)
-	end
-end
-
 local function registerActionButton(button)
 	if registered[button] then return end
 
-	hooksecurefunc(button, "UpdateUsable", actionButton_UpdateUsable)
+	hooksecurefunc(button, "UpdateUsable", actionButton_UpdateColor)
 
 	if Addon:HandleAttackAnimations() then
 		button:HookScript("OnShow", Addon.UpdateAttackAnimation)
