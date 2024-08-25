@@ -74,11 +74,6 @@ local function LoadSkin()
 	SideDressUpFrame.BGBottomLeft:SetSize(183, 93)
 	T.SkinCloseButton(SideDressUpFrameCloseButton, SideDressUpFrame)
 
-	-- WardrobeOutfitFrame:StripTextures(true)
-	-- WardrobeOutfitFrame:CreateBackdrop("Transparent")
-	-- WardrobeOutfitFrame.backdrop:SetPoint("TOPLEFT", WardrobeOutfitFrame, "TOPLEFT", 6, -6)
-	-- WardrobeOutfitFrame.backdrop:SetPoint("BOTTOMRIGHT", WardrobeOutfitFrame, "BOTTOMRIGHT", -6, 6)
-
 	WardrobeOutfitEditFrame:StripTextures(true)
 	WardrobeOutfitEditFrame:SetTemplate("Transparent")
 	WardrobeOutfitEditFrame.AcceptButton:SkinButton()

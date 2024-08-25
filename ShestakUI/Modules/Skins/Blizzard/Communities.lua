@@ -311,7 +311,6 @@ local function LoadSkin()
 
 	T.SkinEditBox(EditStreamDialog.NameEdit, nil, 18)
 	T.SkinEditBox(EditStreamDialog.Description)
-	-- T.SkinCheckBox(EditStreamDialog.TypeCheckBox)
 
 	EditStreamDialog.Accept:SkinButton()
 	EditStreamDialog.Delete:SkinButton()
@@ -335,8 +334,6 @@ local function LoadSkin()
 	Settings.Accept:SkinButton()
 	Settings.Delete:SkinButton()
 	Settings.Cancel:SkinButton()
-
-	-- T.SkinDropDownBox(ClubFinderLanguageDropdown)
 
 	-- Avatar Picker
 	local Avatar = CommunitiesAvatarPickerDialog

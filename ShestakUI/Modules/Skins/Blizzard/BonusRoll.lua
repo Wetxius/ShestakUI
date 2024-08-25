@@ -81,7 +81,7 @@ local function LoadSkin()
 		end
 	end)
 
-	-- Loot after finished dungeon (not tested)
+	-- Loot after finished dungeon (not tested) NOTE
 	-- hooksecurefunc("BossBanner_ConfigureLootFrame", function(frame)
 		-- local button = frame.IconHitBox
 		-- if not button.styled then

@@ -520,8 +520,6 @@ function T.SkinScrollBar(frame, isMinimal)
 			end
 
 			if minimal then
-				-- UpButton:SetSize(14, 14)
-				-- DownButton:SetSize(14, 14)
 				newThumb:SetWidth(10)
 			end
 		end

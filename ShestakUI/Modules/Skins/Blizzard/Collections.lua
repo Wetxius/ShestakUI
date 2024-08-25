@@ -554,7 +554,6 @@ local function LoadSkin()
 	WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame:CreateBackdrop("Overlay")
 	WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame.backdrop:SetPoint("TOPLEFT", 4, -4)
 	WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame.backdrop:SetPoint("BOTTOMRIGHT", 1, 4)
-	-- WardrobeSetsCollectionVariantSetsButton:SkinButton()
 	T.SkinScrollBar(WardrobeCollectionFrame.SetsCollectionFrame.ListContainer.ScrollBar)
 
 	local function SetItemQuality(_, itemFrame)
