@@ -562,7 +562,7 @@ local function handleQuestComplete()
 	local highestValue, highestValueIndex = 0
 	for index = 1, numChoices do
 		local _, _, _, _, _, itemID = GetQuestItemInfo('choice', index)
-		local isCached, _, _, _, _, _, _, _, _, _, itemValue = C_Item.C_Item.GetItemInfo(itemID)
+		local isCached, _, _, _, _, _, _, _, _, _, itemValue = C_Item.GetItemInfo(itemID)
 		if not isCached then
 			EventHandler:WaitForItemData(itemID, handleQuestComplete)
 		else
