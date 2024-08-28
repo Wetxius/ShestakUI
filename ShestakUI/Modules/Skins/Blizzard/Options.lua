@@ -147,7 +147,7 @@ local function LoadSkin()
 					child.VUMeter:StripTextures()
 					child.VUMeter.NineSlice:Hide()
 					child.VUMeter:CreateBackdrop("Overlay")
-					child.VUMeter.backdrop:SetInside(4, 4)
+					child.VUMeter.backdrop:SetInside(child.VUMeter, 4, 4)
 					child.VUMeter.Status:SetStatusBarTexture(C.media.texture)
 				end
 				if child.PushToTalkKeybindButton then

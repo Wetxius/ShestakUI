@@ -52,7 +52,9 @@ local function LoadSkin()
 	local orders = frame.BrowseOrders
 	orders.SearchBar.FavoritesSearchButton:SetSize(22, 22)
 	T.SkinEditBox(orders.SearchBar.SearchBox, nil, 18)
-	T.SkinFilter(orders.SearchBar.FilterDropdown)
+	T.SkinFilter(orders.SearchBar.FilterDropdown, true)
+	orders.SearchBar.FilterDropdown:ClearAllPoints()
+	orders.SearchBar.FilterDropdown:SetPoint("TOPRIGHT", orders.SearchBar.SearchButton, "TOPLEFT", -10, 0)
 
 	orders.CategoryList:StripTextures()
 

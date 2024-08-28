@@ -6,7 +6,7 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	BlackMarketFrame:StripTextures()
-	BlackMarketFrame:SetTemplate("Transparent")
+	BlackMarketFrame:CreateBackdrop("Transparent")
 
 	BlackMarketFrame.Inset:CreateBackdrop("Overlay")
 	BlackMarketFrame.Inset.backdrop:SetPoint("TOPLEFT", 0, 0)
@@ -16,6 +16,9 @@ local function LoadSkin()
 	BlackMarketFrame.MoneyFrameBorder:StripTextures()
 	T.SkinEditBox(BlackMarketBidPriceGold, nil, 18)
 
+	BlackMarketFrame.ColumnName:ClearAllPoints()
+	BlackMarketFrame.ColumnName:SetPoint("TOPLEFT", BlackMarketFrame.TopLeftCorner, 25, -50)
+
 	BlackMarketFrame.BidButton:SkinButton()
 	BlackMarketFrame.BidButton:SetHeight(20)
 	BlackMarketFrame.BidButton:SetPoint("BOTTOMRIGHT", -255, 4)
@@ -23,6 +26,7 @@ local function LoadSkin()
 
 	BlackMarketFrame.HotDeal:StripTextures()
 	BlackMarketFrame.HotDeal:CreateBackdrop("Overlay")
+	BlackMarketFrame.HotDeal.backdrop:SetInside()
 	BlackMarketFrame.HotDeal.Item.IconTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	BlackMarketFrame.HotDeal.Item.IconBorder:SetAlpha(0)
 	BlackMarketFrame.HotDeal.Item:CreateBackdrop("Default")
