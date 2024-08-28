@@ -77,6 +77,30 @@ local function LoadSkin()
 	heroTalentPreview:CreateBackdrop("Transparent")
 	heroTalentPreview.backdrop:SetInside(heroTalentPreview, 20, 40)
 
+	local TalentsSelect = _G.HeroTalentsSelectionDialog
+	if TalentsSelect then
+		T.SkinFrame(TalentsSelect)
+
+		hooksecurefunc(TalentsSelect, "ShowDialog", function(frame)
+			if not frame then return end
+
+			for specFrame in frame.SpecContentFramePool:EnumerateActive() do
+				if specFrame and not specFrame.IsSkinned then
+					--FIXME Need to test if specFrame.SpecName then specFrame.SpecName:SetFont(C.media.normal_font, 18) end
+					-- if specFrame.Description then specFrame.Description:SetFont(C.media.normal_font, 14) end
+					-- if specFrame.CurrencyFrame then
+						-- specFrame.CurrencyFrame.LabelText:SetFont(C.media.normal_font, 13)
+						-- specFrame.CurrencyFrame.AmountText:SetFont(C.media.normal_font, 18)
+					-- end
+					specFrame.ActivateButton:SkinButton()
+					specFrame.ApplyChangesButton:SkinButton()
+
+					specFrame.IsSkinned = true
+				end
+			end
+		end)
+	end
+
 	-- PvP
 	PlayerSpellsFrame.TalentsFrame.PvPTalentList:StripTextures()
 	PlayerSpellsFrame.TalentsFrame.PvPTalentList:CreateBackdrop("Overlay")
