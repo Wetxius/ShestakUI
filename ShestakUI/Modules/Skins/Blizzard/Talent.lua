@@ -72,6 +72,17 @@ local function LoadSkin()
 		end
 	end
 
+	local heroTalentPreview = PlayerSpellsFrame.TalentsFrame.HeroTalentsContainer.PreviewContainer
+	heroTalentPreview.Background:SetAlpha(0)
+	heroTalentPreview:CreateBackdrop("Transparent")
+	heroTalentPreview.backdrop:SetInside(heroTalentPreview, 20, 40)
+
+	-- PvP
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList:StripTextures()
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList:CreateBackdrop("Overlay")
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameStrata(PlayerSpellsFrame.TalentsFrame.PvPTalentList:GetFrameStrata())
+	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameLevel(2000)
+
 	-- Spec tab
 	PlayerSpellsFrame.SpecFrame:CreateBackdrop("Overlay")
 	PlayerSpellsFrame.SpecFrame.backdrop:SetPoint("TOPLEFT", 4, -4)
@@ -105,12 +116,6 @@ local function LoadSkin()
 			end
 		end
 	end)
-
-	-- PvP
-	PlayerSpellsFrame.TalentsFrame.PvPTalentList:StripTextures()
-	PlayerSpellsFrame.TalentsFrame.PvPTalentList:CreateBackdrop("Overlay")
-	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameStrata(PlayerSpellsFrame.TalentsFrame.PvPTalentList:GetFrameStrata())
-	PlayerSpellsFrame.TalentsFrame.PvPTalentList.backdrop:SetFrameLevel(2000)
 
 	-- SpellBook
 	local page = PlayerSpellsFrame.SpellBookFrame
