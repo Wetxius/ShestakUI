@@ -276,7 +276,7 @@ local function BlackMarketFrame_UpdateHotItem(self)
 end
 
 local function BlackMarketScrollFrame_Update(self, elementData)
-	local name, _, _, _, usable, _, _, _, _, _, _, _, _, _, link = C_BlackMarket.C_Item.GetItemInfoByIndex(elementData.index)
+	local name, _, _, _, usable, _, _, _, _, _, _, _, _, _, link = C_BlackMarket.GetItemInfoByIndex(elementData.index)
 	if name and usable and IsKnown(link) then
 		self.Item.IconTexture:SetVertexColor(color.r, color.g, color.b)
 	end
