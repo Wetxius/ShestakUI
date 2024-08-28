@@ -218,8 +218,11 @@ local function LoadSkin()
 		end
 	end)
 
-	for i = 1, 3 do
-		T.SkinTab(_G["PVEFrameTab"..i])
+	for i = 1, 4 do
+		local tab = _G["PVEFrameTab"..i]
+		if tab then
+			T.SkinTab(tab)
+		end
 	end
 
 	LFGListApplicationDialog:SetTemplate("Transparent")
