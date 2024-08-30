@@ -280,6 +280,8 @@ local QUEST_GOSSIP = {
 	[109275] = true, -- Soridormi - begin time rift
 	[120619] = true, -- Big Dig task
 	[120620] = true, -- Big Dig task
+	[120555] = true, -- Awakening The Machine
+	[120733] = true, -- Theater Troupe
 
 	-- Darkmoon Faire
 	[40563] = true, -- whack
@@ -576,6 +578,10 @@ local function handleQuestComplete()
 	end
 
 	if highestValueIndex then
+		if not (QuestInfoRewardsFrame and QuestInfoRewardsFrame.RewardButtons and QuestInfoRewardsFrame.RewardButtons[highestValueIndex]) then
+			return
+		end
+
 		-- "intrusive" action
 		QuestInfoItem_OnClick(QuestInfoRewardsFrame.RewardButtons[highestValueIndex])
 	end
