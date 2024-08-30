@@ -5,19 +5,17 @@ if C.skins.blizzard_frames ~= true then return end
 --	AlliedRacesUI skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	AlliedRacesFrame:StripTextures()
-	AlliedRacesFrame:SetTemplate("Transparent")
+	T.SkinFrame(AlliedRacesFrame)
+	AlliedRacesFrame:SetHeight(615)
 
-	AlliedRacesFramePortrait:SetAlpha(0)
-
+	AlliedRacesFrame.ModelScene:ClearAllPoints()
+	AlliedRacesFrame.ModelScene:SetPoint("BOTTOMLEFT", AlliedRacesFrame, "BOTTOMLEFT", 10, 10)
 	AlliedRacesFrame.ModelScene:StripTextures()
 	AlliedRacesFrame.ModelScene:CreateBackdrop("Transparent")
 	AlliedRacesFrame.ModelScene.backdrop:SetFrameLevel(1)
 	AlliedRacesFrame.ModelScene.backdrop:SetPoint("TOPLEFT", -2, 2)
 	AlliedRacesFrame.ModelScene.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
-
-	AlliedRacesFrame.ModelScene:SetSize(313, 575)
-	AlliedRacesFrame.ModelScene:SetPoint("LEFT", 10, -6)
+	T.SkinModelControl(AlliedRacesFrame.ModelScene)
 
 	local scrollFrame = AlliedRacesFrame.RaceInfoFrame.ScrollFrame
 	AlliedRacesFrame.RaceInfoFrame.AlliedRacesRaceName:SetTextColor(1, .8, 0)
