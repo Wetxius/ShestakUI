@@ -1,4 +1,5 @@
 local T, C, L = unpack(ShestakUI)
+if C_AddOns.IsAddOnLoaded("tullaRange") then return end
 if C.actionbar.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
