@@ -8,6 +8,7 @@ local function LoadSkin()
 	local frame = CovenantRenownFrame
 	frame:CreateBackdrop("Transparent")
 	T.SkinCloseButton(frame.CloseButton)
+	frame.LevelSkipButton:SkinButton()
 
 	hooksecurefunc(frame, "SetUpCovenantData", function(self)
 		self.CloseButton.Border:Hide()
