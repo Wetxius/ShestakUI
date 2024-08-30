@@ -5,35 +5,29 @@ if C.skins.blizzard_frames ~= true then return end
 --	Expansion Landing Page skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin(self)
-	local frame = _G.ExpansionLandingPage
+	local overlay = _G.ExpansionLandingPage.Overlay
+	if overlay then
+		for _, child in next, {overlay:GetChildren()} do
+			child:StripTextures()
+			child:SetTemplate("Transparent")
 
-	local panel
-	if frame.Overlay then
-		for i = 1, frame.Overlay:GetNumChildren() do
-			local child = select(i, frame.Overlay:GetChildren())
+			if child.ScrollFadeOverlay then
+				child.ScrollFadeOverlay:Hide()
+			end
+
 			if child.DragonridingPanel then
-				panel = child
-				break
+				child.DragonridingPanel.SkillsButton:SkinButton()
+			end
+
+			if child.CloseButton then
+				T.SkinCloseButton(child.CloseButton)
 			end
 		end
-	end
 
-	if not panel then return end
-
-	panel.NineSlice:SetAlpha(0)
-	panel.Background:SetAlpha(0)
-	panel:SetTemplate("Transparent")
-
-	if panel.ScrollFadeOverlay then
-		panel.ScrollFadeOverlay:Hide()
-	end
-
-	if panel.DragonridingPanel then
-		panel.DragonridingPanel.SkillsButton:SkinButton()
-	end
-
-	if panel.CloseButton then
-		T.SkinCloseButton(panel.CloseButton)
+		local landingOverlay = overlay.WarWithinLandingOverlay
+		if landingOverlay then
+			T.SkinCloseButton(landingOverlay.CloseButton)
+		end
 	end
 
 	self:UnregisterEvent("ADDON_LOADED")
