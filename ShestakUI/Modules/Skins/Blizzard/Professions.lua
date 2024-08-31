@@ -26,6 +26,19 @@ local function LoadSkin()
 	RankBar:CreateBackdrop("Overlay")
 	RankBar.backdrop:SetOutside(RankBar.Fill)
 
+	if RankBar.ExpansionDropdownButton then
+		local arrow = RankBar.ExpansionDropdownButton:CreateTexture(nil, "ARTWORK")
+		arrow:SetSize(15, 15)
+		arrow:SetPoint("CENTER")
+		arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+		arrow:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+
+		RankBar.ExpansionDropdownButton:SetSize(18, 18)
+		RankBar.ExpansionDropdownButton:SetPoint("RIGHT", RankBar, "RIGHT", -7, -3)
+		RankBar.ExpansionDropdownButton:SkinButton()
+		RankBar.ExpansionDropdownButton.Texture:Hide()
+	end
+
 	local LinkButton = frame.CraftingPage.LinkButton
 	LinkButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
 	LinkButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
@@ -320,15 +333,16 @@ local function LoadSkin()
 	T.SkinScrollBar(BrowseList.ScrollBar)
 	T.SkinEditBox(BrowseList.SearchBox, nil, 16)
 	T.SkinCloseButton(BrowseList.FilterDropdown.ResetButton)
-	BrowseList.FilterDropdown.ResetButton:ClearAllPoints()
-	BrowseList.FilterDropdown.ResetButton:SetPoint("CENTER", BrowseList.FilterDropdown, "TOPRIGHT", 0, 0)
-	BrowseList.FilterDropdown:SkinButton()
+
+	T.SkinFilter(BrowseList.FilterDropdown)
+	BrowseList.FilterDropdown:SetHeight(20)
 	BrowseList.FilterDropdown:SetPoint("TOPRIGHT", BrowseList, "TOPRIGHT", -8, -6)
 	BrowseList.BackgroundNineSlice:Hide()
 
 	local OrderList = Orders.BrowseFrame.OrderList
 	OrderList:StripTextures()
 	T.SkinScrollBar(OrderList.ScrollBar)
+	OrderList.HeaderContainer:SetPoint("TOPLEFT", OrderList, "TOPLEFT", 3, -6)
 
 	hooksecurefunc(Orders, "SetupTable", function()
 		local maxHeaders = OrderList.HeaderContainer:GetNumChildren()
