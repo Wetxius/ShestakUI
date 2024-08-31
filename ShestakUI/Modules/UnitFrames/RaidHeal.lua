@@ -461,7 +461,7 @@ end)
 
 -- Create anchors
 for i = 1, C.raidframe.raid_groups do
-	local raid = CreateFrame("Frame", "RaidAnchor"..i, UIParent)
+	CreateFrame("Frame", "RaidAnchor"..i, UIParent)
 end
 
 local party = CreateFrame("Frame", "PartyAnchor", UIParent)

@@ -5,7 +5,6 @@ if C.general.color_picker ~= true then return end
 --	Improved ColorPicker(ColorPickerPlus by Jaslm)
 ----------------------------------------------------------------------------------------
 local colorBuffer = {}
-local editingText
 
 local delayFunc
 local function delayCall()
