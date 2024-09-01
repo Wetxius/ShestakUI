@@ -4,7 +4,7 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Delves skin
 ----------------------------------------------------------------------------------------
-local function LoadSkin()
+local function LoadFirstSkin()
 	local CompanionConfigurationFrame = _G.DelvesCompanionConfigurationFrame
 	T.SkinFrame(CompanionConfigurationFrame)
 	CompanionConfigurationFrame.CompanionConfigShowAbilitiesButton:SkinButton()
@@ -45,9 +45,9 @@ local function LoadSkin()
 	T.SkinNextPrevButton(CompanionAbilityListFrame.DelvesCompanionAbilityListPagingControls.NextPageButton)
 end
 
-T.SkinFuncs["Blizzard_DelvesCompanionConfiguration"] = LoadSkin
+T.SkinFuncs["Blizzard_DelvesCompanionConfiguration"] = LoadFirstSkin
 
-local function LoadSkin()
+local function LoadSecondSkin()
 	local DifficultyPickerFrame = _G.DelvesDifficultyPickerFrame
 	T.SkinFrame(DifficultyPickerFrame)
 
@@ -68,12 +68,12 @@ local function LoadSkin()
 	end)
 end
 
-T.SkinFuncs["Blizzard_DelvesDifficultyPicker"] = LoadSkin
+T.SkinFuncs["Blizzard_DelvesDifficultyPicker"] = LoadSecondSkin
 
-local function LoadSkin()
+local function LoadThirdSkin()
 	local Dashboard = _G.DelvesDashboardFrame
 	Dashboard.DashboardBackground:SetAlpha(0)
 	Dashboard.ButtonPanelLayoutFrame.CompanionConfigButtonPanel.CompanionConfigButton:SkinButton()
 end
 
-T.SkinFuncs["Blizzard_DelvesDashboardUI"] = LoadSkin
+T.SkinFuncs["Blizzard_DelvesDashboardUI"] = LoadThirdSkin

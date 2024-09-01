@@ -94,6 +94,7 @@ local function LoadSkin()
 		if tab then
 			T.SkinTab(tab)
 			tab:SetFrameLevel(tab:GetFrameLevel() + 2)
+			tab.isSkinned = true
 		end
 	end
 

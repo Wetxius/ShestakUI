@@ -232,15 +232,4 @@ local function LoadSkin()
 	end)
 end
 
-local LoadTootlipSkin = CreateFrame("Frame")
-LoadTootlipSkin:RegisterEvent("ADDON_LOADED")
-LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
-	if C_AddOns.IsAddOnLoaded("Skinner") or C_AddOns.IsAddOnLoaded("Aurora")  then
-		self:UnregisterEvent("ADDON_LOADED")
-		return
-	end
-
-	if addon == "Blizzard_PlayerSpells" then
-		LoadSkin()
-	end
-end)
+T.SkinFuncs["Blizzard_PlayerSpells"] = LoadSkin
