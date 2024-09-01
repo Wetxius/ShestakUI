@@ -9,34 +9,30 @@ local function LoadFirstSkin()
 	T.SkinFrame(CompanionConfigurationFrame)
 	CompanionConfigurationFrame.CompanionConfigShowAbilitiesButton:SkinButton()
 
-	local function HandleButton(button)
-		if button.IsSkinned then return end
-
-		if button.Border then button.Border:SetAlpha(0) end
-		if button.Icon then
-			button.Icon:SkinIcon()
-		end
-
-		button.IsSkinned = true
-	end
-
-	local function UpdateButton(self)
-		self:ForEachFrame(HandleButton)
-	end
-
-	local function HandleOptionSlot(frame, skip)
+	local function SkinOptionSlot(frame, skip)
 		local option = frame.OptionsList
 		option:StripTextures()
 		option:SetTemplate("Transparent")
 
 		if not skip then
-			hooksecurefunc(option.ScrollBox, "Update", UpdateButton)
+			hooksecurefunc(option.ScrollBox, "Update", function(self)
+				self:ForEachFrame(function(button)
+					if not button.IsSkinned then
+						if button.Border then button.Border:SetAlpha(0) end
+						if button.Icon then
+							button.Icon:SkinIcon()
+						end
+
+						button.IsSkinned = true
+					end
+				end)
+			end)
 		end
 	end
 
-	HandleOptionSlot(CompanionConfigurationFrame.CompanionCombatRoleSlot, true)
-	HandleOptionSlot(CompanionConfigurationFrame.CompanionUtilityTrinketSlot)
-	HandleOptionSlot(CompanionConfigurationFrame.CompanionCombatTrinketSlot)
+	SkinOptionSlot(CompanionConfigurationFrame.CompanionCombatRoleSlot, true)
+	SkinOptionSlot(CompanionConfigurationFrame.CompanionUtilityTrinketSlot)
+	SkinOptionSlot(CompanionConfigurationFrame.CompanionCombatTrinketSlot)
 
 	local CompanionAbilityListFrame = _G.DelvesCompanionAbilityListFrame
 	T.SkinFrame(CompanionAbilityListFrame)
