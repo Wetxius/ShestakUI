@@ -237,6 +237,7 @@ local function StyleSmallButton(button, name, isPet)
 		if isPet then
 			local autocast = button.AutoCastOverlay
 			autocast:SetSize(C.actionbar.button_size * 1.05, C.actionbar.button_size * 1.05)
+			autocast:SetPoint("CENTER", 0, 0)
 		end
 
 		if normal then

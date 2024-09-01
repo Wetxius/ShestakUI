@@ -173,13 +173,22 @@ local function LoadSkin()
 				if frame.Button then
 					frame.Button.Border:Hide()
 
-					frame.Button.ActionBarHighlight:SetColorTexture(1, 0.82, 0, 0.4)
+					frame.Button.ActionBarHighlight:SetColorTexture(1, 0.82, 0, 0.3)
 					frame.Button.ActionBarHighlight:SetPoint("TOPLEFT", 2, -2)
 					frame.Button.ActionBarHighlight:SetPoint("BOTTOMRIGHT", -2, 2)
 					hooksecurefunc(frame.Button.ActionBarHighlight, "Show", function()
-						frame.Button.ActionBarHighlight:SetColorTexture(1, 0.82, 0, 0.4)
+						frame.Button.ActionBarHighlight:SetColorTexture(1, 0.82, 0, 0.3)
 						frame.Button.ActionBarHighlight:SetPoint("TOPLEFT", 2, -2)
 						frame.Button.ActionBarHighlight:SetPoint("BOTTOMRIGHT", -2, 2)
+						if frame.Button.backdrop then
+							frame.Button.backdrop:SetBackdropBorderColor(1, 0.82, 0)
+						end
+					end)
+
+					hooksecurefunc(frame.Button.ActionBarHighlight, "Hide", function()
+						if frame.Button.backdrop then
+							frame.Button.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+						end
 					end)
 
 					frame.Button.IconMask:Hide()
@@ -192,6 +201,13 @@ local function LoadSkin()
 						frame.Button.Cooldown:SetPoint("BOTTOMRIGHT", -2, 2)
 					end
 
+					if frame.Button.AutoCastOverlay then
+						frame.Button.AutoCastOverlay.Corners:ClearAllPoints()
+						frame.Button.AutoCastOverlay.Corners:SetPoint("TOPLEFT", frame.Button.Icon, "TOPLEFT", -3, 3)
+						frame.Button.AutoCastOverlay.Corners:SetPoint("BOTTOMRIGHT", frame.Button.Icon, "BOTTOMRIGHT", 3, -3)
+						frame.Button.AutoCastOverlay.Corners:SetAtlas("UI-HUD-ActionBar-PetAutoCast-Corners")
+					end
+
 					frame.Button.BorderSheen:Hide()
 					hooksecurefunc(frame.Button.BorderSheen, "Show", function()
 						frame.Button.BorderSheen:Hide()
@@ -199,6 +215,12 @@ local function LoadSkin()
 
 					frame.Button.Icon:SkinIcon()
 					frame.Button.Icon:StyleButton()
+
+					if frame.Button.ActionBarHighlight:IsShown() then
+						frame.Button.backdrop:SetBackdropBorderColor(1, 0.82, 0)
+					else
+						frame.Button.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+					end
 				end
 				if frame.Text then
 					frame.Text:SetTextColor(1, 0.8, 0)
