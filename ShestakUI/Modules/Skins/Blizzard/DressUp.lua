@@ -28,7 +28,9 @@ local function LoadSkin()
 	local SetSelection = DressUpFrame.SetSelectionPanel
 	if SetSelection then
 		SetSelection:StripTextures()
-		SetSelection:SetTemplate("Transparent")
+		SetSelection:CreateBackdrop("Transparent")
+		SetSelection.backdrop:SetPoint("TOPLEFT", 8, 0)
+		SetSelection.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 		T.SkinScrollBar(SetSelection.ScrollBar)
 
 		hooksecurefunc(SetSelection.ScrollBox, "Update", function(self)
@@ -58,7 +60,7 @@ local function LoadSkin()
 
 	DressUpFrame.OutfitDetailsPanel:StripTextures()
 	DressUpFrame.OutfitDetailsPanel:CreateBackdrop("Transparent")
-	DressUpFrame.OutfitDetailsPanel.backdrop:SetPoint("TOPLEFT", 11, 0)
+	DressUpFrame.OutfitDetailsPanel.backdrop:SetPoint("TOPLEFT", 10, 0)
 	DressUpFrame.OutfitDetailsPanel.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 
 	hooksecurefunc(DressUpFrame.OutfitDetailsPanel, "Refresh", function(self)
