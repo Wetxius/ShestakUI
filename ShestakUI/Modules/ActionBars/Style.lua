@@ -158,6 +158,10 @@ local function StyleNormalButton(button, size)
 			-- button.CooldownFlash.Flipbook:Kill() -- 10.1.5 new GCD flash
 		end
 
+		if button.TargetReticleAnimFrame then
+			button.TargetReticleAnimFrame:SetScale(0.0001)
+		end
+
 		if flyoutBorder then
 			flyoutBorder:SetTexture("")
 		end
