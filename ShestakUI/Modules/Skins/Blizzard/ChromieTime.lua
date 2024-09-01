@@ -20,7 +20,7 @@ local function LoadSkin()
 	local InfoFrame = frame.CurrentlySelectedExpansionInfoFrame
 	InfoFrame:DisableDrawLayer("BACKGROUND")
 	InfoFrame:CreateBackdrop("Overlay")
-	InfoFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, -10)
+	InfoFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, -50)
 	InfoFrame.Name:SetTextColor(1, .8, 0)
 	InfoFrame.Description:SetTextColor(1, 1, 1)
 
