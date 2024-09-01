@@ -31,10 +31,8 @@ local function LoadSkin()
 	end
 	hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
-	T.SkinDropDownBox(GuildControlUINavigationDropDown)
-	T.SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropDown, 180)
-	GuildControlUINavigationDropDownButton:SetWidth(20)
-	GuildControlUIRankSettingsFrameRankDropDownButton:SetWidth(20)
+	T.SkinDropDownBox(GuildControlUINavigationDropdown)
+	T.SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropdown, 180)
 
 	for i = 1, NUM_RANK_FLAGS do
 		if _G["GuildControlUIRankSettingsFrameCheckbox"..i] then
@@ -75,8 +73,7 @@ local function LoadSkin()
 		end
 	end)
 
-	T.SkinDropDownBox(GuildControlUIRankBankFrameRankDropDown, 180)
-	GuildControlUIRankBankFrameRankDropDownButton:SetWidth(20)
+	T.SkinDropDownBox(GuildControlUIRankBankFrameRankDropdown, 180)
 
 	T.SkinCloseButton(GuildControlUICloseButton)
 end
