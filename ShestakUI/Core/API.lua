@@ -1234,25 +1234,43 @@ end
 
 local LoadBlizzardSkin = CreateFrame("Frame")
 LoadBlizzardSkin:RegisterEvent("ADDON_LOADED")
-LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addon)
+LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addonName)
 	if C_AddOns.IsAddOnLoaded("Skinner") or C_AddOns.IsAddOnLoaded("Aurora") or not C.skins.blizzard_frames then
 		self:UnregisterEvent("ADDON_LOADED")
 		return
 	end
 
-	for _addon, skinfunc in pairs(T.SkinFuncs) do
-		if type(skinfunc) == "function" then
-			if _addon == addon then
+	for addon, skinfunc in pairs(T.SkinFuncs) do
+		if type(skinfunc) == "function" then	-- this is loaded by demand addons
+			if addon == addonName then
 				if skinfunc then
 					skinfunc()
 				end
 			end
-		elseif type(skinfunc) == "table" then
-			if _addon == addon then
-				for _, skinfunc in pairs(T.SkinFuncs[_addon]) do
+		elseif type(skinfunc) == "table" then	-- check for ShestakUI tables that contain loaded functions
+			if addon == addonName then
+				for _, skinfunc in pairs(T.SkinFuncs[addon]) do
 					if skinfunc then
 						skinfunc()
 					end
+				end
+			end
+		end
+	end
+end)
+
+-- Check if addon is loaded and apply skin
+local LoadedSkin = CreateFrame("Frame")
+LoadedSkin:RegisterEvent("PLAYER_LOGIN")
+LoadedSkin:SetScript("OnEvent", function()
+	if C_AddOns.IsAddOnLoaded("Skinner") or C_AddOns.IsAddOnLoaded("Aurora") or not C.skins.blizzard_frames then return end
+
+	for addon, skinfunc in pairs(T.SkinFuncs) do
+		if type(skinfunc) == "function" then
+			local isLoaded, isFinished = C_AddOns.IsAddOnLoaded(addon)
+			if isLoaded and isFinished then
+				if skinfunc then
+					skinfunc()
 				end
 			end
 		end
