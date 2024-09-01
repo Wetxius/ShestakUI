@@ -386,7 +386,7 @@ local cycles = {
 	{chatType = "SAY", use = function() return 1 end},
 	{chatType = "PARTY", use = function() return not IsInRaid() and IsInGroup(LE_PARTY_CATEGORY_HOME) end},
 	{chatType = "RAID", use = function() return IsInRaid(LE_PARTY_CATEGORY_HOME) end},
-	{chatType = "INSTANCE_CHAT", use = function() return IsPartyLFG() end},
+	{chatType = "INSTANCE_CHAT", use = function() return IsPartyLFG() or C_PartyInfo.IsPartyWalkIn() end},
 	{chatType = "GUILD", use = function() return IsInGuild() end},
 	{chatType = "SAY", use = function() return 1 end},
 }
