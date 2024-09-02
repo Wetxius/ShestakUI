@@ -275,7 +275,7 @@ function Stuffing:SlotUpdate(b)
 				b.itemlevel = petLevel
 				b.frame.text:SetText(b.itemlevel)
 			elseif info.itemID == 180653 or info.itemID == 187786 or info.itemID == 151086 then -- keystone
-				b.itemlevel, b.name = strmatch(clink, "|H%w+:%d+:%d+:(%d+):.-|h%[(.-)%]|h")
+				b.itemlevel = strmatch(clink, "%d+:%d+:(%d+)")
 				b.itemlevel = tonumber(b.itemlevel) or 0
 				b.frame.text:SetText(b.itemlevel)
 			else
@@ -286,7 +286,7 @@ function Stuffing:SlotUpdate(b)
 			end
 		end
 
-		if not b.name then	-- Keystone bug (NOTE: maybe not needed as check before)
+		if not b.name then	-- Keystone doesn't have name
 			b.name = clink:match("%[(.-)%]") or ""
 		end
 
