@@ -66,8 +66,8 @@ frame:SetScript("OnEvent", function()
 	end)
 
 	-- Fixed SetPointBase and ShowBase taints after finish Pet Battle, entering new combat and summon Hunter pet.
-	ActionBarController:UnregisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	ActionBarController:UnregisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+	--FIXME ActionBarController:UnregisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	-- ActionBarController:UnregisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 end)
 
 ----------------------------------------------------------------------------------------
