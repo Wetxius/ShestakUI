@@ -48,7 +48,7 @@ L_MISC_BUY_STACK = "Alt-Clic pour acheter une pile d'objet"
 L_MISC_HEADER_MARK = "Icône de raid au survol de la souris"
 L_MISC_BINDER_OPEN = "Assignations des boutons de la souris"
 L_MISC_SCROLL = "Parchemin"
-L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
+L_MISC_HEADER_QUEST = "Bouton d'items de quête automatique"
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "Dissoudre le raid"
