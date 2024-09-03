@@ -81,6 +81,7 @@ if T.class == "DEATHKNIGHT" then
 		T.aoespam[52212] = 3		-- Death and Decay
 		T.aoespam[50401] = 4		-- Razorice
 		T.aoespam[91776] = 3		-- Claw (Ghoul)
+		T.aoespam[344955] = 0.5		-- Dark Transformation
 		T.aoespam[222024] = 0		-- Obliterate
 		T.aoespam[222026] = 0		-- Frost Strike
 		T.aoespam[49998] = 0.5		-- Death Strike
