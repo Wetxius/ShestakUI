@@ -90,6 +90,7 @@ if C.announcements.portals == true then
 		[224871] = true,	-- Dalaran, Broken Isles
 		[344597] = true,	-- Oribos
 		[395289] = true,	-- Valdrakken
+		[446534] = true,	-- Dornogal
 	}
 end
 
