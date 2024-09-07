@@ -18,16 +18,12 @@ end
 if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true then
 	T.ReminderBuffs = {
 		Flask = {
-			SpellName(370652),	-- Phial of Static Empowerment
-			SpellName(373257),	-- Phial of Glacial Fury
-			SpellName(374000),	-- Iced Phial of Corrupting Rage
-			SpellName(371036),	-- Phial of Icy Preservation
-			SpellName(371186),	-- Charged Phial of Alacrity
-			SpellName(371339),	-- Phial of Elemental Chaos
-			SpellName(371204),	-- Phial of Still Air
-			SpellName(371354),	-- Phial of the Eye in the Storm
-			SpellName(371386),	-- Phial of Charged Isolation
-			SpellName(371172),	-- Phial of Tepid Versatility
+			SpellName(432021),	-- Flask of Alchemical Chaos
+			SpellName(431974),	-- Flask of Tempered Mastery
+			SpellName(431971),	-- Flask of Tempered Aggression
+			SpellName(431972),	-- Flask of Tempered Swiftness
+			SpellName(431973),	-- Flask of Tempered Versatility
+			SpellName(432473),	-- Flask of Saving Graces
 		},
 		BattleElixir = {
 			-- SpellName(spellID),	-- Spell name
