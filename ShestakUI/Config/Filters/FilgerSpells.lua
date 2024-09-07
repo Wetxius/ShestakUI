@@ -2372,10 +2372,8 @@ C["filger_spells"] = {
 			Position = {"TOP", SPECIAL_P_BUFF_ICON_Anchor},
 
 			-- Potions: Power
-			-- Elemental Potion of Power
-			{spellID = 371024, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Elemental Potion of Ultimate Power
-			{spellID = 371028, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tempered Potion
+			{spellID = 431932, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Potions: Miscellaneous
 			-- Invisible [Potion of the Hushed Zephyr]
@@ -2392,9 +2390,9 @@ C["filger_spells"] = {
 			{spellID = 80353, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fury of the Aspects
 			{spellID = 390386, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Feral Hide Drums
-			{spellID = 381301, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Mallet of Thunderous Skins
+			-- Thunderous Drums [Item]
+			{spellID = 444257, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Mallet of Thunderous Skins [Item]
 			{spellID = 292686, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Power Infusion
 			{spellID = 10060, unitID = "player", caster = "all", filter = "BUFF"},
