@@ -360,10 +360,10 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		end
 	end
 
-	if #gossipSkips > 0 then
+	if #gossipSkips == 1 then
 		C_GossipInfo.SelectOption(gossipSkips[1])
 		return
-	elseif #gossipQuests > 0 then
+	elseif #gossipQuests == 1 then
 		C_GossipInfo.SelectOption(gossipQuests[1])
 		return
 	end
