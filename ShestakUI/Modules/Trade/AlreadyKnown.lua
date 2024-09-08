@@ -9,7 +9,8 @@ local knowns = {}
 local recipe = Enum.ItemClass.Recipe
 local pet = Enum.ItemMiscellaneousSubclass.CompanionPet
 local mount = Enum.ItemMiscellaneousSubclass.Mount
-local knowables = {[recipe] = true, [pet] = true, [mount] = true}
+local illusion = Enum.ItemConsumableSubclass.Other -- Cosmitic Illusions
+local knowables = {[recipe] = true, [pet] = true, [mount] = true, [illusion] = true}
 
 local pattern = ITEM_PET_KNOWN:gsub("%(", "%%(")
 pattern = pattern:gsub("%)", "%%)")
