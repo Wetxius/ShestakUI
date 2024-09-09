@@ -458,6 +458,7 @@ local function LoadSkin()
 			if button.ButtonText and not button.IsSkinned then
 				button:StripTextures()
 				button:CreateBackdrop("Overlay")
+				button.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
 				local r, g, b = unpack(C.media.border_color)
 				button:GetHighlightTexture():SetColorTexture(r, g, b, .25)
 				button.ButtonText:SetFont(C.media.normal_font, 16)
