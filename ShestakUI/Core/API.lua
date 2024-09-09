@@ -961,21 +961,26 @@ function T.SkinIconSelectionFrame(frame, frameNameOverride)
 		end
 	end
 
-	for _, button in next, {frame.IconSelector.ScrollBox.ScrollTarget:GetChildren()} do
-		local texture = button.Icon:GetTexture()
-		button:StripTextures()
-		button:StyleButton(true)
-		button:SetTemplate("Default")
+	hooksecurefunc(frame.IconSelector.ScrollBox, "Update", function(self)
+		for i = 1, self.ScrollTarget:GetNumChildren() do
+			local child = select(i, self.ScrollTarget:GetChildren())
+			if child.Icon and not child.styled then
+				local texture = child.Icon:GetTexture()
+				child:StripTextures()
+				child:StyleButton(true)
+				child:SetTemplate("Default")
 
-		button.Icon:ClearAllPoints()
-		button.Icon:SetPoint("TOPLEFT", 2, -2)
-		button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
-		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		if texture then
-			button.Icon:SetTexture(texture)
+				child.Icon:ClearAllPoints()
+				child.Icon:SetPoint("TOPLEFT", 2, -2)
+				child.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+				child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				if texture then
+					child.Icon:SetTexture(texture)
+				end
+				child.styled = true
+			end
 		end
-		button.styled = true
-	end
+	end)
 
 	local dropdown = frame.BorderBox.IconTypeDropdown
 	if dropdown then
@@ -991,27 +996,6 @@ function T.SkinIconSelectionFrame(frame, frameNameOverride)
 				T.SkinDropDownBox(child)
 			end
 		end
-
-		hooksecurefunc(frame.IconSelector.ScrollBox, "Update", function(self)
-			for i = 1, self.ScrollTarget:GetNumChildren() do
-				local child = select(i, self.ScrollTarget:GetChildren())
-				if child.Icon and not child.styled then
-					local texture = child.Icon:GetTexture()
-					child:StripTextures()
-					child:StyleButton(true)
-					child:SetTemplate("Default")
-
-					child.Icon:ClearAllPoints()
-					child.Icon:SetPoint("TOPLEFT", 2, -2)
-					child.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
-					child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-					if texture then
-						child.Icon:SetTexture(texture)
-					end
-					child.styled = true
-				end
-			end
-		end)
 	end
 end
 

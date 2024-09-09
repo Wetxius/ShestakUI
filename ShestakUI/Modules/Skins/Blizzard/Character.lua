@@ -240,11 +240,8 @@ local function LoadSkin()
 		end
 	end)
 
-	GearManagerPopupFrame:HookScript("OnShow", function(frame)
-		if not frame.isSkinned then
-			T.SkinIconSelectionFrame(frame)
-		end
-	end)
+	-- Icon selection frame
+	T.SkinIconSelectionFrame(GearManagerPopupFrame)
 
 	-- Handle Tabs at bottom of character frame
 	for i = 1, 4 do

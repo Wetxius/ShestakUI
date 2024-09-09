@@ -93,12 +93,7 @@ local function LoadSkin()
 	end)
 
 	-- Icon selection frame
-	MacroPopupFrame:HookScript("OnShow", function(frame)
-		if not frame.isSkinned then
-			T.SkinIconSelectionFrame(frame, "MacroPopup")
-			frame.isSkinned = true
-		end
-	end)
+	T.SkinIconSelectionFrame(MacroPopupFrame)
 end
 
 T.SkinFuncs["Blizzard_MacroUI"] = LoadSkin
