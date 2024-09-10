@@ -402,7 +402,7 @@ function Stuffing:CreateReagentContainer()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ReagentBankFrameItem1, 1, ReagentBankFrameItem1
 	local Deposit = ReagentBankFrame.DespositButton
 
-	Reagent:SetWidth(((C.bag.button_size + C.bag.button_space) * C.bag.bank_columns) + 17)
+	Reagent:SetWidth(((C.bag.button_size + C.bag.button_space) * C.bag.bank_columns) + 19)
 	Reagent:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	Reagent:SetTemplate("Transparent")
 	Reagent:SetFrameStrata(_G["StuffingFrameBank"]:GetFrameStrata())
@@ -536,7 +536,7 @@ end
 
 function Stuffing:SkinWarbandContainer()
 	local warbandFrame = CreateFrame("Frame", "StuffingFrameWarband", UIParent)
-	warbandFrame:SetWidth(((C.bag.button_size + C.bag.button_space) * 14) + 17)
+	warbandFrame:SetWidth(((C.bag.button_size + C.bag.button_space) * 14) + 19)
 	warbandFrame:SetHeight(((C.bag.button_size + C.bag.button_space) * (7 + 1) + 70) - C.bag.button_space)
 	warbandFrame:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	warbandFrame:SetTemplate("Transparent")
@@ -635,9 +635,9 @@ function Stuffing:SkinWarbandContainer()
 				button:SetSize(C.bag.button_size, C.bag.button_size)
 				hooksecurefunc(button, "SetPoint", function(self, point, anchor, attachTo, x, y)
 					if x == 8 or x == 19 then
-						self:SetPoint(point, anchor, attachTo, 3, y)
+						self:SetPoint(point, anchor, attachTo, C.bag.button_space, y)
 					elseif y == -10 then
-						self:SetPoint(point, anchor, attachTo, x, -3)
+						self:SetPoint(point, anchor, attachTo, x, -C.bag.button_space)
 					elseif y == -63 then
 						self:SetPoint(point, anchor, attachTo, 10, -27)
 					end
