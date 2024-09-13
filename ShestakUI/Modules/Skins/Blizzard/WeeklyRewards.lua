@@ -5,6 +5,7 @@ if C.skins.blizzard_frames ~= true then return end
 --	Weekly Rewards skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
+	-- /run WeeklyRewards_ShowUI()
 	local frame = WeeklyRewardsFrame
 	T.SkinCloseButton(frame.CloseButton)
 
@@ -19,15 +20,18 @@ local function LoadSkin()
 	local headers = {
 		frame.RaidFrame,
 		frame.MythicFrame,
-		frame.PVPFrame
+		frame.PVPFrame,
+		frame.WorldFrame
 	}
 
 	for i = 1, #headers do
 		local header = headers[i]
-		header:CreateBackdrop("Default")
-		header.backdrop:SetOutside(header.Background)
-		header.Background:SetTexCoord(0.01602564102564, 0.97109826589595, 0.02890173410405, 0.97109826589595)
-		header.Background:SetSize(380, 130)
+		if header then
+			header:CreateBackdrop("Default")
+			header.backdrop:SetOutside(header.Background)
+			header.Background:SetTexCoord(0.01602564102564, 0.97109826589595, 0.02890173410405, 0.97109826589595)
+			header.Background:SetSize(380, 130)
+		end
 	end
 
 	for _, activity in pairs(frame.Activities) do
