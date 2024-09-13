@@ -3249,44 +3249,33 @@ do
 
 	-- Trinkets
 	if strengthClass[T.class] then
-		-- Bound by Fire and Blaze [Blazebinder's Hoof]
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 383926, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-		-- Bonemaw's Big Toe
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 397400, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- Mark of Khardros
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 91374, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
 	end
 
 	if agilityClass[T.class] then
-		-- Bottle of Spiraling Winds
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 383751, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-		-- Windswept Pages
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 126483, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- Empowering Crystal of Anub'ikkaj
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 449275, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- Skardyn's Grace
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 92099, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
 	end
 
 	if agilityClass[T.class] or strengthClass[T.class] then
-		-- Scent of Blood [Hunger of the Pack]
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 213888, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-		-- Algeth'ar Puzzle
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 383781, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- for future
 	end
 
 	if intellectClass[T.class] then
-		-- Power Theft
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 382126, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- Empowering Crystal of Anub'ikkaj
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 449275, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
 	end
 
 	if isHealer[T.class] then
-		-- Broodkeeper's Promise
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 377462, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-		-- Voidmender's Shadowgem
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 397399, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+		-- for future
 	end
 
-	-- Crumbling Power [Irideus Fragment]
-	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 383941, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-	-- Whispering Incarnate Icon
-	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 377452, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
-	-- Valarjar's Path [Horn of Valor]
-	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 215956, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+	if isTank[T.class] then
+		-- for future
+	end
 
 	-- Remove Serpent Sting if Serpentstalker's Trickery is pick up
 	if IsPlayerSpell(378888) then
