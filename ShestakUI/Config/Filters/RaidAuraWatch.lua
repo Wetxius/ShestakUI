@@ -171,8 +171,8 @@ T.RaidDebuffs = {
 	[SpellName(226512)] = 3,	-- Sanguine
 	[SpellName(240559)] = 3,	-- Grievous
 	[SpellName(240443)] = 3,	-- Bursting
-	-- Dragonflight Season 3
-	[SpellName(409492)] = 6,	-- Afflicted Cry
+	-- The War Within Season 1
+	[SpellName(440313)] = 6,	-- Void Rift
 
 	-- The Stonevault (Season 1)
 	[SpellName(427329)] = 3,	-- Void Corruption
