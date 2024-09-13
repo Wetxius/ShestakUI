@@ -374,6 +374,7 @@ local function LoadSkin()
 
 	T.SkinFrame(CurrencyTransferLog)
 	T.SkinScrollBar(CurrencyTransferLog.ScrollBar)
+	CurrencyTransferLog:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
 
 	do
 		local button = TokenFrame.CurrencyTransferLogToggleButton
