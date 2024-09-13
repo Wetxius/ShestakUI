@@ -3220,6 +3220,9 @@ do
 		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 368970, filter = "CD"}})
 		-- Wing Buffet
 		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 357214, filter = "CD"}})
+	elseif race == "EarthenDwarf" then
+		-- Azerite Surge
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 436344, filter = "CD"}})
 	end
 
 	-- Items
