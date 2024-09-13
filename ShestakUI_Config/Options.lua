@@ -3331,14 +3331,11 @@ do
 	local currency_archaeology = ns.CreateCheckBox(parent, "currency_archaeology", L_GUI_STATS_CURRENCY_ARCHAEOLOGY)
 	currency_archaeology:SetPoint("TOPLEFT", currency, "BOTTOMLEFT", 0, -8)
 
-	local currency_cooking = ns.CreateCheckBox(parent, "currency_cooking", L_GUI_STATS_CURRENCY_COOKING)
-	currency_cooking:SetPoint("TOPLEFT", currency_archaeology, "BOTTOMLEFT", 0, 0)
+	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME10)
+	currency_misc:SetPoint("TOPLEFT", currency_archaeology, "BOTTOMLEFT", 0, 0)
 
-	local currency_raid = ns.CreateCheckBox(parent, "currency_raid", L_GUI_STATS_CURRENCY_RAID)
-	currency_raid:SetPoint("TOPLEFT", currency_cooking, "BOTTOMLEFT", 0, 0)
-
-	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME9)
-	currency_misc:SetPoint("TOPLEFT", currency_raid, "BOTTOMLEFT", 0, 0)
+	-- local currency_raid = ns.CreateCheckBox(parent, "currency_raid", L_GUI_STATS_CURRENCY_RAID) -- save for future
+	-- currency_raid:SetPoint("TOPLEFT", currency_misc, "BOTTOMLEFT", 0, 0)
 
 	local ResetGoldButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ResetGoldButton:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -20, 5)

@@ -669,9 +669,8 @@ C["stats"] = {
 	["bottom_line"] = true,						-- Bottom classcolor line
 	-- Currency (displayed in gold stats)
 	["currency_archaeology"] = false,			-- Archaeology Fragments
-	["currency_cooking"] = true,				-- Cooking Awards
-	["currency_raid"] = true,					-- Raid Seals
 	["currency_misc"] = true,					-- Expansion Currency
+	["currency_raid"] = true,					-- Raid Seals (not used now)
 }
 
 ----------------------------------------------------------------------------------------

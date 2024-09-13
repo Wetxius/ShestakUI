@@ -630,7 +630,6 @@ L_GUI_STATS_BG = "Champ de bataille"
 L.stats_bottom_line = "Ligne de couleur de classe en bas de l'écran"
 L_GUI_STATS_SUBHEADER_CURRENCY = "Devise (afficher au survol de la souris du texte d'information sur l'or)"
 L_GUI_STATS_CURRENCY_ARCHAEOLOGY = "Fragments archéologiques dans devise"
-L_GUI_STATS_CURRENCY_COOKING = "Prix de cuisine dans devise"
 L_GUI_STATS_CURRENCY_RAID = "Sceaux de raid dans devise"
 
 -- Trade options

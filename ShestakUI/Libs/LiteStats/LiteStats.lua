@@ -1764,7 +1764,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = GetProfessions()
+			local _, _, archaeology = GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1842,20 +1842,14 @@ if gold.enabled then
 				Currency(1535)	-- Drust
 			end
 
-			if cooking and C.stats.currency_cooking then
-				titleName = PROFESSIONS_COOKING
-				Currency(81)	-- Epicurean's Award
-				Currency(402)	-- Ironpaw Token
-			end
-
 			-- if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
 				-- titleName = L_STATS_CURRENCY_RAID
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 			-- end
 
 			if C.stats.currency_misc then
-				-- titleName = EXPANSION_NAME10
-				-- Currency(2122)	-- Storm Sigil
+				titleName = EXPANSION_NAME10
+				Currency(2803)	-- Undercoin
 			end
 
 			-- Anima (Shadownlands currency as items in bags credits to StoredAnimaCounter by Falx)

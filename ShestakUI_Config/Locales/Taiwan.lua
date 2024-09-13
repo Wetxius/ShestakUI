@@ -632,7 +632,6 @@ L_GUI_STATS_BG = "戰場分數"
 L.stats_bottom_line = "底部職業著色劃線"
 L_GUI_STATS_SUBHEADER_CURRENCY = "兌換通貨(金幣信息中顯示)"
 L_GUI_STATS_CURRENCY_ARCHAEOLOGY = "考古學"
-L_GUI_STATS_CURRENCY_COOKING = "烹飪"
 L_GUI_STATS_CURRENCY_RAID = "副本徽印"
 
 -- Trade options
