@@ -1854,10 +1854,8 @@ if gold.enabled then
 			-- end
 
 			if C.stats.currency_misc then
-				titleName = EXPANSION_NAME9
-				Currency(2122)	-- Storm Sigil
-				Currency(2118)	-- Elemental Overflow
-				Currency(2003)	-- Dragon Isles Supplies
+				-- titleName = EXPANSION_NAME10
+				-- Currency(2122)	-- Storm Sigil
 			end
 
 			-- Anima (Shadownlands currency as items in bags credits to StoredAnimaCounter by Falx)
