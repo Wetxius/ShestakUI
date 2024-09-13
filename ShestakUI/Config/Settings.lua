@@ -582,6 +582,7 @@ C["reminder"] = {
 	-- Raid buffs
 	["raid_buffs_enable"] = true,				-- Show missing raid buffs
 	["raid_buffs_always"] = false,				-- Show frame always (default show only in raid)
+	["raid_buffs_classcolor"] = false,			-- Enable classcolor border
 	["raid_buffs_size"] = 19.2,					-- Icon size
 	["raid_buffs_alpha"] = 0,					-- Transparent icons when the buff is present
 }

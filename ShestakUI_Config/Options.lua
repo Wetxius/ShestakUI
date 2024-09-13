@@ -3055,8 +3055,11 @@ do
 	local raid_buffs_always = ns.CreateCheckBox(parent, "raid_buffs_always", L_GUI_REMINDER_RAID_ALWAYS)
 	raid_buffs_always:SetPoint("TOPLEFT", raid_buffs_enable, "BOTTOMLEFT", 0, 0)
 
+	local raid_buffs_classcolor = ns.CreateCheckBox(parent, "raid_buffs_classcolor", L.enemycooldown_class_color)
+	raid_buffs_classcolor:SetPoint("TOPLEFT", raid_buffs_always, "BOTTOMLEFT", 0, 0)
+
 	local raid_buffs_size = ns.CreateNumberSlider(parent, "raid_buffs_size", nil, nil, 0, 40, 1, true, L_GUI_REMINDER_RAID_SIZE, L_GUI_REMINDER_RAID_SIZE_DESC)
-	raid_buffs_size:SetPoint("TOPLEFT", raid_buffs_always, "BOTTOMLEFT", 0, -20)
+	raid_buffs_size:SetPoint("TOPLEFT", raid_buffs_classcolor, "BOTTOMLEFT", 0, -20)
 
 	local raid_buffs_alpha = ns.CreateNumberSlider(parent, "raid_buffs_alpha", nil, nil, 0, 1, 0.05, true, L_GUI_REMINDER_RAID_ALPHA, L_GUI_REMINDER_RAID_ALPHA_DESC)
 	raid_buffs_alpha:SetPoint("TOPLEFT", raid_buffs_size, "BOTTOMLEFT", 0, -20)

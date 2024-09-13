@@ -263,15 +263,16 @@ local buffButtons = {
 	"CustomFrame",
 }
 
+local color = C.reminder.raid_buffs_classcolor and "ClassColor" or "Default"
 for i = 1, #buffButtons do
 	local name = buffButtons[i]
 	local button = CreateFrame("Frame", name, RaidBuffReminder)
 	if i == 1 then
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
+		button:CreatePanel(color, C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
 	elseif i == line then
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOM", buffButtons[1], "TOP", 0, 3)
+		button:CreatePanel(color, C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOM", buffButtons[1], "TOP", 0, 3)
 	else
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", buffButtons[i-1], "RIGHT", 3, 0)
+		button:CreatePanel(color, C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", buffButtons[i-1], "RIGHT", 3, 0)
 	end
 	button:SetFrameLevel(RaidBuffReminder:GetFrameLevel() + 2)
 
