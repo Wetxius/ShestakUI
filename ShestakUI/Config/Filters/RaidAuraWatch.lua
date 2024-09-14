@@ -98,10 +98,11 @@ local function SpellName(id)
 	end
 end
 
-T.RaidDebuffs = {
----------------------------------------------------------
--- Nerub'ar Palace
----------------------------------------------------------
+----------------------------------------------------------------------------------------
+--	Debuffs
+----------------------------------------------------------------------------------------
+local RaidDebuffs = {
+	-- Nerub'ar Palace
 	-- Ulgrax the Devourer
 	[SpellName(434705)] = 3,	-- Tenderized
 	[SpellName(435138)] = 3,	-- Digestive Acid
@@ -119,18 +120,15 @@ T.RaidDebuffs = {
 	[SpellName(435410)] = 3,	-- Phase Lunge
 	[SpellName(458277)] = 3,	-- Shattering Sweep
 	[SpellName(438845)] = 3,	-- Expose
-	[SpellName(433517)] = 3,	-- Phase Blades 1
-	[SpellName(434860)] = 3,	-- Phase Blades 2
+	[SpellName(433517)] = 3,	-- Phase Blades
 	[SpellName(459785)] = 3,	-- Cosmic Residue
 	[SpellName(459273)] = 3,	-- Cosmic Shards
 	-- Rasha'nan
 	[SpellName(439785)] = 3,	-- Corrosion
-	[SpellName(439786)] = 3,	-- Rolling Acid 1
-	[SpellName(439790)] = 3,	-- Rolling Acid 2
+	[SpellName(439786)] = 3,	-- Rolling Acid
 	[SpellName(439787)] = 3,	-- Acidic Stupor
 	[SpellName(458067)] = 3,	-- Savage Wound
-	[SpellName(456170)] = 3,	-- Spinneret's Strands 1
-	[SpellName(439783)] = 3,	-- Spinneret's Strands 2
+	[SpellName(456170)] = 3,	-- Spinneret's Strands
 	[SpellName(439780)] = 3,	-- Sticky Webs
 	[SpellName(439776)] = 3,	-- Acid Pool
 	[SpellName(455287)] = 3,	-- Infested Bite
@@ -162,11 +160,9 @@ T.RaidDebuffs = {
 	[SpellName(441772)] = 3,	-- Void Bolt
 	[SpellName(441788)] = 3,	-- Web Vortex
 	[SpellName(440001)] = 3,	-- Binding Webs
-	-- Queen Ansurek
+}
 
------------------------------------------------------------------
--- Dungeons
------------------------------------------------------------------
+local DungeonDebuffs = {
 	-- Mythic+ Affixes
 	[SpellName(226512)] = 3,	-- Sanguine
 	[SpellName(240559)] = 3,	-- Grievous
@@ -289,8 +285,7 @@ T.RaidDebuffs = {
 	[SpellName(322557)] = 3,	-- Soul Split
 	[SpellName(331172)] = 3,	-- Mind Link
 	[SpellName(322563)] = 3,	-- Marked Prey
-	[SpellName(322487)] = 3,	-- Overgrowth 1
-	[SpellName(322486)] = 3,	-- Overgrowth 2
+	[SpellName(322487)] = 3,	-- Overgrowth
 	[SpellName(328756)] = 3,	-- Repulsive Visage
 	[SpellName(325021)] = 3,	-- Mistveil Tear
 	[SpellName(321891)] = 3,	-- Freeze Tag Fixation
@@ -309,8 +304,7 @@ T.RaidDebuffs = {
 	[SpellName(323464)] = 3,	-- Dark Ichor
 	[SpellName(323198)] = 3,	-- Dark Exile
 	[SpellName(343504)] = 3,	-- Dark Grasp
-	[SpellName(343556)] = 3,	-- Morbid Fixation 1
-	[SpellName(338606)] = 3,	-- Morbid Fixation 2
+	[SpellName(343556)] = 3,	-- Morbid Fixation
 	[SpellName(324381)] = 3,	-- Chill Scythe
 	[SpellName(320573)] = 3,	-- Shadow Well
 	[SpellName(333492)] = 3,	-- Necrotic Ichor
@@ -335,8 +329,7 @@ T.RaidDebuffs = {
 	[SpellName(272713)] = 3,	-- Crushing Slam
 
 	-- Grim Batol
-	[SpellName(449885)] = 3,	-- Shadow Gale 1
-	[SpellName(461513)] = 3,	-- Shadow Gale 2
+	[SpellName(449885)] = 3,	-- Shadow Gale
 	[SpellName(449474)] = 3,	-- Molten Spark
 	[SpellName(456773)] = 3,	-- Twilight Wind
 	[SpellName(448953)] = 3,	-- Rumbling Earth
@@ -354,16 +347,25 @@ T.RaidDebuffs = {
 	[SpellName(451241)] = 3,	-- Shadowflame Slash
 	[SpellName(451965)] = 3,	-- Molten Wake
 	[SpellName(451224)] = 3,	-- Enveloping Shadowflame
+}
 
------------------------------------------------------------------
--- Other
------------------------------------------------------------------
+local OtherDebuffs = {
 	[SpellName(87023)] = 4,		-- Cauterize
 	[SpellName(94794)] = 4,		-- Rocket Fuel Leak
 	[SpellName(116888)] = 4,	-- Shroud of Purgatory
-	[SpellName(121175)] = 2,	-- Orb of Power
+	[SpellName(121175)] = 2,	-- Orb of Power (PvP)
 	[SpellName(160029)] = 3,	-- Resurrecting (Pending CR)
 }
+
+-- Add spells from GUI
+for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
+	OtherDebuffs[SpellName(spell)] = 3
+end
+
+for spell, prio in pairs(OtherDebuffs) do
+	RaidDebuffs[spell] = prio
+	DungeonDebuffs[spell] = prio
+end
 
 -----------------------------------------------------------------
 -- PvP
@@ -503,7 +505,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	tinsert(T.RaidBuffs["ALL"], {30108, "RIGHT", {1, 0, 0}, true})	-- Unstable Affliction (Don't dispel)
 
 	for spell, prio in pairs(PvPDebuffs) do
-		T.RaidDebuffs[spell] = prio
+		OtherDebuffs[spell] = prio
 	end
 end
 
@@ -517,6 +519,18 @@ T.RaidDebuffsIgnore = {
 	[425180] = true,		-- Vicious Brand
 }
 
-for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
-	T.RaidDebuffs[SpellName(spell)] = 3
-end
+T.RaidDebuffs = OtherDebuffs
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:SetScript("OnEvent", function()
+	T.RaidDebuffs = {} -- wipe and collect depending of zone
+
+	local _, instanceType = IsInInstance()
+	if instanceType == "raid" then
+		T.RaidDebuffs = RaidDebuffs
+	elseif instanceType == "party" then
+		T.RaidDebuffs = DungeonDebuffs
+	else
+		T.RaidDebuffs = OtherDebuffs
+	end
+end)
