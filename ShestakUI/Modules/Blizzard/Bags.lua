@@ -713,16 +713,6 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		Mixin(ret.frame, BackdropTemplateMixin)
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
-		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
-			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
-				self:GetParent():SetBackdropBorderColor(r, g, b)
-			end
-			self:SetTexture("")
-		end)
-
-		hooksecurefunc(ret.frame.IconBorder, "Hide", function(self)
-			self:GetParent():SetBackdropBorderColor(unpack(C.media.border_color))
-		end)
 
 		table.insert(self.bagframe_buttons, ret)
 
@@ -799,7 +789,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
 	ret.icon:CropIcon()
 
-	-- C_Timer.After(2, function()
+	-- C_Timer.After(2, function() -- TODO: Test it if quality not returned after first open
 	if ret.frame.quality and ret.frame.quality > 1 then
 		local r, g, b = C_Item.GetItemQualityColor(ret.frame.quality)
 		ret.frame:SetBackdropBorderColor(r, g, b)
@@ -1750,6 +1740,12 @@ function Stuffing:BANKFRAME_OPENED()
 		if v.frame and v.frame.GetInventorySlot then
 			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
 			BankFrameItemButton_Update(v.frame)
+
+			local quality = GetInventoryItemQuality("player", v.frame.ID)
+			if quality and quality > 1 then
+				local r, g, b = C_Item.GetItemQualityColor(quality)
+				v.frame:SetBackdropBorderColor(r, g, b)
+			end
 
 			if not v.frame.tooltipText then
 				v.frame.tooltipText = ""
