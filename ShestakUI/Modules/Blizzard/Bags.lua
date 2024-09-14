@@ -651,7 +651,7 @@ function Stuffing:SkinWarbandContainer()
 
 		LastButton = button
 	end
-	warbandFrame:SetHeight(((C.bag.button_size + C.bag.button_space) * (NumRows + 1) + 25) - C.bag.button_space)
+	warbandFrame:SetHeight(NumRows * C.bag.button_size + (NumRows - 1) * C.bag.button_space + 63)
 
 	local function reposition()
 		for button in AccountBankPanel:EnumerateValidItems() do
@@ -768,7 +768,10 @@ function Stuffing:SkinWarbandContainer()
 	AccountBankPanel.TabSettingsMenu:SetClampedToScreen(true)
 
 	AccountBankPanel.Header.Text:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-	AccountBankPanel.Header:SetPoint("TOPLEFT", Deposit, "TOPRIGHT", 20, 0)
+	AccountBankPanel.Header.Text:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
+	AccountBankPanel.Header:ClearAllPoints()
+	AccountBankPanel.Header:SetPoint("TOPLEFT", Deposit, "TOPRIGHT", 5, 0)
+	AccountBankPanel.Header:SetPoint("TOPRIGHT", Close, "TOPLEFT", -5, 0)
 
 	AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox:Hide()
 	AccountBankPanel.MoneyFrame:SetPoint("BOTTOMRIGHT", AccountBankPanel, "BOTTOMRIGHT", -10, 5)
