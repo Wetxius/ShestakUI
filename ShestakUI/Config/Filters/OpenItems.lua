@@ -668,6 +668,7 @@ T.OpenItems = {
 	[205370] = true,	-- Researcher'S Gift
 	[205371] = true,	-- Appreciative Researcher's Scrounged Goods
 	[205373] = true,	-- Researcher's Scrounged Goods
+	[205877] = true,	-- Adventurer's Footlocker
 	[205964] = true,	-- Small Loammian Supply Pack
 	[205966] = true,	-- Cache of Aberrus Treasures
 	[205983] = true,	-- Scentsational Niffen Treasures
