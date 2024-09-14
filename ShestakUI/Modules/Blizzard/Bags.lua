@@ -402,7 +402,7 @@ function Stuffing:CreateReagentContainer()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ReagentBankFrameItem1, 1, ReagentBankFrameItem1
 	local Deposit = ReagentBankFrame.DespositButton
 
-	Reagent:SetWidth(((C.bag.button_size + C.bag.button_space) * C.bag.bank_columns) + 19)
+	Reagent:SetWidth(C.bag.bank_columns * C.bag.button_size + (C.bag.bank_columns - 1) * C.bag.button_space + 10 * 2)
 	Reagent:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	Reagent:SetTemplate("Transparent")
 	Reagent:SetFrameStrata(_G["StuffingFrameBank"]:GetFrameStrata())
@@ -536,8 +536,7 @@ end
 
 function Stuffing:SkinWarbandContainer()
 	local warbandFrame = CreateFrame("Frame", "StuffingFrameWarband", UIParent)
-	warbandFrame:SetWidth(((C.bag.button_size + C.bag.button_space) * 14) + 19)
-	warbandFrame:SetHeight(((C.bag.button_size + C.bag.button_space) * (7 + 1) + 70) - C.bag.button_space)
+	warbandFrame:SetWidth(C.bag.bank_columns * C.bag.button_size + (C.bag.bank_columns - 1) * C.bag.button_space + 10 * 2)
 	warbandFrame:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	warbandFrame:SetTemplate("Transparent")
 
@@ -551,16 +550,6 @@ function Stuffing:SkinWarbandContainer()
 		end
 	end)
 	warbandFrame:SetScript("OnMouseUp", warbandFrame.StopMovingOrSizing)
-
-	AccountBankPanel.Header.Text:SetFont(C.media.normal_font, 12)
-	AccountBankPanel.Header:SetPoint("TOP", AccountBankPanel, "TOP", 0, -3)
-
-	AccountBankPanel.ItemDepositFrame.DepositButton:SetWidth(200)
-	AccountBankPanel.ItemDepositFrame.DepositButton:ClearAllPoints()
-	AccountBankPanel.ItemDepositFrame.DepositButton:SetPoint("BOTTOMLEFT", AccountBankPanel, "BOTTOMLEFT", 10, 38)
-
-	AccountBankPanel.MoneyFrame:SetPoint("BOTTOMRIGHT", AccountBankPanel, "BOTTOMRIGHT", -10, 3)
-	AccountBankPanel.TabSettingsMenu:SetClampedToScreen(true)
 
 	local SwitchBankButton = CreateFrame("Button", nil, warbandFrame)
 	SwitchBankButton:SetSize(80, 20)
@@ -576,7 +565,47 @@ function Stuffing:SkinWarbandContainer()
 		PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
 	end)
 
-	-- Close button
+	local Deposit = AccountBankPanel.ItemDepositFrame.DepositButton
+	Deposit:ClearAllPoints()
+	Deposit:SetSize(170, 20)
+	Deposit:SetPoint("TOPLEFT", SwitchBankButton, "TOPRIGHT", 3, 0)
+	Deposit:SkinButton()
+	Deposit:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+	Deposit.text:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
+	Deposit.text:SetTextColor(1, 1, 1)
+	Deposit.text:SetText(ACCOUNT_BANK_DEPOSIT_BUTTON_LABEL)
+	Deposit:SetFontString(Deposit.text)
+
+	local tooltip_hide = function()
+		GameTooltip:Hide()
+	end
+
+	local tooltip_show = function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 6)
+		GameTooltip:ClearLines()
+		if GetCVarBool("bankAutoDepositReagents") then
+			GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cff55ff55: "..L_STATS_ON.."|r")
+		else
+			GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cffff5555: "..strupper(OFF).."|r")
+		end
+	end
+
+	Deposit:HookScript("OnEnter", tooltip_show)
+	Deposit:HookScript("OnLeave", tooltip_hide)
+
+	local function oldOnCLick() Deposit:OnClick() end -- save old function of Deposit button
+
+	Deposit:RegisterForClicks("AnyUp")
+	Deposit:SetScript("OnClick", function(_, btn)
+		if btn == "RightButton" then
+			local isOn = GetCVarBool("bankAutoDepositReagents")
+			SetCVar("bankAutoDepositReagents", isOn and 0 or 1)
+			Deposit:GetScript("OnEnter")(Deposit)
+		else
+			oldOnCLick()
+		end
+	end)
+
 	local Close = CreateFrame("Button", "StuffingCloseButtonWarband", warbandFrame, "UIPanelCloseButton")
 	T.SkinCloseButton(Close, nil, nil, true)
 	Close:SetSize(15, 15)
@@ -600,6 +629,38 @@ function Stuffing:SkinWarbandContainer()
 	AccountBankPanel:ClearAllPoints()
 	AccountBankPanel:SetAllPoints()
 
+	local NumRows, NumButtons, LastRowButton, LastButton = 1, 1
+	for i = 1, 98 do
+		local button = CreateFrame("Frame", "StuffingWarbandAnchor"..(i).."Slot", warbandFrame)
+		button:SetSize(C.bag.button_size, C.bag.button_size)
+		if i == 1 then
+			button:SetPoint("TOPLEFT", warbandFrame, "TOPLEFT", 10, -27)
+			LastRowButton = button
+			LastButton = button
+		elseif NumButtons == C.bag.bank_columns then
+			button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C.bag.button_space + C.bag.button_size))
+			button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C.bag.button_space + C.bag.button_size))
+			LastRowButton = button
+			NumRows = NumRows + 1
+			NumButtons = 1
+		else
+			button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C.bag.button_space + C.bag.button_size), 0)
+			button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C.bag.button_space + C.bag.button_size), 0)
+			NumButtons = NumButtons + 1
+		end
+
+		LastButton = button
+	end
+	warbandFrame:SetHeight(((C.bag.button_size + C.bag.button_space) * (NumRows + 1) + 25) - C.bag.button_space)
+
+	local function reposition()
+		for button in AccountBankPanel:EnumerateValidItems() do
+			local i = button:GetContainerSlotID()
+			button:ClearAllPoints()
+			button:SetAllPoints("StuffingWarbandAnchor"..(i).."Slot")
+		end
+	end
+
 	hooksecurefunc(AccountBankPanel, "GenerateItemSlotsForSelectedTab", function(self)
 		for button in self.itemButtonPool:EnumerateActive() do
 			if not button.styled then
@@ -608,6 +669,7 @@ function Stuffing:SkinWarbandContainer()
 				button:SetNormalTexture(0)
 				button:StyleButton()
 				button:SetTemplate("Default")
+				button:SetSize(C.bag.button_size, C.bag.button_size)
 
 				T.SkinIconBorder(button.IconBorder, button)
 
@@ -626,27 +688,51 @@ function Stuffing:SkinWarbandContainer()
 				button.Count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
 				button.Count:SetPoint("BOTTOMRIGHT", 1, 1)
 
+				if C.bag.ilvl then
+					button.ilvl = button:CreateFontString(nil, "ARTWORK")
+					button.ilvl:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+					button.ilvl:SetPoint("TOPLEFT", 1, -1)
+					button.ilvl:SetTextColor(1, 1, 0)
+				end
+
 				button.IconQuestTexture:SetAlpha(0)
 				if button.Background then
 					button.Background:SetAlpha(0)
 				end
 
-				-- Reposition
-				button:SetSize(C.bag.button_size, C.bag.button_size)
-				hooksecurefunc(button, "SetPoint", function(self, point, anchor, attachTo, x, y)
-					if x == 8 or x == 19 then
-						self:SetPoint(point, anchor, attachTo, C.bag.button_space, y)
-					elseif y == -10 then
-						self:SetPoint(point, anchor, attachTo, x, -C.bag.button_space)
-					elseif y == -63 then
-						self:SetPoint(point, anchor, attachTo, 10, -27)
-					end
-				end)
-
 				button.styled = true
 			end
+
+			if button.ilvl then
+				button.ilvl:SetText("")
+				local info = C_Container.GetContainerItemInfo(self.selectedTabID, button:GetContainerSlotID())
+				if info and info.hyperlink then
+					local _, _, _, itemlevel, _, _, _, _, _, _, _, itemClassID, itemSubClassID = C_Item.GetItemInfo(info.hyperlink)
+					if itemlevel and itemlevel > 1 and info.quality > 1 and (itemClassID == 2 or itemClassID == 4 or (itemClassID == 3 and itemSubClassID == 11)) then
+						local text = _getRealItemLevel(info.hyperlink, self.selectedTabID, button:GetContainerSlotID()) or itemlevel
+						button.ilvl:SetText(text)
+					end
+				end
+			end
 		end
+		reposition()
 	end)
+
+	if C.bag.ilvl then
+		hooksecurefunc(AccountBankPanel, "RefreshAllItemsForSelectedTab", function(self)
+			for button in self:EnumerateValidItems() do
+				button.ilvl:SetText("")
+				local info = C_Container.GetContainerItemInfo(self.selectedTabID, button:GetContainerSlotID())
+				if info and info.hyperlink then
+					local _, _, _, itemlevel, _, _, _, _, _, _, _, itemClassID, itemSubClassID = C_Item.GetItemInfo(info.hyperlink)
+					if itemlevel and itemlevel > 1 and info.quality > 1 and (itemClassID == 2 or itemClassID == 4 or (itemClassID == 3 and itemSubClassID == 11)) then
+						local text = _getRealItemLevel(info.hyperlink, self.selectedTabID, button:GetContainerSlotID()) or itemlevel
+						button.ilvl:SetText(text)
+					end
+				end
+			end
+		end)
+	end
 
 	local function SkinBankTab(button)
 		if not button.styled then
@@ -679,8 +765,13 @@ function Stuffing:SkinWarbandContainer()
 	end)
 	SkinBankTab(AccountBankPanel.PurchaseTab)
 
-	AccountBankPanel.ItemDepositFrame.DepositButton:SkinButton()
-	T.SkinCheckBox(AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox)
+	AccountBankPanel.TabSettingsMenu:SetClampedToScreen(true)
+
+	AccountBankPanel.Header.Text:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+	AccountBankPanel.Header:SetPoint("TOPLEFT", Deposit, "TOPRIGHT", 20, 0)
+
+	AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox:Hide()
+	AccountBankPanel.MoneyFrame:SetPoint("BOTTOMRIGHT", AccountBankPanel, "BOTTOMRIGHT", -10, 5)
 	AccountBankPanel.MoneyFrame.Border:Hide()
 	AccountBankPanel.MoneyFrame.WithdrawButton:SkinButton()
 	AccountBankPanel.MoneyFrame.DepositButton:SkinButton()
