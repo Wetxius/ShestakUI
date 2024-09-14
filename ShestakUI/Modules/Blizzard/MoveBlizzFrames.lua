@@ -5,14 +5,14 @@ if C.general.move_blizzard ~= true then return end
 --	Move some Blizzard frames
 ----------------------------------------------------------------------------------------
 local frames = {
-	"CharacterFrame", "SpellBookFrame", "TaxiFrame", "QuestFrame", "PVEFrame", "AddonList",
+	"CharacterFrame", "ChannelFrame", "TaxiFrame", "QuestFrame", "PVEFrame", "AddonList",
 	"QuestLogPopupDetailFrame", "MerchantFrame", "TradeFrame", "MailFrame", "LootFrame",
 	"FriendsFrame", "CinematicFrame", "TabardFrame", "PetStableFrame", "BankFrame",
 	"PetitionFrame", "HelpFrame", "GossipFrame", "DressUpFrame", "GuildRegistrarFrame",
 	"ChatConfigFrame", "RaidBrowserFrame", "InterfaceOptionsFrame", "WorldMapFrame",
 	"GameMenuFrame", "VideoOptionsFrame", "GuildInviteFrame", "ItemTextFrame",
-	"OpenMailFrame", "StackSplitFrame", "TutorialFrame", "StaticPopup1",
-	"StaticPopup2", "ScrollOfResurrectionSelectionFrame", "CommunitiesFrame"
+	"OpenMailFrame", "StackSplitFrame", "TutorialFrame", "StaticPopup1", "SettingsPanel",
+	"StaticPopup2", "ScrollOfResurrectionSelectionFrame", "CommunitiesFrame", "ShestakUIOptionsPanel"
 }
 
 for _, v in pairs(frames) do
