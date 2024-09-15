@@ -159,9 +159,11 @@ if C.minimap.garrison_icon == true then
 	ExpansionLandingPageMinimapButton:SetScale(0.6)
 	ExpansionLandingPageMinimapButton:ClearAllPoints()
 	ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
-	hooksecurefunc(ExpansionLandingPageMinimapButton, "UpdateIconForGarrison", function()
-		ExpansionLandingPageMinimapButton:ClearAllPoints()
-		ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
+	hooksecurefunc(ExpansionLandingPageMinimapButton, "SetPoint", function(self, point, anchor, attachTo, x, y)
+		if y ~= 1 then
+			ExpansionLandingPageMinimapButton:ClearAllPoints()
+			ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
+		end
 	end)
 else
 	ExpansionLandingPageMinimapButton:SetScale(0.0001)
@@ -332,31 +334,12 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("GARRISON_SHOW_LANDING_PAGE")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function()
-	local textTitle
-	if ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.Garrison then
-		local garrisonType = C_Garrison.GetLandingPageGarrisonType()
-		if garrisonType == Enum.GarrisonType.Type_6_0_Garrison then
-			textTitle = GARRISON_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_7_0_Garrison then
-			textTitle = ORDER_HALL_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_8_0_Garrison then
-			textTitle = GARRISON_TYPE_8_0_LANDING_PAGE_TITLE
-		elseif garrisonType == Enum.GarrisonType.Type_9_0_Garrison then
-			textTitle = GARRISON_TYPE_9_0_LANDING_PAGE_TITLE
-		end
-
-		if textTitle then
-			tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
-		end
-	elseif ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.ExpansionOverlay then
-		textTitle = DRAGONFLIGHT_LANDING_PAGE_TITLE
-		tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() ToggleExpansionLandingPage() end})
-	elseif ExpansionLandingPageMinimapButton.mode == ExpansionLandingPageMode.MajorFactionRenown then
-		textTitle = WOW_LABS_VIEW_REWARDS
-		tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() ToggleMajorFactionRenown(Constants.MajorFactionsConsts.PLUNDERSTORM_MAJOR_FACTION_ID) end})
+	if ExpansionLandingPageMinimapButton.title then
+		tinsert(micromenu, {text = ExpansionLandingPageMinimapButton.title, notCheckable = 1, func = function() ExpansionLandingPageMinimapButton:ToggleLandingPage() end})
+		frame:UnregisterAllEvents()
 	end
-	frame:UnregisterAllEvents()
 end)
 
 Minimap:SetScript("OnMouseUp", function(self, button)
