@@ -461,10 +461,6 @@ function Stuffing:CreateReagentContainer()
 		end
 	end)
 
-	local tooltip_hide = function()
-		GameTooltip:Hide()
-	end
-
 	local tooltip_show = function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
 		GameTooltip:ClearLines()
@@ -472,7 +468,7 @@ function Stuffing:CreateReagentContainer()
 	end
 
 	Close:HookScript("OnEnter", tooltip_show)
-	Close:HookScript("OnLeave", tooltip_hide)
+	Close:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 	for i = 1, 98 do
 		local button = _G["ReagentBankFrameItem"..i]
@@ -576,12 +572,8 @@ function Stuffing:SkinWarbandContainer()
 	Deposit.text:SetText(ACCOUNT_BANK_DEPOSIT_BUTTON_LABEL)
 	Deposit:SetFontString(Deposit.text)
 
-	local tooltip_hide = function()
-		GameTooltip:Hide()
-	end
-
 	local tooltip_show = function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 6)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 7)
 		GameTooltip:ClearLines()
 		if GetCVarBool("bankAutoDepositReagents") then
 			GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cff55ff55: "..L_STATS_ON.."|r")
@@ -591,7 +583,7 @@ function Stuffing:SkinWarbandContainer()
 	end
 
 	Deposit:HookScript("OnEnter", tooltip_show)
-	Deposit:HookScript("OnLeave", tooltip_hide)
+	Deposit:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 	local function oldOnCLick() Deposit:OnClick() end -- save old function of Deposit button
 
@@ -651,7 +643,7 @@ function Stuffing:SkinWarbandContainer()
 
 		LastButton = button
 	end
-	warbandFrame:SetHeight(NumRows * C.bag.button_size + (NumRows - 1) * C.bag.button_space + 63)
+	warbandFrame:SetHeight(NumRows * C.bag.button_size + (NumRows - 1) * C.bag.button_space + 40)
 
 	local function reposition()
 		for button in AccountBankPanel:EnumerateValidItems() do
@@ -734,6 +726,14 @@ function Stuffing:SkinWarbandContainer()
 		end)
 	end
 
+	local function tabReposition(self, point, anchor, attachTo, x, y)
+		if y == -25 then -- first button
+			self:SetPoint(point, anchor, attachTo, 1, 0)
+		elseif y == -17 then
+			self:SetPoint(point, anchor, attachTo, x, -C.bag.button_space)
+		end
+	end
+
 	local function SkinBankTab(button)
 		if not button.styled then
 			button.Border:SetAlpha(0)
@@ -744,6 +744,7 @@ function Stuffing:SkinWarbandContainer()
 
 			button:SetTemplate("Default")
 			button:StyleButton()
+			button:SetSize(C.bag.button_size, C.bag.button_size)
 
 			button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
 			button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
@@ -753,6 +754,13 @@ function Stuffing:SkinWarbandContainer()
 			button.Icon:SetPoint("TOPLEFT", 2, -2)
 			button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
 			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+			local point, anchor, attachTo, x, y = button:GetPoint()
+			tabReposition(button, point, anchor, attachTo, x, y)
+
+			hooksecurefunc(button, "SetPoint", function(self, point, anchor, attachTo, x, y)
+				tabReposition(self, point, anchor, attachTo, x, y)
+			end)
 
 			button.styled = true
 		end
@@ -766,18 +774,40 @@ function Stuffing:SkinWarbandContainer()
 	SkinBankTab(AccountBankPanel.PurchaseTab)
 
 	AccountBankPanel.TabSettingsMenu:SetClampedToScreen(true)
+	AccountBankPanel.TabSettingsMenu:SetFrameStrata("HIGH")
 
-	AccountBankPanel.Header.Text:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-	AccountBankPanel.Header.Text:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
-	AccountBankPanel.Header:ClearAllPoints()
-	AccountBankPanel.Header:SetPoint("TOPLEFT", Deposit, "TOPRIGHT", 5, 0)
-	AccountBankPanel.Header:SetPoint("TOPRIGHT", Close, "TOPLEFT", -5, 0)
-
+	AccountBankPanel.Header:SetAlpha(0)
 	AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox:Hide()
-	AccountBankPanel.MoneyFrame:SetPoint("BOTTOMRIGHT", AccountBankPanel, "BOTTOMRIGHT", -10, 5)
+	AccountBankPanel.MoneyFrame.MoneyDisplay:ClearAllPoints()
+	AccountBankPanel.MoneyFrame.MoneyDisplay:SetPoint("RIGHT", Close, "LEFT", -5, -3)
 	AccountBankPanel.MoneyFrame.Border:Hide()
-	AccountBankPanel.MoneyFrame.WithdrawButton:SkinButton()
-	AccountBankPanel.MoneyFrame.DepositButton:SkinButton()
+	AccountBankPanel.MoneyFrame.WithdrawButton:Hide()
+	AccountBankPanel.MoneyFrame.DepositButton:Hide()
+
+	AccountBankPanelGoldButton:SetNormalFontObject("SystemFont_Small")
+	AccountBankPanelSilverButton:SetNormalFontObject("SystemFont_Small")
+	AccountBankPanelCopperButton:SetNormalFontObject("SystemFont_Small")
+
+	local goldButton = CreateFrame("Button", nil, warbandFrame)
+	goldButton:SetAlpha(0)
+	goldButton:SetAllPoints(AccountBankPanel.MoneyFrame.MoneyDisplay)
+	goldButton:RegisterForClicks("AnyUp")
+	goldButton:SetScript("OnClick", function(_, btn)
+		if btn == "RightButton" then
+			AccountBankPanel.MoneyFrame.DepositButton:OnClick()
+		else
+			AccountBankPanel.MoneyFrame.WithdrawButton:OnClick()
+		end
+	end)
+
+	local tooltip_show = function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 11)
+		GameTooltip:ClearLines()
+		GameTooltip:SetText(LEFT_BUTTON_STRING.."|cffff5555: "..BANK_WITHDRAW_MONEY_BUTTON_LABEL.."|r\n"..RIGHT_BUTTON_STRING.."|cff55ff55: "..BANK_DEPOSIT_MONEY_BUTTON_LABEL.."|r")
+	end
+
+	goldButton:HookScript("OnEnter", tooltip_show)
+	goldButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 	AccountBankPanel.PurchasePrompt:StripTextures()
 	AccountBankPanel.PurchasePrompt:SetTemplate("Overlay")
@@ -844,10 +874,6 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			PutItemInBag(self:GetID())
 		end)
 
-		local tooltip_hide = function()
-			GameTooltip:Hide()
-		end
-
 		local tooltip_show = function(self)
 			GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
 			GameTooltip:ClearLines()
@@ -861,7 +887,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		end
 
 		ret.frame:HookScript("OnEnter", tooltip_show)
-		ret.frame:HookScript("OnLeave", tooltip_hide)
+		ret.frame:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 		local quality = GetInventoryItemQuality("player", ret.frame.ID)
 		if quality then
@@ -1329,10 +1355,6 @@ function Stuffing:CreateBagFrame(w)
 		self:GetParent():Hide()
 	end)
 
-	local tooltip_hide = function()
-		GameTooltip:Hide()
-	end
-
 	local tooltip_show = function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
 		GameTooltip:ClearLines()
@@ -1340,7 +1362,7 @@ function Stuffing:CreateBagFrame(w)
 	end
 
 	f.b_close:HookScript("OnEnter", tooltip_show)
-	f.b_close:HookScript("OnLeave", tooltip_hide)
+	f.b_close:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 	-- Create the bags frame
 	local fb = CreateFrame("Frame", n.."BagsFrame", f)
@@ -1455,10 +1477,6 @@ function Stuffing:InitBags()
 			end
 		end)
 
-		local tooltip_hide = function()
-			GameTooltip:Hide()
-		end
-
 		local tooltip_show = function(self)
 			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", -5, 5)
 			GameTooltip:ClearLines()
@@ -1466,7 +1484,7 @@ function Stuffing:InitBags()
 		end
 
 		button:SetScript("OnEnter", tooltip_show)
-		button:SetScript("OnLeave", tooltip_hide)
+		button:SetScript("OnLeave", function() GameTooltip:Hide() end)
 	end
 
 	local button = CreateFrame("Button", nil, f)
@@ -1487,10 +1505,6 @@ function Stuffing:InitBags()
 		end
 	end)
 
-	local tooltip_hide = function()
-		GameTooltip:Hide()
-	end
-
 	local tooltip_show = function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -12, 11)
 		GameTooltip:ClearLines()
@@ -1498,7 +1512,7 @@ function Stuffing:InitBags()
 	end
 
 	button:SetScript("OnEnter", tooltip_show)
-	button:SetScript("OnLeave", tooltip_hide)
+	button:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
 	f.editbox = editbox
 	f.detail = detail
