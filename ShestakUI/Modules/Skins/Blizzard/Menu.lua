@@ -14,6 +14,10 @@ local function LoadSkin()
 		else
 			frame:CreateBackdrop("Transparent") -- :SetTemplate errors out
 			backdrops[frame] = frame.backdrop
+
+			if frame.ScrollBar then
+				T.SkinScrollBar(frame.ScrollBar)
+			end
 		end
 	end
 
