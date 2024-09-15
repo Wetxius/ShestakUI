@@ -691,4 +691,5 @@ T.OpenItems = {
 	[211414] = true,	-- Blossoming Dreamtrove
 	[209871] = true,	-- Winter Veil Gift
 	[210657] = true,	-- Gently Shaken Gift
+	[225249] = true,	-- Rattling Bag o' Gold
 }
