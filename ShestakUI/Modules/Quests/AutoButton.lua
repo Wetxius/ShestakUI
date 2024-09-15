@@ -161,7 +161,7 @@ local function startScanningBags()
 end
 
 -- Add all items from quest to our table
-hooksecurefunc(QuestObjectiveTracker, "UpdateSingle", function(_, quest)
+local function UpdateSingle(_, quest)
 	local questLogIndex = quest:GetQuestLogIndex()
 	local link = GetQuestLogSpecialItemInfo(questLogIndex)
 	if link then
@@ -171,9 +171,15 @@ hooksecurefunc(QuestObjectiveTracker, "UpdateSingle", function(_, quest)
 			T.ABItems[itemID] = true
 			startScanningBags()
 		end
+		if quest:IsComplete() then
+			T.ABItems[itemID] = false
+			startScanningBags()
+		end
 	end
-end)
+end
 
+hooksecurefunc(QuestObjectiveTracker, "UpdateSingle", UpdateSingle)
+hooksecurefunc(CampaignQuestObjectiveTracker, "UpdateSingle", UpdateSingle)
 
 local Scanner = CreateFrame("Frame")
 Scanner:RegisterEvent("BAG_UPDATE")
