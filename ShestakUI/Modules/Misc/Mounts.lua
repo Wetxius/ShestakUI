@@ -5,6 +5,7 @@
 ----------------------------------------------------------------------------------------
 function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	if not underwatermount then underwatermount = groundmount end
+	if not dragonridingmount then dragonridingmount = flyingmount end
 	local flyablex, swimablex, vjswim, InVj, nofly
 	local num = C_MountJournal.GetNumMounts()
 	if not num or IsMounted() then
