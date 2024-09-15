@@ -15,6 +15,7 @@ frame:SetScript("OnEvent", function()
 			local function HideFrames()
 				CompactRaidFrameManager:UnregisterAllEvents()
 				CompactRaidFrameContainer:UnregisterAllEvents()
+				CompactRaidFrameManager:SetAlpha(0)
 				if not InCombatLockdown() then
 					CompactRaidFrameManager:Hide()
 					local shown = CompactRaidFrameManager_GetSetting("IsShown")
