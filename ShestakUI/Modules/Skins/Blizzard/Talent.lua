@@ -72,10 +72,14 @@ local function LoadSkin()
 		end
 	end
 
-	local heroTalentPreview = PlayerSpellsFrame.TalentsFrame.HeroTalentsContainer.PreviewContainer
-	heroTalentPreview.Background:SetAlpha(0)
-	heroTalentPreview:CreateBackdrop("Transparent")
-	heroTalentPreview.backdrop:SetInside(heroTalentPreview, 20, 40)
+	for _, frame in pairs{PlayerSpellsFrame.TalentsFrame.HeroTalentsContainer.PreviewContainer, PlayerSpellsFrame.TalentsFrame.HeroTalentsContainer.ExpandedContainer} do
+		if frame then
+			frame.Background:SetAlpha(0)
+			frame:CreateBackdrop("Transparent")
+			frame.backdrop:SetInside(heroTalentPreview, 20, 40)
+			frame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], 0.5)
+		end
+	end
 
 	local TalentsSelect = _G.HeroTalentsSelectionDialog
 	if TalentsSelect then
@@ -86,12 +90,6 @@ local function LoadSkin()
 
 			for specFrame in frame.SpecContentFramePool:EnumerateActive() do
 				if specFrame and not specFrame.IsSkinned then
-					--FIXME Need to test if specFrame.SpecName then specFrame.SpecName:SetFont(C.media.normal_font, 18) end
-					-- if specFrame.Description then specFrame.Description:SetFont(C.media.normal_font, 14) end
-					-- if specFrame.CurrencyFrame then
-						-- specFrame.CurrencyFrame.LabelText:SetFont(C.media.normal_font, 13)
-						-- specFrame.CurrencyFrame.AmountText:SetFont(C.media.normal_font, 18)
-					-- end
 					specFrame.ActivateButton:SkinButton()
 					specFrame.ApplyChangesButton:SkinButton()
 
