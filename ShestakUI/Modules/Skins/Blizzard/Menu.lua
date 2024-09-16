@@ -13,6 +13,7 @@ local function LoadSkin()
 			frame.backdrop = backdrops[frame] -- relink it back
 		else
 			frame:CreateBackdrop("Transparent") -- :SetTemplate errors out
+			frame.backdrop:SetInside(frame, 0, 0)
 			backdrops[frame] = frame.backdrop
 
 			if frame.ScrollBar then
@@ -21,10 +22,11 @@ local function LoadSkin()
 		end
 	end
 
-	local function OpenMenu(manager)
+	local function OpenMenu(manager, _, menuDescription)
 		local menu = manager:GetOpenMenu()
 		if menu then
 			SkinFrame(menu)
+			menuDescription:AddMenuAcquiredCallback(SkinFrame)
 		end
 	end
 
