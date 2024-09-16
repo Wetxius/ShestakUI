@@ -25,7 +25,7 @@ local function addAuraSource(self, func, unit, index, filter, instanceID)
 				src = format("%s (%s)", src, GetUnitName("raid"..raidpet, true))
 			end
 		end
-		if UnitIsPlayer(srcUnit) then
+		if UnitIsPlayer(srcUnit) or UnitInPartyIsAI(srcUnit) then
 			local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2, UnitClass(srcUnit))]
 			if color then
 				src = format("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, src)

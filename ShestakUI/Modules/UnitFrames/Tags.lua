@@ -45,7 +45,7 @@ oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
 
 oUF.Tags.Methods["GetNameColor"] = function(unit)
 	local reaction = UnitReaction(unit, "player")
-	if UnitIsPlayer(unit) then
+	if (UnitIsPlayer(unit) or UnitInPartyIsAI(unit)) then
 		return _TAGS["raidcolor"](unit)
 	elseif reaction then
 		local c = T.oUF_colors.reaction[reaction]

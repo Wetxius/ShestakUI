@@ -169,7 +169,7 @@ local function GetColor(unit)
 	if not unit then return end
 	local r, g, b
 
-	if UnitIsPlayer(unit) then
+	if UnitIsPlayer(unit) or UnitInPartyIsAI(unit) then
 		local _, class = UnitClass(unit)
 		local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 		if color then

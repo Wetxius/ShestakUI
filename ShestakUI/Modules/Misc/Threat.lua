@@ -36,7 +36,7 @@ local AddUnit = function(unit)
 		tinsert(barList, guid)
 		tList[guid] = {
 			name = UnitName(unit),
-			class = UnitIsPlayer(unit) and select(2, UnitClass(unit)) or "PET",
+			class = (UnitIsPlayer(unit) or UnitInPartyIsAI(unit)) and select(2, UnitClass(unit)) or "PET",
 		}
 	end
 	tList[guid].pct = threatpct or 0
