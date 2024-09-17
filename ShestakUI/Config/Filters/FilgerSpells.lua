@@ -2378,6 +2378,8 @@ C["filger_spells"] = {
 			-- Potions: Miscellaneous
 			-- Invisible [Potion of the Hushed Zephyr]
 			{spellID = 371124, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Treading Lightly [Draught of Silent Footfalls]
+			{spellID = 431424, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Raid Amplifiers
 			-- Bloodlust
