@@ -1554,10 +1554,16 @@ C["filger_spells"] = {
 			{spellID = 198069, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Surge of Light
 			{spellID = 114255, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Surge of Insanity
-			{spellID = 423846, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mind Flay: Insanity
+			{spellID = 391401, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Twist of Fate
 			{spellID = 123254, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mind Devourer
+			{spellID = 373204, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unfurling Darkness
+			{spellID = 341282, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadowy Insight
+			{spellID = 375981, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
