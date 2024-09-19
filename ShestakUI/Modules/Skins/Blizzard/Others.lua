@@ -376,7 +376,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 					end
 
 					if not navButton.isSkinned then
-						navButton:SkinButton(true)
+						navButton:SkinButton(true, "Name")
 						if navButton.MenuArrowButton then
 							navButton.MenuArrowButton:SetNormalTexture(0)
 							navButton.MenuArrowButton:SetPushedTexture(0)

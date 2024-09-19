@@ -287,6 +287,11 @@ T.SetModifiedBackdrop = function(self)
 		if self.overlay then
 			self.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
 		end
+		if self.colorText == "Text" then
+			self.Text:SetTextColor(1, 1, 1)
+		elseif self.colorText == "Name" then
+			_G[self:GetName().."Text"]:SetTextColor(1, 1, 1)
+		end
 	end
 end
 
@@ -295,9 +300,14 @@ T.SetOriginalBackdrop = function(self)
 	if self.overlay then
 		self.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
 	end
+	if self.colorText == "Text" then
+		self.Text:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+	elseif self.colorText == "Name" then
+		_G[self:GetName().."Text"]:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+	end
 end
 
-local function SkinButton(f, strip)
+local function SkinButton(f, strip, colorText)
 	if strip then f:StripTextures() end
 
 	if f.SetNormalTexture then f:SetNormalTexture(0) end
@@ -323,6 +333,8 @@ local function SkinButton(f, strip)
 	if f.BottomMiddle then f.BottomMiddle:Hide() end
 	if f.MiddleMiddle then f.MiddleMiddle:Hide() end
 	if f.Background then f.Background:Hide() end
+
+	if colorText then f.colorText = colorText end -- some buttons have yellow static color
 
 	f:SetTemplate("Overlay")
 	f:HookScript("OnEnter", T.SetModifiedBackdrop)
@@ -755,7 +767,7 @@ function T.SkinDropDownBox(frame, width, pos)
 end
 
 function T.SkinFilter(frame, height)
-	frame:SkinButton()
+	frame:SkinButton(nil, "Text")
 
 	local tex = frame:CreateTexture(nil, "ARTWORK")
 	tex:SetPoint("RIGHT", frame, -4, 0)
