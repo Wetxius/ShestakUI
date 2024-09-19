@@ -69,6 +69,8 @@ local function LoadSkin()
 		RecruitAFriendFrame.RecruitmentButton,
 		RecruitAFriendFrame.SplashFrame.OKButton,
 		RecruitAFriendRecruitmentFrame.GenerateOrCopyLinkButton,
+		FriendsFriendsFrame.SendRequestButton,
+		FriendsFriendsFrame.CloseButton
 	}
 
 	for i = 1, #buttons do
@@ -81,6 +83,7 @@ local function LoadSkin()
 		WhoFrame.ScrollBar,
 		QuickJoinFrame.ScrollBar,
 		RecruitAFriendFrame.RecruitList.ScrollBar,
+		FriendsFriendsFrame.ScrollBar
 	}
 
 	for i = 1, #scrollbars do
@@ -142,7 +145,7 @@ local function LoadSkin()
 			local child = select(i, self:GetChildren())
 			local button = child and child.Button
 			if button and not button.styled then
-				button.IconSkinIcon()
+				button.Icon:SkinIcon()
 				button.IconBorder:SetAlpha(0)
 				button:StyleButton(true, 0)
 
