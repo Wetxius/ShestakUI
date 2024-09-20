@@ -147,7 +147,7 @@ local function registerStyle(myProfile)
 	if not BigWigs then return end
 	BigWigsAPI:RegisterBarStyle("ShestakUI", {
 		apiVersion = 1,
-		version = 1,
+		version = 10,
 		GetSpacing = function() return T.Scale(13) end,
 		ApplyStyle = applystyle,
 		BarStopped = freestyle,
@@ -178,7 +178,7 @@ f:SetScript("OnEvent", function(_, event, addon)
 				if BigWigs3DB.profileKeys and BigWigs3DB.namespaces and BigWigs3DB.namespaces.BigWigs_Plugins_Bars and BigWigs3DB.namespaces.BigWigs_Plugins_Bars.profiles then
 					myProfile = BigWigs3DB.namespaces.BigWigs_Plugins_Bars.profiles[BigWigs3DB.profileKeys[UnitName("player").." - "..GetRealmName()]]
 				end
-				if not myProfile or myProfile.InstalledBars ~= C.actionbar.bottombars then
+				if not myProfile then
 					StaticPopup_Show("SETTINGS_BIGWIGS")
 				end
 			end
@@ -208,35 +208,35 @@ function T.UploadBW()
 	local bars = BigWigs:GetPlugin("Bars", true)
 	if bars then
 		bars.db.profile.barStyle = "ShestakUI"
-		bars.db.profile.fontName = C.font.stylization_font
-		bars.db.profile.BigWigsAnchor_width = 185
-		bars.db.profile.BigWigsAnchor_x = 188 / UIParent:GetEffectiveScale()
-		bars.db.profile.BigWigsEmphasizeAnchor_width = 184
-		bars.db.profile.BigWigsEmphasizeAnchor_x = 620
+		bars.db.profile.fontName = "Hooge"
+		--FIXME bars.db.profile.BigWigsAnchor_width = 185
+		-- bars.db.profile.BigWigsAnchor_x = 188 / UIParent:GetEffectiveScale()
+		-- bars.db.profile.BigWigsEmphasizeAnchor_width = 184
+		-- bars.db.profile.BigWigsEmphasizeAnchor_x = 620
 		bars.db.profile.emphasizeGrowup = true
-		bars.db.profile.InstalledBars = C.actionbar.bottombars
-		if C.actionbar.bottombars == 1 then
-			bars.db.profile.BigWigsAnchor_y = 185 * UIParent:GetEffectiveScale()
-			bars.db.profile.BigWigsEmphasizeAnchor_y = 344 * UIParent:GetEffectiveScale()
-		elseif C.actionbar.bottombars == 2 then
-			bars.db.profile.BigWigsAnchor_y = 213 * UIParent:GetEffectiveScale()
-			bars.db.profile.BigWigsEmphasizeAnchor_y = 372 * UIParent:GetEffectiveScale()
-		elseif C.actionbar.bottombars == 3 then
-			bars.db.profile.BigWigsAnchor_y = 241 * UIParent:GetEffectiveScale()
-			bars.db.profile.BigWigsEmphasizeAnchor_y = 400 * UIParent:GetEffectiveScale()
-		end
+		-- bars.db.profile.InstalledBars = C.actionbar.bottombars
+		-- if C.actionbar.bottombars == 1 then
+			-- bars.db.profile.BigWigsAnchor_y = 185 * UIParent:GetEffectiveScale()
+			-- bars.db.profile.BigWigsEmphasizeAnchor_y = 344 * UIParent:GetEffectiveScale()
+		-- elseif C.actionbar.bottombars == 2 then
+			-- bars.db.profile.BigWigsAnchor_y = 213 * UIParent:GetEffectiveScale()
+			-- bars.db.profile.BigWigsEmphasizeAnchor_y = 372 * UIParent:GetEffectiveScale()
+		-- elseif C.actionbar.bottombars == 3 then
+			-- bars.db.profile.BigWigsAnchor_y = 241 * UIParent:GetEffectiveScale()
+			-- bars.db.profile.BigWigsEmphasizeAnchor_y = 400 * UIParent:GetEffectiveScale()
+		-- end
 	end
 	local mess = BigWigs:GetPlugin("Messages")
 	if mess then
 		mess.db.profile.fontName = "Calibri"
 		mess.db.profile.fontSize = 20
 		mess.db.profile.emphFontName = "Calibri"
-		mess.db.profile.BWMessageAnchor_x = 615
-		mess.db.profile.BWMessageAnchor_y = 440
-		mess.db.profile.BWEmphasizeMessageAnchor_x = 618
-		mess.db.profile.BWEmphasizeMessageAnchor_y = 495
-		mess.db.profile.BWEmphasizeCountdownMessageAnchor_x = 665
-		mess.db.profile.BWEmphasizeCountdownMessageAnchor_y = 477
+		--FIXME mess.db.profile.BWMessageAnchor_x = 615
+		-- mess.db.profile.BWMessageAnchor_y = 440
+		-- mess.db.profile.BWEmphasizeMessageAnchor_x = 618
+		-- mess.db.profile.BWEmphasizeMessageAnchor_y = 495
+		-- mess.db.profile.BWEmphasizeCountdownMessageAnchor_x = 665
+		-- mess.db.profile.BWEmphasizeCountdownMessageAnchor_y = 477
 	end
 	local prox = BigWigs:GetPlugin("Proximity")
 	if prox then
