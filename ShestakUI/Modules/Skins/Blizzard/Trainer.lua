@@ -55,6 +55,7 @@ local function LoadSkin()
 	local stepButton = ClassTrainerFrameSkillStepButton
 	stepButton:CreateBackdrop("Overlay")
 	stepButton.backdrop:SetPoint("BOTTOMRIGHT", 2, -3)
+	stepButton.backdrop.overlay:SetVertexColor(0.08, 0.08, 0.13, 1)
 	stepButton:StyleButton(nil, nil, true)
 	stepButton.icon:SkinIcon(true)
 	stepButton.icon:SetPoint("LEFT", stepButton, "LEFT", 6, -1)

@@ -84,7 +84,14 @@ T.SkinFuncs["Blizzard_DelvesDifficultyPicker"] = LoadSecondSkin
 local function LoadThirdSkin()
 	local frame = _G.DelvesDashboardFrame
 	frame.DashboardBackground:SetAlpha(0)
-	frame.ButtonPanelLayoutFrame.CompanionConfigButtonPanel.CompanionConfigButton:SkinButton()
+	frame.ButtonPanelLayoutFrame.CompanionConfigButtonPanel.CompanionConfigButton:SkinButton(nil, "Button")
+	frame.ButtonPanelLayoutFrame.CompanionConfigButtonPanel.CompanionConfigButton:SetMovePoint(nil, 29)
+
+	for _, panel in pairs({frame.ButtonPanelLayoutFrame.CompanionConfigButtonPanel, frame.ButtonPanelLayoutFrame.GreatVaultButtonPanel}) do
+		panel.ButtonPanelBackground:SetAlpha(0)
+		panel:CreateBackdrop("Overlay")
+		panel.backdrop:SetInside(panel.ButtonPanelBackground, 6, 6)
+	end
 end
 
 T.SkinFuncs["Blizzard_DelvesDashboardUI"] = LoadThirdSkin
