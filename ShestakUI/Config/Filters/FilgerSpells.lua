@@ -1360,6 +1360,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Divine Purpose
 			{spellID = 223819, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Final Verdict
+			{spellID = 383329, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Righteous Verdict
 			{spellID = 267611, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blade of Wrath
@@ -1374,6 +1376,8 @@ C["filger_spells"] = {
 			{spellID = 286393, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Selfless Healer
 			{spellID = 114250, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Dawn
+			{spellID = 385127, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shining Light
 			{spellID = 327510, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 		},
