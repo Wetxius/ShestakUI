@@ -429,6 +429,7 @@ elseif T.class == "PRIEST" then
 		T.aoespam[228361] = 1		-- Void Eruption
 		T.merge[228360] = 228361	-- Void Eruption
 		T.aoespam[193473] = 3		-- Mind Flay (Call to the Void)
+		T.aoespam[391403] = 2		-- Mind Flay: Insanity
 		T.aoespam[186723] = 2.5		-- Penance
 		T.merge[47666] = 186723		-- Penance
 		T.aoespam[132157] = 0		-- Holy Nova
@@ -438,7 +439,8 @@ elseif T.class == "PRIEST" then
 		T.aoespam[14914] = 3		-- Holy Fire
 		T.aoespam[120696] = 3		-- Halo
 		T.aoespam[122128] = 3		-- Divine Star
-		T.aoespam[148859] = 3		-- Shadowy Apparition
+		T.aoespam[413231] = 3		-- Shadowy Apparition
+		T.aoespam[373304] = 3		-- Echoing Void
 	end
 	if C.combattext.healing then
 		T.healfilter[34914] = true	-- Vampiric Touch
