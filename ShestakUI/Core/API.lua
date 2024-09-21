@@ -37,6 +37,15 @@ local function SetInside(obj, anchor, xOffset, yOffset)
 	obj:SetPoint("BOTTOMRIGHT", anchor, "BOTTOMRIGHT", -xOffset, yOffset)
 end
 
+local function SetMovePoint(self, x, y, point, anchor, attachTo)
+	local old_point, old_anchor, old_attachTo, old_x, old_y = self:GetPoint()
+	if point or attachTo then
+		self:ClearAllPoints()
+	end
+
+	self:SetPoint(point or old_point, anchor or old_anchor, attachTo or old_attachTo, x or old_x, y or old_y)
+end
+
 ----------------------------------------------------------------------------------------
 --	Template functions
 ----------------------------------------------------------------------------------------
@@ -289,6 +298,8 @@ T.SetModifiedBackdrop = function(self)
 		end
 		if self.colorText == "Text" then
 			self.Text:SetTextColor(1, 1, 1)
+		elseif self.colorText == "Button" then
+			self.ButtonText:SetTextColor(1, 1, 1)
 		elseif self.colorText == "Name" then
 			_G[self:GetName().."Text"]:SetTextColor(1, 1, 1)
 		end
@@ -302,6 +313,8 @@ T.SetOriginalBackdrop = function(self)
 	end
 	if self.colorText == "Text" then
 		self.Text:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+	elseif self.colorText == "Button" then
+		self.ButtonText:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 	elseif self.colorText == "Name" then
 		_G[self:GetName().."Text"]:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 	end
@@ -397,6 +410,7 @@ local function addAPI(object)
 	local mt = getmetatable(object).__index
 	if not object.SetOutside then mt.SetOutside = SetOutside end
 	if not object.SetInside then mt.SetInside = SetInside end
+	if not object.SetMovePoint then mt.SetMovePoint = SetMovePoint end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.CreateBorder then mt.CreateBorder = CreateBorder end
 	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
