@@ -30,6 +30,7 @@ frame:SetScript("OnEvent", function()
 			HideFrames()
 		end
 		CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
+		UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE")
 	end
 
 	TutorialFrameAlertButton:Kill()
