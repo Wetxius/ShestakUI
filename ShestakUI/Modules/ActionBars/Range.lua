@@ -70,11 +70,13 @@ local function isUsuableAction(slot)
 			-- only run the check for spell macros
 			if spellID then
 				local costs = C_Spell.GetSpellPowerCost(spellID)
-				for i = 1, #costs do
-					local cost = costs[i]
+				if costs then
+					for i = 1, #costs do
+						local cost = costs[i]
 
-					if UnitPower("player", cost.type) < cost.minCost then
-						return false, false
+						if UnitPower("player", cost.type) < cost.minCost then
+							return false, false
+						end
 					end
 				end
 			end
