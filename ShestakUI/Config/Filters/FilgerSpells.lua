@@ -1526,7 +1526,7 @@ C["filger_spells"] = {
 			-- Dark Ascension
 			{spellID = 391109, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit of Redemption
-			{spellID = 20711, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 27827, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divinity
 			{spellID = 197030, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power of the Naaru
