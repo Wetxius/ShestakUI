@@ -58,7 +58,6 @@ local function LoadSkin()
 	frame:RegisterEvent("ADDON_LOADED")
 	frame:SetScript("OnEvent", function()
 		if not C_AddOns.IsAddOnLoaded("Overachiever") then return end
-		-- AchievementFrameFilterDropDownButton:SetWidth(17)
 		AchievementFrameFilterDropdown:ClearAllPoints()
 		AchievementFrameFilterDropdown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
 	end)
