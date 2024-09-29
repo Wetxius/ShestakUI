@@ -163,10 +163,6 @@ local RaidDebuffs = {
 }
 
 local DungeonDebuffs = {
-	-- Mythic+ Affixes
-	[SpellName(226512)] = 3,	-- Sanguine
-	[SpellName(240559)] = 3,	-- Grievous
-	[SpellName(240443)] = 3,	-- Bursting
 	-- The War Within Season 1
 	[SpellName(440313)] = 6,	-- Void Rift
 

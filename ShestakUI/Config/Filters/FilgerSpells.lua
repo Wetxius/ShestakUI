@@ -2802,10 +2802,6 @@ C["filger_spells"] = {
 			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Duel
 			{spellID = 236273, unitID = "player", caster = "all", filter = "DEBUFF"},
-
-			-- Mythic+
-			-- Necrotic Wound
-			{spellID = 209858, unitID = "player", caster = "all", filter = "DEBUFF", count = 16},
 		},
 		{
 			Name = "T_BUFF",
@@ -3151,10 +3147,6 @@ C["filger_spells"] = {
 			{spellID = 167152, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Food & Drink
 			{spellID = 257427, unitID = "target", caster = "all", filter = "BUFF"},
-
-			-- Mythic+
-			-- Sanguine Ichor
-			{spellID = 226510, unitID = "target", caster = "all", filter = "BUFF"},
 		},
 	},
 }

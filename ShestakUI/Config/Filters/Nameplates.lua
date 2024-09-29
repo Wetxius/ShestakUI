@@ -98,7 +98,7 @@ T.DebuffBlackList = {
 }
 
 T.BuffWhiteList = {
-	[SpellName(226510)] = true,	-- Sanguine Ichor
+	-- [SpellName(226510)] = true,	-- Sanguine Ichor
 }
 
 for _, spell in pairs(C.nameplate.buffs_list) do
@@ -117,6 +117,9 @@ T.PlateBlacklist = {
 }
 
 T.InterruptCast = { -- Yellow border for interruptible cast
+	-- The War Within Season 1
+	[461904] = true,	-- Cosmic Ascension
+	[462508] = true,	-- Dark Prayer
 	-- Algeth'ar Academy
 	[396812] = true,	-- Mystic Blast
 	[332612] = true,	-- Healing Touch
