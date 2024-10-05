@@ -49,6 +49,15 @@ end
 _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
 
 ----------------------------------------------------------------------------------------
+--	Fix LFG FilterButton width
+----------------------------------------------------------------------------------------
+hooksecurefunc(LFGListFrame.SearchPanel.FilterButton, "SetWidth", function(self, width)	-- FIXME check after while for possible Blizzard fix
+	if width ~= 94 then
+		self:SetWidth(94)
+	end
+end)
+
+----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
 if C_AddOns.IsAddOnLoaded("!!NoTaint2") then return end
