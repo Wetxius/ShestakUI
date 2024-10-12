@@ -28,8 +28,13 @@ PVE_PVP_CC_Anchor:SetSize(221, 25)
 COOLDOWN_Anchor:SetPoint(C.position.filger.cooldown[1], C.position.filger.cooldown[2], C.position.filger.cooldown[3], C.position.filger.cooldown[4], C.unitframe.plugins_swing and C.position.filger.cooldown[5] + 12 or C.position.filger.cooldown[5])
 COOLDOWN_Anchor:SetSize(C.filger.cooldown_size, C.filger.cooldown_size)
 
-T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.unitframe.portrait_enable and "oUF_Target_Portrait" or C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.unitframe.portrait_enable and C.position.filger.target_bar[4] - 3 or C.position.filger.target_bar[4], C.unitframe.portrait_enable and C.position.filger.target_bar[5] + 38 or C.position.filger.target_bar[5])
+local IsPortrait = C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY"
+
+T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], IsPortrait and "oUF_Target_Portrait" or C.position.filger.target_bar[2], C.position.filger.target_bar[3], IsPortrait and C.position.filger.target_bar[4] - 3 or C.position.filger.target_bar[4], IsPortrait and C.position.filger.target_bar[5] + 38 or C.position.filger.target_bar[5])
 T_DE_BUFF_BAR_Anchor:SetSize(218, 25)
+
+P_BUFF_BAR_Anchor:SetPoint(C.position.filger.player_bar[1], IsPortrait and "oUF_Player_Portrait" or C.position.filger.player_bar[2], C.position.filger.player_bar[3], IsPortrait and C.position.filger.player_bar[4] + 3 or C.position.filger.player_bar[4], IsPortrait and C.position.filger.player_bar[5] + 38 or C.position.filger.player_bar[5])
+P_BUFF_BAR_Anchor:SetSize(218, 25)
 
 SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 
@@ -61,13 +66,13 @@ function Filger:UpdateCD()
 		else
 			self.time:SetFormattedText("%d:%.2d", time / 60, time % 60)
 		end
-	else
-		if time < 0 then
-			local frame = self:GetParent()
-			frame.actives[self.value.spid] = nil
-			self:SetScript("OnUpdate", nil)
-			Filger.DisplayActives(frame)
-		end
+	end
+
+	if time < 0 then
+		local frame = self:GetParent()
+		frame.actives[self.value.spid] = nil
+		self:SetScript("OnUpdate", nil)
+		Filger.DisplayActives(frame)
 	end
 end
 
@@ -473,6 +478,12 @@ for _, spell in pairs(C.filger.aura_bar_spells_list) do
 	end
 end
 
+for _, spell in pairs(C.filger.aura_bar_player_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"P_BUFF_BAR", {spellID = spell[1], unitID = "player", caster = "all", filter = "BUFF", absID = true, custom = true}})
+	end
+end
+
 for _, spell in pairs(C.filger.cd_spells_list) do
 	if spell[2] == T.class then
 		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = spell[1], filter = "CD", absID = true, custom = true}})
@@ -552,6 +563,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 		["P_PROC_ICON"] = C.filger.show_proc,
 		["T_DEBUFF_ICON"] = C.filger.show_debuff,
 		["T_DE/BUFF_BAR"] = C.filger.show_aura_bar,
+		["P_BUFF_BAR"] = C.filger.show_aura_bar,
 		["PVE/PVP_CC"] = C.filger.show_aura_bar,
 		["SPECIAL_P_BUFF_ICON"] = C.filger.show_special,
 		["PVE/PVP_DEBUFF"] = C.filger.show_pvp_player,

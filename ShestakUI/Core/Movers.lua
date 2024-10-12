@@ -36,6 +36,7 @@ T.MoverFrames = {
 	PVE_PVP_CC_Anchor,
 	COOLDOWN_Anchor,
 	T_DE_BUFF_BAR_Anchor,
+	P_BUFF_BAR_Anchor,
 	SplitBarLeft,
 	SplitBarRight,
 	UIWidgetPowerBarAnchor,

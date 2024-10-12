@@ -475,6 +475,7 @@ L.filger_show_buff = "Spieler Buffs"
 L.filger_show_proc = "Spieler Procs"
 L.filger_show_debuff = "Debuffs auf Ziel"
 L.filger_show_aura_bar = "Aurabalken auf Ziel"
+L.filger_show_aura_bar_player = "Aura bars on player" -- Need review
 L.filger_show_special = "Besondere Buffs auf Spieler"
 L.filger_show_pvp_player = "PvP-Debuffs auf Spieler"
 L.filger_show_pvp_target = "PvP-Auren auf Spieler"

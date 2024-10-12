@@ -46,6 +46,7 @@ C["position"] = {
 		["pve_cc"] = {"TOPLEFT", "oUF_Player", "BOTTOMLEFT", -2, -44},				-- "PVE/PVP_CC"
 		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 17},			-- "COOLDOWN"
 		["target_bar"] = {"BOTTOMLEFT", "oUF_Target", "BOTTOMRIGHT", 9, -41},		-- "T_DE/BUFF_BAR"
+		["player_bar"] = {"BOTTOMRIGHT", "oUF_Player", "BOTTOMLEFT", -9, -41},		-- "P_BUFF_BAR"
 	},
 	-- Miscellaneous positions
 	["minimap"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 24},				-- Minimap

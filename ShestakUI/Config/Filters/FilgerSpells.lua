@@ -15,6 +15,7 @@ PVE_PVP_DEBUFF_Anchor = CreateFrame("Frame", "PVE_PVP_DEBUFF_Anchor", UIParent)
 PVE_PVP_CC_Anchor = CreateFrame("Frame", "PVE_PVP_CC_Anchor", UIParent)
 COOLDOWN_Anchor = CreateFrame("Frame", "COOLDOWN_Anchor", UIParent)
 T_DE_BUFF_BAR_Anchor = CreateFrame("Frame", "T_DE_BUFF_BAR_Anchor", UIParent)
+P_BUFF_BAR_Anchor = CreateFrame("Frame", "P_BUFF_BAR_Anchor", UIParent)
 
 C["filger_spells"] = {
 	["DEATHKNIGHT"] = {
@@ -2502,6 +2503,20 @@ C["filger_spells"] = {
 			{spellID = 130, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Levitate
 			{spellID = 1706, unitID = "player", caster = "all", filter = "BUFF"},
+		},
+		{
+			Name = "P_BUFF_BAR",
+			Direction = "UP",
+			IconSide = "RIGHT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 186,
+			Position = {"RIGHT", P_BUFF_BAR_Anchor},
+
+			-- Spell holder to enable this section
+			{spellID = 460971, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",

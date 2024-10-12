@@ -169,6 +169,7 @@ local FilgerTable = {
 	L.filger_show_proc,
 	L.filger_show_debuff,
 	L.filger_show_aura_bar,
+	L.filger_show_aura_bar_player,
 	L.filger_show_cd,
 	IGNORE
 }
@@ -178,6 +179,7 @@ local FilgerDropDownText = {
 	[L.filger_show_proc] = "proc_spells_list",
 	[L.filger_show_debuff] = "debuff_spells_list",
 	[L.filger_show_aura_bar] = "aura_bar_spells_list",
+	[L.filger_show_aura_bar_player] = "aura_bar_player_spells_list",
 	[L.filger_show_cd] = "cd_spells_list",
 	[IGNORE] = "ignore_spells_list",
 }

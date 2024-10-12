@@ -475,6 +475,7 @@ L.filger_show_buff = "Buffs du joueur"
 L.filger_show_proc = "Procs du joueur"
 L.filger_show_debuff = "Debuffs sur la cible"
 L.filger_show_aura_bar = "Barre d'aura sur la cible"
+L.filger_show_aura_bar_player = "Aura bars on player" -- Need review
 L.filger_show_special = "Buffs spéciaux sur le joueur"
 L.filger_show_pvp_player = "Debuffs JcJ sur le joueur"
 L.filger_show_pvp_target = "Auras JcJ sur la cible"

@@ -535,10 +535,10 @@ local function Shared(self, unit)
 			self.Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 			self.Experience:CreateBackdrop("Default")
 			self.Experience:EnableMouse(true)
-			if C.unitframe.portrait_enable == true then
-				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
+			if C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY" then
+				self.Experience:SetPoint("TOPRIGHT", self, "TOPLEFT", -18 - C.unitframe.portrait_width - (2 * T.mult), 28)
 			else
-				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
+				self.Experience:SetPoint("TOPRIGHT", self, "TOPLEFT", -11, 28)
 			end
 			self.Experience:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
 			self.Experience:SetOrientation("Vertical")
@@ -562,17 +562,17 @@ local function Shared(self, unit)
 			self.Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 			self.Reputation:CreateBackdrop("Default")
 			self.Reputation:EnableMouse(true)
-			if C.unitframe.portrait_enable == true then
+			if C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY" then
 				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
+					self.Reputation:SetPoint("TOPRIGHT", self.Experience, "TOPLEFT", -7, 0)
 				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
+					self.Reputation:SetPoint("TOPRIGHT", self, "TOPLEFT", -18 - C.unitframe.portrait_width - (2 * T.mult), 28)
 				end
 			else
 				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
+					self.Reputation:SetPoint("TOPRIGHT", self.Experience, "TOPLEFT", -7, 0)
 				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
+					self.Reputation:SetPoint("TOPRIGHT", self, "TOPLEFT", -11, 28)
 				end
 			end
 			self.Reputation:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
@@ -711,15 +711,6 @@ local function Shared(self, unit)
 				self.Portrait:SetFrameLevel(self.Health:GetFrameLevel())
 				self.Portrait.backdrop:Hide()
 				self.Portrait:SetAlpha(0.5)
-
-				if C.filger.enable then
-					local frame = CreateFrame("Frame")
-					frame:RegisterEvent("PLAYER_LOGIN")
-					frame:SetScript("OnEvent", function()
-						T_DE_BUFF_BAR_Anchor:ClearAllPoints()
-						T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.position.filger.target_bar[4], C.position.filger.target_bar[5])
-					end)
-				end
 			end
 		end
 
@@ -796,7 +787,7 @@ local function Shared(self, unit)
 
 		if C.unitframe.plugins_combat_feedback == true then
 			self.CombatFeedbackText = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-			if C.unitframe.portrait_enable == true then
+			if C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY" then
 				self.CombatFeedbackText:SetPoint("BOTTOM", self.Portrait, "BOTTOM", 0, 0)
 				self.CombatFeedbackText:SetParent(self.Portrait)
 			else
