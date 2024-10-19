@@ -17,8 +17,6 @@ frame:SetScript("OnEvent", function()
 	function NugRunning.ConstructTimerBar(w, h)
 		local f = _ConstructTimerBar(w, h)
 
-		f:SetBackdrop(nil)
-
 		local ic = f.icon:GetParent()
 		ic:CreateBackdrop("Default")
 
@@ -42,10 +40,7 @@ frame:SetScript("OnEvent", function()
 	end
 
 	-- Resizes timerbar
-	local _Resize = TimerBar.VScale
 	function TimerBar.Resize(f, w, h)
-		_Resize(f, w, h)
-
 		local ic = f.icon:GetParent()
 		ic:ClearAllPoints()
 		ic:SetPoint("TOPLEFT", f, 1, -1)
