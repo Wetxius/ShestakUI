@@ -14,11 +14,10 @@ Butsu:SetScript("OnEvent", function(self, event, ...)
 	self[event](self, event, ...)
 end)
 
-function Butsu:LOOT_OPENED(_, ...)
+function Butsu:LOOT_OPENED(_, autoLoot)
 	self:Show()
 	lb:Show()
 
-	local autoLoot = ...
 	if not self:IsShown() then
 		CloseLoot(not autoLoot)
 	end
@@ -109,7 +108,7 @@ function Butsu:LOOT_OPENED(_, ...)
 
 		slot.name:SetText(EMPTY)
 		slot.name:SetTextColor(color.r, color.g, color.b)
-		slot.icon:SetTexture("Interface\\Icons\\INV_Misc_Herb_AncientLichen")
+		slot.icon:SetTexture(136511)
 
 		slot.count:Hide()
 		slot.drop:Hide()
