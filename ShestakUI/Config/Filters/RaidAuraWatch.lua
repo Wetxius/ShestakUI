@@ -160,6 +160,14 @@ local RaidDebuffs = {
 	[SpellName(441772)] = 3,	-- Void Bolt
 	[SpellName(441788)] = 3,	-- Web Vortex
 	[SpellName(440001)] = 3,	-- Binding Webs
+	[SpellName(449857)] = 3,	-- Impaled
+	[SpellName(438218)] = 3,	-- Piercing Strike
+	-- Queen Ansurek
+	[SpellName(441865)] = 3,	-- Royal Shackles
+	[SpellName(436800)] = 3,	-- Liquefy
+	[SpellName(455404)] = 3,	-- Feast
+	[SpellName(439829)] = 3,	-- Silken Tomb
+	[SpellName(437586)] = 3,	-- Reactive Toxin
 }
 
 local DungeonDebuffs = {
