@@ -37,8 +37,8 @@ local function LoadSkin()
 
 		for _, frame in next, {dialog.Settings:GetChildren()} do
 			local dd = frame.Dropdown
-			if dd and (dd.DropDownMenu and not dd.isSkinned) then
-				T.SkinDropDownBox(dd.DropDownMenu, 240)
+			if dd and not dd.isSkinned then
+				T.SkinDropDownBox(dd, 240)
 				dd.isSkinned = true
 			end
 
@@ -62,6 +62,8 @@ local function LoadSkin()
 	layout.AcceptButton:SkinButton()
 	layout.CancelButton:SkinButton()
 	T.SkinEditBox(layout.LayoutNameEditBox)
+	layout.LayoutNameEditBox.backdrop:SetPoint("TOPLEFT", -5, -4)
+	layout.LayoutNameEditBox.backdrop:SetPoint("BOTTOMRIGHT", -5, 4)
 	T.SkinCheckBoxAtlas(layout.CharacterSpecificLayoutCheckButton.Button, 26)
 
 	-- Layout Unsaved
@@ -86,7 +88,7 @@ local function LoadSkin()
 	local importBackdrop = importBox.backdrop
 	importBackdrop:ClearAllPoints()
 	importBackdrop:SetPoint("TOPLEFT", importBox, -4, 4)
-	importBackdrop:SetPoint("BOTTOMRIGHT", importBox, 0, -4)
+	importBackdrop:SetPoint("BOTTOMRIGHT", importBox, -4, -4)
 
 	local scrollbar = importBox.ScrollBar
 	T.SkinScrollBar(scrollbar)
