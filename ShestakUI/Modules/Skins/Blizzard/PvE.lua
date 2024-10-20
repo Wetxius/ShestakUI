@@ -589,7 +589,7 @@ if C_AddOns.IsAddOnLoaded("PremadeGroupsFilter") then
 	local RolePanel = _G.PremadeGroupsFilterRolePanel
 	local MiniPanel = _G.PremadeGroupsFilterMiniPanel
 
-	local names = {"Difficulty", "MPRating", "Members", "Tanks", "Heals", "DPS", "Partyfit", "BLFit", "BRFit", "Defeated", "MatchingId", "PvPRating"}
+	local names = {"Difficulty", "MPRating", "Members", "Tanks", "Heals", "DPS", "Partyfit", "BLFit", "BRFit", "Defeated", "MatchingId", "PvPRating", "NeedsBL", "NotDeclined"}
 
 	local function handleGroup(panel)
 		for _, name in pairs(names) do
