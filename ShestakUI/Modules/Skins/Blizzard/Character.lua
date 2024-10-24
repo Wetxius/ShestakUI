@@ -352,8 +352,9 @@ local function LoadSkin()
 	TokenFramePopup:StripTextures()
 	TokenFramePopup:SetTemplate("Transparent")
 	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
+	T.SkinDropDownBox(TokenFrame.filterDropdown)
 
-	local TokenPopupClose = _G.TokenFramePopup['$parent.CloseButton']
+	local TokenPopupClose = _G.TokenFramePopup["$parent.CloseButton"]
 	if TokenPopupClose then
 		T.SkinCloseButton(TokenPopupClose)
 	end
@@ -365,10 +366,14 @@ local function LoadSkin()
 
 	local currencyTransfer = _G.CurrencyTransferMenu
 	currencyTransfer:StripTextures()
-	currencyTransfer:SetTemplate('Transparent')
+	currencyTransfer:SetTemplate("Transparent")
 	T.SkinCloseButton(currencyTransfer.CloseButton)
 	T.SkinDropDownBox(currencyTransfer.SourceSelector.Dropdown)
+	currencyTransfer.AmountSelector.MaxQuantityButton:SkinButton()
+	currencyTransfer.AmountSelector.MaxQuantityButton:SetMovePoint(-4, 2)
 	T.SkinEditBox(currencyTransfer.AmountSelector.InputBox)
+	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("TOPLEFT", 2, -1)
+	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("BOTTOMRIGHT", -4, 5)
 	currencyTransfer.ConfirmButton:SkinButton()
 	currencyTransfer.CancelButton:SkinButton()
 
