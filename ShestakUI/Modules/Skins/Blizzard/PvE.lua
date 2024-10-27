@@ -298,6 +298,10 @@ local function LoadSkin()
 			button.InviteButtonSmall:SkinButton()
 			button.InviteButtonSmall.isSkinned = true
 		end
+		if not button.InviteButton.isSkinned then
+			button.InviteButton:SkinButton()
+			button.InviteButton.isSkinned = true
+		end
 	end)
 
 	hooksecurefunc("LFGListSearchEntry_Update", function(button)
