@@ -364,19 +364,6 @@ local function LoadSkin()
 
 	TokenFramePopup.CurrencyTransferToggleButton:SkinButton()
 
-	local currencyTransfer = _G.CurrencyTransferMenu
-	currencyTransfer:StripTextures()
-	currencyTransfer:SetTemplate("Transparent")
-	T.SkinCloseButton(currencyTransfer.CloseButton)
-	T.SkinDropDownBox(currencyTransfer.SourceSelector.Dropdown)
-	currencyTransfer.AmountSelector.MaxQuantityButton:SkinButton()
-	currencyTransfer.AmountSelector.MaxQuantityButton:SetMovePoint(-4, 2)
-	T.SkinEditBox(currencyTransfer.AmountSelector.InputBox)
-	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("TOPLEFT", 2, -1)
-	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("BOTTOMRIGHT", -4, 5)
-	currencyTransfer.ConfirmButton:SkinButton()
-	currencyTransfer.CancelButton:SkinButton()
-
 	T.SkinFrame(CurrencyTransferLog)
 	T.SkinScrollBar(CurrencyTransferLog.ScrollBar)
 	CurrencyTransferLog:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
@@ -392,6 +379,35 @@ local function LoadSkin()
 		button:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button:GetPushedTexture():SetInside()
 	end
+
+	hooksecurefunc(CurrencyTransferLog.ScrollBox, "Update", function(self)
+		for i = 1, self.ScrollTarget:GetNumChildren() do
+			local child = select(i, self.ScrollTarget:GetChildren())
+			if child and not child.styled then
+				local icon = child.CurrencyIcon
+				if icon then
+					icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				end
+
+				child.styled = true
+			end
+		end
+	end)
+
+	local currencyTransfer = _G.CurrencyTransferMenu
+	currencyTransfer:StripTextures()
+	currencyTransfer:SetTemplate("Transparent")
+	T.SkinCloseButton(currencyTransfer.CloseButton)
+	T.SkinDropDownBox(currencyTransfer.SourceSelector.Dropdown)
+	currencyTransfer.AmountSelector.MaxQuantityButton:SkinButton()
+	currencyTransfer.AmountSelector.MaxQuantityButton:SetMovePoint(-4, 2)
+	T.SkinEditBox(currencyTransfer.AmountSelector.InputBox)
+	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("TOPLEFT", 2, -1)
+	currencyTransfer.AmountSelector.InputBox.backdrop:SetPoint("BOTTOMRIGHT", -4, 5)
+	currencyTransfer.ConfirmButton:SkinButton()
+	currencyTransfer.CancelButton:SkinButton()
+	currencyTransfer.SourceBalancePreview.BalanceInfo.CurrencyIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	currencyTransfer.PlayerBalancePreview.BalanceInfo.CurrencyIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 	hooksecurefunc(TokenFrame.ScrollBox, "Update", function(self)
 		for i = 1, self.ScrollTarget:GetNumChildren() do
