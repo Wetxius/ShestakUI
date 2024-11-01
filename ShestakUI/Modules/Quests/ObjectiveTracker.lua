@@ -441,7 +441,7 @@ hooksecurefunc(ScenarioObjectiveTracker.StageBlock, "UpdateStageBlock", function
 	if not block.backdrop then
 		block:CreateBackdrop("Overlay")
 		block.backdrop:SetPoint("TOPLEFT", block.NormalBG, 3, -3)
-		block.backdrop:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 5)
+		block.backdrop:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 3)
 
 		block.NormalBG:SetAlpha(0)
 		block.FinalBG:SetAlpha(0)
@@ -457,6 +457,7 @@ hooksecurefunc(ScenarioObjectiveTracker.StageBlock, "UpdateWidgetRegistration", 
 
 			local bar = widgetFrame.TimerBar
 			if bar and not bar.styled then
+				bar:SetWidth(220)
 				bar:SetStatusBarTexture(C.media.texture)
 				bar:CreateBackdrop("Overlay")
 				bar:SetStatusBarColor(0, 0.6, 1)
