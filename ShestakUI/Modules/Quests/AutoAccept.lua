@@ -301,7 +301,7 @@ local IGNORE_GOSSIP = {
 	[122442] = true, -- leave the dungeon in remix
 }
 
-local function isQuestIgnored(questID)
+local function isQuestIgnored(questID, title, override)
 	if ignoredQuests[questID] then
 		return true
 	end
@@ -310,7 +310,17 @@ local function isQuestIgnored(questID)
 		return true
 	end
 
+	if override then
+		-- this is so we can override popup quests that are not being tracked, as they can
+		-- get quite annoying
+		return false
+	end
+
 	if C_QuestLog.IsQuestTrivial(questID) and not C_Minimap.IsTrackingHiddenQuests() then
+		return true
+	end
+
+	if C_QuestLog.IsQuestFlaggedCompletedOnAccount(questID) and not C_Minimap.IsTrackingAccountCompletedQuests() then
 		return true
 	end
 
@@ -437,7 +447,13 @@ local function handleGossipQuests()
 	end
 
 	for _, questInfo in next, C_GossipInfo.GetAvailableQuests() do
-		if not questInfo.questLevel or questInfo.questLevel == 0 then
+		if questInfo.questID == 82449 then
+			-- "The Call of the Worldsoul"
+			-- this quest is buggy, it's repeatable (weekly) but the APIs don't report that,
+			-- and all this quest does is open an option of other quests, so we should
+			-- automatically accept it
+			C_GossipInfo.SelectAvailableQuest(questInfo.questID)
+		elseif not questInfo.questLevel or questInfo.questLevel == 0 then
 			-- not cached yet
 			EventHandler:WaitForQuestData(questInfo.questID, handleGossipQuests)
 		elseif questInfo.isRepeatable then
@@ -486,6 +502,7 @@ end
 
 EventHandler:Register('QUEST_GREETING', handleQuestList) -- quest list without gossips
 
+local popups = {}
 local function handleQuestDetail()
 	-- triggered when the information about an available quest is available
 	if paused then
@@ -511,8 +528,13 @@ local function handleQuestDetail()
 		-- when not triggered in combination with QuestGetAutoAccept-style quests this is just
 		-- a normal quest popup, as if it was shared by an unknown player, so we'll just accept it
 		AcceptQuest()
-	elseif not isQuestIgnored(questID) then
+	elseif not isQuestIgnored(questID, nil, popups[questID]) then
 		AcceptQuest()
+	end
+
+	if popups[questID] then
+		-- just remove the already accepted/completed quest from the tracker
+		RemoveAutoQuestPopUp(questID)
 	end
 end
 
@@ -619,6 +641,8 @@ local function handleQuestPopup()
 
 	for index = 1, numPopups do
 		local questID, questType = GetAutoQuestPopUp(index)
+		popups[questID] = true
+
 		if questType == 'OFFER' then
 			ShowQuestOffer(questID)
 		elseif questType == 'COMPLETE' then
