@@ -89,7 +89,7 @@ local function OnEvent(self, event, arg1)
 			return
 		elseif group.offhand then
 			local _, _, _, _, hasOffHandEnchant = GetWeaponEnchantInfo()
-			if not hasOffHandEnchant and C_PaperDollInfo.OffhandHasWeapon() then
+			if not hasOffHandEnchant and (C_PaperDollInfo.OffhandHasWeapon() or C_PaperDollInfo.OffhandHasShield()) then
 				self:Show()
 				if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
 			end
