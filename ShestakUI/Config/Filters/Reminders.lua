@@ -195,6 +195,24 @@ if C.reminder.solo_buffs_enable == true then
 				["pvp"] = true,
 				["level"] = 10,
 			},
+			[4] = {	-- Thunderstrike Ward group
+				["offhand"] = true,
+				["spec"] = 1,
+				["spells"] = {
+					SpellName(462757),		-- Thunderstrike Ward
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
+			[5] = {	-- Skyfury group
+				["spells"] = {
+					SpellName(462854),	-- Skyfury
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
 		},
 		WARRIOR = {
 			[1] = {	-- Battle Shout group
