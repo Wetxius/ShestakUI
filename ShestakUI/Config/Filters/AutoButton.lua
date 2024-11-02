@@ -296,4 +296,5 @@ T.ABItems = {
 T.ABItemsIgnore = {
 	-- [itemID] = true,	-- Item name to ignore
 	[223988] = true,	-- Dalaran Hearthstone
+	[227669] = true,	-- Teleportation Scroll
 }
