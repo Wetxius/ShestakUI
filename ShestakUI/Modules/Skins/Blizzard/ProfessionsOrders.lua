@@ -138,6 +138,8 @@ local function LoadSkin()
 	form.LeftPanelBackground:StripTextures()
 	form.RightPanelBackground:StripTextures()
 
+	form.RecraftSlot.InputSlot.BorderTexture:SetAlpha(0)
+
 	T.SkinCheckBox(form.TrackRecipeCheckbox.Checkbox, 20)
 	if form.AllocateBestQualityCheckbox then
 		T.SkinCheckBox(form.AllocateBestQualityCheckbox)

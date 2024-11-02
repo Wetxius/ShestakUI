@@ -1124,6 +1124,7 @@ function T.SkinProfessionsFlyout(_, parent)
 			end)
 			frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, 2)
 			T.SkinCheckBox(frame.HideUnownedCheckbox, 24)
+			T.SkinScrollBar(frame.ScrollBar)
 			hooksecurefunc(frame.ScrollBox, "Update", function(self)
 				for i = 1, self.ScrollTarget:GetNumChildren() do
 					local button = select(i, self.ScrollTarget:GetChildren())

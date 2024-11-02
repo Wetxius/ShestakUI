@@ -20,6 +20,8 @@ local function LoadSkin()
 	frame.CraftingPage.RecipeList.FilterDropdown:SetHeight(20)
 	frame.CraftingPage.RecipeList.FilterDropdown:SetPoint("TOPRIGHT", ProfessionsFrame.CraftingPage.RecipeList, "TOPRIGHT", -8, -6)
 
+	frame.CraftingPage.ConcentrationDisplay.Icon:SkinIcon()
+
 	local RankBar = frame.CraftingPage.RankBar
 	RankBar.Border:Hide()
 	RankBar.Background:Hide()
@@ -88,6 +90,13 @@ local function LoadSkin()
 
 	T.SkinCheckBox(SchematicForm.TrackRecipeCheckbox, 24)
 	T.SkinCheckBox(SchematicForm.AllocateBestQualityCheckbox, 24)
+
+	local ConcentrateToggleButton = SchematicForm.Details.CraftingChoicesContainer.ConcentrateContainer.ConcentrateToggleButton
+	ConcentrateToggleButton:CreateBackdrop()
+	ConcentrateToggleButton.backdrop:SetAllPoints()
+	ConcentrateToggleButton.Icon:CropIcon()
+	ConcentrateToggleButton:StyleButton()
+	ConcentrateToggleButton.NormalTexture:SetAlpha(0)
 
 	local function skinDetails(frame)
 		frame:SetFrameLevel(frame:GetFrameLevel() + 1)
@@ -362,11 +371,25 @@ local function LoadSkin()
 	Orders:SetupTable() -- init header
 
 	local OrderView = Orders.OrderView
+	OrderView.ConcentrationDisplay.Icon:SkinIcon()
 	local OrderRankBar = OrderView.RankBar
 	OrderRankBar.Border:Hide()
 	OrderRankBar.Background:Hide()
 	OrderRankBar:CreateBackdrop("Overlay")
 	OrderRankBar.backdrop:SetOutside(OrderRankBar.Fill)
+
+	if OrderRankBar.ExpansionDropdownButton then
+		local arrow = OrderRankBar.ExpansionDropdownButton:CreateTexture(nil, "ARTWORK")
+		arrow:SetSize(15, 15)
+		arrow:SetPoint("CENTER")
+		arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+		arrow:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+
+		OrderRankBar.ExpansionDropdownButton:SetSize(18, 18)
+		OrderRankBar.ExpansionDropdownButton:SetPoint("RIGHT", OrderRankBar, "RIGHT", -7, -3)
+		OrderRankBar.ExpansionDropdownButton:SkinButton()
+		OrderRankBar.ExpansionDropdownButton.Texture:Hide()
+	end
 
 	ReskinOutputLog(OrderView.CraftingOutputLog)
 
@@ -381,6 +404,15 @@ local function LoadSkin()
 	OrderInfo.DeclineOrderButton:SkinButton()
 	OrderInfo.ReleaseOrderButton:SkinButton()
 
+	local RewardsFrame = OrderInfo.NPCRewardsFrame
+	if RewardsFrame then
+		RewardsFrame.Background:SetAlpha(0)
+		RewardsFrame.Background:CreateBackdrop("Overlay")
+
+		skinReagentIcon(RewardsFrame.RewardItem1)
+		skinReagentIcon(RewardsFrame.RewardItem2)
+	end
+
 	local NoteBox = OrderInfo.NoteBox
 	NoteBox:StripTextures()
 	NoteBox:CreateBackdrop("Overlay")
@@ -388,14 +420,22 @@ local function LoadSkin()
 
 	local OrderDetails = OrderView.OrderDetails
 	OrderDetails:StripTextures()
-	OrderDetails:CreateBackdrop("Transparent")
+	OrderDetails:CreateBackdrop("Overlay")
 	OrderDetails.backdrop:SetPoint("BOTTOMRIGHT", -2, 0)
 	OrderDetails.Background:ClearAllPoints()
-	OrderDetails.Background:SetInside(OrderDetails.backdrop)
+	OrderDetails.Background:SetInside(OrderDetails.backdrop, 1, 1)
 
 	local OrderSchematicForm = OrderDetails.SchematicForm
 	T.SkinCheckBox(OrderSchematicForm.AllocateBestQualityCheckbox)
 	skinDetails(OrderSchematicForm.Details)
+	T.SkinCheckBox(OrderSchematicForm.TrackRecipeCheckbox)
+
+	local ConcentrateToggleButton = OrderSchematicForm.Details.CraftingChoicesContainer.ConcentrateContainer.ConcentrateToggleButton
+	ConcentrateToggleButton:CreateBackdrop()
+	ConcentrateToggleButton.backdrop:SetAllPoints()
+	ConcentrateToggleButton.Icon:CropIcon()
+	ConcentrateToggleButton:StyleButton()
+	ConcentrateToggleButton.NormalTexture:SetAlpha(0)
 
 	hooksecurefunc(OrderSchematicForm, "Init", function(frame)
 		for slot in frame.reagentSlotPool:EnumerateActive() do
