@@ -33,6 +33,9 @@ frame:SetScript("OnEvent", function()
 	MainMenuBar.ignoreFramePositionManager = true
 	MainMenuBar:SetAttribute("ignoreFramePositionManager", true)
 
+	EditModeUtil.GetRightActionBarWidth = function() return 100 end -- prevent error in GetRightContainerAnchor, abs is nil
+	-- EditModeUtil.GetBottomActionBarHeight = function() return 225 end
+
 	local elements = {
 		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame,
 		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow,
