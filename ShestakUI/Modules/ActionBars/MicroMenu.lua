@@ -127,4 +127,16 @@ if CharacterMicroButton then
 
 	hooksecurefunc(CharacterMicroButton, "SetPushed", SkinCharacterPortrait)
 	hooksecurefunc(CharacterMicroButton, "SetNormal", SkinCharacterPortrait)
+
+	if HelpOpenWebTicketButton then
+		C_Timer.After(1, function()
+			local _, y = CharacterMicroButton:GetCenter()
+			HelpOpenWebTicketButton:ClearAllPoints()
+			if y > (UIParent:GetHeight() / 2) then
+				HelpOpenWebTicketButton:SetPoint("TOP", CharacterMicroButton, "BOTTOM", 0, 2)
+			else
+				HelpOpenWebTicketButton:SetPoint("BOTTOM", CharacterMicroButton, "TOP", 0, -2)
+			end
+		end)
+	end
 end
