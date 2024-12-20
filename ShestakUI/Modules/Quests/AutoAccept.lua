@@ -299,6 +299,13 @@ local QUEST_GOSSIP = {
 local IGNORE_GOSSIP = {
 	-- when we don't want to automate gossip because it's counter-intuitive
 	[122442] = true, -- leave the dungeon in remix
+
+	-- avoid accidental teleports
+	[44733] = true,
+	[125350] = true, -- siren isle
+	[125351] = true, -- siren isle
+	[131324] = true, -- winter veil hillsbrad
+	[131325] = true, -- winter veil hillsbrad
 }
 
 local function isQuestIgnored(questID, title, override)
