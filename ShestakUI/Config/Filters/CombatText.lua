@@ -539,6 +539,7 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[10444] = 3		-- Flametongue Attack
 		T.aoespam[3606] = 3			-- Searing Bolt
 		T.aoespam[170379] = 3		-- Molten Earth
+		T.aoespam[114074] = 1		-- Lava Beam
 		T.aoespam[32175] = 0		-- Stormstrike
 		T.merge[32176] = 32175		-- Stormstrike Off-Hand
 		T.aoespam[114089] = 3		-- Windlash
