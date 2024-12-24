@@ -44,6 +44,10 @@ local function LoadSkin()
 		Cypher = {r = 1, g = 0.8, b = 0},
 		Tinker = {r = 1, g = 0.47, b = 0.47},
 		Primordial = {r = 1, g = 0, b = 1},
+		Fragrance = {r = 1, g = 1, b = 1},
+		SingingThunder = {r = 0.97, g = 0.82, b = 0.29},
+		SingingSea = {r = 0.47, g = 0.67, b = 1},
+		SingingWind = {r = 1, g = 0.47, b = 0.47},
 	}
 
 	hooksecurefunc("ItemSocketingFrame_Update", function()
