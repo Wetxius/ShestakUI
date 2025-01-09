@@ -648,12 +648,16 @@ local function handleQuestPopup()
 
 	for index = 1, numPopups do
 		local questID, questType = GetAutoQuestPopUp(index)
-		popups[questID] = true
+		if questID then
+			popups[questID] = true
 
-		if questType == 'OFFER' then
-			ShowQuestOffer(questID)
-		elseif questType == 'COMPLETE' then
-			ShowQuestComplete(questID)
+			if questType == 'OFFER' then
+				ShowQuestOffer(questID)
+			elseif questType == 'COMPLETE' then
+				ShowQuestComplete(questID)
+			end
+		else
+			EventHandler:WaitForQuestData(questID, handleQuestPopup)
 		end
 	end
 end
