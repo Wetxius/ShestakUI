@@ -167,13 +167,15 @@ local function LoadSkin()
 	end
 	SkinDynamicButton(MountJournal.ToggleDynamicFlightFlyoutButton, 1)
 
-	local flyout = MountJournal.DynamicFlightFlyout
-	flyout.Background:Hide()
-	flyout:CreateBackdrop("Default")
-	flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
-	flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
-	SkinDynamicButton(flyout.OpenDynamicFlightSkillTreeButton, 4)
-	SkinDynamicButton(flyout.DynamicFlightModeButton, 4)
+	local flyout = MountJournal.ToggleDynamicFlightFlyoutButton.popup or MountJournal.DynamicFlightFlyout
+	if flyout then
+		flyout.Background:Hide()
+		flyout:CreateBackdrop("Default")
+		flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
+		flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
+		SkinDynamicButton(flyout.OpenDynamicFlightSkillTreeButton, 4)
+		SkinDynamicButton(flyout.DynamicFlightModeButton, 4)
+	end
 
 	-- PetJournal
 	PetJournal.LeftInset:StripTextures()

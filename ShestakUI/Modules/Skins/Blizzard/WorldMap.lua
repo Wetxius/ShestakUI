@@ -34,8 +34,10 @@ local function LoadSkin()
 	QuestMapFrame.backdrop:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 2, 0)
 	QuestMapFrame.backdrop:SetSize(326, 468)
 
-	QuestMapFrame.SettingsDropdown:ClearAllPoints()
-	QuestMapFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -5, -3)
+	if not T.newPatch then
+		QuestMapFrame.SettingsDropdown:ClearAllPoints()
+		QuestMapFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -5, -3)
+	end
 
 	QuestScrollFrame:ClearAllPoints()
 	QuestScrollFrame:SetPoint("TOP", WorldMapFrame.backdrop, "TOP", 0, -3)
@@ -48,16 +50,18 @@ local function LoadSkin()
 
 	QuestScrollFrame.SearchBox:DisableDrawLayer("BACKGROUND")
 
-	local CampaignOverview = QuestMapFrame.CampaignOverview
-	CampaignOverview:StripTextures()
-	CampaignOverview.ScrollFrame:StripTextures()
-	T.SkinScrollBar(CampaignOverview.ScrollFrame.ScrollBar)
-	CampaignOverview:CreateBackdrop("Overlay")
-	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
-	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
-	CampaignOverview.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
-	CampaignOverview.Header.Background:SetAlpha(0)
-	CampaignOverview.Header.TopFiligree:Hide()
+	if not T.newPatch then
+		local CampaignOverview = QuestMapFrame.CampaignOverview
+		CampaignOverview:StripTextures()
+		CampaignOverview.ScrollFrame:StripTextures()
+		T.SkinScrollBar(CampaignOverview.ScrollFrame.ScrollBar)
+		CampaignOverview:CreateBackdrop("Overlay")
+		CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
+		CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
+		CampaignOverview.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
+		CampaignOverview.Header.Background:SetAlpha(0)
+		CampaignOverview.Header.TopFiligree:Hide()
+	end
 
 	do
 		local frame = QuestScrollFrame.Contents.StoryHeader
@@ -80,11 +84,13 @@ local function LoadSkin()
 	QuestScrollFrameTopBorder.backdrop:SetSize(326, 23)
 	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
 
-	local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.CampaignOverview)
-	QuestScrollFrameTopBorder:CreateBackdrop("Overlay")
-	QuestScrollFrameTopBorder.backdrop:ClearAllPoints()
-	QuestScrollFrameTopBorder.backdrop:SetSize(326, 23)
-	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+	if not T.newPatch then
+		local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.CampaignOverview)
+		QuestScrollFrameTopBorder:CreateBackdrop("Overlay")
+		QuestScrollFrameTopBorder.backdrop:ClearAllPoints()
+		QuestScrollFrameTopBorder.backdrop:SetSize(326, 23)
+		QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+	end
 
 	QuestMapFrame.DetailsFrame:ClearAllPoints()
 	QuestMapFrame.DetailsFrame:SetPoint("TOPRIGHT", QuestMapFrame, "TOPRIGHT", -12, -1)
@@ -157,10 +163,12 @@ local function LoadSkin()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:Kill()
 
 	QuestMapFrame.MapLegend.BorderFrame:StripTextures()
-	QuestMapFrame.MapLegend.BackButton:SkinButton()
-	QuestMapFrame.MapLegend.BackButton:ClearAllPoints()
-	QuestMapFrame.MapLegend.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
-	QuestMapFrame.MapLegend.BackButton:SetSize(326, 23)
+	if not T.newPatch then
+		QuestMapFrame.MapLegend.BackButton:SkinButton()
+		QuestMapFrame.MapLegend.BackButton:ClearAllPoints()
+		QuestMapFrame.MapLegend.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+		QuestMapFrame.MapLegend.BackButton:SetSize(326, 23)
+	end
 
 	MapLegendScrollFrame.Background:Hide()
 	MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", 2, -18)
@@ -237,7 +245,9 @@ local function LoadSkin()
 	WorldMapFloorNavigationDropDown(WorldMapFrame.overlayFrames[1])
 	WorldMapTrackingOptionsButton(WorldMapFrame.overlayFrames[2])
 	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
-	WorldMapLegendButton(WorldMapFrame.overlayFrames[4])
+	if not T.newPatch then
+		WorldMapLegendButton(WorldMapFrame.overlayFrames[4])
+	end
 
 	for i = 1, 15 do
 		local button = _G["Krowi_WorldMapButtons"..i]

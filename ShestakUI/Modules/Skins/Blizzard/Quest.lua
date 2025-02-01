@@ -238,8 +238,10 @@ local function LoadSkin()
 		QuestInfoRewardsFrame.XPFrame.ReceiveText:SetShadowOffset(1, -1)
 		QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1)
 		QuestInfoRewardsFrame.PlayerTitleText:SetShadowOffset(1, -1)
-		QuestInfoAccountCompletedNotice:SetTextColor(0.4, 0.78, 1)
-		QuestInfoAccountCompletedNotice:SetShadowOffset(1, -1)
+		if not T.newPatch then
+			QuestInfoAccountCompletedNotice:SetTextColor(0.4, 0.78, 1)
+			QuestInfoAccountCompletedNotice:SetShadowOffset(1, -1)
+		end
 
 		QuestObjectiveText()
 

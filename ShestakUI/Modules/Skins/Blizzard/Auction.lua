@@ -177,8 +177,10 @@ local function LoadSkin()
 
 	AuctionHouseFrame.ItemBuyFrame.ItemDisplay:StripTextures()
 	SkinItemIcon(AuctionHouseFrame.ItemBuyFrame.ItemDisplay.ItemButton)
-	T.SkinEditBox(AuctionHouseFrameGold)
-	T.SkinEditBox(AuctionHouseFrameSilver)
+	if not T.newPatch then
+		T.SkinEditBox(AuctionHouseFrameGold)
+		T.SkinEditBox(AuctionHouseFrameSilver)
+	end
 
 	local buyFrame = AuctionHouseFrame.CommoditiesBuyFrame
 	buyFrame.BackButton:SkinButton()
