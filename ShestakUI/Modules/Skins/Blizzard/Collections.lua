@@ -22,8 +22,14 @@ local function LoadSkin()
 	CollectionsJournal:SetTemplate("Transparent")
 	CollectionsJournalPortrait:SetAlpha(0)
 
-	for i = 1, 5 do
-		T.SkinTab(_G["CollectionsJournalTab"..i])
+	if T.newPatch then
+		for i = 1, 6 do
+			T.SkinTab(_G["CollectionsJournalTab"..i])
+		end
+	else
+		for i = 1, 5 do
+			T.SkinTab(_G["CollectionsJournalTab"..i])
+		end
 	end
 
 	local buttons = {
@@ -670,6 +676,29 @@ local function LoadSkin()
 
 	WardrobeCollectionFrame.InfoButton.Ring:Hide()
 	WardrobeCollectionFrame.InfoButton:SetPoint("TOPLEFT", WardrobeCollectionFrame, "TOPLEFT", -10, 12)
+
+	-- Scene
+	if T.newPatch then
+		local Frame = _G.WarbandSceneJournal
+
+		local IconsFrame = Frame.IconsFrame
+		if IconsFrame then
+			IconsFrame:StripTextures()
+
+			local controls = IconsFrame.Icons and IconsFrame.Icons.Controls
+			if controls then
+				local checkBox = controls and controls.ShowOwned and controls.ShowOwned.Checkbox
+				if checkBox then
+					T.SkinCheckBox(checkBox, 28)
+				end
+
+				if controls.PagingControls then
+					T.SkinNextPrevButton(controls.PagingControls.PrevPageButton)
+					T.SkinNextPrevButton(controls.PagingControls.NextPageButton)
+				end
+			end
+		end
+	end
 
 	-- Help box
 	local HelpBox = {

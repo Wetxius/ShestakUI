@@ -34,17 +34,25 @@ local function LoadSkin()
 	QuestMapFrame.backdrop:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 2, 0)
 	QuestMapFrame.backdrop:SetSize(326, 468)
 
-	if not T.newPatch then
+	if T.newPatch then
+		QuestScrollFrame.SettingsDropdown:ClearAllPoints()
+		QuestScrollFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -5, -3)
+	else
 		QuestMapFrame.SettingsDropdown:ClearAllPoints()
 		QuestMapFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -5, -3)
 	end
 
-	QuestScrollFrame:ClearAllPoints()
-	QuestScrollFrame:SetPoint("TOP", WorldMapFrame.backdrop, "TOP", 0, -3)
-	QuestScrollFrame:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 4, 0)
-
+	if T.newPatch then
+		QuestScrollFrame:ClearAllPoints()
+		QuestScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
+		QuestScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+	else
+		QuestScrollFrame:ClearAllPoints()
+		QuestScrollFrame:SetPoint("TOP", WorldMapFrame.backdrop, "TOP", 0, -3)
+		QuestScrollFrame:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 4, 0)
+		QuestScrollFrame:SetSize(259, 463)
+	end
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
-	QuestScrollFrame:SetSize(259, 463)
 	QuestScrollFrame.Edge:Hide()
 	QuestScrollFrame.Background:Hide()
 
@@ -74,8 +82,13 @@ local function LoadSkin()
 		frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 	end
 
-	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 2, -18)
-	QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", 2, 15)
+	if T.newPatch then
+		QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", -21, -18)
+		QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", -21, 15)
+	else
+		QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 2, -18)
+		QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", 2, 15)
+	end
 	T.SkinScrollBar(QuestScrollFrame.ScrollBar)
 
 	local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestScrollFrame)
@@ -168,11 +181,30 @@ local function LoadSkin()
 		QuestMapFrame.MapLegend.BackButton:ClearAllPoints()
 		QuestMapFrame.MapLegend.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
 		QuestMapFrame.MapLegend.BackButton:SetSize(326, 23)
+
+		MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", 2, -18)
+		MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", 2, 15)
+	end
+
+	if T.newPatch then
+		MapLegendScrollFrame:ClearAllPoints()
+		MapLegendScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
+		MapLegendScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+
+		local MapLegendTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.MapLegend)
+		MapLegendTopBorder:CreateBackdrop("Overlay")
+		MapLegendTopBorder.backdrop:ClearAllPoints()
+		MapLegendTopBorder.backdrop:SetSize(326, 23)
+		MapLegendTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+
+		QuestMapFrame.MapLegend.TitleText:ClearAllPoints()
+		QuestMapFrame.MapLegend.TitleText:SetPoint("CENTER", MapLegendTopBorder.backdrop)
+
+		MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", -21, -18)
+		MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", -21, 15)
 	end
 
 	MapLegendScrollFrame.Background:Hide()
-	MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", 2, -18)
-	MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", 2, 15)
 	T.SkinScrollBar(MapLegendScrollFrame.ScrollBar)
 
 	-- Floor Dropdown

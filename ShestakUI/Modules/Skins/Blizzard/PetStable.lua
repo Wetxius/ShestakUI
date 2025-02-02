@@ -34,6 +34,10 @@ local function LoadSkin()
 	end
 	T.SkinModelControl(StableFrame.PetModelScene)
 
+	if T.newPatch then
+		T.SkinDropDownBox(StableFrame.PetModelScene.PetInfo.Specialization)
+	end
+
 	StableFrame.StableTogglePetButton:SkinButton()
 	StableFrame.ReleasePetButton:SkinButton()
 end
