@@ -296,6 +296,42 @@ local function LoadSkin()
 		end
 	end
 
+	if T.newPatch then
+		local tabs = {
+			QuestMapFrame.QuestsTab,
+			QuestMapFrame.MapLegendTab
+		}
+		for _, tab in pairs(tabs) do
+			tab.Background:SetAlpha(0)
+
+			tab:SetSize(34, 44)
+
+			tab:CreateBackdrop("Overlay")
+			tab.backdrop:SetPoint("TOPLEFT", 2, -2)
+			tab.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+
+			tab.SelectedTexture:SetDrawLayer("ARTWORK")
+			tab.SelectedTexture:ClearAllPoints()
+			tab.SelectedTexture:SetAllPoints()
+			tab.SelectedTexture:SetPoint("TOPLEFT", 4, -4)
+			tab.SelectedTexture:SetPoint("BOTTOMRIGHT", -4, 4)
+			tab.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+
+			for _, region in next, {tab:GetRegions()} do
+				if region:IsObjectType("Texture") then
+					if region:GetAtlas() == "QuestLog-Tab-side-Glow-hover" then
+						region:SetPoint("TOPLEFT", 4, -4)
+						region:SetPoint("BOTTOMRIGHT", -4, 4)
+						region:SetColorTexture(1, 1, 1, 0.3)
+					end
+				end
+			end
+		end
+
+		QuestMapFrame.QuestsTab:ClearAllPoints()
+		QuestMapFrame.QuestsTab:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPRIGHT", 1, 2)
+	end
+
 	-- QuestSessionManagement skin (based on skin from Aurora)
 	QuestMapFrame.QuestSessionManagement:StripTextures()
 
