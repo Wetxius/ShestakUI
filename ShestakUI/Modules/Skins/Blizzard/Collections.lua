@@ -160,9 +160,15 @@ local function LoadSkin()
 
 	local function SkinDynamicButton(button, i)
 		if button.Border then button.Border:Hide() end
-
 		if i == 1 then
-			select(i, button:GetRegions()):SkinIcon()
+			if T.newPatch then
+				button.b = CreateFrame("Frame", nil, button:GetParent())
+				button.b:SetTemplate("Default")
+				button.b:SetOutside(button)
+				select(3, button:GetRegions()):SetTexCoord(0.1, 0.9, 0.1, 0.9) -- icon
+			else
+				select(i, button:GetRegions()):SkinIcon()
+			end
 			button:SetPushedTexture(0)
 			button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 		else
@@ -177,8 +183,13 @@ local function LoadSkin()
 	if flyout then
 		flyout.Background:Hide()
 		flyout:CreateBackdrop("Default")
-		flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
-		flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
+		if T.newPatch then
+			flyout.backdrop:SetPoint("TOPLEFT", 0, -8)
+			flyout.backdrop:SetPoint("BOTTOMRIGHT", 0, 5)
+		else
+			flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
+			flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
+		end
 		SkinDynamicButton(flyout.OpenDynamicFlightSkillTreeButton, 4)
 		SkinDynamicButton(flyout.DynamicFlightModeButton, 4)
 	end
