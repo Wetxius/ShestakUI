@@ -126,6 +126,13 @@ local function LoadSkin()
 	QuestMapFrame.DetailsFrame.BackFrame.BackButton:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
 	QuestMapFrame.DetailsFrame.BackFrame.BackButton:SetSize(326, 23)
 
+	local accountComplete = QuestMapFrame.QuestsFrame.DetailsFrame.BackFrame.AccountCompletedNotice
+	accountComplete:ClearAllPoints()
+	accountComplete:SetPoint("RIGHT", QuestMapFrame.QuestsFrame.DetailsFrame.BackFrame.BackButton, "RIGHT", -10, 0)
+	accountComplete.AccountCompletedIcon:SetSize(28, 28)
+	accountComplete.AccountCompletedIcon:ClearAllPoints()
+	accountComplete.AccountCompletedIcon:SetPoint("RIGHT", accountComplete.Text, "LEFT", -1, 0)
+
 	local AbandonButton = QuestMapFrame.DetailsFrame.AbandonButton
 	AbandonButton:SkinButton()
 	AbandonButton:ClearAllPoints()
