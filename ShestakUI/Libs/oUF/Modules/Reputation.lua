@@ -50,7 +50,7 @@ local function GetReputation()
 		min, max = 0, majorFactionData.renownLevelThreshold
 		cur = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
 		standingID = MAX_REPUTATION_REACTION + 2
-		standingText = RENOWN_LEVEL_LABEL..majorFactionData.renownLevel
+		standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
 	elseif friendshipID and friendshipID > 0 then
 		local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
 		local currentRank = rankInfo and rankInfo.currentLevel
