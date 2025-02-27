@@ -766,8 +766,6 @@ C["filger_spells"] = {
 			{spellID = 90361, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Posthaste
 			{spellID = 118922, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Volley
-			-- {spellID = 194386, unitID = "player", caster = "player", filter = "BUFF"}, -- Delete after while
 			-- Misdirection
 			{spellID = 35079, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Survivalist
@@ -888,8 +886,6 @@ C["filger_spells"] = {
 			{spellID = 147362, filter = "CD"},
 			-- Kill Command
 			{spellID = 34026, filter = "CD"},
-			-- Sidewinders                     was deleted?
-			{spellID = 214579, filter = "CD"},
 			-- Explosive Shot
 			{spellID = 212431, filter = "CD"},
 			-- Chimera Shot
@@ -902,8 +898,6 @@ C["filger_spells"] = {
 			{spellID = 781, filter = "CD"},
 			-- Dire Beast
 			{spellID = 120679, filter = "CD"},
-			-- Fervor                     was deleted?
-			{spellID = 82726, filter = "CD"},
 			-- Misdirection
 			{spellID = 34477, filter = "CD"},
 			-- Feign Death
@@ -942,8 +936,6 @@ C["filger_spells"] = {
 			{spellID = 264735, filter = "CD"},
 			-- Fortitude of the Bear
 			{spellID = 272679, filter = "CD"},
-			-- Volley
-			{spellID = 194386, filter = "CD"},
 			-- Trueshot
 			{spellID = 288613, filter = "CD"},
 			-- Aimed Shot
@@ -1528,8 +1520,6 @@ C["filger_spells"] = {
 			{spellID = 391109, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit of Redemption
 			{spellID = 27827, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Divinity
-			{spellID = 197030, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power of the Naaru
 			{spellID = 196490, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Archangel
@@ -2279,8 +2269,6 @@ C["filger_spells"] = {
 			{spellID = 32216, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Overpower
 			{spellID = 7384, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Frothing Berserker
-			{spellID = 215572, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Furious Slash
 			{spellID = 202539, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vengeance: Ignore Pain
