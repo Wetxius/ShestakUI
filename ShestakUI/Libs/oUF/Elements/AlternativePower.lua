@@ -4,8 +4,9 @@ local Private = oUF.Private
 
 local unitSelectionType = Private.unitSelectionType
 
--- sourced from FrameXML/UnitPowerBarAlt.lua
+-- sourced from Blizzard_UnitFrame/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10
+
 local ALTERNATE_POWER_NAME = 'ALTERNATE'
 
 local function updateTooltip(self)
@@ -16,13 +17,15 @@ local function updateTooltip(self)
 end
 
 local function onEnter(self)
-	if(not self:IsVisible()) then return end
+	if(GameTooltip:IsForbidden() or not self:IsVisible()) then return end
 
 	GameTooltip_SetDefaultAnchor(GameTooltip, self)
 	self:UpdateTooltip()
 end
 
 local function onLeave()
+	if(GameTooltip:IsForbidden()) then return end
+
 	GameTooltip:Hide()
 end
 

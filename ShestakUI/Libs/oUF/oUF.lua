@@ -620,8 +620,8 @@ do
 	* template     - name of a template to be used for creating the header. Defaults to `'SecureGroupHeaderTemplate'`
 	                 (string?)
 	* visibility   - macro conditional(s) which define when to display the header (string).
-	* ...          - further argument pairs. Consult [Group Headers](http://wowprogramming.com/docs/secure_template/Group_Headers.html)
-	                 for possible values.
+	* ...          - further argument pairs. Consult [Group Headers](https://warcraft.wiki.gg/wiki/SecureGroupHeaderTemplate)
+	                 for possible values. If preferred, the attributes can be an associative table.
 
 	In addition to the standard group headers, oUF implements some of its own attributes. These can be supplied by the
 	layout, but are optional. PingableUnitFrameTemplate is inherited for Ping support.
@@ -640,10 +640,19 @@ do
 		local header = CreateFrame('Frame', name, PetBattleFrameHider, template)
 
 		header:SetAttribute('template', 'SecureUnitButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, PingableUnitFrameTemplate')
-		for i = 1, select('#', ...), 2 do
-			local att, val = select(i, ...)
-			if(not att) then break end
-			header:SetAttribute(att, val)
+
+		if(...) then
+			if(type(...) == 'table') then
+				for att, val in next, (...) do
+					header:SetAttribute(att, val)
+				end
+			else
+				for i = 1, select('#', ...), 2 do
+					local att, val = select(i, ...)
+					if(not att) then break end
+					header:SetAttribute(att, val)
+				end
+			end
 		end
 
 		header.style = style
@@ -716,7 +725,7 @@ Used to create a single unit frame and apply the currently active style to it.
 * self         - the global oUF object
 * unit         - the frame's unit (string)
 * overrideName - unique global name to use for the unit frame. Defaults to an auto-generated name based on the unit
-				 (string?)
+                 (string?)
 
 oUF implements some of its own attributes. These can be supplied by the layout, but are optional.
 PingableUnitFrameTemplate is inherited for Ping support.
@@ -748,8 +757,8 @@ Used to create nameplates and apply the currently active style to them.
 * self      - the global oUF object
 * prefix    - prefix for the global name of the nameplate. Defaults to an auto-generated prefix (string?)
 * callback  - function to be called after a nameplate unit or the player's target has changed. The arguments passed to
-			  the callback are the updated nameplate, if any, the event that triggered the update, and the new unit
-			  (function?)
+              the callback are the updated nameplate, if any, the event that triggered the update, and the new unit
+              (function?)
 * variables - list of console variable-value pairs to be set when the player logs in (table?)
 
 PingableUnitFrameTemplate is inherited for Ping support.
@@ -825,11 +834,13 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 			if(nameplate.UnitFrame) then
 				if(nameplate.UnitFrame.WidgetContainer) then
 					nameplate.UnitFrame.WidgetContainer:SetParent(nameplate.unitFrame)
+					nameplate.UnitFrame.WidgetContainer:SetIgnoreParentAlpha(true)
 					nameplate.unitFrame.WidgetContainer = nameplate.UnitFrame.WidgetContainer
 				end
 
 				if(nameplate.UnitFrame.SoftTargetFrame) then
 					nameplate.UnitFrame.SoftTargetFrame:SetParent(nameplate.unitFrame)
+					nameplate.UnitFrame.SoftTargetFrame:SetIgnoreParentAlpha(true)
 					nameplate.unitFrame.SoftTargetFrame = nameplate.UnitFrame.SoftTargetFrame
 				end
 			end
