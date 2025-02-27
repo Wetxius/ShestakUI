@@ -315,12 +315,12 @@ local function SetupFlyoutButton(button, self)
 end
 
 local function StyleFlyoutButton(self)
-	local button, i = _G["SpellFlyoutButton1"], 1
+	local button, i = _G["SpellFlyoutPopupButton1"], 1
 	while button do
 		SetupFlyoutButton(button, self)
 
 		i = i + 1
-		button = _G["SpellFlyoutButton"..i]
+		button = _G["SpellFlyoutPopupButton"..i]
 	end
 end
 
