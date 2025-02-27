@@ -234,9 +234,6 @@ local function LoadSkin()
 
 	SkinItemIcon(AuctionHouseFrameAuctionsFrame.ItemDisplay.ItemButton)
 
-	T.SkinEditBox(AuctionHouseFrameAuctionsFrameGold)
-	T.SkinEditBox(AuctionHouseFrameAuctionsFrameSilver)
-
 	AuctionHouseFrame.BuyDialog:StripTextures()
 	AuctionHouseFrame.BuyDialog:SetTemplate("Transparent")
 
