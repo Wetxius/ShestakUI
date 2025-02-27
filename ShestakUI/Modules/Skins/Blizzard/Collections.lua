@@ -22,14 +22,8 @@ local function LoadSkin()
 	CollectionsJournal:SetTemplate("Transparent")
 	CollectionsJournalPortrait:SetAlpha(0)
 
-	if T.newPatch then
-		for i = 1, 6 do
-			T.SkinTab(_G["CollectionsJournalTab"..i])
-		end
-	else
-		for i = 1, 5 do
-			T.SkinTab(_G["CollectionsJournalTab"..i])
-		end
+	for i = 1, 6 do
+		T.SkinTab(_G["CollectionsJournalTab"..i])
 	end
 
 	local buttons = {
@@ -161,14 +155,13 @@ local function LoadSkin()
 	local function SkinDynamicButton(button, i)
 		if button.Border then button.Border:Hide() end
 		if i == 1 then
-			if T.newPatch then
-				button.b = CreateFrame("Frame", nil, button:GetParent())
-				button.b:SetTemplate("Default")
-				button.b:SetOutside(button)
-				select(3, button:GetRegions()):SetTexCoord(0.1, 0.9, 0.1, 0.9) -- icon
-			else
-				select(i, button:GetRegions()):SkinIcon()
-			end
+			button.b = CreateFrame("Frame", nil, button:GetParent())
+			button.b:SetTemplate("Default")
+			button.b:SetOutside(button)
+			C_Timer.After(0.05, function()
+				button.b:SetShown(button:IsShown()) -- BETA
+			end)
+			select(3, button:GetRegions()):SetTexCoord(0.1, 0.9, 0.1, 0.9) -- icon
 			button:SetPushedTexture(0)
 			button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 		else
@@ -183,13 +176,8 @@ local function LoadSkin()
 	if flyout then
 		flyout.Background:Hide()
 		flyout:CreateBackdrop("Default")
-		if T.newPatch then
-			flyout.backdrop:SetPoint("TOPLEFT", 0, -8)
-			flyout.backdrop:SetPoint("BOTTOMRIGHT", 0, 5)
-		else
-			flyout.backdrop:SetPoint("TOPLEFT", 3, -5)
-			flyout.backdrop:SetPoint("BOTTOMRIGHT", -6, 6)
-		end
+		flyout.backdrop:SetPoint("TOPLEFT", 0, -8)
+		flyout.backdrop:SetPoint("BOTTOMRIGHT", 0, 5)
 		SkinDynamicButton(flyout.OpenDynamicFlightSkillTreeButton, 4)
 		SkinDynamicButton(flyout.DynamicFlightModeButton, 4)
 	end
