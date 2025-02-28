@@ -78,7 +78,18 @@ local function LoadSkin()
 	T.SkinDropDownBox(CommunitiesFrame.StreamDropdown, nil, true)
 	T.SkinDropDownBox(CommunitiesFrame.CommunitiesListDropdown)
 
-	CommunitiesFrame.AddToChatButton:SkinButton()
+	if CommunitiesFrame.AddToChatButton then
+		local arrow = CommunitiesFrame.AddToChatButton:CreateTexture(nil, "ARTWORK")
+		arrow:SetSize(14, 15)
+		arrow:SetPoint("CENTER")
+		arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+		arrow:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+
+		CommunitiesFrame.AddToChatButton:SetSize(18, 18)
+		CommunitiesFrame.AddToChatButton:SkinButton()
+		CommunitiesFrame.AddToChatButton.Arrow:SetAlpha(0)
+	end
+
 	CommunitiesFrame.CommunitiesControlFrame.CommunitiesSettingsButton:SkinButton()
 
 	hooksecurefunc(CommunitiesListEntryMixin, "Init", function(self, elementData)

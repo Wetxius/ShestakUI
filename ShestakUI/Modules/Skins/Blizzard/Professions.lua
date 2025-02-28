@@ -30,7 +30,7 @@ local function LoadSkin()
 
 	if RankBar.ExpansionDropdownButton then
 		local arrow = RankBar.ExpansionDropdownButton:CreateTexture(nil, "ARTWORK")
-		arrow:SetSize(15, 15)
+		arrow:SetSize(14, 15)
 		arrow:SetPoint("CENTER")
 		arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 		arrow:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
@@ -380,7 +380,7 @@ local function LoadSkin()
 
 	if OrderRankBar.ExpansionDropdownButton then
 		local arrow = OrderRankBar.ExpansionDropdownButton:CreateTexture(nil, "ARTWORK")
-		arrow:SetSize(15, 15)
+		arrow:SetSize(14, 15)
 		arrow:SetPoint("CENTER")
 		arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 		arrow:SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
