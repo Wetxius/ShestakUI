@@ -90,7 +90,7 @@ local function LoadSkin()
 	-- Tabs
 	for i = 1, 3 do
 		local tab = _G["AchievementFrameTab"..i]
-		if tab then
+		if tab and not tab.isSkinned then
 			T.SkinTab(tab)
 			tab:SetFrameLevel(tab:GetFrameLevel() + 2)
 			tab.isSkinned = true
@@ -387,6 +387,21 @@ local function LoadSkin()
 			end
 		end
 	end)
+
+	if C_AddOns.IsAddOnLoaded("Krowi_AchievementFilter") then
+		T.SkinNextPrevButton(KrowiAF_AchievementFrameBrowsingHistoryPrevAchievementButton)
+		T.SkinNextPrevButton(KrowiAF_AchievementFrameBrowsingHistoryNextAchievementButton)
+		T.SkinFilter(KrowiAF_AchievementFrameFilterButton)
+		T.SkinEditBox(KrowiAF_SearchBoxFrame)
+		KrowiAF_AchievementFrameFilterButton:ClearAllPoints()
+		KrowiAF_AchievementFrameFilterButton:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", 35, 21)
+		KrowiAF_AchievementFrameBrowsingHistoryPrevAchievementButton:ClearPoint("RIGHT")
+		KrowiAF_AchievementFrameBrowsingHistoryNextAchievementButton:ClearPoint("RIGHT")
+		KrowiAF_AchievementFrameBrowsingHistoryPrevAchievementButton:SetPoint("LEFT", KrowiAF_AchievementFrameFilterButton, "RIGHT", 3, 0)
+		KrowiAF_AchievementFrameBrowsingHistoryNextAchievementButton:SetPoint("LEFT", KrowiAF_AchievementFrameBrowsingHistoryPrevAchievementButton, "RIGHT", 3, 0)
+		AchievementFrameFilterDropdown:ClearAllPoints()
+		AchievementFrameFilterDropdown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", 35, 21)
+	end
 end
 
 T.SkinFuncs["Blizzard_AchievementUI"] = LoadSkin
