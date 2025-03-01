@@ -49,11 +49,11 @@ if C.raidcooldown.enable == true then
 
 	if #C.raidcooldown.spells_list > 0 then
 		-- Sync spell list with new changes
-		if not C.options.raidcooldown.spells_list_ver or C.options.raidcooldown.spells_list_ver < 4 then
-			tinsert(C.raidcooldown.spells_list, {363534, 180})
-			tinsert(C.raidcooldown.spells_list, {374227, 120})
-			C.options.raidcooldown.spells_list_ver = 4
-		end
+		-- if not C.options.raidcooldown.spells_list_ver or C.options.raidcooldown.spells_list_ver < 4 then
+			-- tinsert(C.raidcooldown.spells_list, {363534, 180})
+			-- tinsert(C.raidcooldown.spells_list, {374227, 120})
+			-- C.options.raidcooldown.spells_list_ver = 4
+		-- end
 		T.raid_spells = C.raidcooldown.spells_list
 	else
 		if C.options.raidcooldown and C.options.raidcooldown.spells_list then
