@@ -359,6 +359,8 @@ local OtherDebuffs = {
 	[SpellName(116888)] = 4,	-- Shroud of Purgatory
 	[SpellName(121175)] = 2,	-- Orb of Power (PvP)
 	[SpellName(160029)] = 3,	-- Resurrecting (Pending CR)
+	[SpellName(225080)] = 3,	-- Reincarnation (Ankh ready)
+	[SpellName(255234)] = 3,	-- Totemic Revival
 }
 
 -- Add spells from GUI
