@@ -642,9 +642,19 @@ local function LoadSkin()
 		model.Border:SetAlpha(0)
 		local bg = CreateFrame("Frame", nil, model)
 		bg:CreateBackdrop("Overlay")
-		bg.backdrop:SetOutside(model, 3, 3)
-
-		hooksecurefunc(model.Border, 'SetAtlas', function(_, texture)
+		bg.backdrop:SetPoint("TOPLEFT", model, "TOPLEFT", -2, 2)
+		bg.backdrop:SetPoint("BOTTOMRIGHT", model, "BOTTOMRIGHT", 3, -2)
+		for _, region in next, {model:GetRegions()} do
+			if region:IsObjectType("Texture") then -- check for hover glow
+				local texture, regionName = region:GetTexture(), region:GetDebugName()
+				if texture == 1569530 or (texture == 1116940 and not strfind(regionName, "SlotInvalidTexture") and not strfind(regionName, "DisabledOverlay")) then
+					region:SetColorTexture(1, 1, 1, 0.3)
+					region:SetBlendMode("ADD")
+					region:SetInside(bg.backdrop)
+				end
+			end
+		end
+		hooksecurefunc(model.Border, "SetAtlas", function(_, texture)
 			local color
 			if texture == "transmog-wardrobe-border-uncollected" then
 				color = {0.3, 0.3, 1}
@@ -677,27 +687,42 @@ local function LoadSkin()
 	WardrobeCollectionFrame.InfoButton:SetPoint("TOPLEFT", WardrobeCollectionFrame, "TOPLEFT", -10, 12)
 
 	-- Scene
-	if T.newPatch then
-		local Frame = _G.WarbandSceneJournal
+	local Frame = _G.WarbandSceneJournal
 
-		local IconsFrame = Frame.IconsFrame
-		if IconsFrame then
-			IconsFrame:StripTextures()
+	local IconsFrame = Frame.IconsFrame
+	if IconsFrame then
+		IconsFrame:StripTextures()
 
-			local controls = IconsFrame.Icons and IconsFrame.Icons.Controls
-			if controls then
-				local checkBox = controls and controls.ShowOwned and controls.ShowOwned.Checkbox
-				if checkBox then
-					T.SkinCheckBox(checkBox, 28)
-				end
+		local controls = IconsFrame.Icons and IconsFrame.Icons.Controls
+		if controls then
+			local checkBox = controls and controls.ShowOwned and controls.ShowOwned.Checkbox
+			if checkBox then
+				T.SkinCheckBox(checkBox, 28)
+			end
 
-				if controls.PagingControls then
-					T.SkinNextPrevButton(controls.PagingControls.PrevPageButton)
-					T.SkinNextPrevButton(controls.PagingControls.NextPageButton)
-				end
+			if controls.PagingControls then
+				T.SkinNextPrevButton(controls.PagingControls.PrevPageButton)
+				T.SkinNextPrevButton(controls.PagingControls.NextPageButton)
 			end
 		end
 	end
+
+	hooksecurefunc(WarbandSceneEntryMixin, "UpdateWarbandSceneData", function(self)
+		if self.warbandSceneInfo and not self.ArtBackdrop then
+			self.ArtBackdrop = CreateFrame("Frame", nil, self)
+			self.ArtBackdrop:SetFrameLevel(self:GetFrameLevel() - 1)
+			self.ArtBackdrop:SetOutside(self.Icon)
+			self.ArtBackdrop:SetTemplate("Default")
+			self.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			self.Border:SetAlpha(0)
+			if self.SetHighlightTexture then
+				local highlight = self:CreateTexture()
+				highlight:SetColorTexture(1, 1, 1, 0.3)
+				highlight:SetAllPoints(self.Icon)
+				self:SetHighlightTexture(highlight)
+			end
+		end
+	end)
 
 	-- Help box
 	local HelpBox = {
