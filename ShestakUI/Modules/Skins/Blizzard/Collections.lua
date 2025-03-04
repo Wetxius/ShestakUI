@@ -155,12 +155,10 @@ local function LoadSkin()
 	local function SkinDynamicButton(button, i)
 		if button.Border then button.Border:Hide() end
 		if i == 1 then
-			button.b = CreateFrame("Frame", nil, button:GetParent())
+			button.b = CreateFrame("Frame", nil, button)
+			button.b:SetFrameLevel(button:GetFrameLevel() - 1)
 			button.b:SetTemplate("Default")
 			button.b:SetOutside(button)
-			C_Timer.After(0.05, function()
-				button.b:SetShown(button:IsShown()) -- BETA
-			end)
 			select(3, button:GetRegions()):SetTexCoord(0.1, 0.9, 0.1, 0.9) -- icon
 			button:SetPushedTexture(0)
 			button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
