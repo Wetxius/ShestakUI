@@ -137,6 +137,9 @@ if CharacterMicroButton then
 			else
 				HelpOpenWebTicketButton:SetPoint("BOTTOM", CharacterMicroButton, "TOP", 0, -2)
 			end
+			if MicroMenu and MicroMenu.UpdateHelpTicketButtonAnchor then -- prevent SetPoint error
+				MicroMenu.UpdateHelpTicketButtonAnchor = T.dummy
+			end
 		end)
 	end
 end
