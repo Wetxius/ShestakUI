@@ -129,17 +129,16 @@ if CharacterMicroButton then
 	hooksecurefunc(CharacterMicroButton, "SetNormal", SkinCharacterPortrait)
 
 	if HelpOpenWebTicketButton then
-		C_Timer.After(1, function()
-			local _, y = CharacterMicroButton:GetCenter()
-			HelpOpenWebTicketButton:ClearAllPoints()
-			if y > (UIParent:GetHeight() / 2) then
-				HelpOpenWebTicketButton:SetPoint("TOP", CharacterMicroButton, "BOTTOM", 0, 2)
-			else
-				HelpOpenWebTicketButton:SetPoint("BOTTOM", CharacterMicroButton, "TOP", 0, -2)
-			end
-			if MicroMenu and MicroMenu.UpdateHelpTicketButtonAnchor then -- prevent SetPoint error
-				MicroMenu.UpdateHelpTicketButtonAnchor = T.dummy
-			end
-		end)
+		-- HelpOpenWebTicketButton:Show() -- for test
+		if MicroMenu and MicroMenu.UpdateHelpTicketButtonAnchor then
+			hooksecurefunc(MicroMenu, "UpdateHelpTicketButtonAnchor", function()
+				local _, y = CharacterMicroButton:GetCenter()
+				if y > (UIParent:GetHeight() / 2) then
+					HelpOpenWebTicketButton:SetPoint("CENTER", _G.CharacterMicroButton, "CENTER", 0, -30)
+				else
+					HelpOpenWebTicketButton:SetPoint("CENTER", _G.CharacterMicroButton, "CENTER", 0, 30)
+				end
+			end)
+		end
 	end
 end
