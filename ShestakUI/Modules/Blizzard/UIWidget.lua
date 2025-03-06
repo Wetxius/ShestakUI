@@ -179,6 +179,24 @@ local function SkinCaptureBar(widget)
 	end
 end
 
+local function SkinSpell(widget)
+	if not widget.styled then
+		widget:SetSize(35, 35)	-- use to avoid overlap in Jail (by default 30 size), not sure how it looks in another place
+		widget.Icon:SkinIcon()
+		widget.Border:SetAlpha(0)
+		widget.DebuffBorder:SetAlpha(0)
+		widget.styled = true
+	end
+	widget.IconMask:Hide()
+	widget.CircleMask:Hide()
+
+	if widget.DebuffBorder:IsShown() then
+		widget.backdrop:SetBackdropBorderColor(0.7, 0, 0)
+	else
+		widget.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+	end
+end
+
 local VigorBar = CreateFrame("Frame", "VigorBar", UIParent)
 VigorBar:CreateBackdrop("Default")
 VigorBar:SetPoint("TOP", powerAnchor, "TOP", 0, -2)
@@ -295,4 +313,8 @@ end)
 
 hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", function(widget)
 	SkinStatusBar(widget)
+end)
+
+hooksecurefunc(UIWidgetBaseSpellTemplateMixin, "Setup", function(widget)
+	SkinSpell(widget)
 end)
