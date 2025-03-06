@@ -9,11 +9,23 @@ frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_Collections" then
 		if not PlayerHasToy(92738) then return end
-		local button = CreateFrame("Button", "PetJournalSafariButton", PetJournal, "SecureActionButtonTemplate, ActionButtonTemplate")
+		local button = CreateFrame("Button", "PetJournalSafariButton", PetJournal, "SecureActionButtonTemplate")
 		button:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 		button:SetSize(36, 36)
 		button:SetAttribute("type", "toy")
 		button:SetAttribute("toy", 92738)
+
+		if not button.icon then
+			button.icon = button:CreateTexture("$parentIcon")
+			button.icon:SetAllPoints()
+
+			button.border = button:CreateTexture("$parentBorder")
+			button.border:SetOutside(button)
+
+			button:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square")
+			button:GetHighlightTexture():SetBlendMode("ADD")
+		end
+
 		if C.skins.blizzard_frames == true then
 			button:SetPoint("TOPLEFT", PetJournal, "TOPRIGHT", 1, 0)
 			button:SetTemplate("Default")
@@ -26,6 +38,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			button.icon:SetDrawLayer("OVERLAY")
 		else
 			button:SetPoint("TOPLEFT", PetJournal, "TOPRIGHT", 3, -24)
+			button.border:SetTexture("Interface\\Buttons\\ActionBarFlyoutButton")
+			button.border:SetTexCoord(0.01562500, 0.67187500, 0.39843750, 0.72656250)
 		end
 
 		button.icon:SetTexture(774766)

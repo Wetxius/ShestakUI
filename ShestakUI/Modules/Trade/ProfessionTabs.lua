@@ -112,7 +112,13 @@ local function UpdateSelectedTabs(object)
 
 	for index = 1, #tabs[object] do
 		local tab = tabs[object][index]
-		tab:SetChecked(C_Spell.IsCurrentSpell(tab.name))
+		if C_Spell.IsCurrentSpell(tab.name) then
+			tab:Disable()
+			tab:SetChecked(true)
+		else
+			tab:Enable()
+			tab:SetChecked(false)
+		end
 	end
 end
 
@@ -126,15 +132,24 @@ end
 
 local function UpdateTab(object, name, texture, hat)
 	local index = tabs[object].index + 1
-	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate, ActionButtonTemplate")
+	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate")
 	tab:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 
 	tab:SetSize(36, 36)
 	tab:ClearAllPoints()
+
+	if not tab.icon then
+		tab.icon = tab:CreateTexture("$parentIcon")
+		tab.icon:SetAllPoints()
+
+		tab:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square")
+		tab:GetHighlightTexture():SetBlendMode("ADD")
+		tab:SetCheckedTexture("Interface\\Buttons\\CheckButtonHilight")
+		tab:GetCheckedTexture():SetBlendMode("ADD")
+	end
+
 	if C_AddOns.IsAddOnLoaded("Aurora") then
 		tab:SetPoint("TOPLEFT", object, "TOPRIGHT", 11, (-44 * index) + 10)
-
-		tab:SetNormalTexture(0)
 
 		local F, C = unpack(Aurora)
 		F.CreateBG(tab)
@@ -143,7 +158,6 @@ local function UpdateTab(object, name, texture, hat)
 
 		tab:SetTemplate("Default")
 		tab:StyleButton()
-		tab:SetNormalTexture(0)
 		tab.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		tab.icon:ClearAllPoints()
 		tab.icon:SetPoint("TOPLEFT", 2, -2)
