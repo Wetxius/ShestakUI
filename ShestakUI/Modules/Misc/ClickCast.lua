@@ -259,7 +259,7 @@ local function Load()
 	SpellBinder:SetPoint("TOPLEFT", PlayerSpellsFrame.SpellBookFrame, "TOPRIGHT", 70, 0)
 	SpellBinder:SetSize(300, 400)
 
-	SpellBinderPortrait:SetAlpha(0)
+	SpellBinderPortrait:SetTexture("Interface\\MacroFrame\\MacroFrame-Icon")
 
 	SpellBinder.title = _G["SpellBinderTitle"] or SpellBinder:CreateFontString("SpellBinderTitle", "OVERLAY", "GameFontNormal")
 	SpellBinder.title:SetPoint("TOP", _G["SpellBinder"], "TOP", 0, -5)
@@ -309,9 +309,14 @@ local function Load()
 		if SpellBinder:IsVisible() then SpellBinder.OpenButton:SetChecked(true) else SpellBinder.OpenButton:SetChecked(false) end
 	end
 
-	SpellBinder.OpenButton = CreateFrame("CheckButton", "SpellBinderOpenButton", PlayerSpellsFrame.SpellBookFrame, "ActionButtonTemplate")
+	SpellBinder.OpenButton = CreateFrame("CheckButton", "SpellBinderOpenButton", PlayerSpellsFrame.SpellBookFrame)
 	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
 	SpellBinder.OpenButton:SetSize(40, 40)
+
+	SpellBinder.OpenButton:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square")
+	SpellBinder.OpenButton:GetHighlightTexture():SetBlendMode("ADD")
+	SpellBinder.OpenButton:SetCheckedTexture("Interface\\Buttons\\CheckButtonHilight")
+	SpellBinder.OpenButton:GetCheckedTexture():SetBlendMode("ADD")
 
 	SpellBinder.OpenButton:SetScript("OnShow", function(self)
 		if SpellBinder:IsVisible() then self:SetChecked(true) end
@@ -412,6 +417,7 @@ local function Load()
 		local F, C = unpack(Aurora)
 		SpellBinder:StripTextures()
 		SpellBinderInset:StripTextures()
+		SpellBinderPortrait:SetAlpha(0)
 
 		SpellBinder.OpenButton:StripTextures()
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
@@ -430,6 +436,7 @@ local function Load()
 		SpellBinder:CreateBackdrop("Transparent")
 		SpellBinder.backdrop:SetPoint("TOPLEFT", -18, 0)
 		SpellBinder.backdrop:SetPoint("BOTTOMRIGHT", 0, 9)
+		SpellBinderPortrait:SetAlpha(0)
 
 		SpellBinder.OpenButton:StripTextures()
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
