@@ -112,7 +112,7 @@ local function UpdateSelectedTabs(object)
 
 	for index = 1, #tabs[object] do
 		local tab = tabs[object][index]
-		if C_Spell.IsCurrentSpell(tab.name) then
+		if tab.spellID and C_Spell.IsCurrentSpell(tab.spellID) then
 			tab:Disable()
 			tab:SetChecked(true)
 		else
@@ -130,7 +130,7 @@ local function ResetTabs(object)
 	tabs[object].index = 0
 end
 
-local function UpdateTab(object, name, texture, hat)
+local function UpdateTab(object, name, texture, spellID)
 	local index = tabs[object].index + 1
 	local tab = tabs[object][index] or CreateFrame("CheckButton", "ProTabs"..tabs[object].index, object, "SecureActionButtonTemplate")
 	tab:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
@@ -168,7 +168,7 @@ local function UpdateTab(object, name, texture, hat)
 
 	tab.icon:SetTexture(texture)
 
-	if hat then
+	if texture == 236571 then	-- Chef's Hat
 		tab:SetAttribute("type", "toy")
 		tab:SetAttribute("toy", 134020)
 	elseif texture == 135805 then	-- Cooking Fire
@@ -176,12 +176,13 @@ local function UpdateTab(object, name, texture, hat)
 		tab:SetAttribute("macrotext", "/cast [@player]"..name)
 	else
 		tab:SetAttribute("type", "spell")
-		tab:SetAttribute("spell", name)
+		tab:SetAttribute("spell", spellID or name)
 	end
 
 	tab:Show()
 
 	tab.name = name
+	tab.spellID = spellID
 
 	tab:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 5, -7)
@@ -206,16 +207,17 @@ local function HandleProfession(object, professionID, hat)
 				if defaults[skillID][index] then
 					local name = C_SpellBook.GetSpellBookItemName(offset + index, 0)
 					local texture = C_SpellBook.GetSpellBookItemTexture(offset + index, 0)
+					local spellID = C_SpellBook.GetSpellBookItemInfo(offset + index, 0).spellID
 
 					if name and texture then
-						UpdateTab(object, name, texture)
+						UpdateTab(object, name, texture, spellID)
 					end
 				end
 			end
 		end
 
 		if hat and PlayerHasToy(134020) and C_ToyBox.IsToyUsable(134020) then
-			UpdateTab(object, GetSpellInfo(67556), 236571, true)
+			UpdateTab(object, GetSpellInfo(67556), 236571, 134020)
 		end
 	end
 end
@@ -237,10 +239,11 @@ local function HandleTabs(object)
 		HandleProfession(object, fishing)
 		HandleProfession(object, cooking, true)
 
+		-- Runuforging and Pick Lock
 		for index = 1, #spells do
 			if IsSpellKnown(spells[index]) then
 				local name, _, texture = GetSpellInfo(spells[index])
-				UpdateTab(object, name, texture)
+				UpdateTab(object, name, texture, spells[index])
 			end
 		end
 	end
