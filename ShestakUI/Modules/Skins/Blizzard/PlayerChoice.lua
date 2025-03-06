@@ -12,6 +12,7 @@ local function LoadSkin()
 			frame.BlackBackground:SetAlpha(0)
 			frame.Background:SetAlpha(0)
 			frame.NineSlice:SetAlpha(0)
+			frame.BorderOverlay:SetAlpha(0)
 			frame.Header.Texture:SetAlpha(0)
 
 			frame:CreateBackdrop("Transparent")
@@ -69,16 +70,16 @@ local function LoadSkin()
 			end
 
 			local buttonsContainer = option.OptionButtonsContainer
-			if buttonsContainer and buttonsContainer.buttonPool then
-				for button in buttonsContainer.buttonPool:EnumerateActive() do
-					if not button.isSkinned then
+			if buttonsContainer and buttonsContainer.buttonFramePool then
+				for buttonFrame in buttonsContainer.buttonFramePool:EnumerateActive() do
+					if not buttonFrame.isSkinned then
 						if IsAnima then
-							button:StripTextures(true)
+							buttonFrame.Button:StripTextures(true)
 						end
 						-- if i == 1 or (hasArtwork and i == 2) then
-							button:SkinButton()
+							buttonFrame.Button:SkinButton()
 						-- end
-						button.isSkinned = true
+						buttonFrame.isSkinned = true
 					end
 				end
 			end
