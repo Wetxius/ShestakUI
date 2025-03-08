@@ -466,7 +466,7 @@ end
 
 local LoadFunction = CreateFrame("Frame")
 LoadFunction:RegisterEvent("ADDON_LOADED")
-LoadFunction:SetScript("OnEvent", function(self, _, addon)
+LoadFunction:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_PlayerSpells" then
 		Load()
 	end

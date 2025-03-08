@@ -113,7 +113,7 @@ local function Update(self, event, unit)
 	end
 
 	if(element.PostUpdate) then
-		return element:PostUpdate(unit, myIncomingHeal, otherIncomingHeal, absorb, healAbsorb)
+		return element:PostUpdate(unit, myIncomingHeal, allIncomingHeal, absorb, healAbsorb)
 	end
 end
 

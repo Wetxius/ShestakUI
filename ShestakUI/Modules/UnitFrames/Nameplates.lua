@@ -588,7 +588,7 @@ local function HealthPostUpdate(self, unit, cur, max)
 	threatColor(main, true)
 end
 
-local function callback(self, event, unit)
+local function callback(self, _, unit)
 	if not self then return end
 	if unit then
 		local unitGUID = UnitGUID(unit)

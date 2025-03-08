@@ -128,7 +128,7 @@ local function CheckAlpha(element)
 	end
 end
 
-local function Update(self, event, unit)
+local function Update(self, _, unit)
 	local element = self.Reputation
 	if(element.PreUpdate) then element:PreUpdate(unit) end
 
@@ -177,7 +177,7 @@ local function ElementDisable(self)
 	Path(self, 'ElementDisable', 'player')
 end
 
-local function Visibility(self, event, unit, selectedFactionIndex)
+local function Visibility(self, event, _, selectedFactionIndex)
 	local shouldEnable
 	if(selectedFactionIndex ~= nil) then
 		if(selectedFactionIndex > 0) then
@@ -202,7 +202,7 @@ local function ForceUpdate(element)
 	return VisibilityPath(element.__owner, 'ForceUpdate', element.__owner.unit)
 end
 
-local function Enable(self, unit)
+local function Enable(self)
 	local element = self.Reputation
 	if(element) then
 		element.__owner = self

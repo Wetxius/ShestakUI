@@ -420,7 +420,7 @@ if not C.actionbar.show_grid then
 	frame:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
 	frame:RegisterEvent("ACTIONBAR_UPDATE_STATE")
 	frame:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	frame:SetScript("OnEvent", function(self, event)
+	frame:SetScript("OnEvent", function(_, event)
 		if event == "ACTIONBAR_SHOWGRID" then
 			for i = 1, #allButtons do
 				allButtons[i]:SetAlpha(1)

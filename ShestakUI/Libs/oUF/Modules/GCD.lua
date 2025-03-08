@@ -45,6 +45,10 @@ local function Update(self)
 	end
 end
 
+local function ForceUpdate(element)
+	return Update(element.__owner, 'ForceUpdate')
+end
+
 local function Enable(self)
 	local element = self.GCD
 	if(element) then

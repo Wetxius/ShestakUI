@@ -65,7 +65,7 @@ if C.skins.blizzard_frames == true then
 
 	button.plus:Hide()
 
-	hooksecurefunc(ObjectiveTrackerFrame, "SetCollapsed", function(self, collapsed)
+	hooksecurefunc(ObjectiveTrackerFrame, "SetCollapsed", function(_, collapsed)
 		if collapsed then
 			button.plus:Show()
 			if C.general.minimize_mouseover then

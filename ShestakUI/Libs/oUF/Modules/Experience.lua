@@ -115,7 +115,7 @@ local function UpdateColor(element, isHonor, isRested)
 	end
 end
 
-local function Update(self, event, unit)
+local function Update(self, _, unit)
 	if(self.unit ~= unit or unit ~= 'player') then return end
 
 	local element = self.Experience
@@ -177,7 +177,7 @@ local function ElementDisable(self)
 	Path(self, 'ElementDisable', 'player')
 end
 
-local function Visibility(self, event, unit)
+local function Visibility(self)
 	local shouldEnable
 
 	if(not UnitHasVehicleUI('player')) then

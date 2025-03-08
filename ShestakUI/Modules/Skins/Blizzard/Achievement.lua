@@ -646,9 +646,9 @@ local function LoadSkin()
 			htex:SetInside(statusBar.backdrop)
 			button:SetHighlightTexture(htex)
 
-			button:SetScript("OnLeave", function(self)
+			button:SetScript("OnLeave", function()
 			end)
-			button:SetScript("OnEnter", function(self)
+			button:SetScript("OnEnter", function()
 			end)
 		end
 	end

@@ -7,7 +7,7 @@ if C.skins.blizzard_frames ~= true or C.skins.clique ~= true then return end
 if not C_AddOns.IsAddOnLoaded("Clique") then return end
 
 local isStyled = false
-hooksecurefunc(Clique, "ShowBindingConfig", function(self)
+hooksecurefunc(Clique, "ShowBindingConfig", function()
 	if isStyled then return end
 	T.SkinFrame(CliqueUIBindingFrame)
 

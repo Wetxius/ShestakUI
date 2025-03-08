@@ -372,7 +372,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		if not C_AddOns.IsAddOnLoaded("Blizzard_MacroUI") or not C_AddOns.IsAddOnLoaded("Blizzard_PlayerSpells") then
 			local Load = CreateFrame("Frame")
 			Load:RegisterEvent("ADDON_LOADED")
-			Load:SetScript("OnEvent", function(self, _, addon)
+			Load:SetScript("OnEvent", function(_, _, addon)
 				if addon == "Blizzard_MacroUI" then
 					registermacro()
 				elseif addon == "Blizzard_PlayerSpells" then

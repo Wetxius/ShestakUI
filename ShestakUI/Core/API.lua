@@ -528,15 +528,15 @@ function T.SkinScrollBar(frame, isMinimal)
 					frame:SetAlpha(0)
 				end
 
-				hooksecurefunc(newThumb, "Hide", function(self)
+				hooksecurefunc(newThumb, "Hide", function()
 					frame:SetAlpha(0)
 				end)
 
-				hooksecurefunc(newThumb, "Show", function(self)
+				hooksecurefunc(newThumb, "Show", function()
 					frame:SetAlpha(1)
 				end)
 
-				hooksecurefunc(newThumb, "SetShown", function(self, showThumb)
+				hooksecurefunc(newThumb, "SetShown", function(_, showThumb)
 					if showThumb then
 						frame:SetAlpha(1)
 					else
@@ -1119,7 +1119,7 @@ function T.SkinProfessionsFlyout(_, parent)
 			frame:StripTextures()
 			frame:CreateBackdrop("Transparent")
 			frame.backdrop:SetFrameLevel(2)
-			hooksecurefunc(frame, "SetParent", function(self)
+			hooksecurefunc(frame, "SetParent", function()
 				frame.backdrop:SetFrameStrata("LOW")
 			end)
 			frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, 2)
@@ -1198,7 +1198,7 @@ local iconColors = {
 function T.SkinIconBorder(frame, parent)
 	local border = parent or frame:GetParent().backdrop
 	frame:SetAlpha(0)
-	hooksecurefunc(frame, "SetVertexColor", function(self, r, g, b)
+	hooksecurefunc(frame, "SetVertexColor", function(_, r, g, b)
 		if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g and not (r > 0.9 and g > 0.9 and b > 0.9) then
 			border:SetBackdropBorderColor(r, g, b)
 		else
@@ -1206,7 +1206,7 @@ function T.SkinIconBorder(frame, parent)
 		end
 	end)
 
-	hooksecurefunc(frame, "SetAtlas", function(self, atlas)
+	hooksecurefunc(frame, "SetAtlas", function(_, atlas)
 		local atlasAbbr = atlas and strmatch(atlas, "%-(%w+)$")
 		local color = atlasAbbr and iconColors[atlasAbbr]
 		if color then
@@ -1214,11 +1214,11 @@ function T.SkinIconBorder(frame, parent)
 		end
 	end)
 
-	hooksecurefunc(frame, "Hide", function(self)
+	hooksecurefunc(frame, "Hide", function()
 		border:SetBackdropBorderColor(unpack(C.media.border_color))
 	end)
 
-	hooksecurefunc(frame, "SetShown", function(self, show)
+	hooksecurefunc(frame, "SetShown", function(_, show)
 		if not show then
 			border:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
