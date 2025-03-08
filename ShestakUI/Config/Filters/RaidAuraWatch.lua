@@ -102,6 +102,8 @@ end
 --	Debuffs
 ----------------------------------------------------------------------------------------
 local RaidDebuffs = {
+	-- Liberation of Undermine
+
 	-- Nerub'ar Palace
 	-- Ulgrax the Devourer
 	[SpellName(434705)] = 3,	-- Tenderized
@@ -173,6 +175,120 @@ local RaidDebuffs = {
 local DungeonDebuffs = {
 	-- The War Within Season 1
 	[SpellName(440313)] = 6,	-- Void Rift
+
+	-- The Rookery (Season 2)
+	[SpellName(429493)] = 3,	-- Unstable Corruption
+	[SpellName(424739)] = 3,	-- Chaotic Corruption
+	[SpellName(433067)] = 3,	-- Seeping Corruption
+	[SpellName(426160)] = 3,	-- Dark Gravity
+	[SpellName(1214324)] = 3,	-- Crashing Thunder
+	[SpellName(424966)] = 3,	-- Lingering Void
+	[SpellName(467907)] = 3,	-- Festering Void
+	[SpellName(458082)] = 3,	-- Stormrider's Charge
+	[SpellName(472764)] = 3,	-- Void Extraction
+	[SpellName(427616)] = 3,	-- Energized Barrage
+	[SpellName(430814)] = 3,	-- Attracting Shadows
+	[SpellName(430179)] = 3,	-- Seeping Corruption
+	[SpellName(1214523)] = 3,	-- Feasting Void
+
+	-- Priory of the Sacred Flame (Season 2)
+	[SpellName(424414)] = 3,	-- Pierce Armor
+	[SpellName(423015)] = 3,	-- Castigator's Shield
+	[SpellName(447439)] = 3,	-- Savage Mauling
+	[SpellName(425556)] = 3,	-- Sanctified Ground
+	[SpellName(428170)] = 3,	-- Blinding Light
+	[SpellName(448492)] = 3,	-- Thunderclap
+	[SpellName(427621)] = 3,	-- Impale
+	[SpellName(446403)] = 3,	-- Sacrificial Flame
+	[SpellName(451764)] = 3,	-- Radiant Flame
+	[SpellName(424426)] = 3,	-- Lunging Strike
+	[SpellName(448787)] = 3,	-- Purification
+	[SpellName(435165)] = 3,	-- Blazing Strike
+	[SpellName(448515)] = 3,	-- Divine Judgment
+	[SpellName(427635)] = 3,	-- Grievous Rip
+	[SpellName(427897)] = 3,	-- Heat Wave
+	[SpellName(424430)] = 3,	-- Consecration
+	[SpellName(453461)] = 3,	-- Caltrops
+	[SpellName(427900)] = 3,	-- Molten Pool
+
+	-- Cinderbrew Meadery (Season 2)
+	[SpellName(441397)] = 3,	-- Bee Venom
+	[SpellName(431897)] = 3,	-- Rowdy Yell
+	[SpellName(442995)] = 3,	-- Swarming Surprise
+	[SpellName(437956)] = 3,	-- Erupting Inferno
+	[SpellName(441413)] = 3,	-- Shredding Sting
+	[SpellName(434773)] = 3,	-- Mean Mug
+	[SpellName(438975)] = 3,	-- Shredding Sting
+	[SpellName(463220)] = 3,	-- Volatile Keg
+	[SpellName(449090)] = 3,	-- Reckless Delivery
+	[SpellName(437721)] = 3,	-- Boiling Flames
+	[SpellName(441179)] = 3,	-- Oozing Honey
+	[SpellName(434707)] = 3,	-- Cinderbrew Toss
+	[SpellName(445180)] = 3,	-- Crawling Brawl
+	[SpellName(442589)] = 3,	-- Beeswax
+	[SpellName(435789)] = 3,	-- Cindering Wounds
+	[SpellName(440134)] = 3,	-- Honey Marinade
+	[SpellName(432182)] = 3,	-- Throw Cinderbrew
+	[SpellName(436644)] = 3,	-- Burning Ricochet
+	[SpellName(436624)] = 3,	-- Cash Cannon
+	[SpellName(439325)] = 3,	-- Burning Fermentation
+	[SpellName(432196)] = 3,	-- Hot Honey
+	[SpellName(439586)] = 3,	-- Fluttering Wing
+	[SpellName(440141)] = 3,	-- Honey Marinade
+
+	-- Darkflame Cleft (Season 2)
+	[SpellName(426943)] = 3,	-- Rising Gloom
+	[SpellName(427015)] = 3,	-- Shadowblast
+	[SpellName(420696)] = 3,	-- Throw Darkflame
+	[SpellName(422648)] = 3,	-- Darkflame Pickaxe
+	[SpellName(1218308)] = 3,	-- Enkindling Inferno
+	[SpellName(422245)] = 3,	-- Rock Buster
+	[SpellName(423693)] = 3,	-- Luring Candleflame
+	[SpellName(421638)] = 3,	-- Wicklighter Barrage
+	[SpellName(424223)] = 3,	-- Incite Flames
+	[SpellName(421146)] = 3,	-- Throw Darkflame
+	[SpellName(427180)] = 3,	-- Fear of the Gloom
+	[SpellName(424322)] = 3,	-- Explosive Flame
+	[SpellName(422807)] = 3,	-- Candlelight
+	[SpellName(420307)] = 3,	-- Candlelight
+	[SpellName(422806)] = 3,	-- Smothering Shadows
+	[SpellName(469620)] = 3,	-- Creeping Shadow
+	[SpellName(443694)] = 3,	-- Crude Weapons
+	[SpellName(428019)] = 3,	-- Flashpoint
+	[SpellName(423501)] = 3,	-- Wild Wallop
+	[SpellName(426277)] = 3,	-- One-Hand Headlock
+	[SpellName(423654)] = 3,	-- Ouch!
+	[SpellName(421653)] = 3,	-- Cursed Wax
+	[SpellName(421067)] = 3,	-- Molten Wax
+	[SpellName(426883)] = 3,	-- Bonk!
+	[SpellName(440653)] = 3,	-- Surging Flamethrower
+
+	-- Operation: Floodgate (Season 2)
+	[SpellName(462737)] = 3,	-- Black Blood Wound
+	[SpellName(1213803)] = 3,	-- Nailed
+	[SpellName(468672)] = 3,	-- Pinch
+	[SpellName(468616)] = 3,	-- Leaping Spark
+	[SpellName(469799)] = 3,	-- Overcharge
+	[SpellName(469811)] = 3,	-- Backwash
+	[SpellName(468680)] = 3,	-- Crabsplosion
+	[SpellName(473051)] = 3,	-- Rushing Tide
+	[SpellName(474351)] = 3,	-- Shreddation Sawblade
+	[SpellName(465830)] = 3,	-- Warp Blood
+	[SpellName(468723)] = 3,	-- Shock Water
+	[SpellName(474388)] = 3,	-- Flamethrower
+	[SpellName(472338)] = 3,	-- Surveyed Ground
+	[SpellName(462771)] = 3,	-- Surveying Beam
+	[SpellName(472819)] = 3,	-- Razorchoke Vines
+	[SpellName(473836)] = 3,	-- Electrocrush
+	[SpellName(468815)] = 3,	-- Gigazap
+	[SpellName(470022)] = 3,	-- Barreling Charge
+	[SpellName(470038)] = 3,	-- Razorchoke Vines
+	[SpellName(473713)] = 3,	-- Kinetic Explosive Gel
+	[SpellName(468811)] = 3,	-- Gigazap
+	[SpellName(466188)] = 3,	-- Thunder Punch
+	[SpellName(460965)] = 3,	-- Barreling Charge
+	[SpellName(472878)] = 3,	-- Sludge Claws
+	[SpellName(473224)] = 3,	-- Sonic Boom
 
 	-- The Stonevault (Season 1)
 	[SpellName(427329)] = 3,	-- Void Corruption
@@ -281,6 +397,60 @@ local DungeonDebuffs = {
 	[SpellName(436322)] = 3,	-- Poison Bolt
 	[SpellName(434083)] = 3,	-- Ambush
 	[SpellName(433843)] = 3,	-- Erupting Webs
+
+	-- Previous Expansion Dungeons (Season 2)
+	-- Theater of Pain
+ 	[SpellName(333299)] = 3,	-- Curse of Desolation
+ 	[SpellName(319539)] = 3,	-- Soulless
+ 	[SpellName(326892)] = 3,	-- Fixate
+ 	[SpellName(321768)] = 3,	-- On the Hook
+ 	[SpellName(323825)] = 3,	-- Grasping Rift
+ 	[SpellName(342675)] = 3,	-- Bone Spear
+ 	[SpellName(323831)] = 3,	-- Death Grasp
+ 	[SpellName(330608)] = 3,	-- Vile Eruption
+ 	[SpellName(330868)] = 3,	-- Necrotic Bolt Volley
+ 	[SpellName(323750)] = 3,	-- Vile Gas
+ 	[SpellName(323406)] = 3,	-- Jagged Gash
+ 	[SpellName(330700)] = 3,	-- Decaying Blight
+ 	[SpellName(319626)] = 3,	-- Phantasmal Parasite
+ 	[SpellName(324449)] = 3,	-- Manifest Death
+ 	[SpellName(341949)] = 3,	-- Withering Blight
+ 	[SpellName(333861)] = 3,	-- Ricocheting Blade
+
+	-- The MOTHERLODE!!
+ 	[SpellName(263074)] = 4,	-- Festering Bite
+ 	[SpellName(280605)] = 4,	-- Brain Freeze
+ 	[SpellName(257337)] = 4,	-- Shocking Claw
+ 	[SpellName(270882)] = 5,	-- Blazing Azerite
+ 	[SpellName(268797)] = 4,	-- Transmute: Enemy to Goo
+ 	[SpellName(259856)] = 4,	-- Chemical Burn
+ 	[SpellName(269302)] = 3,	-- Toxic Blades
+ 	[SpellName(280604)] = 3,	-- Iced Spritzer
+ 	[SpellName(257371)] = 4,	-- Tear Gas
+ 	[SpellName(257544)] = 4,	-- Jagged Cut
+ 	[SpellName(268846)] = 4,	-- Echo Blade
+ 	[SpellName(262794)] = 5,	-- Energy Lash
+ 	[SpellName(262513)] = 5,	-- Azerite Heartseeker
+ 	[SpellName(260838)] = 5,	-- Homing Missle
+ 	[SpellName(263637)] = 4,	-- Clothesline
+
+	-- Operation: Mechagon
+ 	[SpellName(291928)] = 3,	-- Giga-Zap
+ 	[SpellName(302274)] = 3,	-- Fulminating Zap
+ 	[SpellName(298669)] = 3,	-- Taze
+ 	[SpellName(295445)] = 3,	-- Wreck
+ 	[SpellName(294929)] = 3,	-- Blazing Chomp
+ 	[SpellName(297257)] = 3,	-- Electrical Charge
+ 	[SpellName(294855)] = 3,	-- Blossom Blast
+ 	[SpellName(291972)] = 3,	-- Explosive Leap
+ 	[SpellName(285443)] = 3,	-- "Hidden" Flame Cannon
+ 	[SpellName(291974)] = 3,	-- Obnoxious Monologue
+ 	[SpellName(296150)] = 3,	-- Vent Blast
+ 	[SpellName(298602)] = 3,	-- Smoke Cloud
+ 	[SpellName(296560)] = 3,	-- Clinging Static
+ 	[SpellName(297283)] = 3,	-- Cave In
+ 	[SpellName(291914)] = 3,	-- Cutting Beam
+ 	[SpellName(302384)] = 3,	-- Static Discharge
 
 	-- Previous Expansion Dungeons (Season 1)
 	-- Mists of Tirna Scithe
