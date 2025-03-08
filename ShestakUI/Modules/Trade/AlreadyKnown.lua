@@ -93,8 +93,8 @@ local function MerchantFrame_UpdateMerchantInfo()
 
 		local button = _G["MerchantItem"..i.."ItemButton"]
 		if button and button:IsShown() then
-			local _, _, _, _, _, isUsable = GetMerchantItemInfo(index)
-			if isUsable and IsKnown(GetMerchantItemLink(index)) then
+			local info = C_MerchantFrame.GetItemInfo(index)
+			if info and info.isUsable and IsKnown(GetMerchantItemLink(index)) then
 				SetItemButtonTextureVertexColor(button, color.r, color.g, color.b)
 			end
 		end

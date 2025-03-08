@@ -11,9 +11,9 @@ hooksecurefunc("MerchantItemButton_OnModifiedClick", function(self)
 
 		local maxStack = select(8, C_Item.GetItemInfo(itemLink))
 		if maxStack and maxStack > 1 then
-			local numAvailable = select(5, GetMerchantItemInfo(id))
-			if numAvailable > -1 then
-				BuyMerchantItem(id, numAvailable)
+			local info = C_MerchantFrame.GetItemInfo(id)
+			if info and info.numAvailable > -1 then
+				BuyMerchantItem(id, info.numAvailable)
 			else
 				BuyMerchantItem(id, GetMerchantItemMaxStack(id))
 			end
