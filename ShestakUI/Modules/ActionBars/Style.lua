@@ -289,7 +289,7 @@ frame:SetScript("OnEvent", function()
 	StyleNormalButton(ExtraActionButton1)
 end)
 
-local function SetupFlyoutButton(button, self)
+local function SetupFlyoutButton(button)
 	if button:GetHeight() ~= C.actionbar.button_size and not InCombatLockdown() then
 		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 	end
@@ -314,10 +314,10 @@ local function SetupFlyoutButton(button, self)
 	end
 end
 
-local function StyleFlyoutButton(self)
+local function StyleFlyoutButton()
 	local button, i = _G["SpellFlyoutPopupButton1"], 1
 	while button do
-		SetupFlyoutButton(button, self)
+		SetupFlyoutButton(button)
 
 		i = i + 1
 		button = _G["SpellFlyoutPopupButton"..i]

@@ -4,7 +4,7 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Expansion Landing Page skin
 ----------------------------------------------------------------------------------------
-local function LoadSkin(self)
+local function LoadSkin()
 	local overlay = _G.ExpansionLandingPage.Overlay
 	if overlay then
 		for _, child in next, {overlay:GetChildren()} do

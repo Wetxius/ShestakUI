@@ -407,14 +407,14 @@ local function LoadSkin()
 	AchievementFrameFilterDropdown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", 35, 21)
 
 	-- [[ Categories ]]
-	local function OnCategoriesFrameViewAcquiredFrame(frame)
-		frame:StripTextures(true)
-		frame:StyleButton()
+	local function SkinCategoryButton(_, button)
+		button:StripTextures(true)
+		button:StyleButton()
 
-		frame:SetHighlightTexture(C.media.texture)
-		local hl = frame:GetHighlightTexture()
+		button:SetHighlightTexture(C.media.texture)
+		local hl = button:GetHighlightTexture()
 		hl:SetVertexColor(0.8, 0.8, 0.8, 0.25)
-		hl:SetInside(frame.backdrop)
+		hl:SetInside(button.backdrop)
 	end
 
 	local function SkinCategoriesFrame(frame)
@@ -428,9 +428,7 @@ local function LoadSkin()
 		frame.backdrop:SetPoint("BOTTOMRIGHT", 2, -3)
 
 		-- Buttons
-		frame.ScrollView:RegisterCallback(ScrollBoxListViewMixin.Event.OnAcquiredFrame, function(self, _frame, elementData, new)
-			OnCategoriesFrameViewAcquiredFrame(_frame)
-		end, frame)
+		KrowiAF_CategoriesFrame.ScrollView:RegisterCallback(ScrollBoxListViewMixin.Event.OnAcquiredFrame, SkinCategoryButton, KrowiAF_CategoriesFrame);
 	end
 	SkinCategoriesFrame(KrowiAF_CategoriesFrame)
 
@@ -975,7 +973,7 @@ local function LoadSkin()
 		C_Timer.After(0.05, function()
 			SkinSideButtons()
 			if KrowiAF_AchievementFrameSideButton1 then
-				hooksecurefunc(KrowiAF_AchievementFrameSideButton1, "SetPoint", function(self, point, anchor, attachTo, x, y)
+				hooksecurefunc(KrowiAF_AchievementFrameSideButton1, "SetPoint", function(_, _, _, _, _, y)
 					if y == 0 then
 						SkinSideButtons()
 					end

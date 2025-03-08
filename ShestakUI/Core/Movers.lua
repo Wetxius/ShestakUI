@@ -317,7 +317,7 @@ local UpdatePosition = function(moveX, moveY)
 	controls.y:SetText(T.Round(yOfs))
 end
 
-local OnMouseWheel = function(self, offset)
+local OnMouseWheel = function(_, offset)
 	if IsShiftKeyDown() then
 		UpdatePosition(0, offset)
 	elseif IsControlKeyDown() then

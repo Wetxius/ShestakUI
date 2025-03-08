@@ -281,7 +281,7 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
 
-	LootRollAnchor:SetScript("OnEvent", function(_, event, ...)
+	LootRollAnchor:SetScript("OnEvent", function(_, _, ...)
 		return START_LOOT_ROLL(...)
 	end)
 

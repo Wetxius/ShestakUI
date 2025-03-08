@@ -32,18 +32,18 @@ local function UpdateDuration(aura, timeLeft)
 	end
 end
 
-hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(self, auras)
+hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
 	local previousBuff, aboveBuff
 	for index, aura in ipairs(auras) do
 		aura:SetSize(C.aura.player_buff_size, C.aura.player_buff_size)
 		aura:SetTemplate("Default")
 
 		aura.TempEnchantBorder:SetAlpha(0)
-		hooksecurefunc(aura.TempEnchantBorder, "Show", function(self)
+		hooksecurefunc(aura.TempEnchantBorder, "Show", function()
 			aura:SetBackdropBorderColor(0.6, 0.1, 0.6)
 		end)
 
-		hooksecurefunc(aura.TempEnchantBorder, "Hide", function(self)
+		hooksecurefunc(aura.TempEnchantBorder, "Hide", function()
 			if C.aura.classcolor_border == true then
 				aura:SetBackdropBorderColor(unpack(C.media.classborder_color))
 			else

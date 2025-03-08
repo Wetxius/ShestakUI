@@ -707,7 +707,7 @@ local function LoadSkin()
 		end
 	end)
 
-	hooksecurefunc(GarrisonRecruitSelectFrame, "Show", function(self)
+	hooksecurefunc(GarrisonRecruitSelectFrame, "Show", function()
 		C_Timer.After(0.01, function() -- fixed color name after open
 			GarrisonRecruitSelectFrame.FollowerList.ScrollBox:Update()
 		end)
@@ -1033,7 +1033,7 @@ local function LoadSkin()
 	CovenantMissionFrame:DisableDrawLayer("BORDER")
 	CovenantMissionFrame:DisableDrawLayer("BACKGROUND")
 
-	CovenantMissionFrame:HookScript("OnShow", function(self)
+	CovenantMissionFrame:HookScript("OnShow", function()
 		T.SkinCloseButton(CovenantMissionFrame.CloseButton)
 		CovenantMissionFrame.FollowerTab:StripTextures()
 	end)

@@ -271,7 +271,7 @@ local function SkinVigorBar(widget)
 	widget:SetAlpha(0)
 
 	if not widget.hook then
-		hooksecurefunc(widget, "Hide", function(self)
+		hooksecurefunc(widget, "Hide", function()
 			VigorBar:Hide()
 		end)
 		widget.hook = true

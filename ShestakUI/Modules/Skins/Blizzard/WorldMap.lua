@@ -206,20 +206,7 @@ local function LoadSkin()
 		tex:SetAllPoints(button.Icon)
 	end
 
-	-- Legend
-	local function WorldMapLegendButton(button)
-		local shadow = button:GetRegions()
-		shadow:Hide()
-
-		button.Background:Hide()
-		button.IconOverlay:SetAlpha(0)
-		button.Border:Hide()
-
-		local tex = button:GetHighlightTexture()
-		tex:SetAtlas("QuestNormal")
-		tex:SetAllPoints(button.Icon)
-	end
-
+	-- HandyNotes
 	local function HandyNotesButton(button)
 		local shadow = button:GetRegions()
 		shadow:Hide()

@@ -974,7 +974,7 @@ do
 		EditBoxOnTextChanged = function(self)
 			selfTextImport = self:GetText()
 		end,
-		OnAccept = function(self)
+		OnAccept = function()
 			local Code = selfTextImport
 			local Prefix = "ShestakUI:Profile:"
 			local LibDeflate = LibStub:GetLibrary("LibDeflate")

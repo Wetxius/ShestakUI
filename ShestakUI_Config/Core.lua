@@ -861,34 +861,6 @@ end
 
 -- [[ Init ]]
 
-local function changeProfile()
-	local profile
-	if ShestakUIOptionsGlobal[realm][name] == true then
-		if ShestakUIOptionsPerChar == nil then
-			ShestakUIOptionsPerChar = {}
-		end
-		profile = ShestakUIOptionsPerChar
-	else
-		profile = ShestakUIOptions
-	end
-
-	for group, options in pairs(profile) do
-		if C[group] then
-			for option, value in pairs(options) do
-				if C[group][option] == nil or C[group][option] == value then
-					profile[group][option] = nil
-				else
-					C[group][option] = value
-				end
-			end
-		else
-			profile[group] = nil
-		end
-	end
-
-	C.options = profile
-end
-
 local function displaySettings()
 	for _, box in pairs(checkboxes) do
 		box:SetChecked(C[box.group][box.option])
@@ -941,7 +913,6 @@ init:SetScript("OnEvent", function()
 			else
 				ShestakUIOptionsGlobal[realm][name] = false
 			end
-			-- changeProfile()
 			ReloadUI()
 		end,
 		OnCancel = function()

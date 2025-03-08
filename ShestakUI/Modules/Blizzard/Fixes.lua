@@ -67,11 +67,10 @@ if not NoTaint2_Proc_ResetActionButtonAction then
 	-- use /run ActionButton2.action = 2 ActionButton2:UpdateAction() to test
 
 	function NoTaint2_ResetActionButtonAction(self)
-		local ok, tainted_by = issecurevariable(self, "action")
+		local ok = issecurevariable(self, "action")
 		if not ok and not InCombatLockdown() then
 			self.action=nil
 			self:SetAttribute("_aby", "action")
-			-- if self:IsVisible() then NoTaint2_ShowWarning(tainted_by) end
 		end
 	end
 

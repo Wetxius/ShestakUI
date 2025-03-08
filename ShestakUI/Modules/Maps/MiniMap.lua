@@ -159,7 +159,7 @@ if C.minimap.garrison_icon == true then
 	ExpansionLandingPageMinimapButton:SetScale(0.6)
 	ExpansionLandingPageMinimapButton:ClearAllPoints()
 	ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
-	hooksecurefunc(ExpansionLandingPageMinimapButton, "SetPoint", function(self, point, anchor, attachTo, x, y)
+	hooksecurefunc(ExpansionLandingPageMinimapButton, "SetPoint", function(_, _, _, _, _, y)
 		if y ~= 1 then
 			ExpansionLandingPageMinimapButton:ClearAllPoints()
 			ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)

@@ -356,7 +356,7 @@ function Stuffing:SlotUpdate(b)
 				b.frame.Animation.FadeOut:SetToAlpha(0.6)
 				b.frame.Animation.FadeOut:SetDuration(0.4)
 				b.frame.Animation.FadeOut:SetSmoothing("IN_OUT")
-				b.frame:HookScript("OnEnter", function(self)
+				b.frame:HookScript("OnEnter", function()
 					local IsNewItem = C_NewItems.IsNewItem(b.bag, b.slot)
 
 					if not IsNewItem and b.frame.Animation:IsPlaying() then
@@ -1404,7 +1404,7 @@ function Stuffing:InitBags()
 	editbox.backdrop:SetPoint("TOPLEFT", -2, 1)
 	editbox.backdrop:SetPoint("BOTTOMRIGHT", 2, -1)
 
-	local fullReset = function(self)
+	local fullReset = function()
 		Stuffing:SearchReset()
 	end
 
@@ -1466,7 +1466,7 @@ function Stuffing:InitBags()
 		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button.Icon:SetPoint("TOPLEFT", button, 2, -2)
 		button.Icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
-		button:SetScript("OnClick", function(self)
+		button:SetScript("OnClick", function()
 			if editbox:GetText() == text then
 				Stuffing:SearchReset()
 			else

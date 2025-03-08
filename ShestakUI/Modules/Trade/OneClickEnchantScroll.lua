@@ -23,7 +23,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			end
 		end)
 
-		hooksecurefunc(ProfessionsFrame.CraftingPage, "ValidateControls", function(self)
+		hooksecurefunc(ProfessionsFrame.CraftingPage, "ValidateControls", function()
 			if C_TradeSkillUI.IsTradeSkillGuild() or C_TradeSkillUI.IsNPCCrafting() or C_TradeSkillUI.IsTradeSkillLinked() then
 				button:Hide()
 			else

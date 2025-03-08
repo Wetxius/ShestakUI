@@ -21,7 +21,7 @@ MultiBarBottomRight:SetParent(bar)
 bar:SetFrameStrata("LOW")
 
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-bar:SetScript("OnEvent", function(self, event)
+bar:SetScript("OnEvent", function()
 	Settings.SetValue("PROXY_SHOW_ACTIONBAR_5", true)
 	local NumPerRows = C.actionbar.bar5_row
 	local NextRowButtonAnchor = _G["MultiBarBottomRightButton1"]

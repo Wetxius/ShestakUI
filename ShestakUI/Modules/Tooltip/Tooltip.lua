@@ -86,7 +86,7 @@ frame:SetScript("OnEvent", function()
 end)
 
 if C_AddOns.IsAddOnLoaded("RaiderIO") then
-	PVEFrame:HookScript("OnShow", function(self)
+	PVEFrame:HookScript("OnShow", function()
 		if not RaiderIO_ProfileTooltip.styled then
 			RaiderIO_ProfileTooltip.NineSlice:SetAlpha(0)
 			RaiderIO_ProfileTooltip:CreateBackdrop("Transparent")

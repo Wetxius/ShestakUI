@@ -573,16 +573,6 @@ skin.misc = {
 }
 
 --[[ Helper functions ]]
-local icons = {
-	Locked = {0, 0.5, 0, 0.25},
-	Unlocked = {0.5, 1, 0, 0.25},
-	Minimized = {0, 0.5, 0.25, 0.5},
-	Maximized = {0.5, 1, 0.25, 0.5},
-	SinglePanel = {0, 0.5, 0.5, 0.75},
-	DualPanel = {0.5, 1, 0.5, 0.75},
-	Pinned = {0, 0.5, 0.75, 1},
-}
-
 function skin:ColorPetListBordersPet()
 	for _,button in ipairs(self.buttons) do
 

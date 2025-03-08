@@ -16,7 +16,7 @@ end
 MultiBar5:SetParent(bar)
 
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-bar:SetScript("OnEvent", function(self, event)
+bar:SetScript("OnEvent", function()
 	Settings.SetValue("PROXY_SHOW_ACTIONBAR_6", true)
 	local NumPerRows = C.actionbar.bar6_row
 	local NextRowButtonAnchor = _G["MultiBar5Button1"]
