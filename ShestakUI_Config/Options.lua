@@ -2538,7 +2538,31 @@ do
 	low_health.Text:SetWidth(250)
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
-	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
+	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
+
+	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	ListButton:SetPoint("LEFT", cast_color, "RIGHT", 430, 0)
+	ListButton:SetSize(100, 23)
+	ListButton:SetText(ADD)
+	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	ListButton:SetScript("OnClick", function()
+		if not C.options["nameplate"] then
+			C.options["nameplate"] = {}
+		end
+		if not C.options["nameplate"]["cast_color_list"] then
+			C.options["nameplate"]["cast_color_list"] = {}
+		end
+		BuildSpellList(C.options["nameplate"]["cast_color_list"])
+	end)
+	tinsert(ns.buttons, ListButton)
+
+	local function toggleListButton()
+		local shown = cast_color:GetChecked()
+		ListButton:SetEnabled(shown)
+	end
+
+	cast_color:HookScript("OnClick", toggleListButton)
+	ListButton:HookScript("OnShow", toggleListButton)
 
 	local kick_color = ns.CreateCheckBox(parent, "kick_color")
 	kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)

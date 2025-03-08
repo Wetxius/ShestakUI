@@ -147,6 +147,10 @@ T.ImportantCast = { -- Red border for non-interruptible cast
 	[210261] = true,	-- Sound Alarm
 }
 
+for _, spell in pairs(C.nameplate.cast_color_list) do
+	T.InterruptCast[spell] = true
+end
+
 local color = C.nameplate.mob_color
 local color_alt = {0, 0.7, 0.6}
 T.ColorPlate = {
