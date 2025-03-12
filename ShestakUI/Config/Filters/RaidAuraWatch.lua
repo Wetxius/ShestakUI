@@ -103,6 +103,36 @@ end
 ----------------------------------------------------------------------------------------
 local RaidDebuffs = {
 	-- Liberation of Undermine
+	-- Vexie and the Geargrinders
+	[SpellName(465865)] = 3,	-- Tank Buster
+	[SpellName(459669)] = 3,	-- Spew Oil
+	-- Cauldron of Carnage
+	[SpellName(1213690)] = 3,	-- Molten Phlegm
+	[SpellName(1214009)] = 3,	-- Voltaic Image
+	-- Rik Reverb
+	[SpellName(1217122)] = 3,	-- Lingering Voltage
+	[SpellName(468119)] = 3,	-- Resonant Echoes
+	[SpellName(467044)] = 3,	-- Faulty Zap
+	-- Stix Bunkjunker
+	[SpellName(461536)] = 3,	-- Rolling Rubbish
+	[SpellName(1217954)] = 3,	-- Meltdown
+	[SpellName(465346)] = 3,	-- Sorted
+	[SpellName(466748)] = 3,	-- Infected Bite
+	-- Sprocketmonger Lockenstock
+	[SpellName(1218342)] = 3,	-- Unstable Shrapnel
+	[SpellName(465917)] = 3,	-- Gravi-Gunk
+	[SpellName(471308)] = 3,	-- Blisterizer Mk. II
+	-- The One-Armed Bandit
+	[SpellName(471927)] = 3,	-- Withering Flames
+	[SpellName(460420)] = 3,	-- Crushed!
+	-- Mug'Zee, Heads of Security
+	[SpellName(466476)] = 3,	-- Frostshatter Boots
+	[SpellName(466509)] = 3,	-- Stormfury Finger Gun
+	[SpellName(1215488)] = 3,	-- Disintegration Beam
+	-- Chrome King Gallywix
+	[SpellName(466154)] = 3,	-- Blast Burns
+	[SpellName(466834)] = 4,	-- Shock Barrage
+	[SpellName(469362)] = 4,	-- Charged Giga Bomb
 
 	-- Nerub'ar Palace
 	-- Ulgrax the Devourer
@@ -392,57 +422,58 @@ local DungeonDebuffs = {
 
 	-- Previous Expansion Dungeons (Season 2)
 	-- Theater of Pain
- 	[SpellName(333299)] = 3,	-- Curse of Desolation
- 	[SpellName(319539)] = 3,	-- Soulless
- 	[SpellName(326892)] = 3,	-- Fixate
- 	[SpellName(321768)] = 3,	-- On the Hook
- 	[SpellName(323825)] = 3,	-- Grasping Rift
- 	[SpellName(342675)] = 3,	-- Bone Spear
- 	[SpellName(323831)] = 3,	-- Death Grasp
- 	[SpellName(330608)] = 3,	-- Vile Eruption
- 	[SpellName(330868)] = 3,	-- Necrotic Bolt Volley
- 	[SpellName(323750)] = 3,	-- Vile Gas
- 	[SpellName(323406)] = 3,	-- Jagged Gash
- 	[SpellName(330700)] = 3,	-- Decaying Blight
- 	[SpellName(319626)] = 3,	-- Phantasmal Parasite
- 	[SpellName(324449)] = 3,	-- Manifest Death
- 	[SpellName(341949)] = 3,	-- Withering Blight
- 	[SpellName(333861)] = 3,	-- Ricocheting Blade
+	[SpellName(333299)] = 3,	-- Curse of Desolation
+	[SpellName(319539)] = 3,	-- Soulless
+	[SpellName(326892)] = 3,	-- Fixate
+	[SpellName(321768)] = 3,	-- On the Hook
+	[SpellName(323825)] = 3,	-- Grasping Rift
+	[SpellName(342675)] = 3,	-- Bone Spear
+	[SpellName(323831)] = 3,	-- Death Grasp
+	[SpellName(330608)] = 3,	-- Vile Eruption
+	[SpellName(330868)] = 3,	-- Necrotic Bolt Volley
+	[SpellName(323750)] = 3,	-- Vile Gas
+	[SpellName(323406)] = 3,	-- Jagged Gash
+	[SpellName(330700)] = 3,	-- Decaying Blight
+	[SpellName(319626)] = 3,	-- Phantasmal Parasite
+	[SpellName(324449)] = 3,	-- Manifest Death
+	[SpellName(341949)] = 3,	-- Withering Blight
+	[SpellName(333861)] = 3,	-- Ricocheting Blade
+	[SpellName(1223804)] = 3,	-- Well of Darkness
 
 	-- The MOTHERLODE!!
- 	[SpellName(263074)] = 4,	-- Festering Bite
- 	[SpellName(280605)] = 4,	-- Brain Freeze
- 	[SpellName(257337)] = 4,	-- Shocking Claw
- 	[SpellName(270882)] = 5,	-- Blazing Azerite
- 	[SpellName(268797)] = 4,	-- Transmute: Enemy to Goo
- 	[SpellName(259856)] = 4,	-- Chemical Burn
- 	[SpellName(269302)] = 3,	-- Toxic Blades
- 	[SpellName(280604)] = 3,	-- Iced Spritzer
- 	[SpellName(257371)] = 4,	-- Tear Gas
- 	[SpellName(257544)] = 4,	-- Jagged Cut
- 	[SpellName(268846)] = 4,	-- Echo Blade
- 	[SpellName(262794)] = 5,	-- Energy Lash
- 	[SpellName(262513)] = 5,	-- Azerite Heartseeker
- 	[SpellName(260838)] = 5,	-- Homing Missle
- 	[SpellName(263637)] = 4,	-- Clothesline
+	[SpellName(263074)] = 4,	-- Festering Bite
+	[SpellName(280605)] = 4,	-- Brain Freeze
+	[SpellName(257337)] = 4,	-- Shocking Claw
+	[SpellName(270882)] = 5,	-- Blazing Azerite
+	[SpellName(268797)] = 4,	-- Transmute: Enemy to Goo
+	[SpellName(259856)] = 4,	-- Chemical Burn
+	[SpellName(269302)] = 3,	-- Toxic Blades
+	[SpellName(280604)] = 3,	-- Iced Spritzer
+	[SpellName(257371)] = 4,	-- Tear Gas
+	[SpellName(257544)] = 4,	-- Jagged Cut
+	[SpellName(268846)] = 4,	-- Echo Blade
+	[SpellName(262794)] = 5,	-- Energy Lash
+	[SpellName(262513)] = 5,	-- Azerite Heartseeker
+	[SpellName(260838)] = 5,	-- Homing Missle
+	[SpellName(263637)] = 4,	-- Clothesline
 
 	-- Operation: Mechagon
- 	[SpellName(291928)] = 3,	-- Giga-Zap
- 	[SpellName(302274)] = 3,	-- Fulminating Zap
- 	[SpellName(298669)] = 3,	-- Taze
- 	[SpellName(295445)] = 3,	-- Wreck
- 	[SpellName(294929)] = 3,	-- Blazing Chomp
- 	[SpellName(297257)] = 3,	-- Electrical Charge
- 	[SpellName(294855)] = 3,	-- Blossom Blast
- 	[SpellName(291972)] = 3,	-- Explosive Leap
- 	[SpellName(285443)] = 3,	-- "Hidden" Flame Cannon
- 	[SpellName(291974)] = 3,	-- Obnoxious Monologue
- 	[SpellName(296150)] = 3,	-- Vent Blast
- 	[SpellName(298602)] = 3,	-- Smoke Cloud
- 	[SpellName(296560)] = 3,	-- Clinging Static
- 	[SpellName(297283)] = 3,	-- Cave In
- 	[SpellName(291914)] = 3,	-- Cutting Beam
- 	[SpellName(302384)] = 3,	-- Static Discharge
+	[SpellName(291928)] = 3,	-- Giga-Zap
+	[SpellName(302274)] = 3,	-- Fulminating Zap
+	[SpellName(298669)] = 3,	-- Taze
+	[SpellName(295445)] = 3,	-- Wreck
+	[SpellName(294929)] = 3,	-- Blazing Chomp
+	[SpellName(297257)] = 3,	-- Electrical Charge
+	[SpellName(294855)] = 3,	-- Blossom Blast
+	[SpellName(291972)] = 3,	-- Explosive Leap
+	[SpellName(285443)] = 3,	-- "Hidden" Flame Cannon
+	[SpellName(291974)] = 3,	-- Obnoxious Monologue
+	[SpellName(296150)] = 3,	-- Vent Blast
+	[SpellName(298602)] = 3,	-- Smoke Cloud
+	[SpellName(296560)] = 3,	-- Clinging Static
+	[SpellName(297283)] = 3,	-- Cave In
+	[SpellName(291914)] = 3,	-- Cutting Beam
+	[SpellName(302384)] = 3,	-- Static Discharge
 
 	-- Previous Expansion Dungeons (Season 1)
 	-- Mists of Tirna Scithe
