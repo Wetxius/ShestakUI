@@ -233,6 +233,11 @@ local function LoadSkin()
 	AuctionHouseFrame.BuyDialog:StripTextures()
 	AuctionHouseFrame.BuyDialog:SetTemplate("Transparent")
 
+	T.SkinEditBox(BidAmountGold)	-- FIXME: There are another frames with the same name on bids page and are unskinned
+	BidAmountGold.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+	T.SkinEditBox(BidAmountSilver)
+	BidAmountSilver.backdrop:SetPoint("BOTTOMRIGHT", -10, 0)
+
 	-- WoW Token
 	AuctionHouseFrame.WoWTokenResults:StripTextures()
 	AuctionHouseFrame.WoWTokenResults.TokenDisplay:StripTextures()
