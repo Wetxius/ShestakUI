@@ -19,6 +19,7 @@ if C.raidcooldown.enable == true then
 		{80353, 300},	-- Time Warp
 		{390386, 300},	-- Fury of the Aspects
 		{264667, 300},	-- Primal Rage {Hunter's pet]
+		{466904, 300},	-- Harrier's Cry {Hunter's pet]
 		-- Healing
 		{633, 600},		-- Lay on Hands
 		{740, 180},		-- Tranquility

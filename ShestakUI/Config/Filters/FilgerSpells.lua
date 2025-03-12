@@ -2387,6 +2387,8 @@ C["filger_spells"] = {
 			{spellID = 32182, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Primal Rage [Hunter's pet]
 			{spellID = 264667, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- Harrier's Cry [Hunter's pet]
+			{spellID = 466904, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Time Warp
 			{spellID = 80353, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fury of the Aspects
