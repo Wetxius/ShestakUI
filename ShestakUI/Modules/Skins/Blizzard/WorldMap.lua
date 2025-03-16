@@ -158,7 +158,6 @@ local function LoadSkin()
 		shadow:Hide()
 
 		button.Background:Hide()
-		-- button.IconOverlay:SetAlpha(0)
 		button.Border:Hide()
 
 		T.SkinCloseButton(button.ResetButton, nil, nil, true)
@@ -213,8 +212,8 @@ local function LoadSkin()
 
 	for i = 3, #WorldMapFrame.overlayFrames do
 		local frame = WorldMapFrame.overlayFrames[i]
-		if frame.BountyDropdownButton then
-			T.SkinNextPrevButton(frame.BountyDropdownButton)
+		if frame.BountyDropdown then
+			T.SkinNextPrevButton(frame.BountyDropdown)
 			break
 		end
 	end
@@ -307,7 +306,7 @@ local function LoadSkin()
 
 		T.SkinScrollBar(QuestMapFrame.EventsFrame.ScrollBar)
 
-		_G.ScrollUtil.AddAcquiredFrameCallback(EventsFrameScrollBox, EventsFrameCallback, EventsFrame, true)
+		-- _G.ScrollUtil.AddAcquiredFrameCallback(QuestMapFrame.EventsFrame.EventsFrame.ScrollBox, EventsFrameCallback, QuestMapFrame.EventsFrame, true) -- need to skin elements. FIXME need to test and make skin
 	end
 
 	-- C_PlayerInfo.CanPlayerUseEventScheduler = function() return true end -- Test events tab
