@@ -146,27 +146,6 @@ local function LoadSkin()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:Kill()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:Kill()
 
-	QuestMapFrame.MapLegend.BorderFrame:StripTextures()
-
-	MapLegendScrollFrame:ClearAllPoints()
-	MapLegendScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
-	MapLegendScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
-
-	local MapLegendTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.MapLegend)
-	MapLegendTopBorder:CreateBackdrop("Overlay")
-	MapLegendTopBorder.backdrop:ClearAllPoints()
-	MapLegendTopBorder.backdrop:SetSize(326, 23)
-	MapLegendTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
-
-	QuestMapFrame.MapLegend.TitleText:ClearAllPoints()
-	QuestMapFrame.MapLegend.TitleText:SetPoint("CENTER", MapLegendTopBorder.backdrop)
-
-	MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", -21, -18)
-	MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", -21, 15)
-
-	MapLegendScrollFrame.Background:Hide()
-	T.SkinScrollBar(MapLegendScrollFrame.ScrollBar)
-
 	-- Floor Dropdown
 	local function WorldMapFloorNavigationDropDown(frame)
 		T.SkinDropDownBox(frame)
@@ -242,7 +221,8 @@ local function LoadSkin()
 
 	local tabs = {
 		QuestMapFrame.QuestsTab,
-		QuestMapFrame.MapLegendTab
+		QuestMapFrame.MapLegendTab,
+		QuestMapFrame.EventsTab,
 	}
 	for _, tab in pairs(tabs) do
 		tab.Background:SetAlpha(0)
@@ -272,6 +252,65 @@ local function LoadSkin()
 
 	QuestMapFrame.QuestsTab:ClearAllPoints()
 	QuestMapFrame.QuestsTab:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPRIGHT", 1, 2)
+
+	-- Map Legend frame
+	do
+		QuestMapFrame.MapLegend.BorderFrame:StripTextures()
+		MapLegendScrollFrame.Background:Hide()
+
+		MapLegendScrollFrame:ClearAllPoints()
+		MapLegendScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
+		MapLegendScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+
+		local MapLegendTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.MapLegend)
+		MapLegendTopBorder:CreateBackdrop("Overlay")
+		MapLegendTopBorder.backdrop:ClearAllPoints()
+		MapLegendTopBorder.backdrop:SetSize(326, 23)
+		MapLegendTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+
+		QuestMapFrame.MapLegend.TitleText:ClearAllPoints()
+		QuestMapFrame.MapLegend.TitleText:SetPoint("CENTER", MapLegendTopBorder.backdrop)
+
+		MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", -21, -18)
+		MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", -21, 15)
+
+		T.SkinScrollBar(MapLegendScrollFrame.ScrollBar)
+	end
+
+	-- Events frame
+	do
+		QuestMapFrame.EventsFrame.BorderFrame:StripTextures()
+		QuestMapFrame.EventsFrame.ScrollBox.Background:SetAlpha(0)
+
+		for _, region in next, {QuestMapFrame.EventsFrame:GetRegions()} do
+			if region:IsObjectType("Texture") then
+				region:Hide() -- remove yellow texture
+				break
+			end
+		end
+
+		QuestMapFrame.EventsFrame.ScrollBox:ClearAllPoints()
+		QuestMapFrame.EventsFrame.ScrollBox:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
+		QuestMapFrame.EventsFrame.ScrollBox:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+
+		local EventsFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.EventsFrame)
+		EventsFrameTopBorder:CreateBackdrop("Overlay")
+		EventsFrameTopBorder.backdrop:ClearAllPoints()
+		EventsFrameTopBorder.backdrop:SetSize(326, 23)
+		EventsFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+
+		QuestMapFrame.EventsFrame.TitleText:ClearAllPoints()
+		QuestMapFrame.EventsFrame.TitleText:SetPoint("CENTER", EventsFrameTopBorder.backdrop)
+
+		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapFrame.EventsFrame.ScrollBox , "TOPRIGHT", -21, -18)
+		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestMapFrame.EventsFrame.ScrollBox , "BOTTOMRIGHT", -21, 15)
+
+		T.SkinScrollBar(QuestMapFrame.EventsFrame.ScrollBar)
+
+		_G.ScrollUtil.AddAcquiredFrameCallback(EventsFrameScrollBox, EventsFrameCallback, EventsFrame, true)
+	end
+
+	-- C_PlayerInfo.CanPlayerUseEventScheduler = function() return true end -- Test events tab
 
 	-- QuestSessionManagement skin (based on skin from Aurora)
 	QuestMapFrame.QuestSessionManagement:StripTextures()
