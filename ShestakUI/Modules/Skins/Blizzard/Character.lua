@@ -157,6 +157,7 @@ local function LoadSkin()
 		PaperDollFrame.TitleManagerPane.ScrollBar,
 		PaperDollFrame.EquipmentManagerPane.ScrollBar,
 		ReputationFrame.ScrollBar,
+		ReputationFrame.ReputationDetailFrame.ScrollingDescriptionScrollBar,
 		TokenFrame.ScrollBar
 	}
 
