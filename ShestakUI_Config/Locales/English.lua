@@ -390,6 +390,8 @@ L_GUI_NAMEPLATE_OFFTANK_COLOR = "Offtank threat color"
 L.nameplate_extra_color = "Explosive and Spiteful affix color"
 L.nameplate_mob_color_enable = "Change color for important mobs in dungeons"
 L.nameplate_mob_color = "Color for mobs"
+L.nameplate_mob_color_list = "List of mobs"
+L.nameplate_mob_color_list_desc = "List of npc id (separated by space)"
 
 -- Combat text options
 L_GUI_COMBATTEXT = "Combat Text"

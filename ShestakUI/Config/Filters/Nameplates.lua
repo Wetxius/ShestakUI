@@ -169,6 +169,10 @@ T.ColorPlate = {
 	["5925"] = color,		-- Grounding Totem
 }
 
+for word in gmatch(C.nameplate.mob_color_list, "%S+") do
+	T.ColorPlate[tostring(word)] = color
+end
+
 T.ShortNames = {
 	-- Академия Алгет'ар
 	["Рассерженная стрекотуха"] = "Cтрекотуха",

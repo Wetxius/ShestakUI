@@ -366,6 +366,8 @@ L_GUI_NAMEPLATE_OFFTANK_COLOR = "副坦仇恨顏色"
 L.nameplate_extra_color = "炸藥/惡意詞綴顏色"
 L.nameplate_mob_color_enable = "副本中重要小怪著色"
 L.nameplate_mob_color = "小怪顏色"
+L.nameplate_mob_color_list = "List of mobs" -- Need review
+L.nameplate_mob_color_list_desc = "List of npc id (separated by space)" -- Need review
 
 -- Combat text options
 L_GUI_COMBATTEXT = "戰鬥文字"
