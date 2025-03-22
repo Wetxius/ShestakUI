@@ -443,10 +443,13 @@ local function castColor(self)
 	if C.nameplate.cast_color then
 		if T.InterruptCast[self.spellID] then
 			SetColorBorder(self, 1, 0.8, 0)
+			SetColorBorder(self.Border, 1, 0.8, 0)
 		elseif T.ImportantCast[self.spellID] then
 			SetColorBorder(self, 1, 0, 0)
+			SetColorBorder(self.Border, 1, 0, 0)
 		else
 			SetColorBorder(self, unpack(C.media.border_color))
+			SetColorBorder(self.Border, unpack(C.media.border_color))
 		end
 	end
 end
@@ -789,13 +792,13 @@ local function style(self, unit)
 	end
 
 	-- Cast Bar Icon
-	self.CastbarIcon = CreateFrame("Frame", nil, self.Castbar)
-	self.Castbar.Icon = self.CastbarIcon:CreateTexture(nil, "OVERLAY")
+	self.Castbar.Border = CreateFrame("Frame", nil, self.Castbar)
+	self.Castbar.Icon = self.Castbar.Border:CreateTexture(nil, "OVERLAY")
 	self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	self.Castbar.Icon:SetDrawLayer("ARTWORK")
 	self.Castbar.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
 	self.Castbar.Icon:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", 8, 0)
-	CreateBorderFrame(self.CastbarIcon, self.Castbar.Icon)
+	CreateBorderFrame(self.Castbar.Border, self.Castbar.Icon)
 
 	-- Raid Icon
 	self.RaidTargetIndicator = self:CreateTexture(nil, "OVERLAY", nil, 7)
