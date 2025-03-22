@@ -182,7 +182,7 @@ end
 local function SkinSpell(widget)
 	if not widget.styled then
 		widget:SetSize(35, 35)	-- use to avoid overlap in Jail (by default 30 size), not sure how it looks in another place
-		widget.Icon:SkinIcon()
+		widget.Icon:SkinIcon(true)
 		widget.Border:SetAlpha(0)
 		widget.DebuffBorder:SetAlpha(0)
 		widget.styled = true
@@ -191,9 +191,9 @@ local function SkinSpell(widget)
 	widget.CircleMask:Hide()
 
 	if widget.DebuffBorder:IsShown() then
-		widget.backdrop:SetBackdropBorderColor(0.7, 0, 0)
+		widget.Icon.b:SetBackdropBorderColor(0.7, 0, 0)
 	else
-		widget.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+		widget.Icon.b:SetBackdropBorderColor(unpack(C.media.border_color))
 	end
 end
 
