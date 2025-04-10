@@ -26,9 +26,9 @@ local function LoadSkin()
 	TradeFrameCancelButton:SkinButton(true)
 	T.SkinCloseButton(TradeFrameCloseButton, TradeFrame.backdrop)
 
-	T.SkinEditBox(TradePlayerInputMoneyFrameGold)
-	T.SkinEditBox(TradePlayerInputMoneyFrameSilver)
-	T.SkinEditBox(TradePlayerInputMoneyFrameCopper)
+	--FIXME T.SkinEditBox(TradePlayerInputMoneyFrameGold)
+	-- T.SkinEditBox(TradePlayerInputMoneyFrameSilver)
+	-- T.SkinEditBox(TradePlayerInputMoneyFrameCopper)
 
 	for i = 1, MAX_TRADE_ITEMS do
 		local player = _G["TradePlayerItem"..i]
