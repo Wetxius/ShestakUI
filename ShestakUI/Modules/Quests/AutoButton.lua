@@ -165,8 +165,8 @@ local function UpdateSingle(_, quest)
 	local questLogIndex = quest:GetQuestLogIndex()
 	local link = GetQuestLogSpecialItemInfo(questLogIndex)
 	if link then
-		local _, itemID = strsplit(":", link)
-		itemID = tonumber(itemID)
+		local itemID = link:match("item:(%d+)")
+		itemID = tonumber(itemID) or 0
 		if not T.ABItems[itemID] then
 			T.ABItems[itemID] = true
 			startScanningBags()
