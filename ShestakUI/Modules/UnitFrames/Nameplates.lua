@@ -269,6 +269,7 @@ local AurasPostCreateIcon = function(element, button)
 	if C.aura.show_spiral == true then
 		element.disableCooldown = false
 		button.Cooldown:SetReverse(true)
+		button.Cooldown:SetHideCountdownNumbers(true)
 		button.parent = CreateFrame("Frame", nil, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)

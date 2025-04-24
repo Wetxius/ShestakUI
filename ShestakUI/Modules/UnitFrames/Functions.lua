@@ -605,14 +605,10 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-	-- Disable blizzard cooldown numbers
-	if button.Cooldown.SetHideCountdownNumbers then
-		button.Cooldown:SetHideCountdownNumbers(true)
-	end
-
 	if C.aura.show_spiral == true then
 		element.disableCooldown = false
 		button.Cooldown:SetReverse(true)
+		button.Cooldown:SetHideCountdownNumbers(true)
 		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
 		button.parent = CreateFrame("Frame", nil, button)
