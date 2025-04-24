@@ -95,6 +95,7 @@ if IsWetxius then
 		Timer_OnSizeChanged(timer, scaler:GetSize())
 		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
+		self:SetHideCountdownNumbers(true)
 		self:GetRegions():SetAlpha(0)	-- Hide Blizzard cd text
 
 		self.timer = timer
@@ -119,6 +120,7 @@ else
 		Timer_OnSizeChanged(timer, scaler:GetSize())
 		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
+		self:SetHideCountdownNumbers(true)
 		self:GetRegions():SetAlpha(0)	-- Hide Blizzard cd text
 
 		self.timer = timer
@@ -137,7 +139,9 @@ local function deactivateDisplay(cooldown)
 end
 
 local function setHideCooldownNumbers(cooldown, hide)
-	if hide then
+	local disable = not (hide or cooldown.noCooldownCount or cooldown:IsForbidden())
+
+	if disable then
 		hideNumbers[cooldown] = true
 		deactivateDisplay(cooldown)
 	else
@@ -170,5 +174,5 @@ hooksecurefunc(Cooldown_MT, "Clear", deactivateDisplay)
 hooksecurefunc(Cooldown_MT, "SetHideCountdownNumbers", setHideCooldownNumbers)
 
 hooksecurefunc("CooldownFrame_SetDisplayAsPercentage", function(cooldown)
-	setHideCooldownNumbers(cooldown, true)
+	setHideCooldownNumbers(cooldown, false)
 end)
