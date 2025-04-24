@@ -606,7 +606,7 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	-- Disable blizzard cooldown numbers
-	if T.newPatch and button.Cooldown.SetHideCountdownNumbers then
+	if button.Cooldown.SetHideCountdownNumbers then
 		button.Cooldown:SetHideCountdownNumbers(true)
 	end
 
