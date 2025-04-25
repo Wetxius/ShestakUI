@@ -17,4 +17,7 @@ AuroraSkin:SetScript("OnEvent", function()
 
 	T.SkinScrollBar(BaudErrorFrameDetailScrollFrame.ScrollBar)
 	T.SkinScrollBar(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
+
+	BaudErrorFrameDetailScrollFrame.ScrollBar:SetPoint("TOPLEFT", BaudErrorFrameDetailScrollFrame, "TOPRIGHT", 6, -3)
+	BaudErrorFrameDetailScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", BaudErrorFrameDetailScrollFrame, "BOTTOMRIGHT", 6, 3)
 end)
