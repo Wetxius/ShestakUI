@@ -166,10 +166,6 @@ if not NoTaint2_CleanStaticPopups then
 			cleanAll()
 		end
 	end)
-
-	-- In case the stack check is failed, assure the game menu entrance.
-	-- Running cleanAll() multi times has no side effects.
-	--FIXME GameMenuButtonEditMode:HookScript("PreClick", cleanAll)
 end
 
 if not NoTaint2_Proc_StopEnterWorldLayout then
