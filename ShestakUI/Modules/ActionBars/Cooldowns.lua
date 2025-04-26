@@ -152,6 +152,12 @@ end
 hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, modRate)
 	if cooldown.noCooldownCount or cooldown:IsForbidden() or hideNumbers[cooldown] then return end
 
+	local frameName = cooldown.GetName and cooldown:GetName()
+	if frameName and strfind(frameName, "WeakAuras") then
+		cooldown.noCooldownCount = true
+		return
+	end
+
 	local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 
 	if show then
