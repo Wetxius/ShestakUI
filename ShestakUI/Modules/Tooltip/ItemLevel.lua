@@ -105,7 +105,8 @@ end
 
 local function IsCached(itemLink) -- we can"t get the correct level of an artifact until all of its relics have been cached
 	local cached = true
-	local _, itemID, _, relic1, relic2, relic3 = strsplit(":", itemLink)
+	-- local _, itemID, _, relic1, relic2, relic3 = strsplit(":", itemLink)
+	local itemID, _, relic1, relic2, relic3 = itemLink:match("item:(%d+)")
 
 	if not C_Item.GetDetailedItemLevelInfo(itemID) then cached = false end
 	if IsArtifact(itemLink) then
