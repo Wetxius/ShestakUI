@@ -3,7 +3,6 @@
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
 ## Version: 10.22
-## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
 ## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Logo.tga
