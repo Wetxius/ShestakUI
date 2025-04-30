@@ -367,8 +367,11 @@ L_GUI_NAMEPLATE_OFFTANK_COLOR = "Цвет угрозы для оффтанка (
 L.nameplate_extra_color = "Цвет сфер и теней (аффиксы)"
 L.nameplate_mob_color_enable = "Изменить цвет важных противников в подземельях"
 L.nameplate_mob_color = "Цвет для противников"
+L.nameplate_mob_color_alt = "Другой цвет для противников"
 L.nameplate_mob_color_list = "Список противников"
 L.nameplate_mob_color_list_desc = "Список номеров (через пробел)"
+L.nameplate_mob_color_alt_list = L.nameplate_mob_color_list
+L.nameplate_mob_color_alt_list_desc = L.nameplate_mob_color_list_desc
 
 -- Combat text options
 L_GUI_COMBATTEXT = "Текст боя"

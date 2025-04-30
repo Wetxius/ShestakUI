@@ -376,7 +376,7 @@ ns.CreateEditBox = function(parent, option, needsReload, text, number)
 	end
 
 	f.label = label
-	f.tooltipText = ns[parent.tag.."_"..option.."_desc"] or text
+	f.tooltipText = ns[parent.tag.."_"..option.."_desc"] or text or ""
 
 	f:SetScript("OnEnter", function()
 		GameTooltip:SetOwner(f, "ANCHOR_RIGHT", 5, 5)

@@ -2595,6 +2595,14 @@ do
 	mob_color_list:SetPoint("TOPLEFT", mob_color, "BOTTOMLEFT", 2, -10)
 	mob_color_list:SetWidth(240)
 	mob_color_list:SetMaxLetters(200)
+
+	local mob_color_alt = ns.CreateColourPicker(parent, "mob_color_alt", true)
+	mob_color_alt:SetPoint("TOPLEFT", mob_color_list, "BOTTOMLEFT", -2, -10)
+
+	local mob_color_alt_list = ns.CreateEditBox(parent, "mob_color_alt_list", true)
+	mob_color_alt_list:SetPoint("TOPLEFT", mob_color_alt, "BOTTOMLEFT", 2, -10)
+	mob_color_alt_list:SetWidth(240)
+	mob_color_alt_list:SetMaxLetters(200)
 end
 
 -- Combat text

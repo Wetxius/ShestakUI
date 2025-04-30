@@ -420,6 +420,7 @@ C["nameplate"] = {
 	["extra_color"] = {1, 0.3, 0},				-- Explosive and Spiteful affix color
 	["mob_color_enable"] = false,				-- Change color for important mobs in dungeons
 	["mob_color"] = {0, 0.5, 0.8},				-- Color for mobs
+	["mob_color_alt"] = {0, 0.7, 0.6},			-- Second color for mobs
 }
 
 ----------------------------------------------------------------------------------------

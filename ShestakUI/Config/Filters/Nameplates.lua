@@ -152,7 +152,7 @@ for _, spell in pairs(C.nameplate.cast_color_list) do
 end
 
 local color = C.nameplate.mob_color
-local color_alt = {0, 0.7, 0.6}
+local color_alt = C.nameplate.mob_color_alt
 T.ColorPlate = {
 	-- Algeth'ar Academy
 	["196548"] = color,		-- Ancient Branch
@@ -171,6 +171,10 @@ T.ColorPlate = {
 
 for word in gmatch(C.nameplate.mob_color_list, "%S+") do
 	T.ColorPlate[tostring(word)] = color
+end
+
+for word in gmatch(C.nameplate.mob_color_alt_list, "%S+") do
+	T.ColorPlate[tostring(word)] = color_alt
 end
 
 T.ShortNames = {

@@ -19,6 +19,7 @@ C.nameplate.debuffs_list = {}
 C.nameplate.buffs_list = {}
 C.nameplate.cast_color_list = {}
 C.nameplate.mob_color_list = ""
+C.nameplate.mob_color_alt_list = ""
 C.combattext.spells_list = {}
 C.chat.spam_list = ""
 C.font.global_font = false
