@@ -1201,7 +1201,7 @@ end
 
 if C.unitframe.show_boss == true then
 	local boss = {}
-	for i = 1, 8 do
+	for i = 1, 10 do
 		boss[i] = oUF:Spawn("boss"..i, "oUF_Boss"..i)
 		if i == 1 then
 			if C.unitframe.boss_on_right == true then
