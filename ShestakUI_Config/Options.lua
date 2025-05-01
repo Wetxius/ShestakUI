@@ -3549,6 +3549,7 @@ local gameMenuLastButtons = {
 }
 
 local function PositionGameMenuButton()
+	if not ShestakUI then return end
 	local anchorIndex = (C_StorePublic.IsEnabled and C_StorePublic.IsEnabled() and 2) or 1
 	for button in GameMenuFrame.buttonPool:EnumerateActive() do
 		local text = button:GetText()
