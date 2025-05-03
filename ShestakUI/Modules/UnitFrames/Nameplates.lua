@@ -77,8 +77,7 @@ exClass.ROGUE = true
 exClass.WARLOCK = true
 exClass.WARRIOR = true
 if C.nameplate.healer_icon == true then
-	local t = CreateFrame("Frame")
-	t.factions = {
+	local numFactions = {
 		["Horde"] = 1,
 		["Alliance"] = 0,
 	}
@@ -103,11 +102,11 @@ if C.nameplate.healer_icon == true then
 		lastCheck = lastCheck + elapsed
 		if lastCheck > 25 then
 			lastCheck = 0
-			healList = {}
+			wipe(healList)
+			local playerFaction = numFactions[UnitFactionGroup("player")]
 			for i = 1, GetNumBattlefieldScores() do
 				local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-
-				if name and healerSpecs[talentSpec] and t.factions[UnitFactionGroup("player")] == faction then
+				if name and healerSpecs[talentSpec] and faction == playerFaction then
 					name = name:match("(.+)%-.+") or name
 					healList[name] = talentSpec
 				end
@@ -119,7 +118,7 @@ if C.nameplate.healer_icon == true then
 		lastCheck = lastCheck + elapsed
 		if lastCheck > 10 then
 			lastCheck = 0
-			healList = {}
+			wipe(healList)
 			for i = 1, 5 do
 				local specID = GetArenaOpponentSpec(i)
 				if specID and specID > 0 then
@@ -145,7 +144,7 @@ if C.nameplate.healer_icon == true then
 			elseif instanceType == "arena" then
 				t:SetScript("OnUpdate", CheckArenaHealers)
 			else
-				healList = {}
+				wipe(healList)
 				t:SetScript("OnUpdate", nil)
 			end
 		end

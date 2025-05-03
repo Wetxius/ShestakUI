@@ -184,7 +184,7 @@ local function LoadSkin()
 			SkinReward(button, rewardsFrame == MapQuestInfoRewardsFrame)
 
 			hooksecurefunc(button.IconBorder, "SetVertexColor", function(self, r, g, b)
-				if r ~= BAG_ITEM_QUALITY_COLORS[1].r ~= r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
+				if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
 					self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
 				else
 					self:GetParent().backdrop:SetBackdropBorderColor(unpack(C.media.border_color))

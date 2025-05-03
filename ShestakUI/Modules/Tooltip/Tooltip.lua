@@ -469,7 +469,7 @@ end)
 ----------------------------------------------------------------------------------------
 GameTooltip.ItemTooltip.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 hooksecurefunc(GameTooltip.ItemTooltip.IconBorder, "SetVertexColor", function(self, r, g, b)
-	if r ~= BAG_ITEM_QUALITY_COLORS[1].r ~= r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
+	if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
 		self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
 	end
 	self:SetTexture("")
@@ -497,7 +497,7 @@ if icon then
 	reward.backdrop:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
 
 	hooksecurefunc(reward.IconBorder, "SetVertexColor", function(self, r, g, b)
-		if r ~= BAG_ITEM_QUALITY_COLORS[1].r ~= r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
+		if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
 			self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
 		end
 		self:SetTexture("")

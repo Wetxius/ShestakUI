@@ -38,16 +38,20 @@ P_BUFF_BAR_Anchor:SetSize(218, 25)
 
 SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 
+-- Cache
+local GetTime, UnitAura, GetSpellCooldown, GetSpellInfo = GetTime, UnitAura, GetSpellCooldown, GetSpellInfo
+local pairs, ipairs, unpack, format = pairs, ipairs, unpack, string.format
+
 local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
 local SpellGroups = {}
+local tempActiveTable = {}
 
 function Filger:TooltipOnEnter()
 	if self.spellID > 20 then
-		local str = "spell:%s"
 		GameTooltip:ClearLines()
 		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 3)
-		GameTooltip:SetHyperlink(format(str, self.spellID))
+		GameTooltip:SetHyperlink(format("spell:%s", self.spellID))
 		GameTooltip:Show()
 	end
 end
@@ -58,8 +62,9 @@ end
 
 function Filger:UpdateCD()
 	local time = self.value.start + self.value.duration - GetTime()
+	local parent = self:GetParent()
 
-	if self:GetParent().Mode == "BAR" then
+	if parent.Mode == "BAR" then
 		self.statusbar:SetValue(time)
 		if time <= 60 then
 			self.time:SetFormattedText("%.1f", time)
@@ -69,10 +74,9 @@ function Filger:UpdateCD()
 	end
 
 	if time < 0 then
-		local frame = self:GetParent()
-		frame.actives[self.value.spid] = nil
+		parent.actives[self.value.spid] = nil
 		self:SetScript("OnUpdate", nil)
-		Filger.DisplayActives(frame)
+		Filger.DisplayActives(parent)
 	end
 end
 
@@ -82,7 +86,7 @@ function Filger:DisplayActives()
 	local id = self.Id
 	local index = 1
 	local previous = nil
-	local temp = {}
+	wipe(tempActiveTable)
 
 	for _, value in pairs(self.actives) do
 		local bar = self.bars[index]
@@ -105,9 +109,7 @@ function Filger:DisplayActives()
 				end
 			end
 
-			if bar.icon then
-				bar.icon = _G[bar.icon:GetName()]
-			else
+			if not bar.icon then
 				bar.icon = bar:CreateTexture("$parentIcon", "BORDER")
 				bar.icon:SetPoint("TOPLEFT", 2, -2)
 				bar.icon:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -115,9 +117,7 @@ function Filger:DisplayActives()
 			end
 
 			if self.Mode == "ICON" then
-				if bar.cooldown then
-					bar.cooldown = _G[bar.cooldown:GetName()]
-				else
+				if not bar.cooldown then
 					bar.cooldown = CreateFrame("Cooldown", "$parentCD", bar, "CooldownFrameTemplate")
 					bar.cooldown:SetAllPoints(bar.icon)
 					bar.cooldown:SetReverse(true)
@@ -125,9 +125,7 @@ function Filger:DisplayActives()
 					bar.cooldown:SetFrameLevel(3)
 				end
 
-				if bar.count then
-					bar.count = _G[bar.count:GetName()]
-				else
+				if not bar.count then
 					bar.count = bar:CreateFontString("$parentCount", "OVERLAY")
 					bar.count:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
 					bar.count:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
@@ -135,9 +133,7 @@ function Filger:DisplayActives()
 					bar.count:SetJustifyH("RIGHT")
 				end
 			else
-				if bar.statusbar then
-					bar.statusbar = _G[bar.statusbar:GetName()]
-				else
+				if not bar.statusbar then
 					bar.statusbar = CreateFrame("StatusBar", "$parentStatusBar", bar)
 					bar.statusbar:SetWidth(self.BarWidth)
 					bar.statusbar:SetHeight(self.IconSize - 10)
@@ -152,9 +148,7 @@ function Filger:DisplayActives()
 				bar.statusbar:SetMinMaxValues(0, 1)
 				bar.statusbar:SetValue(0)
 
-				if bar.bg then
-					bar.bg = _G[bar.bg:GetName()]
-				else
+				if not bar.bg then
 					bar.bg = CreateFrame("Frame", "$parentBG", bar.statusbar)
 					bar.bg:SetPoint("TOPLEFT", -2, 2)
 					bar.bg:SetPoint("BOTTOMRIGHT", 2, -2)
@@ -162,18 +156,14 @@ function Filger:DisplayActives()
 					bar.bg:SetTemplate("Default")
 				end
 
-				if bar.background then
-					bar.background = _G[bar.background:GetName()]
-				else
+				if not bar.background then
 					bar.background = bar.statusbar:CreateTexture(nil, "BACKGROUND")
 					bar.background:SetAllPoints()
 					bar.background:SetTexture(C.media.texture)
 					bar.background:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.2)
 				end
 
-				if bar.time then
-					bar.time = _G[bar.time:GetName()]
-				else
+				if not bar.time then
 					bar.time = bar.statusbar:CreateFontString("$parentTime", "OVERLAY")
 					bar.time:SetFont(C.font.filger_font, C.font.filger_font_size, C.font.filger_font_style)
 					bar.time:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
@@ -181,9 +171,7 @@ function Filger:DisplayActives()
 					bar.time:SetJustifyH("RIGHT")
 				end
 
-				if bar.count then
-					bar.count = _G[bar.count:GetName()]
-				else
+				if not bar.count then
 					bar.count = bar:CreateFontString("$parentCount", "OVERLAY")
 					bar.count:SetFont(C.font.filger_font, C.font.filger_font_size, C.font.filger_font_style)
 					bar.count:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
@@ -191,9 +179,7 @@ function Filger:DisplayActives()
 					bar.count:SetJustifyH("RIGHT")
 				end
 
-				if bar.spellname then
-					bar.spellname = _G[bar.spellname:GetName()]
-				else
+				if not bar.spellname then
 					bar.spellname = bar.statusbar:CreateFontString("$parentSpellName", "OVERLAY")
 					bar.spellname:SetFont(C.font.filger_font, C.font.filger_font_size, C.font.filger_font_style)
 					bar.spellname:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
@@ -207,22 +193,23 @@ function Filger:DisplayActives()
 		end
 		previous = bar
 		index = index + 1
-		table.insert(temp, value)
+		table.insert(tempActiveTable, value)
 	end
 
 	local function sortTable(a, b)
-		if C.filger.expiration == true and a.data.filter == "CD" then
-			return a.start + a.duration < b.start + b.duration
+		if C.filger.expiration and a.data.filter == "CD" then
+			return (a.start + a.duration) < (b.start + b.duration)
 		else
 			return a.sort < b.sort
 		end
 	end
-	table.sort(temp, sortTable)
+	table.sort(tempActiveTable, sortTable)
 
-	local limit = (C.actionbar.button_size * 12)/self.IconSize
+	local iconSize = self.IconSize or C.filger.buffs_size
+	local limit = (C.actionbar.button_size * 12) / iconSize
 
 	index = 1
-	for activeIndex, value in pairs(temp) do
+	for activeIndex, value in pairs(tempActiveTable) do
 		if activeIndex >= limit then
 			break
 		end
@@ -271,8 +258,7 @@ function Filger:DisplayActives()
 			bar:SetScript("OnEnter", Filger.TooltipOnEnter)
 			bar:SetScript("OnLeave", Filger.TooltipOnLeave)
 		end
-		bar:SetWidth(self.IconSize or C.filger.buffs_size)
-		bar:SetHeight(self.IconSize or C.filger.buffs_size)
+		bar:SetSize(iconSize, iconSize)
 		bar:SetAlpha(value.data.opacity or 1)
 		bar:Show()
 		index = index + 1
@@ -319,22 +305,28 @@ local function FindAuras(self, unit)
 	Filger.DisplayActives(self)
 end
 
-function Filger:OnEvent(event, unit, _, castID)
-	if event == "UNIT_AURA" and (unit == "player" or unit == "target" or unit == "pet" or unit == "focus") then
-		FindAuras(self, unit)
-	elseif event == "UNIT_SPELLCAST_SUCCEEDED" and unit == "player" then
-		local name, _, icon = GetSpellInfo(castID)
-		local data = SpellGroups[self.Id].spells[name]
-		if data and data.filter == "ICD" and data.trigger == "NONE" and (not data.spec or data.spec == T.Spec) then
-			local start, duration = GetTime(), data.duration
-			if data.totem then
-				local haveTotem, _, startTime, durationTime = GetTotemInfo(1)
-				if haveTotem then
-					start, duration = startTime, durationTime
+function Filger:OnEvent(event, ...)
+	if event == "UNIT_AURA" then
+		local unit = ...
+		if unit == "player" or unit == "target" or unit == "pet" or unit == "focus" then
+			FindAuras(self, unit)
+		end
+	elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+		local unit, _, castID = ...
+		if unit == "player" then
+			local name, _, icon = GetSpellInfo(castID)
+			local data = SpellGroups[self.Id].spells[name]
+			if data and data.filter == "ICD" and data.trigger == "NONE" and (not data.spec or data.spec == T.Spec) then
+				local start, duration = GetTime(), data.duration
+				if data.totem then
+					local haveTotem, _, startTime, durationTime = GetTotemInfo(1)
+					if haveTotem then
+						start, duration = startTime, durationTime
+					end
 				end
+				self.actives[data.spellID] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = data.spellID, sort = data.sort}
+				Filger.DisplayActives(self)
 			end
-			self.actives[data.spellID] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = data.spellID, sort = data.sort}
-			Filger.DisplayActives(self)
 		end
 	elseif event == "PLAYER_TARGET_CHANGED" then
 		FindAuras(self, "target")
