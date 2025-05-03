@@ -77,6 +77,8 @@ exClass.ROGUE = true
 exClass.WARLOCK = true
 exClass.WARRIOR = true
 if C.nameplate.healer_icon == true then
+	local t = CreateFrame("Frame")
+
 	local numFactions = {
 		["Horde"] = 1,
 		["Alliance"] = 0,
