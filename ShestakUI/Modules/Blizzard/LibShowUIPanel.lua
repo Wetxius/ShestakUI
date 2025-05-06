@@ -26,6 +26,7 @@ Lib.Delegate = Lib.Delegate or (function()
 end)()
 
 local Delegate = Lib.Delegate
+if not Delegate then return end
 
 local function GetUIPanelWindowInfo(frame, name)
 	if not frame:GetAttribute('UIPanelLayout-defined') then
