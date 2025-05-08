@@ -63,6 +63,17 @@ end
 	-- return i
 -- end
 
+local slotsToCheck = {
+	[INVSLOT_BACK] = true,
+	[INVSLOT_CHEST] = true,
+	[INVSLOT_MAINHAND] = true,
+	[INVSLOT_FINGER1] = true,
+	[INVSLOT_FINGER2] = true,
+	[INVSLOT_WRIST] = true,
+	[INVSLOT_FEET] = true,
+	[INVSLOT_LEGS] = true,
+}
+
 local function _updateItems(unit, frame)
 	-- local itemSlot = checkSpecID(unit)
 	for i = 1, 17 do -- Only check changed player items or items without ilvl text, skip the shirt (4) and always update Inspects
@@ -82,11 +93,9 @@ local function _updateItems(unit, frame)
 
 			-- Check missing enchants and gems
 			if itemLink and (realItemLevel ~= "" and tonumber(realItemLevel) > minItemLevel) then
-				local _, _, enchant, gem1, gem2, gem3 = strsplit(":", itemLink)
-				if i == INVSLOT_BACK or i == INVSLOT_CHEST or i == INVSLOT_MAINHAND or i == INVSLOT_FINGER1 or i == INVSLOT_FINGER2 or i == INVSLOT_WRIST or i == INVSLOT_FEET or i == INVSLOT_LEGS then
-					if enchant and enchant == "" then
-						color = "|cffFF0000"
-					end
+				local _, _,  _, enchant, gem1, gem2, gem3 = strsplit(":", itemLink)
+				if slotsToCheck[i] and enchant and enchant == "" then
+					color = "|cffFF0000"
 				end
 
 				local info = C_Item.GetItemStats(itemLink)
