@@ -1898,8 +1898,11 @@ do
 
 	plugins_aura_watch.children = {plugins_aura_watch_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
 
+	local plugins_buffs_timer = ns.CreateCheckBox(parent, "plugins_buffs_timer")
+	plugins_buffs_timer:SetPoint("TOPLEFT", plugins_pvp_debuffs, "BOTTOMLEFT", -20, 0)
+
 	local plugins_healcomm = ns.CreateCheckBox(parent, "plugins_healcomm", L_GUI_UF_PLUGINS_HEALCOMM)
-	plugins_healcomm:SetPoint("TOPLEFT", plugins_pvp_debuffs, "BOTTOMLEFT", -20, 0)
+	plugins_healcomm:SetPoint("TOPLEFT", plugins_buffs_timer, "BOTTOMLEFT", 0, 0)
 
 	local plugins_over_absorb = ns.CreateCheckBox(parent, "plugins_over_absorb")
 	plugins_over_absorb:SetPoint("TOPLEFT", plugins_healcomm, "BOTTOMLEFT", 20, 0)

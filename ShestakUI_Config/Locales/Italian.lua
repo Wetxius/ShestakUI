@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight_icon = "Evidenzia texture + icona delle pena
 L.raidframe_plugins_aura_watch = "Icone delle penalità d'incursione"
 L.raidframe_plugins_aura_watch_timer = "Timer sulle icone delle penalità d'incursione"
 L.raidframe_plugins_pvp_debuffs = "Mostra anche un’icona per le penalità PvP (dall’elenco)"
+L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review
 L_GUI_UF_PLUGINS_HEALCOMM = "Mostra le cure in arrivo sul riquadro"
 L.raidframe_plugins_over_absorb = "Show over absorb bar on frame" -- Need review
 L.raidframe_plugins_over_heal_absorb = "Show over heal absorb on frame" -- Need review

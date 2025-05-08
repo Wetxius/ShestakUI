@@ -201,6 +201,7 @@ C["raidframe"] = {
 	["plugins_debuffhighlight"] = true,			-- Show texture for dispellable debuff
 	["plugins_aura_watch"] = true,				-- Raid debuff icons (from the list)
 	["plugins_aura_watch_timer"] = false,		-- Timer on raid debuff icons
+	["plugins_buffs_timer"] = false,			-- Timer on raid buffs icons
 	["plugins_debuffhighlight_icon"] = false,	-- Show dispellable debuff icon
 	["plugins_pvp_debuffs"] = false,			-- Show PvP debuff icons (from the list)
 	["plugins_healcomm"] = true,				-- Incoming heal bar on raid frame

@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight_icon = "Debufftextur und Symbol hervorheben"
 L.raidframe_plugins_aura_watch = "'RAID' Buffüberwachung"
 L.raidframe_plugins_aura_watch_timer = "Timer auf Schlachtzugsdebuff Icons"
 L.raidframe_plugins_pvp_debuffs = "Zeige ebenfalls PvP Debuff Symbol (aus der Liste)"
+L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review
 L_GUI_UF_PLUGINS_HEALCOMM = "Leiste für Eingehende Heilung"
 L.raidframe_plugins_over_absorb = "Show over absorb bar on frame" -- Need review
 L.raidframe_plugins_over_heal_absorb = "Show over heal absorb on frame" -- Need review

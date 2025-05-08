@@ -43,14 +43,53 @@ do
 	end
 end
 
+local function formatTime(s)
+	if s > 60 then
+		return format("%dm", floor(s / 60 + 0.5))
+	else
+		return floor(s + 0.5)
+	end
+end
+
+local function OnUpdate(self, elapsed)
+	self.elapsed = (self.elapsed or 1) + elapsed
+	if self.elapsed >= 0.1 then
+		local timeLeft = self.expirationTime - GetTime()
+		if timeLeft > 0.5 then
+			local text = formatTime(timeLeft)
+			self.remaining:SetText(text)
+			if text <= 5 then
+				self.remaining:SetTextColor(1, 1, 0.2)
+			else
+				self.remaining:SetTextColor(1, 1, 1)
+			end
+		else
+			self:SetScript("OnUpdate", nil)
+			self.remaining:Hide()
+		end
+		self.elapsed = 0
+	end
+end
+
 local function resetIcon(icon, count, duration, remaining)
 	icon:Show()
 	if icon.cd then
 		if duration and duration > 0 then
+			if icon.remaining then
+				icon.expirationTime = remaining
+				icon.nextUpdate = 0
+				icon:SetScript("OnUpdate", OnUpdate)
+				icon.remaining:Show()
+			end
+
 			icon.cd:SetCooldown(remaining - duration, duration)
 			icon.cd:Show()
 		else
 			icon.cd:Hide()
+			if icon.remaining then
+				icon:SetScript("OnUpdate", nil)
+				icon.remaining:Hide()
+			end
 		end
 	end
 	if icon.count then

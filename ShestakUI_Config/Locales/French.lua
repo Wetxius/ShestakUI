@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight_icon = "Afficher l’icône d'affaiblissemen
 L.raidframe_plugins_aura_watch = "Icônes d'affaiblissement de raid (de la liste)"
 L.raidframe_plugins_aura_watch_timer = "Durée sur les icônes d'affaiblissement du raid"
 L.raidframe_plugins_pvp_debuffs = "Afficher les icônes d'affaiblissement JcJ (de la liste)"
+L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review
 L_GUI_UF_PLUGINS_HEALCOMM = "Afficher l'estimation des soins entrant sur le cadre"
 L.raidframe_plugins_over_absorb = "Montrer la barre d'absorption sur le cadre"
 L.raidframe_plugins_over_heal_absorb = "Montrer l'excédent de soin absorber sur le cadre"

@@ -746,14 +746,21 @@ local CountOffSets = {
 	BOTTOM = {"RIGHT", "LEFT", 2, 0},
 }
 
-T.CreateAuraWatchIcon = function(_, icon)
-	icon:CreateBorder(nil, true)
-	-- icon.icon:SetPoint("TOPLEFT", icon, 0, 0)
-	-- icon.icon:SetPoint("BOTTOMRIGHT", icon, 0, 0)
-	icon.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	icon.icon:SetDrawLayer("ARTWORK")
-	if icon.cd then
-		icon.cd:SetReverse(true)
+T.CreateAuraWatchIcon = function(_, aura)
+	aura:CreateBorder(nil, true)
+	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	aura.icon:SetDrawLayer("ARTWORK")
+	if aura.cd then
+		aura.cd:SetReverse(true)
+		aura.cd:SetHideCountdownNumbers(true)
+		if C.raidframe.plugins_buffs_timer then
+			aura.parent = CreateFrame("Frame", nil, aura)
+			aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
+			aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+			aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+			aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
+			aura.remaining:SetJustifyH("CENTER")
+		end
 	end
 end
 
@@ -784,29 +791,29 @@ T.CreateAuraWatch = function(self)
 
 	if buffs then
 		for _, spell in pairs(buffs) do
-			local icon = CreateFrame("Frame", nil, auras)
-			icon.spellID = spell[1]
-			icon.anyUnit = spell[4]
-			icon.strictMatching = spell[5]
-			icon:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
-			icon:SetPoint(spell[2], 0, 0)
+			local aura = CreateFrame("Frame", nil, auras)
+			aura.spellID = spell[1]
+			aura.anyUnit = spell[4]
+			aura.strictMatching = spell[5]
+			aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
+			aura:SetPoint(spell[2], 0, 0)
 
-			local tex = icon:CreateTexture(nil, "OVERLAY")
-			tex:SetAllPoints(icon)
+			local tex = aura:CreateTexture(nil, "OVERLAY")
+			tex:SetAllPoints(aura)
 			tex:SetTexture(C.media.blank)
 			if spell[3] then
 				tex:SetVertexColor(unpack(spell[3]))
 			else
 				tex:SetVertexColor(0.8, 0.8, 0.8)
 			end
-			icon.icon = tex
+			aura.icon = tex
 
-			local count = T.SetFontString(icon, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
-			count:SetPoint(point, icon, anchorPoint, x, y)
-			icon.count = count
+			count:SetPoint(point, aura, anchorPoint, x, y)
+			aura.count = count
 
-			auras.icons[spell[1]] = icon
+			auras.icons[spell[1]] = aura
 		end
 	end
 

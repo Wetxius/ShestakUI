@@ -222,6 +222,7 @@ L.raidframe_plugins_debuffhighlight_icon = "Отображать иконку с
 L.raidframe_plugins_aura_watch = "Отображать рейдовые дебаффы (из списка)"
 L.raidframe_plugins_aura_watch_timer = "Включить цифровой таймер"
 L.raidframe_plugins_pvp_debuffs = "Отображать PvP дебаффы (из списка)"
+L.raidframe_plugins_buffs_timer = "Включить цифровой таймер для баффов"
 L_GUI_UF_PLUGINS_HEALCOMM = "Отображать поступающее лечение"
 L.raidframe_plugins_over_absorb = "Избыточное поглощение"
 L.raidframe_plugins_over_heal_absorb = "Избыточное поглощение исцеления"
