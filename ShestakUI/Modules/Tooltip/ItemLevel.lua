@@ -280,14 +280,14 @@ f:SetScript("OnUpdate", function()
 			end
 		end
 	elseif ShouldInspect and (timeSince < INSPECT_TIMEOUT) then
-		if unitID and UnitIsPlayer(unitID) and CanInspect(unitID) and not GuidCache[ guid ]then
+		if unitID and UnitIsPlayer(unitID) and CanInspect(unitID) and not GuidCache[guid] then
 			AddLine(Sekret, QUEUED_STATUS_WAITING..": ", format("%.1fs", INSPECT_TIMEOUT - (GetTime() - lastInspectRequest)), "|cff9A9A9A", "|cff9A9A9A")
 		end
 	else
 		if ActiveGUID then
 			if guid == ActiveGUID then
 				if timeSince <= FailTimeout then
-					AddLine(Sekret, SEARCH..": ", format("%d%%", timeSince / FailTimeout * 100), "|cff9A9A9A", "|cff9A9A9A")
+					AddLine(Sekret, SEARCH, "...", "|cff9A9A9A", "|cff9A9A9A")
 				else
 					AddLine(Sekret, SEARCH..": ", FAILED, "|cff9A9A9A", "|cff9A9A9A")
 					ActiveGUID = nil
@@ -323,6 +323,11 @@ local function DecorateTooltip(guid, isInspect)
 	if GetTooltipGUID() == guid or (isInspect and guid == UnitGUID("target")) then
 		local _, ourEquippedItemLevel = GetAverageItemLevel()
 		local averageItemLevel = cache.ilevel or 0
+		if averageItemLevel == 0 then
+			DoInspect()
+			ActiveGUID = nil
+			return
+		end
 		local r1, g1, b1 = ColorDiff(ourEquippedItemLevel, averageItemLevel)
 
 		local levelText = format("|cff%2x%2x%2x%.1f|r", r1 * 255, g1 * 255, b1 * 255, averageItemLevel)
@@ -367,17 +372,6 @@ function E:INSPECT_READY(guid)
 	ActiveGUID = nil
 	local unitID = UnitTokenFromGUID(guid)
 	if unitID then
-		-- local _, class = UnitClass(unitID)
-		-- local colors = class and RAID_CLASS_COLORS[class]
-		-- local specID = GetInspectSpecialization(unitID)
-		-- local specName
-		-- if not specName and specID and specID ~= 0 then
-			-- specID, specName = GetSpecializationInfoByID(specID, UnitSex(unitID))
-			-- if colors then
-				-- specName = "|c"..colors.colorStr..specName.."|r"
-			-- end
-		-- end
-
 		if not GuidCache[guid] then
 			GuidCache[guid] = {
 				ilevel = 0,
@@ -385,13 +379,9 @@ function E:INSPECT_READY(guid)
 				timestamp = 0,
 			}
 		end
-		-- local cache = GuidCache[guid]
-		-- cache.specID = specID
-		-- cache.class = class
-		-- cache.specName = specName
-		-- cache.itemLevel = C_PaperDollInfo.GetInspectItemLevel(unitID)
 
 		ScanUnit(unitID)
+		C_Timer.After(0.5, function() E("ItemScanComplete", guid, GuidCache[guid]) end)
 	end
 end
 
