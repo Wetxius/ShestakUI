@@ -1126,11 +1126,6 @@ do
 					info.arg2 = key
 					info.checked = value == f.selectedValue
 
-					if isFont then
-						local fObject = CreateFont(info.text)
-						fObject:SetFont(value, 12, "")
-						info.fontObject = fObject
-					end
 					UIDropDownMenu_AddButton(info)
 				end
 			end)
