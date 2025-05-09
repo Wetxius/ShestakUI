@@ -58,6 +58,18 @@ hooksecurefunc(LFGListFrame.SearchPanel.FilterButton, "SetWidth", function(self,
 end)
 
 ----------------------------------------------------------------------------------------
+--	Hide right-click line on unitframes
+----------------------------------------------------------------------------------------
+function UnitFrame_UpdateTooltip(self)
+	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	if GameTooltip:SetUnit(self.unit, self.hideStatusOnTooltip) then
+		self.UpdateTooltip = UnitFrame_UpdateTooltip
+	else
+		self.UpdateTooltip = nil
+	end
+end
+
+----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
 if C_AddOns.IsAddOnLoaded("!!NoTaint2") then return end
