@@ -115,7 +115,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end)
 		if GameMenuFrame.ShestakUI then
 			SkinButton(GameMenuFrame.ShestakUI)
-			GameMenuFrame.ShestakUI.backdrop:SetInside(button, 2, 2)
+			GameMenuFrame.ShestakUI.backdrop:SetInside(GameMenuFrame.ShestakUI, 2, 2)
 			local fstring = GameMenuFrame.ShestakUI:GetFontString()
 			fstring:SetFont(C.media.normal_font, 14)
 		end

@@ -114,12 +114,7 @@ local function LoadSkin()
 
 				button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				button.icon:ClearAllPoints()
-
-				if i == 1 then
-					button.icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMLEFT", -3, 3)
-				else
-					button.icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMLEFT", -3, 4)
-				end
+				button.icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMLEFT", -3, 4)
 
 				button.isSkinned = true
 			end
