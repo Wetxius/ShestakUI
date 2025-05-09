@@ -50,7 +50,7 @@ local funcs = {
 }
 
 for k, v in pairs(funcs) do
-	if k == "SetUnitBuffByAuraInstanceID" or k == "SetUnitBuffByAuraInstanceID" then
+	if k == "SetUnitBuffByAuraInstanceID" or k == "SetUnitDebuffByAuraInstanceID" then
 		hooksecurefunc(GameTooltip, k, function(self, unit, index, filter)
 			addAuraSource(self, v, unit, index, filter, true)
 		end)

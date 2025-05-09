@@ -30,6 +30,10 @@ UnitBuff = function(unit, auraIndex, filter)
 	return AuraUtil.UnpackAuraData(C_UnitAuras.GetBuffDataByIndex(unit, auraIndex, filter))
 end
 
+UnitDebuff = function(unit, auraIndex, filter)
+	return AuraUtil.UnpackAuraData(C_UnitAuras.GetDebuffDataByIndex(unit, auraIndex, filter))
+end
+
 GetSpellInfo = function(data)
 	local spellInfo = C_Spell.GetSpellInfo(data)
 	if spellInfo then
