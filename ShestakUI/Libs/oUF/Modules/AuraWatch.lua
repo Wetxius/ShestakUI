@@ -58,7 +58,7 @@ local function OnUpdate(self, elapsed)
 		if timeLeft > 0.5 then
 			local text = formatTime(timeLeft)
 			self.remaining:SetText(text)
-			if text <= 5 then
+			if timeLeft <= 5 then
 				self.remaining:SetTextColor(1, 1, 0.2)
 			else
 				self.remaining:SetTextColor(1, 1, 1)
