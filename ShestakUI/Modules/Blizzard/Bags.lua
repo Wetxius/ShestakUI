@@ -1759,8 +1759,9 @@ function Stuffing:ADDON_LOADED(addon)
 	ToggleAllBags = Stuffing_Toggle
 	OpenAllBags = Stuffing_Open
 	OpenBackpack = Stuffing_Open
-	CloseAllBags = Stuffing_Close
-	CloseBackpack = Stuffing_Close
+
+	hooksecurefunc("CloseAllBags", Stuffing_Close)
+	hooksecurefunc("CloseBackpack", Stuffing_Close)
 
 	OpenAllBagsMatchingContext = function()
 		local count = 0
