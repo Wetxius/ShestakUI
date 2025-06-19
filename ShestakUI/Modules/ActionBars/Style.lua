@@ -24,6 +24,7 @@ local function StyleNormalButton(button, size)
 		local autocast = button.AutoCastOverlay
 		local shine = _G[name.."Shine"]
 		local spellAlert = button.SpellActivationAlert
+		local assist = button.AssistedCombatRotationFrame
 
 		if button.IconMask then
 			button.IconMask:Hide()
@@ -180,6 +181,10 @@ local function StyleNormalButton(button, size)
 		if spellAlert then
 			spellAlert:SetSize((size or C.actionbar.button_size) * 1.4, (size or C.actionbar.button_size) * 1.4)
 			ActionButton_HideOverlayGlow(button)
+		end
+
+		if assist then
+			assist:SetScale(0.5)
 		end
 
 		button:StyleButton()
@@ -410,3 +415,13 @@ else
 		button.SpellActivationAlert.ProcLoop:Play()
 	end)
 end
+
+hooksecurefunc(AssistedCombatManager, "SetAssistedHighlightFrameShown", function(_, actionButton)
+	local highlightFrame = actionButton.AssistedCombatHighlightFrame
+	if highlightFrame then
+		highlightFrame.Flipbook:SetSize(C.actionbar.button_size * 1.4, C.actionbar.button_size * 1.4)
+		if highlightFrame.InactiveTexture then
+			highlightFrame.InactiveTexture:SetSize(C.actionbar.button_size * 1.4, C.actionbar.button_size * 1.4)
+		end
+	end
+end)
