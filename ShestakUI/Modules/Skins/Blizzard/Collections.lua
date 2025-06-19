@@ -59,11 +59,8 @@ local function LoadSkin()
 		frame:CreateBackdrop("Default")
 		frame.backdrop:SetAllPoints()
 		frame:StyleButton()
-		_G[frame:GetName().."Border"]:Hide()
-		frame.texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		frame.texture:ClearAllPoints()
-		frame.texture:SetPoint("TOPLEFT", 2, -2)
-		frame.texture:SetPoint("BOTTOMRIGHT", -2, 2)
+		frame.Border:Hide()
+		frame.Icon:CropIcon()
 	end
 
 	-- MountJournal
@@ -136,7 +133,7 @@ local function LoadSkin()
 	end
 	hooksecurefunc("MountJournal_InitMountButton", ColorSelectedMount)
 
-	StyleItemButton(MountJournalSummonRandomFavoriteButton)
+	StyleItemButton(MountJournal.SummonRandomFavoriteSpellFrame.Button)
 
 	do
 		local button = MountJournal.MountDisplay.InfoButton
@@ -270,8 +267,8 @@ local function LoadSkin()
 
 	hooksecurefunc("PetJournal_InitPetButton", ColorSelectedPet)
 
-	StyleItemButton(PetJournalHealPetButton)
-	StyleItemButton(PetJournalSummonRandomFavoritePetButton)
+	StyleItemButton(PetJournal.HealPetSpellFrame.Button)
+	StyleItemButton(PetJournal.SummonRandomPetSpellFrame.Button)
 
 	for i = 1, 3 do
 		local button = _G["PetJournalLoadoutPet"..i]
