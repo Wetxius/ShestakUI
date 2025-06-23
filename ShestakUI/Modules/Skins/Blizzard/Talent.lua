@@ -257,6 +257,11 @@ local function LoadSkin()
 						frame.Button.BorderSheen:Hide()
 					end)
 
+					frame.Button.AssistedCombatIconCover:Hide()
+					hooksecurefunc(frame.Button.AssistedCombatIconCover, "SetShown", function()
+						frame.Button.AssistedCombatIconCover:Hide()
+					end)
+
 					frame.Button.Icon:SkinIcon()
 					frame.Button.Icon:StyleButton()
 
