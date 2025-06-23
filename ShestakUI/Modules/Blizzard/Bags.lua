@@ -536,6 +536,8 @@ function Stuffing:SkinWarbandContainer()
 	warbandFrame:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
 	warbandFrame:SetTemplate("Transparent")
 
+	warbandFrame:SetFrameStrata(_G["StuffingFrameBank"]:GetFrameStrata())
+	warbandFrame:SetFrameLevel(_G["StuffingFrameBank"]:GetFrameLevel() + 5)
 	warbandFrame:EnableMouse(true)
 	warbandFrame:SetMovable(true)
 	warbandFrame:SetClampedToScreen(true)
@@ -964,6 +966,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame:SetTemplate("Default")
 		ret.frame:SetNormalTexture(0)
 		ret.frame:SetFrameStrata("HIGH")
+		ret.frame:SetFrameLevel(20)
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
 		ret.icon:CropIcon()
@@ -1217,7 +1220,7 @@ function Stuffing:CreateBagFrame(w)
 	local f = CreateFrame("Frame", n, UIParent)
 	f:EnableMouse(true)
 	f:SetMovable(true)
-	f:SetFrameStrata("MEDIUM")
+	f:SetFrameStrata("HIGH")
 	f:SetFrameLevel(10)
 	f:RegisterForDrag("LeftButton")
 	f:SetScript("OnDragStart", function(self)
@@ -1367,7 +1370,7 @@ function Stuffing:CreateBagFrame(w)
 	-- Create the bags frame
 	local fb = CreateFrame("Frame", n.."BagsFrame", f)
 	fb:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 3)
-	fb:SetFrameStrata("MEDIUM")
+	fb:SetFrameStrata("HIGH")
 	f.bags_frame = fb
 
 	return f
