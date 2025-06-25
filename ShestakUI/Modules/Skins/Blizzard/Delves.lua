@@ -63,20 +63,19 @@ local function LoadSecondSkin()
 	T.SkinDropDownBox(frame.Dropdown)
 	frame.EnterDelveButton:SkinButton()
 
-	local function skinReward(frame)
-		for rewardFrame in frame.rewardPool:EnumerateActive() do
-			if not rewardFrame.IsSkinned then
-				rewardFrame.NameFrame:SetAlpha(0)
-				rewardFrame.Icon:SkinIcon()
-				rewardFrame.IconBorder:SetAlpha(0)
+	local function skinReward(rewardFrame)
+		if not rewardFrame.IsSkinned then
+			rewardFrame.NameFrame:SetAlpha(0)
+			rewardFrame.Icon:SkinIcon()
+			rewardFrame.IconBorder:SetAlpha(0)
 
-				rewardFrame.IsSkinned = true
-			end
+			rewardFrame.IsSkinned = true
 		end
 	end
 
-	hooksecurefunc(frame.DelveRewardsContainerFrame, "SetRewards", skinReward)
-	frame.DelveRewardsContainerFrame:HookScript("OnShow", skinReward)
+	hooksecurefunc(frame.DelveRewardsContainerFrame.ScrollBox, "Update", function(self)
+		self:ForEachFrame(skinReward)
+	end)
 end
 
 T.SkinFuncs["Blizzard_DelvesDifficultyPicker"] = LoadSecondSkin
