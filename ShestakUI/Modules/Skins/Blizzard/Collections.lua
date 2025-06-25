@@ -705,6 +705,7 @@ local function LoadSkin()
 			self.ArtBackdrop:SetTemplate("Default")
 			self.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			self.Border:SetAlpha(0)
+			self.NameBackground:SetAlpha(0)
 			if self.SetHighlightTexture then
 				local highlight = self:CreateTexture()
 				highlight:SetColorTexture(1, 1, 1, 0.3)
