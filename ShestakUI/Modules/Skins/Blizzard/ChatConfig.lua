@@ -281,14 +281,16 @@ local function LoadSkin()
 	end
 
 	TextToSpeechDefaultButton:SkinButton()
-	TextToSpeechFramePlaySampleButton:SkinButton()
-	TextToSpeechFramePlaySampleAlternateButton:SkinButton()
+	if not T.newPatch then
+		TextToSpeechFramePlaySampleButton:SkinButton()
+		TextToSpeechFramePlaySampleAlternateButton:SkinButton()
 
-	T.SkinDropDownBox(TextToSpeechFrameTtsVoiceDropdown)
-	T.SkinDropDownBox(TextToSpeechFrameTtsVoiceAlternateDropdown)
+		T.SkinDropDownBox(TextToSpeechFrameTtsVoiceDropdown)
+		T.SkinDropDownBox(TextToSpeechFrameTtsVoiceAlternateDropdown)
 
-	T.SkinSlider(TextToSpeechFrameAdjustRateSlider)
-	T.SkinSlider(TextToSpeechFrameAdjustVolumeSlider)
+		T.SkinSlider(TextToSpeechFrameAdjustRateSlider)
+		T.SkinSlider(TextToSpeechFrameAdjustVolumeSlider)
+	end
 
 	hooksecurefunc("TextToSpeechFrame_UpdateMessageCheckboxes", function(frame)
 		local checkBoxTable = frame.checkBoxTable

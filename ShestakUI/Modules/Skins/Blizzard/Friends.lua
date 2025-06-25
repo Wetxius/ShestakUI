@@ -74,7 +74,10 @@ local function LoadSkin()
 	}
 
 	for i = 1, #buttons do
-		buttons[i]:SkinButton()
+		local button = buttons[i]
+		if button then
+			button:SkinButton()
+		end
 	end
 
 	local scrollbars = {
