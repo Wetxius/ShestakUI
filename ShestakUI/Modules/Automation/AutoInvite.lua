@@ -18,7 +18,7 @@ if C.automation.accept_invite == true then
 			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
 			AcceptGroup()
-			for i = 1, STATICPOPUP_NUMDIALOGS do
+			for i = 1, 4 do
 				local frame = _G["StaticPopup"..i]
 				if frame:IsVisible() and frame.which == "PARTY_INVITE" then
 					frame.inviteAccepted = 1

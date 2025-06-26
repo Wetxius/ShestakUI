@@ -102,7 +102,7 @@ end
 if not NoTaint2_CleanStaticPopups then
 	--code since !NoTaint, test: /run StaticPopup_Show('PARTY_INVITE',"a") /dump issecurevariable(StaticPopup1, "which")
 	function NoTaint2_CleanStaticPopups()
-		for index = 1, STATICPOPUP_NUMDIALOGS, 1 do
+		for index = 1, 4, 1 do
 			local frame = _G["StaticPopup"..index];
 			if not issecurevariable(frame, "which") then
 				if frame:IsShown() then
