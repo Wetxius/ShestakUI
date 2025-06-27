@@ -59,7 +59,7 @@ local function LoadSkin()
 		FriendsFrameUnsquelchButton,
 		AddFriendEntryFrameAcceptButton,
 		AddFriendEntryFrameCancelButton,
-		AddFriendInfoFrameContinueButton,
+		AddFriendInfoFrameContinueButton, -- FIXME Not exist in 11.2
 		QuickJoinFrame.JoinQueueButton,
 		QuickJoinRoleSelectionFrame.AcceptButton,
 		QuickJoinRoleSelectionFrame.CancelButton,
