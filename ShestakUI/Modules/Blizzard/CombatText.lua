@@ -312,7 +312,7 @@ local function OnEvent(_, event, subevent, powerType)
 			xCT3:AddMessage("-"..LEAVING_COMBAT, 0.1, 1, 0.1)
 	elseif event == "PLAYER_REGEN_DISABLED" and CVarCallbackRegistry:GetCVarValueBool("floatingCombatTextCombatState") then
 			xCT3:AddMessage("+"..ENTERING_COMBAT, 1, 0.1, 0.1)
-	elseif event == "UNIT_POWER_UPDATE" and CVarCallbackRegistry:GetCVarValueBool("floatingCombatTextEnergyGains") then
+	elseif event == "UNIT_POWER_UPDATE" and CVarCallbackRegistry:GetCVarValueBool("floatingCombatTextComboPoints") then
 		if subevent == ct.unit then
 			if powerType and powerType ~= 'COMBO_POINTS' then return end
 			local cp = UnitPower(ct.unit, 4)
