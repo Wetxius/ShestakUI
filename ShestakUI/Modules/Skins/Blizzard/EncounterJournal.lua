@@ -266,7 +266,7 @@ local function LoadSkin()
 				if not child.backdrop and not child.TipButton then
 					child:CreateBackdrop("Overlay")
 					child.backdrop:SetPoint("TOPLEFT", 0, -4)
-					child.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+					child.backdrop:SetPoint("BOTTOMRIGHT", -5, 0)
 				end
 
 				child.isSkinned = true
@@ -442,7 +442,7 @@ local function LoadSkin()
 					button.backdrop:SetPoint("TOPLEFT", button.Border, 5, -5)
 					button.backdrop:SetPoint("BOTTOMRIGHT", button.Border, -4, 3)
 					button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-					T.SkinIconBorder(button.Border, button.backdrop)
+					T.SkinIconBorder(button.Border, button.backdrop, true)
 					button.Border:SetAtlas(button.Border:GetAtlas()) -- force to update border as it call before we can skin
 					button.styled = true
 				end

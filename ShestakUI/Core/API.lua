@@ -1192,19 +1192,23 @@ local iconColors = {
 	["purple"]		= BAG_ITEM_QUALITY_COLORS[4],
 	["orange"]		= BAG_ITEM_QUALITY_COLORS[5],
 	["artifact"]	= BAG_ITEM_QUALITY_COLORS[6],
-	["account"]		= BAG_ITEM_QUALITY_COLORS[7]
+	["account"]		= BAG_ITEM_QUALITY_COLORS[7],
+	["epic"]		= BAG_ITEM_QUALITY_COLORS[4],
+	["legendary"]	= BAG_ITEM_QUALITY_COLORS[5],
 }
 
-function T.SkinIconBorder(frame, parent)
+function T.SkinIconBorder(frame, parent, useAtlas)
 	local border = parent or frame:GetParent().backdrop
 	frame:SetAlpha(0)
-	hooksecurefunc(frame, "SetVertexColor", function(_, r, g, b)
-		if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g and not (r > 0.9 and g > 0.9 and b > 0.9) then
-			border:SetBackdropBorderColor(r, g, b)
-		else
-			border:SetBackdropBorderColor(unpack(C.media.border_color))
-		end
-	end)
+	if not useAtlas then
+		hooksecurefunc(frame, "SetVertexColor", function(_, r, g, b)
+			if r ~= BAG_ITEM_QUALITY_COLORS[1].r and g ~= BAG_ITEM_QUALITY_COLORS[1].g and not (r > 0.9 and g > 0.9 and b > 0.9) then
+				border:SetBackdropBorderColor(r, g, b)
+			else
+				border:SetBackdropBorderColor(unpack(C.media.border_color))
+			end
+		end)
+	end
 
 	hooksecurefunc(frame, "SetAtlas", function(_, atlas)
 		local atlasAbbr = atlas and strmatch(atlas, "%-(%w+)$")
