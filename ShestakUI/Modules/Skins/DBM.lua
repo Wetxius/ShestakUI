@@ -181,9 +181,21 @@ DBMSkin:SetScript("OnEvent", function()
 			T.SkinCloseButton(DBM_GUI_OptionsFrameClosePanelButton)
 		end
 
-		local dbmbskins = {
+		local buttons = {
 			"DBM_GUI_OptionsFrameWebsiteButton",
-			"DBM_GUI_OptionsFrameOkay",
+			"DBM_GUI_OptionsFrameOkay"
+		}
+
+		for i = 1, #buttons do
+			local button = _G[buttons[i]]
+			if button and not button.overlay then
+				button:SkinButton(true)
+			end
+		end
+
+		DBM_GUI_OptionsFrameTab1:SetPoint("TOPLEFT", DBM_GUI_OptionsFrameList, "TOPLEFT", 10, 38)
+
+		local tabs = {
 			"DBM_GUI_OptionsFrameTab1",
 			"DBM_GUI_OptionsFrameTab2",
 			"DBM_GUI_OptionsFrameTab3",
@@ -191,13 +203,22 @@ DBMSkin:SetScript("OnEvent", function()
 			"DBM_GUI_OptionsFrameTab5"
 		}
 
-		for i = 1, getn(dbmbskins) do
-			local buttons = _G[dbmbskins[i]]
-			if buttons and not buttons.overlay then
-				buttons:SkinButton(true)
-				if i > 2 then
-					buttons:SetHeight(26)
-				end
+		for i = 1, #tabs do
+			local tab = _G[tabs[i]]
+			if tab then
+				T.SkinTab(tab, true)
+			end
+		end
+
+		local scrollBars = {
+			DBM_GUI_OptionsFrameListScrollBar,
+			DBM_GUI_OptionsFramePanelContainerFOVScrollBar
+		}
+
+		for i = 1, #scrollBars do
+			local scrollBar = scrollBars[i]
+			if scrollBar then
+				T.SkinScrollBar(scrollBar)
 			end
 		end
 	end
