@@ -19,8 +19,13 @@ ExtraActionBarFrame:SetParent(anchor)
 ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetAllPoints()
 ExtraActionBarFrame.ignoreInLayout = true
-ExtraActionBarFrame:SetIgnoreParentScale(true)
-ExtraActionBarFrame:SetScale(UIParent:GetScale())
+
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_LOGIN")
+frame:SetScript("OnEvent", function()
+	ExtraActionBarFrame:SetIgnoreParentScale(true)
+	ExtraActionBarFrame:SetScale(UIParent:GetScale())
+end)
 
 -- Prevent reanchor
 ExtraAbilityContainer:SetScript("OnShow", nil)
