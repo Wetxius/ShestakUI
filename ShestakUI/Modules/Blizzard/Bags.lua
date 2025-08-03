@@ -1744,8 +1744,10 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
-	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
+	if not T.newPatch then
+		self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
+		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
+	end
 	self:RegisterEvent("BAG_CLOSED")
 	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:RegisterEvent("BAG_CONTAINER_UPDATE")

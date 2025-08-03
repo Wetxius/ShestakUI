@@ -269,7 +269,12 @@ local function LoadSkin()
 	LFGListFrame.SearchPanel.RefreshButton:SetSize(24, 24)
 	LFGListFrame.SearchPanel.RefreshButton.Icon:SetPoint("CENTER")
 	T.SkinFilter(LFGListFrame.SearchPanel.FilterButton, true)
-	LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
+	if not T.newPatch then
+		LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
+	else
+		LFGListFrame.SearchPanel.SearchBox:ClearAllPoints()
+		LFGListFrame.SearchPanel.SearchBox:SetPoint("RIGHT", LFGListFrame.SearchPanel.FilterButton, "LEFT", -5, 0)
+	end
 
 	local function skinCreateButton(button)
 		local child = button:GetChildren()
