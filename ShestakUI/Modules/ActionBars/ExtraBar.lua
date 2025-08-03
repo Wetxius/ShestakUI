@@ -19,6 +19,8 @@ ExtraActionBarFrame:SetParent(anchor)
 ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetAllPoints()
 ExtraActionBarFrame.ignoreInLayout = true
+ExtraActionBarFrame:SetIgnoreParentScale(true)
+ExtraActionBarFrame:SetScale(UIParent:GetScale())
 
 -- Prevent reanchor
 ExtraAbilityContainer:SetScript("OnShow", nil)
