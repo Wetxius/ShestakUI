@@ -148,134 +148,101 @@ local function LoadSkin()
 	BankItemSearchBox.backdrop:SetPoint("TOPLEFT", 13, 0)
 	BankItemSearchBox.backdrop:SetPoint("BOTTOMRIGHT", -2, 0)
 
-	BankItemAutoSortButton:StyleButton()
-	BankItemAutoSortButton:SetTemplate("Default")
-	BankItemAutoSortButton:SetSize(20, 20)
-	BankItemAutoSortButton:SetPoint("TOPLEFT", BankItemSearchBox, "TOPRIGHT", 3, 0)
-	BankItemAutoSortButton:GetNormalTexture():SetTexture("Interface\\Icons\\inv_pet_broom")
-	BankItemAutoSortButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	BankItemAutoSortButton:GetNormalTexture():ClearAllPoints()
-	BankItemAutoSortButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-	BankItemAutoSortButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
+	BankPanel.AutoSortButton:StyleButton()
+	BankPanel.AutoSortButton:SetTemplate("Default")
+	BankPanel.AutoSortButton:SetSize(20, 20)
+	BankPanel.AutoSortButton:SetPoint("TOPLEFT", BankItemSearchBox, "TOPRIGHT", 3, 0)
+	BankPanel.AutoSortButton:GetNormalTexture():SetTexture("Interface\\Icons\\inv_pet_broom")
+	BankPanel.AutoSortButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	BankPanel.AutoSortButton:GetNormalTexture():ClearAllPoints()
+	BankPanel.AutoSortButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
+	BankPanel.AutoSortButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
 
-	BankFrameMoneyFrameBorder:Hide()
+	BankPanel.MoneyFrame.Border:Hide()
 
-	BankFramePurchaseButton:SkinButton()
+	BankPanel.AutoDepositFrame.DepositButton:SkinButton()
 	T.SkinCloseButton(BankFrameCloseButton, BankFrame.backdrop)
 
-	BankSlotsFrame:StripTextures()
+	-- BankSlotsFrame:StripTextures()
 
-	for i = 1, 28 do
-		local item = _G["BankFrameItem"..i]
-		SkinBagSlots(item)
-	end
+	-- for i = 1, 28 do
+		-- local item = _G["BankFrameItem"..i]
+		-- SkinBagSlots(item)
+	-- end
 
-	for i = 1, 7 do
-		local bag = BankSlotsFrame["Bag"..i]
-		local icon = bag.icon
+	-- for i = 1, 7 do
+		-- local bag = BankSlotsFrame["Bag"..i]
+		-- local icon = bag.icon
 
-		bag.IconBorder:SetAlpha(0)
+		-- bag.IconBorder:SetAlpha(0)
 
-		bag:StripTextures()
-		bag:StyleButton()
-		bag:SetTemplate("Default")
+		-- bag:StripTextures()
+		-- bag:StyleButton()
+		-- bag:SetTemplate("Default")
 
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
-	end
+		-- icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		-- icon:ClearAllPoints()
+		-- icon:SetPoint("TOPLEFT", 2, -2)
+		-- icon:SetPoint("BOTTOMRIGHT", -2, 2)
+	-- end
 
 	-- Tabs
 	for i = 1, 3 do
 		T.SkinTab(_G["BankFrameTab"..i])
 	end
 
-	-- ReagentBank
-	ReagentBankFrame:StripTextures()
-	ReagentBankFrame:DisableDrawLayer("BACKGROUND")
-	ReagentBankFrame:DisableDrawLayer("ARTWORK")
-
-	ReagentBankFrameUnlockInfo:StripTextures()
-	ReagentBankFrameUnlockInfo:CreateBackdrop("Overlay")
-	ReagentBankFrameUnlockInfo.backdrop:SetPoint("TOPLEFT", 4, -2)
-	ReagentBankFrameUnlockInfo.backdrop:SetPoint("BOTTOMRIGHT", -4, 2)
-	ReagentBankFrameUnlockInfo.backdrop:SetFrameLevel(ReagentBankFrameUnlockInfo.backdrop:GetFrameLevel() + 1)
-
-	ReagentBankFrameUnlockInfoPurchaseButton:SkinButton()
-	ReagentBankFrameUnlockInfoPurchaseButton:SetFrameLevel(ReagentBankFrameUnlockInfo:GetFrameLevel() + 3)
-	ReagentBankFrame.DespositButton:SkinButton()
-
-	ReagentBankFrame:HookScript("OnShow", function()
-		for i = 1, 98 do
-			local item = _G["ReagentBankFrameItem"..i]
-			SkinBagSlots(item)
-			BankFrameItemButton_Update(item)
-		end
-	end)
-
-	hooksecurefunc("BankFrameItemButton_Update", function(frame)
-		if not frame.isBag and frame.IconQuestTexture:IsShown() then
-			if frame.IconQuestTexture:GetTexture() == 368362 then
-				frame:SetBackdropBorderColor(1, 0.3, 0.3)
-			else
-				frame:SetBackdropBorderColor(1, 1, 0)
-			end
-		end
-	end)
-
 	-- Warband
-	AccountBankPanel:StripTextures()
+	-- AccountBankPanel:StripTextures()
 
-	hooksecurefunc(AccountBankPanel, "GenerateItemSlotsForSelectedTab", SkinItemSlots)
+	-- hooksecurefunc(AccountBankPanel, "GenerateItemSlotsForSelectedTab", SkinItemSlots)
 
-	local function SkinBankTab(button)
-		if not button.styled then
-			button.Border:SetAlpha(0)
+	-- local function SkinBankTab(button)
+		-- if not button.styled then
+			-- button.Border:SetAlpha(0)
 
-			if button.Background then
-				button.Background:SetAlpha(0)
-			end
+			-- if button.Background then
+				-- button.Background:SetAlpha(0)
+			-- end
 
-			button:SetTemplate("Default")
-			button:StyleButton()
+			-- button:SetTemplate("Default")
+			-- button:StyleButton()
 
-			button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
-			button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
-			button.SelectedTexture:SetPoint("BOTTOMRIGHT", -2, 2)
+			-- button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+			-- button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
+			-- button.SelectedTexture:SetPoint("BOTTOMRIGHT", -2, 2)
 
-			button.Icon:ClearAllPoints()
-			button.Icon:SetPoint("TOPLEFT", 2, -2)
-			button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
-			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			-- button.Icon:ClearAllPoints()
+			-- button.Icon:SetPoint("TOPLEFT", 2, -2)
+			-- button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			-- button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-			button.styled = true
-		end
-	end
+			-- button.styled = true
+		-- end
+	-- end
 
-	hooksecurefunc(AccountBankPanel, "RefreshBankTabs", function(self)
-		for tab in self.bankTabPool:EnumerateActive() do
-			SkinBankTab(tab)
-		end
-	end)
-	SkinBankTab(AccountBankPanel.PurchaseTab)
+	-- hooksecurefunc(AccountBankPanel, "RefreshBankTabs", function(self)
+		-- for tab in self.bankTabPool:EnumerateActive() do
+			-- SkinBankTab(tab)
+		-- end
+	-- end)
+	-- SkinBankTab(AccountBankPanel.PurchaseTab)
 
-	AccountBankPanel.ItemDepositFrame.DepositButton:SkinButton()
-	T.SkinCheckBox(AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox)
-	AccountBankPanel.MoneyFrame.Border:Hide()
-	AccountBankPanel.MoneyFrame.WithdrawButton:SkinButton()
-	AccountBankPanel.MoneyFrame.DepositButton:SkinButton()
+	-- AccountBankPanel.ItemDepositFrame.DepositButton:SkinButton()
+	-- T.SkinCheckBox(AccountBankPanel.ItemDepositFrame.IncludeReagentsCheckbox)
+	-- AccountBankPanel.MoneyFrame.Border:Hide()
+	-- AccountBankPanel.MoneyFrame.WithdrawButton:SkinButton()
+	-- AccountBankPanel.MoneyFrame.DepositButton:SkinButton()
 
-	AccountBankPanel.PurchasePrompt:StripTextures()
-	AccountBankPanel.PurchasePrompt:CreateBackdrop("Overlay")
-	AccountBankPanel.PurchasePrompt.backdrop:SetPoint("TOPLEFT", 4, -2)
-	AccountBankPanel.PurchasePrompt.backdrop:SetPoint("BOTTOMRIGHT", -4, 2)
-	AccountBankPanel.PurchasePrompt.backdrop:SetFrameLevel(AccountBankPanel.PurchasePrompt.backdrop:GetFrameLevel() + 1)
+	-- AccountBankPanel.PurchasePrompt:StripTextures()
+	-- AccountBankPanel.PurchasePrompt:CreateBackdrop("Overlay")
+	-- AccountBankPanel.PurchasePrompt.backdrop:SetPoint("TOPLEFT", 4, -2)
+	-- AccountBankPanel.PurchasePrompt.backdrop:SetPoint("BOTTOMRIGHT", -4, 2)
+	-- AccountBankPanel.PurchasePrompt.backdrop:SetFrameLevel(AccountBankPanel.PurchasePrompt.backdrop:GetFrameLevel() + 1)
 
-	AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SkinButton()
-	AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SetFrameLevel(AccountBankPanel.PurchasePrompt:GetFrameLevel() + 3)
+	-- AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SkinButton()
+	-- AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SetFrameLevel(AccountBankPanel.PurchasePrompt:GetFrameLevel() + 3)
 
-	T.SkinIconSelectionFrame(AccountBankPanel.TabSettingsMenu)
+	-- T.SkinIconSelectionFrame(AccountBankPanel.TabSettingsMenu)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
