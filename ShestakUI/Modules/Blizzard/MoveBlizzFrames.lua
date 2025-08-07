@@ -58,7 +58,6 @@ local AddOnFrames = {
 	["Blizzard_TalentUI"] = {"PlayerTalentFrame"},
 	["Blizzard_TalkingHeadUI"] = {"TalkingHeadFrame"},
 	["Blizzard_TrainerUI"] = {"ClassTrainerFrame"},
-	["Blizzard_VoidStorageUI"] = {"VoidStorageFrame"},
 }
 
 local frame = CreateFrame("Frame")

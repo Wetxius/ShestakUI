@@ -306,8 +306,7 @@ hooksecurefunc("EquipmentFlyout_DisplayButton", function(button)
 		return
 	end
 
-	local _, _, bags, voidStorage, slot, bag = EquipmentManager_UnpackLocation(location)
-	if voidStorage then return end
+	local _, _, bags, _, slot, bag = EquipmentManager_UnpackLocation(location)
 
 	if bags then
 		SetupFlyoutLevel(button, bag, slot)
