@@ -41,7 +41,7 @@ end
 
 local function Visibility(self)
 	local element = self.ArcaneCharge
-	local spec = GetSpecialization()
+	local spec = C_SpecializationInfo.GetSpecialization()
 
 	if spec == SPEC_MAGE_ARCANE then
 		element:Show()

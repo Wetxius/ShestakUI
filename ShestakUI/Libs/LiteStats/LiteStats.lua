@@ -1433,16 +1433,16 @@ if talents.enabled then
 			end
 
 			local lootSpec = GetLootSpecialization()
-			local spec = GetSpecialization()
+			local spec = C_SpecializationInfo.GetSpecialization()
 
-			lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
-			specName = spec and select(2, GetSpecializationInfo(spec)) or NO
+			lootSpecName = lootSpec and select(2, C_SpecializationInfo.GetSpecializationInfoByID(lootSpec)) or NO
+			specName = spec and select(2, C_SpecializationInfo.GetSpecializationInfo(spec)) or NO
 
 			local specText = L_STATS_SPEC..":"
 			local specIcon, lootIcon = "", ""
 			local lootText = LOOT..":"
 
-			local _, _, _, specTex = GetSpecializationInfo(spec)
+			local _, _, _, specTex = C_SpecializationInfo.GetSpecializationInfo(spec)
 			local texSize = 14
 			if specTex then
 				specIcon = format("|T%s:"..texSize..":"..texSize..":0:0:64:64:5:59:5:59|t", specTex)
@@ -1453,7 +1453,7 @@ if talents.enabled then
 				lootText = ""
 				lootSpecName = "|cff55ff55"..specName.."|r"
 			else
-				local _, _, _, texture = GetSpecializationInfoByID(lootSpec)
+				local _, _, _, texture = C_SpecializationInfo.GetSpecializationInfoByID(lootSpec)
 				if texture then
 					lootIcon = format("|T%s:"..texSize..":"..texSize..":0:0:64:64:5:59:5:59|t", texture)
 				end
@@ -1493,9 +1493,9 @@ if talents.enabled then
 					PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
 				else
 					for index = 1, 4 do
-						local id, name, _, texture = GetSpecializationInfo(index)
+						local id, name, _, texture = C_SpecializationInfo.GetSpecializationInfo(index)
 						if id then
-							if GetSpecializationInfo(GetSpecialization()) == id then
+							if C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization()) == id then
 								name = "|cff55ff55"..name.."|r"
 							end
 							specList[index + 1].text = format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59|t  %s", texture, name)
@@ -1506,16 +1506,16 @@ if talents.enabled then
 					end
 					EasyMenu(specList, LSMenus, self, 0, 24, "MENU")
 				end
-			elseif b == "RightButton" and GetSpecialization() then
+			elseif b == "RightButton" and C_SpecializationInfo.GetSpecialization() then
 				local lootSpec = GetLootSpecialization()
-				local _, specName = GetSpecializationInfo(GetSpecialization())
+				local _, specName = C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization())
 				local specDefault = format(LOOT_SPECIALIZATION_DEFAULT, specName)
 				if lootSpec == 0 then
 					specDefault = "|cff55ff55"..format(LOOT_SPECIALIZATION_DEFAULT, specName).."|r"
 				end
 				lootList[2].text = specDefault
 				for index = 1, 4 do
-					local id, name, _, texture = GetSpecializationInfo(index)
+					local id, name, _, texture = C_SpecializationInfo.GetSpecializationInfo(index)
 					if id then
 						if lootSpec == id then
 							name = "|cff55ff55"..name.."|r"
@@ -2038,7 +2038,7 @@ if stats.enabled then
 			self.elapsed = self.elapsed + u
 			if self.fired and self.elapsed > 2.5 then
 				self.text:SetText(gsub(stats.fmt, "%[(%w-)%]", tags))
-				LP_Stat.text:SetText(gsub(stat[format("spec%dfmt", GetSpecialization() and GetSpecialization() or 1)], "%[(%w-)%]", tags))
+				LP_Stat.text:SetText(gsub(stat[format("spec%dfmt", C_SpecializationInfo.GetSpecialization() and C_SpecializationInfo.GetSpecialization() or 1)], "%[(%w-)%]", tags))
 				self.elapsed, self.fired = 0, false
 				if self.hovered then self:GetScript("OnEnter")(self) end
 			end
@@ -2050,9 +2050,9 @@ if stats.enabled then
 			GameTooltip:ClearLines()
 			GameTooltip:AddLine(PAPERDOLL_SIDEBAR_STATS, tthead.r, tthead.g, tthead.b)
 			GameTooltip:AddLine(" ")
-			local spec = GetSpecialization()
+			local spec = C_SpecializationInfo.GetSpecialization()
 			if spec then
-				local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
+				local primaryStat = select(6, C_SpecializationInfo.GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
 				local value = UnitStat("player", primaryStat)
 				local statName = _G["SPELL_STAT"..primaryStat.."_NAME"]
 				GameTooltip:AddDoubleLine(statName, value, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)

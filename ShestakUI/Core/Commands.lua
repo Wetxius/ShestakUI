@@ -159,7 +159,7 @@ SLASH_INSTTELEPORT2 = "/еудузщке"
 SlashCmdList.SPEC = function(spec)
 	local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()
 	if canUse then
-		if GetSpecialization() ~= tonumber(spec) then
+		if C_SpecializationInfo.GetSpecialization() ~= tonumber(spec) then
 			C_SpecializationInfo.SetSpecialization(spec)
 		end
 	else

@@ -63,7 +63,7 @@ end
 
 local function Visibility(self)
 	local element = self.HarmonyBar
-	local spec = GetSpecialization()
+	local spec = C_SpecializationInfo.GetSpecialization()
 
 	if spec == SPEC_MONK_WINDWALKER then
 		element:Show()

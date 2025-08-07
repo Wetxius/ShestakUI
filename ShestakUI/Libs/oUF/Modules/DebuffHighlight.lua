@@ -36,7 +36,7 @@ local function GetDebuffType(unit, filter)
 end
 
 local function CheckSpec()
-	local spec = GetSpecialization()
+	local spec = C_SpecializationInfo.GetSpecialization()
 
 	if T.class == "DRUID" then
 		if spec == 4 then

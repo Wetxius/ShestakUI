@@ -45,7 +45,7 @@ end
 	-- local i = 0
 	-- local specID
 	-- if unit == "player" then
-		-- specID = GetSpecializationInfo(GetSpecialization())
+		-- specID = C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization())
 	-- else
 		-- specID = GetInspectSpecialization("target")
 	-- end

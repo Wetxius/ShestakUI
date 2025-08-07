@@ -7,7 +7,7 @@ if C.automation.auto_role ~= true then return end
 local prev = 0
 local function SetRole()
 	if T.level >= 10 and not InCombatLockdown() and IsInGroup() and not IsPartyLFG() then
-		local spec = GetSpecialization()
+		local spec = C_SpecializationInfo.GetSpecialization()
 		if spec then
 			local role = GetSpecializationRole(spec)
 			if UnitGroupRolesAssigned("player") ~= role then

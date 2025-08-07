@@ -79,7 +79,7 @@ local isCaster = {
 }
 
 local function CheckRole()
-	local spec = GetSpecialization()
+	local spec = C_SpecializationInfo.GetSpecialization()
 	local role = spec and GetSpecializationRole(spec)
 
 	T.Spec = spec
@@ -102,7 +102,7 @@ RoleUpdater:SetScript("OnEvent", CheckRole)
 
 T.IsHealerSpec = function()
 	local healer = false
-	local spec = GetSpecialization()
+	local spec = C_SpecializationInfo.GetSpecialization()
 
 	if (T.class == "EVOKER" and spec == 2) or (T.class == "DRUID" and spec == 4) or (T.class == "MONK" and spec == 2) or
 	(T.class == "PALADIN" and spec == 1) or (T.class == "PRIEST" and spec ~= 3) or (T.class == "SHAMAN" and spec == 3) then
