@@ -453,7 +453,6 @@ elseif T.class == "PRIEST" then
 		T.aoespam[120696] = 3		-- Halo
 		T.aoespam[122128] = 3		-- Divine Star
 		T.aoespam[413231] = 3		-- Shadowy Apparition
-		T.aoespam[373304] = 3		-- Echoing Void
 	end
 	if C.combattext.healing then
 		T.healfilter[34914] = true	-- Vampiric Touch
