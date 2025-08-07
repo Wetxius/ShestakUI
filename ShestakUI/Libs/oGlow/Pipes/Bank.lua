@@ -26,4 +26,4 @@ local disable = function(self)
 	self:UnregisterEvent("PLAYERBANKSLOTS_CHANGED", update)
 end
 
-oGlow:RegisterPipe("bank", enable, disable, update, "Player bank frame")
+--FIXME oGlow:RegisterPipe("bank", enable, disable, update, "Player bank frame")
