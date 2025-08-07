@@ -5,7 +5,7 @@ if C.bag.enable ~= true then return end
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4, 5}
-local BAGS_BANK = {-1, 6, 7, 8, 9, 10, 11, 12}
+local BAGS_BANK = {6, 7, 8, 9, 10, 11, 12}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -835,30 +835,30 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	if slot > 5 then
 		ret.slot = slot
 		slot = slot - 5
-		ret.frame = CreateFrame("ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
+		ret.frame = CreateFrame("ItemButton", "StuffingBBag"..slot.."Slot", p, "")
 		Mixin(ret.frame, BackdropTemplateMixin)
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
 
 		table.insert(self.bagframe_buttons, ret)
 
-		BankFrameItemButton_Update(ret.frame)
+		-- BankFrameItemButton_Update(ret.frame)
 
 		if not ret.frame.tooltipText then
 			ret.frame.tooltipText = ""
 		end
 
-		ret.frame.ID = ret.frame:GetInventorySlot()
+		ret.frame.ID = C_Container.ContainerIDToInventoryID(slot + 1)
 		local quality = GetInventoryItemQuality("player", ret.frame.ID)
 		if quality then
 			ret.frame.quality = quality
 		end
 
-		if slot > GetNumBankSlots() then
-			SetItemButtonTextureVertexColor(ret.frame, 1.0, 0.1, 0.1)
-		else
-			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
-		end
+		--FIXME if slot > GetNumBankSlots() then
+			-- SetItemButtonTextureVertexColor(ret.frame, 1.0, 0.1, 0.1)
+		-- else
+			-- SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
+		-- end
 	else
 		ret.frame = CreateFrame("ItemButton", "StuffingFBag"..(slot + 1).."Slot", p, "")
 		Mixin(ret.frame, BackdropTemplateMixin)
@@ -1270,31 +1270,31 @@ function Stuffing:CreateBagFrame(w)
 
 	if w == "Bank" then
 		-- Reagent button
-		f.b_reagent = CreateFrame("Button", "StuffingReagentButton"..w, f)
-		f.b_reagent:SetSize(105, 20)
-		f.b_reagent:SetPoint("TOPLEFT", 10, -4)
-		f.b_reagent:RegisterForClicks("AnyUp")
-		f.b_reagent:SkinButton()
-		f.b_reagent:SetScript("OnClick", function()
-			BankFrame_ShowPanel(BANK_PANELS[2].name)
-			PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
-			if not ReagentBankFrame.isMade then
-				self:CreateReagentContainer()
-				ReagentBankFrame.isMade = true
-			else
-				_G["StuffingFrameReagent"]:Show()
-			end
-			_G["StuffingFrameBank"]:Hide()
-		end)
-		f.b_reagent:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-		f.b_reagent.text:SetPoint("CENTER")
-		f.b_reagent.text:SetText(REAGENT_BANK)
-		f.b_reagent:SetFontString(f.b_reagent.text)
+		-- f.b_reagent = CreateFrame("Button", "StuffingReagentButton"..w, f)
+		-- f.b_reagent:SetSize(105, 20)
+		-- f.b_reagent:SetPoint("TOPLEFT", 10, -4)
+		-- f.b_reagent:RegisterForClicks("AnyUp")
+		-- f.b_reagent:SkinButton()
+		-- f.b_reagent:SetScript("OnClick", function()
+			-- BankFrame_ShowPanel(BANK_PANELS[2].name)
+			-- PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
+			-- if not ReagentBankFrame.isMade then
+				-- self:CreateReagentContainer()
+				-- ReagentBankFrame.isMade = true
+			-- else
+				-- _G["StuffingFrameReagent"]:Show()
+			-- end
+			-- _G["StuffingFrameBank"]:Hide()
+		-- end)
+		-- f.b_reagent:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+		-- f.b_reagent.text:SetPoint("CENTER")
+		-- f.b_reagent.text:SetText(REAGENT_BANK)
+		-- f.b_reagent:SetFontString(f.b_reagent.text)
 
 		-- Warband button
 		f.b_warband = CreateFrame("Button", "StuffingWarbandButton"..w, f)
 		f.b_warband:SetSize(105, 20)
-		f.b_warband:SetPoint("TOPLEFT", f.b_reagent, "TOPRIGHT", 3, 0)
+		f.b_warband:SetPoint("TOPLEFT", 10, -4)
 		f.b_warband:RegisterForClicks("AnyUp")
 		f.b_warband:SkinButton()
 		f.b_warband:SetScript("OnClick", function()
@@ -1326,12 +1326,12 @@ function Stuffing:CreateBagFrame(w)
 		f.b_purchase.text:SetPoint("CENTER")
 		f.b_purchase.text:SetText(BANKSLOTPURCHASE)
 		f.b_purchase:SetFontString(f.b_purchase.text)
-		local _, full = GetNumBankSlots()
-		if full then
-			f.b_purchase:Hide()
-		else
-			f.b_purchase:Show()
-		end
+		--FIXME local _, full = GetNumBankSlots()
+		-- if full then
+			-- f.b_purchase:Hide()
+		-- else
+			-- f.b_purchase:Show()
+		-- end
 	end
 
 	-- Close button
@@ -1739,8 +1739,8 @@ function Stuffing:ADDON_LOADED(addon)
 
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("ITEM_LOCK_CHANGED")
-	self:RegisterEvent("BANKFRAME_OPENED")
-	self:RegisterEvent("BANKFRAME_CLOSED")
+	--FIXME self:RegisterEvent("BANKFRAME_OPENED")
+	-- self:RegisterEvent("BANKFRAME_CLOSED")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
@@ -1779,11 +1779,11 @@ function Stuffing:ADDON_LOADED(addon)
 		return count
 	end
 
-	BankFrame:UnregisterAllEvents()
-	BankFrame:SetScale(0.00001)
-	BankFrame:SetAlpha(0)
-	BankFrame:ClearAllPoints()
-	BankFrame:SetPoint("TOPLEFT")
+	-- BankFrame:UnregisterAllEvents()
+	-- BankFrame:SetScale(0.00001)
+	-- BankFrame:SetAlpha(0)
+	-- BankFrame:ClearAllPoints()
+	-- BankFrame:SetPoint("TOPLEFT")
 end
 
 function Stuffing:PLAYER_ENTERING_WORLD()
@@ -1872,9 +1872,9 @@ function Stuffing:BANKFRAME_OPENED()
 end
 
 function Stuffing:BANKFRAME_CLOSED()
-	if StuffingFrameReagent then
-		StuffingFrameReagent:Hide()
-	end
+	-- if StuffingFrameReagent then
+		-- StuffingFrameReagent:Hide()
+	-- end
 	if StuffingFrameWarband then
 		StuffingFrameWarband:Hide()
 	end
@@ -2225,12 +2225,12 @@ end
 
 function Stuffing:PLAYERBANKBAGSLOTS_CHANGED()
 	if not StuffingPurchaseButtonBank then return end
-	local numSlots, full = GetNumBankSlots()
-	if full then
-		StuffingPurchaseButtonBank:Hide()
-	else
-		StuffingPurchaseButtonBank:Show()
-	end
+	--FIXME local numSlots, full = GetNumBankSlots()
+	-- if full then
+		-- StuffingPurchaseButtonBank:Hide()
+	-- else
+		-- StuffingPurchaseButtonBank:Show()
+	-- end
 
 	local button
 	for i = 1, NUM_BANKBAGSLOTS, 1 do
