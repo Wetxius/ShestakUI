@@ -136,7 +136,7 @@ end
 ----------------------------------------------------------------------------------------
 local deleteDialog = StaticPopupDialogs["DELETE_GOOD_ITEM"]
 if deleteDialog.OnShow then
-	hooksecurefunc(deleteDialog, "OnShow", function(s) s.editBox:SetText(DELETE_ITEM_CONFIRM_STRING) s.editBox:SetAutoFocus(false) s.editBox:ClearFocus() end)
+	hooksecurefunc(deleteDialog, "OnShow", function(s) s:GetEditBox():SetText(DELETE_ITEM_CONFIRM_STRING) s:GetEditBox():SetAutoFocus(false) s:GetEditBox():ClearFocus() end)
 end
 
 ----------------------------------------------------------------------------------------
