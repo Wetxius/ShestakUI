@@ -16,49 +16,26 @@ local function LoadSkin()
 	LossOfControlFrame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	LossOfControlFrame.AbilityName:ClearAllPoints()
 
-	if T.newPatch then
-		hooksecurefunc(LossOfControlFrame, "SetUpDisplay", function(self)
-			self.Icon:ClearAllPoints()
-			self.Icon:SetPoint("CENTER", self, "CENTER", 0, 0)
+	hooksecurefunc(LossOfControlFrame, "SetUpDisplay", function(self)
+		self.Icon:ClearAllPoints()
+		self.Icon:SetPoint("CENTER", self, "CENTER", 0, 0)
 
-			self.AbilityName:ClearAllPoints()
-			self.AbilityName:SetPoint("BOTTOM", self, 0, -28)
-			self.AbilityName.scrollTime = nil
+		self.AbilityName:ClearAllPoints()
+		self.AbilityName:SetPoint("BOTTOM", self, 0, -28)
+		self.AbilityName.scrollTime = nil
 
-			self.TimeLeft.NumberText:ClearAllPoints()
-			self.TimeLeft.NumberText:SetPoint("BOTTOM", self, 4, -58)
-			self.TimeLeft.NumberText.scrollTime = nil
+		self.TimeLeft.NumberText:ClearAllPoints()
+		self.TimeLeft.NumberText:SetPoint("BOTTOM", self, 4, -58)
+		self.TimeLeft.NumberText.scrollTime = nil
 
-			self.TimeLeft.SecondsText:ClearAllPoints()
-			self.TimeLeft.SecondsText:SetPoint("BOTTOM", self, 0, -80)
-			self.TimeLeft.SecondsText.scrollTime = nil
+		self.TimeLeft.SecondsText:ClearAllPoints()
+		self.TimeLeft.SecondsText:SetPoint("BOTTOM", self, 0, -80)
+		self.TimeLeft.SecondsText.scrollTime = nil
 
-			if self.Anim:IsPlaying() then
-				self.Anim:Stop()
-			end
-		end)
-	else
-		hooksecurefunc("LossOfControlFrame_SetUpDisplay", function(self)
-			self.Icon:ClearAllPoints()
-			self.Icon:SetPoint("CENTER", self, "CENTER", 0, 0)
-
-			self.AbilityName:ClearAllPoints()
-			self.AbilityName:SetPoint("BOTTOM", self, 0, -28)
-			self.AbilityName.scrollTime = nil
-
-			self.TimeLeft.NumberText:ClearAllPoints()
-			self.TimeLeft.NumberText:SetPoint("BOTTOM", self, 4, -58)
-			self.TimeLeft.NumberText.scrollTime = nil
-
-			self.TimeLeft.SecondsText:ClearAllPoints()
-			self.TimeLeft.SecondsText:SetPoint("BOTTOM", self, 0, -80)
-			self.TimeLeft.SecondsText.scrollTime = nil
-
-			if self.Anim:IsPlaying() then
-				self.Anim:Stop()
-			end
-		end)
-	end
+		if self.Anim:IsPlaying() then
+			self.Anim:Stop()
+		end
+	end)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
