@@ -108,6 +108,7 @@ local function LoadSkin()
 	WhoFrameGroupInviteButton:SetSize(WhoFrameGroupInviteButton:GetWidth() - 4, WhoFrameGroupInviteButton:GetHeight())
 	T.SkinEditBox(WhoFrameEditBox, WhoFrameEditBox:GetWidth() + 30, WhoFrameEditBox:GetHeight() - 15)
 	WhoFrameEditBox:SetPoint("BOTTOM", WhoFrame, "BOTTOM", 0, 31)
+	WhoFrameEditBox.backdrop:SetOutside(nil, 2, -2)
 
 	T.SkinEditBox(AddFriendNameEditBox)
 	AddFriendNameEditBox:SetHeight(AddFriendNameEditBox:GetHeight() - 5)
@@ -257,6 +258,7 @@ local function LoadSkin()
 
 	T.SkinCloseButton(FriendsFrameCloseButton)
 	T.SkinDropDownBox(WhoFrameDropdown, 150)
+	WhoFrameColumnHeader2:SetHeight(20)
 	T.SkinDropDownBox(FriendsFrameStatusDropdown, 70)
 	T.SkinDropDownBox(FriendsFriendsFrameDropdown)
 
