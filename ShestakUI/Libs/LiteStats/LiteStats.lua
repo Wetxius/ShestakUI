@@ -1435,7 +1435,7 @@ if talents.enabled then
 			local lootSpec = GetLootSpecialization()
 			local spec = C_SpecializationInfo.GetSpecialization()
 
-			lootSpecName = lootSpec and select(2, C_SpecializationInfo.GetSpecializationInfoByID(lootSpec)) or NO
+			lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
 			specName = spec and select(2, C_SpecializationInfo.GetSpecializationInfo(spec)) or NO
 
 			local specText = L_STATS_SPEC..":"
@@ -1453,7 +1453,7 @@ if talents.enabled then
 				lootText = ""
 				lootSpecName = "|cff55ff55"..specName.."|r"
 			else
-				local _, _, _, texture = C_SpecializationInfo.GetSpecializationInfoByID(lootSpec)
+				local _, _, _, texture = GetSpecializationInfoByID(lootSpec)
 				if texture then
 					lootIcon = format("|T%s:"..texSize..":"..texSize..":0:0:64:64:5:59:5:59|t", texture)
 				end
@@ -1494,7 +1494,7 @@ if talents.enabled then
 				else
 					for index = 1, 4 do
 						local id, name, _, texture = C_SpecializationInfo.GetSpecializationInfo(index)
-						if id then
+						if id and name then
 							if C_SpecializationInfo.GetSpecializationInfo(C_SpecializationInfo.GetSpecialization()) == id then
 								name = "|cff55ff55"..name.."|r"
 							end
@@ -1516,7 +1516,7 @@ if talents.enabled then
 				lootList[2].text = specDefault
 				for index = 1, 4 do
 					local id, name, _, texture = C_SpecializationInfo.GetSpecializationInfo(index)
-					if id then
+					if id and name then
 						if lootSpec == id then
 							name = "|cff55ff55"..name.."|r"
 						end
