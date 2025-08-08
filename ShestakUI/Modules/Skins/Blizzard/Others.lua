@@ -126,15 +126,12 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				_G["StaticPopup"..i.."Button"..j]:SkinButton()
 			end
 			_G["StaticPopup"..i]:StripTextures()
-			if not T.newPatch then
-				_G["StaticPopup"..i].Border:StripTextures()
-			end
 			_G["StaticPopup"..i]:CreateBackdrop("Transparent")
 			_G["StaticPopup"..i].backdrop:SetPoint("TOPLEFT", 2, -2)
 			_G["StaticPopup"..i].backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
 			_G["StaticPopup"..i.."EditBox"].NineSlice:StripTextures()
 			_G["StaticPopup"..i.."EditBox"]:CreateBackdrop("Overlay")
-			_G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("TOPLEFT", -2, -2)
+			_G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("TOPLEFT", 3, -1)
 			_G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
 			T.SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
 			T.SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
