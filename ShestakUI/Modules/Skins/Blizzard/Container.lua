@@ -207,6 +207,7 @@ local function LoadSkin()
 
 	BankPanel.MoneyFrame.WithdrawButton:SkinButton()
 	BankPanel.MoneyFrame.DepositButton:SkinButton()
+	T.SkinCheckBox(BankPanel.AutoDepositFrame.IncludeReagentsCheckbox)
 
 	BankPanel.PurchasePrompt:StripTextures()
 	BankPanel.PurchasePrompt:CreateBackdrop("Overlay")
