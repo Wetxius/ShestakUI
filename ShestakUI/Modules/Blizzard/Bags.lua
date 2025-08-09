@@ -6,6 +6,7 @@ if C.bag.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4, 5}
 local BAGS_BANK = {6, 7, 8, 9, 10, 11, -1}
+local BAGS_ACCOUNT = {12, 13, 14, 15, 16}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -389,10 +390,7 @@ function Stuffing:UpdateCooldowns(b)
 	end
 end
 
-local function InitTab()
-
-end
-
+-- TODO: Rewrite to use bank system
 function Stuffing:SkinWarbandContainer()
 	local warbandFrame = CreateFrame("Frame", "StuffingFrameWarband", UIParent)
 	warbandFrame:SetWidth(C.bag.bank_columns * C.bag.button_size + (C.bag.bank_columns - 1) * C.bag.button_space + 10 * 2)
@@ -413,7 +411,7 @@ function Stuffing:SkinWarbandContainer()
 	warbandFrame:SetScript("OnMouseUp", warbandFrame.StopMovingOrSizing)
 
 	local SwitchBankButton = CreateFrame("Button", nil, warbandFrame)
-	SwitchBankButton:SetSize(80, 20)
+	SwitchBankButton:SetSize(95, 20)
 	SwitchBankButton:SkinButton()
 	SwitchBankButton:SetPoint("TOPLEFT", 10, -4)
 	SwitchBankButton:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
@@ -422,6 +420,7 @@ function Stuffing:SkinWarbandContainer()
 	SwitchBankButton:SetScript("OnClick", function()
 		BankFrame.BankPanel:SetBankType(Enum.BankType.Character or 0)
 		warbandFrame:Hide()
+		-- BankPanel:SetParent(_G["StuffingFrameBank"])
 		_G["StuffingFrameBank"]:Show()
 		PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
 	end)
@@ -642,12 +641,17 @@ function Stuffing:SkinWarbandContainer()
 	BankPanel.TabSettingsMenu:SetFrameStrata("HIGH")
 
 	BankPanel.Header:SetAlpha(0)
-	BankPanel.AutoDepositFrame.IncludeReagentsCheckbox:Hide()
+	BankPanel.AutoDepositFrame.IncludeReagentsCheckbox:SetScale(0.001)
+	BankPanel.AutoDepositFrame.IncludeReagentsCheckbox:SetAlpha(0)
 	BankPanel.MoneyFrame.MoneyDisplay:ClearAllPoints()
 	BankPanel.MoneyFrame.MoneyDisplay:SetPoint("RIGHT", Close, "LEFT", -5, -3)
 	BankPanel.MoneyFrame.Border:Hide()
-	BankPanel.MoneyFrame.WithdrawButton:Hide()
-	BankPanel.MoneyFrame.DepositButton:Hide()
+	BankPanel.MoneyFrame.WithdrawButton:SetScale(0.001)
+	BankPanel.MoneyFrame.DepositButton:SetScale(0.001)
+	BankPanel.MoneyFrame.WithdrawButton:SetAlpha(0)
+	BankPanel.MoneyFrame.DepositButton:SetAlpha(0)
+
+	BankPanel.AutoSortButton:SetScale(0.001)
 
 	BankPanelGoldButton:SetNormalFontObject("SystemFont_Small")
 	BankPanelSilverButton:SetNormalFontObject("SystemFont_Small")
@@ -688,6 +692,7 @@ function Stuffing:SkinWarbandContainer()
 
 	BankFrame.BankPanel:SetBankType(Enum.BankType.Account or 2)
 end
+
 function Stuffing:BagFrameSlotNew(p, slot)
 	for _, v in ipairs(self.bagframe_buttons) do
 		if v.slot == slot then
@@ -705,21 +710,22 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
 
-		table.insert(self.bagframe_buttons, ret)
+		local bag_tex = GetInventoryItemTexture("player", C_Container.ContainerIDToInventoryID(ret.slot))
+		_G[ret.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
 
-		-- BankFrameItemButton_Update(ret.frame)
+		table.insert(self.bagframe_buttons, ret)
 
 		if not ret.frame.tooltipText then
 			ret.frame.tooltipText = ""
 		end
 
-		ret.frame.ID = C_Container.ContainerIDToInventoryID(slot + 1)
+		ret.frame.ID = C_Container.ContainerIDToInventoryID(ret.slot)
 		local quality = GetInventoryItemQuality("player", ret.frame.ID)
 		if quality then
 			ret.frame.quality = quality
 		end
 
-		ret.frame:Hide()	-- 11.2 now use the new tab system
+		-- ret.frame:Hide()	-- 11.2 now use the new tab system
 	else
 		ret.frame = CreateFrame("ItemButton", "StuffingFBag"..(slot + 1).."Slot", p, "")
 		Mixin(ret.frame, BackdropTemplateMixin)
@@ -1012,25 +1018,6 @@ function Stuffing:SearchUpdate(str)
 		end
 	end
 
-	-- if ReagentBankFrameItem1 then
-		-- for slotID = 1, 98 do
-			-- local _, _, _, _, _, _, ilink = GetContainerItemInfo(-3, slotID)
-			-- local button = _G["ReagentBankFrameItem"..slotID]
-			-- if ilink then
-				-- local name, _, _, _, _, class, subclass = C_Item.GetItemInfo(ilink)
-				-- class = class or ""
-				-- subclass = subclass or ""
-				-- if not string.find(string.lower(name), str) and not string.find(string.lower(class), str) and not string.find(string.lower(subclass), str) then
-					-- SetItemButtonDesaturated(button, true)
-					-- button.searchOverlay:Show()
-				-- else
-					-- SetItemButtonDesaturated(button, false)
-					-- button.searchOverlay:Hide()
-				-- end
-			-- end
-		-- end
-	-- end
-
 	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
 		C_Container.SetItemSearch(str)
 	end
@@ -1044,14 +1031,6 @@ function Stuffing:SearchReset()
 		b.frame.searchOverlay:Hide()
 		SetItemButtonDesaturated(b.frame, false)
 	end
-
-	-- if ReagentBankFrameItem1 then
-		-- for slotID = 1, 98 do
-			-- local button = _G["ReagentBankFrameItem"..slotID]
-			-- SetItemButtonDesaturated(button, false)
-			-- button.searchOverlay:Hide()
-		-- end
-	-- end
 
 	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
 		C_Container.SetItemSearch("")
@@ -1132,7 +1111,7 @@ function Stuffing:CreateBagFrame(w)
 	if w == "Bank" then
 		-- Warband button
 		f.b_warband = CreateFrame("Button", "StuffingWarbandButton"..w, f)
-		f.b_warband:SetSize(105, 20)
+		f.b_warband:SetSize(95, 20)
 		f.b_warband:SetPoint("TOPLEFT", 10, -4)
 		f.b_warband:RegisterForClicks("AnyUp")
 		f.b_warband:SkinButton()
@@ -1144,6 +1123,7 @@ function Stuffing:CreateBagFrame(w)
 			else
 				BankFrame.BankPanel:SetBankType(Enum.BankType.Account or 2)
 				_G["StuffingFrameWarband"]:Show()
+				-- BankPanel:SetParent(_G["StuffingFrameWarband"])
 			end
 
 			PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
@@ -1154,22 +1134,22 @@ function Stuffing:CreateBagFrame(w)
 		f.b_warband.text:SetText(ACCOUNT_BANK_PANEL_TITLE)
 		f.b_warband:SetFontString(f.b_warband.text)
 
-		-- Buy button
-		f.b_purchase = CreateFrame("Button", "StuffingPurchaseButton"..w, f)
-		f.b_purchase:SetSize(80, 20)
-		f.b_purchase:SetPoint("TOPLEFT", f.b_warband, "TOPRIGHT", 3, 0)
-		f.b_purchase:RegisterForClicks("AnyUp")
-		f.b_purchase:SkinButton()
-		f.b_purchase:SetScript("OnClick", function() BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:Click() end)
-		f.b_purchase:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-		f.b_purchase.text:SetPoint("CENTER")
-		f.b_purchase.text:SetText(BANKSLOTPURCHASE)
-		f.b_purchase:SetFontString(f.b_purchase.text)
-		if C_Bank.CanPurchaseBankTab(Enum.BankType.Character) then
-			f.b_purchase:Show()
-		else
-			f.b_purchase:Hide()
-		end
+		--BETA Buy button
+		-- f.b_purchase = CreateFrame("Button", "StuffingPurchaseButton"..w, f)
+		-- f.b_purchase:SetSize(80, 20)
+		-- f.b_purchase:SetPoint("TOPLEFT", f.b_warband, "TOPRIGHT", 3, 0)
+		-- f.b_purchase:RegisterForClicks("AnyUp")
+		-- f.b_purchase:SkinButton()
+		-- f.b_purchase:SetScript("OnClick", function() BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:Click() end)
+		-- f.b_purchase:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+		-- f.b_purchase.text:SetPoint("CENTER")
+		-- f.b_purchase.text:SetText(BANKSLOTPURCHASE)
+		-- f.b_purchase:SetFontString(f.b_purchase.text)
+		-- if C_Bank.CanPurchaseBankTab(Enum.BankType.Character) then
+			-- f.b_purchase:Show()
+		-- else
+			-- f.b_purchase:Hide()
+		-- end
 	end
 
 	-- Close button
@@ -1210,6 +1190,25 @@ function Stuffing:CreateBagFrame(w)
 	fb:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 3)
 	fb:SetFrameStrata("HIGH")
 	f.bags_frame = fb
+
+	if w == "Bank" then
+		-- Buy button
+		f.b_purchase = CreateFrame("Button", "StuffingPurchaseButtonBank", fb)
+		f.b_purchase:SetSize(80, 20)
+		f.b_purchase:SetPoint("BOTTOMLEFT", fb, "TOPLEFT", 0, 3)
+		f.b_purchase:RegisterForClicks("AnyUp")
+		f.b_purchase:SkinButton()
+		f.b_purchase:SetScript("OnClick", function() BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:Click() end)
+		f.b_purchase:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+		f.b_purchase.text:SetPoint("CENTER")
+		f.b_purchase.text:SetText(BANKSLOTPURCHASE)
+		f.b_purchase:SetFontString(f.b_purchase.text)
+		if C_Bank.CanPurchaseBankTab(Enum.BankType.Character) then
+			f.b_purchase:Show()
+		else
+			f.b_purchase:Hide()
+		end
+	end
 
 	return f
 end
@@ -1269,7 +1268,6 @@ function Stuffing:InitBags()
 	editbox:SetScript("OnEditFocusLost", clearFocus)
 	editbox:SetScript("OnEditFocusGained", gainFocus)
 	editbox:SetScript("OnTextChanged", updateSearch)
-	-- editbox:SetText(SEARCH)
 
 	local detail = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
 	detail:SetPoint("TOPLEFT", f, 12, -8)
@@ -1283,11 +1281,11 @@ function Stuffing:InitBags()
 	local buttons = {}
 	local filterTable = {
 		[1] = {3566860, C_Item.GetItemClassInfo(0)},	-- Consumable
-		[2] = {135280, C_Item.GetItemClassInfo(2)},	-- Weapon
-		[3] = {132341, C_Item.GetItemClassInfo(4)},	-- Armor
-		[4] = {132281, C_Item.GetItemClassInfo(7)},	-- Tradeskill
-		[5] = {236667, ITEM_BIND_QUEST},		-- Quest
-		[6] = {133784, ITEM_BIND_ON_EQUIP},		-- BoE
+		[2] = {135280, C_Item.GetItemClassInfo(2)},		-- Weapon
+		[3] = {132341, C_Item.GetItemClassInfo(4)},		-- Armor
+		[4] = {132281, C_Item.GetItemClassInfo(7)},		-- Tradeskill
+		[5] = {236667, ITEM_BIND_QUEST},				-- Quest
+		[6] = {133784, ITEM_BIND_ON_EQUIP},				-- BoE
 	}
 	for i = 1, #filterTable do
 		local button = CreateFrame("Button", "BagsFilterButton"..i, C.bag.filter and f or editbox)
@@ -1405,9 +1403,9 @@ function Stuffing:Layout(isBank)
 		fb:Hide()
 	end
 
-	if isBank then
-		fb:Hide()	-- 11.2 now use the new tab system
-	end
+	--BETA if isBank then
+		-- fb:Hide()	-- 11.2 now use the new tab system
+	-- end
 
 	local idx = 0
 	for _, v in ipairs(bs) do
@@ -1572,211 +1570,6 @@ function Stuffing:SetBagsForSorting(c)
 			end
 		else
 			table.insert(self.sortBags, tonumber(s))
-		end
-	end
-end
-
-function Stuffing:ADDON_LOADED(addon)
-	if addon ~= "ShestakUI" then return nil end
-
-	self:RegisterEvent("BAG_UPDATE")
-	self:RegisterEvent("ITEM_LOCK_CHANGED")
-	--FIXME self:RegisterEvent("BANKFRAME_OPENED")
-	-- self:RegisterEvent("BANKFRAME_CLOSED")
-	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
-	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE")
-	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	self:RegisterEvent("BAG_CLOSED")
-	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
-	self:RegisterEvent("BAG_CONTAINER_UPDATE")
-	self:RegisterEvent("BAG_UPDATE_DELAYED")
-
-	self:InitBags()
-
-	tinsert(UISpecialFrames, "StuffingFrameBags")
-	tinsert(UISpecialFrames, "StuffingFrameWarband")
-
-	ToggleBackpack = Stuffing_Toggle
-	ToggleBag = Stuffing_Toggle
-	ToggleAllBags = Stuffing_Toggle
-	OpenAllBags = Stuffing_Open
-	OpenBackpack = Stuffing_Open
-
-	hooksecurefunc("CloseAllBags", Stuffing_Close)
-	hooksecurefunc("CloseBackpack", Stuffing_Close)
-
-	OpenAllBagsMatchingContext = function()
-		local count = 0
-		for i = 0, NUM_BAG_FRAMES do
-			if ItemButtonUtil.GetItemContextMatchResultForContainer(i) == ItemButtonUtil.ItemContextMatchResult.Match then
-				Stuffing_Open()
-				count = count + 1
-			end
-		end
-		return count
-	end
-
-	-- BankFrame:UnregisterAllEvents()
-	-- BankFrame:SetScale(0.00001)
-	-- BankFrame:SetAlpha(0)
-	-- BankFrame:ClearAllPoints()
-	-- BankFrame:SetPoint("TOPLEFT")
-end
-
-function Stuffing:PLAYER_ENTERING_WORLD()
-	Stuffing:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	ToggleBackpack()
-	ToggleBackpack()
-end
-
-function Stuffing:PLAYERBANKSLOTS_CHANGED()
-	if self.bankFrame and self.bankFrame:IsShown() then
-		self:BagSlotUpdate(-1)
-	end
-end
-
-function Stuffing:BAG_UPDATE(id)
-	self:BagSlotUpdate(id)
-end
-
-function Stuffing:BAG_UPDATE_DELAYED()
-	for _, i in ipairs(BAGS_BACKPACK) do
-		local numSlots = C_Container.GetContainerNumSlots(i)
-		if self.bags_num[i] and self.bags_num[i] ~= numSlots then
-			self:Layout()
-			return
-		end
-	end
-end
-
-function Stuffing:ITEM_LOCK_CHANGED(bag, slot)
-	if slot == nil then return end
-	for _, v in ipairs(self.buttons) do
-		if v.bag == bag and v.slot == slot then
-			self:SlotUpdate(v)
-			break
-		end
-	end
-end
-
-function Stuffing:BANKFRAME_OPENED()
-	if not self.bankFrame then
-		self:InitBank()
-	end
-
-	self:Layout(true)
-	for _, x in ipairs(BAGS_BANK) do
-		self:BagSlotUpdate(x)
-	end
-
-	self.bankFrame:Show()
-	Stuffing_Open()
-
-	for _, v in ipairs(self.bagframe_buttons) do
-		if v.frame and v.frame.GetInventorySlot then
-			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
-			BankFrameItemButton_Update(v.frame)
-
-			local quality = GetInventoryItemQuality("player", v.frame.ID)
-			if quality and quality > 1 then
-				local r, g, b = C_Item.GetItemQualityColor(quality)
-				v.frame:SetBackdropBorderColor(r, g, b)
-			end
-
-			if not v.frame.tooltipText then
-				v.frame.tooltipText = ""
-			end
-		end
-	end
-	if not C_Bank.CanViewBank(Enum.BankType.Character) and C_Bank.CanViewBank(Enum.BankType.Account) then
-		StuffingWarbandButtonBank:Click()
-	end
-end
-
-function Stuffing:BANKFRAME_CLOSED()
-	if StuffingFrameWarband then
-		StuffingFrameWarband:Hide()
-	end
-	if self.bankFrame then
-		self.bankFrame:Hide()
-	end
-end
-
-function Stuffing:PLAYER_INTERACTION_MANAGER_FRAME_SHOW(...)
-	local type = ...
-	if type == 10 then	-- Guild bank
-		Stuffing_Open()
-	elseif type == 40 then	-- ScrappingMachine
-		for i = 0, #BAGS_BACKPACK - 1 do
-			Stuffing:BAG_UPDATE(i)
-		end
-	end
-end
-
-function Stuffing:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(...)
-	local type = ...
-	if type == 10 then	-- Guild bank
-		Stuffing_Close()
-	end
-end
-
-function Stuffing:BAG_CLOSED(id)
-	local b = self.bags[id]
-	if b then
-		table.remove(self.bags, id)
-		b:Hide()
-		table.insert(trashBag, #trashBag + 1, b)
-		self.bags_num[id] = -1
-	end
-
-	while true do
-		local changed = false
-
-		for i, v in ipairs(self.buttons) do
-			if v.bag == id then
-				v.frame:Hide()
-				v.frame.lock = false
-
-				table.insert(trashButton, #trashButton + 1, v.frame)
-				table.remove(self.buttons, i)
-
-				v = nil
-				changed = true
-			end
-		end
-
-		if not changed then
-			break
-		end
-	end
-	if id > 5 then
-		Stuffing_Close() -- prevent graphical bug with empty slots
-	end
-end
-
-function Stuffing:BAG_UPDATE_COOLDOWN()
-	for _, v in pairs(self.buttons) do
-		self:UpdateCooldowns(v)
-	end
-end
-
-function Stuffing:BAG_CONTAINER_UPDATE()
-	for _, v in ipairs(self.bagframe_buttons) do
-		if v.frame and v.slot < 5 then -- exclude bank
-			v.frame.ID = C_Container.ContainerIDToInventoryID(v.slot + 1)
-
-			local slotLink = GetInventoryItemLink("player", v.frame.ID)
-			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
-			if slotLink then
-				local _, _, quality = C_Item.GetItemInfo(slotLink)
-				if quality and quality > 1 then
-					local r, g, b = C_Item.GetItemQualityColor(quality)
-					v.frame:SetBackdropBorderColor(r, g, b)
-				end
-			end
-
-			local bag_tex = GetInventoryItemTexture("player", v.frame.ID)
-			_G[v.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
 		end
 	end
 end
@@ -1964,6 +1757,7 @@ function Stuffing:Restack()
 
 	Stuffing_Open()
 
+	-- TODO: Add support for Account warband bank
 	-- if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		-- for slotID = 1, 98 do
 			-- local _, cnt, _, _, _, _, clink = GetContainerItemInfo(-3, slotID)
@@ -2114,18 +1908,212 @@ function Stuffing.Menu(self, level)
 	UIDropDownMenu_AddButton(info, level)
 end
 
--- StaticPopupDialogs.BUY_BANK_SLOT = {
-	-- text = CONFIRM_BUY_BANK_SLOT,
-	-- button1 = YES,
-	-- button2 = NO,
-	-- OnAccept = PurchaseSlot,
-	-- OnShow = function(self)
-		-- MoneyFrame_Update(self.moneyFrame, GetBankSlotCost())
-	-- end,
-	-- hasMoneyFrame = 1,
-	-- timeout = 0,
-	-- hideOnEscape = 1,
--- }
+function Stuffing:ADDON_LOADED(addon)
+	if addon ~= "ShestakUI" then return nil end
+
+	self:RegisterEvent("BAG_UPDATE")
+	self:RegisterEvent("ITEM_LOCK_CHANGED")
+	self:RegisterEvent("BANKFRAME_OPENED")
+	self:RegisterEvent("BANKFRAME_CLOSED")
+	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
+	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE")
+	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
+	self:RegisterEvent("BAG_CLOSED")
+	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
+	self:RegisterEvent("BAG_CONTAINER_UPDATE")
+	self:RegisterEvent("BAG_UPDATE_DELAYED")
+
+	self:InitBags()
+
+	tinsert(UISpecialFrames, "StuffingFrameBags")
+	tinsert(UISpecialFrames, "StuffingFrameWarband")
+
+	ToggleBackpack = Stuffing_Toggle
+	ToggleBag = Stuffing_Toggle
+	ToggleAllBags = Stuffing_Toggle
+	OpenAllBags = Stuffing_Open
+	OpenBackpack = Stuffing_Open
+
+	hooksecurefunc("CloseAllBags", Stuffing_Close)
+	hooksecurefunc("CloseBackpack", Stuffing_Close)
+
+	OpenAllBagsMatchingContext = function()
+		local count = 0
+		for i = 0, NUM_BAG_FRAMES do
+			if ItemButtonUtil.GetItemContextMatchResultForContainer(i) == ItemButtonUtil.ItemContextMatchResult.Match then
+				Stuffing_Open()
+				count = count + 1
+			end
+		end
+		return count
+	end
+
+	-- Hide Blizzard Bank
+	BankFrame:UnregisterAllEvents()
+	BankFrame:SetScale(0.00001)
+	BankFrame:SetAlpha(0)
+	BankFrame:ClearAllPoints()
+	BankFrame:SetPoint("TOPLEFT")
+end
+
+function Stuffing:PLAYER_ENTERING_WORLD()
+	Stuffing:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	ToggleBackpack()
+	ToggleBackpack()
+end
+
+function Stuffing:PLAYERBANKSLOTS_CHANGED()
+	if self.bankFrame and self.bankFrame:IsShown() then
+		self:BagSlotUpdate(-1)
+	end
+end
+
+function Stuffing:BAG_UPDATE(id)
+	self:BagSlotUpdate(id)
+end
+
+function Stuffing:BAG_UPDATE_DELAYED()
+	for _, i in ipairs(BAGS_BACKPACK) do
+		local numSlots = C_Container.GetContainerNumSlots(i)
+		if self.bags_num[i] and self.bags_num[i] ~= numSlots then
+			self:Layout()
+			return
+		end
+	end
+end
+
+function Stuffing:ITEM_LOCK_CHANGED(bag, slot)
+	if slot == nil then return end
+	for _, v in ipairs(self.buttons) do
+		if v.bag == bag and v.slot == slot then
+			self:SlotUpdate(v)
+			break
+		end
+	end
+end
+
+function Stuffing:BANKFRAME_OPENED()
+	if not self.bankFrame then
+		self:InitBank()
+	end
+
+	self:Layout(true)
+	for _, x in ipairs(BAGS_BANK) do
+		self:BagSlotUpdate(x)
+	end
+
+	self.bankFrame:Show()
+	Stuffing_Open()
+
+	for _, v in ipairs(self.bagframe_buttons) do
+		if v.frame and v.frame.GetInventorySlot then
+			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
+			BankFrameItemButton_Update(v.frame)
+
+			local quality = GetInventoryItemQuality("player", v.frame.ID)
+			if quality and quality > 1 then
+				local r, g, b = C_Item.GetItemQualityColor(quality)
+				v.frame:SetBackdropBorderColor(r, g, b)
+			end
+
+			if not v.frame.tooltipText then
+				v.frame.tooltipText = ""
+			end
+		end
+	end
+	-- If open via warband bank item
+	if not C_Bank.CanViewBank(Enum.BankType.Character) and C_Bank.CanViewBank(Enum.BankType.Account) then
+		StuffingWarbandButtonBank:Click()
+	end
+end
+
+function Stuffing:BANKFRAME_CLOSED()
+	if StuffingFrameWarband then
+		StuffingFrameWarband:Hide()
+	end
+	if self.bankFrame then
+		self.bankFrame:Hide()
+	end
+end
+
+function Stuffing:PLAYER_INTERACTION_MANAGER_FRAME_SHOW(...)
+	local type = ...
+	if type == 10 then	-- Guild bank
+		Stuffing_Open()
+	elseif type == 40 then	-- ScrappingMachine
+		for i = 0, #BAGS_BACKPACK - 1 do
+			Stuffing:BAG_UPDATE(i)
+		end
+	end
+end
+
+function Stuffing:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(...)
+	local type = ...
+	if type == 10 then	-- Guild bank
+		Stuffing_Close()
+	end
+end
+
+function Stuffing:BAG_CLOSED(id)
+	local b = self.bags[id]
+	if b then
+		table.remove(self.bags, id)
+		b:Hide()
+		table.insert(trashBag, #trashBag + 1, b)
+		self.bags_num[id] = -1
+	end
+
+	while true do
+		local changed = false
+
+		for i, v in ipairs(self.buttons) do
+			if v.bag == id then
+				v.frame:Hide()
+				v.frame.lock = false
+
+				table.insert(trashButton, #trashButton + 1, v.frame)
+				table.remove(self.buttons, i)
+
+				v = nil
+				changed = true
+			end
+		end
+
+		if not changed then
+			break
+		end
+	end
+	if id > 5 then
+		Stuffing_Close() -- prevent graphical bug with empty slots
+	end
+end
+
+function Stuffing:BAG_UPDATE_COOLDOWN()
+	for _, v in pairs(self.buttons) do
+		self:UpdateCooldowns(v)
+	end
+end
+
+function Stuffing:BAG_CONTAINER_UPDATE()
+	for _, v in ipairs(self.bagframe_buttons) do
+		if v.frame and v.slot < 5 then -- exclude bank
+			v.frame.ID = C_Container.ContainerIDToInventoryID(v.slot + 1)
+
+			local slotLink = GetInventoryItemLink("player", v.frame.ID)
+			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
+			if slotLink then
+				local _, _, quality = C_Item.GetItemInfo(slotLink)
+				if quality and quality > 1 then
+					local r, g, b = C_Item.GetItemQualityColor(quality)
+					v.frame:SetBackdropBorderColor(r, g, b)
+				end
+			end
+
+			local bag_tex = GetInventoryItemTexture("player", v.frame.ID)
+			_G[v.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
+		end
+	end
+end
 
 -- Kill Blizzard functions
 LootWonAlertFrame_OnClick = T.dummy
