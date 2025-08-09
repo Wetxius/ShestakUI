@@ -17,6 +17,6 @@ frame:SetScript("OnEvent", function(_, event, ...)
 
 	local unit, _, spellID = ...
 	if UnitIsEnemy("player", unit) and drinkSpell[GetSpellInfo(spellID)] then
-		SendChatMessage(UnitClass(unit).." "..UnitName(unit)..L_MISC_DRINKING, T.CheckChat(true))
+		C_ChatInfo.SendChatMessage(UnitClass(unit).." "..UnitName(unit)..L_MISC_DRINKING, T.CheckChat(true))
 	end
 end)

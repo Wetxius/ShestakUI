@@ -207,16 +207,16 @@ local function Announce(chn)
 	local nums = GetNumLootItems()
 	if nums == 0 or (nums == 1 and GetLootSlotType(1) == LOOT_SLOT_MONEY) then return end
 	if UnitIsPlayer("target") or not UnitExists("target") then
-		SendChatMessage(">> "..LOOT..":", chn)
+		C_ChatInfo.SendChatMessage(">> "..LOOT..":", chn)
 	else
-		SendChatMessage(">> "..LOOT.." - '"..UnitName("target").."':", chn)
+		C_ChatInfo.SendChatMessage(">> "..LOOT.." - '"..UnitName("target").."':", chn)
 	end
 	for i = 1, GetNumLootItems() do
 		if LootSlotHasItem(i) then
 			local link = GetLootSlotLink(i)
 			local messlink = "- %s"
 			if GetLootSlotType(i) ~= LOOT_SLOT_MONEY then
-				SendChatMessage(format(messlink, link), chn)
+				C_ChatInfo.SendChatMessage(format(messlink, link), chn)
 			end
 		end
 	end

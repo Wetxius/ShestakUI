@@ -22,7 +22,7 @@ end
 SlashCmdList.TELLTARGET = function(msg)
 	local name = GetUnitName("target", true)
 	if name then
-		SendChatMessage(msg, "WHISPER", nil, name)
+		C_ChatInfo.SendChatMessage(msg, "WHISPER", nil, name)
 	end
 end
 SLASH_TELLTARGET1 = "/tt"

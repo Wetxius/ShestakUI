@@ -24,7 +24,7 @@ local function pull(_, elapsed)
 		target = ""
 	end
 	if not firstdone then
-		SendChatMessage(string.format(L_ANNOUNCE_PC_MSG, target, tostring(delay)), T.CheckChat(true))
+		C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_PC_MSG, target, tostring(delay)), T.CheckChat(true))
 		firstdone = true
 		delay = delay - 1
 	end
@@ -32,10 +32,10 @@ local function pull(_, elapsed)
 	if lastupdate >= interval then
 		lastupdate = 0
 		if delay > 0 then
-			SendChatMessage(tostring(delay).."..", T.CheckChat(true))
+			C_ChatInfo.SendChatMessage(tostring(delay).."..", T.CheckChat(true))
 			delay = delay - 1
 		else
-			SendChatMessage(L_ANNOUNCE_PC_GO, T.CheckChat(true))
+			C_ChatInfo.SendChatMessage(L_ANNOUNCE_PC_GO, T.CheckChat(true))
 			reset()
 		end
 	end
@@ -45,7 +45,7 @@ function frame.Pull(timer)
 	delay = timer or 3
 	if timerframe:GetScript("OnUpdate") then
 		reset()
-		SendChatMessage(L_ANNOUNCE_PC_ABORTED, T.CheckChat(true))
+		C_ChatInfo.SendChatMessage(L_ANNOUNCE_PC_ABORTED, T.CheckChat(true))
 	else
 		timerframe:SetScript("OnUpdate", pull)
 	end
