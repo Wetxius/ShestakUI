@@ -51,6 +51,6 @@ f:SetScript("OnEvent", function()
 	end
 
 	-- Penance
-	local penanceTicks = IsPlayerSpell(193134) and 4 or 3
+	local penanceTicks = C_SpellBook.IsSpellKnown(193134) and 4 or 3
 	T.CastBarTicks[SpellName(47540)] = penanceTicks
 end)

@@ -3287,7 +3287,7 @@ do
 	end
 
 	-- Remove Serpent Sting if Serpentstalker's Trickery is pick up
-	if IsPlayerSpell(378888) then
+	if C_SpellBook.IsSpellKnown(378888) then
 		T.FilgerIgnoreSpell[GetSpellInfo(271788)] = true
 	end
 end

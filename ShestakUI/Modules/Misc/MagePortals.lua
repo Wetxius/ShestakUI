@@ -91,7 +91,7 @@ learnSpell:RegisterEvent("PLAYER_LOGIN")
 learnSpell:RegisterEvent("LEARNED_SPELL_IN_SKILL_LINE")
 learnSpell:SetScript("OnEvent", function()
 	for i, spell in pairs(spells) do
-		if not IsSpellKnown(spell[1]) then
+		if not C_SpellBook.IsSpellKnown(spell[1]) then
 			_G["TeleportMenuName"..i]:SetTextColor(0.4, 0.4, 0.4)
 		else
 			_G["TeleportMenuName"..i]:SetTextColor(1, 1, 1)

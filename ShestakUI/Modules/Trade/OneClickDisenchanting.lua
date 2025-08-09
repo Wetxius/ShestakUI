@@ -123,11 +123,11 @@ local enchantingItems = {
 function button:PLAYER_LOGIN()
 	local disenchanter, rogue
 
-	if IsSpellKnown(13262) then
+	if C_SpellBook.IsSpellKnown(13262) then
 		disenchanter = true
 	end
 
-	if IsSpellKnown(1804) then
+	if C_SpellBook.IsSpellKnown(1804) then
 		rogue = ITEM_MIN_SKILL:gsub("%%s", (T.client == "ruRU" and "Взлом замков" or GetSpellInfo(1809))):gsub("%%d", "%(.*%)")
 	end
 

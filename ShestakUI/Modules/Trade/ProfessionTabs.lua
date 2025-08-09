@@ -241,7 +241,7 @@ local function HandleTabs(object)
 
 		-- Runuforging and Pick Lock
 		for index = 1, #spells do
-			if IsSpellKnown(spells[index]) then
+			if C_SpellBook.IsSpellKnown(spells[index]) then
 				local name, _, texture = GetSpellInfo(spells[index])
 				UpdateTab(object, name, texture, spells[index])
 			end
