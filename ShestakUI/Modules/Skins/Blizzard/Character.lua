@@ -400,7 +400,7 @@ local function LoadSkin()
 	currencyTransfer:SetTemplate("Transparent")
 	T.SkinCloseButton(currencyTransfer.CloseButton)
 
-	local frame = T.newPatch and currencyTransfer.Content or currencyTransfer
+	local frame = currencyTransfer.Content
 	T.SkinDropDownBox(frame.SourceSelector.Dropdown)
 	frame.AmountSelector.MaxQuantityButton:SkinButton()
 	frame.AmountSelector.MaxQuantityButton:SetMovePoint(-4, 2)
