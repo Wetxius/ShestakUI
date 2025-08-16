@@ -125,36 +125,47 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			for j = 1, 4 do
 				_G["StaticPopup"..i.."Button"..j]:SkinButton()
 			end
-			_G["StaticPopup"..i]:StripTextures()
-			_G["StaticPopup"..i]:CreateBackdrop("Transparent")
-			_G["StaticPopup"..i].backdrop:SetPoint("TOPLEFT", 2, -2)
-			_G["StaticPopup"..i].backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
-			_G["StaticPopup"..i.."EditBox"].NineSlice:StripTextures()
-			_G["StaticPopup"..i.."EditBox"]:CreateBackdrop("Overlay")
-			_G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("TOPLEFT", 3, -1)
-			_G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
-			T.SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
-			T.SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
-			T.SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameCopper"])
-			_G["StaticPopup"..i.."MoneyInputFrameGold"].backdrop:SetPoint("TOPLEFT", -3, 0)
-			_G["StaticPopup"..i.."MoneyInputFrameSilver"].backdrop:SetPoint("TOPLEFT", -3, 0)
-			_G["StaticPopup"..i.."MoneyInputFrameCopper"].backdrop:SetPoint("TOPLEFT", -3, 0)
-			if not T.newPatch then
-				_G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
-				_G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
-				_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Default")
-				_G["StaticPopup"..i.."ItemFrame"]:StyleButton()
-				_G["StaticPopup"..i.."ItemFrame"].IconBorder:SetAlpha(0)
-				_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
-				_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetPoint("TOPLEFT", 2, -2)
-				_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
+			local frame = _G["StaticPopup"..i]
+			frame:StripTextures()
+			frame:CreateBackdrop("Transparent")
+			frame.backdrop:SetPoint("TOPLEFT", 2, -2)
+			frame.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+
+			local editBox = _G["StaticPopup"..i.."EditBox"]
+			editBox.NineSlice:StripTextures()
+			editBox:CreateBackdrop("Overlay")
+			editBox.backdrop:SetPoint("TOPLEFT", 3, -1)
+			editBox.backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
+
+			local gold = _G["StaticPopup"..i.."MoneyInputFrameGold"]
+			local silver = _G["StaticPopup"..i.."MoneyInputFrameSilver"]
+			local copper = _G["StaticPopup"..i.."MoneyInputFrameCopper"]
+			T.SkinEditBox(gold)
+			T.SkinEditBox(silver)
+			T.SkinEditBox(copper)
+			gold.backdrop:SetPoint("TOPLEFT", -3, 0)
+			silver.backdrop:SetPoint("TOPLEFT", -3, 0)
+			copper.backdrop:SetPoint("TOPLEFT", -3, 0)
+
+			local itemFrame = frame.ItemFrame
+			if itemFrame.NameFrame then
+				itemFrame.NameFrame:Kill()
 			end
-			_G["StaticPopup"..i.."CloseButton"]:SetNormalTexture(0)
-			_G["StaticPopup"..i.."CloseButton"].SetNormalTexture = T.dummy
-			_G["StaticPopup"..i.."CloseButton"]:SetPushedTexture(0)
-			_G["StaticPopup"..i.."CloseButton"].SetPushedTexture = T.dummy
-			T.SkinCloseButton(_G["StaticPopup"..i.."CloseButton"])
+
+			itemFrame.Item:GetNormalTexture():Kill()
+			itemFrame.Item:SetTemplate("Default")
+			itemFrame.Item:StyleButton()
+			itemFrame.Item.IconBorder:SetAlpha(0)
+
+			local icon = _G["StaticPopup"..i.."IconTexture"]
+			icon:CropIcon()
+
+			local close = _G["StaticPopup"..i.."CloseButton"]
+			close:SetNormalTexture(0)
+			close.SetNormalTexture = T.dummy
+			close:SetPushedTexture(0)
+			close.SetPushedTexture = T.dummy
+			T.SkinCloseButton(close)
 		end
 		_G["StaticPopup1ExtraButton"]:SkinButton()
 
