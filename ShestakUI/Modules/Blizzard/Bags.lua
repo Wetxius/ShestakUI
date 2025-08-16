@@ -5,8 +5,12 @@ if C.bag.enable ~= true then return end
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4, 5}
-local BAGS_BANK = {6, 7, 8, 9, 10, 11, -1}
-local BAGS_ACCOUNT = {12, 13, 14, 15, 16}
+local BAGS_BANK = {6, 7, 8, 9, 10, 11}
+-- local BAGS_BANK_1 = {6, 7, 8} -- TODO: create 2 tab for banks
+-- local BAGS_BANK_2 = {9, 10, 11}
+local BAGS_WARBAND = {12, 13, 14, 15, 16}
+-- local BAGS_WARBAND_1 = {12, 13, 14}
+-- local BAGS_WARBAND_2 = {15, 16}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -140,8 +144,8 @@ local function Stuffing_OnShow()
 	PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
 end
 
-local function StuffingBank_OnHide()
-	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then return end
+local function StuffingBank_OnHide() -- close bank frame
+	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then return end	-- fallback when switch layout
 	C_Bank.CloseBankFrame()
 	if Stuffing.frame:IsShown() then
 		Stuffing.frame:Hide()
@@ -149,9 +153,19 @@ local function StuffingBank_OnHide()
 	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
 
-local function Stuffing_OnHide()
-	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
+local function StuffingAccount_OnHide() -- close account warband frame
+	if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then return end	-- fallback when switch layout
+	C_Bank.CloseBankFrame()
+	if Stuffing.frame:IsShown() then
+		Stuffing.frame:Hide()
+	end
+	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
+end
+
+local function Stuffing_OnHide() -- close main bags
+	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
 		C_Bank.CloseBankFrame()
+		Stuffing.warbandFrame:Hide()
 	end
 	if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		Stuffing.bankFrame:Hide()
@@ -159,13 +173,13 @@ local function Stuffing_OnHide()
 	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
 
-local function Stuffing_Open()
+local function Stuffing_Open() -- open main bags
 	if not Stuffing.frame:IsShown() then
 		Stuffing.frame:Show()
 	end
 end
 
-local function Stuffing_Close()
+local function Stuffing_Close() -- call Stuffing_OnHide()
 	C_Timer.After(0.01, function() -- fix showing GameMenu when pressing ESC
 		if Stuffing.frame:IsShown() then
 			Stuffing.frame:Hide()
@@ -173,7 +187,7 @@ local function Stuffing_Close()
 	end)
 end
 
-local function Stuffing_Toggle()
+local function Stuffing_Toggle() -- toggle main bags
 	if Stuffing.frame:IsShown() then
 		Stuffing.frame:Hide()
 	else
@@ -390,307 +404,19 @@ function Stuffing:UpdateCooldowns(b)
 	end
 end
 
--- TODO: Rewrite to use bank system
-function Stuffing:SkinWarbandContainer()
-	local warbandFrame = CreateFrame("Frame", "StuffingFrameWarband", UIParent)
-	warbandFrame:SetWidth(C.bag.bank_columns * C.bag.button_size + (C.bag.bank_columns - 1) * C.bag.button_space + 10 * 2)
-	warbandFrame:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
-	warbandFrame:SetTemplate("Transparent")
+local function AddBankTabSettingsToTooltip(tooltip, depositFlags)
+	if not tooltip or not depositFlags then return end
 
-	warbandFrame:SetFrameStrata(_G["StuffingFrameBank"]:GetFrameStrata())
-	warbandFrame:SetFrameLevel(_G["StuffingFrameBank"]:GetFrameLevel() + 5)
-	warbandFrame:EnableMouse(true)
-	warbandFrame:SetMovable(true)
-	warbandFrame:SetClampedToScreen(true)
-	warbandFrame:SetClampRectInsets(0, 0, 0, -20)
-	warbandFrame:SetScript("OnMouseDown", function(self, button)
-		if IsShiftKeyDown() and button == "LeftButton" then
-			self:StartMoving()
-		end
-	end)
-	warbandFrame:SetScript("OnMouseUp", warbandFrame.StopMovingOrSizing)
-
-	local SwitchBankButton = CreateFrame("Button", nil, warbandFrame)
-	SwitchBankButton:SetSize(95, 20)
-	SwitchBankButton:SkinButton()
-	SwitchBankButton:SetPoint("TOPLEFT", 10, -4)
-	SwitchBankButton:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-	SwitchBankButton.text:SetPoint("CENTER")
-	SwitchBankButton.text:SetText(BANK)
-	SwitchBankButton:SetScript("OnClick", function()
-		BankFrame.BankPanel:SetBankType(Enum.BankType.Character or 0)
-		warbandFrame:Hide()
-		-- BankPanel:SetParent(_G["StuffingFrameBank"])
-		_G["StuffingFrameBank"]:Show()
-		PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
-	end)
-
-	local Deposit = BankPanel.AutoDepositFrame.DepositButton
-	Deposit:ClearAllPoints()
-	Deposit:SetSize(170, 20)
-	Deposit:SetPoint("TOPLEFT", SwitchBankButton, "TOPRIGHT", 3, 0)
-	Deposit:SkinButton()
-	Deposit:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-	Deposit.text:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
-	Deposit.text:SetTextColor(1, 1, 1)
-	Deposit.text:SetText(ACCOUNT_BANK_DEPOSIT_BUTTON_LABEL)
-	Deposit:SetFontString(Deposit.text)
-
-	local tooltip_show = function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 7)
-		GameTooltip:ClearLines()
-		if GetCVarBool("bankAutoDepositReagents") then
-			GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cff55ff55: "..L_STATS_ON.."|r")
-		else
-			GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cffff5555: "..strupper(OFF).."|r")
-		end
+	if FlagsUtil.IsSet(depositFlags, Enum.BagSlotFlags.ExpansionCurrent) then
+		GameTooltip_AddNormalLine(tooltip, BANK_TAB_EXPANSION_ASSIGNMENT:format(BANK_TAB_EXPANSION_FILTER_CURRENT))
+	elseif FlagsUtil.IsSet(depositFlags, Enum.BagSlotFlags.ExpansionLegacy) then
+		GameTooltip_AddNormalLine(tooltip, BANK_TAB_EXPANSION_ASSIGNMENT:format(BANK_TAB_EXPANSION_FILTER_LEGACY))
 	end
 
-	Deposit:HookScript("OnEnter", tooltip_show)
-	Deposit:HookScript("OnLeave", function() GameTooltip:Hide() end)
-
-	local function oldOnCLick() Deposit:OnClick() end -- save old function of Deposit button
-
-	Deposit:RegisterForClicks("AnyUp")
-	Deposit:SetScript("OnClick", function(_, btn)
-		if btn == "RightButton" then
-			local isOn = GetCVarBool("bankAutoDepositReagents")
-			SetCVar("bankAutoDepositReagents", isOn and 0 or 1)
-			Deposit:GetScript("OnEnter")(Deposit)
-		else
-			oldOnCLick()
-		end
-	end)
-
-	local Close = CreateFrame("Button", "StuffingCloseButtonWarband", warbandFrame, "UIPanelCloseButton")
-	T.SkinCloseButton(Close, nil, nil, true)
-	Close:SetSize(15, 15)
-	Close:RegisterForClicks("AnyUp")
-	Close:SetScript("OnClick", function(self, btn)
-		if btn == "RightButton" then
-			if Stuffing_DDMenu.initialize ~= Stuffing.Menu then
-				CloseDropDownMenus()
-				Stuffing_DDMenu.initialize = Stuffing.Menu
-			end
-			ToggleDropDownMenu(nil, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
-			return
-		else
-			warbandFrame:Hide()
-			StuffingBank_OnHide()
-		end
-	end)
-
-	BankPanel:StripTextures()
-	BankPanel:SetParent(warbandFrame)
-	BankPanel:ClearAllPoints()
-	BankPanel:SetAllPoints()
-
-	local NumRows, NumButtons, LastRowButton, LastButton = 1, 1
-	for i = 1, 98 do
-		local button = CreateFrame("Frame", "StuffingWarbandAnchor"..(i).."Slot", warbandFrame)
-		button:SetSize(C.bag.button_size, C.bag.button_size)
-		if i == 1 then
-			button:SetPoint("TOPLEFT", warbandFrame, "TOPLEFT", 10, -27)
-			LastRowButton = button
-			LastButton = button
-		elseif NumButtons == C.bag.bank_columns then
-			button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C.bag.button_space + C.bag.button_size))
-			button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C.bag.button_space + C.bag.button_size))
-			LastRowButton = button
-			NumRows = NumRows + 1
-			NumButtons = 1
-		else
-			button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C.bag.button_space + C.bag.button_size), 0)
-			button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C.bag.button_space + C.bag.button_size), 0)
-			NumButtons = NumButtons + 1
-		end
-
-		LastButton = button
+	local filterList = ContainerFrameUtil_ConvertFilterFlagsToList(depositFlags)
+	if filterList then
+		GameTooltip_AddNormalLine(tooltip, BANK_TAB_DEPOSIT_ASSIGNMENTS:format(filterList), true)
 	end
-	warbandFrame:SetHeight(NumRows * C.bag.button_size + (NumRows - 1) * C.bag.button_space + 40)
-
-	local function reposition()
-		for button in BankPanel:EnumerateValidItems() do
-			local i = button:GetContainerSlotID()
-			button:ClearAllPoints()
-			button:SetAllPoints("StuffingWarbandAnchor"..(i).."Slot")
-		end
-	end
-
-	hooksecurefunc(BankPanel, "GenerateItemSlotsForSelectedTab", function(self)
-		for button in self.itemButtonPool:EnumerateActive() do
-			if not button.styled then
-				local icon = button.icon
-
-				button:SetNormalTexture(0)
-				button:StyleButton()
-				button:SetTemplate("Default")
-				button:SetSize(C.bag.button_size, C.bag.button_size)
-
-				T.SkinIconBorder(button.IconBorder, button)
-
-				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				icon:ClearAllPoints()
-				icon:SetPoint("TOPLEFT", 2, -2)
-				icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-				if button.IconOverlay then
-					button.IconOverlay:ClearAllPoints()
-					button.IconOverlay:SetPoint("TOPLEFT", 2, -2)
-					button.IconOverlay:SetPoint("BOTTOMRIGHT", -2, 2)
-				end
-
-				button.Count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-				button.Count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
-				button.Count:SetPoint("BOTTOMRIGHT", 1, 1)
-
-				if C.bag.ilvl then
-					button.ilvl = button:CreateFontString(nil, "ARTWORK")
-					button.ilvl:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-					button.ilvl:SetPoint("TOPLEFT", 1, -1)
-					button.ilvl:SetTextColor(1, 1, 0)
-				end
-
-				button.IconQuestTexture:SetAlpha(0)
-				if button.Background then
-					button.Background:SetAlpha(0)
-				end
-
-				button.styled = true
-			end
-
-			if button.ilvl then
-				button.ilvl:SetText("")
-				local info = C_Container.GetContainerItemInfo(self.selectedTabID, button:GetContainerSlotID())
-				if info and info.hyperlink then
-					local _, _, _, itemlevel, _, _, _, _, _, _, _, itemClassID, itemSubClassID = C_Item.GetItemInfo(info.hyperlink)
-					if itemlevel and itemlevel > 1 and info.quality > 1 and (itemClassID == 2 or itemClassID == 4 or (itemClassID == 3 and itemSubClassID == 11)) then
-						local text = _getRealItemLevel(info.hyperlink, self.selectedTabID, button:GetContainerSlotID()) or itemlevel
-						button.ilvl:SetText(text)
-					end
-				end
-			end
-		end
-		reposition()
-	end)
-
-	if C.bag.ilvl then
-		hooksecurefunc(BankPanel, "RefreshAllItemsForSelectedTab", function(self)
-			for button in self:EnumerateValidItems() do
-				button.ilvl:SetText("")
-				local info = C_Container.GetContainerItemInfo(self.selectedTabID, button:GetContainerSlotID())
-				if info and info.hyperlink then
-					local _, _, _, itemlevel, _, _, _, _, _, _, _, itemClassID, itemSubClassID = C_Item.GetItemInfo(info.hyperlink)
-					if itemlevel and itemlevel > 1 and info.quality > 1 and (itemClassID == 2 or itemClassID == 4 or (itemClassID == 3 and itemSubClassID == 11)) then
-						local text = _getRealItemLevel(info.hyperlink, self.selectedTabID, button:GetContainerSlotID()) or itemlevel
-						button.ilvl:SetText(text)
-					end
-				end
-			end
-		end)
-	end
-
-	local function tabReposition(self, point, anchor, attachTo, x, y)
-		if y == -25 then -- first button
-			self:SetPoint(point, anchor, attachTo, 1, 0)
-		elseif y == -17 then
-			self:SetPoint(point, anchor, attachTo, x, -C.bag.button_space)
-		end
-	end
-
-	local function SkinBankTab(button)
-		if not button.styled then
-			button.Border:SetAlpha(0)
-
-			if button.Background then
-				button.Background:SetAlpha(0)
-			end
-
-			button:SetTemplate("Default")
-			button:StyleButton()
-			button:SetSize(C.bag.button_size, C.bag.button_size)
-
-			button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
-			button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
-			button.SelectedTexture:SetPoint("BOTTOMRIGHT", -2, 2)
-
-			button.Icon:ClearAllPoints()
-			button.Icon:SetPoint("TOPLEFT", 2, -2)
-			button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
-			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			local point, anchor, attachTo, x, y = button:GetPoint()
-			tabReposition(button, point, anchor, attachTo, x, y)
-
-			hooksecurefunc(button, "SetPoint", function(self, point, anchor, attachTo, x, y)
-				tabReposition(self, point, anchor, attachTo, x, y)
-			end)
-
-			button.styled = true
-		end
-	end
-
-	hooksecurefunc(BankPanel, "RefreshBankTabs", function(self)
-		for tab in self.bankTabPool:EnumerateActive() do
-			SkinBankTab(tab)
-		end
-	end)
-	SkinBankTab(BankPanel.PurchaseTab)
-
-	BankPanel.TabSettingsMenu:SetClampedToScreen(true)
-	BankPanel.TabSettingsMenu:SetFrameStrata("HIGH")
-
-	BankPanel.Header:SetAlpha(0)
-	BankPanel.AutoDepositFrame.IncludeReagentsCheckbox:SetScale(0.001)
-	BankPanel.AutoDepositFrame.IncludeReagentsCheckbox:SetAlpha(0)
-	BankPanel.MoneyFrame.MoneyDisplay:ClearAllPoints()
-	BankPanel.MoneyFrame.MoneyDisplay:SetPoint("RIGHT", Close, "LEFT", -5, -3)
-	BankPanel.MoneyFrame.Border:Hide()
-	BankPanel.MoneyFrame.WithdrawButton:SetScale(0.001)
-	BankPanel.MoneyFrame.DepositButton:SetScale(0.001)
-	BankPanel.MoneyFrame.WithdrawButton:SetAlpha(0)
-	BankPanel.MoneyFrame.DepositButton:SetAlpha(0)
-
-	BankPanel.AutoSortButton:SetScale(0.001)
-
-	BankPanelGoldButton:SetNormalFontObject("SystemFont_Small")
-	BankPanelSilverButton:SetNormalFontObject("SystemFont_Small")
-	BankPanelCopperButton:SetNormalFontObject("SystemFont_Small")
-
-	local goldButton = CreateFrame("Button", nil, warbandFrame)
-	goldButton:SetAlpha(0)
-	goldButton:SetAllPoints(BankPanel.MoneyFrame.MoneyDisplay)
-	goldButton:RegisterForClicks("AnyUp")
-	goldButton:SetScript("OnClick", function(_, btn)
-		if btn == "RightButton" then
-			BankPanel.MoneyFrame.DepositButton:OnClick()
-		else
-			BankPanel.MoneyFrame.WithdrawButton:OnClick()
-		end
-	end)
-
-	local tooltip_show = function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 11)
-		GameTooltip:ClearLines()
-		GameTooltip:SetText(LEFT_BUTTON_STRING.."|cffff5555: "..BANK_WITHDRAW_MONEY_BUTTON_LABEL.."|r\n"..RIGHT_BUTTON_STRING.."|cff55ff55: "..BANK_DEPOSIT_MONEY_BUTTON_LABEL.."|r")
-	end
-
-	goldButton:HookScript("OnEnter", tooltip_show)
-	goldButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
-
-	BankPanel.PurchasePrompt:StripTextures()
-	BankPanel.PurchasePrompt:SetTemplate("Overlay")
-	BankPanel.PurchasePrompt:SetAllPoints(warbandFrame)
-	BankPanel.PurchasePrompt:SetFrameStrata("FULLSCREEN")
-
-	BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SkinButton()
-	BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:SetFrameLevel(BankPanel.PurchasePrompt:GetFrameLevel() + 3)
-
-	BankPanel.LockPrompt:StripTextures()
-
-	T.SkinIconSelectionFrame(BankPanel.TabSettingsMenu)
-
-	BankFrame.BankPanel:SetBankType(Enum.BankType.Account or 2)
 end
 
 function Stuffing:BagFrameSlotNew(p, slot)
@@ -702,30 +428,37 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 	local ret = {}
 
+	-- Bank and Account
 	if slot > 5 then
 		ret.slot = slot
-		slot = slot - 5
-		ret.frame = CreateFrame("ItemButton", "StuffingBBag"..slot.."Slot", p, "")
+		local name = slot >= 12 and "StuffingABag" or "StuffingBBag"
+		slot = slot >= 12 and slot - 11 or slot - 5
+		ret.frame = CreateFrame("ItemButton", name..slot.."Slot", p, "")
 		Mixin(ret.frame, BackdropTemplateMixin)
-		ret.frame:StripTextures()
-		ret.frame:SetID(slot)
 
-		local bag_tex = GetInventoryItemTexture("player", C_Container.ContainerIDToInventoryID(ret.slot))
-		_G[ret.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
+		ret.frame:SetID(ret.slot)
+		ret.frame.bankType = slot >= 12 and WARBANDBANK_TYPE or CHARACTERBANK_TYPE
+		ret.frame.bagID = slot
+
+		_G[ret.frame:GetName().."IconTexture"]:SetTexture(136511)
+
+		local tooltip_show = function(self)
+			if not BankFrame.BankPanel.purchasedBankTabData then return end
+			local data = BankFrame.BankPanel.purchasedBankTabData[self.bagID]
+			if not data then return end
+
+			GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
+			GameTooltip:ClearLines()
+			GameTooltip_SetTitle(GameTooltip, data.name, NORMAL_FONT_COLOR)
+			AddBankTabSettingsToTooltip(GameTooltip, data.depositFlags)
+			GameTooltip_AddInstructionLine(GameTooltip, BANK_TAB_TOOLTIP_CLICK_INSTRUCTION)
+			GameTooltip:Show()
+		end
+
+		ret.frame:HookScript("OnEnter", tooltip_show)
+		ret.frame:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 		table.insert(self.bagframe_buttons, ret)
-
-		if not ret.frame.tooltipText then
-			ret.frame.tooltipText = ""
-		end
-
-		ret.frame.ID = C_Container.ContainerIDToInventoryID(ret.slot)
-		local quality = GetInventoryItemQuality("player", ret.frame.ID)
-		if quality then
-			ret.frame.quality = quality
-		end
-
-		-- ret.frame:Hide()	-- 11.2 now use the new tab system
 	else
 		ret.frame = CreateFrame("ItemButton", "StuffingFBag"..(slot + 1).."Slot", p, "")
 		Mixin(ret.frame, BackdropTemplateMixin)
@@ -1017,10 +750,6 @@ function Stuffing:SearchUpdate(str)
 			end
 		end
 	end
-
-	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
-		C_Container.SetItemSearch(str)
-	end
 end
 
 function Stuffing:SearchReset()
@@ -1030,10 +759,6 @@ function Stuffing:SearchReset()
 		end
 		b.frame.searchOverlay:Hide()
 		SetItemButtonDesaturated(b.frame, false)
-	end
-
-	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
-		C_Container.SetItemSearch("")
 	end
 
 	self.frame.editbox:SetText("")
@@ -1058,98 +783,219 @@ end
 function Stuffing:CreateBagFrame(w)
 	local n = "StuffingFrame"..w
 	local f = CreateFrame("Frame", n, UIParent)
-	f:EnableMouse(true)
-	f:SetMovable(true)
-	f:SetFrameStrata("HIGH")
-	f:SetFrameLevel(10)
-	f:RegisterForDrag("LeftButton")
-	f:SetScript("OnDragStart", function(self)
-		if IsAltKeyDown() or IsShiftKeyDown() then
-			self:StartMoving()
-			DragFunction(self, true)
-			f.moved = true
-		end
-	end)
+	if w ~= "Warband" then
+		f:EnableMouse(true)
+		f:SetMovable(true)
+		f:SetFrameStrata("HIGH")
+		f:SetFrameLevel(10)
+		f:RegisterForDrag("LeftButton")
+		f:SetScript("OnDragStart", function(self)
+			if IsAltKeyDown() or IsShiftKeyDown() then
+				self:StartMoving()
+				DragFunction(self, true)
+				f.moved = true
+			end
+		end)
 
-	f:SetScript("OnDragStop", function(self)
-		if f.moved then	-- prevent false register without modifier key
-			self:StopMovingOrSizing()
-			DragFunction(self, false)
-			local ap, p, rp, x, y = f:GetPoint()
-			if not p then p = UIParent end
-			local positionTable = T.CurrentProfile()
-			positionTable[f:GetName()] = {ap, p:GetName(), rp, x, y}
-			f.moved = nil
-		end
-	end)
+		f:SetScript("OnDragStop", function(self)
+			if f.moved then	-- prevent false register without modifier key
+				self:StopMovingOrSizing()
+				DragFunction(self, false)
+				local ap, p, rp, x, y = f:GetPoint()
+				if not p then p = UIParent end
+				local positionTable = T.CurrentProfile()
+				positionTable[f:GetName()] = {ap, p:GetName(), rp, x, y}
+				f.moved = nil
+			end
+		end)
 
-	f:SetScript("OnMouseDown", function(_, button)
-		if IsControlKeyDown() and button == "RightButton" then
-			f:ClearAllPoints()
+		f:SetScript("OnMouseDown", function(_, button)
+			if IsControlKeyDown() and button == "RightButton" then
+				f:ClearAllPoints()
+				if w == "Bank" then
+					f:SetPoint(unpack(C.position.bank))
+				else
+					f:SetPoint(unpack(C.position.bag))
+				end
+				f:SetUserPlaced(false)
+				local positionTable = T.CurrentProfile()
+				positionTable[f:GetName()] = nil
+			end
+		end)
+
+		local positionTable = T.CurrentProfile()
+		if positionTable[f:GetName()] then
+			f:SetPoint(unpack(positionTable[f:GetName()]))
+		else
 			if w == "Bank" then
 				f:SetPoint(unpack(C.position.bank))
 			else
 				f:SetPoint(unpack(C.position.bag))
 			end
-			f:SetUserPlaced(false)
-			local positionTable = T.CurrentProfile()
-			positionTable[f:GetName()] = nil
-		end
-	end)
-
-	local positionTable = T.CurrentProfile()
-	if positionTable[f:GetName()] then
-		f:SetPoint(unpack(positionTable[f:GetName()]))
-	else
-		if w == "Bank" then
-			f:SetPoint(unpack(C.position.bank))
-		else
-			f:SetPoint(unpack(C.position.bag))
 		end
 	end
 
-	if w == "Bank" then
-		-- Warband button
-		f.b_warband = CreateFrame("Button", "StuffingWarbandButton"..w, f)
-		f.b_warband:SetSize(95, 20)
-		f.b_warband:SetPoint("TOPLEFT", 10, -4)
-		f.b_warband:RegisterForClicks("AnyUp")
-		f.b_warband:SkinButton()
-		f.b_warband:SetScript("OnClick", function()
-			if not BankPanel.isMade then
-				-- BankFrame.BankPanel:SetBankType(Enum.BankType.Account or 2)
-				self:SkinWarbandContainer()
-				BankPanel.isMade = true
-			else
+	-- Create the bags frame
+	local fb = CreateFrame("Frame", n.."BagsFrame", f)
+	fb:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 3)
+	fb:SetFrameStrata("HIGH")
+	f.bags_frame = fb
+
+	if w == "Bank" or w == "Warband" then
+		-- Switch layout button
+		f.b_switch = CreateFrame("Button", "StuffingSwitchButton"..w, f)
+		f.b_switch:SetSize(95, 20)
+		f.b_switch:SetPoint("TOPLEFT", 10, -4)
+		f.b_switch:RegisterForClicks("AnyUp")
+		f.b_switch:SkinButton()
+		f.b_switch:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+		f.b_switch.text:SetPoint("CENTER")
+		f.b_switch.text:SetText(w == "Bank" and ACCOUNT_BANK_PANEL_TITLE or BANK)
+		f.b_switch:SetWidth(f.b_switch.text:GetWidth() + 15)
+		f.b_switch:SetFontString(f.b_switch.text)
+
+		if w == "Bank" then
+			f.b_switch:SetScript("OnClick", function()
+				self.warbandFrame:Show()
+				self.bankFrame:Hide()
+				if bag_bars == 1 then
+					Stuffing:Layout("warband")
+				end
 				BankFrame.BankPanel:SetBankType(Enum.BankType.Account or 2)
-				_G["StuffingFrameWarband"]:Show()
-				-- BankPanel:SetParent(_G["StuffingFrameWarband"])
+				PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
+			end)
+		else
+			f.b_switch:SetScript("OnClick", function()
+				self.bankFrame:Show()
+				self.warbandFrame:Hide()
+				if bag_bars == 1 then
+					Stuffing:Layout("bank")
+				end
+				BankFrame.BankPanel:SetBankType(Enum.BankType.Character or 0)
+				PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
+			end)
+		end
+
+		-- Deposit button
+		f.b_deposit = CreateFrame("Button", nil, f)
+		f.b_deposit:SetSize(170, 20)
+		f.b_deposit:SetPoint("TOPLEFT", f.b_switch, "TOPRIGHT", 3, 0)
+		f.b_deposit:RegisterForClicks("AnyUp")
+		f.b_deposit:SkinButton()
+		f.b_deposit:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+		f.b_deposit.text:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
+		f.b_deposit.text:SetTextColor(1, 1, 1)
+		f.b_deposit.text:SetText(w == "Bank" and CHARACTER_BANK_DEPOSIT_BUTTON_LABEL or ACCOUNT_BANK_DEPOSIT_BUTTON_LABEL)
+		f.b_deposit:SetWidth(f.b_deposit.text:GetWidth() + 15)
+		f.b_deposit:SetFontString(f.b_deposit.text)
+
+		if w == "Bank" then
+			f.b_deposit:SetScript("OnClick", function(_, btn)
+				BankPanel.AutoDepositFrame.DepositButton:OnClick()
+			end)
+		else
+			local tooltip_show = function(self)
+				GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 7)
+				GameTooltip:ClearLines()
+				if GetCVarBool("bankAutoDepositReagents") then
+					GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cff55ff55: "..L_STATS_ON.."|r")
+				else
+					GameTooltip:SetText(BANK_DEPOSIT_INCLUDE_REAGENTS_CHECKBOX_LABEL.."|cffff5555: "..strupper(OFF).."|r")
+				end
 			end
 
-			PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
-			_G["StuffingFrameBank"]:Hide()
-		end)
-		f.b_warband:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-		f.b_warband.text:SetPoint("CENTER")
-		f.b_warband.text:SetText(ACCOUNT_BANK_PANEL_TITLE)
-		f.b_warband:SetFontString(f.b_warband.text)
+			f.b_deposit:HookScript("OnEnter", tooltip_show)
+			f.b_deposit:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
-		--BETA Buy button
-		-- f.b_purchase = CreateFrame("Button", "StuffingPurchaseButton"..w, f)
-		-- f.b_purchase:SetSize(80, 20)
-		-- f.b_purchase:SetPoint("TOPLEFT", f.b_warband, "TOPRIGHT", 3, 0)
-		-- f.b_purchase:RegisterForClicks("AnyUp")
-		-- f.b_purchase:SkinButton()
-		-- f.b_purchase:SetScript("OnClick", function() BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:Click() end)
-		-- f.b_purchase:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-		-- f.b_purchase.text:SetPoint("CENTER")
-		-- f.b_purchase.text:SetText(BANKSLOTPURCHASE)
-		-- f.b_purchase:SetFontString(f.b_purchase.text)
-		-- if C_Bank.CanPurchaseBankTab(Enum.BankType.Character) then
-			-- f.b_purchase:Show()
-		-- else
-			-- f.b_purchase:Hide()
-		-- end
+			f.b_deposit:SetScript("OnClick", function(_, btn)
+				if btn == "RightButton" then
+					local isOn = GetCVarBool("bankAutoDepositReagents")
+					SetCVar("bankAutoDepositReagents", isOn and 0 or 1)
+					f.b_deposit:GetScript("OnEnter")(f.b_deposit)
+				else
+					BankPanel.AutoDepositFrame.DepositButton:OnClick()
+				end
+			end)
+		end
+
+		-- Buy button
+		fb.b_purchase = CreateFrame("ItemButton", "StuffingPurchaseButton"..w, fb, "InsecureActionButtonTemplate")
+		fb.b_purchase:SetFrameLevel(15)
+		Mixin(fb.b_purchase, BackdropTemplateMixin)
+		fb.b_purchase:RegisterForClicks("AnyUp", "AnyDown")
+		fb.b_purchase:SetAttribute("type", "click")
+		fb.b_purchase:SetAttribute("clickbutton", _G.BankFrame.BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton)
+
+		fb.b_purchase:SetSize(C.bag.button_size, C.bag.button_size)
+		fb.b_purchase:SetPoint("RIGHT", fb, "RIGHT", -10, 0)
+
+		fb.b_purchase:StyleButton()
+		fb.b_purchase:SetTemplate("Default")
+		fb.b_purchase:SetBackdropBorderColor(1, 1, 0)
+		fb.b_purchase:SetNormalTexture((0))
+
+		fb.b_purchase.icon = _G[fb.b_purchase:GetName().."IconTexture"]
+		fb.b_purchase.icon:CropIcon()
+		fb.b_purchase.icon:SetTexture(135769)
+
+		if C_Bank.CanPurchaseBankTab(w == "Bank" and Enum.BankType.Character or Enum.BankType.Account) then
+			fb.b_purchase:Show()
+		else
+			fb.b_purchase:Hide()
+		end
+	end
+
+	if w == "Warband" then
+		f:ClearAllPoints()
+		f:SetPoint("TOPLEFT", _G["StuffingFrameBank"], "TOPLEFT", 0, 0)
+		T.SkinIconSelectionFrame(BankPanel.TabSettingsMenu)
+
+		-- Gold ammount
+		local goldText = f:CreateFontString(nil, "ARTWORK")
+		goldText:SetFont(C.font.stats_font, C.font.stats_font_size, C.font.stats_font_style)
+		goldText:SetShadowOffset(C.font.stats_font_shadow and 1 or 0, C.font.stats_font_shadow and -1 or 0)
+		goldText:SetPoint("RIGHT", f, "TOPRIGHT", -25, -13)
+
+		local function comma_value(n) -- credit http://richard.warburton.it
+			local left, num, right = string.match(n,"^([^%d]*%d)(%d*)(.-)$")
+			return left..(num:reverse():gsub("(%d%d%d)","%1,"):reverse())..right
+		end
+		local function formatgold()
+			local amount = C_Bank.FetchDepositedMoney(Enum.BankType.Account) or 0
+			local gold, silver, copper = floor(amount * 0.0001), floor(mod(amount * 0.01, 100)), floor(mod(amount, 100))
+
+			return (gold > 0 and format("%s|cffffd700%s|r ", comma_value(gold), GOLD_AMOUNT_SYMBOL) or "")
+			.. (format("%.2d|cffc7c7cf%s|r ", silver, SILVER_AMOUNT_SYMBOL))
+			.. (format("%.2d|cffeda55f%s|r", copper, COPPER_AMOUNT_SYMBOL))
+		end
+		goldText:SetText(formatgold())
+
+		local goldButton = CreateFrame("Button", nil, f)
+		goldButton:SetAlpha(0)
+		goldButton:SetAllPoints(goldText)
+		goldButton:RegisterForClicks("AnyUp")
+		goldButton:SetScript("OnClick", function(_, btn)
+			if btn == "RightButton" then
+				BankPanel.MoneyFrame.DepositButton:OnClick()
+			else
+				BankPanel.MoneyFrame.WithdrawButton:OnClick()
+			end
+		end)
+
+		local tooltip_show = function(self)
+			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 11)
+			GameTooltip:ClearLines()
+			GameTooltip:SetText(LEFT_BUTTON_STRING.."|cffff5555: "..BANK_WITHDRAW_MONEY_BUTTON_LABEL.."|r\n"..RIGHT_BUTTON_STRING.."|cff55ff55: "..BANK_DEPOSIT_MONEY_BUTTON_LABEL.."|r")
+		end
+
+		goldButton:HookScript("OnEnter", tooltip_show)
+		goldButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
+
+		goldButton:RegisterEvent("PLAYER_MONEY")
+		goldButton:RegisterEvent("ACCOUNT_MONEY")
+		goldButton:SetScript("OnEvent", function()
+			goldText:SetText(formatgold())
+		end)
 	end
 
 	-- Close button
@@ -1185,31 +1031,6 @@ function Stuffing:CreateBagFrame(w)
 	f.b_close:HookScript("OnEnter", tooltip_show)
 	f.b_close:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
-	-- Create the bags frame
-	local fb = CreateFrame("Frame", n.."BagsFrame", f)
-	fb:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 3)
-	fb:SetFrameStrata("HIGH")
-	f.bags_frame = fb
-
-	if w == "Bank" then
-		-- Buy button
-		f.b_purchase = CreateFrame("Button", "StuffingPurchaseButtonBank", fb)
-		f.b_purchase:SetSize(80, 20)
-		f.b_purchase:SetPoint("BOTTOMLEFT", fb, "TOPLEFT", 0, 3)
-		f.b_purchase:RegisterForClicks("AnyUp")
-		f.b_purchase:SkinButton()
-		f.b_purchase:SetScript("OnClick", function() BankPanel.PurchasePrompt.TabCostFrame.PurchaseButton:Click() end)
-		f.b_purchase:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
-		f.b_purchase.text:SetPoint("CENTER")
-		f.b_purchase.text:SetText(BANKSLOTPURCHASE)
-		f.b_purchase:SetFontString(f.b_purchase.text)
-		if C_Bank.CanPurchaseBankTab(Enum.BankType.Character) then
-			f.b_purchase:Show()
-		else
-			f.b_purchase:Hide()
-		end
-	end
-
 	return f
 end
 
@@ -1221,6 +1042,31 @@ function Stuffing:InitBank()
 	local f = self:CreateBagFrame("Bank")
 	f:SetScript("OnHide", StuffingBank_OnHide)
 	self.bankFrame = f
+
+	if self.warbandFrame then return end
+	local f = self:CreateBagFrame("Warband")
+	f:Hide()
+	f:SetScript("OnHide", StuffingAccount_OnHide)
+	self.warbandFrame = f
+
+	-- Update bank bags icon
+	hooksecurefunc(BankFrame.BankPanel, "RefreshBankTabs", function(self)
+		if not self.purchasedBankTabData then return end
+
+		for _, data in pairs(self.purchasedBankTabData) do
+			if data.ID >= 12 then
+				local slot = data.ID - 11
+				if _G["StuffingABag"..slot.."Slot"] then
+					_G["StuffingABag"..slot.."SlotIconTexture"]:SetTexture(data.icon)
+				end
+			else
+				local slot = data.ID - 5
+				if _G["StuffingBBag"..slot.."Slot"] then
+					_G["StuffingBBag"..slot.."SlotIconTexture"]:SetTexture(data.icon)
+				end
+			end
+		end
+	end)
 end
 
 function Stuffing:InitBags()
@@ -1360,21 +1206,46 @@ function Stuffing:InitBags()
 	f:Hide()
 end
 
-function Stuffing:Layout(isBank)
+local function TabOnClick(self, btn)
+	if not BankFrame.BankPanel.purchasedBankTabData then return end
+
+	local data = BankFrame.BankPanel.purchasedBankTabData[self.bagID]
+	if not data then return end
+
+	if btn == "RightButton" then
+		local menu = BankFrame.BankPanel.TabSettingsMenu
+		if menu then
+			if menu:IsShown() then menu:Hide() end
+			menu:SetParent(UIParent)
+			menu:ClearAllPoints()
+			menu:SetPoint("CENTER", 0, 100)
+			menu:EnableMouse(true)
+			menu:SetFrameStrata("DIALOG")
+			menu:OnOpenTabSettingsRequested(self:GetID())
+		end
+	end
+end
+
+function Stuffing:Layout(type)
 	local slots = 0
 	local rows = 0
 	local off = 20
 	local cols, f, bs
+	local mult = 0
 
-	if isBank then
+	if type == "bank" then
 		bs = BAGS_BANK
 		cols = C.bag.bank_columns
 		f = self.bankFrame
-		f:SetAlpha(1)
+	elseif type == "warband" then
+		bs = BAGS_WARBAND
+		cols = C.bag.bank_columns
+		f = self.warbandFrame
 	else
 		bs = BAGS_BACKPACK
 		cols = C.bag.bag_columns
 		f = self.frame
+		mult = 1
 
 		f.editbox:SetFont(C.media.normal_font, C.font.bags_font_size + 3, "")
 		f.detail:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
@@ -1393,7 +1264,7 @@ function Stuffing:Layout(isBank)
 		local bsize = C.bag.button_size
 
 		local w = 2 * 10
-		w = w + ((#bs - 1) * bsize)
+		w = w + ((#bs - mult) * bsize)
 		w = w + ((#bs - 2) * 4)
 
 		fb:SetHeight(2 * 10 + bsize)
@@ -1403,13 +1274,9 @@ function Stuffing:Layout(isBank)
 		fb:Hide()
 	end
 
-	--BETA if isBank then
-		-- fb:Hide()	-- 11.2 now use the new tab system
-	-- end
-
 	local idx = 0
 	for _, v in ipairs(bs) do
-		if (not isBank and v <= 4) or (isBank and v ~= -1) then
+		if (not type and v <= 4) or (type and v ~= -1) then
 			local bsize = C.bag.button_size
 			local b = self:BagFrameSlotNew(fb, v)
 			local xoff = 10
@@ -1424,7 +1291,7 @@ function Stuffing:Layout(isBank)
 			local btns = self.buttons
 			b.frame:HookScript("OnEnter", function()
 				local bag
-				if isBank then bag = v else bag = v + 1 end
+				if type then bag = v else bag = v + 1 end
 
 				for _, val in ipairs(btns) do
 					if val.bag == bag then
@@ -1441,7 +1308,7 @@ function Stuffing:Layout(isBank)
 				end
 			end)
 
-			b.frame:SetScript("OnClick", nil)
+			b.frame:SetScript("OnClick", type and TabOnClick or nil)
 
 			idx = idx + 1
 		end
@@ -1536,36 +1403,21 @@ function Stuffing:SetBagsForSorting(c)
 	self.sortBags = {}
 
 	local cmd = ((c == nil or c == "") and {"d"} or {strsplit("/", c)})
+	local targetBags = (self.bankFrame and self.bankFrame:IsShown()) and BAGS_BANK or (self.warbandFrame and self.warbandFrame:IsShown()) and BAGS_WARBAND or BAGS_BACKPACK
 
 	for _, s in ipairs(cmd) do
 		if s == "c" then
 			self.sortBags = {}
 		elseif s == "d" then
-			if not self.bankFrame or not self.bankFrame:IsShown() then
-				for _, i in ipairs(BAGS_BACKPACK) do
-					if self.bags[i] and self.bags[i].bagType == ST_NORMAL then
-						table.insert(self.sortBags, i)
-					end
-				end
-			else
-				for _, i in ipairs(BAGS_BANK) do
-					if self.bags[i] and self.bags[i].bagType == ST_NORMAL then
-						table.insert(self.sortBags, i)
-					end
+			for _, i in ipairs(targetBags) do
+				if self.bags[i] and self.bags[i].bagType == ST_NORMAL then
+					table.insert(self.sortBags, i)
 				end
 			end
 		elseif s == "p" then
-			if not self.bankFrame or not self.bankFrame:IsShown() then
-				for _, i in ipairs(BAGS_BACKPACK) do
-					if self.bags[i] and self.bags[i].bagType == ST_SPECIAL then
-						table.insert(self.sortBags, i)
-					end
-				end
-			else
-				for _, i in ipairs(BAGS_BANK) do
-					if self.bags[i] and self.bags[i].bagType == ST_SPECIAL then
-						table.insert(self.sortBags, i)
-					end
+			for _, i in ipairs(targetBags) do
+				if self.bags[i] and self.bags[i].bagType == ST_SPECIAL then
+					table.insert(self.sortBags, i)
 				end
 			end
 		else
@@ -1641,8 +1493,8 @@ function Stuffing:SortBags()
 	BS_clearData()
 
 	local bagList
-	if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
-		bagList = {12, 13, 14, 15, 16}
+	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
+		bagList = {16, 15, 14, 13, 12}
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		bagList = {11, 10, 9, 8, 7, 6}
 	else
@@ -1757,75 +1609,39 @@ function Stuffing:Restack()
 
 	Stuffing_Open()
 
-	-- TODO: Add support for Account warband bank
-	-- if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
-		-- for slotID = 1, 98 do
-			-- local _, cnt, _, _, _, _, clink = GetContainerItemInfo(-3, slotID)
-			-- if clink then
-				-- local n, _, _, _, _, _, _, s = C_Item.GetItemInfo(clink)
+	for _, v in pairs(self.buttons) do
+		if InBags(v.bag) then
+			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
+			if clink then
+				local n, _, _, _, _, _, _, s = C_Item.GetItemInfo(clink)
 
-				-- if n and cnt ~= s then
-					-- if not sr[clink] then
-						-- sr[clink] = {{item = slotID, size = cnt, max = s}}
-					-- else
-						-- table.insert(sr[clink], {item = slotID, size = cnt, max = s})
-					-- end
-				-- end
-			-- end
-		-- end
-
-		-- for _, v in pairs(sr) do
-			-- if #v > 1 then
-				-- for j = 2, #v, 2 do
-					-- local a, b = v[j - 1], v[j]
-					-- local _, _, l1 = GetContainerItemInfo(-3, a.item)
-					-- local _, _, l2 = GetContainerItemInfo(-3, b.item)
-
-					-- if l1 or l2 then
-						-- did_restack = true
-					-- else
-						-- C_Container.PickupContainerItem(-3, a.item)
-						-- C_Container.PickupContainerItem(-3, b.item)
-						-- did_restack = true
-					-- end
-				-- end
-			-- end
-		-- end
-	-- else
-		for _, v in pairs(self.buttons) do
-			if InBags(v.bag) then
-				local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
-				if clink then
-					local n, _, _, _, _, _, _, s = C_Item.GetItemInfo(clink)
-
-					if n and cnt ~= s then
-						if not st[clink] then
-							st[clink] = {{item = v, size = cnt, max = s}}
-						else
-							table.insert(st[clink], {item = v, size = cnt, max = s})
-						end
-					end
-				end
-			end
-		end
-		for _, v in pairs(st) do
-			if #v > 1 then
-				for j = 2, #v, 2 do
-					local a, b = v[j - 1], v[j]
-					local _, _, l1 = GetContainerItemInfo(a.item.bag, a.item.slot)
-					local _, _, l2 = GetContainerItemInfo(b.item.bag, b.item.slot)
-
-					if l1 or l2 then
-						did_restack = true
+				if n and cnt ~= s then
+					if not st[clink] then
+						st[clink] = {{item = v, size = cnt, max = s}}
 					else
-						C_Container.PickupContainerItem(a.item.bag, a.item.slot)
-						C_Container.PickupContainerItem(b.item.bag, b.item.slot)
-						did_restack = true
+						table.insert(st[clink], {item = v, size = cnt, max = s})
 					end
 				end
 			end
 		end
-	-- end
+	end
+	for _, v in pairs(st) do
+		if #v > 1 then
+			for j = 2, #v, 2 do
+				local a, b = v[j - 1], v[j]
+				local _, _, l1 = GetContainerItemInfo(a.item.bag, a.item.slot)
+				local _, _, l2 = GetContainerItemInfo(b.item.bag, b.item.slot)
+
+				if l1 or l2 then
+					did_restack = true
+				else
+					C_Container.PickupContainerItem(a.item.bag, a.item.slot)
+					C_Container.PickupContainerItem(b.item.bag, b.item.slot)
+					did_restack = true
+				end
+			end
+		end
+	end
 
 	if did_restack then
 		self:SetScript("OnUpdate", Stuffing.RestackOnUpdate)
@@ -1847,10 +1663,10 @@ function Stuffing.Menu(self, level)
 	info.text = BAG_FILTER_CLEANUP.." Blizzard"
 	info.notCheckable = 1
 	info.func = function()
-		if _G["StuffingFrameWarband"] and _G["StuffingFrameWarband"]:IsShown() then
-			C_Container.SortAccountBankBags()
-		elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
+		if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 			C_Container.SortBankBags()
+		elseif Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
+			C_Container.SortAccountBankBags()
 		else
 			C_Container.SortBags()
 		end
@@ -1894,7 +1710,9 @@ function Stuffing.Menu(self, level)
 		end
 		Stuffing:Layout()
 		if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-			Stuffing:Layout(true)
+			Stuffing:Layout("bank")
+		elseif Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
+			Stuffing:Layout("warband")
 		end
 	end
 	UIDropDownMenu_AddButton(info, level)
@@ -1926,7 +1744,6 @@ function Stuffing:ADDON_LOADED(addon)
 	self:InitBags()
 
 	tinsert(UISpecialFrames, "StuffingFrameBags")
-	tinsert(UISpecialFrames, "StuffingFrameWarband")
 
 	ToggleBackpack = Stuffing_Toggle
 	ToggleBag = Stuffing_Toggle
@@ -1997,7 +1814,7 @@ function Stuffing:BANKFRAME_OPENED()
 		self:InitBank()
 	end
 
-	self:Layout(true)
+	self:Layout("bank")
 	for _, x in ipairs(BAGS_BANK) do
 		self:BagSlotUpdate(x)
 	end
@@ -2005,32 +1822,18 @@ function Stuffing:BANKFRAME_OPENED()
 	self.bankFrame:Show()
 	Stuffing_Open()
 
-	for _, v in ipairs(self.bagframe_buttons) do
-		if v.frame and v.frame.GetInventorySlot then
-			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
-			BankFrameItemButton_Update(v.frame)
-
-			local quality = GetInventoryItemQuality("player", v.frame.ID)
-			if quality and quality > 1 then
-				local r, g, b = C_Item.GetItemQualityColor(quality)
-				v.frame:SetBackdropBorderColor(r, g, b)
-			end
-
-			if not v.frame.tooltipText then
-				v.frame.tooltipText = ""
-			end
-		end
+	Stuffing:Layout("warband")
+	for _, x in ipairs(BAGS_WARBAND) do
+		self:BagSlotUpdate(x)
 	end
-	-- If open via warband bank item
+
+	-- If open via Warband Bank Distance Inhibitor
 	if not C_Bank.CanViewBank(Enum.BankType.Character) and C_Bank.CanViewBank(Enum.BankType.Account) then
-		StuffingWarbandButtonBank:Click()
+		StuffingSwitchButtonBank:Click()
 	end
 end
 
 function Stuffing:BANKFRAME_CLOSED()
-	if StuffingFrameWarband then
-		StuffingFrameWarband:Hide()
-	end
 	if self.bankFrame then
 		self.bankFrame:Hide()
 	end
