@@ -82,7 +82,6 @@ local function LoadSkin()
 
 	local scrollbars = {
 		FriendsListFrame.ScrollBar,
-		IgnoreListFrame.ScrollBar,
 		WhoFrame.ScrollBar,
 		QuickJoinFrame.ScrollBar,
 		RecruitAFriendFrame.RecruitList.ScrollBar,
@@ -93,14 +92,20 @@ local function LoadSkin()
 		T.SkinScrollBar(scrollbars[i], true)
 	end
 
+	if not T.newPatch then
+		T.SkinScrollBar(IgnoreListFrame.ScrollBar)
+	end
+
 	-- Reposition buttons
 	WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -3, 0)
 	WhoFrameAddFriendButton:SetPoint("RIGHT", WhoFrameGroupInviteButton, "LEFT", -3, 0)
 	WhoFrameGroupInviteButton:SetPoint("BOTTOMRIGHT", WhoFrame, "BOTTOMRIGHT", -4, 4)
 	FriendsFrameAddFriendButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
 	FriendsFrameSendMessageButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
-	FriendsFrameIgnorePlayerButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
-	FriendsFrameUnsquelchButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
+	if not T.newPatch then
+		FriendsFrameIgnorePlayerButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
+		FriendsFrameUnsquelchButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
+	end
 
 	-- Resize Buttons
 	WhoFrameWhoButton:SetSize(WhoFrameWhoButton:GetWidth() + 7, WhoFrameWhoButton:GetHeight())
@@ -185,9 +190,11 @@ local function LoadSkin()
 	end)
 
 	-- BNet Frame
-	FriendsFrameBattlenetFrame.BroadcastButton:SetAlpha(0)
-	FriendsFrameBattlenetFrame.BroadcastButton:ClearAllPoints()
-	FriendsFrameBattlenetFrame.BroadcastButton:SetAllPoints(FriendsFrameBattlenetFrame)
+	if not T.newPatch then
+		FriendsFrameBattlenetFrame.BroadcastButton:SetAlpha(0)
+		FriendsFrameBattlenetFrame.BroadcastButton:ClearAllPoints()
+		FriendsFrameBattlenetFrame.BroadcastButton:SetAllPoints(FriendsFrameBattlenetFrame)
+	end
 
 	FriendsFrameBattlenetFrame.BroadcastFrame:CreateBackdrop("Transparent")
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("TOPLEFT", 6, 1)
