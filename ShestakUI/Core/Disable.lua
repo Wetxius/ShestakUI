@@ -81,7 +81,7 @@ if C_AddOns.IsAddOnLoaded("DBM-SpellTimers") then
 	C.raidcooldown.enable = false
 end
 
-T.anotherBags = C_AddOns.IsAddOnLoaded("AdiBags") or C_AddOns.IsAddOnLoaded("ArkInventory") or C_AddOns.IsAddOnLoaded("cargBags_Nivaya") or C_AddOns.IsAddOnLoaded("cargBags") or C_AddOns.IsAddOnLoaded("Bagnon") or C_AddOns.IsAddOnLoaded("Combuctor") or C_AddOns.IsAddOnLoaded("TBag") or C_AddOns.IsAddOnLoaded("BaudBag") or C_AddOns.IsAddOnLoaded("Baganator")
+T.anotherBags = C_AddOns.IsAddOnLoaded("AdiBags") or C_AddOns.IsAddOnLoaded("ArkInventory") or C_AddOns.IsAddOnLoaded("cargBags_Nivaya") or C_AddOns.IsAddOnLoaded("cargBags") or C_AddOns.IsAddOnLoaded("Bagnon") or C_AddOns.IsAddOnLoaded("Combuctor") or C_AddOns.IsAddOnLoaded("TBag") or C_AddOns.IsAddOnLoaded("BaudBag") or C_AddOns.IsAddOnLoaded("Baganator") or C_AddOns.IsAddOnLoaded("BetterBags")
 if T.anotherBags then
 	C.bag.enable = false
 end
