@@ -59,7 +59,6 @@ local function LoadSkin()
 		FriendsFrameUnsquelchButton,
 		AddFriendEntryFrameAcceptButton,
 		AddFriendEntryFrameCancelButton,
-		AddFriendInfoFrameContinueButton, -- FIXME Not exist in 11.2
 		QuickJoinFrame.JoinQueueButton,
 		QuickJoinRoleSelectionFrame.AcceptButton,
 		QuickJoinRoleSelectionFrame.CancelButton,
@@ -117,8 +116,15 @@ local function LoadSkin()
 
 	T.SkinEditBox(AddFriendNameEditBox)
 	AddFriendNameEditBox:SetHeight(AddFriendNameEditBox:GetHeight() - 5)
-	AddFriendFrame:SetTemplate("Transparent")
+	T.SkinFrame(AddFriendFrame)
 	FriendsFriendsFrame:SetTemplate("Transparent")
+
+	-- Ignore
+	if T.newPatch then
+		T.SkinFrame(FriendsFrame.IgnoreListWindow)
+		FriendsFrame.IgnoreListWindow.UnignorePlayerButton:SkinButton()
+		T.SkinScrollBar(FriendsFrame.IgnoreListWindow.ScrollBar)
+	end
 
 	-- Recruit a Friend
 	local SplashFrame = RecruitAFriendFrame.SplashFrame
@@ -194,6 +200,12 @@ local function LoadSkin()
 		FriendsFrameBattlenetFrame.BroadcastButton:SetAlpha(0)
 		FriendsFrameBattlenetFrame.BroadcastButton:ClearAllPoints()
 		FriendsFrameBattlenetFrame.BroadcastButton:SetAllPoints(FriendsFrameBattlenetFrame)
+	end
+
+	if T.newPatch then
+		local b = FriendsFrameBattlenetFrame.ContactsMenuButton
+		b:SkinButton()
+		b:SetSize(25, 25)
 	end
 
 	FriendsFrameBattlenetFrame.BroadcastFrame:CreateBackdrop("Transparent")
@@ -280,6 +292,12 @@ local function LoadSkin()
 
 	for i = 1, 3 do
 		T.SkinTab(_G["FriendsTabHeaderTab"..i], true)
+	end
+
+	if T.newPatch then
+		for _, tab in next, {FriendsTabHeader.TabSystem:GetChildren()} do
+			tab:StripTextures()
+		end
 	end
 end
 
