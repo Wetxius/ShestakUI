@@ -31,7 +31,7 @@ local function attachByAuraInstanceID(self, ...)
 	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
 	local id = aura and aura.spellId
 	if id then addLine(self, id) end
-	if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(...)..": "..id) end
+	if debuginfo == true and id and IsModifierKeyDown() then print(aura.name..": "..id) end
 end
 
 hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", attachByAuraInstanceID) -- from oUF Auras
