@@ -97,6 +97,10 @@ T.DebuffBlackList = {
 	-- [SpellName(spellID)] = true,	-- Spell Name
 }
 
+for _, spell in pairs(C.nameplate.ignore_list) do
+	T.DebuffBlackList[SpellName(spell)] = true
+end
+
 T.BuffWhiteList = {
 	-- [SpellName(226510)] = true,	-- Sanguine Ichor
 }

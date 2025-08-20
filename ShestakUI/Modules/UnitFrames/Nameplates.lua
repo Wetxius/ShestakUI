@@ -226,8 +226,8 @@ local AurasCustomFilter = function(_, unit, data)
 
 	if not UnitIsFriend("player", unit) then
 		if data.isHarmful then
-			if C.nameplate.track_debuffs and data.isPlayerAura or data.sourceUnit == "pet" then
-				if ((data.nameplateShowAll or data.nameplateShowPersonal) and not T.DebuffBlackList[data.name]) then
+			if C.nameplate.track_debuffs and (data.isPlayerAura or data.sourceUnit == "pet") and not T.DebuffBlackList[data.name] then
+				if data.nameplateShowAll or data.nameplateShowPersonal then
 					allow = true
 				elseif T.DebuffWhiteList[data.name] then
 					allow = true

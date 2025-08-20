@@ -2458,16 +2458,33 @@ do
 	ListButton:SetSize(100, 23)
 	ListButton:SetText(ADD)
 	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
+	ListButton:RegisterForClicks("AnyUp")
+	ListButton:SetScript("OnClick", function(_, btn)
 		if not C.options["nameplate"] then
 			C.options["nameplate"] = {}
 		end
-		if not C.options["nameplate"]["debuffs_list"] then
-			C.options["nameplate"]["debuffs_list"] = {}
+		if btn == "LeftButton" then
+			if not C.options["nameplate"]["debuffs_list"] then
+				C.options["nameplate"]["debuffs_list"] = {}
+			end
+			BuildSpellList(C.options["nameplate"]["debuffs_list"])
+		else
+			if not C.options["nameplate"]["ignore_list"] then
+				C.options["nameplate"]["ignore_list"] = {}
+			end
+			BuildSpellList(C.options["nameplate"]["ignore_list"])
 		end
-		BuildSpellList(C.options["nameplate"]["debuffs_list"])
 	end)
 	tinsert(ns.buttons, ListButton)
+
+	local tooltip_show = function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 3, 3)
+		GameTooltip:ClearLines()
+		GameTooltip:SetText(RIGHT_BUTTON_STRING..": "..IGNORE)
+	end
+
+	ListButton:HookScript("OnEnter", tooltip_show)
+	ListButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 	local function toggleListButton()
 		local shown = track_debuffs:GetChecked()

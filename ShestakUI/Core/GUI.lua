@@ -17,6 +17,7 @@ C.enemycooldown.spells_list_ver = 1
 C.pulsecooldown.spells_list = {}
 C.nameplate.debuffs_list = {}
 C.nameplate.buffs_list = {}
+C.nameplate.ignore_list = {}
 C.nameplate.cast_color_list = {}
 C.nameplate.mob_color_list = ""
 C.nameplate.mob_color_alt_list = ""
