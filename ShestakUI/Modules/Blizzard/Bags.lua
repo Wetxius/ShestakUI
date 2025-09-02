@@ -1134,12 +1134,14 @@ function Stuffing:InitBank()
 
 		if not BankFrame.BankPanel.purchasedBankTabData[4] then -- only first 3 bags exist
 			local data = BankFrame.BankPanel.purchasedBankTabData[1]
-			if data.bankType == 0 then
-				StuffingFrameBankTab1:Hide()
-				StuffingFrameBankTab2:Hide()
-			else
-				StuffingFrameWarbandTab1:Hide()
-				StuffingFrameWarbandTab2:Hide()
+			if data then
+				if data.bankType == 0 then
+					StuffingFrameBankTab1:Hide()
+					StuffingFrameBankTab2:Hide()
+				else
+					StuffingFrameWarbandTab1:Hide()
+					StuffingFrameWarbandTab2:Hide()
+				end
 			end
 		end
 
