@@ -365,6 +365,27 @@ CloseButton:SetScript("OnClick", function()
 end)
 CloseButton:SkinButton()
 
+-- Allow to move chat frame
+do
+	chatInfo:EnableMouse(true)
+	chatInfo:SetMovable(true)
+	chatInfo:SetClampedToScreen(true)
+	chatInfo:RegisterForDrag("LeftButton")
+	chatInfo:SetScript("OnDragStart", OnDragStart)
+	chatInfo:SetScript("OnDragStop", OnDragStop)
+	chatInfo:SetScript("OnMouseUp", RestoreDefaults)
+	chatInfo:SetScript("OnMouseWheel", OnMouseWheel)
+	chatInfo.frame = ChatFrame1
+
+	chatInfo:SetScript("OnEnter", function(self)
+		ShowControls(self)
+	end)
+
+	chatInfo:SetScript("OnLeave", function(self)
+		if not MouseIsOver(controls) then controls:Hide() end
+	end)
+end
+
 local index = 200
 local CreateMover = function(frame, unit)
 	local mover = CreateFrame("Frame", nil, UIParent)

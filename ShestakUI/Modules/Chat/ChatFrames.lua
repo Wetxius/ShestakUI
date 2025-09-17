@@ -448,17 +448,17 @@ end
 ----------------------------------------------------------------------------------------
 --	Prevent reposition ChatFrame
 ----------------------------------------------------------------------------------------
-hooksecurefunc(ChatFrame1, "SetPoint", function(self, _, _, _, x)
-	if x ~= C.position.chat[4] then
-		self:ClearAllPoints()
-		self:SetSize(C.chat.width, C.chat.height)
-		if C.chat.background == true then
-			self:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5] + 4)
-		else
-			self:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5])
-		end
-	end
-end)
+-- hooksecurefunc(ChatFrame1, "SetPoint", function(self, _, _, _, x)	--BETA
+	-- if x ~= C.position.chat[4] then
+		-- self:ClearAllPoints()
+		-- self:SetSize(C.chat.width, C.chat.height)
+		-- if C.chat.background == true then
+			-- self:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5] + 4)
+		-- else
+			-- self:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5])
+		-- end
+	-- end
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Right chat frame
