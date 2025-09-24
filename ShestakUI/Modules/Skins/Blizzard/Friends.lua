@@ -84,11 +84,15 @@ local function LoadSkin()
 		WhoFrame.ScrollBar,
 		QuickJoinFrame.ScrollBar,
 		RecruitAFriendFrame.RecruitList.ScrollBar,
+		RecentAlliesFrame.List.ScrollBar,
 		FriendsFriendsFrame.ScrollBar
 	}
 
 	for i = 1, #scrollbars do
-		T.SkinScrollBar(scrollbars[i], true)
+		local scrollbar = scrollbars[i]
+		if scrollbar then
+			T.SkinScrollBar(scrollbar, true)
+		end
 	end
 
 	if not T.newPatch then
@@ -114,8 +118,8 @@ local function LoadSkin()
 	WhoFrameEditBox:SetPoint("BOTTOM", WhoFrame, "BOTTOM", 0, 31)
 	WhoFrameEditBox.backdrop:SetOutside(nil, 2, -2)
 
-	T.SkinEditBox(AddFriendNameEditBox)
-	AddFriendNameEditBox:SetHeight(AddFriendNameEditBox:GetHeight() - 5)
+	T.SkinEditBox(AddFriendNameEditBox, nil, AddFriendNameEditBox:GetHeight() - 5)
+	AddFriendNameEditBox.backdrop:SetOutside(nil, 4, 0)
 	T.SkinFrame(AddFriendFrame)
 	FriendsFriendsFrame:SetTemplate("Transparent")
 
