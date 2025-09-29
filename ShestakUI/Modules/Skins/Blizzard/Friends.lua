@@ -84,7 +84,6 @@ local function LoadSkin()
 		WhoFrame.ScrollBar,
 		QuickJoinFrame.ScrollBar,
 		RecruitAFriendFrame.RecruitList.ScrollBar,
-		RecentAlliesFrame.List.ScrollBar,
 		FriendsFriendsFrame.ScrollBar
 	}
 
@@ -93,6 +92,10 @@ local function LoadSkin()
 		if scrollbar then
 			T.SkinScrollBar(scrollbar, true)
 		end
+	end
+
+	if T.newPatch then
+		T.SkinScrollBar(RecentAlliesFrame.List.ScrollBar)
 	end
 
 	if not T.newPatch then
