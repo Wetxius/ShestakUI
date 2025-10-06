@@ -325,7 +325,7 @@ local OnMouseWheel = function(_, offset)
 	end
 end
 
-local chatInfo = CreateFrame("Frame", nil, UIParent)
+local chatInfo = CreateFrame("Frame", "MoverInfo", UIParent)
 chatInfo:SetFrameStrata("TOOLTIP")
 chatInfo:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -3, 1)
 chatInfo:SetSize(C.chat.width + 7, C.chat.height + 4)
