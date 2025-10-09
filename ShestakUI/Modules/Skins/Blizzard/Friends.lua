@@ -15,7 +15,6 @@ local function LoadSkin()
 		WhoFrameColumnHeader4,
 		AddFriendFrame,
 		FriendsFriendsFrame,
-		IgnoreListFrame,
 		FriendsFrameInset,
 		WhoFrameListInset,
 		WhoFrameEditBoxInset,
