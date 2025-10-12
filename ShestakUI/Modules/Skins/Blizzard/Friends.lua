@@ -93,13 +93,7 @@ local function LoadSkin()
 		end
 	end
 
-	if T.newPatch then
-		T.SkinScrollBar(RecentAlliesFrame.List.ScrollBar)
-	end
-
-	if not T.newPatch then
-		T.SkinScrollBar(IgnoreListFrame.ScrollBar)
-	end
+	T.SkinScrollBar(RecentAlliesFrame.List.ScrollBar)
 
 	-- Reposition buttons
 	WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -3, 0)
@@ -107,10 +101,6 @@ local function LoadSkin()
 	WhoFrameGroupInviteButton:SetPoint("BOTTOMRIGHT", WhoFrame, "BOTTOMRIGHT", -4, 4)
 	FriendsFrameAddFriendButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
 	FriendsFrameSendMessageButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
-	if not T.newPatch then
-		FriendsFrameIgnorePlayerButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
-		FriendsFrameUnsquelchButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
-	end
 
 	-- Resize Buttons
 	WhoFrameWhoButton:SetSize(WhoFrameWhoButton:GetWidth() + 7, WhoFrameWhoButton:GetHeight())
@@ -126,11 +116,9 @@ local function LoadSkin()
 	FriendsFriendsFrame:SetTemplate("Transparent")
 
 	-- Ignore
-	if T.newPatch then
-		T.SkinFrame(FriendsFrame.IgnoreListWindow)
-		FriendsFrame.IgnoreListWindow.UnignorePlayerButton:SkinButton()
-		T.SkinScrollBar(FriendsFrame.IgnoreListWindow.ScrollBar)
-	end
+	T.SkinFrame(FriendsFrame.IgnoreListWindow)
+	FriendsFrame.IgnoreListWindow.UnignorePlayerButton:SkinButton()
+	T.SkinScrollBar(FriendsFrame.IgnoreListWindow.ScrollBar)
 
 	-- Recruit a Friend
 	local SplashFrame = RecruitAFriendFrame.SplashFrame
@@ -202,13 +190,7 @@ local function LoadSkin()
 	end)
 
 	-- BNet Frame
-	if not T.newPatch then
-		FriendsFrameBattlenetFrame.BroadcastButton:SetAlpha(0)
-		FriendsFrameBattlenetFrame.BroadcastButton:ClearAllPoints()
-		FriendsFrameBattlenetFrame.BroadcastButton:SetAllPoints(FriendsFrameBattlenetFrame)
-	end
-
-	if T.newPatch then
+	do
 		local b = FriendsFrameBattlenetFrame.ContactsMenuButton
 		b:SkinButton()
 		b:SetSize(25, 25)
@@ -300,10 +282,8 @@ local function LoadSkin()
 		T.SkinTab(_G["FriendsTabHeaderTab"..i], true)
 	end
 
-	if T.newPatch then
-		for _, tab in next, {FriendsTabHeader.TabSystem:GetChildren()} do
-			tab:StripTextures()
-		end
+	for _, tab in next, {FriendsTabHeader.TabSystem:GetChildren()} do
+		tab:StripTextures()
 	end
 end
 

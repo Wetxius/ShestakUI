@@ -17,11 +17,7 @@ local function LoadSkin()
 	T.SkinDropDownBox(TimeManagerAlarmTimeFrame.MinuteDropdown, 79)
 	T.SkinDropDownBox(TimeManagerAlarmTimeFrame.AMPMDropdown, 70)
 
-	if T.newPatch then
-		T.SkinEditBox(TimeManagerAlarmMessageEditBox)
-	else
-		T.SkinEditBox(TimeManagerAlarmMessageEditBox, nil, TimeManagerAlarmMessageEditBox:GetHeight() - 5)
-	end
+	T.SkinEditBox(TimeManagerAlarmMessageEditBox)
 
 	T.SkinCheckBox(TimeManagerAlarmEnabledButton)
 	T.SkinCheckBox(TimeManagerMilitaryTimeCheck)
