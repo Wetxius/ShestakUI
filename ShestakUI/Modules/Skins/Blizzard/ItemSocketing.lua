@@ -52,7 +52,7 @@ local function LoadSkin()
 
 	hooksecurefunc("ItemSocketingFrame_Update", function()
 		for i, socket in ipairs(_G.ItemSocketingFrame.Sockets) do
-			local gemColor = GetSocketTypes(i)
+			local gemColor = C_ItemSocketInfo.GetSocketTypes(i)
 			local color = GEM_TYPE_INFO[gemColor]
 			if color then
 				socket:SetBackdropBorderColor(color.r, color.g, color.b)
