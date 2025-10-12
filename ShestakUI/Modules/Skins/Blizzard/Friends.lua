@@ -216,6 +216,19 @@ local function LoadSkin()
 
 	FriendsFrame:SetTemplate("Transparent")
 
+	local InviteAtlas = {
+		["friendslist-invitebutton-horde-normal"] = [[Interface\FriendsFrame\PlusManz-Horde]],
+		["friendslist-invitebutton-alliance-normal"] = [[Interface\FriendsFrame\PlusManz-Alliance]],
+		["friendslist-invitebutton-default-normal"] = [[Interface\FriendsFrame\PlusManz-PlusManz]]
+	}
+
+	local function HandleInviteTex(self, atlas)
+		local tex = InviteAtlas[atlas]
+		if tex then
+			self.inv:SetTexture(tex)
+		end
+	end
+
 	local function ReskinFriendButton(button)
 		if button.styled then return end
 		local icon = button.gameIcon
@@ -227,7 +240,7 @@ local function LoadSkin()
 
 		icon:SetParent(icon.b)
 		icon:SetSize(22, 22)
-		icon:SetTexCoord(.17, .83, .17, .83)
+		icon:SetTexCoord(0, 1, 0, 1)
 		icon:ClearAllPoints()
 		icon:SetPoint("RIGHT", button, "RIGHT", -27, 0)
 		icon.SetPoint = T.dummy
@@ -240,9 +253,11 @@ local function LoadSkin()
 		button.travelPassButton:SetPoint("TOPRIGHT", -1, -2)
 
 		button.inv = button.travelPassButton:CreateTexture(nil, "OVERLAY", nil, 7)
-		button.inv:SetTexture([[Interface\FriendsFrame\PlusManz-PlusManz]])
 		button.inv:SetPoint("TOPRIGHT", 1, -4)
 		button.inv:SetSize(22, 22)
+
+		button.travelPassButton.NormalTexture.inv = button.inv
+		hooksecurefunc(button.travelPassButton.NormalTexture, "SetAtlas", HandleInviteTex)
 
 		button.background:Hide()
 		button.styled = true
