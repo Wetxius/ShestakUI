@@ -193,7 +193,7 @@ load:SetScript("OnEvent", function(self)
 	local t = ColorPickerFrame:CreateTexture("ColorPPCopyColorSwatch")
 	local w, h = ColorPickerFrame.Content.ColorSwatchCurrent:GetSize()
 	t:SetSize(w, h)
-	t:SetColorTexture(0, 0, 0)
+	t:SetColorTexture(0.01, 0.01, 0.01)
 	t:Hide()
 	t:SetPoint("LEFT", ColorPickerFrame.Content.ColorSwatchCurrent, "RIGHT", 2, -13)
 

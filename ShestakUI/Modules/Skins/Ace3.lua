@@ -171,7 +171,7 @@ AceGUI.RegisterAsWidget = function(self, widget)
 		colorSwatch:SetInside(frame.backdrop)
 
 		if colorSwatch.background then
-			colorSwatch.background:SetColorTexture(0, 0, 0, 0)
+			colorSwatch.background:SetColorTexture(0.01, 0.01, 0.01, 0)
 		end
 
 		if colorSwatch.checkers then

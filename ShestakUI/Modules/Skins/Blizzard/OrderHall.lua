@@ -38,11 +38,11 @@ local function LoadSkin()
 			local alpha = child.AlphaIconOverlay:GetAlpha()
 			if alpha <= 0.5 then -- talentAvailability
 				backdrop:SetBackdropBorderColor(0.5, 0.5, 0.5) -- [border = grey, shadow x2]
-				child.darkOverlay:SetColorTexture(0, 0, 0, 0.50)
+				child.darkOverlay:SetColorTexture(0.01, 0.01, 0.01, 0.50)
 				child.darkOverlay:Show()
 			elseif alpha <= 0.7 then -- isBeingResearched
 				backdrop:SetBackdropBorderColor(0, 1, 1) -- [border = teal, shadow x1]
-				child.darkOverlay:SetColorTexture(0, 0, 0, 0.25)
+				child.darkOverlay:SetColorTexture(0.01, 0.01, 0.01, 0.25)
 				child.darkOverlay:Show()
 			end
 		elseif atlas:find("green") then
@@ -53,7 +53,7 @@ local function LoadSkin()
 			child.darkOverlay:Hide()
 		else
 			backdrop:SetBackdropBorderColor(0.2, 0.2, 0.2) -- [border = dark grey, shadow x3]
-			child.darkOverlay:SetColorTexture(0, 0, 0, 0.75)
+			child.darkOverlay:SetColorTexture(0.01, 0.01, 0.01, 0.75)
 			child.darkOverlay:Show()
 		end
 	end

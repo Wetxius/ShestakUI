@@ -331,7 +331,7 @@ local function LoadSkin()
 
 		local cover = frame.PortraitFrame.PortraitRingCover
 		if cover then
-			cover:SetColorTexture(0, 0, 0)
+			cover:SetColorTexture(0.01, 0.01, 0.01)
 			cover:SetAllPoints(frame.squareBG)
 		end
 

@@ -142,7 +142,7 @@ local function LoadSkin()
 	-- Icon in upper right corner of character frame
 	CharacterFrame:SetTemplate("Transparent")
 	CharacterFramePortrait:Kill()
-	CharacterModelFrameBackgroundOverlay:SetColorTexture(0, 0, 0)
+	CharacterModelFrameBackgroundOverlay:SetColorTexture(0.01, 0.01, 0.01)
 	CharacterModelScene:CreateBackdrop("Default")
 	CharacterModelScene.backdrop:SetPoint("TOPLEFT", -3, 4)
 	CharacterModelScene.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
