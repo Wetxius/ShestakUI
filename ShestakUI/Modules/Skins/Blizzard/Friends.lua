@@ -17,10 +17,6 @@ local function LoadSkin()
 		FriendsFriendsFrame,
 		FriendsFrameInset,
 		WhoFrameListInset,
-		WhoFrameEditBoxInset,
-		LFRQueueFrameListInset,
-		LFRQueueFrameRoleInset,
-		LFRQueueFrameCommentInset,
 		FriendsFrameBattlenetFrame,
 		BattleTagInviteFrame,
 		QuickJoinRoleSelectionFrame,
@@ -196,13 +192,9 @@ local function LoadSkin()
 		b:SetSize(23, 23)
 	end
 
-	FriendsFrameBattlenetFrame:GetRegions():Hide()
-
 	FriendsFrameBattlenetFrame.BroadcastFrame:CreateBackdrop("Transparent")
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("TOPLEFT", 6, 1)
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("BOTTOMRIGHT", -4, 1)
-
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border:Hide()
 
 	T.SkinEditBox(FriendsFrameBattlenetFrame.BroadcastFrame.EditBox, nil, 18)
 
@@ -285,7 +277,7 @@ local function LoadSkin()
 	T.SkinCloseButton(FriendsFrameCloseButton)
 	T.SkinDropDownBox(WhoFrameDropdown, 150)
 	WhoFrameColumnHeader2:SetHeight(20)
-	T.SkinDropDownBox(FriendsFrameStatusDropdown, 70)
+	T.SkinDropDownBox(FriendsFrameStatusDropdown)
 	T.SkinDropDownBox(FriendsFriendsFrameDropdown)
 
 	FriendsFrameStatusDropdown:ClearAllPoints()
