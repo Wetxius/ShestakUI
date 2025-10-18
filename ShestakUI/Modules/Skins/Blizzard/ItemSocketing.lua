@@ -16,22 +16,15 @@ local function LoadSkin()
 	ItemSocketingDescription:DisableDrawLayer("BORDER")
 	ItemSocketingDescription:DisableDrawLayer("BACKGROUND")
 
-	for i = 1, MAX_NUM_SOCKETS do
-		local button = _G["ItemSocketingSocket"..i]
-		local button_bracket = _G["ItemSocketingSocket"..i.."BracketFrame"]
-		local button_bg = _G["ItemSocketingSocket"..i.."Background"]
-		local button_icon = _G["ItemSocketingSocket"..i.."IconTexture"]
-
+	local Container = ItemSocketingFrame.SocketingContainer
+	for _, button in ipairs(Container.SocketFrames) do
 		button:StripTextures()
 		button:StyleButton()
 		button:SetTemplate("Overlay")
-		button_bracket:Kill()
-		button_bg:Kill()
+		button.BracketFrame:Kill()
+		button.Background:Kill()
 
-		button_icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		button_icon:ClearAllPoints()
-		button_icon:SetPoint("TOPLEFT", 2, -2)
-		button_icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		button.Icon:SkinIcon()
 	end
 
 	local GEM_TYPE_INFO = {
@@ -51,7 +44,7 @@ local function LoadSkin()
 	}
 
 	hooksecurefunc("ItemSocketingFrame_Update", function()
-		for i, socket in ipairs(_G.ItemSocketingFrame.Sockets) do
+		for i, socket in ipairs(Container.SocketFrames) do
 			local gemColor = C_ItemSocketInfo.GetSocketTypes(i)
 			local color = GEM_TYPE_INFO[gemColor]
 			if color then
@@ -65,9 +58,9 @@ local function LoadSkin()
 	end)
 
 	ItemSocketingFramePortrait:Kill()
-	ItemSocketingSocketButton:ClearAllPoints()
-	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame.backdrop, "BOTTOMRIGHT", -5, 5)
-	ItemSocketingSocketButton:SkinButton()
+	Container.ApplySocketsButton:ClearAllPoints()
+	Container.ApplySocketsButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame.backdrop, "BOTTOMRIGHT", -5, 5)
+	Container.ApplySocketsButton:SkinButton()
 	T.SkinCloseButton(ItemSocketingFrameCloseButton, ItemSocketingFrame.backdrop)
 end
 
