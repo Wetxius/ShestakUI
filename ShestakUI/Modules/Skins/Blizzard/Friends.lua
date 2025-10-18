@@ -193,12 +193,16 @@ local function LoadSkin()
 	do
 		local b = FriendsFrameBattlenetFrame.ContactsMenuButton
 		b:SkinButton()
-		b:SetSize(25, 25)
+		b:SetSize(23, 23)
 	end
+
+	FriendsFrameBattlenetFrame:GetRegions():Hide()
 
 	FriendsFrameBattlenetFrame.BroadcastFrame:CreateBackdrop("Transparent")
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("TOPLEFT", 6, 1)
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("BOTTOMRIGHT", -4, 1)
+
+	FriendsFrameBattlenetFrame.BroadcastFrame.Border:Hide()
 
 	T.SkinEditBox(FriendsFrameBattlenetFrame.BroadcastFrame.EditBox, nil, 18)
 
@@ -287,6 +291,8 @@ local function LoadSkin()
 	FriendsFrameStatusDropdown:ClearAllPoints()
 	FriendsFrameStatusDropdown:SetPoint("TOPLEFT", FriendsFrame, "TOPLEFT", 22, -27)
 	FriendsFrameStatusDropdown.Text:SetFont(C.media.normal_font, 12, "")
+	FriendsFrameStatusDropdown.Text:ClearAllPoints()
+	FriendsFrameStatusDropdown.Text:SetPoint("LEFT", FriendsFrameStatusDropdown, "LEFT", 7, -1)
 
 	-- Bottom Tabs
 	for i = 1, 4 do
