@@ -4,6 +4,7 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Hide Blizzard ActionBars stuff(by Tukz)
 ----------------------------------------------------------------------------------------
+local MainMenuBar = MainMenuBar and MainMenuBar or MainActionBar -- BETA
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
