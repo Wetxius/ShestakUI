@@ -20,6 +20,12 @@ local function LoadSkin()
 	frame.UpgradeItemButton.icon:SetInside()
 	frame.UpgradeItemButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
+	hooksecurefunc(ItemUpgradeFrame, "UpdateUpgradeItemInfo", function(self)
+		if self.upgradeInfo then
+			self.UpgradeItemButton:SetPushedTexture(0)
+		end
+	end)
+
 	T.SkinDropDownBox(frame.ItemInfo.Dropdown)
 
 	frame.UpgradeButton:SkinButton(true)
