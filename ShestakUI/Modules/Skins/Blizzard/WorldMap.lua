@@ -238,6 +238,7 @@ local function LoadSkin()
 		tab.SelectedTexture:SetPoint("BOTTOMRIGHT", -4, 4)
 		tab.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
 
+		-- Hover texture
 		for _, region in next, {tab:GetRegions()} do
 			if region:IsObjectType("Texture") then
 				if region:GetAtlas() == "QuestLog-Tab-side-Glow-hover" then

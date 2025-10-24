@@ -47,6 +47,7 @@
 	<Script file="GuildControl.lua"/>
 	<Script file="GuildRegistrar.lua"/>
 	<Script file="Help.lua"/>
+	<Script file="Housing.lua"/>
 	<Script file="Inspect.lua"/>
 	<Script file="Islands.lua"/>
 	<Script file="ItemInteraction.lua"/>
