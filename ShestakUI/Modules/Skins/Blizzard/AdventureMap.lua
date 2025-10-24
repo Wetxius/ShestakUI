@@ -11,10 +11,9 @@ local function LoadSkin()
 
 	local function SkinRewards()
 		local pool = _G.AdventureMapQuestChoiceDialog.rewardPool
-		local objects = pool and pool.activeObjects
-		if not objects then return end
+		if not pool or not pool.EnumerateActive then return end
 
-		for reward in pairs(objects) do
+		for reward in pool:EnumerateActive() do
 			if not reward.isSkinned then
 				reward.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				reward.ItemNameBG:Hide()
