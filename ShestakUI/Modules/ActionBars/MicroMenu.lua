@@ -20,6 +20,7 @@ local MICRO_BUTTONS = {
 	"PlayerSpellsMicroButton",
 	"AchievementMicroButton",
 	"QuestLogMicroButton",
+	"HousingMicroButton",
 	"GuildMicroButton",
 	"LFDMicroButton",
 	"EJMicroButton",
@@ -28,6 +29,10 @@ local MICRO_BUTTONS = {
 	"MainMenuMicroButton",
 	"HelpMicroButton",
 }
+
+if not T.newPatch then
+	tremove(MICRO_BUTTONS, "HousingMicroButton")
+end
 
 for i, button in pairs(MICRO_BUTTONS) do
 	local bu = _G[button]
