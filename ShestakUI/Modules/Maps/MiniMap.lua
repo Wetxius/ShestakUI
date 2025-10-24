@@ -319,6 +319,16 @@ local micromenu = {
 	end},
 }
 
+if T.newPatch then
+	tinsert(micromenu, {text = HOUSING_MICRO_BUTTON, notCheckable = 1, func = function()
+		if Kiosk.IsEnabled() then
+			return
+		end
+
+		HousingFramesUtil.ToggleHousingDashboard()
+	end})
+end
+
 if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() then
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
 end
