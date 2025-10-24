@@ -39,6 +39,9 @@ local function LoadSkin()
 		b:SetPoint("TOPLEFT", item_bar, "TOPLEFT", 4, -4)
 
 		b.IconBorder:SetAlpha(0)
+		if T.newPatch then
+			b.IconOverlay:SetAlpha(0) -- Housing decor (maybe change border color instead?)
+		end
 
 		t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		t:ClearAllPoints()
