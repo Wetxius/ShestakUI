@@ -92,6 +92,12 @@ local function SetChatStyle(frame)
 	_G[format("ChatFrame%sEditBoxMid", id)]:Kill()
 	_G[format("ChatFrame%sEditBoxRight", id)]:Kill()
 
+	if T.newPatch then
+		_G[format("ChatFrame%sEditBoxFocusLeft", id)]:SetTexture("")
+		_G[format("ChatFrame%sEditBoxFocusMid", id)]:SetTexture("")
+		_G[format("ChatFrame%sEditBoxFocusRight", id)]:SetTexture("")
+	end
+
 	_G[format("ChatFrame%sTabGlow", id)]:Kill()
 
 	-- Kill scroll bar
@@ -133,7 +139,7 @@ local function SetChatStyle(frame)
 		end
 
 		-- Update border color according where we talk
-		hooksecurefunc("ChatEdit_UpdateHeader", function()
+		hooksecurefunc("ChatEdit_UpdateHeader", function() -- FIXME not work in 11.2.7
 			local chatType = _G[chat.."EditBox"]:GetAttribute("chatType")
 			if not chatType then return end
 
