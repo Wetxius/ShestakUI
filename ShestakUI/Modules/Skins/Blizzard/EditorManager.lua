@@ -21,6 +21,8 @@ local function LoadSkin()
 
 	T.SkinSliderStep(frame.GridSpacingSlider.Slider, true)
 
+	T.SkinScrollBar(frame.AccountSettings.SettingsContainer.ScrollBar)
+
 	for _, frame in next, {frame.AccountSettings.SettingsContainer.ScrollChild.BasicOptionsContainer:GetChildren()} do
 		if frame.Button then
 			T.SkinCheckBox(frame.Button, 30)
