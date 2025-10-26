@@ -329,7 +329,7 @@ if T.newPatch then
 	end})
 end
 
-if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() then
+if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() and C_StorePublic.IsEnabled() then
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
 end
 
