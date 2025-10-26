@@ -507,9 +507,6 @@ local function LoadSkin()
 	WardrobeTransmogFrame.ModelScene.ClearAllPendingButton:SkinButton()
 	T.SkinCheckBox(WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox)
 
-	WardrobeCollectionFrame.FilterButton:SetPoint("TOPLEFT", WardrobeCollectionFrameSearchBox, "TOPRIGHT", 5, 2)
-	WardrobeCollectionFrame.FilterButton:SetWidth(90)
-
 	for i = 1, #WardrobeTransmogFrame.SlotButtons do
 		local slot = WardrobeTransmogFrame.SlotButtons[i]
 		local icon = slot.Icon
@@ -627,9 +624,9 @@ local function LoadSkin()
 		end
 	end)
 
-	for i = 1, #WardrobeCollectionFrame.ItemsCollectionFrame.Models do
-		local model = WardrobeCollectionFrame.ItemsCollectionFrame.Models[i]
+	local function SkinModels(model)
 		model.Border:SetAlpha(0)
+		model.TransmogStateTexture:SetAlpha(0)
 		local bg = CreateFrame("Frame", nil, model)
 		bg:CreateBackdrop("Overlay")
 		bg.backdrop:SetPoint("TOPLEFT", model, "TOPLEFT", -2, 2)
@@ -638,7 +635,7 @@ local function LoadSkin()
 			if region:IsObjectType("Texture") then -- check for hover glow
 				local texture, regionName = region:GetTexture(), region:GetDebugName()
 				if texture == 1569530 or (texture == 1116940 and not strfind(regionName, "SlotInvalidTexture") and not strfind(regionName, "DisabledOverlay")) then
-					region:SetColorTexture(1, 1, 1, 0.3)
+					region:SetColorTexture(1, 1, 1, 0.2)
 					region:SetBlendMode("ADD")
 					region:SetInside(bg.backdrop)
 				end
@@ -650,6 +647,8 @@ local function LoadSkin()
 				color = {0.3, 0.3, 1}
 			elseif texture == "transmog-wardrobe-border-unusable" then
 				color = {0.8, 0, 0}
+			elseif model.TransmogStateTexture:IsShown() then
+				color = {1, 0.7, 1}
 			else
 				color = C.media.border_color
 			end
@@ -657,12 +656,14 @@ local function LoadSkin()
 		end)
 	end
 
+	for i = 1, #WardrobeCollectionFrame.ItemsCollectionFrame.Models do
+		local model = WardrobeCollectionFrame.ItemsCollectionFrame.Models[i]
+		SkinModels(model)
+	end
+
 	for i = 1, #WardrobeCollectionFrame.SetsTransmogFrame.Models do
 		local model = WardrobeCollectionFrame.SetsTransmogFrame.Models[i]
-		model.Border:SetAlpha(0)
-		local bg = CreateFrame("Frame", nil, model)
-		bg:CreateBackdrop("Overlay")
-		bg.backdrop:SetOutside(model, 3, 3)
+		SkinModels(model)
 	end
 
 	local function SkinSetItemButtons(self)
