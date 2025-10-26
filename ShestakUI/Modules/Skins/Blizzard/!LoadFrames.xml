@@ -26,6 +26,7 @@
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
 	<Script file="Contribution.lua"/>
+	<Script file="CooldownViewer.lua"/>
 	<Script file="CovenantPreview.lua"/>
 	<Script file="CovenantRenown.lua"/>
 	<Script file="CovenantSanctum.lua"/>
