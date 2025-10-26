@@ -42,6 +42,24 @@ local function LoadSkin()
 	content.Categories:StripTextures()
 	content.Categories.Background:SetAlpha(0)
 
+
+	hooksecurefunc(content.OptionsContainer.ScrollBox, "Update", function(frame)
+		for _, button in next, {frame.ScrollTarget:GetChildren()} do
+			if not button.isSkinned then
+				button:GetRegions():Hide()
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", 2, -2)
+				button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+				button:StyleButton(nil, 4)
+
+				button.HoverBackground:SetAlpha(0)
+
+				button.isSkinned = true
+			end
+		end
+	end)
+
+
 	T.SkinEditBox(content.SearchBox)
 	content.SearchBox.backdrop:SetOutside(nil, 2, -4)
 	T.SkinFilter(content.Filters.FilterDropdown, true)
