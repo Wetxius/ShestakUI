@@ -51,6 +51,7 @@ ChatFrameToggleVoiceMuteButton:Kill()
 local function SetChatStyle(frame)
 	local id = frame:GetID()
 	local chat = frame:GetName()
+	local editBox = _G[chat.."EditBox"]
 
 	_G[chat]:SetFrameLevel(5)
 
@@ -61,9 +62,9 @@ local function SetChatStyle(frame)
 	_G[chat]:SetFading(false)
 
 	-- Move the chat edit box
-	_G[chat.."EditBox"]:ClearAllPoints()
-	_G[chat.."EditBox"]:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", -10, 23)
-	_G[chat.."EditBox"]:SetPoint("BOTTOMRIGHT", ChatFrame1, "TOPRIGHT", 11, 23)
+	editBox:ClearAllPoints()
+	editBox:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", -10, 23)
+	editBox:SetPoint("BOTTOMRIGHT", ChatFrame1, "TOPRIGHT", 11, 23)
 
 	-- Hide textures
 	for j = 1, #CHAT_FRAME_TEXTURES do
@@ -105,32 +106,32 @@ local function SetChatStyle(frame)
 	frame.ScrollToBottomButton:Kill()
 
 	-- Kill off editbox artwork
-	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions())
+	local a, b, c = select(6, editBox:GetRegions())
 	a:Kill() b:Kill() c:Kill()
 
 	-- Kill bubble tex/glow
 	if _G[chat.."Tab"].conversationIcon then _G[chat.."Tab"].conversationIcon:Kill() end
 
 	-- Disable alt key usage
-	_G[chat.."EditBox"]:SetAltArrowKeyMode(false)
+	editBox:SetAltArrowKeyMode(false)
 
 	-- Hide editbox on login
-	_G[chat.."EditBox"]:Hide()
+	editBox:Hide()
 
 	-- Script to hide editbox instead of fading editbox to 0.35 alpha via IM Style
-	_G[chat.."EditBox"]:HookScript("OnEditFocusGained", function(self) self:Show() end)
-	_G[chat.."EditBox"]:HookScript("OnEditFocusLost", function(self) if self:GetText() == "" then self:Hide() end end)
+	editBox:HookScript("OnEditFocusGained", function(self) self:Show() end)
+	editBox:HookScript("OnEditFocusLost", function(self) if self:GetText() == "" then self:Hide() end end)
 
 	-- Hide edit box every time we click on a tab
-	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
+	_G[chat.."Tab"]:HookScript("OnClick", function() editBox:Hide() end)
 
 	-- Create our own texture for edit box
 	if C.chat.background == true and C.chat.tabs_mouseover ~= true then
-		local EditBoxBackground = CreateFrame("Frame", "ChatEditBoxBackground", _G[chat.."EditBox"])
-		EditBoxBackground:CreatePanel("Transparent", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
+		local EditBoxBackground = CreateFrame("Frame", "ChatEditBoxBackground", editBox)
+		EditBoxBackground:CreatePanel("Transparent", 1, 1, "LEFT", editBox, "LEFT", 0, 0)
 		EditBoxBackground:ClearAllPoints()
-		EditBoxBackground:SetPoint("TOPLEFT", _G[chat.."EditBox"], "TOPLEFT", 7, -5)
-		EditBoxBackground:SetPoint("BOTTOMRIGHT", _G[chat.."EditBox"], "BOTTOMRIGHT", -7, 4)
+		EditBoxBackground:SetPoint("TOPLEFT", editBox, "TOPLEFT", 7, -5)
+		EditBoxBackground:SetPoint("BOTTOMRIGHT", editBox, "BOTTOMRIGHT", -7, 4)
 		EditBoxBackground:SetFrameStrata("LOW")
 		EditBoxBackground:SetFrameLevel(1)
 
@@ -139,22 +140,41 @@ local function SetChatStyle(frame)
 		end
 
 		-- Update border color according where we talk
-		hooksecurefunc("ChatEdit_UpdateHeader", function() -- FIXME not work in 11.2.7
-			local chatType = _G[chat.."EditBox"]:GetAttribute("chatType")
-			if not chatType then return end
+		if T.newPatch then
+			hooksecurefunc(editBox, "UpdateHeader", function()
+				local chatType = editBox:GetAttribute("chatType")
+				if not chatType then return end
 
-			local chanTarget = _G[chat.."EditBox"]:GetAttribute("channelTarget")
-			local chanName = chanTarget and GetChannelName(chanTarget)
-			if chanName and chatType == "CHANNEL" then
-				if chanName == 0 then
-					colorize(unpack(C.media.border_color))
+				local chanTarget = editBox:GetAttribute("channelTarget")
+				local chanName = chanTarget and GetChannelName(chanTarget)
+				if chanName and chatType == "CHANNEL" then
+					if chanName == 0 then
+						colorize(unpack(C.media.border_color))
+					else
+						colorize(ChatTypeInfo[chatType..chanName].r, ChatTypeInfo[chatType..chanName].g, ChatTypeInfo[chatType..chanName].b)
+					end
 				else
-					colorize(ChatTypeInfo[chatType..chanName].r, ChatTypeInfo[chatType..chanName].g, ChatTypeInfo[chatType..chanName].b)
+					colorize(ChatTypeInfo[chatType].r, ChatTypeInfo[chatType].g, ChatTypeInfo[chatType].b)
 				end
-			else
-				colorize(ChatTypeInfo[chatType].r, ChatTypeInfo[chatType].g, ChatTypeInfo[chatType].b)
-			end
-		end)
+			end)
+		else
+			hooksecurefunc("ChatEdit_UpdateHeader", function()
+				local chatType = _G[chat.."EditBox"]:GetAttribute("chatType")
+				if not chatType then return end
+
+				local chanTarget = _G[chat.."EditBox"]:GetAttribute("channelTarget")
+				local chanName = chanTarget and GetChannelName(chanTarget)
+				if chanName and chatType == "CHANNEL" then
+					if chanName == 0 then
+						colorize(unpack(C.media.border_color))
+					else
+						colorize(ChatTypeInfo[chatType..chanName].r, ChatTypeInfo[chatType..chanName].g, ChatTypeInfo[chatType..chanName].b)
+					end
+				else
+					colorize(ChatTypeInfo[chatType].r, ChatTypeInfo[chatType].g, ChatTypeInfo[chatType].b)
+				end
+			end)
+		end
 	end
 
 	-- Rename combat log tab
