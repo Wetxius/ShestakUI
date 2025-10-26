@@ -281,6 +281,17 @@ local function LoadSkin()
 	end
 
 	TextToSpeechDefaultButton:SkinButton()
+	TextToSpeechFramePanelContainer.PlaySampleButton:SkinButton()
+	TextToSpeechFramePanelContainer.PlaySampleAlternateButton:SkinButton()
+
+	T.SkinDropDownBox(TextToSpeechFramePanelContainer.TtsVoiceDropdown)
+	T.SkinDropDownBox(TextToSpeechFramePanelContainer.TtsVoiceAlternateDropdown)
+
+	T.SkinSlider(TextToSpeechFramePanelContainer.AdjustRateSlider.Slider)
+	T.SkinSlider(TextToSpeechFramePanelContainer.AdjustVolumeSlider.Slider)
+
+	T.SkinScrollBar(ChatConfigTextToSpeechSettings.ScrollBar)
+	T.SkinScrollBar(ChatConfigTextToSpeechMessageSettingsScroll.ScrollBar)
 
 	hooksecurefunc("TextToSpeechFrame_UpdateMessageCheckboxes", function(frame)
 		local checkBoxTable = frame.checkBoxTable
