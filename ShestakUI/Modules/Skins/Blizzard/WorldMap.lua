@@ -224,30 +224,7 @@ local function LoadSkin()
 		QuestMapFrame.EventsTab,
 	}
 	for _, tab in pairs(tabs) do
-		tab.Background:SetAlpha(0)
-
-		tab:SetSize(34, 44)
-
-		tab:CreateBackdrop("Overlay")
-		tab.backdrop:SetPoint("TOPLEFT", 2, -2)
-		tab.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
-
-		tab.SelectedTexture:SetDrawLayer("ARTWORK")
-		tab.SelectedTexture:ClearAllPoints()
-		tab.SelectedTexture:SetPoint("TOPLEFT", 4, -4)
-		tab.SelectedTexture:SetPoint("BOTTOMRIGHT", -4, 4)
-		tab.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
-
-		-- Hover texture
-		for _, region in next, {tab:GetRegions()} do
-			if region:IsObjectType("Texture") then
-				if region:GetAtlas() == "QuestLog-Tab-side-Glow-hover" then
-					region:SetPoint("TOPLEFT", 4, -4)
-					region:SetPoint("BOTTOMRIGHT", -4, 4)
-					region:SetColorTexture(1, 1, 1, 0.3)
-				end
-			end
-		end
+		T.SkinFrameTab(tab)
 	end
 
 	QuestMapFrame.QuestsTab:ClearAllPoints()

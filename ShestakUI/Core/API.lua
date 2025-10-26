@@ -1152,6 +1152,37 @@ function T.SkinHelpBox(frame)
 	end
 end
 
+function T.SkinFrameTab(frame)
+	frame:SetSize(34, 44)
+
+	frame:CreateBackdrop("Overlay")
+	frame.backdrop:SetPoint("TOPLEFT", 2, -2)
+	frame.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+
+	if frame.Background then
+		frame.Background:SetAlpha(0)
+	end
+
+	if frame.SelectedTexture then
+		frame.SelectedTexture:SetDrawLayer("ARTWORK")
+		frame.SelectedTexture:ClearAllPoints()
+		frame.SelectedTexture:SetPoint("TOPLEFT", 4, -4)
+		frame.SelectedTexture:SetPoint("BOTTOMRIGHT", -4, 4)
+		frame.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+	end
+
+	-- Hover texture
+	for _, region in next, {frame:GetRegions()} do
+		if region:IsObjectType("Texture") then
+			if region:GetAtlas() == "QuestLog-Tab-side-Glow-hover" then
+				region:SetPoint("TOPLEFT", 4, -4)
+				region:SetPoint("BOTTOMRIGHT", -4, 4)
+				region:SetColorTexture(1, 1, 1, 0.3)
+			end
+		end
+	end
+end
+
 function T.SkinFrame(frame, backdrop, x, y)
 	local name = frame and frame.GetName and frame:GetName()
 	local portraitFrame = name and _G[name.."Portrait"] or frame.Portrait or frame.portrait

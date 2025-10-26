@@ -2,7 +2,7 @@ local T, C, L = unpack(ShestakUI)
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
---	Delves skin
+--	Housing skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	local frame = _G.HousingDashboardFrame
