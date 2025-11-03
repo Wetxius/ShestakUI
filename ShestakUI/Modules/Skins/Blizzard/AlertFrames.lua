@@ -865,6 +865,42 @@ local function LoadSkin()
 	hooksecurefunc(NewCosmeticAlertFrameSystem, "setUpFunction", SkinNewPetMountAlert)
 	hooksecurefunc(NewWarbandSceneAlertSystem, "setUpFunction", SkinNewPetMountAlert)
 
+	local function SkinHousingItemAlert(frame)
+		frame:SetAlpha(1)
+		if not frame.hooked then
+			hooksecurefunc(frame, "SetAlpha", forceAlpha)
+			frame.hooked = true
+		end
+
+		if not frame.backdrop then
+			frame:CreateBackdrop("Transparent")
+			frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 1, -6)
+			frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -5, 6)
+		end
+
+		frame.Background:Kill()
+		frame:DisableDrawLayer("BORDER")
+		frame.Glow:Kill()
+		frame.LightRays:Kill()
+		frame.LightRays2:Kill()
+
+		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		frame.Icon:SetDrawLayer("BORDER", 5)
+		frame.Icon:ClearAllPoints()
+		frame.Icon:SetPoint("LEFT", frame.backdrop, 9, 0)
+		frame.Icon:SetSize(50, 50)
+
+		-- Icon border
+		if not frame.Icon.b then
+			frame.Icon.b = CreateFrame("Frame", nil, frame)
+			frame.Icon.b:SetTemplate("Default")
+			frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
+			frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
+			frame.Icon:SetParent(frame.Icon.b)
+		end
+	end
+	hooksecurefunc(HousingItemEarnedAlertFrameSystem, "setUpFunction", SkinHousingItemAlert)
+
 	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
 		if frame.RewardFrames then
 			for _, button in next, frame.RewardFrames do

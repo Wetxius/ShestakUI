@@ -320,6 +320,13 @@ SlashCmdList.TEST_ACHIEVEMENT = function()
 	NewRuneforgePowerAlertSystem:AddAlert(204)
 	NewCosmeticAlertFrameSystem:AddAlert(204)
 	NewWarbandSceneAlertSystem:AddAlert(1)
+	do
+		local rewardData = {}
+		rewardData.itemType = 2
+		rewardData.itemName = "Test"
+		-- rewardData.icon = 7252953
+		HousingItemEarnedAlertFrameSystem:AddAlert(rewardData)
+	end
 	-- BonusRollFrame_StartBonusRoll(242969, 'test', 20, 515, 15, 14)
 end
 SLASH_TEST_ACHIEVEMENT1 = "/tach"
