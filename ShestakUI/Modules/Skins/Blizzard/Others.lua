@@ -279,6 +279,23 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 					if frame.ScrollBar then
 						T.SkinScrollBar(frame.ScrollBar)
 					end
+
+					for i = 1, frame:GetNumChildren() do
+						local child = select(i, frame:GetChildren())
+
+						local level = {
+							child.MinLevel,
+							child.MaxLevel
+						}
+
+						for i = 1, #level do
+							local frame = level[i]
+							if frame then
+								T.SkinEditBox(frame)
+								frame.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
+							end
+						end
+					end
 				end
 			end
 
