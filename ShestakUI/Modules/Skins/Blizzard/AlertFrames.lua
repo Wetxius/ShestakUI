@@ -899,7 +899,9 @@ local function LoadSkin()
 			frame.Icon:SetParent(frame.Icon.b)
 		end
 	end
-	hooksecurefunc(HousingItemEarnedAlertFrameSystem, "setUpFunction", SkinHousingItemAlert)
+	if T.newPatch then
+		hooksecurefunc(HousingItemEarnedAlertFrameSystem, "setUpFunction", SkinHousingItemAlert)
+	end
 
 	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
 		if frame.RewardFrames then
