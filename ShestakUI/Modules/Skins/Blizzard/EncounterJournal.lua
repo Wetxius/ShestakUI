@@ -82,12 +82,9 @@ local function LoadSkin()
 	end
 
 	-- TutorialsFrame
-	if T.newPatch then
-		T.SkinTab(EncounterJournal.TutorialsTab)
+	T.SkinTab(EncounterJournal.TutorialsTab)
 
-		EncounterJournal.TutorialsFrame.Contents.StartButton:SkinButton()
-	end
-
+	EncounterJournal.TutorialsFrame.Contents.StartButton:SkinButton()
 
 	mainTabs[1]:ClearAllPoints()
 	mainTabs[1]:SetPoint("TOPLEFT", EncounterJournal, "BOTTOMLEFT", 11, 0)

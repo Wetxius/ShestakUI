@@ -308,6 +308,13 @@ local micromenu = {
 		end
 		ToggleCollectionsJournal()
 	end},
+	{text = HOUSING_MICRO_BUTTON, notCheckable = 1, func = function()
+		if Kiosk.IsEnabled() then
+			return
+		end
+
+		HousingFramesUtil.ToggleHousingDashboard()
+	end},
 	{text = HELP_BUTTON, notCheckable = 1, func = function()
 		ToggleHelpFrame()
 	end},
@@ -318,16 +325,6 @@ local micromenu = {
 		ToggleBattlefieldMap()
 	end},
 }
-
-if T.newPatch then
-	tinsert(micromenu, {text = HOUSING_MICRO_BUTTON, notCheckable = 1, func = function()
-		if Kiosk.IsEnabled() then
-			return
-		end
-
-		HousingFramesUtil.ToggleHousingDashboard()
-	end})
-end
 
 if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() and C_StorePublic.IsEnabled() then
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})

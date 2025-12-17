@@ -30,10 +30,6 @@ local MICRO_BUTTONS = {
 	"HelpMicroButton",
 }
 
-if not T.newPatch then
-	tremove(MICRO_BUTTONS, "HousingMicroButton")
-end
-
 for i, button in pairs(MICRO_BUTTONS) do
 	local bu = _G[button]
 	local normal = bu:GetNormalTexture()
