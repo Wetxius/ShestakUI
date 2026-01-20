@@ -107,15 +107,19 @@ local function LoadSkin()
 		T.SkinCheckBox(_G[checkboxes[i]])
 	end
 
-	local ReskinColourSwatch = function(f)
+	local function ReskinColourSwatch(f)
 		if f.InnerBorder then
 			f.InnerBorder:SetAlpha(0)
 			f.SwatchBg:SetAlpha(0)
 		end
 
-		f:CreateBackdrop("Overlay")
+		f:CreateBackdrop("Default")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
-		f.backdrop:SetOutside(f.Color, 2, 2)
+		f.backdrop:SetInside(f, 0, 0)
+
+		local texture = f.Color
+		texture:SetInside(f.backdrop)
+		texture:SetTexture(C.media.blank)
 	end
 
 	local function ReskinCombatColourSwatch(f)
@@ -124,9 +128,13 @@ local function LoadSkin()
 			SwatchBg:SetAlpha(0)
 		end
 
-		f:CreateBackdrop("Overlay")
+		f:CreateBackdrop("Default")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
-		f.backdrop:SetInside(f, 1, 1)
+		f.backdrop:SetInside(f, 0, 0)
+
+		local texture = f:GetNormalTexture()
+		texture:SetInside(f.backdrop)
+		texture:SetTexture(C.media.blank)
 	end
 
 	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
@@ -134,7 +142,7 @@ local function LoadSkin()
 
 		local checkBoxNameString = frame:GetName().."Checkbox"
 
-		if checkBoxTemplate == "ChatConfigCheckboxTemplate" then
+		if checkBoxTemplate == "ChatConfigCheckboxTemplate" or checkBoxTemplate == "ChatConfigCheckboxSmallTemplate" then	-- Combat Source
 			for index in ipairs(checkBoxTable) do
 				local checkBoxName = checkBoxNameString..index
 				local checkbox = _G[checkBoxName]
@@ -147,7 +155,7 @@ local function LoadSkin()
 
 				T.SkinCheckBox(_G[checkBoxName.."Check"])
 			end
-		elseif checkBoxTemplate == "ChatConfigCheckboxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckboxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckboxWithSwatchTemplate" then
+		else
 			for index in ipairs(checkBoxTable) do
 				local checkBoxName = checkBoxNameString..index
 				local checkbox = _G[checkBoxName]
@@ -159,7 +167,10 @@ local function LoadSkin()
 				bg:CreateBackdrop("Overlay")
 				bg.backdrop:SetAllPoints(bg)
 
-				ReskinColourSwatch(_G[checkBoxName.."ColorSwatch"])
+				local swatch = _G[checkBoxName.."ColorSwatch"]
+				if swatch then
+					ReskinColourSwatch(swatch)
+				end
 
 				T.SkinCheckBox(_G[checkBoxName.."Check"])
 			end

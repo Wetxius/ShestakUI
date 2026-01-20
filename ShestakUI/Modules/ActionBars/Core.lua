@@ -16,10 +16,10 @@ frame:SetScript("OnEvent", function()
 	PetActionBar:UnregisterAllEvents()
 	StanceBar:EnableMouse(false)
 	StanceBar:UnregisterAllEvents()
-	MicroButtonAndBagsBar:SetScale(0.00001)
-	MicroButtonAndBagsBar:EnableMouse(false)
-	MicroButtonAndBagsBar:ClearAllPoints()
-	MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
+	--BETA MicroButtonAndBagsBar:SetScale(0.00001)
+	-- MicroButtonAndBagsBar:EnableMouse(false)
+	-- MicroButtonAndBagsBar:ClearAllPoints()
+	-- MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
 	BagsBar:Hide()
 	BagsBar:UnregisterAllEvents()
 
@@ -554,4 +554,5 @@ T.PetBarUpdate = function()
 			petActionButton:SetChecked(false)
 		end
 	end
+	PetActionBar.rangeTimer = -1
 end

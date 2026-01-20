@@ -48,7 +48,7 @@ local function LoadSkin()
 		end)
 	end
 
-	local button = DressUpFrame.ToggleOutfitDetailsButton
+	local button = T.newPatch and DressUpFrame.ToggleCustomSetDetailsButton or DressUpFrame.ToggleOutfitDetailsButton
 	button:SetNormalTexture(134331)
 	button:SetPushedTexture(134331)
 	button:StyleButton(true)
@@ -58,12 +58,13 @@ local function LoadSkin()
 	button:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button:GetPushedTexture():SetInside()
 
-	DressUpFrame.OutfitDetailsPanel:StripTextures()
-	DressUpFrame.OutfitDetailsPanel:CreateBackdrop("Transparent")
-	DressUpFrame.OutfitDetailsPanel.backdrop:SetPoint("TOPLEFT", 10, 0)
-	DressUpFrame.OutfitDetailsPanel.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+	local panel = T.newPatch and DressUpFrame.CustomSetDetailsPanel or DressUpFrame.OutfitDetailsPanel
+	panel:StripTextures()
+	panel:CreateBackdrop("Transparent")
+	panel.backdrop:SetPoint("TOPLEFT", 10, 0)
+	panel.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 
-	hooksecurefunc(DressUpFrame.OutfitDetailsPanel, "Refresh", function(self)
+	hooksecurefunc(panel, "Refresh", function(self)
 		if self.slotPool then
 			for slot in self.slotPool:EnumerateActive() do
 				if not slot.skinned then
@@ -82,10 +83,11 @@ local function LoadSkin()
 	DressUpFrame.LinkButton:SkinButton()
 	DressUpFrame.LinkButton:SetPoint("BOTTOMLEFT", 4, 4)
 
-	T.SkinDropDownBox(DressUpFrameOutfitDropdown, 195, 21)
-	DressUpFrameOutfitDropdown.SaveButton:SkinButton()
-	DressUpFrameOutfitDropdown.SaveButton:ClearAllPoints()
-	DressUpFrameOutfitDropdown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropdown, 91, 0)
+	local dropdown = T.newPatch and DressUpFrameCustomSetDropdown or DressUpFrameOutfitDropdown
+	T.SkinDropDownBox(dropdown, 195, 21)
+	dropdown.SaveButton:SkinButton()
+	dropdown.SaveButton:ClearAllPoints()
+	dropdown.SaveButton:SetPoint("RIGHT", dropdown, 91, 0)
 
 	T.SkinCloseButton(DressUpFrameCloseButton, DressUpFrame.backdrop)
 
@@ -97,12 +99,14 @@ local function LoadSkin()
 	SideDressUpFrame.BGBottomLeft:SetSize(183, 93)
 	T.SkinCloseButton(SideDressUpFrameCloseButton, SideDressUpFrame)
 
-	WardrobeOutfitEditFrame:StripTextures(true)
-	WardrobeOutfitEditFrame:SetTemplate("Transparent")
-	WardrobeOutfitEditFrame.AcceptButton:SkinButton()
-	WardrobeOutfitEditFrame.CancelButton:SkinButton()
-	WardrobeOutfitEditFrame.DeleteButton:SkinButton()
-	T.SkinEditBox(WardrobeOutfitEditFrame.EditBox, 250, 25)
+	if not T.newPatch then
+		WardrobeOutfitEditFrame:StripTextures(true)
+		WardrobeOutfitEditFrame:SetTemplate("Transparent")
+		WardrobeOutfitEditFrame.AcceptButton:SkinButton()
+		WardrobeOutfitEditFrame.CancelButton:SkinButton()
+		WardrobeOutfitEditFrame.DeleteButton:SkinButton()
+		T.SkinEditBox(WardrobeOutfitEditFrame.EditBox, 250, 25)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

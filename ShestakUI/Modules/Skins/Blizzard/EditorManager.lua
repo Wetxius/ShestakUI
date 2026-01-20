@@ -58,7 +58,7 @@ local function LoadSkin()
 	end
 
 	-- Layout Creator
-	local layout = _G.EditModeNewLayoutDialog
+	local layout = T.newPatch and EditModeLayoutDialog or _G.EditModeNewLayoutDialog
 	layout:StripTextures()
 	layout:CreateBackdrop("Transparent")
 	layout.AcceptButton:SkinButton()

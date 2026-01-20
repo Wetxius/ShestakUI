@@ -1120,21 +1120,23 @@ function T.SkinProfessionsFlyout(_, parent)
 			frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, 2)
 			T.SkinCheckBox(frame.HideUnownedCheckbox, 24)
 			T.SkinScrollBar(frame.ScrollBar)
+
 			hooksecurefunc(frame.ScrollBox, "Update", function(self)
-				for i = 1, self.ScrollTarget:GetNumChildren() do
-					local button = select(i, self.ScrollTarget:GetChildren())
+				self:ForEachFrame(function(button)
 					if button.IconBorder and not button.styled then
 						button:SetTemplate("Transparent")
-						button.icon:CropIcon()
+						button.Icon:CropIcon()
 						button:SetNormalTexture(0)
 						button:SetPushedTexture(0)
 						button:GetHighlightTexture():Hide()
 						T.SkinIconBorder(button.IconBorder, button)
+						button.IconBorder:SetVertexColor(button.IconBorder:GetVertexColor())
 
 						button.styled = true
 					end
-				end
+				end)
 			end)
+			frame.ScrollBox:Update() -- force to apply skin
 
 			break
 		end

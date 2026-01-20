@@ -78,7 +78,7 @@ local function Copy(cf)
 	local text = ""
 	for i = 1, cf:GetNumMessages() do
 		local line = cf:GetMessageInfo(i)
-		if line and not MessageIsProtected(line) then
+		if line and canaccessvalue(line) and not MessageIsProtected(line) then
 			font:SetFormattedText("%s \n", line)
 			local cleanLine = font:GetText() or ""
 			text = text..cleanLine

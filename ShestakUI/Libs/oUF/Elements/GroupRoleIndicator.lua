@@ -1,6 +1,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+-- ShestakUI modified
 local function Update(self, event)
 	local element = self.GroupRoleIndicator
 

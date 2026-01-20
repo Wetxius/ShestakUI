@@ -15,12 +15,14 @@ bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:RegisterEvent("PLAYER_CONTROL_LOST")
 bar:RegisterEvent("PLAYER_CONTROL_GAINED")
 bar:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED")
+bar:RegisterUnitEvent("UNIT_PET", "player")
+bar:RegisterUnitEvent("UNIT_FLAGS", "pet")
 bar:RegisterEvent("PET_BAR_UPDATE")
 bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
 bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
-bar:RegisterEvent("UNIT_PET")
-bar:RegisterEvent("UNIT_FLAGS")
-bar:RegisterEvent("UNIT_AURA")
+bar:RegisterEvent("PET_UI_UPDATE")
+bar:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
+bar:RegisterUnitEvent("UNIT_AURA", "pet")
 bar:SetScript("OnEvent", function(self, event, arg1)
 	if event == "PLAYER_ENTERING_WORLD" then
 		T.StylePet()
@@ -50,11 +52,20 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 		end
 		RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
 		hooksecurefunc(PetActionBar, "Update", T.PetBarUpdate)
-	elseif event == "PET_BAR_UPDATE" or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED"
-	or event == "UNIT_FLAGS" or (event == "UNIT_PET" and arg1 == "player") or (event == "UNIT_AURA" and arg1 == "pet") then
-		T.PetBarUpdate()
+		C_Timer.After(1, function()
+			-- Fix range and keybind
+			if PetHasActionBar() and UnitIsVisible("pet") then
+				if InCombatLockdown() then
+					PetActionBar:Update()
+				else
+					PetActionBar:Show()
+				end
+			end
+		end)
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 		PetActionBar:UpdateCooldowns()
+	else
+		T.PetBarUpdate()
 	end
 end)
 

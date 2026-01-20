@@ -32,6 +32,7 @@ local AddUnit = function(unit)
 		threatval = threatval + 410065408
 	end
 	local guid = UnitGUID(unit)
+	if not canaccessvalue(guid) then return end -- BETA
 	if not tList[guid] then
 		tinsert(barList, guid)
 		tList[guid] = {

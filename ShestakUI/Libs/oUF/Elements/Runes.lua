@@ -1,5 +1,3 @@
-if(select(2, UnitClass('player')) ~= 'DEATHKNIGHT') then return end
-
 local _, ns = ...
 local oUF = ns.oUF
 
@@ -48,28 +46,20 @@ local function UpdateColor(self, event)
 		color = self.colors.power.RUNES
 	end
 
-	local r, g, b = color[1], color[2], color[3]
-
-	for index = 1, #element do
-		element[index]:SetStatusBarColor(r, g, b)
-
-		local bg = element[index].bg
-		if(bg) then
-			local mu = bg.multiplier or 1
-			bg:SetVertexColor(r * mu, g * mu, b * mu)
+	if(color) then
+		for index = 1, #element do
+			element[index]:GetStatusBarTexture():SetVertexColor(color:GetRGB())
 		end
 	end
 
-	--[[ Callback: Runes:PostUpdateColor(r, g, b)
+	--[[ Callback: Runes:PostUpdateColor(color)
 	Called after the element color has been updated.
 
 	* self - the Runes element
-	* r    - the red component of the used color (number)[0-1]
-	* g    - the green component of the used color (number)[0-1]
-	* b    - the blue component of the used color (number)[0-1]
+	* color - the used ColorMixin-based object (table?)
 	--]]
 	if(element.PostUpdateColor) then
-		element:PostUpdateColor(r, g, b)
+		element:PostUpdateColor(color)
 	end
 end
 
@@ -155,7 +145,25 @@ local function ForceUpdate(element)
 	ColorPath(element.__owner, 'ForceUpdate')
 end
 
+local function Disable(self)
+	local element = self.Runes
+	if(element) then
+		for i = 1, #element do
+			element[i]:Hide()
+		end
+
+		self:UnregisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+		self:UnregisterEvent('RUNE_POWER_UPDATE', Path)
+	end
+end
+
 local function Enable(self, unit)
+	if(UnitClassBase('player') ~= 'DEATHKNIGHT') then
+		Disable(self)
+
+		return false
+	end
+
 	local element = self.Runes
 	if(element and UnitIsUnit(unit, 'player')) then
 		element.__owner = self
@@ -172,18 +180,6 @@ local function Enable(self, unit)
 		self:RegisterEvent('RUNE_POWER_UPDATE', Path, true)
 
 		return true
-	end
-end
-
-local function Disable(self)
-	local element = self.Runes
-	if(element) then
-		for i = 1, #element do
-			element[i]:Hide()
-		end
-
-		self:UnregisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
-		self:UnregisterEvent('RUNE_POWER_UPDATE', Path)
 	end
 end
 

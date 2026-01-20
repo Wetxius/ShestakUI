@@ -107,16 +107,12 @@ local function LoadSkin()
 		T.SkinScrollBar(scrollbars[i])
 	end
 
-	-- Set texture to hide circle
-	_G.GroupFinderFrame.groupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
-	_G.GroupFinderFrame.groupButton2.icon:SetTexture("Interface\\LFGFrame\\UI-LFR-PORTRAIT")
-	_G.GroupFinderFrame.groupButton3.icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
-
 	for i = 1, 4 do
 		local button = GroupFinderFrame["groupButton"..i]
 
 		if button then
 			button.ring:Hide()
+			button.CircleMask:Hide()
 			button:CreateBackdrop("Overlay")
 			button.backdrop:SetAllPoints()
 			button:StyleButton()

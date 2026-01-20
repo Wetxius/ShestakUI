@@ -38,14 +38,32 @@ local function LoadSkin()
 
 	StopwatchTabFrame:StripTextures()
 
-	T.SkinCloseButton(StopwatchCloseButton)
-	T.SkinNextPrevButton(StopwatchPlayPauseButton)
-	T.SkinNextPrevButton(StopwatchResetButton)
-	StopwatchPlayPauseButton:SetSize(17, 17)
-	StopwatchResetButton:SetSize(17, 17)
-	StopwatchResetButton:GetNormalTexture():SetTexCoord(0.25, 0.72, 0.28, 0.78)
-	StopwatchPlayPauseButton:SetPoint("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
+	local function skinButton(btn)
+		btn:SetTemplate("Overlay")
+		btn:SetSize(17, 17)
+
+		btn:GetNormalTexture():SetTexCoord(0.25, 0.72, 0.28, 0.78)
+		btn:GetNormalTexture():ClearAllPoints()
+		btn:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
+		btn:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
+		if btn:GetDisabledTexture() then
+			btn:GetDisabledTexture():SetAllPoints(btn:GetNormalTexture())
+		end
+		if btn:GetPushedTexture() then
+			btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())
+		end
+		if btn:GetHighlightTexture() then
+			btn:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
+			btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
+		end
+	end
+
+	skinButton(StopwatchPlayPauseButton)
+	skinButton(StopwatchResetButton)
 	StopwatchResetButton:SetPoint("BOTTOMRIGHT", StopwatchFrame, "BOTTOMRIGHT", -7, 7)
+	StopwatchPlayPauseButton:SetPoint("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
+
+	T.SkinCloseButton(StopwatchCloseButton)
 	StopwatchCloseButton:ClearAllPoints()
 	StopwatchCloseButton:SetPoint("BOTTOMRIGHT", StopwatchFrame.backdrop, "TOPRIGHT", 0, 3)
 end

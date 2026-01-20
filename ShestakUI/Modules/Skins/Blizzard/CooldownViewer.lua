@@ -6,7 +6,7 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	local frame = _G.CooldownViewerSettings
-	T.SkinFrame(frame)
+	T.SkinFrame(frame, true, -1, 0)
 
 	local tabs = {
 		frame.SpellsTab,
@@ -16,10 +16,17 @@ local function LoadSkin()
 		T.SkinFrameTab(tab)
 	end
 
+	T.SkinFrame(CooldownViewerLayoutDialog)
+	CooldownViewerLayoutDialog.AcceptButton:SkinButton()
+	CooldownViewerLayoutDialog.CancelButton:SkinButton()
+	T.SkinEditBox(CooldownViewerLayoutDialog.LayoutNameEditBox)
+	CooldownViewerLayoutDialog.LayoutNameEditBox.backdrop:SetOutside(nil, 2, -4)
+
 	T.SkinEditBox(frame.SearchBox)
 	frame.SearchBox.backdrop:SetOutside(nil, 2, -4)
 	T.SkinScrollBar(frame.CooldownScroll.ScrollBar)
 	frame.UndoButton:SkinButton()
+	T.SkinDropDownBox(frame.LayoutDropdown)
 
 	local oldAtlas = {
 		Options_ListExpand_Right = 1,
@@ -154,6 +161,11 @@ local function LoadSkin()
 		UpdateTextContainer(container)
 		icon:SkinIcon()
 
+		if container.DebuffBorder then
+			container.DebuffBorder:SetAlpha(0)
+			-- container.backdrop:SetBackdropBorderColor(1, 0, 0) -- BETA need?
+		end
+
 		for _, region in next, {container:GetRegions()} do
 			if region:IsObjectType("Texture") then
 				local texture = region:GetTexture()
@@ -214,7 +226,6 @@ local function LoadSkin()
 			frame.Cooldown:SetSwipeTexture(C.media.blank)
 
 			if not frame.Cooldown.done then
-
 				for key, func in next, hookFunctions do
 					if frame[key] then
 						hooksecurefunc(frame, key, func)

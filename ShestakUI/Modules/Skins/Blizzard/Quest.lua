@@ -458,8 +458,7 @@ local function LoadSkin()
 				button:StripTextures()
 				button:CreateBackdrop("Overlay")
 				button.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
-				local r, g, b = unpack(C.media.border_color)
-				button:GetHighlightTexture():SetColorTexture(r, g, b, .25)
+				button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.2)
 				button.ButtonText:SetFont(C.media.normal_font, 16)
 				button.IsSkinned = true
 			end
@@ -486,10 +485,11 @@ local function LoadSkin()
 			if header.CollapseButton and not header.CollapseButton.styled then
 				header:StripTextures()
 				header:CreateBackdrop("Overlay")
+				header.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
 				header.backdrop:SetPoint("TOPLEFT", header.Background, -4, 0)
 				header.backdrop:SetPoint("BOTTOMRIGHT", header.Background, 0, 0)
-				local r, g, b = unpack(C.media.border_color)
-				header.Highlight:SetColorTexture(r, g, b, 0.75)
+				header.Highlight:SetColorTexture(1, 1, 1, 0.2)
+				header.Highlight:SetInside(header.backdrop)
 				header.CollapseButton.styled = true
 			end
 		end

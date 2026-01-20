@@ -630,7 +630,7 @@ elseif T.class == "WARRIOR" then
 		T.merge[199852] = 199667	-- Whirlwind Off-Hand (Fury)
 		T.aoespam[46968] = 0		-- Shockwave
 		T.aoespam[6343] = 0			-- Thunder Clap
-		T.aoespam[115767] = 3		-- Deep Wounds
+		--BETA T.aoespam[115767] = 3		-- Deep Wounds
 		T.aoespam[50622] = 3		-- Bladestorm
 		T.aoespam[52174] = 0		-- Heroic Leap
 		T.aoespam[118000] = 0		-- Dragon Roar

@@ -25,6 +25,7 @@ local function StyleNormalButton(button, size)
 		local shine = _G[name.."Shine"]
 		local spellAlert = button.SpellActivationAlert
 		local assist = button.AssistedCombatRotationFrame
+		local loc = button.lossOfControlCooldown
 
 		if button.IconMask then
 			button.IconMask:Hide()
@@ -46,17 +47,17 @@ local function StyleNormalButton(button, size)
 			button.NewActionTexture:SetAlpha(0)
 		end
 
-		if normal then
-			normal:SetTexture()
-			normal:Hide()
-			normal:SetAlpha(0)
-		end
+		-- if normal then -- BETA remove?
+			-- normal:SetTexture()
+			-- normal:Hide()
+			-- normal:SetAlpha(0)
+		-- end
 
-		if normal2 then
-			normal2:SetTexture()
-			normal2:Hide()
-			normal2:SetAlpha(0)
-		end
+		-- if normal2 then
+			-- normal2:SetTexture()
+			-- normal2:Hide()
+			-- normal2:SetAlpha(0)
+		-- end
 
 		flash:SetTexture("")
 		button:SetNormalTexture(0)
@@ -128,11 +129,11 @@ local function StyleNormalButton(button, size)
 		icon:CropIcon()
 		icon:SetDrawLayer("BACKGROUND", 7)
 
-		if normal then
-			normal:ClearAllPoints()
-			normal:SetPoint("TOPLEFT")
-			normal:SetPoint("BOTTOMRIGHT")
-		end
+		-- if normal then -- BETA remove?
+			-- normal:ClearAllPoints()
+			-- normal:SetPoint("TOPLEFT")
+			-- normal:SetPoint("BOTTOMRIGHT")
+		-- end
 
 		if highlight then
 			highlight:ClearAllPoints()
@@ -185,6 +186,10 @@ local function StyleNormalButton(button, size)
 
 		if assist then
 			assist:SetScale(0.5)
+		end
+
+		if loc then
+			loc:SetInside(button)
 		end
 
 		button:StyleButton()
@@ -415,6 +420,13 @@ else
 			alertFrame.ProcStartFlipbook:SetPoint("TOPLEFT", button, -C.actionbar.button_size * 0.9, C.actionbar.button_size * 0.9)
 			alertFrame.ProcStartFlipbook:SetPoint("BOTTOMRIGHT", button, C.actionbar.button_size * 0.9, -C.actionbar.button_size * 0.9)
 			alertFrame.ProcLoop:Play()
+
+			local proc = alertFrame.ProcAltGlow
+			if proc then
+				proc:ClearAllPoints()
+				proc:SetPoint("TOPLEFT", button, -2, 2)
+				proc:SetPoint("BOTTOMRIGHT", button, 2, -2)
+			end
 		end
 	end)
 end

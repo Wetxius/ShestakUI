@@ -271,29 +271,37 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 
 				if backdrops[frame] then
 					frame.backdrop = backdrops[frame] -- relink it back
+					if T.newPatch then
+						if frame:GetFrameLevel() - 1 >= 0 then
+							frame.backdrop:SetFrameLevel(frame:GetFrameLevel() - 1)
+						end
+					end
 				else
 					frame:CreateBackdrop("Transparent") -- :SetTemplate errors out
 					frame.backdrop:SetInside(frame, 0, 0)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, 8)
 					backdrops[frame] = frame.backdrop
+				end
 
-					if frame.ScrollBar then
+				if frame.ScrollBar and not frame.ScrollBar.styled then
 						T.SkinScrollBar(frame.ScrollBar)
+						frame.ScrollBar.styled = true
 					end
 
-					for i = 1, frame:GetNumChildren() do
-						local child = select(i, frame:GetChildren())
+				for i = 1, frame:GetNumChildren() do
+					local child = select(i, frame:GetChildren())
 
-						local level = {
-							child.MinLevel,
-							child.MaxLevel
-						}
+					local level = {
+						child.MinLevel,
+						child.MaxLevel
+					}
 
-						for i = 1, #level do
-							local frame = level[i]
-							if frame then
-								T.SkinEditBox(frame)
-								frame.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
-							end
+					for i = 1, #level do
+						local frame = level[i]
+						if frame and not frame.styled then
+							T.SkinEditBox(frame)
+							frame.backdrop:SetPoint("BOTTOMRIGHT", -3, 0)
+							frame.styled = true
 						end
 					end
 				end
@@ -373,8 +381,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				buttons:SkinButton()
 			end
 		end
-		LFDReadyCheckPopup.YesButton:SkinButton(true)
-		LFDReadyCheckPopup.NoButton:SkinButton(true)
+		if not T.newPatch then
+			LFDReadyCheckPopup.YesButton:SkinButton(true)
+			LFDReadyCheckPopup.NoButton:SkinButton(true)
+		end
 
 		-- ColorPickerFrame
 		ColorPickerFrame.Footer.OkayButton:SkinButton(true)

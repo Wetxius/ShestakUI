@@ -9,7 +9,7 @@ local oUF = ns.oUF
 
 local frame = CreateFrame("Frame")
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
-if C.nameplate.combat == true then
+if C.nameplate.combat then
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -33,7 +33,7 @@ end
 
 frame:RegisterEvent("PLAYER_LOGIN")
 function frame:PLAYER_LOGIN()
-	if C.nameplate.enhance_threat == true then
+	if C.nameplate.enhance_threat then
 		SetCVar("threatWarning", 3)
 	end
 	SetCVar("nameplateGlobalScale", 1)
@@ -60,7 +60,7 @@ function frame:PLAYER_LOGIN()
 
 	local function changeFont(self, size)
 		local mult = size or 1
-		self:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * mult * T.noscalemult, C.font.nameplates_font_style)
+		self:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * mult * 1, C.font.nameplates_font_style)
 		self:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 	end
 	changeFont(SystemFont_NamePlateFixed)
@@ -76,7 +76,7 @@ exClass.MAGE = true
 exClass.ROGUE = true
 exClass.WARLOCK = true
 exClass.WARRIOR = true
-if C.nameplate.healer_icon == true then
+if C.nameplate.healer_icon then
 	local t = CreateFrame("Frame")
 
 	local numFactions = {
@@ -163,7 +163,7 @@ local totemData = {
 	[GetSpellInfo(204331)] = 511726,	-- Counterstrike Totem
 	[GetSpellInfo(204332)] = 136114,	-- Windfury Totem
 	[GetSpellInfo(204336)] = 136039,	-- Grounding Totem
-	[GetSpellInfo(157153)] = 971076,	-- Cloudburst Totem
+	-- [GetSpellInfo(157153)] = 971076,	-- Cloudburst Totem
 	[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
 	[GetSpellInfo(108280)] = 538569,	-- Healing Tide Totem
 	[GetSpellInfo(207399)] = 136080,	-- Ancestral Protection Totem
@@ -180,36 +180,36 @@ local function CreateBorderFrame(frame, point)
 
 	frame.backdrop = frame:CreateTexture(nil, "BORDER")
 	frame.backdrop:SetDrawLayer("BORDER", -8)
-	frame.backdrop:SetPoint("TOPLEFT", point, "TOPLEFT", -T.noscalemult * 3, T.noscalemult * 3)
-	frame.backdrop:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", T.noscalemult * 3, -T.noscalemult * 3)
+	frame.backdrop:SetPoint("TOPLEFT", point, "TOPLEFT", -1 * 3, 1 * 3)
+	frame.backdrop:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", 1 * 3, -1 * 3)
 	local r, g, b, a = unpack(C.media.backdrop_color)
 	frame.backdrop:SetColorTexture(r, g, b + 0.01, a)
 
 	frame.bordertop = frame:CreateTexture(nil, "BORDER")
-	frame.bordertop:SetPoint("TOPLEFT", point, "TOPLEFT", -T.noscalemult * 2, T.noscalemult * 2)
-	frame.bordertop:SetPoint("TOPRIGHT", point, "TOPRIGHT", T.noscalemult * 2, T.noscalemult * 2)
-	frame.bordertop:SetHeight(T.noscalemult)
+	frame.bordertop:SetPoint("TOPLEFT", point, "TOPLEFT", -1 * 2, 1 * 2)
+	frame.bordertop:SetPoint("TOPRIGHT", point, "TOPRIGHT", 1 * 2, 1 * 2)
+	frame.bordertop:SetHeight(1)
 	frame.bordertop:SetColorTexture(unpack(C.media.border_color))
 	frame.bordertop:SetDrawLayer("BORDER", -7)
 
 	frame.borderbottom = frame:CreateTexture(nil, "BORDER")
-	frame.borderbottom:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", -T.noscalemult * 2, -T.noscalemult * 2)
-	frame.borderbottom:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", T.noscalemult * 2, -T.noscalemult * 2)
-	frame.borderbottom:SetHeight(T.noscalemult)
+	frame.borderbottom:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", -1 * 2, -1 * 2)
+	frame.borderbottom:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", 1 * 2, -1 * 2)
+	frame.borderbottom:SetHeight(1)
 	frame.borderbottom:SetColorTexture(unpack(C.media.border_color))
 	frame.borderbottom:SetDrawLayer("BORDER", -7)
 
 	frame.borderleft = frame:CreateTexture(nil, "BORDER")
-	frame.borderleft:SetPoint("TOPLEFT", point, "TOPLEFT", -T.noscalemult * 2, T.noscalemult * 2)
-	frame.borderleft:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", T.noscalemult * 2, -T.noscalemult * 2)
-	frame.borderleft:SetWidth(T.noscalemult)
+	frame.borderleft:SetPoint("TOPLEFT", point, "TOPLEFT", -1 * 2, 1 * 2)
+	frame.borderleft:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", 1 * 2, -1 * 2)
+	frame.borderleft:SetWidth(1)
 	frame.borderleft:SetColorTexture(unpack(C.media.border_color))
 	frame.borderleft:SetDrawLayer("BORDER", -7)
 
 	frame.borderright = frame:CreateTexture(nil, "BORDER")
-	frame.borderright:SetPoint("TOPRIGHT", point, "TOPRIGHT", T.noscalemult * 2, T.noscalemult * 2)
-	frame.borderright:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", -T.noscalemult * 2, -T.noscalemult * 2)
-	frame.borderright:SetWidth(T.noscalemult)
+	frame.borderright:SetPoint("TOPRIGHT", point, "TOPRIGHT", 1 * 2, 1 * 2)
+	frame.borderright:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", -1 * 2, -1 * 2)
+	frame.borderright:SetWidth(1)
 	frame.borderright:SetColorTexture(unpack(C.media.border_color))
 	frame.borderright:SetDrawLayer("BORDER", -7)
 end
@@ -226,20 +226,29 @@ local AurasCustomFilter = function(_, unit, data)
 	local allow = false
 
 	if not UnitIsFriend("player", unit) then
-		if data.isHarmful then
-			if C.nameplate.track_debuffs and (data.isPlayerAura or data.sourceUnit == "pet") and not T.DebuffBlackList[data.name] then
-				if data.nameplateShowAll or data.nameplateShowPersonal then
-					allow = true
-				elseif T.DebuffWhiteList[data.name] then
+		if data.isHarmfulAura then
+			-- if C.nameplate.track_debuffs and (data.isPlayerAura or data.sourceUnit == "pet") and not T.DebuffBlackList[data.name] then
+			if C.nameplate.track_debuffs and data.isPlayerAura then
+				local filter = C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "INCLUDE_NAME_PLATE_ONLY")
+				if filter then
 					allow = true
 				end
+				-- if data.nameplateShowAll or data.nameplateShowPersonal then
+					-- allow = true
+				-- elseif T.DebuffWhiteList[data.name] then
+					-- allow = true
+				-- end
 			end
 		else
-			if T.BuffWhiteList[data.name] then
-				allow = true
-			elseif data.isStealable then
+			local filter = C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "INCLUDE_NAME_PLATE_ONLY")
+			if filter then
 				allow = true
 			end
+			-- if canaccessvalue(data.name) and T.BuffWhiteList[data.name] then -- BETA value is secret in combat
+				-- allow = true
+			-- elseif canaccessvalue(data.isStealable) and data.isStealable then
+				-- allow = true
+			-- end
 		end
 	end
 
@@ -254,7 +263,7 @@ end
 local AurasPostCreateIcon = function(element, button)
 	CreateBorderFrame(button)
 
-	button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * T.noscalemult / Mult, C.font.auras_font_style)
+	button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * 1 / Mult, C.font.auras_font_style)
 	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 	button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
 	button.remaining:SetJustifyH("CENTER")
@@ -265,10 +274,10 @@ local AurasPostCreateIcon = function(element, button)
 
 	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
 	button.Count:SetJustifyH("RIGHT")
-	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size * T.noscalemult / Mult, C.font.auras_font_style)
+	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size * 1 / Mult, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-	if C.aura.show_spiral == true then
+	if C.aura.show_spiral then
 		element.disableCooldown = false
 		button.Cooldown:SetReverse(true)
 		button.Cooldown:SetHideCountdownNumbers(true)
@@ -283,28 +292,31 @@ end
 
 local AurasPostUpdateIcon = function(_, button, unit, data)
 	if not UnitIsFriend("player", unit) then
-		if data.isHarmful then
+		if data.isHarmfulAura then
 			if C.nameplate.track_debuffs and data.isPlayerAura or data.sourceUnit == "pet" then
 				if C.nameplate.track_buffs then
 					SetColorBorder(button, unpack(C.media.border_color))
 				end
 			end
 		else
-			if T.BuffWhiteList[data.name] then
-				SetColorBorder(button, 0, 0.5, 0)
-			elseif data.isStealable then
-				SetColorBorder(button, 1, 0.85, 0)
-			end
+			local color = C_CurveUtil.EvaluateColorFromBoolean(data.isStealable, {r = 1, g = 0.85, b = 0, a = 1}, {r = 0, g = 0.5, b = 0, a = 1})
+			SetColorBorder(button, color:GetRGB())
+			-- if T.BuffWhiteList[data.name] then
+				-- SetColorBorder(button, 0, 0.5, 0)
+			-- elseif data.isStealable then
+				-- SetColorBorder(button, 1, 0.85, 0)
+			-- end
 		end
 	end
 
-	if data.duration and data.duration > 0 and C.aura.show_timer == true then
+	-- if data.duration and data.duration > 0 and C.aura.show_timer then
+	if data.expirationTime and C.aura.show_timer then
 		button.remaining:Show()
-		button.timeLeft = data.expirationTime
+		-- button.timeLeft = data.expirationTime
 		button:SetScript("OnUpdate", T.CreateAuraTimer)
 	else
 		button.remaining:Hide()
-		button.timeLeft = math.huge
+		-- button.timeLeft = math.huge
 		button:SetScript("OnUpdate", nil)
 	end
 	button.first = true
@@ -316,11 +328,11 @@ local function UpdateTarget(self)
 
 	if isTarget and not isMe then
 		if C.nameplate.ad_height > 0 or C.nameplate.ad_width > 0 then
-			self:SetSize((C.nameplate.width + C.nameplate.ad_width) * T.noscalemult, (C.nameplate.height + C.nameplate.ad_height) * T.noscalemult)
-			self.Castbar:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, -8-((C.nameplate.height + C.nameplate.ad_height) * T.noscalemult))
-			self.Castbar.Icon:SetSize(((C.nameplate.height + C.nameplate.ad_height) * 2 * T.noscalemult) + 8, ((C.nameplate.height + C.nameplate.ad_height) * 2 * T.noscalemult) + 8)
-			if C.nameplate.class_icons == true then
-				self.Class.Icon:SetSize(((C.nameplate.height + C.nameplate.ad_height) * 2 * T.noscalemult) + 8, ((C.nameplate.height + C.nameplate.ad_height) * 2 * T.noscalemult) + 8)
+			self:SetSize((C.nameplate.width + C.nameplate.ad_width) * 1, (C.nameplate.height + C.nameplate.ad_height) * 1)
+			self.Castbar:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, -8-((C.nameplate.height + C.nameplate.ad_height) * 1))
+			self.Castbar.Icon:SetSize(((C.nameplate.height + C.nameplate.ad_height) * 2 * 1) + 8, ((C.nameplate.height + C.nameplate.ad_height) * 2 * 1) + 8)
+			if C.nameplate.class_icons then
+				self.Class.Icon:SetSize(((C.nameplate.height + C.nameplate.ad_height) * 2 * 1) + 8, ((C.nameplate.height + C.nameplate.ad_height) * 2 * 1) + 8)
 			end
 		end
 		if C.nameplate.target_glow then
@@ -329,11 +341,11 @@ local function UpdateTarget(self)
 		self:SetAlpha(1)
 	else
 		if C.nameplate.ad_height > 0 or C.nameplate.ad_width > 0 then
-			self:SetSize(C.nameplate.width * T.noscalemult, C.nameplate.height * T.noscalemult)
-			self.Castbar:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, -8-(C.nameplate.height * T.noscalemult))
-			self.Castbar.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
-			if C.nameplate.class_icons == true then
-				self.Class.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
+			self:SetSize(C.nameplate.width * 1, C.nameplate.height * 1)
+			self.Castbar:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, -8-(C.nameplate.height * 1))
+			self.Castbar.Icon:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
+			if C.nameplate.class_icons then
+				self.Class.Icon:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
 			end
 		end
 		if C.nameplate.target_glow then
@@ -348,9 +360,9 @@ local function UpdateTarget(self)
 end
 
 local function UpdateName(self)
-	if C.nameplate.healer_icon == true then
+	if C.nameplate.healer_icon then
 		local name = self.unitName
-		if name then
+		if name and canaccessvalue(name) then -- BETA
 			if healList[name] then
 				if exClass[healList[name]] then
 					self.HealerIcon:Hide()
@@ -363,7 +375,7 @@ local function UpdateName(self)
 		end
 	end
 
-	if C.nameplate.class_icons == true then
+	if C.nameplate.class_icons then
 		local reaction = UnitReaction(self.unit, "player")
 		if UnitIsPlayer(self.unit) and (reaction and reaction <= 4) then
 			local _, class = UnitClass(self.unit)
@@ -378,9 +390,9 @@ local function UpdateName(self)
 		end
 	end
 
-	if C.nameplate.totem_icons == true then
+	if C.nameplate.totem_icons then
 		local name = self.unitName
-		if name then
+		if name and canaccessvalue(name) then -- BETA
 			if totemData[name] then
 				self.Totem.Icon:SetTexture(totemData[name])
 				self.Totem:Show()
@@ -424,26 +436,39 @@ end
 
 -- Cast color
 local function castColor(self)
-	if self.notInterruptible then
-		self:SetStatusBarColor(0.78, 0.25, 0.25)
-		self.bg:SetColorTexture(0.78, 0.25, 0.25, 0.2)
-	else
-		if C.nameplate.kick_color then
-			local start = GetSpellCooldown(kickID)
-			if start ~= 0 then
-				self:SetStatusBarColor(1, 0.5, 0)
-				self.bg:SetColorTexture(1, 0.5, 0, 0.2)
-			else
-				self:SetStatusBarColor(1, 0.8, 0)
-				self.bg:SetColorTexture(1, 0.8, 0, 0.2)
-			end
-		else
-			self:SetStatusBarColor(1, 0.8, 0)
-			self.bg:SetColorTexture(1, 0.8, 0, 0.2)
-		end
-	end
+	-- Check if notInterruptible
+	local color = C_CurveUtil.EvaluateColorFromBoolean(self.notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
 
-	if C.nameplate.cast_color then
+	-- if C.nameplate.kick_color then
+		-- local start, _, enabled = GetSpellCooldown(kickID)
+		-- local col = C_CurveUtil.EvaluateColorFromBoolean(enabled, {r = 1, g = 0.5, b = 0, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
+		-- -- Rewrite color for notInterruptible
+		-- color = C_CurveUtil.EvaluateColorFromBoolean(self.notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = col.r, g = col.g, b = col.b, a = 1})
+	-- end
+
+	self:GetStatusBarTexture():SetVertexColor(color:GetRGBA())
+	self.bg:SetColorTexture(color.r, color.g, color.b, 0.2)
+
+	-- if canaccessvalue(self.notInterruptible) and self.notInterruptible then -- secret, need to create new element with alpha?
+		-- self:SetStatusBarColor(0.78, 0.25, 0.25)
+		-- self.bg:SetColorTexture(0.78, 0.25, 0.25, 0.2)
+	-- else
+		-- if C.nameplate.kick_color then
+			-- local start = GetSpellCooldown(kickID)
+			-- -- if (canaccessvalue(start) and start ~= 0) or start then -- BETA
+				-- -- self:SetStatusBarColor(1, 0.5, 0)
+				-- -- self.bg:SetColorTexture(1, 0.5, 0, 0.2)
+			-- -- else
+				-- -- self:SetStatusBarColor(1, 0.8, 0)
+				-- -- self.bg:SetColorTexture(1, 0.8, 0, 0.2)
+			-- -- end
+		-- else
+			-- self:SetStatusBarColor(1, 0.8, 0)
+			-- self.bg:SetColorTexture(1, 0.8, 0, 0.2)
+		-- end
+	-- end
+
+	if C.nameplate.cast_color and canaccessvalue(self.spellID) then -- BETA not work
 		if T.InterruptCast[self.spellID] then
 			SetColorBorder(self, 1, 0.8, 0)
 			SetColorBorder(self.Border, 1, 0.8, 0)
@@ -478,7 +503,7 @@ local function threatColor(self, forced)
 			end
 		elseif threatStatus == 3 then	-- securely tanking, highest threat
 			if T.Role == "Tank" then
-				if C.nameplate.enhance_threat == true then
+				if C.nameplate.enhance_threat then
 					if C.nameplate.mob_color_enable and T.ColorPlate[self.npcID] then
 						self.Health:SetStatusBarColor(unpack(T.ColorPlate[self.npcID]))
 					else
@@ -488,26 +513,26 @@ local function threatColor(self, forced)
 					SetColorBorder(self.Health, unpack(C.nameplate.bad_color))
 				end
 			else
-				if C.nameplate.enhance_threat == true then
+				if C.nameplate.enhance_threat then
 					self.Health:SetStatusBarColor(unpack(C.nameplate.bad_color))
 				else
 					SetColorBorder(self.Health, unpack(C.nameplate.bad_color))
 				end
 			end
 		elseif threatStatus == 2 then	-- insecurely tanking, another unit have higher threat but not tanking
-			if C.nameplate.enhance_threat == true then
+			if C.nameplate.enhance_threat then
 				self.Health:SetStatusBarColor(unpack(C.nameplate.near_color))
 			else
 				SetColorBorder(self.Health, unpack(C.nameplate.near_color))
 			end
 		elseif threatStatus == 1 then	-- not tanking, higher threat than tank
-			if C.nameplate.enhance_threat == true then
+			if C.nameplate.enhance_threat then
 				self.Health:SetStatusBarColor(unpack(C.nameplate.near_color))
 			else
 				SetColorBorder(self.Health, unpack(C.nameplate.near_color))
 			end
 		elseif threatStatus == 0 then	-- not tanking, lower threat than tank
-			if C.nameplate.enhance_threat == true then
+			if C.nameplate.enhance_threat then
 				if T.Role == "Tank" then
 					local offTank = false
 					if IsInRaid() then
@@ -542,17 +567,18 @@ end
 
 local function HealthPostUpdate(self, unit, cur, max)
 	local main = self:GetParent()
-	local perc = 0
-	if max and max > 0 then
-		perc = cur / max
-	end
+	-- local perc = 0
+	-- if max and max > 0 then
+		-- perc = cur / max
+	-- end
+	-- perc = UnitHealthPercent(unit)
 
 	local r, g, b
 	local mu = self.bg.multiplier
 	local isPlayer = UnitIsPlayer(unit)
 	local unitReaction = UnitReaction(unit, "player")
 	if not UnitIsUnit("player", unit) and isPlayer and (unitReaction and unitReaction >= 5) then
-		r, g, b = unpack(T.oUF_colors.power["MANA"])
+		r, g, b = T.oUF_colors.power["MANA"]:GetRGB()
 		self:SetStatusBarColor(r, g, b)
 		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
 	elseif not UnitIsTapDenied(unit) and not isPlayer then
@@ -561,7 +587,7 @@ local function HealthPostUpdate(self, unit, cur, max)
 		else
 			local reaction = T.oUF_colors.reaction[unitReaction]
 			if reaction then
-				r, g, b = reaction[1], reaction[2], reaction[3]
+				r, g, b = reaction:GetRGB()
 			else
 				r, g, b = UnitSelectionColor(unit, true)
 			end
@@ -572,20 +598,37 @@ local function HealthPostUpdate(self, unit, cur, max)
 	end
 
 	if isPlayer then
-		if perc <= 0.5 and perc >= 0.2 then
-			SetColorBorder(self, 1, 1, 0)
-		elseif perc < 0.2 then
-			SetColorBorder(self, 1, 0, 0)
-		else
-			SetColorBorder(self, unpack(C.media.border_color))
-		end
-	elseif not isPlayer and C.nameplate.enhance_threat == true then
+		local curve = C_CurveUtil.CreateColorCurve()
+		curve:SetType(Enum.LuaCurveType.Step)
+		curve:AddPoint(0, CreateColor(1, 0, 0, 1))
+		curve:AddPoint(0.2, CreateColor(1, 1, 0, 1))
+		curve:AddPoint(0.5, CreateColor(unpack(C.media.border_color)))
+		local color = UnitHealthPercent(unit, true, curve)
+		local r, g, b = color:GetRGB()
+		SetColorBorder(self, r, g, b)
+
+		-- if perc <= 0.5 and perc >= 0.2 then  -- BETA not work
+			-- SetColorBorder(self, 1, 1, 0)
+		-- elseif perc < 0.2 then
+			-- SetColorBorder(self, 1, 0, 0)
+		-- else
+			-- SetColorBorder(self, unpack(C.media.border_color))
+		-- end
+	elseif not isPlayer and C.nameplate.enhance_threat then
 		if C.nameplate.low_health then
-			if perc < C.nameplate.low_health_value then
-				SetColorBorder(self, unpack(C.nameplate.low_health_color))
-			else
-				SetColorBorder(self, unpack(C.media.border_color))
-			end
+			local curve = C_CurveUtil.CreateColorCurve()
+			curve:SetType(Enum.LuaCurveType.Step)
+			curve:AddPoint(0, CreateColor(unpack(C.nameplate.low_health_color)))
+			curve:AddPoint(C.nameplate.low_health_value, CreateColor(unpack(C.media.border_color)))
+			local color = UnitHealthPercent(unit, true, curve)
+			local r, g, b = color:GetRGB()
+			SetColorBorder(self, r, g, b)
+
+			-- if perc < C.nameplate.low_health_value then -- BETA not work
+				-- SetColorBorder(self, unpack(C.nameplate.low_health_color))
+			-- else
+				-- SetColorBorder(self, unpack(C.media.border_color))
+			-- end
 		else
 			SetColorBorder(self, unpack(C.media.border_color))
 		end
@@ -598,7 +641,8 @@ local function callback(self, _, unit)
 	if not self then return end
 	if unit then
 		local unitGUID = UnitGUID(unit)
-		self.npcID = unitGUID and select(6, strsplit('-', unitGUID))
+		self.npcID = unitGUID and canaccessvalue(unitGUID) and select(6, strsplit('-', unitGUID))
+		-- self.npcID = unitGUID and select(6, strsplit('-', unitGUID)) -- BETA
 		self.unitName = UnitName(unit)
 		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
 		if self.npcID and T.PlateBlacklist[self.npcID] then
@@ -669,7 +713,7 @@ local function style(self, unit)
 	self.unit = unit
 
 	self:SetPoint("CENTER", nameplate, "CENTER")
-	self:SetSize(C.nameplate.width * T.noscalemult, C.nameplate.height * T.noscalemult)
+	self:SetSize(C.nameplate.width, C.nameplate.height)
 
 	-- Health Bar
 	self.Health = CreateFrame("StatusBar", nil, self)
@@ -688,9 +732,9 @@ local function style(self, unit)
 	self.Health.bg.multiplier = 0.2
 
 	-- Health Text
-	if C.nameplate.health_value == true then
+	if C.nameplate.health_value then
 		self.Health.value = self.Health:CreateFontString(nil, "OVERLAY")
-		self.Health.value:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
+		self.Health.value:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * 1, C.font.nameplates_font_style)
 		self.Health.value:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 		self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
 		self:Tag(self.Health.value, "[NameplateHealth]")
@@ -700,10 +744,11 @@ local function style(self, unit)
 	self.Power = CreateFrame("StatusBar", nil, self)
 	self.Power:SetStatusBarTexture(C.media.texture)
 	self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -6)
-	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, -6-(C.nameplate.height * T.noscalemult / 2))
+	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, -6-(C.nameplate.height * 1 / 2))
 	self.Power.frequentUpdates = true
 	self.Power.colorPower = true
 	self.Power.PostUpdate = T.PreUpdatePower
+	self.Power.PostUpdateColor = T.PreUpdatePower
 	CreateBorderFrame(self.Power)
 
 	self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
@@ -712,19 +757,19 @@ local function style(self, unit)
 	self.Power.bg.multiplier = 0.2
 
 	-- Hide Blizzard Power Bar
-	hooksecurefunc(_G.NamePlateDriverFrame, "SetupClassNameplateBars", function(frame)
-		if not frame or frame:IsForbidden() then
-			return
-		end
-		if frame.classNamePlatePowerBar then
-			frame.classNamePlatePowerBar:Hide()
-			frame.classNamePlatePowerBar:UnregisterAllEvents()
-		end
-	end)
+	-- hooksecurefunc(_G.NamePlateDriverFrame, "SetupClassNameplateBars", function(frame)
+		-- if not frame or frame:IsForbidden() then
+			-- return
+		-- end
+		-- if frame.classNamePlatePowerBar then
+			-- frame.classNamePlatePowerBar:Hide()
+			-- frame.classNamePlatePowerBar:UnregisterAllEvents()
+		-- end
+	-- end)
 
 	-- Name Text
 	self.Name = self:CreateFontString(nil, "OVERLAY")
-	self.Name:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
+	self.Name:SetFont(C.font.nameplates_font, C.font.nameplates_font_size, C.font.nameplates_font_style)
 	self.Name:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 	self.Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -3, 4)
 	self.Name:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 3, 4)
@@ -741,9 +786,9 @@ local function style(self, unit)
 	-- Target Glow
 	if C.nameplate.target_glow then
 		self.Glow = CreateFrame("Frame", nil, self, "BackdropTemplate")
-		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\ShestakUI\Media\Textures\Glow.tga]], edgeSize = 4 * T.noscalemult})
-		self.Glow:SetPoint("TOPLEFT", -7 * T.noscalemult, 7 * T.noscalemult)
-		self.Glow:SetPoint("BOTTOMRIGHT", 7 * T.noscalemult, -7 * T.noscalemult)
+		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\ShestakUI\Media\Textures\Glow.tga]], edgeSize = 4 * 1})
+		self.Glow:SetPoint("TOPLEFT", -7 * 1, 7 * 1)
+		self.Glow:SetPoint("BOTTOMRIGHT", 7 * 1, -7 * 1)
 		self.Glow:SetBackdropBorderColor(0.8, 0.8, 0.8)
 		self.Glow:SetFrameLevel(0)
 		self.Glow:Hide()
@@ -751,7 +796,7 @@ local function style(self, unit)
 
 	-- Level Text
 	self.Level = self:CreateFontString(nil, "ARTWORK")
-	self.Level:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
+	self.Level:SetFont(C.font.nameplates_font, C.font.nameplates_font_size, C.font.nameplates_font_style)
 	self.Level:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 	self.Level:SetPoint("RIGHT", self.Health, "LEFT", -2, 0)
 	self:Tag(self.Level, "[DiffColor][NameplateLevel][shortclassification]")
@@ -762,7 +807,7 @@ local function style(self, unit)
 	self.Castbar:SetStatusBarTexture(C.media.texture)
 	self.Castbar:SetStatusBarColor(1, 0.8, 0)
 	self.Castbar:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -8)
-	self.Castbar:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, -8-(C.nameplate.height * T.noscalemult))
+	self.Castbar:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, -8-(C.nameplate.height))
 	CreateBorderFrame(self.Castbar)
 
 	self.Castbar.bg = self.Castbar:CreateTexture(nil, "BORDER")
@@ -770,25 +815,33 @@ local function style(self, unit)
 	self.Castbar.bg:SetTexture(C.media.texture)
 	self.Castbar.bg:SetColorTexture(1, 0.8, 0, 0.2)
 
+	-- self.Castbar.Shield = self.Castbar:CreateTexture(nil, 'ARTWORK') -- BETA delete if not need
+	-- self.Castbar.Shield:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", 0, 0)
+	-- self.Castbar.Shield:SetPoint("BOTTOMRIGHT", self.Castbar:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	-- self.Castbar.Shield:SetTexture(C.media.texture)
+	-- self.Castbar.Shield:SetVertexColor(0.8, 0, 0)
+
 	self.Castbar.PostCastStart = castColor
 	self.Castbar.PostCastInterruptible = castColor
 
 	-- Cast Time Text
 	self.Castbar.Time = self.Castbar:CreateFontString(nil, "ARTWORK")
 	self.Castbar.Time:SetPoint("RIGHT", self.Castbar, "RIGHT", 0, 0)
-	self.Castbar.Time:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
+	self.Castbar.Time:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * 1, C.font.nameplates_font_style)
 	self.Castbar.Time:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 
-	self.Castbar.CustomTimeText = function(self, duration)
-		self.Time:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
-	end
+	-- self.Castbar.CustomTimeText = function(self, durationObject)
+		-- local duration = durationObject:GetRemainingDuration()
+		-- self.Time:SetText(("%.1f"):format(duration))
+		-- -- self.Time:SetText(("%.1f"):format(self.channeling and duration or self.max - duration)) -- BETA
+	-- end
 
 	-- Cast Name Text
-	if C.nameplate.show_castbar_name == true then
+	if C.nameplate.show_castbar_name then
 		self.Castbar.Text = self.Castbar:CreateFontString(nil, "OVERLAY")
 		self.Castbar.Text:SetPoint("LEFT", self.Castbar, "LEFT", 3, 0)
 		self.Castbar.Text:SetPoint("RIGHT", self.Castbar.Time, "LEFT", -1, 0)
-		self.Castbar.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
+		self.Castbar.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * 1, C.font.nameplates_font_style)
 		self.Castbar.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 		self.Castbar.Text:SetHeight(C.font.nameplates_font_size)
 		self.Castbar.Text:SetJustifyH("LEFT")
@@ -799,74 +852,77 @@ local function style(self, unit)
 	self.Castbar.Icon = self.Castbar.Border:CreateTexture(nil, "OVERLAY")
 	self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	self.Castbar.Icon:SetDrawLayer("ARTWORK")
-	self.Castbar.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
+	self.Castbar.Icon:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
 	self.Castbar.Icon:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", 8, 0)
 	CreateBorderFrame(self.Castbar.Border, self.Castbar.Icon)
 
 	-- Raid Icon
 	self.RaidTargetIndicator = self:CreateTexture(nil, "OVERLAY", nil, 7)
-	self.RaidTargetIndicator:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
-	self.RaidTargetIndicator:SetPoint("BOTTOM", self.Health, "TOP", 0, C.nameplate.track_debuffs == true and 38 or 16)
+	self.RaidTargetIndicator:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
+	self.RaidTargetIndicator:SetPoint("BOTTOM", self.Health, "TOP", 0, C.nameplate.track_debuffs and 38 or 16)
 
 	-- Class Icon
-	if C.nameplate.class_icons == true then
+	if C.nameplate.class_icons then
 		self.Class = CreateFrame("Frame", nil, self)
 		self.Class.Icon = self.Class:CreateTexture(nil, "OVERLAY")
-		self.Class.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
+		self.Class.Icon:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
 		self.Class.Icon:SetPoint("TOPRIGHT", self.Health, "TOPLEFT", -8, 0)
 		self.Class.Icon:SetTexture("Interface\\WorldStateFrame\\Icons-Classes")
 		self.Class.Icon:SetTexCoord(0, 0, 0, 0)
 		CreateBorderFrame(self.Class, self.Class.Icon)
+		self.Class:Hide()
 	end
 
 	-- Totem Icon
-	if C.nameplate.totem_icons == true then
+	if C.nameplate.totem_icons then
 		self.Totem = CreateFrame("Frame", nil, self)
 		self.Totem.Icon = self.Totem:CreateTexture(nil, "OVERLAY")
-		self.Totem.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
+		self.Totem.Icon:SetSize((C.nameplate.height * 2 * 1) + 8, (C.nameplate.height * 2 * 1) + 8)
 		self.Totem.Icon:SetPoint("BOTTOM", self.Health, "TOP", 0, 16)
 		self.Totem.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		CreateBorderFrame(self.Totem, self.Totem.Icon)
+		self.Totem:Hide()
 	end
 
 	-- Healer Icon
-	if C.nameplate.healer_icon == true then
+	if C.nameplate.healer_icon then
 		self.HealerIcon = self.Health:CreateFontString(nil, "OVERLAY")
 		self.HealerIcon:SetFont(C.font.nameplates_font, 32, C.font.nameplates_font_style)
 		self.HealerIcon:SetText("|cFFD53333+|r")
-		self.HealerIcon:SetPoint("BOTTOM", self.Name, "TOP", 0, C.nameplate.track_debuffs == true and 13 or 0)
+		self.HealerIcon:SetPoint("BOTTOM", self.Name, "TOP", 0, C.nameplate.track_debuffs and 13 or 0)
+		self.HealerIcon:Hide()
 	end
 
 	-- Quest Icon
 	if C.nameplate.quests then
 		self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
-		self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
+		self.QuestIcon:SetSize((C.nameplate.height * 2 * 1), (C.nameplate.height * 2 * 1))
 		self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)
 		self.QuestIcon:Hide()
 
 		self.QuestIcon.Text = self:CreateFontString(nil, "OVERLAY")
 		self.QuestIcon.Text:SetPoint("RIGHT", self.QuestIcon, "LEFT", -1, 0)
-		self.QuestIcon.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult * 2, C.font.nameplates_font_style)
+		self.QuestIcon.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * 1 * 2, C.font.nameplates_font_style)
 		self.QuestIcon.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 
 		self.QuestIcon.Item = self:CreateTexture(nil, "OVERLAY")
-		self.QuestIcon.Item:SetSize((C.nameplate.height * 2 * T.noscalemult) - 2, (C.nameplate.height * 2 * T.noscalemult) - 2)
+		self.QuestIcon.Item:SetSize((C.nameplate.height * 2 * 1) - 2, (C.nameplate.height * 2 * 1) - 2)
 		self.QuestIcon.Item:SetPoint("RIGHT", self.QuestIcon.Text, "LEFT", -2, 0)
 		self.QuestIcon.Item:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
 
 	-- Aura tracking
-	if C.nameplate.track_debuffs == true or C.nameplate.track_buffs == true then
+	if C.nameplate.track_debuffs or C.nameplate.track_buffs then
 		self.Auras = CreateFrame("Frame", nil, self)
 		self.Auras:SetPoint("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, C.font.nameplates_font_size + 7)
 		self.Auras.initialAnchor = "BOTTOMRIGHT"
-		self.Auras["growth-y"] = "UP"
-		self.Auras["growth-x"] = "LEFT"
+		self.Auras.growthX = "LEFT"
+		self.Auras.growthY = "UP"
 		self.Auras.numDebuffs = C.nameplate.track_debuffs and 6 or 0
 		self.Auras.numBuffs = C.nameplate.track_buffs and 4 or 0
 		self.Auras:SetSize(20 + C.nameplate.width, C.nameplate.auras_size)
-		self.Auras.spacing = 5 * T.noscalemult
-		self.Auras.size = C.nameplate.auras_size * T.noscalemult - 3
+		self.Auras.spacing = 5 * 1
+		self.Auras.size = C.nameplate.auras_size * 1 - 3
 		self.Auras.disableMouse = true
 
 		self.Auras.FilterAura = AurasCustomFilter
@@ -885,14 +941,17 @@ local function style(self, unit)
 	end)
 
 	self.Health.PostUpdate = HealthPostUpdate
+	self.Health.PostUpdateColor = HealthPostUpdate
 
 	-- Absorb
-	if C.raidframe.plugins_healcomm == true then
-		local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ahpb:SetTexture(C.media.texture)
-		ahpb:SetVertexColor(1, 1, 0, 1)
+	if C.raidframe.plugins_healcomm then
+		local absorb = CreateFrame("StatusBar", nil, self.Health)
+		absorb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		absorb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		absorb:SetStatusBarTexture(C.media.texture)
+		absorb:SetStatusBarColor(1, 1, 0, 1)
 		self.HealthPrediction = {
-			absorbBar = ahpb
+			damageAbsorb = absorb
 		}
 	end
 
@@ -913,4 +972,8 @@ end
 
 oUF:RegisterStyle("ShestakNameplates", style)
 oUF:SetActiveStyle("ShestakNameplates")
-oUF:SpawnNamePlates("ShestakNameplates", callback)
+oUF:SpawnNamePlates("ShestakNameplates")
+
+oUFShestakUI_NamePlateDriver:SetTargetCallback(callback)
+oUFShestakUI_NamePlateDriver:SetAddedCallback(callback)
+oUFShestakUI_NamePlateDriver:SetRemovedCallback(callback)

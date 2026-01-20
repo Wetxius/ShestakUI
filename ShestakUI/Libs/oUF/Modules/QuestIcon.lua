@@ -32,6 +32,7 @@ local function GetQuests(unitID)
 	local _, instanceType = IsInInstance()
 	if instanceType == "arena" or instanceType == "pvp" or instanceType == "raid" or C_ChallengeMode.IsChallengeModeActive() then return end
 
+	if not canaccessvalue(unitID) or IsInInstance() then return end -- BETA secret error in dungeon
 	ScanTooltip:SetOwner(_G.UIParent, "ANCHOR_NONE")
 	ScanTooltip:SetUnit(unitID)
 	ScanTooltip:Show()
@@ -40,6 +41,7 @@ local function GetQuests(unitID)
 	for i = 3, ScanTooltip:NumLines() do
 		local str = _G["oUF_QuestIconTooltipTextLeft" .. i]
 		local text = str and str:GetText()
+		if not canaccessvalue(text) then return end
 		if not text or text == "" then return end
 
 		if UnitIsPlayer(text) then

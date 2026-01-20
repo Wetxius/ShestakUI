@@ -58,6 +58,150 @@ local function LoadSkin()
 	EncounterJournalEncounterFrameInfoClassFilterClearFrame:GetRegions():SetAlpha(0)
 	T.SkinDropDownBox(EncounterJournalEncounterFrameInfoDifficulty)
 
+	-- Journey
+	EncounterJournalJourneysFrame.BorderFrame:StripTextures()
+
+	EncounterJournalJourneysFrame.JourneyProgress.LevelSkipButton:SkinButton()
+	EncounterJournalJourneysFrame.JourneyProgress.OverviewBtn:SkinButton()
+	EncounterJournalJourneysFrame.JourneyOverview.OverviewBtn:SkinButton()
+
+	EncounterJournalJourneysFrame.JourneyProgress.DividerTexture:SetAlpha(0)
+
+	local delvesBtn = EncounterJournalJourneysFrame.JourneyProgress.DelvesCompanionConfigurationFrame.CompanionConfigBtn
+	delvesBtn:CreateBackdrop("Overlay")
+	delvesBtn.backdrop:SetInside(nil, 4, 4)
+	delvesBtn:StyleButton(true, 6)
+	delvesBtn.NormalTexture:SetAlpha(0)
+	delvesBtn.PushedTexture:SetInside(delvesBtn.backdrop)
+	delvesBtn.PushedTexture:SetColorTexture(0.9, 0.8, 0.1, 0.3)
+	delvesBtn:SetScript("OnMouseDown", T.dummy)
+	delvesBtn:SetScript("OnMouseUp", T.dummy)
+	delvesBtn.IconBorder:SetAlpha(0)
+	delvesBtn.Icon:SkinIcon(true)
+
+	local paragon = EncounterJournalJourneysFrame.JourneyProgress.RenownTrackFrame.ClipFrame.ParagonLevelFrame
+	paragon.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	C_Timer.After(2, function() -- it's dark without timer
+		paragon.IconBorder:SetAlpha(0)
+	end)
+	paragon.HighlightTexture:SetAlpha(0)
+
+	hooksecurefunc(EncounterJournalJourneysFrame.JourneyProgress, "SetRewards", function(self)
+		for reward in self.rewardPool:EnumerateActive() do
+			if not reward.styled then
+				reward:CreateBackdrop("Overlay")
+				reward.backdrop:SetPoint("TOPLEFT", reward, 18, -8)
+				reward.backdrop:SetPoint("BOTTOMRIGHT", reward, -18, 8)
+
+				reward.RewardCardBG:SetAlpha(0)
+
+				reward.b = CreateFrame("Frame", nil, reward)
+				reward.b:SetTemplate("Default")
+				reward.b:SetPoint("TOPLEFT", reward.RewardCardIcon, "TOPLEFT", -2, 2)
+				reward.b:SetPoint("BOTTOMRIGHT", reward.RewardCardIcon, "BOTTOMRIGHT", 2, -2)
+				reward.RewardCardIcon:SetParent(reward.b)
+				reward.RewardCardIcon:SetTexCoord(0.15, 0.85, 0.15, 0.85)
+				reward.styled = true
+			end
+		end
+	end)
+
+	hooksecurefunc(EncounterJournalJourneysFrame.JourneyProgress.RenownTrackFrame, "Init", function(self)
+		for frame in self.elementPool:EnumerateActive() do
+			if not frame.hooked then
+				hooksecurefunc(frame, "TryInit", function(self)
+					if not self.styled then
+						self.HighlightTexture:SetAllPoints(self.Icon)
+						self.HighlightTexture:SetColorTexture(1, 1, 1, 0.3)
+						self.styled = true
+					end
+				end)
+				frame.hooked = true
+			end
+		end
+	end)
+
+	hooksecurefunc(EncounterJournalJourneysFrame.JourneyProgress.EncounterRewardProgressFrame, "Init", function(self)
+		for frame in self.elementPool:EnumerateActive() do
+			if not frame.hooked then
+				hooksecurefunc(frame, "TryInit", function(self)
+					if not self.styled then
+						self.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						self.styled = true
+					end
+				end)
+				frame.hooked = true
+			end
+		end
+	end)
+
+	local button = EncounterJournalInstanceSelect.GreatVaultButton
+	button:SetSize(23, 23)
+	button:SetTemplate("Default")
+	button:StyleButton(true)
+	button:SetPoint("LEFT", EncounterJournalInstanceSelect.ExpansionDropdown, "RIGHT", 5, 0)
+	button.NormalTexture:SetInside()
+	button.NormalTexture:SetTexCoord(0.25, 0.75, 0.25, 0.73)
+	button.PushedTexture:SetInside()
+	button.PushedTexture:SetTexCoord(0.25, 0.75, 0.25, 0.73)
+
+	hooksecurefunc(_G.EncounterJournalJourneysFrame.JourneysList, "Update", function(frame)
+		for _, button in next, {frame.ScrollTarget:GetChildren()} do
+			if button and button.NormalTexture and not button.IsSkinned then
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", 2, -2)
+				button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+				button:StyleButton(true, 4)
+
+				button.NormalTexture:SetInside(button.backdrop)
+				button.NormalTexture:SetTexCoord(0.2, 0.8, 0.2, 0.8)
+				button.PushedTexture:SetInside(button.backdrop)
+				button.PushedTexture:SetTexCoord(0.2, 0.8, 0.2, 0.8)
+
+				local bar = button.JourneyCardProgressBar
+				if bar then
+					bar.JourneyCardProgressBarBG:SetAlpha(0)
+					bar:SetSize(320, 10)
+
+					bar.barBackdrop = CreateFrame("Frame", nil, bar)
+					bar.barBackdrop:SetFrameLevel(bar:GetFrameLevel())
+					bar.barBackdrop:SetOutside(bar)
+					bar.barBackdrop:SetTemplate("Overlay")
+					bar:SetStatusBarTexture(C.media.texture)
+					bar:SetStatusBarColor(0, 1, 0.6)
+				end
+
+				button:SetScript("OnMouseDown", T.dummy)
+				button:SetScript("OnMouseUp", T.dummy)
+
+				local check = button.WatchedFactionToggleFrame and button.WatchedFactionToggleFrame.WatchFactionCheckbox
+				if check then
+					T.SkinCheckBox(check, 20)
+					check.Label:SetPoint("LEFT", check, "RIGHT", 4, 0)
+				end
+
+				button.IsSkinned = true
+			end
+			if button and button.hover then button.hover:SetColorTexture(1, 1, 1, 0.3) end -- delves can bugged
+		end
+	end)
+
+	hooksecurefunc(_G.EncounterJournalMonthlyActivitiesFrame.ScrollBox, "Update", function(frame)
+		for _, button in next, {frame.ScrollTarget:GetChildren()} do
+			if button and button.NormalTexture and not button.IsSkinned then
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", 2, -2)
+				button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+				button:StyleButton(true, 4)
+
+				button.NormalTexture:SetAlpha(0)
+
+				button.IsSkinned = true
+			end
+		end
+	end)
+
+	-- Monthly activities
 	local monthlyActivities = EncounterJournalMonthlyActivitiesFrame
 	if monthlyActivities then
 		EncounterJournalMonthlyActivitiesFrame:StripTextures()
@@ -65,6 +209,7 @@ local function LoadSkin()
 		EncounterJournalMonthlyActivitiesFrame.FilterList:SetTemplate("Overlay")
 		EncounterJournalMonthlyActivitiesFrame.ThemeContainer:StripTextures(true) -- force to kill
 		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.ScrollBar)
+		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.FilterList.ScrollBar)
 		monthlyActivities.HelpButton.Ring:Hide()
 		monthlyActivities.HelpButton:SetPoint("TOPLEFT", EncounterJournalMonthlyActivitiesFrame, "TOPLEFT", -15, 70)
 	end
@@ -75,10 +220,25 @@ local function LoadSkin()
 		EncounterJournalDungeonTab,
 		EncounterJournalRaidTab,
 		EncounterJournalLootJournalTab,
+		EncounterJournalJourneysTab
 	}
 
 	for _, tab in pairs(mainTabs) do
 		T.SkinTab(tab)
+	end
+
+	local scrollBar = {
+		EncounterJournalInstanceSelect.ScrollBar,
+		EncounterJournalEncounterFrameInfo.LootContainer.ScrollBar,
+		EncounterJournalEncounterFrameInstanceFrame.LoreScrollBar,
+		EncounterJournalEncounterFrameInfo.BossesScrollBar,
+		EncounterJournalEncounterFrameInfoDetailsScrollFrame.ScrollBar,
+		EncounterJournalEncounterFrameInfoOverviewScrollFrame.ScrollBar,
+		EncounterJournalJourneysFrame.ScrollBar
+	}
+
+	for _, scroll in pairs(scrollBar) do
+		T.SkinScrollBar(scroll)
 	end
 
 	-- TutorialsFrame
@@ -91,10 +251,11 @@ local function LoadSkin()
 
 	T.SkinEditBox(EncounterJournalSearchBox)
 	T.SkinCloseButton(EncounterJournalCloseButton)
-	T.SkinDropDownBox(EncounterJournalInstanceSelect.ExpansionDropdown )
+	T.SkinDropDownBox(EncounterJournalInstanceSelect.ExpansionDropdown)
 
 	EncounterJournalInstanceSelectBG:SetAlpha(0)
 	EncounterJournalInstanceSelect.bg:SetAlpha(0)
+	EncounterJournalInstanceSelect.evergreenBg:SetAlpha(0)
 	EncounterJournalEncounterFrameInfoBG:SetAlpha(0)
 	EncounterJournal.encounter.info.leftShadow:SetAlpha(0)
 	EncounterJournal.encounter.info.rightShadow:SetAlpha(0)
@@ -136,13 +297,6 @@ local function LoadSkin()
 
 	EncounterJournalEncounterFrameInfoOverviewTab:SetPoint("TOPLEFT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", 8, -40)
 	EncounterJournalEncounterFrameInfoOverviewTab.SetPoint = T.dummy
-
-	T.SkinScrollBar(EncounterJournalInstanceSelect.ScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.LootContainer.ScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInstanceFrame.LoreScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.BossesScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrame.ScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrame.ScrollBar)
 
 	for i = 1, AJ_MAX_NUM_SUGGESTIONS do
 		local suggestion = EncounterJournal.suggestFrame["Suggestion"..i]
@@ -187,8 +341,21 @@ local function LoadSkin()
 	EncounterJournalEncounterFrameInstanceFrameBG:SetSize(325, 240)
 	EncounterJournalEncounterFrameInstanceFrameBG:ClearAllPoints()
 	EncounterJournalEncounterFrameInstanceFrameBG:SetPoint("TOP", EncounterJournalEncounterFrameInstanceFrame, "TOP", 0, -45)
-	EncounterJournalEncounterFrameInstanceFrameMapButton:ClearAllPoints()
-	EncounterJournalEncounterFrameInstanceFrameMapButton:SetPoint("BOTTOMLEFT", EncounterJournalEncounterFrameInstanceFrameBG, "BOTTOMLEFT", 5, 5)
+	local mapButton = EncounterJournalEncounterFrameInstanceFrameMapButton
+	mapButton:ClearAllPoints()
+	mapButton:SetPoint("BOTTOMLEFT", EncounterJournalEncounterFrameInstanceFrameBG, "BOTTOMLEFT", 5, 5)
+	mapButton.texture:SetTexCoord(0.25, 0.75, 0.1, 0.4)
+	mapButton.texture:SetInside(mapButton, 4, 4)
+	local hl = EncounterJournalEncounterFrameInstanceFrameMapButtonHighlight
+	hl:SetColorTexture(1, 1, 1, 0.2)
+	hl:SetInside(mapButton, 4, 4)
+	mapButton:SetScript("OnMouseDown", function(self)
+		self.texture:SetTexCoord(0.25, 0.75, 0.6, 0.9)
+	end)
+	mapButton:SetScript("OnMouseUp", function(self)
+		self.texture:SetTexCoord(0.25, 0.75, 0.1, 0.4)
+	end)
+
 	EncounterJournalEncounterFrameInstanceFrame.LoreScrollingFont:SetHeight(EncounterJournalEncounterFrameInstanceFrame.LoreScrollingFont:GetHeight() + 25)
 
 	for _, child in next, { _G.EncounterJournalEncounterFrameInstanceFrame.LoreScrollingFont.ScrollBox.ScrollTarget:GetChildren() } do

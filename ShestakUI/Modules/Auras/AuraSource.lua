@@ -10,9 +10,10 @@ local function addAuraSource(self, func, unit, index, filter, instanceID)
 		local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, index)
 		srcUnit = aura and aura.sourceUnit
 	else
-		srcUnit = select(7, func(unit, index, filter))
+		local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
+		srcUnit = aura and aura.sourceUnit
 	end
-	if srcUnit then
+	if srcUnit and canaccessvalue(srcUnit) then
 		local src = GetUnitName(srcUnit, true)
 		if srcUnit == "pet" or srcUnit == "vehicle" then
 			src = format("%s (|cff%02x%02x%02x%s|r)", src, T.color.r * 255, T.color.g * 255, T.color.b * 255, GetUnitName("player", true))
@@ -33,7 +34,7 @@ local function addAuraSource(self, func, unit, index, filter, instanceID)
 		else
 			local color = T.oUF_colors.reaction[UnitReaction(srcUnit, "player")]
 			if color then
-				src = format("|cff%02x%02x%02x%s|r", color[1] * 255, color[2] * 255, color[3] * 255, src)
+				src = format("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, src)
 			end
 		end
 		self:AddLine(DONE_BY.." "..src)
@@ -47,10 +48,11 @@ local funcs = {
 	SetUnitDebuff = UnitDebuff,
 	SetUnitBuffByAuraInstanceID = UnitBuff,
 	SetUnitDebuffByAuraInstanceID = UnitDebuff,
+	SetUnitAuraByAuraInstanceID = UnitAura,
 }
 
 for k, v in pairs(funcs) do
-	if k == "SetUnitBuffByAuraInstanceID" or k == "SetUnitDebuffByAuraInstanceID" then
+	if k == "SetUnitBuffByAuraInstanceID" or k == "SetUnitDebuffByAuraInstanceID" or k == "SetUnitAuraByAuraInstanceID" then
 		hooksecurefunc(GameTooltip, k, function(self, unit, index, filter)
 			addAuraSource(self, v, unit, index, filter, true)
 		end)

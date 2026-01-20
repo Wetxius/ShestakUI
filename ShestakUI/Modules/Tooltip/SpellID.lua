@@ -10,6 +10,7 @@ local function addLine(self, id, isItem)
 		local line = _G[self:GetName().."TextLeft"..i]
 		if not line then break end
 		local text = line:GetText()
+		if not canaccessvalue(text) then return end
 		if text and strfind(text, id) then return end
 	end
 	if isItem then
@@ -22,7 +23,8 @@ end
 
 -- Spells
 hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
-	local id = select(10, UnitAura(...))
+	local aura = C_UnitAuras.GetAuraDataByIndex(...)
+	local id = aura and aura.spellId
 	if id then addLine(self, id) end
 	if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(...)..": "..id) end
 end)
@@ -36,6 +38,7 @@ end
 
 hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", attachByAuraInstanceID) -- from oUF Auras
 hooksecurefunc(GameTooltip, "SetUnitDebuffByAuraInstanceID", attachByAuraInstanceID)
+hooksecurefunc(GameTooltip, "SetUnitAuraByAuraInstanceID", attachByAuraInstanceID)
 
 hooksecurefunc("SetItemRef", function(link)
 	local id = tonumber(link:match("spell:(%d+)"))

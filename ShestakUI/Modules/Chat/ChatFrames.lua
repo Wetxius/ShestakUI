@@ -12,7 +12,7 @@ end
 
 -- Function to rename channel and other stuff
 local AddMessage = function(self, text, ...)
-	if type(text) == "string" then
+	if type(text) == "string" and canaccessvalue(text) then
 		text = text:gsub("|h%[(%d+)%. .-%]|h", "|h[%1]|h")
 		text = text:gsub("|Hplayer:(.-)|h%[(.-)%]|h", Strip)
 	end
@@ -357,7 +357,7 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveRealmName)
 --	Save slash command typo
 ----------------------------------------------------------------------------------------
 local function TypoHistory_Posthook_AddMessage(chat, text)
-	if text and strfind(text, HELP_TEXT_SIMPLE) then
+	if text and canaccessvalue(text) and strfind(text, HELP_TEXT_SIMPLE) then
 		ChatEdit_AddHistory(chat.editBox)
 	end
 end

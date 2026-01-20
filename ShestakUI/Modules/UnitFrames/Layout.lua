@@ -77,6 +77,7 @@ local function Shared(self, unit)
 	end
 
 	self.Health.PostUpdate = T.PostUpdateHealth
+	self.Health.PostUpdateColor = T.PostUpdateHealthColor
 
 	-- Health bar background
 	self.Health.bg = self.Health:CreateTexture(nil, "BORDER")
@@ -88,95 +89,95 @@ local function Shared(self, unit)
 		self.Health.bg.multiplier = 0.2
 	end
 
-	self.Health.value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-	if unit == "player" or unit == "pet" or unit == "focus" then
-		self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
-		self.Health.value:SetJustifyH("RIGHT")
-	elseif unit == "arena" then
-		if C.unitframe.arena_on_right == true then
-			self.Health.value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
-			self.Health.value:SetJustifyH("LEFT")
-		else
+	if unit ~= "arenatarget" then
+		self.Health.value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		if unit == "player" or unit == "pet" or unit == "focus" then
 			self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
 			self.Health.value:SetJustifyH("RIGHT")
-		end
-	elseif unit == "boss" then
-		if C.unitframe.boss_on_right == true then
+		elseif unit == "arena" then
+			if C.unitframe.arena_on_right == true then
+				self.Health.value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Health.value:SetJustifyH("LEFT")
+			else
+				self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Health.value:SetJustifyH("RIGHT")
+			end
+		elseif unit == "boss" then
+			if C.unitframe.boss_on_right == true then
+				self.Health.value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Health.value:SetJustifyH("LEFT")
+			else
+				self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Health.value:SetJustifyH("RIGHT")
+			end
+		else
 			self.Health.value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
 			self.Health.value:SetJustifyH("LEFT")
-		else
-			self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
-			self.Health.value:SetJustifyH("RIGHT")
 		end
-	elseif unit == "arenatarget" then
-		self.Health.value:Hide()
-	else
-		self.Health.value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
-		self.Health.value:SetJustifyH("LEFT")
-	end
 
-	-- Power bar
-	self.Power = CreateFrame("StatusBar", self:GetName().."_Power", self)
-	if unit == "player" or unit == "target" or unit == "arena" or unit == "boss" then
-		self.Power:SetHeight(5 + C.unitframe.extra_power_height)
-	elseif unit == "arenatarget" then
-		self.Power:SetHeight(0)
-	else
-		self.Power:SetHeight(2)
-	end
-	self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -1)
-	self.Power:SetPoint("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -1)
-	self.Power:SetStatusBarTexture(C.media.texture)
-
-	self.Power.frequentUpdates = true
-	self.Power.colorDisconnected = true
-	self.Power.colorTapping = true
-	if C.unitframe.own_color == true then
-		self.Power.colorClass = true
-	else
-		self.Power.colorPower = true
-	end
-	if C.unitframe.plugins_smooth_bar == true then
-		self.Power.Smooth = true
-	end
-
-	self.Power.PreUpdate = T.PreUpdatePower
-	self.Power.PostUpdate = T.PostUpdatePower
-
-	self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
-	self.Power.bg:SetAllPoints()
-	self.Power.bg:SetTexture(C.media.texture)
-	if C.unitframe.own_color == true and unit == "pet" then
-		self.Power.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
-	else
-		self.Power.bg.multiplier = 0.2
-	end
-
-	self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-	if unit == "player" then
-		self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-		self.Power.value:SetJustifyH("RIGHT")
-	elseif unit == "arena" then
-		if C.unitframe.arena_on_right == true then
-			self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
-			self.Power.value:SetJustifyH("LEFT")
+		-- Power bar
+		self.Power = CreateFrame("StatusBar", self:GetName().."_Power", self)
+		if unit == "player" or unit == "target" or unit == "arena" or unit == "boss" then
+			self.Power:SetHeight(5 + C.unitframe.extra_power_height)
 		else
-			self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-			self.Power.value:SetJustifyH("RIGHT")
+			self.Power:SetHeight(2)
 		end
-	elseif unit == "boss" then
-		if C.unitframe.boss_on_right == true then
-			self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
-			self.Power.value:SetJustifyH("LEFT")
+		self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -1)
+		self.Power:SetPoint("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -1)
+		self.Power:SetStatusBarTexture(C.media.texture)
+
+		self.Power.frequentUpdates = true
+		self.Power.colorDisconnected = true
+		self.Power.colorTapping = true
+		if C.unitframe.own_color == true then
+			self.Power.colorClass = true
 		else
-			self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-			self.Power.value:SetJustifyH("RIGHT")
+			self.Power.colorPower = true
 		end
-	elseif unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget" then
-		self.Power.value:Hide()
-	else
-		self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
-		self.Power.value:SetJustifyH("LEFT")
+		if C.unitframe.plugins_smooth_bar == true then
+			self.Power.Smooth = true
+		end
+
+		self.Power.PostUpdate = T.PostUpdatePower
+		self.Power.PostUpdateColor = T.PostUpdatePowerColor
+		self:RegisterEvent("UNIT_FLAGS", T.ForceUpdate)		-- Force when dead, to hide power
+		self:RegisterEvent("UNIT_FACTION", T.ForceUpdate)	-- Force when alive, to show power
+
+		self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
+		self.Power.bg:SetAllPoints()
+		self.Power.bg:SetTexture(C.media.texture)
+		if C.unitframe.own_color == true and unit == "pet" then
+			self.Power.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
+		else
+			self.Power.bg.multiplier = 0.2
+		end
+
+		if unit ~= "pet" and unit ~= "focus" and unit ~= "focustarget" and unit ~= "targettarget" then
+			self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			if unit == "player" then
+				self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+				self.Power.value:SetJustifyH("RIGHT")
+			elseif unit == "arena" then
+				if C.unitframe.arena_on_right == true then
+					self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+					self.Power.value:SetJustifyH("LEFT")
+				else
+					self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+					self.Power.value:SetJustifyH("RIGHT")
+				end
+			elseif unit == "boss" then
+				if C.unitframe.boss_on_right == true then
+					self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+					self.Power.value:SetJustifyH("LEFT")
+				else
+					self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+					self.Power.value:SetJustifyH("RIGHT")
+				end
+			else
+				self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+				self.Power.value:SetJustifyH("LEFT")
+			end
+		end
 	end
 
 	-- Names
@@ -287,6 +288,12 @@ local function Shared(self, unit)
 			self.Runes.colorSpec = true
 			self.Runes.sortOrder = "asc"
 
+			self.Runes.PostUpdateColor = function(element, color)
+				for index = 1, #element do
+					T.PostUpdateBackdropColor(element[index], color)
+				end
+			end
+
 			for i = 1, 6 do
 				self.Runes[i] = CreateFrame("StatusBar", self:GetName().."_Rune"..i, self.Runes)
 				self.Runes[i]:SetSize((player_width - 5) / 6, 7)
@@ -372,6 +379,21 @@ local function Shared(self, unit)
 
 				self.Stagger.Text = T.SetFontString(self.Stagger, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 				self.Stagger.Text:SetPoint("CENTER", self.Stagger, "CENTER", 0, 0)
+
+				self.Stagger.PostUpdateColor = function(element, color)
+					T.PostUpdateBackdropColor(element, color)
+				end
+
+				self.Stagger.PostVisibility = function(element, isVisible)
+					if isVisible then
+						if element.__owner.Debuffs then element.__owner.Debuffs:SetPoint("BOTTOMRIGHT", element.__owner, "TOPRIGHT", 2, 19) end
+					else
+						if C_SpecializationInfo.GetSpecialization() ~= SPEC_MONK_WINDWALKER then -- Windwalker has own chi bar
+							if element.__owner.Debuffs then element.__owner.Debuffs:SetPoint("BOTTOMRIGHT", element.__owner, "TOPRIGHT", 2, 5) end
+						end
+					end
+				end
+
 			end
 		end
 
@@ -525,7 +547,7 @@ local function Shared(self, unit)
 
 		-- Additional mana
 		if T.class == "DRUID" or T.class == "PRIEST" or T.class == "SHAMAN" then
-			CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateClassMana(self) end)
+			CreateFrame("Frame"):SetScript("OnUpdate", function(_, elapsed) T.UpdateClassMana(self, elapsed) end)
 			self.ClassMana = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.ClassMana:SetTextColor(1, 0.49, 0.04)
 		end
@@ -634,22 +656,23 @@ local function Shared(self, unit)
 		end)
 	end
 
-	if unit == "pet" or unit == "targettarget" or unit == "focus" or unit == "focustarget" then
+	if unit == "pet" and C.aura.pet_debuffs or unit == "focus" and C.aura.focus_debuffs
+	or unit == "focustarget" and C.aura.fot_debuffs or unit == "targettarget" and C.aura.tot_debuffs then
 		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
 		self.Debuffs:SetHeight(25)
 		self.Debuffs:SetWidth(pet_width + 4)
 		self.Debuffs.size = T.Scale(C.aura.debuff_size)
 		self.Debuffs.spacing = T.Scale(3)
 		self.Debuffs.num = 4
-		self.Debuffs["growth-y"] = "DOWN"
+		self.Debuffs.growthY = "DOWN"
 		if unit == "pet" or unit == "focus" then
 			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -17)
 			self.Debuffs.initialAnchor = "TOPRIGHT"
-			self.Debuffs["growth-x"] = "LEFT"
+			self.Debuffs.growthX = "LEFT"
 		else
 			self.Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -17)
 			self.Debuffs.initialAnchor = "TOPLEFT"
-			self.Debuffs["growth-x"] = "RIGHT"
+			self.Debuffs.growthX = "RIGHT"
 		end
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
@@ -715,43 +738,51 @@ local function Shared(self, unit)
 		end
 
 		if unit == "player" then
-			self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
-			self.Debuffs:SetHeight(165)
-			self.Debuffs:SetWidth(player_width + 4)
-			self.Debuffs.size = T.Scale(C.aura.debuff_size)
-			self.Debuffs.spacing = T.Scale(3)
-			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
-			self.Debuffs["growth-y"] = "UP"
-			self.Debuffs["growth-x"] = "LEFT"
-			if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
-			or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo == true and C.unitframe_class_bar.combo_old ~= true)
-			or (T.class == "SHAMAN" and C.unitframe_class_bar.totem == true)
-			or (T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then
-				self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19)
-			else
-				self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5)
-			end
+			if C.aura.player_auras then
+				self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
+				self.Debuffs:SetHeight(165)
+				self.Debuffs:SetWidth(player_width + 4)
+				self.Debuffs.size = T.Scale(C.aura.debuff_size)
+				self.Debuffs.spacing = T.Scale(3)
+				self.Debuffs.initialAnchor = "BOTTOMRIGHT"
+				self.Debuffs.growthX = "LEFT"
+				self.Debuffs.growthY = "UP"
+				if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
+				or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo == true and C.unitframe_class_bar.combo_old ~= true)
+				or (T.class == "SHAMAN" and C.unitframe_class_bar.totem == true)
+				or (T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then
+					self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19)
+				else
+					self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5)
+				end
 
-			self.Debuffs.PostCreateButton = T.PostCreateIcon
-			self.Debuffs.PostUpdateButton = T.PostUpdateIcon
+				self.Debuffs.PostCreateButton = T.PostCreateIcon
+				self.Debuffs.PostUpdateButton = T.PostUpdateIcon
+			else
+				BuffFrame:Hide()
+				DebuffFrame:Hide()
+			end
 		end
 
 		if unit == "target" then
-			self.Auras = CreateFrame("Frame", self:GetName().."_Auras", self)
-			self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
-			self.Auras.initialAnchor = "BOTTOMLEFT"
-			self.Auras["growth-x"] = "RIGHT"
-			self.Auras["growth-y"] = "UP"
-			self.Auras.numDebuffs = 16
-			self.Auras.numBuffs = 32
-			self.Auras:SetHeight(165)
-			self.Auras:SetWidth(player_width - 6)
-			self.Auras.spacing = T.Scale(3)
-			self.Auras.size = T.Scale(C.aura.debuff_size)
-			self.Auras.gap = true
-			self.Auras.PostCreateButton = T.PostCreateIcon
-			self.Auras.PostUpdateButton = T.PostUpdateIcon
-			self.Auras.FilterAura = T.CustomFilter
+			if C.aura.target_auras then
+				self.Auras = CreateFrame("Frame", self:GetName().."_Auras", self)
+				self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
+				self.Auras.initialAnchor = "BOTTOMLEFT"
+				self.Auras.growthX = "RIGHT"
+				self.Auras.growthY = "UP"
+				self.Auras.numDebuffs = 16
+				self.Auras.numBuffs = 32
+				self.Auras:SetHeight(165)
+				self.Auras:SetWidth(player_width - 6)
+				self.Auras.spacing = T.Scale(3)
+				self.Auras.size = T.Scale(C.aura.debuff_size)
+				self.Auras.gap = true
+				self.Auras.PostCreateButton = T.PostCreateIcon
+				self.Auras.PostUpdateButton = T.PostUpdateIcon
+				self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
+				self.Auras.FilterAura = T.CustomFilter
+			end
 
 			-- Rogue/Druid Combo bar
 			if C.unitframe_class_bar.combo == true and (C.unitframe_class_bar.combo_old == true or (T.class ~= "DRUID" and T.class ~= "ROGUE")) then
@@ -822,7 +853,14 @@ local function Shared(self, unit)
 		self.Castbar.Overlay:SetPoint("TOPLEFT", -2, 2)
 		self.Castbar.Overlay:SetPoint("BOTTOMRIGHT", 2, -2)
 
+		-- self.Castbar.Shield = self.Castbar:CreateTexture(nil, 'ARTWORK') -- BETA delete if not need
+		-- self.Castbar.Shield:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", 0, 0)
+		-- self.Castbar.Shield:SetPoint("BOTTOMRIGHT", self.Castbar:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		-- self.Castbar.Shield:SetTexture(C.media.texture)
+		-- self.Castbar.Shield:SetVertexColor(0.8, 0, 0)
+
 		self.Castbar.PostCastStart = T.PostCastStart
+		self.Castbar.PostCastInterruptible = T.PostCastStart
 
 		if unit == "player" then
 			if C.unitframe.castbar_icon == true then
@@ -941,8 +979,13 @@ local function Shared(self, unit)
 				self.Castbar.Time2:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, -10)
 
 				self.Castbar.CustomTimeText = function(self, duration)
-					self.Time:SetText(("%.1f"):format(self.max))
-					self.Time2:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
+					if self.endTime then
+						local max = self.endTime - self.startTime
+						self.Time:SetText(("%.1f"):format(max))
+						self.Time2:SetText(("%.1f"):format(self.channeling and duration or max - duration))
+					else
+						self.Time2:SetText(("%.1f"):format(duration))
+					end
 				end
 				self.Castbar.CustomDelayText = function(self)
 					self.Time:SetText(("|cffaf5050%s %.1f|r"):format(self.channeling and "-" or "+", abs(self.delay)))
@@ -973,7 +1016,7 @@ local function Shared(self, unit)
 	end
 
 	-- Swing bar
-	if C.unitframe.plugins_swing == true and unit == "player" then
+	if C.unitframe.plugins_swing == true and unit == "player" then -- BETA not work
 		self.Swing = CreateFrame("StatusBar", self:GetName().."_Swing", self)
 		self.Swing:CreateBackdrop("Default")
 		if C.unitframe.unit_castbar then
@@ -1075,11 +1118,11 @@ local function Shared(self, unit)
 			if C.unitframe.boss_on_right == true then
 				self.Auras:SetPoint("RIGHT", self, "LEFT", -5, 0)
 				self.Auras.initialAnchor = "RIGHT"
-				self.Auras["growth-x"] = "LEFT"
+				self.Auras.growthX = "LEFT"
 			else
 				self.Auras:SetPoint("LEFT", self, "RIGHT", 5, 0)
 				self.Auras.initialAnchor = "LEFT"
-				self.Auras["growth-x"] = "RIGHT"
+				self.Auras.growthX = "RIGHT"
 			end
 			self.Auras.numDebuffs = C.aura.boss_debuffs
 			self.Auras.numBuffs = C.aura.boss_buffs
@@ -1090,6 +1133,7 @@ local function Shared(self, unit)
 			self.Auras.gap = true
 			self.Auras.PostCreateButton = T.PostCreateIcon
 			self.Auras.PostUpdateButton = T.PostUpdateIcon
+			self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
 			self.Auras.FilterAura = T.CustomFilterBoss
 		end
 
@@ -1154,8 +1198,6 @@ local function Shared(self, unit)
 		end
 		self.NormalAlpha = 1
 	end
-
-	T.HideAuraFrame(self)
 
 	if T.PostCreateUnitFrames then
 		T.PostCreateUnitFrames(self, unit)
@@ -1331,7 +1373,7 @@ end
 --	Test UnitFrames(by community)
 ----------------------------------------------------------------------------------------
 local moving = false
-SlashCmdList.TEST_UF = function()
+SlashCmdList.TEST_UF = function(msg)
 	if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 	if not moving then
 		for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
@@ -1341,30 +1383,32 @@ SlashCmdList.TEST_UF = function()
 			end
 		end
 
-		-- if C.unitframe.show_arena == true then
-			-- for i = 1, 5 do
-				-- _G["oUF_Arena"..i].oldunit = _G["oUF_Arena"..i].unit
-				-- _G["oUF_Arena"..i].Trinket.Hide = T.dummy
-				-- _G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
-				-- _G["oUF_Arena"..i]:SetAttribute("unit", "player")
+		if msg == "arena" then
+			if C.unitframe.show_arena == true then
+				for i = 1, 5 do
+					_G["oUF_Arena"..i].oldunit = _G["oUF_Arena"..i].unit
+					_G["oUF_Arena"..i].Trinket.Hide = T.dummy
+					_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
+					_G["oUF_Arena"..i]:SetAttribute("unit", "player")
 
-				-- _G["oUF_Arena"..i.."Target"].oldunit = _G["oUF_Arena"..i.."Target"].unit
-				-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
+					_G["oUF_Arena"..i.."Target"].oldunit = _G["oUF_Arena"..i.."Target"].unit
+					_G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
 
-				-- if C.unitframe.plugins_enemy_spec == true then
-					-- _G["oUF_Arena"..i].EnemySpec:SetText(SPECIALIZATION)
-				-- end
+					if C.unitframe.plugins_enemy_spec == true then
+						_G["oUF_Arena"..i].EnemySpec:SetText(SPECIALIZATION)
+					end
 
-				-- if C.unitframe.plugins_diminishing == true then
-					-- SlashCmdList.DIMINISHINGCD()
-				-- end
-			-- end
-		-- end
-
-		if C.unitframe.show_boss == true then
-			for i = 1, 8 do
-				_G["oUF_Boss"..i].oldunit = _G["oUF_Boss"..i].unit
-				_G["oUF_Boss"..i]:SetAttribute("unit", "player")
+					if C.unitframe.plugins_diminishing == true then
+						SlashCmdList.DIMINISHINGCD()
+					end
+				end
+			end
+		else
+			if C.unitframe.show_boss == true then
+				for i = 1, 8 do
+					_G["oUF_Boss"..i].oldunit = _G["oUF_Boss"..i].unit
+					_G["oUF_Boss"..i]:SetAttribute("unit", "player")
+				end
 			end
 		end
 		moving = true
@@ -1376,18 +1420,21 @@ SlashCmdList.TEST_UF = function()
 			end
 		end
 
-		-- if C.unitframe.show_arena == true then
-			-- for i = 1, 5 do
-				-- _G["oUF_Arena"..i].Trinket.Hide = nil
-				-- _G["oUF_Arena"..i]:SetAttribute("unit", _G["oUF_Arena"..i].oldunit)
-				-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", _G["oUF_Arena"..i.."Target"].oldunit)
-			-- end
-		-- end
+		if msg == "arena" then
+			if C.unitframe.show_arena == true then
+				for i = 1, 5 do
+					_G["oUF_Arena"..i].Trinket.Hide = nil
+					_G["oUF_Arena"..i]:SetAttribute("unit", _G["oUF_Arena"..i].oldunit)
+					_G["oUF_Arena"..i.."Target"]:SetAttribute("unit", _G["oUF_Arena"..i.."Target"].oldunit)
+				end
+			end
 
-		if C.unitframe.show_boss == true then
-			for i = 1, 8 do
-				_G["oUF_Boss"..i].unit = _G["oUF_Boss"..i].oldunit
-				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].unit)
+		else
+			if C.unitframe.show_boss == true then
+				for i = 1, 8 do
+					_G["oUF_Boss"..i].unit = _G["oUF_Boss"..i].oldunit
+					_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].unit)
+				end
 			end
 		end
 		moving = false

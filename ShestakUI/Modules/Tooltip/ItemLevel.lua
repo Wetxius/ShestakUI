@@ -124,7 +124,7 @@ local function AddLine(sekret, leftText, rightText, prefixColor, detailColor, do
 	for i = 2, GameTooltip:NumLines() do
 		local line = _G["GameTooltipTextLeft"..i]
 		local text = line and line:IsShown() and line:GetText()
-		if text and text:find(sekret) then
+		if text and canaccessvalue(text) and text:find(sekret) then
 			line:SetText(prefixColor..leftText..detailColor..rightText)
 			GameTooltip:Show()
 			return
@@ -255,6 +255,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetI
 
 local function GetTooltipGUID()
 	local _, unitID = GameTooltip:GetUnit()
+	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if UnitIsPlayer(unitID) and CanInspect(unitID) then
 		return guid
@@ -266,7 +267,9 @@ local ShouldInspect = false
 lastInspectRequest = 0
 local FailTimeout = 1
 f:SetScript("OnUpdate", function()
+	if InCombatLockdown() then return end -- BETA
 	local _, unitID = GameTooltip:GetUnit()
+	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if not guid or (InspectFrame and InspectFrame:IsVisible()) then return end
 	local timeSince = GetTime() - lastInspectRequest
@@ -414,6 +417,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(self
 	if self ~= GameTooltip or self:IsForbidden() then return end
 	if C.tooltip.show_shift and not IsShiftKeyDown() then return end
 	local _, unitID = self:GetUnit()
+	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if guid and UnitIsPlayer(unitID) then
 		local cache = GuidCache[guid]

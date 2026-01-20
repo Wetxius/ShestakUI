@@ -31,12 +31,12 @@ local function OnEvent(self, event, arg1)
 	if event == "PLAYER_LOGIN" then
 		if not self.icon:GetTexture() then
 			self:UnregisterAllEvents()
-			self:RegisterEvent("LEARNED_SPELL_IN_TAB")
+			self:RegisterEvent("LEARNED_SPELL_IN_SKILL_LINE")
 		end
 		return
 	end
 
-	if event == "LEARNED_SPELL_IN_TAB" and self.icon:GetTexture() then
+	if event == "LEARNED_SPELL_IN_SKILL_LINE" and self.icon:GetTexture() then
 		self:UnregisterAllEvents()
 		self:RegisterEvent("UNIT_AURA")
 		self:RegisterEvent("UNIT_ENTERED_VEHICLE")
@@ -98,8 +98,17 @@ local function OnEvent(self, event, arg1)
 
 		wipe(playerBuff)
 		local i = 1
+		local secret
 		while true do
-			local name = UnitBuff("player", i)
+			local name
+			local auraData = C_UnitAuras.GetAuraDataByIndex("player", i, "HELPFUL")
+			if auraData then
+				if canaccessvalue(auraData.name) then -- BETA
+					name = auraData.name
+				else
+					secret = true
+				end
+			end
 			if not name then break end
 			playerBuff[name] = true
 			i = i + 1
@@ -117,7 +126,7 @@ local function OnEvent(self, event, arg1)
 		else
 			for i = 1, #group.spells do
 				local name = group.spells[i][1]
-				if name and playerBuff[name] then
+				if (name and playerBuff[name]) or secret then
 					self:Hide()
 					return
 				end

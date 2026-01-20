@@ -326,8 +326,14 @@ local micromenu = {
 	end},
 }
 
-if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() and C_StorePublic.IsEnabled() then
-	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
+if T.newPatch then
+	if not IsTrialAccount() and C_StorePublic.IsEnabled() then
+		tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
+	end
+else
+	if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() and C_StorePublic.IsEnabled() then
+		tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
+	end
 end
 
 if T.level == MAX_PLAYER_LEVEL then

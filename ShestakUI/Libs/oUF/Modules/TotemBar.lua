@@ -39,8 +39,7 @@ local function UpdateSlot(self, slot)
 		r, g, b = r * mu, g * mu, b * mu
 		totem.bg:SetVertexColor(r, g, b)
 	end
-
-	if haveTotem and duration > 0 then
+	if (canaccessvalue(haveTotem) and haveTotem) and duration > 0 then
 		totem.finish = startTime + duration
 		totem:SetMinMaxValues(0, duration)
 		totem:SetValue(duration)

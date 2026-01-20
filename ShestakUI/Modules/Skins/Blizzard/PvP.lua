@@ -19,30 +19,33 @@ end)
 if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	-- Set texture to hide circle
-	PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
-	PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
-	PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
+	-- PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
+	-- PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
+	-- PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
 
-	for i = 1, 3 do
-		local button = _G["PVPQueueFrameCategoryButton"..i]
-		button.Ring:Kill()
-		button:CreateBackdrop("Overlay")
-		button.backdrop:SetAllPoints()
-		button:StyleButton()
-		button.Background:Kill()
-		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		button.Icon:SetPoint("LEFT", button, "LEFT", 10, 0)
-		button.Icon:SetDrawLayer("OVERLAY")
-		button.Icon:SetSize(40, 40)
-		button.border = CreateFrame("Frame", nil, button)
-		button.border:CreateBackdrop("Default")
-		button.border.backdrop:SetPoint("TOPLEFT", button.Icon, -2, 2)
-		button.border.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, 2, -2)
+	for i = 1, #PVPQueueFrame.CategoryButtons do
+		local button = PVPQueueFrame.CategoryButtons[i]
+		if button then
+			button.Ring:Kill()
+			button.CircleMask:Hide()
+			button:CreateBackdrop("Overlay")
+			button.backdrop:SetAllPoints()
+			button:StyleButton()
+			button.Background:Kill()
+			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			button.Icon:SetPoint("LEFT", button, "LEFT", 10, 0)
+			button.Icon:SetDrawLayer("OVERLAY")
+			button.Icon:SetSize(40, 40)
+			button.border = CreateFrame("Frame", nil, button)
+			button.border:CreateBackdrop("Default")
+			button.border.backdrop:SetPoint("TOPLEFT", button.Icon, -2, 2)
+			button.border.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, 2, -2)
+		end
 	end
 
 	hooksecurefunc("PVPQueueFrame_SelectButton", function(index)
 		local self = PVPQueueFrame
-		for i = 1, 3 do
+		for i = 1, 4 do
 			local button = self["CategoryButton"..i]
 			if i == index then
 				button.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
@@ -137,7 +140,7 @@ local function LoadSkin()
 		end
 	end)
 
-	hooksecurefunc(HonorFrame.SpecificScrollBox, "Update", function (self)
+	hooksecurefunc(HonorFrame.SpecificScrollBox, "Update", function(self)
 		for i = 1, self.ScrollTarget:GetNumChildren() do
 			local button = select(i, self.ScrollTarget:GetChildren())
 			if not button.IsSkinned then
@@ -158,12 +161,15 @@ local function LoadSkin()
 	end)
 
 	local checkButtons = {
-		HonorFrame.TankIcon,
-		HonorFrame.HealerIcon,
-		HonorFrame.DPSIcon,
-		ConquestFrame.TankIcon,
-		ConquestFrame.HealerIcon,
-		ConquestFrame.DPSIcon
+		HonorFrame.RoleList.TankIcon,
+		HonorFrame.RoleList.HealerIcon,
+		HonorFrame.RoleList.DPSIcon,
+		ConquestFrame.RoleList.TankIcon,
+		ConquestFrame.RoleList.HealerIcon,
+		ConquestFrame.RoleList.DPSIcon,
+		TrainingGroundsFrame.RoleList.TankIcon,
+		TrainingGroundsFrame.RoleList.HealerIcon,
+		TrainingGroundsFrame.RoleList.DPSIcon
 	}
 
 	for i = 1, #checkButtons do
@@ -253,6 +259,73 @@ local function LoadSkin()
 	RewardFrame.Icon:SkinIcon()
 
 	NewSeasonPopup.Leave:SkinButton()
+
+	-- TrainingGroundsFrame
+	TrainingGroundsFrame.Inset:StripTextures()
+	TrainingGroundsFrame.BonusTrainingGroundList:StripTextures()
+	TrainingGroundsFrame.BonusTrainingGroundList.ShadowOverlay:StripTextures()
+
+	for _, i in pairs({"RandomTrainingGroundButton"}) do
+		local button = TrainingGroundsFrame.BonusTrainingGroundList[i]
+		button:StripTextures()
+		button:SetTemplate("Overlay")
+		button:StyleButton()
+		button.SelectedTexture:SetDrawLayer("ARTWORK")
+		button.SelectedTexture:ClearAllPoints()
+		button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
+		button.SelectedTexture:SetPoint("BOTTOMRIGHT", -2, 2)
+		button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+
+		local reward = button.Reward
+		reward:StripTextures()
+		reward:SetTemplate("Default")
+		reward:SetSize(40, 40)
+		reward:SetPoint("RIGHT", button, "RIGHT", -8, 0)
+		reward.CircleMask:Hide()
+
+		reward.Icon:SetAllPoints()
+		reward.Icon:SetPoint("TOPLEFT", 2, -2)
+		reward.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		reward.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+		reward.EnlistmentBonus:StripTextures()
+		reward.EnlistmentBonus:SetTemplate("Default")
+		reward.EnlistmentBonus:SetSize(20, 20)
+		reward.EnlistmentBonus:SetPoint("TOPRIGHT", 2, 2)
+
+		local EnlistmentBonusIcon = reward.EnlistmentBonus:CreateTexture()
+		EnlistmentBonusIcon:SetPoint("TOPLEFT", reward.EnlistmentBonus, "TOPLEFT", 2, -2)
+		EnlistmentBonusIcon:SetPoint("BOTTOMRIGHT", reward.EnlistmentBonus, "BOTTOMRIGHT", -2, 2)
+		EnlistmentBonusIcon:SetTexture("Interface\\Icons\\achievement_guildperk_honorablemention_rank2")
+		EnlistmentBonusIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	end
+
+	T.SkinDropDownBox(TrainingGroundsFrameTypeDropdown, 165)
+	TrainingGroundsFrameTypeDropdown:SetPoint("BOTTOMRIGHT", TrainingGroundsFrame.Inset, "TOPRIGHT", -14, -1)
+	T.SkinScrollBar(TrainingGroundsFrame.SpecificTrainingGroundList.ScrollBar)
+	TrainingGroundsFrame.SpecificTrainingGroundList.ScrollBar:SetPoint("TOPLEFT", TrainingGroundsFrame, "TOPRIGHT", -19, -92)
+	TrainingGroundsFrame.SpecificTrainingGroundList.ScrollBar:SetPoint("BOTTOMLEFT", TrainingGroundsFrame, "BOTTOMRIGHT", -19, 27)
+	TrainingGroundsFrame.QueueButton:SkinButton(true)
+
+	hooksecurefunc(TrainingGroundsFrame.SpecificTrainingGroundList.ScrollBox, "Update", function(self)
+		for i = 1, self.ScrollTarget:GetNumChildren() do
+			local button = select(i, self.ScrollTarget:GetChildren())
+			if not button.IsSkinned then
+				button:SetSize(368, 38)
+				button:StripTextures()
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", 0, 0)
+				button.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
+				button:StyleButton(nil, nil, true)
+				button.SelectedTexture:SetDrawLayer("ARTWORK")
+				button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+				button.SelectedTexture:SetInside(button.backdrop)
+				button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				button.Icon:SetPoint("TOPLEFT", 5, -3)
+				button.IsSkinned = true
+			end
+		end
+	end)
 end
 
 T.SkinFuncs["Blizzard_PVPUI"] = LoadSkin

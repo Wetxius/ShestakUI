@@ -139,7 +139,7 @@ local function deactivateDisplay(cooldown)
 end
 
 local function setHideCooldownNumbers(cooldown, hide)
-	local disable = not (hide or cooldown.noCooldownCount or cooldown:IsForbidden())
+	local disable = not (canaccessvalue(hide) and hide or cooldown.noCooldownCount or cooldown:IsForbidden())
 
 	if disable then
 		hideNumbers[cooldown] = true
@@ -158,6 +158,7 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 		return
 	end
 
+	if not canaccessvalue(start) then return end
 	local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 
 	if show then
@@ -181,4 +182,15 @@ hooksecurefunc(Cooldown_MT, "SetHideCountdownNumbers", setHideCooldownNumbers)
 
 hooksecurefunc("CooldownFrame_SetDisplayAsPercentage", function(cooldown)
 	setHideCooldownNumbers(cooldown, false)
+end)
+
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+frame:RegisterEvent("PLAYER_REGEN_ENABLED")
+frame:SetScript("OnEvent", function(_, event)
+	if event == "PLAYER_REGEN_DISABLED" then
+		SetCVar("countdownForCooldowns", 1)
+	else
+		SetCVar("countdownForCooldowns", 0)
+	end
 end)

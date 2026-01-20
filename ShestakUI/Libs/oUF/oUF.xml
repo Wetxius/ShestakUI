@@ -1,13 +1,14 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Init.lua"/>
+	<Script file="Enums.lua"/>
 	<Script file="Private.lua"/>
 	<Script file="oUF.lua"/>
 	<Script file="Events.lua"/>
-	<Script file="CombatEvents.lua"/>
 	<Script file="Factory.lua"/>
 	<Script file="Blizzard.lua"/>
 	<Script file="Units.lua"/>
 	<Script file="Colors.lua"/>
+	<Script file="Legacy.lua"/>
 
 	<Script file="Elements\AlternativePower.lua"/>
 	<Script file="Elements\AssistantIndicator.lua"/>
@@ -15,8 +16,8 @@
 	<Script file="Elements\CastBar.lua"/>
 	<Script file="Elements\CombatIndicator.lua"/>
 	<Script file="Elements\GroupRoleIndicator.lua"/>
-	<Script file="Elements\HealPrediction.lua"/>
 	<Script file="Elements\Health.lua"/>
+	<Script file="Elements\HealthPrediction.lua"/>
 	<Script file="Elements\LeaderIndicator.lua"/>
 	<Script file="Elements\PhaseIndicator.lua"/>
 	<Script file="Elements\Portraits.lua"/>

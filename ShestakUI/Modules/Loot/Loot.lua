@@ -290,7 +290,7 @@ do
 		local slot = self:GetID()
 		if LootSlotHasItem(slot) then
 			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-			GameTooltip:SetLootItem(slot)
+			GameTooltip:SetLootItem(slot) -- BETA error secret
 			CursorUpdate(self)
 		end
 
@@ -332,7 +332,7 @@ do
 	local OnUpdate = function(self)
 		if GameTooltip:IsOwned(self) then
 			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-			GameTooltip:SetLootItem(self:GetID())
+			GameTooltip:SetLootItem(self:GetID()) -- BETA error secret
 			CursorOnUpdate(self)
 		end
 	end

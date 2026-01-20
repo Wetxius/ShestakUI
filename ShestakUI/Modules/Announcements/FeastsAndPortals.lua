@@ -1,4 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
+if T.newPatch then return end -- BETA not work
 if C.announcements.feasts ~= true and C.announcements.portals ~= true and C.announcements.toys ~= true then return end
 
 ----------------------------------------------------------------------------------------

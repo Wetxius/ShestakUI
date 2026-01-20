@@ -13,6 +13,7 @@ T.Round = function(number, decimals)
 end
 
 T.ShortValue = function(value)
+	if not canaccessvalue(value) then return AbbreviateNumbers(value) end
 	if value >= 1e11 then
 		return ("%.0fb"):format(value / 1e9)
 	elseif value >= 1e10 then
@@ -149,6 +150,7 @@ RegisterStateDriver(T_PetBattleFrameHider, "visibility", "[petbattle] hide; show
 ----------------------------------------------------------------------------------------
 T.UTF = function(string, i, dots)
 	if not string then return end
+	if not canaccessvalue(string) then return string end
 	local bytes = string:len()
 	if bytes <= i then
 		return string

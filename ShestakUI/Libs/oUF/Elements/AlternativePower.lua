@@ -1,8 +1,5 @@
 local _, ns = ...
 local oUF = ns.oUF
-local Private = oUF.Private
-
-local unitSelectionType = Private.unitSelectionType
 
 -- sourced from Blizzard_UnitFrame/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10
@@ -33,49 +30,28 @@ local function UpdateColor(self, event, unit, powerType)
 	if(self.unit ~= unit or powerType ~= ALTERNATE_POWER_NAME) then return end
 	local element = self.AlternativePower
 
-	local r, g, b, color
-	if(element.colorThreat and not UnitPlayerControlled(unit) and UnitThreatSituation('player', unit)) then
-		color =  self.colors.threat[UnitThreatSituation('player', unit)]
-	elseif(element.colorPower) then
+	local color
+	if(element.colorPower) then
 		color = self.colors.power[ALTERNATE_POWER_INDEX]
-	elseif(element.colorClass and (UnitIsPlayer(unit) or UnitInPartyIsAI(unit)))
-		or (element.colorClassNPC and not (UnitIsPlayer(unit) or UnitInPartyIsAI(unit))) then
-		local _, class = UnitClass(unit)
-		color = self.colors.class[class]
-	elseif(element.colorSelection and unitSelectionType(unit, element.considerSelectionInCombatHostile)) then
-		color = self.colors.selection[unitSelectionType(unit, element.considerSelectionInCombatHostile)]
-	elseif(element.colorReaction and UnitReaction(unit, 'player')) then
-		color = self.colors.reaction[UnitReaction(unit, 'player')]
-	elseif(element.colorSmooth) then
-		local adjust = 0 - (element.min or 0)
-		r, g, b = self:ColorGradient((element.cur or 1) + adjust, (element.max or 1) + adjust, unpack(element.smoothGradient or self.colors.smooth))
-	end
 
-	if(color) then
-		r, g, b = color[1], color[2], color[3]
-	end
-
-	if(b) then
-		element:SetStatusBarColor(r, g, b)
-
-		local bg = element.bg
-		if(bg) then
-			local mu = bg.multiplier or 1
-			bg:SetVertexColor(r * mu, g * mu, b * mu)
+		if(element.colorPowerSmooth and color and color:GetCurve()) then
+			color = UnitPowerPercent(unit, true, color:GetCurve())
 		end
 	end
 
-	--[[ Callback: AlternativePower:PostUpdateColor(unit, r, g, b)
+	if(color) then
+		element:GetStatusBarTexture():SetVertexColor(color:GetRGB())
+	end
+
+	--[[ Callback: AlternativePower:PostUpdateColor(unit, color)
 	Called after the element color has been updated.
 
-	* self - the AlternativePower element
-	* unit - the unit for which the update has been triggered (string)
-	* r    - the red component of the used color (number)[0-1]
-	* g    - the green component of the used color (number)[0-1]
-	* b    - the blue component of the used color (number)[0-1]
+	* self  - the AlternativePower element
+	* unit  - the unit for which the update has been triggered (string)
+	* color - the used ColorMixin-based object (table?)
 	--]]
 	if(element.PostUpdateColor) then
-		element:PostUpdateColor(unit, r, g, b)
+		element:PostUpdateColor(unit, color)
 	end
 end
 
@@ -99,7 +75,7 @@ local function Update(self, event, unit, powerType)
 		max = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
 		min = barInfo.minPower
 		element:SetMinMaxValues(min, max)
-		element:SetValue(cur)
+		element:SetValue(cur, element.smoothing)
 	end
 
 	element.cur = cur
@@ -188,6 +164,10 @@ local function Enable(self, unit)
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
+
+		if(not element.smoothing) then
+			element.smoothing = Enum.StatusBarInterpolation.Immediate
+		end
 
 		self:RegisterEvent('UNIT_POWER_BAR_SHOW', VisibilityPath)
 		self:RegisterEvent('UNIT_POWER_BAR_HIDE', VisibilityPath)

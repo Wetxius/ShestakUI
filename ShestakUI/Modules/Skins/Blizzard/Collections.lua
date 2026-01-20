@@ -490,45 +490,9 @@ local function LoadSkin()
 	end)
 
 	-- Wardrobe
-	T.SkinFrame(WardrobeFrame)
+	WardrobeCollectionFrame.ItemsCollectionFrame:StripTextures()
 	T.SkinDropDownBox(WardrobeCollectionFrame.ClassDropdown)
 
-	T.SkinDropDownBox(WardrobeTransmogFrame.OutfitDropdown)
-	WardrobeTransmogFrame.OutfitDropdown:SetPoint("TOPLEFT", WardrobeTransmogFrame, "TOPLEFT", 5, 28)
-	WardrobeTransmogFrame.OutfitDropdown:SetWidth(195)
-	WardrobeTransmogFrame.OutfitDropdown.SaveButton:SkinButton()
-	WardrobeTransmogFrame.OutfitDropdown.SaveButton:SetHeight(23)
-	WardrobeTransmogFrame.OutfitDropdown.SaveButton:SetPoint("TOPLEFT", WardrobeTransmogFrame.OutfitDropdown, "TOPRIGHT", 3, -1)
-	WardrobeTransmogFrame:StripTextures()
-	WardrobeTransmogFrame.Inset:StripTextures()
-	WardrobeTransmogFrame.ApplyButton:SkinButton()
-	WardrobeTransmogFrame.SpecDropdown:SkinButton()
-	WardrobeTransmogFrame.SpecDropdown:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
-	WardrobeTransmogFrame.ModelScene.ClearAllPendingButton:SkinButton()
-	T.SkinCheckBox(WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox)
-
-	for i = 1, #WardrobeTransmogFrame.SlotButtons do
-		local slot = WardrobeTransmogFrame.SlotButtons[i]
-		local icon = slot.Icon
-		local border = slot.Border
-
-		if slot then
-			border:Kill()
-
-			slot:StyleButton()
-			slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-			slot:CreateBackdrop("Default")
-			slot.backdrop:SetAllPoints()
-
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-		end
-	end
-
-	WardrobeCollectionFrame.ItemsCollectionFrame:StripTextures()
-	WardrobeCollectionFrame.SetsTransmogFrame:StripTextures()
 	WardrobeCollectionFrame.progressBar:StripTextures()
 	WardrobeCollectionFrame.progressBar:CreateBackdrop("Overlay")
 	WardrobeCollectionFrame.progressBar:SetStatusBarTexture(C.media.texture)
@@ -539,8 +503,6 @@ local function LoadSkin()
 	T.SkinDropDownBox(WardrobeCollectionFrame.ItemsCollectionFrame.WeaponDropdown)
 	T.SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
 	T.SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
-	T.SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
-	T.SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
 
 	WardrobeCollectionFrame.SetsCollectionFrame.LeftInset:StripTextures()
 	WardrobeCollectionFrame.SetsCollectionFrame.RightInset:StripTextures()
@@ -661,11 +623,6 @@ local function LoadSkin()
 		SkinModels(model)
 	end
 
-	for i = 1, #WardrobeCollectionFrame.SetsTransmogFrame.Models do
-		local model = WardrobeCollectionFrame.SetsTransmogFrame.Models[i]
-		SkinModels(model)
-	end
-
 	local function SkinSetItemButtons(self)
 		for itemFrame in self.DetailsFrame.itemFramesPool:EnumerateActive() do
 			itemFrame.IconBorder:SetAlpha(0)
@@ -720,9 +677,7 @@ local function LoadSkin()
 	local HelpBox = {
 		ToyBox.favoriteHelpBox,
 		WardrobeCollectionFrame.ItemsCollectionFrame.HelpBox,
-		WardrobeCollectionFrame.SetsTabHelpBox,
-		WardrobeTransmogFrame.SpecHelpBox,
-		WardrobeTransmogFrame.OutfitHelpBox
+		WardrobeCollectionFrame.SetsTabHelpBox
 	}
 
 	for i = 1, #HelpBox do

@@ -49,7 +49,7 @@ oUF.Tags.Methods["GetNameColor"] = function(unit)
 		return _TAGS["raidcolor"](unit)
 	elseif reaction then
 		local c = T.oUF_colors.reaction[reaction]
-		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
+		return string.format("|cff%02x%02x%02x", c.r * 255, c.g * 255, c.b * 255)
 	else
 		local r, g, b = 0.33, 0.59, 0.33
 		return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
@@ -104,10 +104,12 @@ end
 oUF.Tags.Events["LFD"] = "PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE"
 
 oUF.Tags.Methods["AltPower"] = function(unit)
-	local min = UnitPower(unit, ALTERNATE_POWER_INDEX)
-	local max = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
-	if max > 0 and not UnitIsDeadOrGhost(unit) then
-		return ("%s%%"):format(math.floor(min / max * 100 + 0.5))
+	-- local min = UnitPower(unit, ALTERNATE_POWER_INDEX)
+	-- local max = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
+	local perc = UnitPowerPercent(unit, ALTERNATE_POWER_INDEX, true, CurveConstants.ScaleTo100)
+	if not UnitIsDeadOrGhost(unit) then
+	-- if max > 0 and not UnitIsDeadOrGhost(unit) then -- BETA
+		return ("%s%%"):format(perc)
 	end
 end
 oUF.Tags.Events["AltPower"] = "UNIT_POWER_UPDATE"
@@ -135,13 +137,13 @@ oUF.Tags.Methods["NameplateNameColor"] = function(unit)
 			return _TAGS["raidcolor"](unit)
 		else
 			local c = T.oUF_colors.power["MANA"]
-			return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
+			return string.format("|cff%02x%02x%02x", c.r * 255, c.g * 255, c.b * 255)
 		end
 	elseif UnitIsPlayer(unit) then
 		return _TAGS["raidcolor"](unit)
 	elseif reaction then
 		local c = T.oUF_colors.reaction[reaction]
-		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
+		return string.format("|cff%02x%02x%02x", c.r * 255, c.g * 255, c.b * 255)
 	else
 		local r, g, b = 0.33, 0.59, 0.33
 		return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
@@ -151,26 +153,36 @@ oUF.Tags.Events["NameplateNameColor"] = "UNIT_POWER_UPDATE UNIT_FLAGS"
 
 oUF.Tags.Methods["NameplateNameShort"] = function(unit)
 	local name = UnitName(unit)
-	name = T.ShortNames[name] or name
+	if canaccessvalue(name) then -- BETA
+		name = T.ShortNames[name] or name
+	end
 	return T.UTF(name, 18, true)
 end
 oUF.Tags.Events["NameplateNameShort"] = "UNIT_NAME_UPDATE"
 
 oUF.Tags.Methods["NameplateHealth"] = function(unit)
 	local hp = UnitHealth(unit)
-	local maxhp = UnitHealthMax(unit)
-	if maxhp == 0 then
-		return 0
-	else
-		return ("%s - %d%%"):format(T.ShortValue(hp), hp / maxhp * 100 + 0.5)
-	end
+	-- local maxhp = UnitHealthMax(unit)
+	local perc = UnitHealthPercent(unit, true, CurveConstants.ScaleTo100)
+
+	return ("%s - %d%%"):format(AbbreviateNumbers(hp), perc)
+
+	-- if maxhp == 0 then
+		-- return 0
+	-- else
+		-- return ("%s - %d%%"):format(T.ShortValue(hp), hp / maxhp * 100 + 0.5)
+	-- end
 end
 oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"
 
 oUF.Tags.Methods["Absorbs"] = function(unit)
-    local absorb = UnitGetTotalAbsorbs(unit)
-    if absorb and absorb > 0 then
-        return T.ShortValue(absorb)
-    end
+	local absorb = UnitGetTotalAbsorbs(unit)
+	if absorb then
+		AbbreviateNumbers(absorb)
+	end
+
+	-- if absorb and absorb > 0 then
+		-- return T.ShortValue(absorb)
+	-- end
 end
 oUF.Tags.Events["Absorbs"] = "UNIT_ABSORB_AMOUNT_CHANGED"

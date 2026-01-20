@@ -348,6 +348,18 @@ local function LoadSkin()
 	BrowseList.FilterDropdown:SetPoint("TOPRIGHT", BrowseList, "TOPRIGHT", -8, -6)
 	BrowseList.BackgroundNineSlice:Hide()
 
+	hooksecurefunc(BrowseList.ScrollBox, "Update", function(frame)
+		for _, child in next, {frame.ScrollTarget:GetChildren()} do
+			if child.CenterPiece and not child.isSkinned then
+				child:DisableDrawLayer("BACKGROUND")
+				child:CreateBackdrop("Overlay")
+				child.backdrop:SetPoint("TOPLEFT", child, 6, 0)
+				child.backdrop:SetPoint("BOTTOMRIGHT", child, -6, 4)
+				child.isSkinned = true
+			end
+		end
+	end)
+
 	local OrderList = Orders.BrowseFrame.OrderList
 	OrderList:StripTextures()
 	T.SkinScrollBar(OrderList.ScrollBar)

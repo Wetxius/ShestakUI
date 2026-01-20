@@ -8,7 +8,8 @@ local function LoadSkin()
 	local frame = _G.HousingDashboardFrame
 	T.SkinFrame(frame)
 
-	frame.HouseInfoContent.DashboardNoHousesFrame.NoHouseButton:SkinButton()
+	frame.HouseInfoContent.DashboardNoHousesFrame.Background:SetInside(frame.HouseInfoContent.DashboardNoHousesFrame)
+	frame.HouseInfoContent.DashboardNoHousesFrame.NoHouseButton:SkinButton(nil, "Text")
 
 	local tabs = {
 		frame.HouseInfoTabButton,
@@ -36,12 +37,13 @@ local function LoadSkin()
 		end
 	end
 
-	local content = HousingDashboardFrame.CatalogContent
+	frame.HouseInfoTabButton:SetPoint("TOPLEFT", frame, "TOPRIGHT", 1, -60)
+
+	local content = frame.CatalogContent
 	content:StripTextures()
 	content.PreviewFrame:StripTextures()
 	content.Categories:StripTextures()
 	content.Categories.Background:SetAlpha(0)
-
 
 	hooksecurefunc(content.OptionsContainer.ScrollBox, "Update", function(frame)
 		for _, button in next, {frame.ScrollTarget:GetChildren()} do
@@ -59,7 +61,6 @@ local function LoadSkin()
 		end
 	end)
 
-
 	T.SkinEditBox(content.SearchBox)
 	content.SearchBox.backdrop:SetOutside(nil, 2, -4)
 	T.SkinFilter(content.Filters.FilterDropdown, true)
@@ -76,3 +77,27 @@ local function LoadSkin()
 end
 
 T.SkinFuncs["Blizzard_HousingDashboard"] = LoadSkin
+
+local function LoadNeighborhoodSkin()
+	local frame = _G.HousingCreateNeighborhoodCharterFrame
+	T.SkinFrame(frame)
+
+	T.SkinEditBox(frame.NeighborhoodNameEditBox)
+	frame.ConfirmButton:SkinButton(nil, "Text")
+	frame.CancelButton:SkinButton(nil, "Text")
+
+	-- local ConfirmationFrame = frame.ConfirmationFrame
+	-- ConfirmationFrame:StripTextures()
+	-- ConfirmationFrame:SetTemplate()
+	-- ConfirmationFrame.ConfirmButton:SkinButton()
+	-- ConfirmationFrame.CancelButton:SkinButton()
+end
+
+T.SkinFuncs["Blizzard_HousingCreateNeighborhood"] = LoadNeighborhoodSkin
+
+local function LoadModelPreviewSkin()
+	local frame = _G.HousingModelPreviewFrame
+	T.SkinFrame(frame)
+end
+
+T.SkinFuncs["Blizzard_HousingModelPreview"] = LoadModelPreviewSkin

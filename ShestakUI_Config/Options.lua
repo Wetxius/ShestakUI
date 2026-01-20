@@ -955,7 +955,7 @@ do
 			Serialized = LibSerialize:Serialize(ShestakUIPositionsPerChar[i])
 		end
 
-		local Compressed = LibDeflate:CompressDeflate(Serialized)
+		local Compressed = LibDeflate:CompressDeflate(Serialized, {level = 9})
 		local Encoded = LibDeflate:EncodeForPrint(Compressed)
 		local Result = Prefix..Encoded
 		StaticPopup_Show("SHESTAKUI_EXPORT_PROFILE", _, _, Result)
@@ -3565,7 +3565,7 @@ local gameMenuLastButtons = {
 
 local function PositionGameMenuButton()
 	if not ShestakUI then return end
-	local anchorIndex = (C_StorePublic.IsEnabled and C_StorePublic.IsEnabled() and 2) or 1
+	local anchorIndex = (C_StorePublic.IsEnabled and C_StorePublic.IsEnabled() and 3) or 2 -- BETA check on live
 	for button in GameMenuFrame.buttonPool:EnumerateActive() do
 		local text = button:GetText()
 

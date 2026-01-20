@@ -26,8 +26,13 @@ local function GetDebuffType(unit, filter)
 	if not UnitCanAssist("player", unit) then return nil end
 	local i = 1
 	while true do
-		local _, texture, _, debufftype = UnitAura(unit, i, "HARMFUL")
+		local texture, debufftype
+		local auraData = C_UnitAuras.GetAuraDataByIndex(unit, i, "HARMFUL")
+		if auraData then
+			texture, debufftype = auraData.icon, auraData.dispelName
+		end
 		if not texture then break end
+		if not canaccessvalue(debufftype) then break end
 		if debufftype and not filter or (filter and dispellist[debufftype]) then
 			return debufftype, texture
 		end

@@ -13,7 +13,7 @@ AutoResurrect:SetScript("OnEvent", function(_, event, name)
 			StaticPopup_Hide("RESURRECT_NO_TIMER")
 
 			C_Timer.After(2, function()
-				DoEmote("thank", name)
+				C_ChatInfo.PerformEmote("thank", name)
 			end)
 		end
 	end

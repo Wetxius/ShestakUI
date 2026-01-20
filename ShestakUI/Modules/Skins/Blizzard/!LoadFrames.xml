@@ -30,9 +30,10 @@
 	<Script file="CovenantPreview.lua"/>
 	<Script file="CovenantRenown.lua"/>
 	<Script file="CovenantSanctum.lua"/>
+	<Script file="DamageMeter.lua"/>
+	<Script file="DeathRecap.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="Delves.lua"/>
-	<Script file="DeathRecap.lua"/>
 	<Script file="DressUp.lua"/>
 	<Script file="EditorManager.lua"/>
 	<Script file="EncounterJournal.lua"/>
@@ -64,8 +65,8 @@
 	<Script file="Options.lua"/>
 	<Script file="OrderHall.lua"/>
 	<Script file="PartyPoseUI.lua"/>
-	<Script file="Petition.lua"/>
 	<Script file="PetStable.lua"/>
+	<Script file="Petition.lua"/>
 	<Script file="PlayerChoice.lua"/>
 	<Script file="Professions.lua"/>
 	<Script file="ProfessionsBook.lua"/>
@@ -89,6 +90,7 @@
 	<Script file="TorghastLevelPicker.lua"/>
 	<Script file="Trade.lua"/>
 	<Script file="Trainer.lua"/>
+	<Script file="Transmog.lua"/>
 	<Script file="Tutorial.lua"/>
 	<Script file="WeeklyRewards.lua"/>
 	<Script file="WorldMap.lua"/>

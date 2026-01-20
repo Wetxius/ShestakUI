@@ -106,7 +106,7 @@ C["filger_spells"] = {
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
 
 			-- Festering Wound
-			{spellID = 194310, unitID = "target", caster = "player", filter = "DEBUFF"},
+			--BETA {spellID = 194310, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Virulent Plague
 			{spellID = 191587, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Blood Plague
@@ -810,7 +810,7 @@ C["filger_spells"] = {
 			-- Mok'Nathal Tactics
 			{spellID = 201081, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mongoose Fury
-			{spellID = 190931, unitID = "player", caster = "player", filter = "BUFF"},
+			--BETA {spellID = 190931, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Beast Cleave
 			{spellID = 118455, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Mend Pet
@@ -2031,7 +2031,7 @@ C["filger_spells"] = {
 			-- Feral Lunge
 			{spellID = 196884, filter = "CD"},
 			-- Cloudburst Totem
-			{spellID = 157153, filter = "CD"},
+			--BETA {spellID = 157153, filter = "CD"},
 			-- Earthbind Totem
 			{spellID = 2484, filter = "CD"},
 			-- Thunderstorm

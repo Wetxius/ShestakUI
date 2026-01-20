@@ -5,6 +5,7 @@ if C.skins.blizzard_frames ~= true then return end
 --	Major Factions skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
+	if T.newPatch then return end -- BETA not work
 	local frame = _G.MajorFactionRenownFrame
 
 	T.SkinFrame(frame)

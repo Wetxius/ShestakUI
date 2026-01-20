@@ -18,6 +18,7 @@ BINDING_NAME_TAR_MARK_0 = BINDING_NAME_RAIDTARGETNONE
 --	Mob marking(by ALZA)
 ----------------------------------------------------------------------------------------
 if C.misc.shift_marking ~= true then return end
+if T.newPatch then return end -- BETA not work
 local menuFrame = CreateFrame("Frame", "MarkingFrame", UIParent, "UIDropDownMenuTemplate")
 local menuIcon = "Interface\\TargetingFrame\\UI-RaidTargetingIcons"
 local menuList = {

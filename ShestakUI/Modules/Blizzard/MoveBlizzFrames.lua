@@ -65,10 +65,10 @@ frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(_, _, addon)
 	-- Fix move
 	if addon == "Blizzard_Collections" then
-		local checkbox = _G.WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox
-		checkbox.Label:ClearAllPoints()
-		checkbox.Label:SetPoint("LEFT", checkbox, "RIGHT", 2, 1)
-		checkbox.Label:SetPoint("RIGHT", checkbox, "RIGHT", 160, 1)
+		--BETA local checkbox = _G.WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox
+		-- checkbox.Label:ClearAllPoints()
+		-- checkbox.Label:SetPoint("LEFT", checkbox, "RIGHT", 2, 1)
+		-- checkbox.Label:SetPoint("RIGHT", checkbox, "RIGHT", 160, 1)
 	elseif addon == "Blizzard_EncounterJournal" then
 		local replacement = function(rewardFrame)
 			if rewardFrame.data then

@@ -109,9 +109,8 @@ local found = {}
 local function Update(frame, _, unit)
 	if frame.unit ~= unit then return end
 	local watch = frame.AuraWatch
-	local index, icons = 1, watch.watched
-	local _, name, count, duration, remaining, caster, key, icon, spellID
-	local filter = "HELPFUL"
+	local icons = watch.watched
+	local key, icon
 	local guid = UnitGUID(unit)
 	if not guid then return end
 	if not GUIDs[guid] then setupGUID(guid) end
@@ -120,16 +119,18 @@ local function Update(frame, _, unit)
 		icon:Hide()
 	end
 
-	while true do
-		name, _, count, _, duration, remaining, caster, _, _, spellID = UnitAura(unit, index, filter)
-		if not name then
-			if filter == "HELPFUL" then
-				filter = "HARMFUL"
-				index = 1
-			else
-				break
+	for i = 1, 2 do
+		local filter = (i == 1 and "HELPFUL" or "HARMFUL")
+		local index = 1
+		while true do
+			local name, count, duration, remaining, caster, spellId
+			local auraData = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
+			if auraData then
+				name, count, duration, remaining, caster, spellId = auraData.name, auraData.applications, auraData.duration, auraData.expirationTime, auraData.sourceUnit, auraData.spellId
 			end
-		else
+			if not name then break end
+			if not canaccessvalue(duration) then break end
+
 			if watch.strictMatching then
 				key = spellID
 			else

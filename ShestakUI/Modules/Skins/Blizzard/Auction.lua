@@ -86,12 +86,13 @@ local function LoadSkin()
 
 	hooksecurefunc("AuctionHouseFilterButton_SetUp", function(button)
 		button:CreateBackdrop("Overlay")
-		button.backdrop:SetPoint("TOPLEFT", button.SelectedTexture, "TOPLEFT", 1, -1)
-		button.backdrop:SetPoint("BOTTOMRIGHT", button.SelectedTexture, "BOTTOMRIGHT", -1, 1)
+		button.backdrop:SetInside(button, 1, 1)
 
 		button.NormalTexture:SetAlpha(0)
 		button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.2)
 		button.HighlightTexture:SetColorTexture(1, 1, 1, 0.2)
+		button.HighlightTexture:SetInside(button.backdrop)
+		button.SelectedTexture:SetInside(button.backdrop)
 	end)
 
 	local function SkinListIcon(frame)

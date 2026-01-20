@@ -23,7 +23,11 @@ function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 		flyablex = true
 	end
 	for i = 1, 40 do
-		local sid = select(10, UnitBuff("player", i))
+		local sid
+		local auraData = C_UnitAuras.GetBuffDataByIndex("player", i)
+		if auraData and canaccessvalue(auraData.spellId) then
+			sid = auraData.spellId
+		end
 		if sid == 73701 or sid == 76377 then
 			InVj = true
 		end

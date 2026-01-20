@@ -2,7 +2,8 @@ local hook
 local _E
 
 local getID = function(loc)
-	local player, bank, bags, _, slot, bag = EquipmentManager_UnpackLocation(loc)
+	local data = EquipmentManager_GetLocationData(loc)
+	local player, bank, bags, slot, bag = data.isPlayer, data.isBank, data.isBags, data.slot, data.bag
 	if not player and not bank and not bags then return end
 
 	if not bags then

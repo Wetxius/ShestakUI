@@ -63,9 +63,13 @@ local function Shared(self, unit)
 	end
 
 	self.Health.PostUpdate = function(health, unit)
-		if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+		if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
 			health:SetValue(0)
 		end
+	end
+
+	self.Health.PostUpdateColor = function(element, unit, color)
+		T.PostUpdateBackdropColor(element, color)
 	end
 
 	if C.unitframe.own_color == true then
@@ -126,6 +130,7 @@ local function Shared(self, unit)
 		end
 
 		self.Health.PostUpdate = T.PostUpdateRaidHealth
+		self.Health.PostUpdateColor = T.PostUpdateRaidHealthColor
 
 		-- Power bar
 		self.Power = CreateFrame("StatusBar", nil, self)
@@ -134,12 +139,6 @@ local function Shared(self, unit)
 		self.Power:SetPoint("TOP", self, "BOTTOM", 0, unit == "party" and party_power_height or raid_power_height)
 		self.Power:SetStatusBarTexture(C.media.texture)
 
-		self.Power.PostUpdate = function(power, unit)
-			if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
-				power:SetValue(0)
-			end
-		end
-
 		self.Power.frequentUpdates = true
 		self.Power.colorDisconnected = true
 		if C.unitframe.own_color == true then
@@ -147,6 +146,16 @@ local function Shared(self, unit)
 		else
 			self.Power.colorPower = true
 		end
+
+		self.Power.PostUpdate = function(power, unit)
+			if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
+				power:SetValue(0)
+			end
+		end
+
+		self.Power.PostUpdateColor = T.PostUpdatePowerColor
+		self:RegisterEvent("UNIT_FLAGS", T.ForceUpdate)		-- Force when dead, to hide power
+		self:RegisterEvent("UNIT_FACTION", T.ForceUpdate)	-- Force when alive, to show power
 
 		-- Power bar background
 		self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
@@ -310,7 +319,7 @@ oUF:Factory(function(self)
 	oUF:RegisterStyle("ShestakHeal", Shared)
 	oUF:SetActiveStyle("ShestakHeal")
 	if C.raidframe.show_party == true then
-		local party = self:SpawnHeader("oUF_Party", nil, "custom [@raid6,exists] hide;show",
+		local party = self:SpawnHeader("oUF_Party", nil,
 			"oUF-initialConfigFunction", [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute("initial-width"))
@@ -329,6 +338,7 @@ oUF:Factory(function(self)
 			"yOffset", C.raidframe.party_vertical and T.Scale(-7),
 			"point", C.raidframe.party_vertical and "TOP" or "LEFT"
 		)
+		party:SetVisibility("custom [@raid6,exists] hide;show")
 		party:SetPoint("TOPLEFT", _G["PartyAnchor"])
 		if C.raidframe.party_vertical then
 			_G["PartyAnchor"]:SetSize(party_width, party_height * 5 + T.Scale(7) * 4)
@@ -338,7 +348,7 @@ oUF:Factory(function(self)
 
 		-- Party targets
 		if C.raidframe.show_target then
-			local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "custom [@raid6,exists] hide;show",
+			local partytarget = self:SpawnHeader("oUF_PartyTarget", nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -358,6 +368,7 @@ oUF:Factory(function(self)
 				"yOffset", C.raidframe.party_vertical and T.Scale(-7),
 				"point", C.raidframe.party_vertical and "TOP" or "LEFT"
 			)
+			partytarget:SetVisibility("custom [@raid6,exists] hide;show")
 			partytarget:SetPoint("TOPLEFT", _G["PartyTargetAnchor"])
 			if C.raidframe.party_vertical then
 				_G["PartyTargetAnchor"]:SetSize(T.Scale(party_height), T.Scale(party_height) * 5 + T.Scale(7) * 4)
@@ -369,7 +380,7 @@ oUF:Factory(function(self)
 
 		-- Party pets
 		if C.raidframe.show_pet then
-			local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
+			local partypet = self:SpawnHeader("oUF_PartyPet", nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -390,6 +401,7 @@ oUF:Factory(function(self)
 				"yOffset", C.raidframe.party_vertical and T.Scale(-7),
 				"point", C.raidframe.party_vertical and "TOP" or "LEFT"
 			)
+			partypet:SetVisibility("custom [@raid6,exists] hide;show")
 			partypet:SetPoint("TOPLEFT", _G["PartyPetAnchor"])
 			if C.raidframe.party_vertical then
 				_G["PartyPetAnchor"]:SetSize(T.Scale(party_height), T.Scale(party_height) * 5 + T.Scale(7) * 4)
@@ -403,7 +415,7 @@ oUF:Factory(function(self)
 	if C.raidframe.show_raid == true then
 		local raid = {}
 		for i = 1, C.raidframe.raid_groups do
-			local raidgroup = self:SpawnHeader("oUF_RaidHeal"..i, nil, "custom [@raid6,exists] show;hide",
+			local raidgroup = self:SpawnHeader("oUF_RaidHeal"..i, nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -423,6 +435,7 @@ oUF:Factory(function(self)
 				"point", C.raidframe.raid_groups_vertical and "TOPLEFT" or "LEFT",
 				"columnAnchorPoint", C.raidframe.raid_groups_vertical and "TOP" or "LEFT"
 			)
+			raidgroup:SetVisibility("custom [@raid6,exists] show;hide")
 			raidgroup:SetPoint("TOPLEFT", _G["RaidAnchor"..i])
 			if C.raidframe.raid_groups_vertical then
 				_G["RaidAnchor"..i]:SetSize(raid_width, T.Scale(raid_height) * 5 + T.Scale(7) * 4)
@@ -444,7 +457,7 @@ oUF:Factory(function(self)
 
 		if C.raidframe.raid_tanks == true then
 			-- Tanks
-			local raidtank = self:SpawnHeader("oUF_MainTank", nil, "raid",
+			local raidtank = self:SpawnHeader("oUF_MainTank", nil,
 				"oUF-initialConfigFunction", ([[
 					self:SetWidth(%d)
 					self:SetHeight(%d)
@@ -454,6 +467,7 @@ oUF:Factory(function(self)
 				"groupFilter", "MAINTANK",
 				"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 			)
+			raidtank:SetVisibility("raid")
 			_G["RaidTankAnchor"]:SetSize(raid_width, raid_height)
 			raidtank:SetPoint("BOTTOMLEFT", _G["RaidTankAnchor"])
 		end

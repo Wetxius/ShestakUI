@@ -35,11 +35,11 @@ local function LoadSkin()
 	QuestMapFrame.backdrop:SetSize(326, 468)
 
 	QuestScrollFrame.SettingsDropdown:ClearAllPoints()
-	QuestScrollFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -5, -3)
+	QuestScrollFrame.SettingsDropdown:SetPoint("TOPRIGHT", QuestMapFrameBackdrop, "TOPRIGHT", -6, -3)
 
 	QuestScrollFrame:ClearAllPoints()
 	QuestScrollFrame:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
-	QuestScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+	QuestScrollFrame:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 2)
 
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame.Edge:Hide()
@@ -58,8 +58,8 @@ local function LoadSkin()
 		frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 	end
 
-	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", -21, -18)
-	QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", -21, 15)
+	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", -22, -18)
+	QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", -22, 13)
 
 	T.SkinScrollBar(QuestScrollFrame.ScrollBar)
 
@@ -225,6 +225,7 @@ local function LoadSkin()
 	}
 	for _, tab in pairs(tabs) do
 		T.SkinFrameTab(tab)
+		-- tab:SetWidth(30)
 	end
 
 	QuestMapFrame.QuestsTab:ClearAllPoints()
@@ -248,8 +249,8 @@ local function LoadSkin()
 		QuestMapFrame.MapLegend.TitleText:ClearAllPoints()
 		QuestMapFrame.MapLegend.TitleText:SetPoint("CENTER", MapLegendTopBorder.backdrop)
 
-		MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", -21, -18)
-		MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", -21, 15)
+		MapLegendScrollFrame.ScrollBar:SetPoint("TOPLEFT", MapLegendScrollFrame, "TOPRIGHT", -22, -18)
+		MapLegendScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", MapLegendScrollFrame, "BOTTOMRIGHT", -22, 15)
 
 		T.SkinScrollBar(MapLegendScrollFrame.ScrollBar)
 	end
@@ -266,9 +267,7 @@ local function LoadSkin()
 			end
 		end
 
-		QuestMapFrame.EventsFrame.ScrollBox:ClearAllPoints()
-		QuestMapFrame.EventsFrame.ScrollBox:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPLEFT", 0, -3)
-		QuestMapFrame.EventsFrame.ScrollBox:SetPoint("BOTTOMRIGHT", QuestMapFrame.backdrop, "BOTTOMRIGHT", 4, 0)
+		QuestMapFrame.EventsFrame.ScrollBox:SetPoint("TOPLEFT", QuestMapFrame.EventsFrame, "TOPLEFT", 0, -15)
 
 		local EventsFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.EventsFrame)
 		EventsFrameTopBorder:CreateBackdrop("Overlay")
@@ -279,15 +278,77 @@ local function LoadSkin()
 		QuestMapFrame.EventsFrame.TitleText:ClearAllPoints()
 		QuestMapFrame.EventsFrame.TitleText:SetPoint("CENTER", EventsFrameTopBorder.backdrop)
 
-		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapFrame.EventsFrame.ScrollBox , "TOPRIGHT", -21, -18)
-		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestMapFrame.EventsFrame.ScrollBox , "BOTTOMRIGHT", -21, 15)
+		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapFrame.EventsFrame.ScrollBox, "TOPRIGHT", 1, -18)
+		QuestMapFrame.EventsFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestMapFrame.EventsFrame.ScrollBox, "BOTTOMRIGHT", 1, 3)
 
 		T.SkinScrollBar(QuestMapFrame.EventsFrame.ScrollBar)
 
-		-- _G.ScrollUtil.AddAcquiredFrameCallback(QuestMapFrame.EventsFrame.EventsFrame.ScrollBox, EventsFrameCallback, QuestMapFrame.EventsFrame, true) -- need to skin elements. FIXME need to test and make skin
-	end
+		do
+			local EventsFrameHookedElements = {}
 
-	-- C_PlayerInfo.CanPlayerUseEventScheduler = function() return true end -- Test events tab
+			local function EventsFrameBackgroundNormal(element, texture)
+				if texture ~= C.media.texture then
+					element:SetTexture(C.media.texture)
+					element:SetVertexColor(1, 1, 1, 0.1)
+					element:SetInside(nil, 3, 3)
+					element:CreateBackdrop("Overlay")
+					element:GetParent().backdrop:SetOutside(element)
+
+					local parent = element:GetParent()
+					if parent and parent.Highlight then
+						parent.Highlight:SetColorTexture(1, 1, 1, 0.15)
+						parent.Highlight:SetAllPoints(element)
+					end
+				end
+			end
+
+			local EventsFrameFunctions = {
+				function(element) -- 1: OngoingHeader
+					if not element.Background.backdrop then
+						element.Background:SetAlpha(0)
+						-- element.Background:CreateBackdrop("Overlay")
+						-- element.backdrop:SetInside(element.Background, 1, 1)
+						-- element.backdrop.overlay:SetVertexColor(1, 1, 1, 0.15)
+					end
+
+					element.Label:SetTextColor(1, 0.8, 0)
+				end,
+				function(element) -- 2: OngoingEvent
+					if not EventsFrameHookedElements[element] then
+						hooksecurefunc(element.Background, "SetAtlas", EventsFrameBackgroundNormal)
+						EventsFrameHookedElements[element] = element.Background
+					end
+				end,
+				function(element) -- 3: ScheduledHeader
+					if not element.Background.backdrop then
+						element.Background:SetAlpha(0)
+						-- element.Background:CreateBackdrop("Overlay")
+						-- element.backdrop:SetInside(element.Background, 1, 1)
+						-- element.backdrop.overlay:SetVertexColor(1, 1, 1, 0.15)
+					end
+
+					-- element.Label:SetTextColor(1, 1, 1)
+				end,
+				function(element) -- 4: ScheduledEvent
+					if element.Highlight then
+						element.Highlight:SetAlpha(0)
+						-- element.Highlight:SetColorTexture(1, 1, 1, 0.15)
+					end
+				end
+			}
+
+			local function EventsFrameCallback(_, frame, elementData)
+				if not elementData.data then return end
+
+				local func = EventsFrameFunctions[elementData.data.entryType]
+				if func then
+					func(frame)
+				end
+			end
+
+			_G.ScrollUtil.AddAcquiredFrameCallback(QuestMapFrame.EventsFrame.ScrollBox, EventsFrameCallback, QuestMapFrame.EventsFrame, true)
+		end
+	end
 
 	-- QuestSessionManagement skin (based on skin from Aurora)
 	QuestMapFrame.QuestSessionManagement:StripTextures()

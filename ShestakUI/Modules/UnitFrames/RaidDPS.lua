@@ -57,9 +57,13 @@ local function Shared(self, unit)
 	self.Health:SetStatusBarTexture(C.media.texture)
 
 	self.Health.PostUpdate = function(health, unit)
-		if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+		if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
 			health:SetValue(0)
 		end
+	end
+
+	self.Health.PostUpdateColor = function(element, unit, color)
+		T.PostUpdateBackdropColor(element, color)
 	end
 
 	self.Health.colorTapping = true
@@ -98,6 +102,7 @@ local function Shared(self, unit)
 		end
 
 		self.Health.PostUpdate = T.PostUpdateRaidHealth
+		self.Health.PostUpdateColor = T.PostUpdateRaidHealthColor
 
 		-- Power bar
 		self.Power = CreateFrame("StatusBar", nil, self)
@@ -120,8 +125,10 @@ local function Shared(self, unit)
 			self.Power.colorPower = true
 		end
 
-		self.Power.PreUpdate = T.PreUpdatePower
 		self.Power.PostUpdate = T.PostUpdatePower
+		self.Power.PostUpdateColor = T.PostUpdatePowerColor
+		self:RegisterEvent("UNIT_FLAGS", T.ForceUpdate)		-- Force when dead, to hide power
+		self:RegisterEvent("UNIT_FACTION", T.ForceUpdate)	-- Force when alive, to show power
 
 		-- Power bar background
 		self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
@@ -130,8 +137,9 @@ local function Shared(self, unit)
 		self.Power.bg:SetAlpha(1)
 		self.Power.bg.multiplier = 0.2
 
-		self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-		if not (suffix == "pet" or suffix == "target") and unit ~= "tank" then
+		-- Power value for party player
+		if not (suffix == "pet" or suffix == "target") and unit == "party" then
+			self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
 			self.Power.value:SetJustifyH("RIGHT")
 		end
@@ -221,8 +229,8 @@ local function Shared(self, unit)
 		self.Debuffs.spacing = T.Scale(3)
 		self.Debuffs.initialAnchor = "LEFT"
 		self.Debuffs.num = 7
-		self.Debuffs["growth-y"] = "DOWN"
-		self.Debuffs["growth-x"] = "RIGHT"
+		self.Debuffs.growthX = "RIGHT"
+		self.Debuffs.growthY = "DOWN"
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 	end
@@ -273,7 +281,7 @@ oUF:Factory(function(self)
 	oUF:SetActiveStyle("ShestakDPS")
 	if C.raidframe.show_party == true then
 		-- Party
-		local party = self:SpawnHeader("oUF_PartyDPS", nil, "custom [@raid6,exists] hide;show",
+		local party = self:SpawnHeader("oUF_PartyDPS", nil,
 			"oUF-initialConfigFunction", [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute("initial-width"))
@@ -291,12 +299,13 @@ oUF:Factory(function(self)
 			"yOffset", T.Scale(28),
 			"point", "BOTTOM"
 		)
+		party:SetVisibility("custom [@raid6,exists] hide;show")
 		_G["PartyDPSAnchor"]:SetSize(T.Scale(party_width), T.Scale(party_height) * 5 + T.Scale(28) * 4)
 		party:SetPoint("BOTTOMLEFT", _G["PartyDPSAnchor"])
 
 		-- Party targets
 		if C.raidframe.show_target then
-			local partytarget = self:SpawnHeader("oUF_PartyTargetDPS", nil, "custom [@raid6,exists] hide;show",
+			local partytarget = self:SpawnHeader("oUF_PartyTargetDPS", nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -315,13 +324,14 @@ oUF:Factory(function(self)
 				"yOffset", T.Scale(28),
 				"point", "BOTTOM"
 			)
+			partytarget:SetVisibility("custom [@raid6,exists] hide;show")
 			_G["PartyTargetDPSAnchor"]:SetSize(T.Scale(partytarget_width), T.Scale(partytarget_height) * 5 + T.Scale(28) * 4)
 			partytarget:SetPoint("BOTTOMLEFT", _G["PartyTargetDPSAnchor"])
 		end
 
 		-- Party pets
 		if C.raidframe.show_pet then
-			local partypet = self:SpawnHeader("oUF_PartyPetDPS", nil, "custom [@raid6,exists] hide;show",
+			local partypet = self:SpawnHeader("oUF_PartyPetDPS", nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -341,6 +351,7 @@ oUF:Factory(function(self)
 				"yOffset", T.Scale(28),
 				"point", "BOTTOM"
 			)
+			partypet:SetVisibility("custom [@raid6,exists] hide;show")
 			_G["PartyPetDPSAnchor"]:SetSize(T.Scale(partytarget_width), T.Scale(partytarget_height) * 5 + T.Scale(28) * 4)
 			partypet:SetPoint("BOTTOMLEFT", _G["PartyPetDPSAnchor"])
 		end
@@ -350,7 +361,7 @@ oUF:Factory(function(self)
 		-- Raid
 		local raid = {}
 		for i = 1, C.raidframe.raid_groups do
-			local raidgroup = self:SpawnHeader("oUF_RaidDPS"..i, nil, "custom [@raid6,exists] show;hide",
+			local raidgroup = self:SpawnHeader("oUF_RaidDPS"..i, nil,
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
@@ -370,6 +381,7 @@ oUF:Factory(function(self)
 				"columnSpacing", T.Scale(7),
 				"columnAnchorPoint", "TOP"
 			)
+			raidgroup:SetVisibility("custom [@raid6,exists] show;hide")
 			if i == 1 then
 				_G["RaidDPSAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_dps))
 				raidgroup:SetPoint("TOPLEFT", _G["RaidDPSAnchor"..i])
@@ -386,7 +398,7 @@ oUF:Factory(function(self)
 
 	if C.raidframe.raid_tanks == true then
 		-- Tanks
-		local raidtank = self:SpawnHeader("oUF_MainTankDPS", nil, "raid",
+		local raidtank = self:SpawnHeader("oUF_MainTankDPS", nil,
 			"oUF-initialConfigFunction", ([[
 				self:SetWidth(%d)
 				self:SetHeight(%d)
@@ -396,6 +408,7 @@ oUF:Factory(function(self)
 			"groupFilter", "MAINTANK",
 			"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 		)
+		raidtank:SetVisibility("raid")
 		_G["RaidTankDPSAnchor"]:SetSize(tank_width, tank_height)
 		raidtank:SetPoint("BOTTOMLEFT", _G["RaidTankDPSAnchor"])
 	end

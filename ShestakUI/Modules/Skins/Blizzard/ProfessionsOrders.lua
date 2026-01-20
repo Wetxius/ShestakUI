@@ -63,12 +63,13 @@ local function LoadSkin()
 
 	local function skinCategoryButton(button)
 		button:CreateBackdrop("Overlay")
-		button.backdrop:SetPoint("TOPLEFT", button.SelectedTexture, "TOPLEFT", 1, -1)
-		button.backdrop:SetPoint("BOTTOMRIGHT", button.SelectedTexture, "BOTTOMRIGHT", -1, 1)
+		button.backdrop:SetInside(button, 1, 1)
 
 		button.NormalTexture:SetAlpha(0)
 		button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.2)
 		button.HighlightTexture:SetColorTexture(1, 1, 1, 0.2)
+		button.HighlightTexture:SetInside(button.backdrop)
+		button.SelectedTexture:SetInside(button.backdrop)
 	end
 
 	hooksecurefunc(orders.CategoryList.ScrollBox, "Update", function(self)
@@ -138,9 +139,13 @@ local function LoadSkin()
 	form.LeftPanelBackground:StripTextures()
 	form.RightPanelBackground:StripTextures()
 
+	form.RecraftSlot.InputSlot:CreateBackdrop("Overlay")
+	form.RecraftSlot.InputSlot.backdrop:SetOutside(ProfessionsCustomerOrdersFrameNormalTexture)
 	form.RecraftSlot.InputSlot.BorderTexture:SetAlpha(0)
+	form.RecraftSlot.InputSlot.Glow:Hide()
 
-	T.SkinCheckBox(form.TrackRecipeCheckbox.Checkbox, 20)
+	T.SkinCheckBox(form.TrackRecipeCheckbox.Checkbox, 19)
+	form.TrackRecipeCheckbox:SetPoint("BOTTOMLEFT", form.RecipeHeader, "BOTTOMLEFT", 8, 3)
 	if form.AllocateBestQualityCheckbox then
 		T.SkinCheckBox(form.AllocateBestQualityCheckbox)
 	end

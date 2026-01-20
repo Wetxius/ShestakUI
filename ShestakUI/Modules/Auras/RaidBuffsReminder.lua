@@ -82,12 +82,26 @@ local function OnAuraChange(_, event, arg1)
 	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
 
 	wipe(playerBuff)
+	local isSecret
 	local i = 1
 	while true do
-		local name = UnitBuff("player", i)
+		local name
+		local auraData = C_UnitAuras.GetAuraDataByIndex("player", i, "HELPFUL")
+		if auraData and not canaccessvalue(auraData.name) then isSecret = true end  -- BETA
+		if auraData and canaccessvalue(auraData.name) then
+			name = auraData.name
+		end
 		if not name then break end
 		playerBuff[name] = true
 		i = i + 1
+	end
+
+	-- Hide if found secret
+	if isSecret then
+		RaidBuffReminder:SetAlpha(0)
+		return
+	else
+		RaidBuffReminder:SetAlpha(1)
 	end
 
 	-- If We're a caster we may want to see different buffs

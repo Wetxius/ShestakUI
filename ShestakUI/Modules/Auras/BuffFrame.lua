@@ -26,7 +26,9 @@ local function UpdateDuration(aura, timeLeft)
 	local duration = aura.Duration
 	if timeLeft and C.aura.show_timer == true then
 		duration:SetVertexColor(1, 1, 1)
-		duration:SetFormattedText(GetFormattedTime(timeLeft))
+		if canaccessvalue(timeLeft) then -- BETA
+			duration:SetFormattedText(GetFormattedTime(timeLeft))
+		end
 	else
 		duration:Hide()
 	end

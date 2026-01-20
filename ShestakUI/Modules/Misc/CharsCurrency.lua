@@ -141,27 +141,6 @@ hooksecurefunc(GameTooltip, "SetQuestLogCurrency", function(tooltip, _, id)
 	end
 end)
 
-if xMerchantFrame then
-	local function xMerchantTooltip(self)
-		if self.pointType == "Beta" then
-			local id = nameToID[self.itemLink]
-			if id then
-				self.UpdateTooltip = nil
-				return GameTooltip:SetCurrencyByID(id)
-			end
-		end
-		self.UpdateTooltip = self.origUpdateTooltip
-	end
-
-	for i = 1, 10 do
-		for j = 1, MAX_ITEM_COST do
-			local item = _G["xMerchantFrame"..i.."Item"..j]
-			item:HookScript("OnEnter", xMerchantTooltip)
-			item.origUpdateTooltip = item.UpdateTooltip
-		end
-	end
-end
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, addon)

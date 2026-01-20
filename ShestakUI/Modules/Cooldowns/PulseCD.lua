@@ -1,4 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
+if T.newPatch then return end -- BETA not work
 if C.pulsecooldown.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

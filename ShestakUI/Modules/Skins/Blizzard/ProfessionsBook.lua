@@ -11,6 +11,11 @@ local function LoadSkin()
 	ProfessionsBookFrameTutorialButton.Ring:Hide()
 	ProfessionsBookFrameTutorialButton:SetPoint("TOPLEFT", ProfessionsBookFrame, "TOPLEFT", -10, 15)
 
+	PrimaryProfession1Icon:SkinIcon()
+	PrimaryProfession2Icon:SkinIcon()
+	PrimaryProfession1IconBorder:Hide()
+	PrimaryProfession2IconBorder:Hide()
+
 	local headers = {
 		"PrimaryProfession1",
 		"PrimaryProfession2",

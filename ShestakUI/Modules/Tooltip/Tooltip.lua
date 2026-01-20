@@ -52,6 +52,13 @@ for _, tt in pairs(tooltips) do
 		end
 		bg:SetTemplate("Transparent")
 
+		local header = tt.CompareHeader
+		if header then
+			header:StripTextures()
+			header:CreateBackdrop("Overlay")
+			header.backdrop:SetInside(header, 0, 3)
+		end
+
 		tt.GetBackdrop = function() return backdrop end
 		tt.GetBackdropColor = function() return C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha end
 		tt.GetBackdropBorderColor = function() return unpack(C.media.border_color) end
@@ -125,11 +132,12 @@ GameTooltipStatusBar:SetPoint("TOPRIGHT", GameTooltip, "BOTTOMRIGHT", -2, 6)
 
 -- Raid icon
 local ricon = GameTooltip:CreateTexture("GameTooltipRaidIcon", "OVERLAY")
-ricon:SetHeight(18)
-ricon:SetWidth(18)
+ricon:SetSize(18, 18)
 ricon:SetPoint("BOTTOM", GameTooltip, "TOP", 0, 5)
+ricon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+ricon:Hide()
 
-GameTooltip:HookScript("OnHide", function() ricon:SetTexture(nil) end)
+GameTooltip:HookScript("OnHide", function() ricon:Hide() end)
 
 -- Add "Targeted By" line
 local targetedList = {}
@@ -182,7 +190,7 @@ local function GetColor(unit)
 	else
 		local reaction = T.oUF_colors.reaction[UnitReaction(unit, "player")]
 		if reaction then
-			r, g, b = reaction[1], reaction[2], reaction[3]
+			r, g, b = reaction:GetRGB()
 		else
 			r, g, b = 1, 1, 1
 		end
@@ -224,17 +232,20 @@ if C.tooltip.health_value == true then
 	GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 		if not value then return end
 		local min, max = self:GetMinMaxValues()
-		if (value < min) or (value > max) then return end
+		if canaccessvalue(min) then
+			if (value < min) or (value > max) then return end
+		end
 		self:SetStatusBarColor(0, 1, 0)
 		local _, unit = GameTooltip:GetUnit()
-		if unit then
+		if unit and canaccessvalue(unit) then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
 			if not self.text then
 				self.text = self:CreateFontString(nil, "OVERLAY", "Tooltip_Med")
 				self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 1.5)
 			end
 			self.text:Show()
-			local hp = T.ShortValue(min).." / "..T.ShortValue(max)
+			local hp = AbbreviateNumbers(min).." / "..AbbreviateNumbers(max)
+			-- local hp = T.ShortValue(min).." / "..T.ShortValue(max)
 			self.text:SetText(hp)
 		end
 	end)
@@ -246,6 +257,8 @@ local OnTooltipSetUnit = function(self)
 	local unit = (select(2, self:GetUnit())) or (GetMouseFoci()[1] and GetMouseFoci()[1].GetAttribute and GetMouseFoci()[1]:GetAttribute("unit")) or (UnitExists("mouseover") and "mouseover") or nil
 
 	if not unit then return end
+
+	if not canaccessvalue(unit) then return end
 
 	local name, realm = UnitName(unit)
 	local race, englishRace = UnitRace(unit)
@@ -345,12 +358,13 @@ local OnTooltipSetUnit = function(self)
 		local text = ""
 
 		if UnitIsEnemy("player", unit.."target") then
-			r, g, b = unpack(T.oUF_colors.reaction[1])
+			r, g, b = T.oUF_colors.reaction[1]:GetRGB()
 		elseif not UnitIsFriend("player", unit.."target") then
-			r, g, b = unpack(T.oUF_colors.reaction[4])
+			r, g, b = T.oUF_colors.reaction[4]:GetRGB()
 		end
 
-		if UnitName(unit.."target") == UnitName("player") then
+
+		if not IsInInstance() and UnitIsUnit("player", unit.."target") then -- BETA
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r ".."|cffff0000> "..UNIT_YOU.." <|r"
 		else
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r "..UnitName(unit.."target")
@@ -362,9 +376,10 @@ local OnTooltipSetUnit = function(self)
 	if C.tooltip.raid_icon == true then
 		local raidIndex = GetRaidTargetIndex(unit)
 		if raidIndex then
-			ricon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..raidIndex)
+			SetRaidTargetIconTexture(ricon, raidIndex)
+			ricon:Show()
 		else
-			ricon:SetTexture(nil)
+			ricon:Hide()
 		end
 	end
 

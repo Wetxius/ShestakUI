@@ -281,8 +281,13 @@ local function FindAuras(self, unit)
 		local filter = (i == 1 and "HELPFUL" or "HARMFUL")
 		local index = 1
 		while true do
-			local name, icon, count, _, duration, expirationTime, caster, _, _, spid = UnitAura(unit, index, filter)
+			local auraData = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
+			local name, icon, count, _, duration, expirationTime, caster, _, _, spid
+			if auraData then
+				name, icon, count, _, duration, expirationTime, caster, _, _, spid = auraData.name, auraData.icon, auraData.applications, _, auraData.duration, auraData.expirationTime, auraData.sourceUnit, _, _,  auraData.spellId
+			end
 			if not name then break end
+			if not canaccessvalue(duration) then return end
 
 			local data = SpellGroups[self.Id].spells[name] or SpellGroups[self.Id].spells[spid]
 			if data and (data.caster ~= 1 and (caster == data.caster or data.caster == "all") or MyUnits[caster]) and (not data.unitID or data.unitID == unit) and (not data.absID or spid == data.spellID) then
@@ -320,8 +325,10 @@ function Filger:OnEvent(event, ...)
 				local start, duration = GetTime(), data.duration
 				if data.totem then
 					local haveTotem, _, startTime, durationTime = GetTotemInfo(1)
-					if haveTotem then
-						start, duration = startTime, durationTime
+					if canaccessvalue(haveTotem) and haveTotem or startTime then
+						if canaccessvalue(durationTime) then
+							start, duration = startTime, durationTime
+						end
 					end
 				end
 				self.actives[data.spellID] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = data.spellID, sort = data.sort}
@@ -406,7 +413,7 @@ function Filger:OnEvent(event, ...)
 						start, duration = GetInventoryItemCooldown("player", data.slotID)
 					end
 				end
-				if name and (duration or 0) > 1.9 and duration < 900 then
+				if name and canaccessvalue(duration) and (duration or 0) > 1.9 and duration < 900 then
 					if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
 						self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
 					end

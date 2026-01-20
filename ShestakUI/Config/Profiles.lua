@@ -288,7 +288,7 @@ if IsWetxius then
 	end)
 
 	T.CustomFilgerSpell = {
-		{"P_PROC_ICON", {spellID = 26573, filter = "ICD", trigger = "NONE", totem = true}}, 		-- Consecration
+		-- {"P_PROC_ICON", {spellID = 26573, filter = "ICD", trigger = "NONE", totem = true}}, 		-- Consecration
 	}
 end
 

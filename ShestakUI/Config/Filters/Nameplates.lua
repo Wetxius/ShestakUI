@@ -83,7 +83,7 @@ T.DebuffWhiteList = {
 	-- Warrior
 	[SpellName(5246)] = true,	-- Intimidating Shout
 	[SpellName(132168)] = true,	-- Shockwave
-	[SpellName(115767)] = true,	-- Deep Wounds
+	--BETA [SpellName(115767)] = true,	-- Deep Wounds
 	-- Racial
 	[SpellName(20549)] = true,	-- War Stomp (Tauren)
 	[SpellName(107079)] = true,	-- Quaking Palm (Pandaren)
