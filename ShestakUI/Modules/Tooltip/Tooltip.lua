@@ -409,10 +409,11 @@ end
 --	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
 ----------------------------------------------------------------------------------------
 hooksecurefunc(TooltipComparisonManager, "AnchorShoppingTooltips", function(self, _, secondaryItemShown)
-	local tooltip = self.tooltip;
-	local shoppingTooltip1 = tooltip.shoppingTooltips[1];
-	local shoppingTooltip2 = tooltip.shoppingTooltips[2];
+	local tooltip = self.tooltip
+	local shoppingTooltip1 = tooltip.shoppingTooltips[1]
+	local shoppingTooltip2 = tooltip.shoppingTooltips[2]
 	local point = shoppingTooltip1:GetPoint(2)
+	if not canaccessvalue(point) then return end
 	if secondaryItemShown then
 		if point == "TOP" then
 			shoppingTooltip1:ClearAllPoints()
