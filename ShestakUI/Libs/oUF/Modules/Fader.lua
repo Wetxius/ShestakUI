@@ -46,19 +46,19 @@ local conditions = setmetatable({
 	UnitTarget = function(_, unit) return unit and UnitExists(unit.."target") end,
 	PlayerTaxi = function() return UnitOnTaxi("player") end,
 	UnitTaxi = function(_, unit) return unit and UnitOnTaxi(unit) end,
-	UnitMaxHealth = function(_, unit) return unit and not UnitIsDeadOrGhost(unit) and UnitHealth(unit) == UnitHealthMax(unit) end,
-	PlayerMaxHealth = function(_, unit) return unit and not UnitIsDeadOrGhost("player") and UnitHealth("player") == UnitHealthMax("player") end,
-	UnitMaxMana = function(_, unit) return unit and not UnitIsDeadOrGhost(unit) and UnitPower(unit) == UnitPowerMax(unit) end,
-	PlayerMaxMana = function(_, unit) return unit and not UnitIsDeadOrGhost("player") and UnitPower("player") == UnitPowerMax("player") end,
+	UnitMaxHealth = function(_, unit) return unit and not UnitIsDeadOrGhost(unit) and canaccessvalue(UnitHealth(unit)) and UnitHealth(unit) == UnitHealthMax(unit) end,
+	PlayerMaxHealth = function(_, unit) return unit and not UnitIsDeadOrGhost("player") and canaccessvalue(UnitHealth(unit)) and UnitHealth("player") == UnitHealthMax("player") end,
+	UnitMaxMana = function(_, unit) return unit and not UnitIsDeadOrGhost(unit) and canaccessvalue(UnitPower(unit)) and UnitPower(unit) == UnitPowerMax(unit) end,
+	PlayerMaxMana = function(_, unit) return unit and not UnitIsDeadOrGhost("player") and canaccessvalue(UnitPower(unit)) and UnitPower("player") == UnitPowerMax("player") end,
 	Stealth = IsStealthed,
 	Flying = IsFlying,
 	Resting = IsResting,
 	Combat = InCombatLockdown,
-	PlayerNotMaxHealth = function(_, unit) return unit and UnitHealth("player") ~= UnitHealthMax("player") end,
+	PlayerNotMaxHealth = function(_, unit) return unit and canaccessvalue(UnitHealth("player")) and UnitHealth("player") ~= UnitHealthMax("player") end,
 	PlayerNotMaxMana = function(_, unit)
 		local _, powerTypeString = UnitPowerType("player")
 		if powerTypeString ~= "RAGE" and powerTypeString ~= "RUNIC_POWER" then
-			return unit and UnitPower("player") ~= UnitPowerMax("player")
+			return unit and canaccessvalue(UnitPower("player")) and UnitPower("player") ~= UnitPowerMax("player")
 		end
 	end,
 	Casting = function(_, unit) return unit and (UnitCastingInfo(unit) or UnitChannelInfo(unit)) end,
