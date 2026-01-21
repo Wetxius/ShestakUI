@@ -979,12 +979,12 @@ T.CustomFilterBoss = function(_, unit, data)
 	return true
 end
 
-T.UpdateThreat = function(self, unit, status, r, g, b)
+T.UpdateThreat = function(self, unit, status, color)
 	local parent = self:GetParent()
 	local badunit = not unit or parent.unit ~= unit
 
-	if not badunit and status and status > 1 then
-		parent.backdrop:SetBackdropBorderColor(r, g, b)
+	if not badunit and color and status and status > 1 then
+		parent.backdrop:SetBackdropBorderColor(color:GetRGB())
 	else
 		parent.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 	end
