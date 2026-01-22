@@ -464,12 +464,9 @@ local function LoadSkin()
 			end
 		end
 		for button in _G.QuestScrollFrame.titleFramePool:EnumerateActive() do
-			if not button.IsSkinned then
-				if button.Checkbox then
-					button.Checkbox:DisableDrawLayer("BACKGROUND")
-					button.Checkbox:CreateBackdrop("Overlay")
-				end
-
+			if button.Checkbox and not button.IsSkinned then
+				button.Checkbox:StripTextures(true)
+				button.Checkbox:CreateBackdrop("Overlay")
 				button.IsSkinned = true
 			end
 		end
@@ -518,13 +515,14 @@ local function LoadSkin()
 		for callingHeader in QuestScrollFrame.covenantCallingsHeaderFramePool:EnumerateActive() do
 			if not callingHeader.backdrop then
 				callingHeader:CreateBackdrop("Overlay")
-				callingHeader.backdrop:SetPoint("TOPLEFT", callingHeader.Background, 7, -2)
-				callingHeader.backdrop:SetPoint("BOTTOMRIGHT", callingHeader.Background, -5, 10)
+				callingHeader.backdrop:SetPoint("TOPLEFT", callingHeader.Background, 5, -2)
+				callingHeader.backdrop:SetPoint("BOTTOMRIGHT", callingHeader.Background, -5, 2)
 				callingHeader.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 
 				callingHeader.Background:SetAlpha(0)
-				callingHeader.HighlightBackground:SetAlpha(0)
+				callingHeader.HighlightTexture:SetAlpha(0)
 				callingHeader.SelectedTexture:SetAlpha(0)
+				callingHeader.SelectedHighlight:SetAlpha(0)
 				callingHeader.Divider:SetAlpha(0)
 			end
 		end
