@@ -3555,29 +3555,19 @@ local button = CreateFrame("Button", "ShestakUI_GameMenuButton", GameMenuFrame, 
 button:SetScript("OnClick", openGUI)
 button:SetSize(150, 28)
 button:SetText("ShestakUI")
-
 GameMenuFrame.ShestakUI = button
-
-local gameMenuLastButtons = {
-	[_G.GAMEMENU_OPTIONS] = 1,
-	[_G.BLIZZARD_STORE] = 2
-}
 
 local function PositionGameMenuButton()
 	if not ShestakUI then return end
-	local anchorIndex = (C_StorePublic.IsEnabled and C_StorePublic.IsEnabled() and 2) or 1
-	for button in GameMenuFrame.buttonPool:EnumerateActive() do
-		local text = button:GetText()
 
-		local lastIndex = gameMenuLastButtons[text]
-		if lastIndex == anchorIndex and GameMenuFrame.ShestakUI then
-			GameMenuFrame.ShestakUI:SetPoint("TOPLEFT", button, "BOTTOMLEFT", 0, -14)
-		elseif not lastIndex then
-			local point, anchor, point2, x, y = button:GetPoint()
-			button:SetPoint(point, anchor, point2, x, y - 35)
-		end
+	for button in GameMenuFrame.buttonPool:EnumerateActive() do
+		GameMenuFrame.ShestakUI:SetPoint("TOPLEFT", GameMenuFrame, "TOPLEFT", 28, -30)
+
+		local point, anchor, point2, x, y = button:GetPoint()
+		button:SetPoint(point, anchor, point2, x, y - 30)
 
 		-- Replace EditMode with our moving system
+		local text = button:GetText()
 		if text and text == HUD_EDIT_MODE_MENU then
 			button:SetScript("OnClick", function()
 				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
