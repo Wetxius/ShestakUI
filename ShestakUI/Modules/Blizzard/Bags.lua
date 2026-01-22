@@ -1597,7 +1597,7 @@ function Stuffing:SortBags()
 	BS_clearData()
 
 	local bagList
-	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
+	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then -- FIXME sort only visiable tab
 		bagList = {16, 15, 14, 13, 12}
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		bagList = {11, 10, 9, 8, 7, 6}
@@ -1711,7 +1711,9 @@ function Stuffing:Restack()
 	local sr = {}
 	local did_restack = false
 
-	Stuffing_Open()
+	if not (Stuffing.bankFrame and Stuffing.bankFrame:IsShown()) then
+		Stuffing_Open()
+	end
 
 	for _, v in pairs(self.buttons) do
 		if InBags(v.bag) then
