@@ -733,7 +733,7 @@ T.PostCastStart = function(Castbar, unit)
 			setBarTicks(Castbar, 0)
 		else
 			local spell = UnitChannelInfo(unit)
-			Castbar.channelingTicks = T.CastBarTicks[spell] or 0
+			Castbar.channelingTicks = canaccessvalue(spell) and T.CastBarTicks[spell] or 0
 			setBarTicks(Castbar, Castbar.channelingTicks)
 		end
 	end
