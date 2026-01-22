@@ -66,13 +66,14 @@ frame:SetScript("OnEvent", function()
 		C_Container.SetInsertItemsLeftToRight(false)
 	end
 
-	if C.combattext.enable then
-		if C.combattext.incoming then
-			SetCVar("enableFloatingCombatText", 1)
-		else
-			SetCVar("enableFloatingCombatText", 0)
-		end
-	end
+	-- BETA not used
+	-- if C.combattext.enable then
+		-- if C.combattext.incoming then
+			-- SetCVar("enableFloatingCombatText", 1)
+		-- else
+			-- SetCVar("enableFloatingCombatText", 0)
+		-- end
+	-- end
 end)
 
 local function AcknowledgeTips()
