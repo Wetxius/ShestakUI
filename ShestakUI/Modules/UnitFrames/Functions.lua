@@ -150,7 +150,7 @@ end
 
 T.PostUpdateBackdropColor = function(element, color)
 	local bg = element.bg
-	if bg then
+	if bg and color then
 		local mu = bg.multiplier or 1
 		local r, g, b = color:GetRGB()
 		bg:SetVertexColor(r * mu, g * mu, b * mu)
@@ -967,7 +967,8 @@ end
 
 T.CustomFilterBoss = function(_, unit, data)
 	if data.isHarmfulAura then
-		if data.isPlayerAura or UnitIsUnit(unit, data.sourceUnit) then
+		if data.isPlayerAura then
+		-- if data.isPlayerAura or UnitIsUnit(unit, data.sourceUnit) then
 		-- if (data.isPlayerAura or data.sourceUnit == unit) then
 			-- if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then -- BETA secret value
 				return true
