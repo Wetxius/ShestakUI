@@ -1215,6 +1215,7 @@ if experience.enabled then
 		OnEvent = function(self, event, ...)
 			if event == "CHAT_MSG_COMBAT_XP_GAIN" then
 				local msg = ...
+				if not canaccessvalue(msg) then return end
 				if msg:find(mobxp) then
 					_, lastkill = strmatch(msg, mobxp)
 					lastkill = strmatch(lastkill, "%d+")
