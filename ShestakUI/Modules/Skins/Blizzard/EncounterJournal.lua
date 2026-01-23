@@ -66,6 +66,13 @@ local function LoadSkin()
 	EncounterJournalJourneysFrame.JourneyOverview.OverviewBtn:SkinButton()
 
 	EncounterJournalJourneysFrame.JourneyProgress.DividerTexture:SetAlpha(0)
+	EncounterJournalJourneysFrame.JourneyProgress.ProgressDetailsFrame.JourneyLevelBar:SetAlpha(0)
+
+	local delvesBar = EncounterJournalJourneysFrame.JourneyProgress.DelveRewardProgressBar
+	delvesBar:StripTextures()
+	delvesBar:CreateBackdrop("Overlay")
+	delvesBar:SetStatusBarTexture(C.media.texture)
+	delvesBar:SetStatusBarColor(0, 1, 0.6)
 
 	local delvesBtn = EncounterJournalJourneysFrame.JourneyProgress.DelvesCompanionConfigurationFrame.CompanionConfigBtn
 	delvesBtn:CreateBackdrop("Overlay")
