@@ -26,15 +26,15 @@ local function GetDebuffType(unit, filter)
 	if not UnitCanAssist("player", unit) then return nil end
 	local i = 1
 	while true do
-		local texture, debufftype
+		local texture, debufftype, auraInstanceID
 		local auraData = C_UnitAuras.GetAuraDataByIndex(unit, i, "HARMFUL")
 		if auraData then
-			texture, debufftype = auraData.icon, auraData.dispelName
+			texture, debufftype, auraInstanceID = auraData.icon, auraData.dispelName, auraData.auraInstanceID
 		end
 		if not texture then break end
 		if not canaccessvalue(debufftype) then break end
 		if debufftype and not filter or (filter and dispellist[debufftype]) then
-			return debufftype, texture
+			return debufftype, texture, auraInstanceID
 		end
 		i = i + 1
 	end
@@ -76,11 +76,20 @@ local function CheckSpec()
 	end
 end
 
+local dispelColorCurve = C_CurveUtil.CreateColorCurve()
+dispelColorCurve:SetType(Enum.LuaCurveType.Step)
+for _, dispelIndex in next, oUF.Enum.DispelType do
+	if(oUF.colors.dispel[dispelIndex]) then
+		dispelColorCurve:AddPoint(dispelIndex, oUF.colors.dispel[dispelIndex])
+	end
+end
+
 local function Update(object, _, unit)
 	if object.unit ~= unit then return end
-	local debuffType, texture = GetDebuffType(unit, object.DebuffHighlightFilter)
+	local debuffType, texture, auraInstanceID = GetDebuffType(unit, object.DebuffHighlightFilter)
 	if debuffType then
-		local color = DebuffTypeColor[debuffType]
+		-- local color = DebuffTypeColor[debuffType] -- BETA not exist
+		local color = C_UnitAuras.GetAuraDispelTypeColor(unit, auraInstanceID, dispelColorCurve)
 		if object.DebuffHighlightBackdrop or object.DebuffHighlightBackdropBorder then
 			if object.DebuffHighlightBackdrop then
 				object:SetBackdropColor(color.r, color.g, color.b, object.DebuffHighlightAlpha or 1)
