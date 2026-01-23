@@ -773,11 +773,13 @@ function Stuffing:ToggleSlots(frame, first)
 		slotHide = first and BAGS_BANK_2 or BAGS_BANK_1
 		tabSelected = first and StuffingFrameBankTab1 or StuffingFrameBankTab2
 		tabEmpty = first and StuffingFrameBankTab2 or StuffingFrameBankTab1
+		self.frame.bank_first = first
 	else
 		slotShow = first and BAGS_WARBAND_1 or BAGS_WARBAND_2
 		slotHide = first and BAGS_WARBAND_2 or BAGS_WARBAND_1
 		tabSelected = first and StuffingFrameWarbandTab1 or StuffingFrameWarbandTab2
 		tabEmpty = first and StuffingFrameWarbandTab2 or StuffingFrameWarbandTab1
+		self.frame.warband_first = first
 	end
 
 	for _, x in ipairs(slotHide) do
@@ -1597,10 +1599,18 @@ function Stuffing:SortBags()
 	BS_clearData()
 
 	local bagList
-	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then -- FIXME sort only visiable tab
-		bagList = {16, 15, 14, 13, 12}
+	if Stuffing.warbandFrame and Stuffing.warbandFrame:IsShown() then
+		if self.frame.warband_first then
+			bagList = {14, 13, 12}
+		else
+			bagList = {16, 15}
+		end
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-		bagList = {11, 10, 9, 8, 7, 6}
+		if self.frame.bank_first then
+			bagList = {8, 7, 6}
+		else
+			bagList = {11, 10, 9}
+		end
 	else
 		bagList = {4, 3, 2, 1, 0}
 	end
