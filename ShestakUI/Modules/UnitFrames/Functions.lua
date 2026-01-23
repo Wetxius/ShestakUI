@@ -91,13 +91,13 @@ T.PostUpdateHealth = function(health, unit, cur, max)
 			-- r, g, b = oUF:ColorGradient(cur, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			-- if (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") and health:GetAttribute("normalUnit") ~= "pet" then
 				-- if C.unitframe.show_total_value then
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(cur), T.ShortValue(max))
 					-- else
 						-- health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(cur), T.ShortValue(max))
 					-- end
 				-- else
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", cur, r * 255, g * 255, b * 255, floor(cur / max * 100))
 					-- else
 						-- health.value:SetFormattedText("|cffffffff%d - %d%%|r", cur, floor(cur / max * 100))
@@ -105,26 +105,26 @@ T.PostUpdateHealth = function(health, unit, cur, max)
 				-- end
 			-- elseif unit == "target" then
 				-- if C.unitframe.show_total_value then
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(cur), T.ShortValue(max))
 					-- else
 						-- health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(cur), T.ShortValue(max))
 					-- end
 				-- else
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(cur / max * 100), T.ShortValue(cur))
 					-- else
 						-- health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(cur))
 					-- end
 				-- end
 			-- elseif unit and unit:find("boss%d") then
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(cur / max * 100), T.ShortValue(cur))
 				-- else
 					-- health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(cur))
 				-- end
 			-- else
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(cur / max * 100))
 				-- else
 					-- health.value:SetFormattedText("|cffffffff%d%%|r", floor(cur / max * 100))
@@ -132,13 +132,13 @@ T.PostUpdateHealth = function(health, unit, cur, max)
 			-- end
 		-- else
 			-- if (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- health.value:SetText("|cff559655"..max.."|r")
 				-- else
 					-- health.value:SetText("|cffffffff"..max.."|r")
 				-- end
 			-- else
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- health.value:SetText("|cff559655"..T.ShortValue(max).."|r")
 				-- else
 					-- health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
@@ -259,20 +259,20 @@ T.PostUpdateRaidHealth = function(health, unit, cur, max)
 		-- if cur ~= max then
 			-- r, g, b = oUF:ColorGradient(cur, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			-- if self:GetParent():GetName():match("oUF_PartyDPS") then
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", T.ShortValue(cur), r * 255, g * 255, b * 255, floor(cur / max * 100))
 				-- else
 					-- health.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(cur), floor(cur / max * 100))
 				-- end
 			-- else
-				-- if C.unitframe.color_value == true then
-					-- if C.raidframe.deficit_health == true then
+				-- if C.unitframe.color_value then
+					-- if C.raidframe.deficit_health then
 						-- health.value:SetText("|cffffffff".."-"..T.ShortValue(max - cur))
 					-- else
 						-- health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(cur / max * 100))
 					-- end
 				-- else
-					-- if C.raidframe.deficit_health == true then
+					-- if C.raidframe.deficit_health then
 						-- health.value:SetText("|cffffffff".."-"..T.ShortValue(max - cur))
 					-- else
 						-- health.value:SetFormattedText("|cffffffff%d%%|r", floor(cur / max * 100))
@@ -280,7 +280,7 @@ T.PostUpdateRaidHealth = function(health, unit, cur, max)
 				-- end
 			-- end
 		-- else
-			-- if C.unitframe.color_value == true then
+			-- if C.unitframe.color_value then
 				-- health.value:SetText("|cff559655"..T.ShortValue(max).."|r")
 			-- else
 				-- health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
@@ -426,13 +426,13 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 			-- if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
 				-- if unit == "target" then
 					-- if C.unitframe.show_total_value then
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- else
 							-- power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- end
 					-- else
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", perc, T.ShortValue(max - (max - cur)))
 						-- else
 							-- power.value:SetFormattedText("|cffffffff%d%% - %s|r", perc, T.ShortValue(max - (max - cur)))
@@ -440,39 +440,39 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 					-- end
 				-- elseif (unit == "player" and power:GetAttribute("normalUnit") == "pet") or unit == "pet" then
 					-- if C.unitframe.show_total_value then
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- else
 							-- power.value:SetFormattedText("%s |cffffffff-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- end
 					-- else
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%d%%", perc)
 						-- else
 							-- power.value:SetFormattedText("|cffffffff%d%%|r", perc)
 						-- end
 					-- end
 				-- elseif unit and (unit:find("arena%d") or unit:find("boss%d")) then
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- power.value:SetFormattedText("|cffD7BEA5%d%% - %s|r", perc, T.ShortValue(max - (max - cur)))
 					-- else
 						-- power.value:SetFormattedText("|cffffffff%d%% - %s|r", perc, T.ShortValue(max - (max - cur)))
 					-- end
 				-- elseif self:GetParent():GetName():match("oUF_PartyDPS") then
-					-- if C.unitframe.color_value == true then
+					-- if C.unitframe.color_value then
 						-- power.value:SetFormattedText("%s |cffD7BEA5-|r %d%%", T.ShortValue(max - (max - cur)), perc)
 					-- else
 						-- power.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(max - (max - cur)), perc)
 					-- end
 				-- else
 					-- if C.unitframe.show_total_value then
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- else
 							-- power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
 						-- end
 					-- else
-						-- if C.unitframe.color_value == true then
+						-- if C.unitframe.color_value then
 							-- power.value:SetFormattedText("%d |cffD7BEA5-|r %d%%", max - (max - cur), perc)
 						-- else
 							-- power.value:SetFormattedText("|cffffffff%d - %d%%|r", max - (max - cur), perc)
@@ -480,7 +480,7 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 					-- end
 				-- end
 			-- else
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- power.value:SetText(max - (max - cur))
 				-- else
 					-- power.value:SetText("|cffffffff"..max - (max - cur).."|r")
@@ -488,13 +488,13 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 			-- end
 		-- else
 			-- if unit == "pet" or unit == "target" or (unit and unit:find("arena%d")) or (self:GetParent():GetName():match("oUF_PartyDPS")) then
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- power.value:SetText(T.ShortValue(cur))
 				-- else
 					-- power.value:SetText("|cffffffff"..T.ShortValue(cur).."|r")
 				-- end
 			-- else
-				-- if C.unitframe.color_value == true then
+				-- if C.unitframe.color_value then
 					-- power.value:SetText(cur)
 				-- else
 					-- power.value:SetText("|cffffffff"..cur.."|r")
@@ -716,7 +716,7 @@ end
 T.PostCastStart = function(Castbar, unit)
 	if unit == "vehicle" then unit = "player" end
 
-	if unit == "player" and C.unitframe.castbar_latency == true and Castbar.Latency then
+	if unit == "player" and C.unitframe.castbar_latency and Castbar.Latency then
 		local _, _, _, ms = GetNetStats()
 		Castbar.Latency:SetText(("%dms"):format(ms))
 		if Castbar.casting then
@@ -836,6 +836,7 @@ T.PostCreateIcon = function(element, button)
 
 	button.Cooldown.noCooldownCount = true
 	button.Cooldown:SetDrawEdge(false)
+	button.Cooldown:SetHideCountdownNumbers(true)
 
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
 	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -846,10 +847,8 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-	if C.aura.show_spiral == true then
-		element.disableCooldown = false
+	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
-		button.Cooldown:SetHideCountdownNumbers(true)
 		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
 		button.parent = CreateFrame("Frame", nil, button)
@@ -857,7 +856,7 @@ T.PostCreateIcon = function(element, button)
 		button.Count:SetParent(button.parent)
 		button.remaining:SetParent(button.parent)
 	else
-		element.disableCooldown = true
+		button.Cooldown:SetAlpha(0)
 	end
 end
 
@@ -937,7 +936,7 @@ T.PostUpdateIcon = function(element, button, unit, data)
 		button.Icon:SetDesaturated(false)
 	end
 
-	-- if data.duration and (canaccessvalue(data.duration) and data.duration > 0) and C.aura.show_timer == true then
+	-- if data.duration and (canaccessvalue(data.duration) and data.duration > 0) and C.aura.show_timer then
 	if data.expirationTime and C.aura.show_timer then
 		button.remaining:Show()
 		-- button.timeLeft = data.expirationTime

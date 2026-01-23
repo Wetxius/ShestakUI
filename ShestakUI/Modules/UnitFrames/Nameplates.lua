@@ -269,6 +269,8 @@ local AurasPostCreateIcon = function(element, button)
 	button.remaining:SetJustifyH("CENTER")
 
 	button.Cooldown.noCooldownCount = true
+	button.Cooldown:SetDrawEdge(false)
+	button.Cooldown:SetHideCountdownNumbers(true)
 
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
@@ -278,15 +280,13 @@ local AurasPostCreateIcon = function(element, button)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	if C.aura.show_spiral then
-		element.disableCooldown = false
 		button.Cooldown:SetReverse(true)
-		button.Cooldown:SetHideCountdownNumbers(true)
 		button.parent = CreateFrame("Frame", nil, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)
 		button.remaining:SetParent(button.parent)
 	else
-		element.disableCooldown = true
+		button.Cooldown:SetAlpha(0)
 	end
 end
 
