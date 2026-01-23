@@ -18,13 +18,13 @@ local function LoadFirstSkin()
 		if not skip then
 			hooksecurefunc(option.ScrollBox, "Update", function(self)
 				self:ForEachFrame(function(button)
-					if not button.IsSkinned then
+					if not button.styled then
 						if button.Border then button.Border:SetAlpha(0) end
 						if button.Icon then
 							button.Icon:SkinIcon()
 						end
 
-						button.IsSkinned = true
+						button.styled = true
 					end
 				end)
 			end)
@@ -64,12 +64,12 @@ local function LoadSecondSkin()
 	frame.EnterDelveButton:SkinButton()
 
 	local function skinReward(rewardFrame)
-		if not rewardFrame.IsSkinned then
+		if not rewardFrame.styled then
 			rewardFrame.NameFrame:SetAlpha(0)
 			rewardFrame.Icon:SkinIcon()
 			rewardFrame.IconBorder:SetAlpha(0)
 
-			rewardFrame.IsSkinned = true
+			rewardFrame.styled = true
 		end
 	end
 
