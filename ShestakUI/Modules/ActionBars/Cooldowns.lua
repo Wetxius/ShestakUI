@@ -95,7 +95,7 @@ if IsWetxius then
 		Timer_OnSizeChanged(timer, scaler:GetSize())
 		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
-		self:SetHideCountdownNumbers(true)
+		-- self:SetHideCountdownNumbers(true)
 		self:GetRegions():SetAlpha(0)	-- Hide Blizzard cd text
 
 		self.timer = timer
@@ -120,7 +120,7 @@ else
 		Timer_OnSizeChanged(timer, scaler:GetSize())
 		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
-		self:SetHideCountdownNumbers(true)
+		-- self:SetHideCountdownNumbers(true)
 		self:GetRegions():SetAlpha(0)	-- Hide Blizzard cd text
 
 		self.timer = timer
@@ -149,6 +149,9 @@ local function setHideCooldownNumbers(cooldown, hide)
 	end
 end
 
+local font = CreateFont("ShestakUI_TimerFont")
+font:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+
 hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, modRate)
 	if cooldown.noCooldownCount or cooldown:IsForbidden() or hideNumbers[cooldown] then return end
 
@@ -158,7 +161,13 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 		return
 	end
 
-	if not canaccessvalue(start) then return end
+	if not canaccessvalue(start) then
+		cooldown:SetCountdownFont("ShestakUI_TimerFont")
+		-- cooldown:SetHideCountdownNumbers(false)
+		cooldown:GetRegions():SetAlpha(1)
+		return
+	end
+
 	local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 
 	if show then
@@ -184,13 +193,13 @@ hooksecurefunc("CooldownFrame_SetDisplayAsPercentage", function(cooldown)
 	setHideCooldownNumbers(cooldown, false)
 end)
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-frame:RegisterEvent("PLAYER_REGEN_ENABLED")
-frame:SetScript("OnEvent", function(_, event)
-	if event == "PLAYER_REGEN_DISABLED" then
-		SetCVar("countdownForCooldowns", 1)
-	else
-		SetCVar("countdownForCooldowns", 0)
-	end
-end)
+-- local frame = CreateFrame("Frame")
+-- frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+-- frame:RegisterEvent("PLAYER_REGEN_ENABLED")
+-- frame:SetScript("OnEvent", function(_, event)
+	-- if event == "PLAYER_REGEN_DISABLED" then
+		-- SetCVar("countdownForCooldowns", 1)
+	-- else
+		-- SetCVar("countdownForCooldowns", 0)
+	-- end
+-- end)

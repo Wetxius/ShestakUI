@@ -39,8 +39,8 @@ frame:SetScript("OnEvent", function()
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_TALENT_CHANGES, true)
 
-	SetCVar("countdownForCooldowns", 0)
-	-- SetCVar("countdownForCooldowns", 1) -- BETA
+	-- SetCVar("countdownForCooldowns", 0)
+	SetCVar("countdownForCooldowns", 1) -- BETA
 
 	if C.chat.enable then
 		SetCVar("chatStyle", "im")
