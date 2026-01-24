@@ -142,6 +142,11 @@ local function LoadSkin()
 		if button.CircleBackground then button.CircleBackground:Hide() end
 		if button.CircleBackgroundGlow then button.CircleBackgroundGlow:Hide() end
 		if button.ValueText then button.ValueText:SetPoint("BOTTOMRIGHT", button.Icon, 0, 0) end
+		local context = button.QuestRewardContextIcon
+		if context then
+			local point, relativeTo, relativePoint, xOfs, yOfs = context:GetPoint()
+			context:SetPoint(point, relativeTo, relativePoint, xOfs - 7, yOfs)
+		end
 		if button.IconBorder then button.IconBorder:SetAlpha(0) end
 		if button.IconOverlay then button.IconOverlay:SetAlpha(0) end --BETA
 		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
