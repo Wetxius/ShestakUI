@@ -413,13 +413,12 @@ local function LoadSkin()
 
 	-- NPC Model
 	QuestModelScene:StripTextures()
-	QuestModelScene:CreateBackdrop("Overlay")
-	QuestModelScene.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
-	QuestNPCModelNameTooltipFrame:CreateBackdrop("Overlay")
-	QuestNPCModelNameTooltipFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+	QuestModelScene:CreateBackdrop("Transparent")
+	QuestNPCModelNameTooltipFrame:CreateBackdrop("Transparent")
 	QuestNPCModelNameTooltipFrame.backdrop:ClearAllPoints()
 	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPLEFT", QuestModelScene.backdrop, "BOTTOMLEFT", 0, -3)
-	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("BOTTOMRIGHT", QuestModelScene.ModelTextFrame, "BOTTOMRIGHT", 2, -1)
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPRIGHT", QuestModelScene.backdrop, "BOTTOMRIGHT", 0, -3)
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("BOTTOM", QuestModelScene.ModelTextFrame, "BOTTOM", 0, 0)
 	QuestNPCModelNameText:SetPoint("TOPLEFT", QuestModelScene.ModelNameDivider, 15, -20)
 	QuestNPCModelNameText:SetPoint("BOTTOMRIGHT", QuestModelScene.ModelNameDivider, -15, 7)
 	QuestModelScene.ModelTextFrame:StripTextures()
@@ -428,14 +427,14 @@ local function LoadSkin()
 			x = x + 6
 			y = y + 40
 
-			QuestModelScene.backdrop.overlay:Hide()
-			QuestNPCModelNameTooltipFrame.backdrop.overlay:Hide()
+			QuestModelScene.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+			QuestNPCModelNameTooltipFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
 		else
-			QuestModelScene.backdrop.overlay:Show()
-			QuestNPCModelNameTooltipFrame.backdrop.overlay:Show()
+			QuestModelScene.backdrop:SetBackdropColor(0.1, 0.1, 0.1, 1)
+			QuestNPCModelNameTooltipFrame.backdrop:SetBackdropColor(0.1, 0.1, 0.1, 1)
 		end
 		QuestModelScene:ClearAllPoints()
-		QuestModelScene:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x, y)
+		QuestModelScene:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x - 2, y)
 		QuestModelScene.ModelTextFrame:SetHeight(85)
 	end)
 
