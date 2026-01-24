@@ -1479,6 +1479,7 @@ do
 	ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
 	local skinTable = {
+		{"assistedcombat"},
 		{"atlasloot"},
 		{"bigwigs"},
 		{"blood_shield_tracker"},

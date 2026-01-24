@@ -196,6 +196,7 @@
 
 	<Include file="Modules\Skins\Blizzard\!LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
+	<Script file="Modules\Skins\AssistedCombat.lua"/>
 	<Script file="Modules\Skins\AtlasLoot.lua"/>
 	<Script file="Modules\Skins\Aurora.lua"/>
 	<Script file="Modules\Skins\BaudErrorFrame.lua"/>

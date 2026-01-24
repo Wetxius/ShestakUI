@@ -58,6 +58,7 @@ C["skins"] = {
 	["minimap_buttons_mouseover"] = true,		-- Addons icons on mouseover
 	-- Addons
 	["ace3"] = false,							-- Ace3 options elements skin
+	["assistedcombat"] = false,					-- Simple Assisted Combat Icon skin
 	["atlasloot"] = false,						-- AtlasLoot skin
 	["bigwigs"] = false,						-- BigWigs skin
 	["blood_shield_tracker"] = false,			-- BloodShieldTracker skin
