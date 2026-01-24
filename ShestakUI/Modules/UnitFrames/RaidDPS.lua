@@ -258,9 +258,9 @@ local function Shared(self, unit)
 
 	-- Smooth bars
 	if C.unitframe.plugins_smooth_bar == true then
-		self.Health.Smooth = true
+		self.Health.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
 		if not (suffix == "pet" or suffix == "target") then
-			self.Power.Smooth = true
+			self.Power.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
 		end
 	end
 

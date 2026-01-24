@@ -73,7 +73,7 @@ local function Shared(self, unit)
 		self.Health.colorReaction = true
 	end
 	if C.unitframe.plugins_smooth_bar == true then
-		self.Health.Smooth = true
+		self.Health.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
 	end
 
 	self.Health.PostUpdate = T.PostUpdateHealth
@@ -135,7 +135,7 @@ local function Shared(self, unit)
 			self.Power.colorPower = true
 		end
 		if C.unitframe.plugins_smooth_bar == true then
-			self.Power.Smooth = true
+			self.Power.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
 		end
 
 		self.Power.PostUpdate = T.PostUpdatePower
@@ -394,6 +394,9 @@ local function Shared(self, unit)
 					end
 				end
 
+				if C.unitframe.plugins_smooth_bar == true then
+					self.Stagger.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
+				end
 			end
 		end
 
@@ -1112,6 +1115,10 @@ local function Shared(self, unit)
 		self.AlternativePower.text = T.SetFontString(self.AlternativePower, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 		self.AlternativePower.text:SetPoint("CENTER", self.AlternativePower, "CENTER", 0, 0)
 		self:Tag(self.AlternativePower.text, "[AltPower]")
+
+		if C.unitframe.plugins_smooth_bar == true then
+			self.AlternativePower.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
+		end
 
 		if C.aura.boss_auras == true then
 			self.Auras = CreateFrame("Frame", self:GetName().."_Auras", self)
