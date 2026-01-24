@@ -6,7 +6,6 @@ if C.chat.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 hooksecurefunc("SetItemRef", function(link) -- Secure hook to avoid taint
 	if IsAltKeyDown() then
-		local ChatFrameEditBox = ChatEdit_ChooseBoxForSend()
 		local player = link:match("^player:([^:]+)")
 		local bplayer = link:match("^BNplayer:([^:]+)")
 		if player then
@@ -20,6 +19,6 @@ hooksecurefunc("SetItemRef", function(link) -- Secure hook to avoid taint
 				BNInviteFriend(accountInfo.gameAccountInfo.gameAccountID)
 			end
 		end
-		ChatEdit_OnEscapePressed(ChatFrameEditBox) -- Secure hook opens whisper, so closing it.
+		ChatFrameUtil.ChooseBoxForSend():ClearChat() -- Secure hook opens whisper, so closing it.
 	end
 end)
