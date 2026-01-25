@@ -9,6 +9,11 @@ local function LoadFirstSkin()
 	T.SkinFrame(frame)
 	frame.CompanionConfigShowAbilitiesButton:SkinButton()
 	frame.CompanionPortraitFrame:SetFrameLevel(10)
+	frame.CompanionPortraitFrame.Border:SetAlpha(0)
+	frame.CompanionPortraitFrame:SetScale(0.6)
+	frame.CompanionPortraitFrame:ClearAllPoints()
+	frame.CompanionPortraitFrame:SetPoint("TOP", frame, "TOP", 0, -40)
+	frame.CompanionExperienceRingFrame:SetScale(0.6)
 
 	local function SkinOptionSlot(frame, skip)
 		local option = frame.OptionsList
