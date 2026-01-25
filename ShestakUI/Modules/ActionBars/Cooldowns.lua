@@ -191,14 +191,3 @@ hooksecurefunc(Cooldown_MT, "SetHideCountdownNumbers", setHideCooldownNumbers)
 hooksecurefunc("CooldownFrame_SetDisplayAsPercentage", function(cooldown)
 	setHideCooldownNumbers(cooldown, false)
 end)
-
--- local frame = CreateFrame("Frame")
--- frame:RegisterEvent("PLAYER_REGEN_DISABLED")
--- frame:RegisterEvent("PLAYER_REGEN_ENABLED")
--- frame:SetScript("OnEvent", function(_, event)
-	-- if event == "PLAYER_REGEN_DISABLED" then
-		-- SetCVar("countdownForCooldowns", 1)
-	-- else
-		-- SetCVar("countdownForCooldowns", 0)
-	-- end
--- end)

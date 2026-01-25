@@ -11,7 +11,7 @@ local function Strip(info, name)
 end
 
 -- Function to rename channel and other stuff
-local AddMessage = function(self, text, ...)
+local function AddMessage(self, text, ...)
 	if type(text) == "string" and canaccessvalue(text) then
 		text = text:gsub("|h%[(%d+)%. .-%]|h", "|h[%1]|h")
 		text = text:gsub("|Hplayer:(.-)|h%[(.-)%]|h", Strip)

@@ -443,7 +443,7 @@ local function LoadSkin()
 		progressBar.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 		progressBar:SetColors({R = 0, G = 0.5, B = 0}, {R = 0.8, G = 0, B = 0})
 	end
-	SkinGameTooltipProgressBar(LibStub("Krowi_GameTooltipWithProgressBar-2.0").ProgressBar)
+	--BETA SkinGameTooltipProgressBar(LibStub("Krowi_GameTooltipWithProgressBar-2.0").ProgressBar)
 
 	-- [[ Achievements ]]
 	local function SkinAchievementButton(button)
