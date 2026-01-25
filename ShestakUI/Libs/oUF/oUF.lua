@@ -764,7 +764,7 @@ do
 		if(IsLoggedIn()) then
 			C_NamePlate.SetNamePlateSize(driver.plateWidth or 200, driver.plateHeight or 30)
 
-			local enemyInset = driver.friendlyNonInteractible and hitInset or -hitInset
+			local enemyInset = driver.enemyNonInteractible and hitInset or -hitInset
 			C_NamePlateManager.SetNamePlateHitTestInsets(Enum.NamePlateType.Enemy, enemyInset, enemyInset, enemyInset, enemyInset)
 
 			local friendlyInset = driver.friendlyNonInteractible and hitInset or -hitInset
@@ -772,7 +772,13 @@ do
 
 			if(driver.cvars) then
 				for name, value in next, driver.cvars do
-					C_CVar.SetCVar(name, value)
+					if(type(value) == 'table') then
+						for bitmaskIndex, bitmaskValue in next, value do
+							C_CVar.SetCVarBitfield(name, bitmaskIndex, bitmaskValue)
+						end
+					else
+						C_CVar.SetCVar(name, value)
+					end
 				end
 			end
 		end
@@ -981,9 +987,9 @@ function oUF:AddElement(name, update, enable, disable)
 
 	if(elements[name]) then return nierror(string.format('Element [%s] is already registered.', name)) end
 	elements[name] = {
-		update = update;
-		enable = enable;
-		disable = disable;
+		update = update,
+		enable = enable,
+		disable = disable,
 	}
 end
 
