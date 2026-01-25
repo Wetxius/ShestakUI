@@ -56,7 +56,6 @@
 	<Script file="Modules\QuestIcon.lua"/>
 	<Script file="Modules\RaidDebuffs.lua"/>
 	<Script file="Modules\Reputation.lua"/>
-	<Script file="Modules\Smooth.lua"/>
 	<Script file="Modules\SoulShards.lua"/>
 	<Script file="Modules\Swing.lua"/>
 	<Script file="Modules\TotemBar.lua"/>
