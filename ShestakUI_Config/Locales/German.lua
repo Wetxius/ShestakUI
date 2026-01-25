@@ -29,7 +29,7 @@ L.profile_options = "Settings" -- Need review
 L.profile_movers = "Moving elements" -- Need review
 L.profile_export = "Export" -- Need review
 L.profile_import = "Import" -- Need review
-L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
+L.profile_error_lib = "To enable export and import - install Media_ShestakUI" -- Need review
 L.profile_error_code = "Error in imported code!" -- Need review
 
 -- General options

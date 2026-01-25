@@ -31,7 +31,7 @@ L.profile_options = "设置"
 L.profile_movers = "框架移动"
 L.profile_export = "导出"
 L.profile_import = "导入"
-L.profile_error_lib = "要启用导入和导出，请安装WeakAuras"
+L.profile_error_lib = "要启用导入和导出，请安装Media_ShestakUI"
 L.profile_error_code = "导入的代码有错误!"
 
 -- General options

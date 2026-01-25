@@ -28,7 +28,7 @@ L.profile_options = "Settings"
 L.profile_movers = "Moving elements"
 L.profile_export = "Export"
 L.profile_import = "Import"
-L.profile_error_lib = "To enable export and import - install WeakAuras"
+L.profile_error_lib = "To enable export and import - install Media_ShestakUI"
 L.profile_error_code = "Error in imported code!"
 
 -- General options

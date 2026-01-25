@@ -31,7 +31,7 @@ L.profile_options = "設置"
 L.profile_movers = "框架移動"
 L.profile_export = "滙出"
 L.profile_import = "滙入"
-L.profile_error_lib = "要啓用滙入和滙出，請安裝WeakAuras"
+L.profile_error_lib = "要啓用滙入和滙出，請安裝Media_ShestakUI"
 L.profile_error_code = "滙入的代碼有錯誤！"
 
 -- General options
