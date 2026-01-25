@@ -68,10 +68,6 @@ frame:SetScript("OnEvent", function()
 	hooksecurefunc("TalentFrame_LoadUI", function()
 		PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	end)
-
-	-- Fixed SetPointBase and ShowBase taints after finish Pet Battle, entering new combat and summon Hunter pet.
-	--FIXME ActionBarController:UnregisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	-- ActionBarController:UnregisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 end)
 
 ----------------------------------------------------------------------------------------
@@ -555,4 +551,36 @@ T.PetBarUpdate = function()
 		end
 	end
 	PetActionBar.rangeTimer = -1
+end
+
+----------------------------------------------------------------------------------------
+--	Rewrite Blizzard function to prevent ShowBase, SetPointBase, ClearAllPointsBase taints after finish Pet Battle, entering new combat and summon Hunter pet (.../Blizzard_ActionBarController/ActionBarController.lua)
+----------------------------------------------------------------------------------------
+function ValidateActionBarTransition()
+	if ActionBarBusy() then
+		return
+	end
+
+	if CURRENT_ACTION_BAR_STATE == LE_ACTIONBAR_STATE_MAIN then
+		-- MainActionBar:Show()
+
+		-- if StanceBar:ShouldShow() then
+			-- StanceBar:Show()
+		-- end
+
+		if OverrideActionBar:IsShown() then
+			MicroMenu:ResetMicroMenuPosition()
+			BeginActionBarTransition(OverrideActionBar, nil)
+		end
+	elseif CURRENT_ACTION_BAR_STATE == LE_ACTIONBAR_STATE_OVERRIDE then
+		-- MainActionBar:Hide()
+		-- StanceBar:Hide()
+
+		if not OverrideActionBar:IsShown() then
+			BeginActionBarTransition(OverrideActionBar, 1)
+		end
+	end
+
+	-- MultiActionBar_Update()
+	UIParent_ManageFramePositions()
 end
