@@ -211,6 +211,9 @@ local function GameTooltipDefault(tooltip, parent)
 	if not C.tooltip.shift_modifer then
 		if InCombatLockdown() and C.tooltip.hide_combat and not IsShiftKeyDown() then
 			tooltip:Hide()
+			C_Timer.After(0.01, function()
+				GameTooltip_OnHide(tooltip)
+			end)
 		end
 	end
 end
@@ -394,7 +397,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetU
 --	Hide tooltips in combat for action bars, pet bar and stance bar
 ----------------------------------------------------------------------------------------
 if C.tooltip.hidebuttons == true then
-	local CombatHideActionButtonsTooltip = function(self)
+	local function CombatHideActionButtonsTooltip(self)
 		if not IsShiftKeyDown() then
 			self:Hide()
 		end
