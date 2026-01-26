@@ -357,7 +357,7 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 		power.value:SetText()
 	else
 		local perc = UnitPowerPercent(unit, pType, true, CurveConstants.ScaleTo100)
-
+		local text = C_StringUtil.TruncateWhenZero(cur)	-- hide if zero
 		if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
 			if unit == "target" then
 				if C.unitframe.show_total_value then
@@ -416,9 +416,9 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 			end
 		else
 			if C.unitframe.color_value then
-				power.value:SetText(cur)
+				power.value:SetText(text or cur)
 			else
-				power.value:SetText("|cffffffff"..cur.."|r")
+				power.value:SetText("|cffffffff"..text or cur.."|r")
 			end
 		end
 
