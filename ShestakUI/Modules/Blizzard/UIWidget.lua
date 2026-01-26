@@ -113,6 +113,13 @@ local function SkinStatusBar(widget)
 		end
 	end
 
+	if widget.Label then
+		local r, g, b = widget.Label:GetTextColor()
+		if r == 0 and g == 0 and b == 0 then
+			widget.Label:SetTextColor(1, 1, 1)
+		end
+	end
+
 	if not bar.styled then
 		bar.BGLeft:SetAlpha(0)
 		bar.BGRight:SetAlpha(0)
