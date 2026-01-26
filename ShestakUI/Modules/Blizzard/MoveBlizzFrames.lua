@@ -89,6 +89,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if AddOnFrames[addon] then
 		for _, v in pairs(AddOnFrames[addon]) do
 			if _G[v] then
+				if v == "PlayerSpellsFrame" and InCombatLockdown() then return end -- prevent error when open in combat
 				_G[v]:EnableMouse(true)
 				_G[v]:SetMovable(true)
 				_G[v]:SetClampedToScreen(true)
