@@ -203,6 +203,12 @@ local function LoadSkin()
 
 				button.NormalTexture:SetAlpha(0)
 
+				-- TODO
+				local collapse = button.HeaderCollapseIndicator
+				if collapse then
+
+				end
+
 				button.IsSkinned = true
 			end
 		end
@@ -211,14 +217,36 @@ local function LoadSkin()
 	-- Monthly activities
 	local monthlyActivities = EncounterJournalMonthlyActivitiesFrame
 	if monthlyActivities then
-		EncounterJournalMonthlyActivitiesFrame:StripTextures()
-		EncounterJournalMonthlyActivitiesFrame.FilterList:StripTextures()
-		EncounterJournalMonthlyActivitiesFrame.FilterList:SetTemplate("Overlay")
-		EncounterJournalMonthlyActivitiesFrame.ThemeContainer:StripTextures(true) -- force to kill
-		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.ScrollBar)
-		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.FilterList.ScrollBar)
+		monthlyActivities:StripTextures()
+		monthlyActivities.FilterList:StripTextures()
+		monthlyActivities.FilterList:SetTemplate("Overlay")
+		monthlyActivities.ThemeContainer:StripTextures(true) -- force to kill
+		T.SkinScrollBar(monthlyActivities.ScrollBar)
+		T.SkinScrollBar(monthlyActivities.FilterList.ScrollBar)
 		monthlyActivities.HelpButton.Ring:Hide()
-		monthlyActivities.HelpButton:SetPoint("TOPLEFT", EncounterJournalMonthlyActivitiesFrame, "TOPLEFT", -15, 70)
+		monthlyActivities.HelpButton:SetPoint("TOPLEFT", monthlyActivities, "TOPLEFT", -15, 70)
+
+		monthlyActivities.ThresholdContainer.BarBorder:SetAlpha(0)
+		local bar = monthlyActivities.ThresholdContainer.ThresholdBar
+		bar.barBackdrop = CreateFrame("Frame", nil, bar)
+		bar.barBackdrop:SetFrameLevel(bar:GetFrameLevel())
+		bar.barBackdrop:SetOutside(bar)
+		bar.barBackdrop:SetTemplate("Overlay")
+		bar:SetStatusBarTexture(C.media.texture)
+		bar:SetStatusBarColor(0, 0.6, 1)
+
+		hooksecurefunc(MonthlyActivitiesRewardButtonMixin, "SetRewardItem", function(self)
+			if not self.styled then
+				self:ClearAllPoints()
+				self:SetPoint("LEFT", monthlyActivities.ThresholdContainer.ThresholdBar.barBackdrop, "RIGHT", -2, -3)
+				self.Icon:SkinIcon()
+				self.CircleMask:Hide()
+				self.NormalTexture:SetAlpha(0)
+				self.HighlightTexture:SetAlpha(0)
+				self.PushedTexture:SetAlpha(0)
+				self.styled = true
+			end
+		end)
 	end
 
 	local mainTabs = {
