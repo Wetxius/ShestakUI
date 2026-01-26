@@ -5,6 +5,7 @@ local Private = oUF.Private
 local frame_metatable = Private.frame_metatable
 
 local function colorsAndPercent(a, b, ...)
+	if not canaccessvalue(a) then return end
 	if(a <= 0 or b == 0) then
 		return nil, ...
 	elseif(a >= b) then
