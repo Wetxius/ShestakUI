@@ -32,13 +32,13 @@ if C_AddOns.IsAddOnLoaded("Stuf") or C_AddOns.IsAddOnLoaded("PitBull4") or C_Add
 	C.unitframe.enable = false
 end
 
-if C_AddOns.IsAddOnLoaded("Grid") or C_AddOns.IsAddOnLoaded("Grid2") or C_AddOns.IsAddOnLoaded("HealBot") or C_AddOns.IsAddOnLoaded("VuhDo") or C_AddOns.IsAddOnLoaded("Cell") or C_AddOns.IsAddOnLoaded("Aptechka") then
+if C_AddOns.IsAddOnLoaded("Grid") or C_AddOns.IsAddOnLoaded("Grid2") or C_AddOns.IsAddOnLoaded("HealBot") or C_AddOns.IsAddOnLoaded("VuhDo") or C_AddOns.IsAddOnLoaded("Cell") or C_AddOns.IsAddOnLoaded("Aptechka") or C_AddOns.IsAddOnLoaded("DandersFrames") then
 	C.raidframe.show_party = false
 	C.raidframe.show_raid = false
 	C.raidframe.auto_position = "NONE"
 end
 
-if C_AddOns.IsAddOnLoaded("TidyPlates") or C_AddOns.IsAddOnLoaded("nPlates") or C_AddOns.IsAddOnLoaded("Kui_Nameplates") or C_AddOns.IsAddOnLoaded("rNamePlates") or C_AddOns.IsAddOnLoaded("EKplates") or C_AddOns.IsAddOnLoaded("bdNameplates") or C_AddOns.IsAddOnLoaded("Plater") or C_AddOns.IsAddOnLoaded("Nameplates") or C_AddOns.IsAddOnLoaded("NeatPlates") then
+if C_AddOns.IsAddOnLoaded("TidyPlates") or C_AddOns.IsAddOnLoaded("nPlates") or C_AddOns.IsAddOnLoaded("Kui_Nameplates") or C_AddOns.IsAddOnLoaded("rNamePlates") or C_AddOns.IsAddOnLoaded("EKplates") or C_AddOns.IsAddOnLoaded("bdNameplates") or C_AddOns.IsAddOnLoaded("Plater") or C_AddOns.IsAddOnLoaded("Nameplates") or C_AddOns.IsAddOnLoaded("NeatPlates") or C_AddOns.IsAddOnLoaded("Platynator") then
 	C.nameplate.enable = false
 end
 
