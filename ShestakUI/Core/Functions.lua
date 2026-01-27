@@ -220,6 +220,7 @@ T.IsFramePositionedLeft = function(frame)
 end
 
 T.CurrentProfile = function(reset)
+	if not ShestakUIOptionsGlobal then return {} end	-- prevent error when disable ShestakUI_Config
 	if ShestakUIOptionsGlobal[T.realm][T.name] then
 		if ShestakUIPositionsPerChar == nil then
 			ShestakUIPositionsPerChar = ShestakUIPositions
