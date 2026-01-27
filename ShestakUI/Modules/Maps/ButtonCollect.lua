@@ -15,6 +15,7 @@ local BlackList = {
 local buttons = {}
 local collectFrame = CreateFrame("Frame", "ButtonCollectFrame", UIParent)
 local line = math.ceil(C.minimap.size / 20.8)
+collectFrame.col = 1	-- for minimap on top option
 
 local texList = {
 	["136430"] = true,	-- Interface\\Minimap\\MiniMap-TrackingBorder
@@ -60,6 +61,7 @@ local function PositionAndStyle()
 			f:SetPoint("TOP", collectFrame, "TOP", 0, 0)
 		elseif i == line then
 			f:SetPoint("TOPRIGHT", buttons[1], "TOPLEFT", -1, 0)
+			collectFrame.col = 2
 		else
 			f:SetPoint("TOP", buttons[i-1], "BOTTOM", 0, -1)
 		end

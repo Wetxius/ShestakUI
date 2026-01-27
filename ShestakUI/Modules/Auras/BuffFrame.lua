@@ -34,6 +34,27 @@ local function UpdateDuration(aura, timeLeft)
 	end
 end
 
+-- Reposition
+C_Timer.After(0.2, function()
+	local left = T.IsFramePositionedLeft(BuffsAnchor)
+	if left then
+		local previousBuff, aboveBuff
+		for index, aura in ipairs(BuffFrame.auraFrames) do
+			aura:ClearAllPoints()
+			if (index > 1) and (mod(index, rowbuffs) == 1) then
+				aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -C.aura.player_buff_space)
+				aboveBuff = aura
+			elseif index == 1 then
+				aura:SetPoint("TOPLEFT", BuffsAnchor, "TOPLEFT", 0, 0)
+				aboveBuff = aura
+			else
+				aura:SetPoint("LEFT", previousBuff, "RIGHT", C.aura.player_buff_space, 0)
+			end
+			previousBuff = aura
+		end
+	end
+end)
+
 hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
 	local previousBuff, aboveBuff
 	for index, aura in ipairs(auras) do
