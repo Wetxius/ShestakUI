@@ -866,6 +866,11 @@ local function Shared(self, unit)
 		self.Castbar.PostCastInterruptible = T.PostCastStart
 
 		if unit == "player" then
+			self.Castbar.CreatePip = T.CustomCreatePip
+			self.Castbar.PostUpdatePips = T.PostUpdatePips
+		end
+
+		if unit == "player" then
 			if C.unitframe.castbar_icon == true then
 				self.Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + ((C.unitframe.castbar_height + 7) / 2) , C.position.unitframes.player_castbar[5])
 				self.Castbar:SetWidth(C.unitframe.castbar_width)

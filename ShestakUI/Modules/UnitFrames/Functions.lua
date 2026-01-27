@@ -810,6 +810,65 @@ T.CustomCastDelayText = function(self, durationObject)
 	end
 end
 
+local colorStage = {
+	[1] = {1, 0, 0},
+	[2] = {1, 0.9, 0},
+	[3] = {0, 1, 0.5},
+}
+
+local colorStages = {
+	[1] = {1, 0, 0},
+	[2] = {1, 0.4, 0},
+	[3] = {1, 0.9, 0},
+	[4] = {0, 1, 0.5},
+}
+
+T.CustomCreatePip = function(element, stage)
+	local pip = CreateFrame("Frame", nil, element:GetParent())
+	pip:SetSize(2, element:GetHeight())
+
+	pip.texture = pip:CreateTexture(nil, "BORDER", nil, -2)
+	pip.texture:SetTexture(C.media.texture)
+
+	pip.gap = pip:CreateTexture(nil, "ARTWORK")
+	pip.gap:SetAllPoints(pip)
+	pip.gap:SetTexture(C.media.texture)
+
+	return pip
+end
+
+T.PostUpdatePips = function(element, stages)
+	local color = {0, 0, 0}
+
+	for stage, stageSection in next, stages do
+		if #stages == 4 then
+			color = colorStages[stage]
+		else
+			color = colorStage[stage]
+		end
+
+		local pip = element.Pips[stage]
+		local r, g, b = unpack(color)
+
+		pip.texture:SetVertexColor(r, g, b)
+		pip.gap:SetVertexColor(r * 0.75, g * 0.75, b * 0.75)
+	end
+
+	local maxStage = #element.Pips
+	for i, pip in next, element.Pips do
+		pip.texture:ClearAllPoints()
+
+		local anchor = element.Pips[i + 1] or element
+		if element:GetReverseFill() then
+			pip.texture:SetPoint("TOPLEFT", anchor, 0, 0)
+			pip.texture:SetPoint("BOTTOMRIGHT", pip, 0, 0)
+		else
+			pip.texture:SetPoint("TOPRIGHT", anchor, 0, 0)
+			pip.texture:SetPoint("BOTTOMLEFT", pip, 0, 0)
+		end
+	end
+end
+
 T.AuraTrackerTime = function(self, elapsed)
 	if self.active then
 		self.timeleft = self.timeleft - elapsed
