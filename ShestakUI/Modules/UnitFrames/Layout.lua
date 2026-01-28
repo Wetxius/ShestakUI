@@ -204,7 +204,9 @@ local function Shared(self, unit)
 				self:Tag(self.Info, "[GetNameColor][NameMedium]")
 			end
 		elseif unit == "arenatarget" then
-			self.Info:SetPoint("CENTER", self.Health, "CENTER", 1, 0)
+			-- self.Info:SetPoint("CENTER", self.Health, "CENTER", 1, 0) -- BETA while we can't crop name
+			self.Info:SetPoint("LEFT", self.Health, "LEFT", 1, 0)
+			self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
 			self:Tag(self.Info, "[GetNameColor][NameArena]")
 		elseif unit == "arena" then
 			if C.unitframe.arena_on_right == true then

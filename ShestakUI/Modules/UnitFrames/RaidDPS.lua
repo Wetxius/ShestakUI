@@ -148,9 +148,13 @@ local function Shared(self, unit)
 	-- Names
 	self.Info = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 	if (suffix == "pet" or suffix == "target") and unit ~= "tank" then
-		self.Info:SetPoint("CENTER", self.Health, "CENTER", 2, 0)
+		-- self.Info:SetPoint("CENTER", self.Health, "CENTER", 2, 0) -- BETA while we can't crop name
+		self.Info:SetPoint("LEFT", self.Health, "LEFT", 0, 0)
+		self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
 	elseif unit == "tank" then
-		self.Info:SetPoint("CENTER", self.Health, "CENTER", 0, 4)
+		-- self.Info:SetPoint("CENTER", self.Health, "CENTER", 0, 4)
+		self.Info:SetPoint("LEFT", self.Health, "LEFT", 0, 4)
+		self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 4)
 	else
 		self.Info:SetPoint("LEFT", self.Health, "LEFT", 3, 0)
 		self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
