@@ -652,13 +652,24 @@ ns.addCategory("announcements", L_GUI_ANNOUNCEMENTS, L_GUI_ANNOUNCEMENTS_SUBTEXT
 ns.addCategory("automation", L_GUI_AUTOMATION, L_GUI_AUTOMATION_SUBTEXT)
 ns.addCategory("reminder", L_GUI_REMINDER, L_GUI_REMINDER_SUBTEXT)
 ns.addCategory("raidcooldown", L_GUI_COOLDOWN_RAID, L_GUI_COOLDOWN_RAID_SUBTEXT)
-ns.addCategory("enemycooldown", L_GUI_COOLDOWN_ENEMY, L_GUI_COOLDOWN_ENEMY_SUBTEXT)
-ns.addCategory("pulsecooldown", L.pulsecooldown, L.pulsecooldown_subtext)
+-- ns.addCategory("enemycooldown", L_GUI_COOLDOWN_ENEMY, L_GUI_COOLDOWN_ENEMY_SUBTEXT)
+-- ns.addCategory("pulsecooldown", L.pulsecooldown, L.pulsecooldown_subtext)
 ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
 ns.addCategory("toppanel", L_GUI_TOP_PANEL, L_GUI_TOP_PANEL_SUBTEXT)
 ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
 ns.addCategory("trade", L_GUI_TRADE, L_GUI_TRADE_SUBTEXT)
 ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT)
+
+
+local function HideOptions(frame)
+	-- for i = 1, #list do
+		-- local frame = list[i]
+		if frame then
+			frame:SetScale(0.00001)
+			frame:SetAlpha(0)
+		end
+	-- end
+end
 
 -- General
 do
@@ -2638,129 +2649,129 @@ do
 	enable.children = {blizz_head_numbers, damage_style}
 
 	-- Damage and healing
-	local subheader = ns.addSubCategory(parent, L.combattext_subheader_damage)
-	subheader:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, -10)
+	-- local subheader = ns.addSubCategory(parent, L.combattext_subheader_damage)
+	-- subheader:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, -10)
 
-	local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
-	incoming:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+	-- local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
+	-- incoming:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
-	local damage = ns.CreateCheckBox(parent, "damage", L_GUI_COMBATTEXT_DAMAGE)
-	damage:SetPoint("TOPLEFT", incoming, "BOTTOMLEFT", 0, 0)
+	-- local damage = ns.CreateCheckBox(parent, "damage", L_GUI_COMBATTEXT_DAMAGE)
+	-- damage:SetPoint("TOPLEFT", incoming, "BOTTOMLEFT", 0, 0)
 
-	local pet_damage = ns.CreateCheckBox(parent, "pet_damage", L_GUI_COMBATTEXT_PET_DAMAGE)
-	pet_damage:SetPoint("TOPLEFT", damage, "BOTTOMLEFT", 20, 0)
+	-- local pet_damage = ns.CreateCheckBox(parent, "pet_damage", L_GUI_COMBATTEXT_PET_DAMAGE)
+	-- pet_damage:SetPoint("TOPLEFT", damage, "BOTTOMLEFT", 20, 0)
 
-	local dot_damage = ns.CreateCheckBox(parent, "dot_damage", L_GUI_COMBATTEXT_DOT_DAMAGE)
-	dot_damage:SetPoint("TOPLEFT", pet_damage, "BOTTOMLEFT", 0, 0)
+	-- local dot_damage = ns.CreateCheckBox(parent, "dot_damage", L_GUI_COMBATTEXT_DOT_DAMAGE)
+	-- dot_damage:SetPoint("TOPLEFT", pet_damage, "BOTTOMLEFT", 0, 0)
 
-	local healing = ns.CreateCheckBox(parent, "healing", L_GUI_COMBATTEXT_HEALING)
-	healing:SetPoint("TOPLEFT", dot_damage, "BOTTOMLEFT", -20, 0)
+	-- local healing = ns.CreateCheckBox(parent, "healing", L_GUI_COMBATTEXT_HEALING)
+	-- healing:SetPoint("TOPLEFT", dot_damage, "BOTTOMLEFT", -20, 0)
 
-	local show_hots = ns.CreateCheckBox(parent, "show_hots", L_GUI_COMBATTEXT_HOTS)
-	show_hots:SetPoint("TOPLEFT", healing, "BOTTOMLEFT", 20, 0)
+	-- local show_hots = ns.CreateCheckBox(parent, "show_hots", L_GUI_COMBATTEXT_HOTS)
+	-- show_hots:SetPoint("TOPLEFT", healing, "BOTTOMLEFT", 20, 0)
 
-	local show_overhealing = ns.CreateCheckBox(parent, "show_overhealing", L_GUI_COMBATTEXT_OVERHEALING)
-	show_overhealing:SetPoint("TOPLEFT", show_hots, "BOTTOMLEFT", 0, 0)
+	-- local show_overhealing = ns.CreateCheckBox(parent, "show_overhealing", L_GUI_COMBATTEXT_OVERHEALING)
+	-- show_overhealing:SetPoint("TOPLEFT", show_hots, "BOTTOMLEFT", 0, 0)
 
-	healing.children = {show_hots, show_overhealing}
+	-- healing.children = {show_hots, show_overhealing}
 
-	local icons = ns.CreateCheckBox(parent, "icons", L_GUI_COMBATTEXT_ICONS)
-	icons:SetPoint("TOPLEFT", show_overhealing, "BOTTOMLEFT", -20, 0)
+	-- local icons = ns.CreateCheckBox(parent, "icons", L_GUI_COMBATTEXT_ICONS)
+	-- icons:SetPoint("TOPLEFT", show_overhealing, "BOTTOMLEFT", -20, 0)
 
-	local icon_size = ns.CreateNumberSlider(parent, "icon_size", nil, nil, 0, 40, 1, true, L_GUI_COMBATTEXT_ICON_SIZE, L_GUI_COMBATTEXT_ICON_SIZE_DESC)
-	icon_size:SetPoint("TOPLEFT", icons, "BOTTOMLEFT", 0, -20)
+	-- local icon_size = ns.CreateNumberSlider(parent, "icon_size", nil, nil, 0, 40, 1, true, L_GUI_COMBATTEXT_ICON_SIZE, L_GUI_COMBATTEXT_ICON_SIZE_DESC)
+	-- icon_size:SetPoint("TOPLEFT", icons, "BOTTOMLEFT", 0, -20)
 
-	local max_lines = ns.CreateNumberSlider(parent, "max_lines", nil, nil, 0, 30, 1, true, L_GUI_COMBATTEXT_MAX_LINES, L_GUI_COMBATTEXT_MAX_LINES_DESC)
-	max_lines:SetPoint("TOPLEFT", icon_size, "BOTTOMLEFT", 0, -20)
+	-- local max_lines = ns.CreateNumberSlider(parent, "max_lines", nil, nil, 0, 30, 1, true, L_GUI_COMBATTEXT_MAX_LINES, L_GUI_COMBATTEXT_MAX_LINES_DESC)
+	-- max_lines:SetPoint("TOPLEFT", icon_size, "BOTTOMLEFT", 0, -20)
 
-	local time_visible = ns.CreateNumberSlider(parent, "time_visible", nil, nil, 0, 10, 1, true, L_GUI_COMBATTEXT_TIME_VISIBLE, L_GUI_COMBATTEXT_TIME_VISIBLE_DESC)
-	time_visible:SetPoint("LEFT", max_lines, "RIGHT", 120, 0)
+	-- local time_visible = ns.CreateNumberSlider(parent, "time_visible", nil, nil, 0, 10, 1, true, L_GUI_COMBATTEXT_TIME_VISIBLE, L_GUI_COMBATTEXT_TIME_VISIBLE_DESC)
+	-- time_visible:SetPoint("LEFT", max_lines, "RIGHT", 120, 0)
 
-	local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
-	damage_color:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -10)
+	-- local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
+	-- damage_color:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -10)
 
-	local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
-	short_numbers:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
+	-- local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
+	-- short_numbers:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
 
-	local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam")
-	merge_aoe_spam:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
+	-- local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam")
+	-- merge_aoe_spam:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", merge_aoe_spam, "RIGHT", 400, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["combattext"] then
-			C.options["combattext"] = {}
-		end
-		if not C.options["combattext"]["spells_list"] then
-			C.options["combattext"]["spells_list"] = {}
-		end
-		BuildSpellList(C.options["combattext"]["spells_list"], true)
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", merge_aoe_spam, "RIGHT", 400, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["combattext"] then
+			-- C.options["combattext"] = {}
+		-- end
+		-- if not C.options["combattext"]["spells_list"] then
+			-- C.options["combattext"]["spells_list"] = {}
+		-- end
+		-- BuildSpellList(C.options["combattext"]["spells_list"], true)
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = merge_aoe_spam:GetChecked()
-		ListButton:SetEnabled(shown)
-	end
+	-- local function toggleListButton()
+		-- local shown = merge_aoe_spam:GetChecked()
+		-- ListButton:SetEnabled(shown)
+	-- end
 
-	merge_aoe_spam:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- merge_aoe_spam:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local merge_melee = ns.CreateCheckBox(parent, "merge_melee", L_GUI_COMBATTEXT_MERGE_MELEE)
-	merge_melee:SetPoint("TOPLEFT", merge_aoe_spam, "BOTTOMLEFT", 20, 0)
+	-- local merge_melee = ns.CreateCheckBox(parent, "merge_melee", L_GUI_COMBATTEXT_MERGE_MELEE)
+	-- merge_melee:SetPoint("TOPLEFT", merge_aoe_spam, "BOTTOMLEFT", 20, 0)
 
-	local merge_all = ns.CreateCheckBox(parent, "merge_all")
-	merge_all:SetPoint("TOPLEFT", merge_melee, "BOTTOMLEFT", 0, 0)
+	-- local merge_all = ns.CreateCheckBox(parent, "merge_all")
+	-- merge_all:SetPoint("TOPLEFT", merge_melee, "BOTTOMLEFT", 0, 0)
 
-	merge_aoe_spam.children = {merge_melee, merge_all}
+	-- merge_aoe_spam.children = {merge_melee, merge_all}
 
-	local direction = ns.CreateCheckBox(parent, "direction")
-	direction:SetPoint("TOPLEFT", merge_all, "BOTTOMLEFT", -20, 0)
+	-- local direction = ns.CreateCheckBox(parent, "direction")
+	-- direction:SetPoint("TOPLEFT", merge_all, "BOTTOMLEFT", -20, 0)
 
-	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
-	scrollable:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 0, 0)
+	-- local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
+	-- scrollable:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 0, 0)
 
-	-- Panel 2
-	local parent = ShestakUIOptionsPanel.combattext2
+	-- -- Panel 2
+	-- local parent = ShestakUIOptionsPanel.combattext2
 
-	local crit_prefix = ns.CreateEditBox(parent, "crit_prefix", true, L_GUI_COMBATTEXT_CRIT_PREFIX)
-	crit_prefix:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 6, -8)
+	-- local crit_prefix = ns.CreateEditBox(parent, "crit_prefix", true, L_GUI_COMBATTEXT_CRIT_PREFIX)
+	-- crit_prefix:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 6, -8)
 
-	local crit_postfix = ns.CreateEditBox(parent, "crit_postfix", true, L_GUI_COMBATTEXT_CRIT_POSTFIX)
-	crit_postfix:SetPoint("TOPLEFT", crit_prefix, "BOTTOMLEFT", 0, -10)
+	-- local crit_postfix = ns.CreateEditBox(parent, "crit_postfix", true, L_GUI_COMBATTEXT_CRIT_POSTFIX)
+	-- crit_postfix:SetPoint("TOPLEFT", crit_prefix, "BOTTOMLEFT", 0, -10)
 
-	local treshold = ns.CreateEditBox(parent, "treshold", true, L_GUI_COMBATTEXT_TRESHOLD, true)
-	treshold:SetPoint("TOPLEFT", crit_postfix, "BOTTOMLEFT", 0, -10)
+	-- local treshold = ns.CreateEditBox(parent, "treshold", true, L_GUI_COMBATTEXT_TRESHOLD, true)
+	-- treshold:SetPoint("TOPLEFT", crit_postfix, "BOTTOMLEFT", 0, -10)
 
-	local heal_treshold = ns.CreateEditBox(parent, "heal_treshold", true, L_GUI_COMBATTEXT_HEAL_TRESHOLD, true)
-	heal_treshold:SetPoint("TOPLEFT", treshold, "BOTTOMLEFT", 0, -10)
+	-- local heal_treshold = ns.CreateEditBox(parent, "heal_treshold", true, L_GUI_COMBATTEXT_HEAL_TRESHOLD, true)
+	-- heal_treshold:SetPoint("TOPLEFT", treshold, "BOTTOMLEFT", 0, -10)
 
-	-- Various messages
-	local subheader = ns.addSubCategory(parent, L.combattext_subheader_combat_module_top)
-	subheader:SetPoint("TOPLEFT", heal_treshold, "BOTTOMLEFT", -6, -15)
+	-- -- Various messages
+	-- local subheader = ns.addSubCategory(parent, L.combattext_subheader_combat_module_top)
+	-- subheader:SetPoint("TOPLEFT", heal_treshold, "BOTTOMLEFT", -6, -15)
 
-	local dispel = ns.CreateCheckBox(parent, "dispel", L_GUI_COMBATTEXT_DISPEL)
-	dispel:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+	-- local dispel = ns.CreateCheckBox(parent, "dispel", L_GUI_COMBATTEXT_DISPEL)
+	-- dispel:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
-	local interrupt = ns.CreateCheckBox(parent, "interrupt", L_GUI_COMBATTEXT_INTERRUPT)
-	interrupt:SetPoint("TOPLEFT", dispel, "BOTTOMLEFT", 0, 0)
+	-- local interrupt = ns.CreateCheckBox(parent, "interrupt", L_GUI_COMBATTEXT_INTERRUPT)
+	-- interrupt:SetPoint("TOPLEFT", dispel, "BOTTOMLEFT", 0, 0)
 
-	local killingblow = ns.CreateCheckBox(parent, "killingblow", L_GUI_COMBATTEXT_KILLINGBLOW)
-	killingblow:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 0, 0)
+	-- local killingblow = ns.CreateCheckBox(parent, "killingblow", L_GUI_COMBATTEXT_KILLINGBLOW)
+	-- killingblow:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 0, 0)
 
-	local dk_runes = ns.CreateCheckBox(parent, "dk_runes", L_GUI_COMBATTEXT_DK_RUNES)
-	dk_runes:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
+	-- local dk_runes = ns.CreateCheckBox(parent, "dk_runes", L_GUI_COMBATTEXT_DK_RUNES)
+	-- dk_runes:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
 
-	damage.children = {pet_damage, dot_damage, dispel, interrupt, killingblow}
+	-- damage.children = {pet_damage, dot_damage, dispel, interrupt, killingblow}
 
-	local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-	status:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", -30, -15)
-	status:SetWidth(600)
-	status:SetTextColor(0.9, 0.9, 0.9)
-	status:SetText(L.combattext_subheader_combat_module_top_extra)
+	-- local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	-- status:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", -30, -15)
+	-- status:SetWidth(600)
+	-- status:SetTextColor(0.9, 0.9, 0.9)
+	-- status:SetText(L.combattext_subheader_combat_module_top_extra)
 end
 
 -- Bag
@@ -2949,56 +2960,56 @@ end
 do
 	local parent = ShestakUIOptionsPanel.announcements
 
-	local interrupts = ns.CreateCheckBox(parent, "interrupts")
-	interrupts:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	-- local interrupts = ns.CreateCheckBox(parent, "interrupts")
+	-- interrupts:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local spells = ns.CreateCheckBox(parent, "spells")
-	spells:SetPoint("TOPLEFT", interrupts, "BOTTOMLEFT", 0, 0)
+	-- local spells = ns.CreateCheckBox(parent, "spells")
+	-- spells:SetPoint("TOPLEFT", interrupts, "BOTTOMLEFT", 0, 0)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", spells, "RIGHT", 400, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["announcements"] then
-			C.options["announcements"] = {}
-		end
-		if not C.options["announcements"]["spells_list"] then
-			C.options["announcements"]["spells_list"] = T.announce_spells
-		end
-		BuildSpellList(C.options["announcements"]["spells_list"])
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", spells, "RIGHT", 400, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["announcements"] then
+			-- C.options["announcements"] = {}
+		-- end
+		-- if not C.options["announcements"]["spells_list"] then
+			-- C.options["announcements"]["spells_list"] = T.announce_spells
+		-- end
+		-- BuildSpellList(C.options["announcements"]["spells_list"])
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = spells:GetChecked()
-		ListButton:SetEnabled(shown)
-		if not T.announce_spells then
-			ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
-			ListButton:SetScript("OnClick", nil)
-		end
-	end
+	-- local function toggleListButton()
+		-- local shown = spells:GetChecked()
+		-- ListButton:SetEnabled(shown)
+		-- if not T.announce_spells then
+			-- ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
+			-- ListButton:SetScript("OnClick", nil)
+		-- end
+	-- end
 
-	spells:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- spells:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local spells_from_all = ns.CreateCheckBox(parent, "spells_from_all")
-	spells_from_all:SetPoint("TOPLEFT", spells, "BOTTOMLEFT", 20, 0)
+	-- local spells_from_all = ns.CreateCheckBox(parent, "spells_from_all")
+	-- spells_from_all:SetPoint("TOPLEFT", spells, "BOTTOMLEFT", 20, 0)
 
-	spells.children = {spells_from_all}
+	-- spells.children = {spells_from_all}
 
-	local feasts = ns.CreateCheckBox(parent, "feasts")
-	feasts:SetPoint("TOPLEFT", spells_from_all, "BOTTOMLEFT", -20, 0)
+	-- local feasts = ns.CreateCheckBox(parent, "feasts")
+	-- feasts:SetPoint("TOPLEFT", spells_from_all, "BOTTOMLEFT", -20, 0)
 
-	local portals = ns.CreateCheckBox(parent, "portals")
-	portals:SetPoint("TOPLEFT", feasts, "BOTTOMLEFT", 0, 0)
+	-- local portals = ns.CreateCheckBox(parent, "portals")
+	-- portals:SetPoint("TOPLEFT", feasts, "BOTTOMLEFT", 0, 0)
 
-	local toys = ns.CreateCheckBox(parent, "toys")
-	toys:SetPoint("TOPLEFT", portals, "BOTTOMLEFT", 0, 0)
+	-- local toys = ns.CreateCheckBox(parent, "toys")
+	-- toys:SetPoint("TOPLEFT", portals, "BOTTOMLEFT", 0, 0)
 
 	local flask_food = ns.CreateCheckBox(parent, "flask_food")
-	flask_food:SetPoint("TOPLEFT", toys, "BOTTOMLEFT", 0, 0)
+	flask_food:SetPoint("TOPLEFT", toys or parent.subText, "BOTTOMLEFT", 0, 0)
 
 	local flask_food_raid = ns.CreateCheckBox(parent, "flask_food_raid")
 	flask_food_raid:SetPoint("TOPLEFT", flask_food, "BOTTOMLEFT", 20, 0)
@@ -3192,115 +3203,115 @@ do
 end
 
 -- Enemy cooldowns
-do
-	local parent = ShestakUIOptionsPanel.enemycooldown
+-- do
+	-- local parent = ShestakUIOptionsPanel.enemycooldown
 
-	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COOLDOWN_ENEMY_ENABLE)
-	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	-- local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COOLDOWN_ENEMY_ENABLE)
+	-- enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 60, 1, true, L_GUI_COOLDOWN_ENEMY_SIZE)
-	size:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
+	-- local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 60, 1, true, L_GUI_COOLDOWN_ENEMY_SIZE)
+	-- size:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local direction = ns.CreateDropDown(parent, "direction", true, L_GUI_COOLDOWN_ENEMY_DIRECTION, {"RIGHT", "LEFT", "UP", "DOWN"})
-	direction:SetPoint("TOPLEFT", size, "BOTTOMLEFT", -16, -10)
+	-- local direction = ns.CreateDropDown(parent, "direction", true, L_GUI_COOLDOWN_ENEMY_DIRECTION, {"RIGHT", "LEFT", "UP", "DOWN"})
+	-- direction:SetPoint("TOPLEFT", size, "BOTTOMLEFT", -16, -10)
 
-	local show_always = ns.CreateCheckBox(parent, "show_always", L_GUI_COOLDOWN_ENEMY_EVERYWHERE)
-	show_always:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 16, 0)
+	-- local show_always = ns.CreateCheckBox(parent, "show_always", L_GUI_COOLDOWN_ENEMY_EVERYWHERE)
+	-- show_always:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 16, 0)
 
-	local show_inpvp = ns.CreateCheckBox(parent, "show_inpvp", L_GUI_COOLDOWN_ENEMY_IN_BG)
-	show_inpvp:SetPoint("TOPLEFT", show_always, "BOTTOMLEFT", 0, 0)
+	-- local show_inpvp = ns.CreateCheckBox(parent, "show_inpvp", L_GUI_COOLDOWN_ENEMY_IN_BG)
+	-- show_inpvp:SetPoint("TOPLEFT", show_always, "BOTTOMLEFT", 0, 0)
 
-	local show_inarena = ns.CreateCheckBox(parent, "show_inarena", L_GUI_COOLDOWN_ENEMY_IN_ARENA)
-	show_inarena:SetPoint("TOPLEFT", show_inpvp, "BOTTOMLEFT", 0, 0)
+	-- local show_inarena = ns.CreateCheckBox(parent, "show_inarena", L_GUI_COOLDOWN_ENEMY_IN_ARENA)
+	-- show_inarena:SetPoint("TOPLEFT", show_inpvp, "BOTTOMLEFT", 0, 0)
 
-	local show_inparty = ns.CreateCheckBox(parent, "show_inparty")
-	show_inparty:SetPoint("TOPLEFT", show_inarena, "BOTTOMLEFT", 0, 0)
+	-- local show_inparty = ns.CreateCheckBox(parent, "show_inparty")
+	-- show_inparty:SetPoint("TOPLEFT", show_inarena, "BOTTOMLEFT", 0, 0)
 
-	local class_color = ns.CreateCheckBox(parent, "class_color")
-	class_color:SetPoint("TOPLEFT", show_inparty, "BOTTOMLEFT", 0, 0)
+	-- local class_color = ns.CreateCheckBox(parent, "class_color")
+	-- class_color:SetPoint("TOPLEFT", show_inparty, "BOTTOMLEFT", 0, 0)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("TOPLEFT", class_color, "BOTTOMLEFT", 3, -5)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(L_GUI_SPELL_LIST)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton.tooltipText = "|cffFFD100"..L_GUI_RESET_SPELLS_DESC.."|r"
-	ListButton:SetScript("OnClick", function()
-		if not C.options["enemycooldown"] then
-			C.options["enemycooldown"] = {}
-		end
-		if not C.options["enemycooldown"]["spells_list"] then
-			C.options["enemycooldown"]["spells_list"] = T.enemy_spells
-			C.options.enemycooldown.spells_list_ver = 2
-		end
-		if IsControlKeyDown() then
-			C.options["enemycooldown"]["spells_list"] = nil
-			ns.setReloadNeeded(true)
-			ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
-			ListButton:SetScript("OnClick", nil)
-			GameTooltip:Hide()
-			SpellList:Hide()
-			return
-		end
-		BuildSpellList(C.options["enemycooldown"]["spells_list"], true)
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("TOPLEFT", class_color, "BOTTOMLEFT", 3, -5)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(L_GUI_SPELL_LIST)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton.tooltipText = "|cffFFD100"..L_GUI_RESET_SPELLS_DESC.."|r"
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["enemycooldown"] then
+			-- C.options["enemycooldown"] = {}
+		-- end
+		-- if not C.options["enemycooldown"]["spells_list"] then
+			-- C.options["enemycooldown"]["spells_list"] = T.enemy_spells
+			-- C.options.enemycooldown.spells_list_ver = 2
+		-- end
+		-- if IsControlKeyDown() then
+			-- C.options["enemycooldown"]["spells_list"] = nil
+			-- ns.setReloadNeeded(true)
+			-- ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
+			-- ListButton:SetScript("OnClick", nil)
+			-- GameTooltip:Hide()
+			-- SpellList:Hide()
+			-- return
+		-- end
+		-- BuildSpellList(C.options["enemycooldown"]["spells_list"], true)
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = enable:GetChecked()
-		ListButton:SetEnabled(shown)
-		if not T.enemy_spells then ListButton:Disable() return end
-	end
+	-- local function toggleListButton()
+		-- local shown = enable:GetChecked()
+		-- ListButton:SetEnabled(shown)
+		-- if not T.enemy_spells then ListButton:Disable() return end
+	-- end
 
-	enable:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
-end
+	-- enable:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
+-- end
 
 -- Pulse cooldowns
-do
-	local parent = ShestakUIOptionsPanel.pulsecooldown
+-- do
+	-- local parent = ShestakUIOptionsPanel.pulsecooldown
 
-	local enable = ns.CreateCheckBox(parent, "enable")
-	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	-- local enable = ns.CreateCheckBox(parent, "enable")
+	-- enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 150, 1, true)
-	size:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
+	-- local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 150, 1, true)
+	-- size:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local sound = ns.CreateCheckBox(parent, "sound")
-	sound:SetPoint("TOPLEFT", size, "BOTTOMLEFT", 0, -10)
+	-- local sound = ns.CreateCheckBox(parent, "sound")
+	-- sound:SetPoint("TOPLEFT", size, "BOTTOMLEFT", 0, -10)
 
-	local anim_scale = ns.CreateNumberSlider(parent, "anim_scale", nil, nil, 0, 3, 0.05, true)
-	anim_scale:SetPoint("TOPLEFT", sound, "BOTTOMLEFT", 0, -20)
+	-- local anim_scale = ns.CreateNumberSlider(parent, "anim_scale", nil, nil, 0, 3, 0.05, true)
+	-- anim_scale:SetPoint("TOPLEFT", sound, "BOTTOMLEFT", 0, -20)
 
-	local hold_time = ns.CreateNumberSlider(parent, "hold_time", nil, nil, 0, 5, 1, true)
-	hold_time:SetPoint("TOPLEFT", anim_scale, "BOTTOMLEFT", 0, -20)
+	-- local hold_time = ns.CreateNumberSlider(parent, "hold_time", nil, nil, 0, 5, 1, true)
+	-- hold_time:SetPoint("TOPLEFT", anim_scale, "BOTTOMLEFT", 0, -20)
 
-	local threshold = ns.CreateNumberSlider(parent, "threshold", nil, nil, 0, 15, 1, true)
-	threshold:SetPoint("TOPLEFT", hold_time, "BOTTOMLEFT", 0, -20)
+	-- local threshold = ns.CreateNumberSlider(parent, "threshold", nil, nil, 0, 15, 1, true)
+	-- threshold:SetPoint("TOPLEFT", hold_time, "BOTTOMLEFT", 0, -20)
 
-	-- Filtering list
-	local subheader = ns.addSubCategory(parent, L.pulsecooldown_subheader_whitelist)
-	subheader:SetPoint("TOPLEFT", threshold, "BOTTOMLEFT", 0, -11)
+	-- -- Filtering list
+	-- local subheader = ns.addSubCategory(parent, L.pulsecooldown_subheader_whitelist)
+	-- subheader:SetPoint("TOPLEFT", threshold, "BOTTOMLEFT", 0, -11)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -15)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["pulsecooldown"] then
-			C.options["pulsecooldown"] = {}
-		end
-		if not C.options["pulsecooldown"]["spells_list"] then
-			C.options["pulsecooldown"]["spells_list"] = {}
-		end
-		BuildSpellList(C.options["pulsecooldown"]["spells_list"])
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -15)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["pulsecooldown"] then
+			-- C.options["pulsecooldown"] = {}
+		-- end
+		-- if not C.options["pulsecooldown"]["spells_list"] then
+			-- C.options["pulsecooldown"]["spells_list"] = {}
+		-- end
+		-- BuildSpellList(C.options["pulsecooldown"]["spells_list"])
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local whitelist = ns.CreateCheckBox(parent, "whitelist")
-	whitelist:SetPoint("LEFT", ListButton, "RIGHT", 40, 0)
-end
+	-- local whitelist = ns.CreateCheckBox(parent, "whitelist")
+	-- whitelist:SetPoint("LEFT", ListButton, "RIGHT", 40, 0)
+-- end
 
 -- Threat
 do
