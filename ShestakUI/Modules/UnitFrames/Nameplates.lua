@@ -587,7 +587,11 @@ local function HealthPostUpdate(self, unit, cur, max)
 		else
 			local reaction = T.oUF_colors.reaction[unitReaction]
 			if reaction then
-				r, g, b = reaction:GetRGB()
+				if unitReaction == 1 and not UnitCanAttack("player", unit) then
+					r, g, b = UnitSelectionColor(unit, true)	-- Unfriendly
+				else
+					r, g, b = reaction:GetRGB()
+				end
 			else
 				r, g, b = UnitSelectionColor(unit, true)
 			end

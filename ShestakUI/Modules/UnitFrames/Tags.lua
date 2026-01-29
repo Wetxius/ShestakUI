@@ -142,8 +142,13 @@ oUF.Tags.Methods["NameplateNameColor"] = function(unit)
 	elseif UnitIsPlayer(unit) then
 		return _TAGS["raidcolor"](unit)
 	elseif reaction then
-		local c = T.oUF_colors.reaction[reaction]
-		return string.format("|cff%02x%02x%02x", c.r * 255, c.g * 255, c.b * 255)
+		local r, g, b
+		if reaction == 1 and not UnitCanAttack("player", unit) then
+			r, g, b = UnitSelectionColor(unit, true)	-- Unfriendly
+		else
+			r, g, b = T.oUF_colors.reaction[reaction]:GetRGB()
+		end
+		return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 	else
 		local r, g, b = 0.33, 0.59, 0.33
 		return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
