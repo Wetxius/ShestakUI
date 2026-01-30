@@ -660,17 +660,6 @@ ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
 ns.addCategory("trade", L_GUI_TRADE, L_GUI_TRADE_SUBTEXT)
 ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT)
 
-
-local function HideOptions(frame)
-	-- for i = 1, #list do
-		-- local frame = list[i]
-		if frame then
-			frame:SetScale(0.00001)
-			frame:SetAlpha(0)
-		end
-	-- end
-end
-
 -- General
 do
 	local parent = ShestakUIOptionsPanel.general
@@ -1511,10 +1500,10 @@ do
 		{"plater"},
 		{"postal"},
 		{"rarescanner"},
-		{"recount"},
+		-- {"recount"},
 		{"rematch"},
-		{"skada"},
-		{"tiny_dps"},
+		-- {"skada"},
+		-- {"tiny_dps"},
 		{"vanaskos"},
 		{"weak_auras"},
 	}
@@ -1653,11 +1642,11 @@ do
 	local plugins_gcd = ns.CreateCheckBox(parent, "plugins_gcd", L_GUI_UF_PLUGINS_GCD)
 	plugins_gcd:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
-	local plugins_swing = ns.CreateCheckBox(parent, "plugins_swing", L_GUI_UF_PLUGINS_SWING)
-	plugins_swing:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
+	-- local plugins_swing = ns.CreateCheckBox(parent, "plugins_swing", L_GUI_UF_PLUGINS_SWING)
+	-- plugins_swing:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
 
 	local plugins_experience_bar = ns.CreateCheckBox(parent, "plugins_experience_bar")
-	plugins_experience_bar:SetPoint("TOPLEFT", plugins_swing, "BOTTOMLEFT", 0, 0)
+	plugins_experience_bar:SetPoint("TOPLEFT", plugins_swing or plugins_gcd, "BOTTOMLEFT", 0, 0)
 
 	local plugins_reputation_bar = ns.CreateCheckBox(parent, "plugins_reputation_bar")
 	plugins_reputation_bar:SetPoint("TOPLEFT", plugins_experience_bar, "BOTTOMLEFT", 0, 0)
@@ -1674,11 +1663,11 @@ do
 	local plugins_fader = ns.CreateCheckBox(parent, "plugins_fader", L_GUI_UF_PLUGINS_FADER)
 	plugins_fader:SetPoint("TOPLEFT", plugins_combat_feedback, "BOTTOMLEFT", 0, 0)
 
-	local plugins_diminishing = ns.CreateCheckBox(parent, "plugins_diminishing", L_GUI_UF_PLUGINS_DIMINISHING)
-	plugins_diminishing:SetPoint("TOPLEFT", plugins_fader, "BOTTOMLEFT", 0, 0)
+	-- local plugins_diminishing = ns.CreateCheckBox(parent, "plugins_diminishing", L_GUI_UF_PLUGINS_DIMINISHING)
+	-- plugins_diminishing:SetPoint("TOPLEFT", plugins_fader, "BOTTOMLEFT", 0, 0)
 
 	local plugins_power_prediction = ns.CreateCheckBox(parent, "plugins_power_prediction", L_GUI_UF_PLUGINS_POWER_PREDICTION)
-	plugins_power_prediction:SetPoint("TOPLEFT", plugins_diminishing, "BOTTOMLEFT", 0, 0)
+	plugins_power_prediction:SetPoint("TOPLEFT", plugins_diminishing or plugins_fader, "BOTTOMLEFT", 0, 0)
 
 	local plugins_absorbs = ns.CreateCheckBox(parent, "plugins_absorbs")
 	plugins_absorbs:SetPoint("TOPLEFT", plugins_power_prediction, "BOTTOMLEFT", 0, 0)
@@ -3451,11 +3440,11 @@ do
 	local raid_tools = ns.CreateCheckBox(parent, "raid_tools")
 	raid_tools:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local shift_marking = ns.CreateCheckBox(parent, "shift_marking")
-	shift_marking:SetPoint("TOPLEFT", raid_tools, "BOTTOMLEFT", 0, 0)
+	--BETA local shift_marking = ns.CreateCheckBox(parent, "shift_marking")
+	-- shift_marking:SetPoint("TOPLEFT", raid_tools, "BOTTOMLEFT", 0, 0)
 
 	local afk_spin_camera = ns.CreateCheckBox(parent, "afk_spin_camera")
-	afk_spin_camera:SetPoint("TOPLEFT", shift_marking, "BOTTOMLEFT", 0, 0)
+	afk_spin_camera:SetPoint("TOPLEFT", shift_marking or raid_tools, "BOTTOMLEFT", 0, 0)
 
 	local quest_auto_button = ns.CreateCheckBox(parent, "quest_auto_button")
 	quest_auto_button:SetPoint("TOPLEFT", afk_spin_camera, "BOTTOMLEFT", 0, 0)
