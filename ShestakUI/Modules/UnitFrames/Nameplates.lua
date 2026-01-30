@@ -54,9 +54,9 @@ function frame:PLAYER_LOGIN()
 	SetCVar("nameplatePlayerMaxDistance", 60)
 
 	if C.nameplate.only_name then
-		-- SetCVar("nameplateShowOnlyNames", 1) -- This option bugged new Afflicted affix
+		SetCVar("nameplateShowOnlyNameForFriendlyPlayerUnits", 1)
 	end
-	SetCVar("nameplateShowOnlyNames", 0)
+	-- SetCVar("nameplateShowOnlyNames", 0)
 
 	local function changeFont(self, size)
 		local mult = size or 1
@@ -566,41 +566,14 @@ local function threatColor(self, forced)
 end
 
 local function HealthPostUpdate(self, unit, cur, max)
-	local main = self:GetParent()
 	-- local perc = 0
 	-- if max and max > 0 then
 		-- perc = cur / max
 	-- end
 	-- perc = UnitHealthPercent(unit)
 
-	local r, g, b
-	local mu = self.bg.multiplier
+	-- Low health border for enemy player and mobs
 	local isPlayer = UnitIsPlayer(unit)
-	local unitReaction = UnitReaction(unit, "player")
-	if not UnitIsUnit("player", unit) and isPlayer and (unitReaction and unitReaction >= 5) then
-		r, g, b = T.oUF_colors.power["MANA"]:GetRGB()
-		self:SetStatusBarColor(r, g, b)
-		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
-	elseif not UnitIsTapDenied(unit) and not isPlayer then
-		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then
-			r, g, b = unpack(T.ColorPlate[main.npcID])
-		else
-			local reaction = T.oUF_colors.reaction[unitReaction]
-			if reaction then
-				if unitReaction == 1 and not UnitCanAttack("player", unit) then
-					r, g, b = UnitSelectionColor(unit, true)	-- Unfriendly
-				else
-					r, g, b = reaction:GetRGB()
-				end
-			else
-				r, g, b = UnitSelectionColor(unit, true)
-			end
-		end
-
-		self:SetStatusBarColor(r, g, b)
-		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
-	end
-
 	if isPlayer then
 		local curve = C_CurveUtil.CreateColorCurve()
 		curve:SetType(Enum.LuaCurveType.Step)
@@ -636,6 +609,39 @@ local function HealthPostUpdate(self, unit, cur, max)
 		else
 			SetColorBorder(self, unpack(C.media.border_color))
 		end
+	end
+end
+
+local function HealthPostUpdateColor(self, unit, color)
+	T.PostUpdateBackdropColor(self, color)
+
+	local main = self:GetParent()
+	local r, g, b
+	local mu = self.bg.multiplier
+	local isPlayer = UnitIsPlayer(unit)
+	local unitReaction = UnitReaction(unit, "player")
+	if not UnitIsUnit("player", unit) and isPlayer and (unitReaction and unitReaction >= 5) then
+		r, g, b = T.oUF_colors.power["MANA"]:GetRGB()
+		self:SetStatusBarColor(r, g, b)
+		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
+	elseif not UnitIsTapDenied(unit) and not isPlayer then
+		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then
+			r, g, b = unpack(T.ColorPlate[main.npcID])
+		else
+			local reaction = T.oUF_colors.reaction[unitReaction]
+			if reaction then
+				if unitReaction < 4 and not UnitCanAttack("player", unit) then
+					r, g, b = UnitSelectionColor(unit, true)
+				else
+					r, g, b = reaction:GetRGB()
+				end
+			else
+				r, g, b = UnitSelectionColor(unit, true)
+			end
+		end
+
+		self:SetStatusBarColor(r, g, b)
+		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
 	end
 
 	threatColor(main, true)
@@ -716,7 +722,8 @@ local function style(self, unit)
 	local main = self
 	self.unit = unit
 
-	self:SetPoint("CENTER", nameplate, "CENTER")
+	self:ClearAllPoints()
+	self:SetPoint("CENTER")
 	self:SetSize(C.nameplate.width, C.nameplate.height)
 
 	-- Health Bar
@@ -945,7 +952,7 @@ local function style(self, unit)
 	end)
 
 	self.Health.PostUpdate = HealthPostUpdate
-	self.Health.PostUpdateColor = HealthPostUpdate
+	self.Health.PostUpdateColor = HealthPostUpdateColor
 
 	-- Absorb
 	if C.raidframe.plugins_healcomm then
