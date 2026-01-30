@@ -61,7 +61,7 @@ announceFrame:RegisterEvent("PET_BATTLE_OVER")
 announceFrame:SetScript("OnEvent", function(_, event)
 	if event == "PET_BATTLE_OPENING_DONE" then
 		local name = GetSpellInfo(158486)
-		if PlayerHasToy(92738) and not T.CheckPlayerBuff(name) then
+		if PlayerHasToy(92738) and not T.HasPlayerBuff(name) then
 			local maxlevel = true
 			for i = 1, 3 do
 				local level = C_PetBattles.GetLevel(1, i)

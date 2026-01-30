@@ -116,12 +116,18 @@ end
 ----------------------------------------------------------------------------------------
 --	Player's buff check
 ----------------------------------------------------------------------------------------
-T.CheckPlayerBuff = function(spell)
+T.HasPlayerBuff = function(spell)
 	for i = 1, 40 do
-		local name, _, _, _, _, _, unitCaster = UnitBuff("player", i)
+		local name
+		local auraData = C_UnitAuras.GetAuraDataByIndex("player", i, "HELPFUL")
+		if auraData then
+			if canaccessvalue(auraData.name) then
+				name = auraData.name
+			end
+		end
 		if not name then break end
 		if name == spell then
-			return i, unitCaster
+			return true
 		end
 	end
 	return nil

@@ -59,7 +59,7 @@ function CheckBuffs()
 	btn:SetAttribute("spell", nil)
 	if specSpells then
 		for name in pairs(specSpells) do
-			if name and not T.CheckPlayerBuff(name) then
+			if name and not T.HasPlayerBuff(name) then
 				if GetSpellCooldown(name) == 0 then
 					btn:SetAttribute("spell", name)
 					SetOverrideBindingClick(btn, true, "MOUSEWHEELUP", "AutoBuffButton")
