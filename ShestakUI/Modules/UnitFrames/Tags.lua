@@ -143,8 +143,8 @@ oUF.Tags.Methods["NameplateNameColor"] = function(unit)
 		return _TAGS["raidcolor"](unit)
 	elseif reaction then
 		local r, g, b
-		if reaction == 1 and not UnitCanAttack("player", unit) then
-			r, g, b = UnitSelectionColor(unit, true)	-- Unfriendly
+		if reaction < 4 and not UnitCanAttack("player", unit) then
+			r, g, b = UnitSelectionColor(unit, true)
 		else
 			r, g, b = T.oUF_colors.reaction[reaction]:GetRGB()
 		end
