@@ -1,5 +1,4 @@
 local T, C, L = unpack(ShestakUI)
-if T.newPatch then return end -- BETA not work
 if C.raidcooldown.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -308,20 +307,20 @@ local OnEvent = function(self, event)
 		end
 	end
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId = CombatLogGetCurrentEventInfo()
-		if band(sourceFlags, filter) == 0 then return end
-		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
-			if sourceName then
-				sourceName = sourceName:gsub("-.+", "")
-			else
-				return
-			end
-			if T.RaidSpells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
-				if (sourceName == T.name and C.raidcooldown.show_self == true) or sourceName ~= T.name then
-					StartTimer(sourceName, spellId)
-				end
-			end
-		end
+		-- local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId = CombatLogGetCurrentEventInfo()
+		-- if band(sourceFlags, filter) == 0 then return end
+		-- if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
+			-- if sourceName then
+				-- sourceName = sourceName:gsub("-.+", "")
+			-- else
+				-- return
+			-- end
+			-- if T.RaidSpells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
+				-- if (sourceName == T.name and C.raidcooldown.show_self == true) or sourceName ~= T.name then
+					-- StartTimer(sourceName, spellId)
+				-- end
+			-- end
+		-- end
 	elseif event == "ZONE_CHANGED_NEW_AREA" and select(2, IsInInstance()) == "arena" or not IsInGroup() then
 		for _, v in pairs(Ressesbars) do
 			StopTimer(v)
@@ -346,7 +345,7 @@ end
 local f = CreateFrame("Frame")
 f:SetScript("OnEvent", OnEvent)
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+--BETA f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 f:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 f:RegisterEvent("ENCOUNTER_END")
 
