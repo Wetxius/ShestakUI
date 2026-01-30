@@ -279,6 +279,7 @@ if IsWetxius then
 			PTR_IssueReporter:SetScale(0.001)
 		end
 		SetCVar("lootUnderMouse", 1)
+		SetCVar("nameplateShowFriendlyNPCs", 0)
 		local anchor = _G["oUF_Player"] or ChatFrame1
 		C["position"].auto_button = {"BOTTOMLEFT", anchor, "TOPRIGHT", 33, 83}
 		if AutoButtonAnchor then

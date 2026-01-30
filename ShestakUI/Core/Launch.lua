@@ -25,7 +25,7 @@ local function InstallUI()
 	SetCVar("lossOfControl", 0)
 	SetCVar("nameplateShowAll", 1)
 	SetCVar("nameplateShowSelf", 0)
-	SetCVar("nameplateShowFriendlyNPCs", 1)
+	-- SetCVar("nameplateShowFriendlyNPCs", 1)
 
 	-- Setting chat frames
 	if C.chat.enable == true and not (C_AddOns.IsAddOnLoaded("Prat-3.0") or C_AddOns.IsAddOnLoaded("Chatter")) then
