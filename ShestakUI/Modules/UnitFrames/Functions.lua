@@ -1076,6 +1076,39 @@ T.CreateAuraWatchIcon = function(_, aura)
 	end
 end
 
+T.CreateRaidBuffIcon = function(element, button)
+	button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+	button.remaining:SetPoint("CENTER", button, "CENTER", 1, 1)
+	button.remaining:SetJustifyH("CENTER")
+
+	button.Cooldown.noCooldownCount = true
+	button.Cooldown:SetDrawEdge(false)
+	button.Cooldown:SetHideCountdownNumbers(true)
+
+	button.Icon:SetPoint("TOPLEFT", 2, -2)
+	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
+	button.Count:SetJustifyH("RIGHT")
+	button.Count:SetFont(C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+	button.Count:Hide()
+
+	if C.aura.show_spiral then
+		button.Cooldown:SetReverse(true)
+		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+		button.parent = CreateFrame("Frame", nil, button)
+		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		button.Count:SetParent(button.parent)
+		button.remaining:SetParent(button.parent)
+	else
+		button.Cooldown:SetAlpha(0)
+	end
+end
+
 T.CreateAuraWatch = function(self)
 	local auras = CreateFrame("Frame", nil, self)
 	auras:SetPoint("TOPLEFT", self.Health, 0, 0)

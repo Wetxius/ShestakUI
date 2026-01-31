@@ -255,50 +255,78 @@ local function Shared(self, unit)
 
 	if C.raidframe.plugins_aura_watch == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
 		-- Classbuffs
-		T.CreateAuraWatch(self, unit)
+		-- T.CreateAuraWatch(self, unit)
 
-		-- Raid debuffs
-		self.RaidDebuffs = CreateFrame("Frame", nil, self)
-		self.RaidDebuffs:SetSize(19, 19)
-		self.RaidDebuffs:SetPoint("CENTER", self, 0, 1)
-		self.RaidDebuffs:SetFrameStrata("MEDIUM")
-		self.RaidDebuffs:SetFrameLevel(10)
-		self.RaidDebuffs:SetTemplate("Default")
+		-- Raid Buffs
+		self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
+		self.Buffs:SetSize(self:GetWidth(), 11 * C.raidframe.icon_multiplier)
+		self.Buffs.size = 11 * C.raidframe.icon_multiplier
+		self.Buffs.num = 5
+		self.Buffs:SetPoint("TOPRIGHT", self, 2, 2)
+		self.Buffs.initialAnchor = "TOPRIGHT"
+		self.Buffs.growthX = "LEFT"
 
-		self.RaidDebuffs.icon = self.RaidDebuffs:CreateTexture(nil, "BORDER")
-		self.RaidDebuffs.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		self.RaidDebuffs.icon:SetPoint("TOPLEFT", 2, -2)
-		self.RaidDebuffs.icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
+		-- self.Buffs.PostUpdateButton = T.PostUpdateIcon
 
-		if C.raidframe.plugins_aura_watch_timer == true then
-			self.RaidDebuffs.time = T.SetFontString(self.RaidDebuffs, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-			self.RaidDebuffs.time:SetPoint("CENTER", 1, 1)
-			self.RaidDebuffs.time:SetTextColor(1, 1, 1)
-		end
+		self.Buffs.disableMouse = true
+		self.Buffs.filter = "HELPFUL|RAID"
 
-		self.RaidDebuffs.count = T.SetFontString(self.RaidDebuffs, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-		self.RaidDebuffs.count:SetPoint("BOTTOMRIGHT", self.RaidDebuffs, "BOTTOMRIGHT", 3, -1)
-		self.RaidDebuffs.count:SetTextColor(1, 1, 1)
+		-- Raid Debuffs
+		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
+		self.Debuffs:SetSize(18, 18)
+		self.Debuffs.size = T.Scale(18)
+		self.Debuffs.num = 1
+		self.Debuffs:SetPoint("CENTER", self, 0, 1)
 
-		if C.aura.show_spiral == true then
-			self.RaidDebuffs.cd = CreateFrame("Cooldown", nil, self.RaidDebuffs, "CooldownFrameTemplate")
-			self.RaidDebuffs.cd:SetPoint("TOPLEFT", 2, -2)
-			self.RaidDebuffs.cd:SetPoint("BOTTOMRIGHT", -2, 2)
-			self.RaidDebuffs.cd:SetReverse(true)
-			self.RaidDebuffs.cd:SetDrawEdge(false)
-			self.RaidDebuffs.cd.noCooldownCount = true
-			self.RaidDebuffs.cd:SetHideCountdownNumbers(true)
-			self.RaidDebuffs.parent = CreateFrame("Frame", nil, self.RaidDebuffs)
-			self.RaidDebuffs.parent:SetFrameLevel(self.RaidDebuffs.cd:GetFrameLevel() + 1)
-			if C.raidframe.plugins_aura_watch_timer == true then
-				self.RaidDebuffs.time:SetParent(self.RaidDebuffs.parent)
-			end
-			self.RaidDebuffs.count:SetParent(self.RaidDebuffs.parent)
-		end
+		self.Debuffs.PostCreateButton = T.PostCreateIcon
+		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 
-		self.RaidDebuffs.ShowDispellableDebuff = C.raidframe.plugins_debuffhighlight_icon
-		self.RaidDebuffs.FilterDispellableDebuff = true
-		self.RaidDebuffs.MatchBySpellName = true
+		self.Debuffs.disableMouse = true
+		self.Debuffs.filter = "HARMFUL|RAID"
+
+		-- -- Raid debuffs
+		-- self.RaidDebuffs = CreateFrame("Frame", nil, self)
+		-- self.RaidDebuffs:SetSize(19, 19)
+		-- self.RaidDebuffs:SetPoint("CENTER", self, 0, 1)
+		-- self.RaidDebuffs:SetFrameStrata("MEDIUM")
+		-- self.RaidDebuffs:SetFrameLevel(10)
+		-- self.RaidDebuffs:SetTemplate("Default")
+
+		-- self.RaidDebuffs.icon = self.RaidDebuffs:CreateTexture(nil, "BORDER")
+		-- self.RaidDebuffs.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		-- self.RaidDebuffs.icon:SetPoint("TOPLEFT", 2, -2)
+		-- self.RaidDebuffs.icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+		-- if C.raidframe.plugins_aura_watch_timer == true then
+			-- self.RaidDebuffs.time = T.SetFontString(self.RaidDebuffs, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			-- self.RaidDebuffs.time:SetPoint("CENTER", 1, 1)
+			-- self.RaidDebuffs.time:SetTextColor(1, 1, 1)
+		-- end
+
+		-- self.RaidDebuffs.count = T.SetFontString(self.RaidDebuffs, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		-- self.RaidDebuffs.count:SetPoint("BOTTOMRIGHT", self.RaidDebuffs, "BOTTOMRIGHT", 3, -1)
+		-- self.RaidDebuffs.count:SetTextColor(1, 1, 1)
+
+		-- if C.aura.show_spiral == true then
+			-- self.RaidDebuffs.cd = CreateFrame("Cooldown", nil, self.RaidDebuffs, "CooldownFrameTemplate")
+			-- self.RaidDebuffs.cd:SetPoint("TOPLEFT", 2, -2)
+			-- self.RaidDebuffs.cd:SetPoint("BOTTOMRIGHT", -2, 2)
+			-- self.RaidDebuffs.cd:SetReverse(true)
+			-- self.RaidDebuffs.cd:SetDrawEdge(false)
+			-- self.RaidDebuffs.cd.noCooldownCount = true
+			-- self.RaidDebuffs.cd:SetHideCountdownNumbers(true)
+			-- self.RaidDebuffs.parent = CreateFrame("Frame", nil, self.RaidDebuffs)
+			-- self.RaidDebuffs.parent:SetFrameLevel(self.RaidDebuffs.cd:GetFrameLevel() + 1)
+			-- if C.raidframe.plugins_aura_watch_timer == true then
+				-- self.RaidDebuffs.time:SetParent(self.RaidDebuffs.parent)
+			-- end
+			-- self.RaidDebuffs.count:SetParent(self.RaidDebuffs.parent)
+		-- end
+
+		-- self.RaidDebuffs.ShowDispellableDebuff = C.raidframe.plugins_debuffhighlight_icon
+		-- self.RaidDebuffs.FilterDispellableDebuff = true
+		-- self.RaidDebuffs.MatchBySpellName = true
 	end
 
 	if T.PostCreateHealRaidFrames then
