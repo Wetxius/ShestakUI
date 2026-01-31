@@ -79,8 +79,10 @@ status.text = status:CreateFontString(nil, "OVERLAY")
 status.text:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 status.text:SetPoint("CENTER", bar, "CENTER", 0, 0)
 
-local _, ns = ...
-local oUF = ns.oUF
+local gradient = C_CurveUtil.CreateColorCurve()
+gradient:AddPoint(0.0, CreateColor(0.8, 0.2, 0.1))
+gradient:AddPoint(0.5, CreateColor(1, 0.8, 0.1))
+gradient:AddPoint(1, CreateColor(0.2, 0.8, 0.1))
 
 -- Update Function
 local update = 1
@@ -93,12 +95,15 @@ status:SetScript("OnUpdate", function(self, elapsed)
 		local max = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 		local texture, r, g, b = GetUnitPowerBarTextureInfo("player", 2, 0)
 		if not texture or (r == 1 and g == 1 and b == 1) then
-			r, g, b = oUF:ColorGradient(cur, max, 0.8, 0.2, 0.1, 1, 0.8, 0.1, 0.33, 0.59, 0.33)
+			local color = UnitPowerPercent("player", ALTERNATE_POWER_INDEX, true, gradient)
+			if color then
+				r, g, b = color:GetRGB()
+			end
 		end
 		self:SetMinMaxValues(0, max)
 		self:SetValue(cur)
 		self.text:SetText(cur.."/"..max)
-		self:SetStatusBarColor(r, g, b)
+		self:GetStatusBarTexture():SetVertexColor(r, g, b)
 		self.bg:SetVertexColor(r, g, b, 0.25)
 		update = 0
 	end
