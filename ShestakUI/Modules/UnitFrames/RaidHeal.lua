@@ -228,13 +228,11 @@ local function Shared(self, unit)
 
 	-- Debuff highlight
 	if C.raidframe.plugins_debuffhighlight and not (suffix == "target" or suffix == "targettarget") then
-		self.DebuffHighlight = self.Health:CreateTexture(nil, "OVERLAY")
-		self.DebuffHighlight:SetAllPoints(self.Health)
-		self.DebuffHighlight:SetTexture(C.media.highlight)
-		self.DebuffHighlight:SetVertexColor(0, 0, 0, 0)
-		self.DebuffHighlight:SetBlendMode("ADD")
-		self.DebuffHighlightAlpha = 1
-		self.DebuffHighlightFilter = true
+		self.DispelColor = self.Health:CreateTexture(nil, "OVERLAY")
+		self.DispelColor:SetAllPoints(self.Health)
+		self.DispelColor:SetTexture(C.media.highlight)
+		self.DispelColor:SetVertexColor(0, 0, 0, 0)
+		self.DispelColor:SetBlendMode("ADD")
 	end
 
 	-- Incoming heals and heal/damage absorbs
