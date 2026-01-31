@@ -270,7 +270,7 @@ local function Shared(self, unit)
 		-- self.Buffs.PostUpdateButton = T.PostUpdateIcon
 
 		self.Buffs.disableMouse = true
-		self.Buffs.filter = "HELPFUL|RAID"
+		self.Buffs.filter = "HELPFUL|PLAYER|RAID"
 
 		-- Raid Debuffs
 		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
