@@ -2584,7 +2584,8 @@ do
 	-- kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
 	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
-	enhance_threat:SetPoint("TOPLEFT", kick_color or low_health, "BOTTOMLEFT", 0, 0)
+	-- enhance_threat:SetPoint("TOPLEFT", kick_color, "BOTTOMLEFT", 0, 0)
+	enhance_threat:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
 
 	local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
 	good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 24, -4)
@@ -2598,8 +2599,8 @@ do
 	local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true, L_GUI_NAMEPLATE_OFFTANK_COLOR)
 	offtank_color:SetPoint("TOPLEFT", bad_color, "BOTTOMLEFT", 0, -8)
 
-	local extra_color = ns.CreateColourPicker(parent, "extra_color", true)
-	extra_color:SetPoint("TOPLEFT", offtank_color, "BOTTOMLEFT", 0, -8)
+	-- local extra_color = ns.CreateColourPicker(parent, "extra_color", true)
+	-- extra_color:SetPoint("TOPLEFT", offtank_color, "BOTTOMLEFT", 0, -8)
 
 	--BETA local mob_color_enable = ns.CreateCheckBox(parent, "mob_color_enable")
 	-- mob_color_enable:SetPoint("TOPLEFT", extra_color, "BOTTOMLEFT", -24, -8)
