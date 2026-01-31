@@ -560,6 +560,11 @@ local StopFlash = function(self)
 	end
 end
 
+local low_mana = C_CurveUtil.CreateColorCurve()
+low_mana:SetType(Enum.LuaCurveType.Step)
+low_mana:AddPoint(0, CreateColor(1, 1, 1, 1))
+low_mana:AddPoint(0.2, CreateColor(1, 1, 1, 0))
+
 T.UpdateManaLevel = function(self, elapsed)
 	self.elapsed = (self.elapsed or 0) + elapsed
 	if self.elapsed < 0.2 then return end
@@ -580,11 +585,7 @@ T.UpdateManaLevel = function(self, elapsed)
 		if UnitIsDeadOrGhost("player") then
 			self.ManaLevel:SetText()
 		else
-			local curve = C_CurveUtil.CreateColorCurve()
-			curve:SetType(Enum.LuaCurveType.Step)
-			curve:AddPoint(0, CreateColor(1, 1, 1, 1))
-			curve:AddPoint(0.2, CreateColor(1, 1, 1, 0))
-			local color = UnitPowerPercent("player", 0, true, curve)
+			local color = UnitPowerPercent("player", 0, true, low_mana)
 			local _, _, _, alpha = color:GetRGBA()
 			self.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
 			self.ManaLevel:SetAlpha(alpha)
@@ -594,6 +595,10 @@ T.UpdateManaLevel = function(self, elapsed)
 		StopFlash(self)
 	end
 end
+
+local full_mana = C_CurveUtil.CreateColorCurve()
+full_mana:AddPoint(0.99, CreateColor(1, 1, 1, 1))
+full_mana:AddPoint(1, CreateColor(1, 1, 1, 0))
 
 T.UpdateClassMana = function(self, elapsed)
 	self.elapsed = (self.elapsed or 0) + elapsed
@@ -619,19 +624,12 @@ T.UpdateClassMana = function(self, elapsed)
 			self.ClassMana:SetAlpha(0)
 			self.FlashInfo.ManaLevel:SetText()
 		else
-			local curve = C_CurveUtil.CreateColorCurve()
-			curve:SetType(Enum.LuaCurveType.Step)
-			curve:AddPoint(0, CreateColor(1, 1, 1, 1))
-			curve:AddPoint(0.2, CreateColor(1, 1, 1, 0))
-			local color = UnitPowerPercent("player", 0, true, curve)
+			local color = UnitPowerPercent("player", 0, true, low_mana)
 			local _, _, _, alpha = color:GetRGBA()
 			self.FlashInfo.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
 			self.FlashInfo.ManaLevel:SetAlpha(alpha)
 
-			local curve = C_CurveUtil.CreateColorCurve()
-			curve:AddPoint(0.99, CreateColor(1, 1, 1, 1))
-			curve:AddPoint(1, CreateColor(1, 1, 1, 0))
-			local color = UnitPowerPercent("player", 0, true, curve)
+			local color = UnitPowerPercent("player", 0, true, full_mana)
 			local _, _, _, alpha = color:GetRGBA()
 
 			-- if min ~= max then

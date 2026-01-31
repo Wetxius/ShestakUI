@@ -565,47 +565,29 @@ local function threatColor(self, forced)
 	end
 end
 
-local function HealthPostUpdate(self, unit, cur, max)
-	-- local perc = 0
-	-- if max and max > 0 then
-		-- perc = cur / max
-	-- end
-	-- perc = UnitHealthPercent(unit)
+-- Low health border for enemy player and mobs
+local low_health_player = C_CurveUtil.CreateColorCurve()
+low_health_player:SetType(Enum.LuaCurveType.Step)
+low_health_player:AddPoint(0, CreateColor(1, 0, 0, 1))
+low_health_player:AddPoint(0.2, CreateColor(1, 1, 0, 1))
+low_health_player:AddPoint(0.5, CreateColor(unpack(C.media.border_color)))
 
-	-- Low health border for enemy player and mobs
+local low_health = C_CurveUtil.CreateColorCurve()
+low_health:SetType(Enum.LuaCurveType.Step)
+low_health:AddPoint(0, CreateColor(unpack(C.nameplate.low_health_color)))
+low_health:AddPoint(C.nameplate.low_health_value, CreateColor(unpack(C.media.border_color)))
+
+local function HealthPostUpdate(self, unit)
 	local isPlayer = UnitIsPlayer(unit)
 	if isPlayer then
-		local curve = C_CurveUtil.CreateColorCurve()
-		curve:SetType(Enum.LuaCurveType.Step)
-		curve:AddPoint(0, CreateColor(1, 0, 0, 1))
-		curve:AddPoint(0.2, CreateColor(1, 1, 0, 1))
-		curve:AddPoint(0.5, CreateColor(unpack(C.media.border_color)))
-		local color = UnitHealthPercent(unit, true, curve)
+		local color = UnitHealthPercent(unit, true, low_health_player)
 		local r, g, b = color:GetRGB()
 		SetColorBorder(self, r, g, b)
-
-		-- if perc <= 0.5 and perc >= 0.2 then  -- BETA not work
-			-- SetColorBorder(self, 1, 1, 0)
-		-- elseif perc < 0.2 then
-			-- SetColorBorder(self, 1, 0, 0)
-		-- else
-			-- SetColorBorder(self, unpack(C.media.border_color))
-		-- end
 	elseif not isPlayer and C.nameplate.enhance_threat then
 		if C.nameplate.low_health then
-			local curve = C_CurveUtil.CreateColorCurve()
-			curve:SetType(Enum.LuaCurveType.Step)
-			curve:AddPoint(0, CreateColor(unpack(C.nameplate.low_health_color)))
-			curve:AddPoint(C.nameplate.low_health_value, CreateColor(unpack(C.media.border_color)))
-			local color = UnitHealthPercent(unit, true, curve)
+			local color = UnitHealthPercent(unit, true, low_health)
 			local r, g, b = color:GetRGB()
 			SetColorBorder(self, r, g, b)
-
-			-- if perc < C.nameplate.low_health_value then -- BETA not work
-				-- SetColorBorder(self, unpack(C.nameplate.low_health_color))
-			-- else
-				-- SetColorBorder(self, unpack(C.media.border_color))
-			-- end
 		else
 			SetColorBorder(self, unpack(C.media.border_color))
 		end
@@ -662,12 +644,10 @@ local function callback(self, _, unit)
 		end
 
 		if UnitIsUnit(unit, "player") then
-			self.Power:Show()
 			self.Name:Hide()
 			self.Castbar:SetAlpha(0)
 			self.RaidTargetIndicator:SetAlpha(0)
 		else
-			self.Power:Hide()
 			self.Name:Show()
 			self.Castbar:SetAlpha(1)
 			self.RaidTargetIndicator:SetAlpha(1)
@@ -751,33 +731,6 @@ local function style(self, unit)
 		self:Tag(self.Health.value, "[NameplateHealth]")
 	end
 
-	-- Player Power Bar
-	self.Power = CreateFrame("StatusBar", nil, self)
-	self.Power:SetStatusBarTexture(C.media.texture)
-	self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -6)
-	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, -6-(C.nameplate.height * 1 / 2))
-	self.Power.frequentUpdates = true
-	self.Power.colorPower = true
-	self.Power.PostUpdate = T.PreUpdatePower
-	self.Power.PostUpdateColor = T.PreUpdatePower
-	CreateBorderFrame(self.Power)
-
-	self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
-	self.Power.bg:SetAllPoints()
-	self.Power.bg:SetTexture(C.media.texture)
-	self.Power.bg.multiplier = 0.2
-
-	-- Hide Blizzard Power Bar
-	-- hooksecurefunc(_G.NamePlateDriverFrame, "SetupClassNameplateBars", function(frame)
-		-- if not frame or frame:IsForbidden() then
-			-- return
-		-- end
-		-- if frame.classNamePlatePowerBar then
-			-- frame.classNamePlatePowerBar:Hide()
-			-- frame.classNamePlatePowerBar:UnregisterAllEvents()
-		-- end
-	-- end)
-
 	-- Name Text
 	self.Name = self:CreateFontString(nil, "OVERLAY")
 	self.Name:SetFont(C.font.nameplates_font, C.font.nameplates_font_size, C.font.nameplates_font_style)
@@ -825,12 +778,6 @@ local function style(self, unit)
 	self.Castbar.bg:SetAllPoints()
 	self.Castbar.bg:SetTexture(C.media.texture)
 	self.Castbar.bg:SetColorTexture(1, 0.8, 0, 0.2)
-
-	-- self.Castbar.Shield = self.Castbar:CreateTexture(nil, 'ARTWORK') -- BETA delete if not need
-	-- self.Castbar.Shield:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", 0, 0)
-	-- self.Castbar.Shield:SetPoint("BOTTOMRIGHT", self.Castbar:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-	-- self.Castbar.Shield:SetTexture(C.media.texture)
-	-- self.Castbar.Shield:SetVertexColor(0.8, 0, 0)
 
 	self.Castbar.PostCastStart = castColor
 	self.Castbar.PostCastInterruptible = castColor
