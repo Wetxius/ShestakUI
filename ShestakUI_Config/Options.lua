@@ -2553,38 +2553,38 @@ do
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
 	low_health.Text:SetWidth(250)
 
-	local cast_color = ns.CreateCheckBox(parent, "cast_color")
-	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
+	-- local cast_color = ns.CreateCheckBox(parent, "cast_color")
+	-- cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", cast_color, "RIGHT", 430, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["nameplate"] then
-			C.options["nameplate"] = {}
-		end
-		if not C.options["nameplate"]["cast_color_list"] then
-			C.options["nameplate"]["cast_color_list"] = {}
-		end
-		BuildSpellList(C.options["nameplate"]["cast_color_list"])
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", cast_color, "RIGHT", 430, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["nameplate"] then
+			-- C.options["nameplate"] = {}
+		-- end
+		-- if not C.options["nameplate"]["cast_color_list"] then
+			-- C.options["nameplate"]["cast_color_list"] = {}
+		-- end
+		-- BuildSpellList(C.options["nameplate"]["cast_color_list"])
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = cast_color:GetChecked()
-		ListButton:SetEnabled(shown)
-	end
+	-- local function toggleListButton()
+		-- local shown = cast_color:GetChecked()
+		-- ListButton:SetEnabled(shown)
+	-- end
 
-	cast_color:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- cast_color:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local kick_color = ns.CreateCheckBox(parent, "kick_color")
-	kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
+	-- local kick_color = ns.CreateCheckBox(parent, "kick_color")
+	-- kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
 	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
-	enhance_threat:SetPoint("TOPLEFT", kick_color, "BOTTOMLEFT", 0, 0)
+	enhance_threat:SetPoint("TOPLEFT", kick_color or low_health, "BOTTOMLEFT", 0, 0)
 
 	local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
 	good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 24, -4)
@@ -2601,24 +2601,24 @@ do
 	local extra_color = ns.CreateColourPicker(parent, "extra_color", true)
 	extra_color:SetPoint("TOPLEFT", offtank_color, "BOTTOMLEFT", 0, -8)
 
-	local mob_color_enable = ns.CreateCheckBox(parent, "mob_color_enable")
-	mob_color_enable:SetPoint("TOPLEFT", extra_color, "BOTTOMLEFT", -24, -8)
+	--BETA local mob_color_enable = ns.CreateCheckBox(parent, "mob_color_enable")
+	-- mob_color_enable:SetPoint("TOPLEFT", extra_color, "BOTTOMLEFT", -24, -8)
 
-	local mob_color = ns.CreateColourPicker(parent, "mob_color", true)
-	mob_color:SetPoint("TOPLEFT", mob_color_enable, "BOTTOMLEFT", 24, -4)
+	-- local mob_color = ns.CreateColourPicker(parent, "mob_color", true)
+	-- mob_color:SetPoint("TOPLEFT", mob_color_enable, "BOTTOMLEFT", 24, -4)
 
-	local mob_color_list = ns.CreateEditBox(parent, "mob_color_list", true)
-	mob_color_list:SetPoint("TOPLEFT", mob_color, "BOTTOMLEFT", 2, -10)
-	mob_color_list:SetWidth(240)
-	mob_color_list:SetMaxLetters(200)
+	-- local mob_color_list = ns.CreateEditBox(parent, "mob_color_list", true)
+	-- mob_color_list:SetPoint("TOPLEFT", mob_color, "BOTTOMLEFT", 2, -10)
+	-- mob_color_list:SetWidth(240)
+	-- mob_color_list:SetMaxLetters(200)
 
-	local mob_color_alt = ns.CreateColourPicker(parent, "mob_color_alt", true)
-	mob_color_alt:SetPoint("TOPLEFT", mob_color_list, "BOTTOMLEFT", -2, -10)
+	-- local mob_color_alt = ns.CreateColourPicker(parent, "mob_color_alt", true)
+	-- mob_color_alt:SetPoint("TOPLEFT", mob_color_list, "BOTTOMLEFT", -2, -10)
 
-	local mob_color_alt_list = ns.CreateEditBox(parent, "mob_color_alt_list", true)
-	mob_color_alt_list:SetPoint("TOPLEFT", mob_color_alt, "BOTTOMLEFT", 2, -10)
-	mob_color_alt_list:SetWidth(240)
-	mob_color_alt_list:SetMaxLetters(200)
+	-- local mob_color_alt_list = ns.CreateEditBox(parent, "mob_color_alt_list", true)
+	-- mob_color_alt_list:SetPoint("TOPLEFT", mob_color_alt, "BOTTOMLEFT", 2, -10)
+	-- mob_color_alt_list:SetWidth(240)
+	-- mob_color_alt_list:SetMaxLetters(200)
 end
 
 -- Combat text
