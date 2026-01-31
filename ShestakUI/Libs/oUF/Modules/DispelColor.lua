@@ -91,6 +91,7 @@ local function CheckSpec()
 		[2] = color_curse,
 		[3] = color_disease,
 		[4] = color_poison,
+		[9] = CreateColor(0, 0, 0, 0),
 	}
 
 	for i, color in pairs(dispelIndex) do
