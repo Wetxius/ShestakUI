@@ -153,6 +153,10 @@ local function LoadSkin()
 							button.Ring:Hide()
 						end
 
+						if button.CircleMask then
+							button.CircleMask:Hide()
+						end
+
 						if button.spellID then
 							local texture = C_Spell.GetSpellTexture(button.spellID)
 							if texture then
