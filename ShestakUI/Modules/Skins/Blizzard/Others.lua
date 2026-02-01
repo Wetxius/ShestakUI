@@ -156,6 +156,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			itemFrame.Item:SetTemplate("Default")
 			itemFrame.Item:StyleButton()
 			itemFrame.Item.IconBorder:SetAlpha(0)
+			itemFrame.Item.IconOverlay:SetAlpha(0)
 
 			local icon = _G["StaticPopup"..i.."IconTexture"]
 			icon:CropIcon()
