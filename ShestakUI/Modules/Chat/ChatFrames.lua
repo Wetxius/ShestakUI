@@ -20,27 +20,27 @@ local function AddMessage(self, text, ...)
 end
 
 -- Global strings
-_G.CHAT_INSTANCE_CHAT_GET = "|Hchannel:INSTANCE_CHAT|h["..L_CHAT_INSTANCE_CHAT.."]|h %s:\32"
-_G.CHAT_INSTANCE_CHAT_LEADER_GET = "|Hchannel:INSTANCE_CHAT|h["..L_CHAT_INSTANCE_CHAT_LEADER.."]|h %s:\32"
-_G.CHAT_BN_WHISPER_GET = L_CHAT_BN_WHISPER.." %s:\32"
-_G.CHAT_GUILD_GET = "|Hchannel:GUILD|h["..L_CHAT_GUILD.."]|h %s:\32"
-_G.CHAT_OFFICER_GET = "|Hchannel:OFFICER|h["..L_CHAT_OFFICER.."]|h %s:\32"
-_G.CHAT_PARTY_GET = "|Hchannel:PARTY|h["..L_CHAT_PARTY.."]|h %s:\32"
-_G.CHAT_PARTY_LEADER_GET = "|Hchannel:PARTY|h["..L_CHAT_PARTY_LEADER.."]|h %s:\32"
-_G.CHAT_PARTY_GUIDE_GET = CHAT_PARTY_LEADER_GET
-_G.CHAT_RAID_GET = "|Hchannel:RAID|h["..L_CHAT_RAID.."]|h %s:\32"
-_G.CHAT_RAID_LEADER_GET = "|Hchannel:RAID|h["..L_CHAT_RAID_LEADER.."]|h %s:\32"
-_G.CHAT_RAID_WARNING_GET = "["..L_CHAT_RAID_WARNING.."] %s:\32"
-_G.CHAT_PET_BATTLE_COMBAT_LOG_GET = "|Hchannel:PET_BATTLE_COMBAT_LOG|h["..L_CHAT_PET_BATTLE.."]|h:\32"
-_G.CHAT_PET_BATTLE_INFO_GET = "|Hchannel:PET_BATTLE_INFO|h["..L_CHAT_PET_BATTLE.."]|h:\32"
-_G.CHAT_SAY_GET = "%s:\32"
-_G.CHAT_WHISPER_GET = L_CHAT_WHISPER.." %s:\32"
-_G.CHAT_YELL_GET = "%s:\32"
-_G.CHAT_FLAG_AFK = "|cffE7E716"..L_CHAT_AFK.."|r "
-_G.CHAT_FLAG_DND = "|cffFF0000"..L_CHAT_DND.."|r "
-_G.CHAT_FLAG_GM = "|cff4154F5"..L_CHAT_GM.."|r "
-_G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L_CHAT_COME_ONLINE
-_G.ERR_FRIEND_OFFLINE_S = "[%s] "..L_CHAT_GONE_OFFLINE
+-- _G.CHAT_INSTANCE_CHAT_GET = "|Hchannel:INSTANCE_CHAT|h["..L_CHAT_INSTANCE_CHAT.."]|h %s:\32"
+-- _G.CHAT_INSTANCE_CHAT_LEADER_GET = "|Hchannel:INSTANCE_CHAT|h["..L_CHAT_INSTANCE_CHAT_LEADER.."]|h %s:\32"
+-- _G.CHAT_BN_WHISPER_GET = L_CHAT_BN_WHISPER.." %s:\32"
+-- _G.CHAT_GUILD_GET = "|Hchannel:GUILD|h["..L_CHAT_GUILD.."]|h %s:\32"
+-- _G.CHAT_OFFICER_GET = "|Hchannel:OFFICER|h["..L_CHAT_OFFICER.."]|h %s:\32"
+-- _G.CHAT_PARTY_GET = "|Hchannel:PARTY|h["..L_CHAT_PARTY.."]|h %s:\32"
+-- _G.CHAT_PARTY_LEADER_GET = "|Hchannel:PARTY|h["..L_CHAT_PARTY_LEADER.."]|h %s:\32"
+-- _G.CHAT_PARTY_GUIDE_GET = CHAT_PARTY_LEADER_GET
+-- _G.CHAT_RAID_GET = "|Hchannel:RAID|h["..L_CHAT_RAID.."]|h %s:\32"
+-- _G.CHAT_RAID_LEADER_GET = "|Hchannel:RAID|h["..L_CHAT_RAID_LEADER.."]|h %s:\32"
+-- _G.CHAT_RAID_WARNING_GET = "["..L_CHAT_RAID_WARNING.."] %s:\32"
+-- _G.CHAT_PET_BATTLE_COMBAT_LOG_GET = "|Hchannel:PET_BATTLE_COMBAT_LOG|h["..L_CHAT_PET_BATTLE.."]|h:\32"
+-- _G.CHAT_PET_BATTLE_INFO_GET = "|Hchannel:PET_BATTLE_INFO|h["..L_CHAT_PET_BATTLE.."]|h:\32"
+-- _G.CHAT_SAY_GET = "%s:\32"
+-- _G.CHAT_WHISPER_GET = L_CHAT_WHISPER.." %s:\32"
+-- _G.CHAT_YELL_GET = "%s:\32"
+-- _G.CHAT_FLAG_AFK = "|cffE7E716"..L_CHAT_AFK.."|r "
+-- _G.CHAT_FLAG_DND = "|cffFF0000"..L_CHAT_DND.."|r "
+-- _G.CHAT_FLAG_GM = "|cff4154F5"..L_CHAT_GM.."|r "
+-- _G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L_CHAT_COME_ONLINE
+-- _G.ERR_FRIEND_OFFLINE_S = "[%s] "..L_CHAT_GONE_OFFLINE
 
 -- Kill channel and voice buttons
 ChatFrameChannelButton:Kill()
