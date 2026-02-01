@@ -24,10 +24,10 @@ function t.pushfront(frame)
 	if not hook[frame] then
 		hook[frame] = true -- hook only once, hook doesn't go away when temporary frames are closed (11+)
 		hooksecurefunc(frame.historyBuffer, "PushFront", function(frame)
-			while #frame.elements > frame.maxElements - 5 do -- minimum of 2 less than max is needed, 5 to provide some buffer
+			while #frame.elements > frame.maxElements:GetValue() - 5 do -- minimum of 2 less than max is needed, 5 to provide some buffer
 				table.remove(frame.elements, 1)
 			end
-			frame.headIndex = #frame.elements
+			frame.headIndex:SetValue(#frame.elements)
 		end)
 	end
 end
