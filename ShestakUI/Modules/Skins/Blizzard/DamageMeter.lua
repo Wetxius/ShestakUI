@@ -5,11 +5,12 @@ if C.skins.blizzard_frames ~= true then return end
 --	Damage Meter skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local function skinBar(frame)
+	local function skinBar(frame, second)
 		for _, frame in next, {frame.ScrollTarget:GetChildren()} do
-			-- if InCombatLockdown() then return end -- BETA secret value error
 			local bar = frame.StatusBar
-			local height = bar and bar:GetHeight() or 10
+			local icon = frame.Icon
+			local height = bar and bar:GetHeight() or 14
+			if issecretvalue(height) then height = 14 end
 			if bar and not bar.styled then
 				bar:SetStatusBarTexture(C.media.texture)
 				bar.Background:Hide()
@@ -17,7 +18,7 @@ local function LoadSkin()
 				frame.backdrop:SetPoint("TOPLEFT", 4, -1)
 				frame.backdrop:SetPoint("BOTTOMRIGHT", -1, 1)
 
-				if frame.Icon and frame.Icon.Icon:IsShown() then
+				if icon and icon.Icon:IsShown() then
 					frame.backdrop:SetPoint("TOPLEFT", height + 2, -1)
 				end
 
@@ -27,28 +28,44 @@ local function LoadSkin()
 				bar.styled = true
 			end
 
-			local icon = frame.Icon
 			if icon and not icon.styled then
 				icon.b = CreateFrame("Frame", nil, frame)
 				icon.b:SetTemplate("Default")
 				icon.b:SetPoint("LEFT", frame, "LEFT", 1, 0)
-
 				icon.b:SetSize(height, height)
+
 				icon:SetInside(icon.b)
 				icon.styled = true
 			end
-			if not frame.Icon.Icon:IsShown() and icon.b then
+
+			-- Secret workaround
+			if second then
+				local height = bar:GetHeight()
+				if canaccessvalue(height) and not bar.height then
+					if icon and icon.Icon:IsShown() then
+						frame.backdrop:SetPoint("TOPLEFT", height + 2, -1)
+					end
+					if icon then
+						icon.b:SetSize(height, height)
+					end
+					bar.height = true
+				end
+			end
+
+			if not icon.Icon:IsShown() and icon.b then
 				icon.b:Hide()
 			end
 
 			if bar and bar.styled then
-				if frame.Icon then
+				if icon then
 					for i = 1, bar:GetNumPoints() do
 						local ap, p, rp, x, y = bar:GetPoint(i)
-						if ap == "TOP" and y == -1 then
-							bar:SetPoint(ap, p, rp, x, y - 2)
-						elseif ap == "BOTTOMRIGHT" and y == 1 then
-							bar:SetPoint(ap, p, rp, x + 1, y + 2)
+						if canaccessvalue(ap) then
+							if ap == "TOP" and y == -1 then
+								bar:SetPoint(ap, p, rp, x, y - 2)
+							elseif ap == "BOTTOMRIGHT" and y == 1 then
+								bar:SetPoint(ap, p, rp, x + 1, y + 2)
+							end
 						end
 					end
 					bar:SetPoint("LEFT", frame.backdrop, "LEFT", 2, 0)
@@ -90,7 +107,7 @@ local function LoadSkin()
 		end)
 
 		hooksecurefunc(window.SourceWindow.ScrollBox, "Update", function(frame)
-			skinBar(frame)
+			skinBar(frame, true)
 		end)
 	end)
 end
