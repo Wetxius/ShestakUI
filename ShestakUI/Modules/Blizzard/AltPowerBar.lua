@@ -108,3 +108,9 @@ status:SetScript("OnUpdate", function(self, elapsed)
 		update = 0
 	end
 end)
+
+-- Reposition for Counter bar (Darkmoon Fair)
+if PlayerPowerBarAlt then
+	PlayerPowerBarAlt:ClearAllPoints()
+	PlayerPowerBarAlt:SetPoint("TOP", UIParent, "TOP", 0, -200)
+end

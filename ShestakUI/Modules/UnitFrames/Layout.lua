@@ -636,30 +636,30 @@ local function Shared(self, unit)
 		end
 	end
 
-	-- Counter bar (Darkmoon Fair)
-	if unit == "player" or unit == "pet" then
-		self.CounterBar = CreateFrame("StatusBar", self:GetName().."_CounterBar", self)
-		self.CounterBar:CreateBackdrop("Default")
-		self.CounterBar:SetWidth(221)
-		self.CounterBar:SetHeight(20)
-		self.CounterBar:SetStatusBarTexture(C.media.texture)
-		self.CounterBar:SetPoint("TOP", UIParent, "TOP", 0, -102)
+	-- Counter bar (Darkmoon Fair) -- Midnight secret error
+	-- if unit == "player" or unit == "pet" then
+		-- self.CounterBar = CreateFrame("StatusBar", self:GetName().."_CounterBar", self)
+		-- self.CounterBar:CreateBackdrop("Default")
+		-- self.CounterBar:SetWidth(221)
+		-- self.CounterBar:SetHeight(20)
+		-- self.CounterBar:SetStatusBarTexture(C.media.texture)
+		-- self.CounterBar:SetPoint("TOP", UIParent, "TOP", 0, -102)
 
-		self.CounterBar.bg = self.CounterBar:CreateTexture(nil, "BORDER")
-		self.CounterBar.bg:SetAllPoints()
-		self.CounterBar.bg:SetTexture(C.media.texture)
+		-- self.CounterBar.bg = self.CounterBar:CreateTexture(nil, "BORDER")
+		-- self.CounterBar.bg:SetAllPoints()
+		-- self.CounterBar.bg:SetTexture(C.media.texture)
 
-		self.CounterBar.Text = T.SetFontString(self.CounterBar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-		self.CounterBar.Text:SetPoint("CENTER")
+		-- self.CounterBar.Text = T.SetFontString(self.CounterBar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		-- self.CounterBar.Text:SetPoint("CENTER")
 
-		self.CounterBar:SetScript("OnValueChanged", function(_, value)
-			local _, max = self.CounterBar:GetMinMaxValues()
-			local r, g, b = oUF:ColorGradient(value, max, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
-			self.CounterBar:SetStatusBarColor(r, g, b)
-			self.CounterBar.bg:SetVertexColor(r, g, b, 0.2)
-			self.CounterBar.Text:SetText(floor(value))
-		end)
-	end
+		-- self.CounterBar:SetScript("OnValueChanged", function(_, value)
+			-- local _, max = self.CounterBar:GetMinMaxValues()
+			-- local r, g, b = oUF:ColorGradient(value, max, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+			-- self.CounterBar:SetStatusBarColor(r, g, b)
+			-- self.CounterBar.bg:SetVertexColor(r, g, b, 0.2)
+			-- self.CounterBar.Text:SetText(floor(value))
+		-- end)
+	-- end
 
 	if unit == "pet" and C.aura.pet_debuffs or unit == "focus" and C.aura.focus_debuffs
 	or unit == "focustarget" and C.aura.fot_debuffs or unit == "targettarget" and C.aura.tot_debuffs then

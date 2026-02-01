@@ -25,7 +25,7 @@ local Update = function(self, _, unit)
 	if not barID then
 		counterbar:Hide()
 	else
-		counterbar.expiration = expiration - GetTime()
+		counterbar.expiration = expiration - GetTime() -- expiration is secret value in 12.0.0
 		counterbar:SetMinMaxValues(0, max)
 		counterbar:Show()
 	end
