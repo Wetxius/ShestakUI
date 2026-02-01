@@ -430,6 +430,11 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			SplashFrame.BottomCloseButton:SkinButton()
 			T.SkinCloseButton(SplashFrame.TopCloseButton)
 
+			-- Campaign finish
+			UIWidgetCenterDisplayFrame:StripTextures()
+			UIWidgetCenterDisplayFrame:SetTemplate("Transparent")
+			UIWidgetCenterDisplayFrame.CloseButton:SkinButton()
+
 			-- NavBar Buttons (Used in EncounterJournal and HelpFrame)
 			local function NavButtonXOffset(button, point, anchor, point2, _, yoffset, skip)
 				if not skip then
