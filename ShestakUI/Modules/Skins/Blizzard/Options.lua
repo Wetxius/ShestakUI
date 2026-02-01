@@ -139,7 +139,9 @@ local function LoadSkin()
 						child.collapseTex:SetPoint("RIGHT", -10, 0)
 
 						UpdateHeaderExpand(child, false)
-						hooksecurefunc(child, "EvaluateVisibility", UpdateHeaderExpand)
+						if child.EvaluateVisibility then -- prevent error
+							hooksecurefunc(child, "EvaluateVisibility", UpdateHeaderExpand)
+						end
 					end
 				end
 				if child.ToggleTest then
