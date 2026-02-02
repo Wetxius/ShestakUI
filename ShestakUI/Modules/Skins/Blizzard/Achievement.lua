@@ -438,12 +438,20 @@ local function LoadSkin()
 		for _, fill in next, fills do
 			fill:SetTexture(C.media.texture)
 		end
-		progressBar:CreateBackdrop()
+		progressBar:CreateBackdrop("Overlay")
 		progressBar.backdrop:SetPoint("TOPLEFT", 5, -4)
 		progressBar.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
-		progressBar:SetColors({R = 0, G = 0.5, B = 0}, {R = 0.8, G = 0, B = 0})
+		progressBar:SetColors({R = 0.2, G = 0.6, B = 0.2}, {R = 0.8, G = 0.2, B = 0.2})
 	end
-	--BETA SkinGameTooltipProgressBar(LibStub("Krowi_GameTooltipWithProgressBar-2.0").ProgressBar)
+	local numFrames = 1
+	hooksecurefunc(KrowiAF_SummaryFrame, "GetStatusBar", function()
+		local bar = _G["Krowi_ProgressBar"..numFrames]
+		while bar do
+			SkinGameTooltipProgressBar(bar)
+			numFrames = numFrames + 1
+			bar = _G["Krowi_ProgressBar"..numFrames]
+		end
+	end)
 
 	-- [[ Achievements ]]
 	local function SkinAchievementButton(button)
@@ -637,7 +645,7 @@ local function LoadSkin()
 		statusBar:CreateBackdrop("Overlay")
 		statusBar.backdrop:SetPoint("TOPLEFT", 12, -12)
 		statusBar.backdrop:SetPoint("BOTTOMRIGHT", -12, 12)
-		statusBar:SetColors({R = 0, G = 0.5, B = 0}, {R = 0.8, G = 0, B = 0})
+		statusBar:SetColors({R = 0.2, G = 0.6, B = 0.2}, {R = 0.8, G = 0.2, B = 0.2})
 		if statusBar.Button then
 			local button = statusBar.Button
 
