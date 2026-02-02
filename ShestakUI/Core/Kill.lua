@@ -66,6 +66,8 @@ frame:SetScript("OnEvent", function()
 		C_Container.SetInsertItemsLeftToRight(false)
 	end
 
+	SetCVar("timeMgrUseMilitaryTime", 1) -- TODO: delete afterwhile
+
 	-- BETA not used
 	-- if C.combattext.enable then
 		-- if C.combattext.incoming then
