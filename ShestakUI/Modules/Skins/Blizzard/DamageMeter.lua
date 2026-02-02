@@ -4,6 +4,7 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Damage Meter skin
 ----------------------------------------------------------------------------------------
+local barHeight = 14
 local function LoadSkin()
 	local function skinBar(frame, second)
 		for _, frame in next, {frame.ScrollTarget:GetChildren()} do
@@ -11,6 +12,7 @@ local function LoadSkin()
 			local icon = frame.Icon
 			local height = bar and bar:GetHeight() or 14
 			if issecretvalue(height) then height = 14 end
+			if second then height = barHeight end
 			if bar and not bar.styled then
 				bar:SetStatusBarTexture(C.media.texture)
 				bar.Background:Hide()
@@ -25,6 +27,7 @@ local function LoadSkin()
 				bar.Name:SetFont(C.font.stylization_font, C.font.stylization_font_size, C.font.stylization_font_style)
 				bar.Value:SetFont(C.font.stylization_font, C.font.stylization_font_size, C.font.stylization_font_style)
 
+				barHeight = height -- store it while source window not loaded
 				bar.styled = true
 			end
 
@@ -36,20 +39,6 @@ local function LoadSkin()
 
 				icon:SetInside(icon.b)
 				icon.styled = true
-			end
-
-			-- Secret workaround
-			if second then
-				local height = bar:GetHeight()
-				if canaccessvalue(height) and not bar.height then
-					if icon and icon.Icon:IsShown() then
-						frame.backdrop:SetPoint("TOPLEFT", height + 2, -1)
-					end
-					if icon then
-						icon.b:SetSize(height, height)
-					end
-					bar.height = true
-				end
 			end
 
 			if not icon.Icon:IsShown() and icon.b then
@@ -66,6 +55,8 @@ local function LoadSkin()
 							elseif ap == "BOTTOMRIGHT" and y == 1 then
 								bar:SetPoint(ap, p, rp, x + 1, y + 2)
 							end
+						else
+							bar:SetInside(frame.backdrop)
 						end
 					end
 					bar:SetPoint("LEFT", frame.backdrop, "LEFT", 2, 0)
@@ -82,7 +73,7 @@ local function LoadSkin()
 		T.SkinFrame(window.SourceWindow, true, 12, 10)
 		T.SkinScrollBar(window.SourceWindow.ScrollBar)
 
-		window.DamageMeterTypeDropdown:SetSize(20, 20)
+		window.DamageMeterTypeDropdown:SetSize(18, 18)
 		window.DamageMeterTypeDropdown:SkinButton()
 		window.DamageMeterTypeDropdown.Arrow:SetTexCoord(0.3, 0.7, 0.25, 0.65)
 		window.DamageMeterTypeDropdown.Arrow:SetInside(window.DamageMeterTypeDropdown)
@@ -93,7 +84,7 @@ local function LoadSkin()
 		window.SessionDropdown:SkinButton()
 		window.SessionDropdown:SetPoint("RIGHT", window.SettingsDropdown, -28, 0)
 
-		window.SettingsDropdown:SetSize(20, 20)
+		window.SettingsDropdown:SetSize(18, 18)
 		window.SettingsDropdown:SkinButton()
 		window.SettingsDropdown.Icon:SetTexCoord(0.3, 0.73, 0.2, 0.65)
 		window.SettingsDropdown.Icon:SetInside(window.SettingsDropdown)
