@@ -98,6 +98,16 @@ T.SkinFuncs["Blizzard_HousingCreateNeighborhood"] = LoadNeighborhoodSkin
 local function LoadModelPreviewSkin()
 	local frame = _G.HousingModelPreviewFrame
 	T.SkinFrame(frame)
+
+	frame.ModelPreview:StripTextures()
+
+	for i = 1, 5 do
+		local button = select(i, frame.ModelPreview.ModelSceneControls:GetChildren())
+		if button.NormalTexture then
+			button.NormalTexture:SetAlpha(0)
+			button.PushedTexture:SetAlpha(0)
+		end
+	end
 end
 
 T.SkinFuncs["Blizzard_HousingModelPreview"] = LoadModelPreviewSkin
