@@ -152,11 +152,13 @@ local function AddTargetedBy()
 	if numParty > 0 or numRaid > 0 then
 		for i = 1, (numRaid > 0 and numRaid or numParty) do
 			local unit = (numRaid > 0 and "raid"..i or "party"..i)
-			if UnitIsUnit(unit.."target", token) and not UnitIsUnit(unit, "player") then
-				local _, class = UnitClass(unit)
-				targetedList[#targetedList + 1] = ClassColors[class]
-				targetedList[#targetedList + 1] = UnitName(unit)
-				targetedList[#targetedList + 1] = "|r, "
+			if not C_Secrets.ShouldUnitIdentityBeSecret(unit) and not C_Secrets.ShouldUnitIdentityBeSecret(token) then
+				if UnitIsUnit(unit.."target", token) and not UnitIsUnit(unit, "player") then
+					local _, class = UnitClass(unit)
+					targetedList[#targetedList + 1] = ClassColors[class]
+					targetedList[#targetedList + 1] = UnitName(unit)
+					targetedList[#targetedList + 1] = "|r, "
+				end
 			end
 		end
 		if #targetedList > 0 then
