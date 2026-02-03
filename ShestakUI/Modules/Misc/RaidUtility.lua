@@ -148,8 +148,14 @@ for i = 1, 9 do
 	b:CreateBackdrop("Overlay")
 	b:SetNormalTexture(iconTexture[i])
 	b:RegisterForClicks("AnyUp", "AnyDown")
-	b:SetAttribute("type", "macro")
-	b:SetAttribute("macrotext", format(i == 9 and "/cwm 0" or "/cwm %d\n/wm %d", ground[i], ground[i]))
+
+	if i == 9 then
+		b:SetAttribute("type", "worldmarker")
+		b:SetAttribute("action", "clear")
+	else
+		b:SetAttribute("type", "macro")
+		b:SetAttribute("macrotext", format("/cwm %d\n/wm %d", ground[i], ground[i]))
+	end
 
 	prev = b
 end
