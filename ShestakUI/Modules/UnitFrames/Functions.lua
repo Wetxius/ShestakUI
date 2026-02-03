@@ -790,22 +790,17 @@ end
 
 T.CustomCastTimeText = function(self, durationObject)
 	local duration = durationObject:GetRemainingDuration()
-	if self.endTime then
-		local max = self.max or (self.endTime - self.startTime)
-		self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or max - duration, max))
-	else
-		self.Time:SetText(("%.1f"):format(duration))
-	end
+	local elapsed = durationObject:GetElapsedDuration()
+	local total = durationObject:GetTotalDuration()
+
+	self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or elapsed, total))
 end
 
 T.CustomCastDelayText = function(self, durationObject)
 	local duration = durationObject:GetRemainingDuration()
-	if self.endTime then
-		local max = self.max or (self.endTime - self.startTime)
-		self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or max - duration, self.channeling and "-" or "+", abs(self.delay)))
-	else
-		self.Time:SetText(("%.1f"):format(duration))
-	end
+	local elapsed = durationObject:GetElapsedDuration()
+
+	self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or elapsed, self.channeling and "-" or "+", abs(self.delay)))
 end
 
 local colorStages = {
