@@ -883,6 +883,7 @@ local function LoadSkin()
 		frame.Glow:Kill()
 		frame.LightRays:Kill()
 		frame.LightRays2:Kill()
+		frame.Divider:Kill()
 
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.Icon:SetDrawLayer("BORDER", 5)
