@@ -6,6 +6,7 @@ if C.aura.player_auras ~= true then return end
 ----------------------------------------------------------------------------------------
 local rowbuffs = 16
 local alpha = 0
+local space = 3
 
 local GetFormattedTime = function(s)
 	if s >= 86400 then
@@ -20,7 +21,7 @@ end
 
 local BuffsAnchor = CreateFrame("Frame", "BuffsAnchor", UIParent)
 BuffsAnchor:SetPoint(unpack(C.position.player_buffs))
-BuffsAnchor:SetSize((15 * C.aura.player_buff_size) + 42, (C.aura.player_buff_size * 2) + 3)
+BuffsAnchor:SetSize((15 * C.aura.player_buff_size) + 42, (C.aura.player_buff_size * 2) + space)
 
 local function UpdateDuration(aura, timeLeft)
 	local duration = aura.Duration
@@ -42,13 +43,13 @@ C_Timer.After(0.2, function()
 		for index, aura in ipairs(BuffFrame.auraFrames) do
 			aura:ClearAllPoints()
 			if (index > 1) and (mod(index, rowbuffs) == 1) then
-				aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -C.aura.player_buff_space)
+				aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -space)
 				aboveBuff = aura
 			elseif index == 1 then
 				aura:SetPoint("TOPLEFT", BuffsAnchor, "TOPLEFT", 0, 0)
 				aboveBuff = aura
 			else
-				aura:SetPoint("LEFT", previousBuff, "RIGHT", C.aura.player_buff_space, 0)
+				aura:SetPoint("LEFT", previousBuff, "RIGHT", space, 0)
 			end
 			previousBuff = aura
 		end
@@ -76,13 +77,13 @@ hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
 
 		aura:ClearAllPoints()
 		if (index > 1) and (mod(index, rowbuffs) == 1) then
-			aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -3)
+			aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -space)
 			aboveBuff = aura
 		elseif index == 1 then
 			aura:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 			aboveBuff = aura
 		else
-			aura:SetPoint("RIGHT", previousBuff, "LEFT", -3, 0)
+			aura:SetPoint("RIGHT", previousBuff, "LEFT", -space, 0)
 		end
 
 		previousBuff = aura
