@@ -83,6 +83,10 @@ local unitFrames = {
 	RaidTankDPSAnchor
 }
 
+if C.unitframe.castbar_focus_type ~= "NONE" then
+	tinsert(unitFrames,_G["oUF_Focus_Castbar_Icon"])
+end
+
 for i = 1, 5 do
 	tinsert(unitFrames,_G["oUF_Boss"..i])
 	tinsert(unitFrames,_G["oUF_Arena"..i])
