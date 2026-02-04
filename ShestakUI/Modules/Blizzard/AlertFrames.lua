@@ -90,6 +90,12 @@ end
 
 local function SetUpAlert()
 	GroupLootContainer:EnableMouse(false)
+	GroupLootContainer.ignoreInLayout = true
+	hooksecurefunc("GroupLootContainer_Update", function()
+		CheckGrow()
+		GroupLootContainer:ClearAllPoints()
+		GroupLootContainer:SetPoint(POSITION, AchievementAnchor, POSITION, 2, FIRST_YOFFSET)
+	end)
 
 	hooksecurefunc(AlertFrame, "UpdateAnchors", function(self)
 		CheckGrow()
