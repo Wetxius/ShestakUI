@@ -30,7 +30,7 @@ local function LoadSkin()
 	BonusRollFrame.SpecRing:SetTexture("")
 	BonusRollFrame.SpecIcon:SetPoint("TOPLEFT", BonusRollFrame, "TOPLEFT", 0, -3)
 	BonusRollFrame.SpecIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	-- BonusRollFrame.SpecIcon:SetTexture("Interface\\Icons\\spell_nature_brilliance")
+	-- BonusRollFrame.SpecIcon:SetTexture("Interface\\Icons\\spell_nature_brilliance") -- for test
 
 	BonusRollFrame.SpecIcon.b = CreateFrame("Frame", nil, BonusRollFrame)
 	BonusRollFrame.SpecIcon.b:SetFrameLevel(6)
@@ -81,16 +81,19 @@ local function LoadSkin()
 		end
 	end)
 
-	-- Loot after finished dungeon (not tested) NOTE
-	-- hooksecurefunc("BossBanner_ConfigureLootFrame", function(frame)
-		-- local button = frame.IconHitBox
-		-- if not button.styled then
-			-- frame.Icon:SkinIcon()
-			-- T.SkinIconBorder(button.IconBorder, frame.Icon:GetParent().backdrop)
+	-- Loot after finished dungeon
+	hooksecurefunc("BossBanner_ConfigureLootFrame", function(frame)
+		local button = frame.IconHitBox
+		if not button.styled then
+			frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			C_Timer.After(1, function()
+				frame.Icon:SkinIcon() -- looks weird while animation
+			end)
 
-			-- button.styled = true
-		-- end
-	-- end
+			button.styled = true
+		end
+		button.IconBorder:SetTexture(nil)
+	end)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
