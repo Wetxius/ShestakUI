@@ -39,6 +39,7 @@ local fragment = {
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("CHAT_MSG_CURRENCY")
 frame:SetScript("OnEvent", function(_, _, msg)
+	if IsInInstance() then return end
 	local _, _, currencyID = string.find(msg, "currency:(%d+)");
 	if not currencyID then return end
 
