@@ -5,7 +5,6 @@ if C.skins.blizzard_frames ~= true then return end
 --	Major Factions skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if T.newPatch then return end -- BETA not work
 	local frame = _G.MajorFactionRenownFrame
 
 	T.SkinFrame(frame)
@@ -28,4 +27,16 @@ local function LoadSkin()
 	end)
 end
 
-T.SkinFuncs["Blizzard_MajorFactions"] = LoadSkin
+T.SkinFuncs["Blizzard_MajorFactionRenown"] = LoadSkin
+
+-- /run MajorFactionsRenownToast:ShowRenownLevelUpToast(C_MajorFactions.GetMajorFactionData(2710), 8)
+if MajorFactionsRenownToast then
+	hooksecurefunc(MajorFactionsRenownToast, "PlayBanner", function(self)
+		if not self.styled then
+			self.RewardIcon:SkinIcon(true)
+			self.styled = true
+		end
+		self.RewardIconRing:Hide()
+		self.RewardIconMask:Hide()
+	end)
+end
