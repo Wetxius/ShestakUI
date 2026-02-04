@@ -468,18 +468,24 @@ local function castColor(self)
 		-- end
 	-- end
 
-	if C.nameplate.cast_color and canaccessvalue(self.spellID) then -- BETA not work
-		if T.InterruptCast[self.spellID] then
-			SetColorBorder(self, 1, 0.8, 0)
-			SetColorBorder(self.Border, 1, 0.8, 0)
-		elseif T.ImportantCast[self.spellID] then
-			SetColorBorder(self, 1, 0, 0)
-			SetColorBorder(self.Border, 1, 0, 0)
-		else
-			SetColorBorder(self, unpack(C.media.border_color))
-			SetColorBorder(self.Border, unpack(C.media.border_color))
-		end
+	if C.nameplate.cast_color then
+		local color = C_CurveUtil.EvaluateColorFromBoolean(C_Spell.IsSpellImportant(self.spellID), {r = 1, g = 0.8, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
+		SetColorBorder(self, color:GetRGB())
+		SetColorBorder(self.Border, color:GetRGB())
 	end
+
+	-- if C.nameplate.cast_color and canaccessvalue(self.spellID) then -- BETA not work
+		-- if T.InterruptCast[self.spellID] then
+			-- SetColorBorder(self, 1, 0.8, 0)
+			-- SetColorBorder(self.Border, 1, 0.8, 0)
+		-- elseif T.ImportantCast[self.spellID] then
+			-- SetColorBorder(self, 1, 0, 0)
+			-- SetColorBorder(self.Border, 1, 0, 0)
+		-- else
+			-- SetColorBorder(self, unpack(C.media.border_color))
+			-- SetColorBorder(self.Border, unpack(C.media.border_color))
+		-- end
+	-- end
 end
 
 -- Health color
@@ -788,12 +794,6 @@ local function style(self, unit)
 	self.Castbar.Time:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * 1, C.font.nameplates_font_style)
 	self.Castbar.Time:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 
-	-- self.Castbar.CustomTimeText = function(self, durationObject)
-		-- local duration = durationObject:GetRemainingDuration()
-		-- self.Time:SetText(("%.1f"):format(duration))
-		-- -- self.Time:SetText(("%.1f"):format(self.channeling and duration or self.max - duration)) -- BETA
-	-- end
-
 	-- Cast Name Text
 	if C.nameplate.show_castbar_name then
 		self.Castbar.Text = self.Castbar:CreateFontString(nil, "OVERLAY")
@@ -903,7 +903,7 @@ local function style(self, unit)
 
 	-- Absorb
 	if C.raidframe.plugins_healcomm then
-		local absorb = CreateFrame("StatusBar", nil, self.Health)
+		local absorb = CreateFrame("StatusBar", nil, self)
 		absorb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		absorb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		absorb:SetStatusBarTexture(C.media.texture)
