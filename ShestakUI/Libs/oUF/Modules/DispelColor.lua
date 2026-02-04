@@ -24,24 +24,24 @@ local color_disease = CreateColor(0, 0, 0, 0)
 local color_poison = CreateColor(0, 0, 0, 0)
 
 if T.class == "DRUID" then
-	color_curse = _G.DEBUFF_TYPE_CURSE_COLOR
-	color_poison = _G.DEBUFF_TYPE_POISON_COLOR
+	color_curse = CreateColor(0.6, 0, 1)
+	color_poison = CreateColor(0, 0.6, 0)
 elseif T.class == "EVOKER" then
-	color_curse = _G.DEBUFF_TYPE_CURSE_COLOR
-	color_poison = _G.DEBUFF_TYPE_POISON_COLOR
-	color_disease = _G.DEBUFF_TYPE_DISEASE_COLOR
+	color_curse = CreateColor(0.6, 0, 1)
+	color_poison = CreateColor(0, 0.6, 0)
+	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "MAGE" then
-	color_curse = _G.DEBUFF_TYPE_CURSE_COLOR
+	color_curse = CreateColor(0.6, 0, 1)
 elseif T.class == "MONK" then
-	color_poison = _G.DEBUFF_TYPE_POISON_COLOR
-	color_disease = _G.DEBUFF_TYPE_DISEASE_COLOR
+	color_poison = CreateColor(0, 0.6, 0)
+	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "PALADIN" then
-	color_poison = _G.DEBUFF_TYPE_POISON_COLOR
-	color_disease = _G.DEBUFF_TYPE_DISEASE_COLOR
+	color_poison = CreateColor(0, 0.6, 0)
+	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "PRIEST" then
-	color_disease = _G.DEBUFF_TYPE_DISEASE_COLOR
+	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "SHAMAN" then
-	color_curse = _G.DEBUFF_TYPE_CURSE_COLOR
+	color_curse = CreateColor(0.6, 0, 1)
 end
 
 local dispelColorCurve = C_CurveUtil.CreateColorCurve()
@@ -52,19 +52,19 @@ local function CheckSpec()
 
 	if T.class == "DRUID" then
 		if spec == 4 then
-			color_magic = _G.DEBUFF_TYPE_MAGIC_COLOR
+			color_magic = CreateColor(0.2, 0.6, 1)
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
 	elseif T.class == "MONK" then
 		if spec == 2 then
-			color_magic = _G.DEBUFF_TYPE_MAGIC_COLOR
+			color_magic = CreateColor(0.2, 0.6, 1)
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
 	elseif T.class == "PALADIN" then
 		if spec == 1 then
-			color_magic = _G.DEBUFF_TYPE_MAGIC_COLOR
+			color_magic = CreateColor(0.2, 0.6, 1)
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
@@ -72,11 +72,11 @@ local function CheckSpec()
 		if spec == 3 then
 			color_magic = CreateColor(0, 0, 0, 0)
 		else
-			color_magic = _G.DEBUFF_TYPE_MAGIC_COLOR
+			color_magic = CreateColor(0.2, 0.6, 1)
 		end
 	elseif T.class == "SHAMAN" then
 		if spec == 3 then
-			color_magic = _G.DEBUFF_TYPE_MAGIC_COLOR
+			color_magic = CreateColor(0.2, 0.6, 1)
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end

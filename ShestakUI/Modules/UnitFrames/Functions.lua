@@ -948,6 +948,23 @@ local playerUnits = {
 	vehicle = true,
 }
 
+local dispelIndex = {
+	[0] = _G.DEBUFF_TYPE_NONE_COLOR,
+	[1] = CreateColor(0.2, 0.6, 1),		-- Magic
+	[2] = CreateColor(0.6, 0, 1),		-- Curse
+	[3] = CreateColor(0.6, 0.4, 0),		-- Disease
+	[4] = CreateColor(0, 0.6, 0),		-- Poison
+	[9] = CreateColor(0.95, 0.4, 0.95),	-- Enrage
+	[11] = _G.DEBUFF_TYPE_BLEED_COLOR	-- Bleed
+}
+
+local curve = C_CurveUtil.CreateColorCurve()
+curve:SetType(Enum.LuaCurveType.Step)
+for i, color in pairs(dispelIndex) do
+	curve:AddPoint(i, color)
+end
+T.DispelCurve = curve
+
 T.PostUpdateIcon = function(element, button, unit, data)
 	if data.isHarmfulAura then
 		if not UnitIsFriend("player", unit) and not data.isPlayerAura then
@@ -957,7 +974,7 @@ T.PostUpdateIcon = function(element, button, unit, data)
 			end
 		else
 			if C.aura.debuff_color_type then
-				local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, element.dispelColorCurve)
+				local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
 				button:SetBackdropBorderColor(color:GetRGBA())
 				button.Icon:SetDesaturated(false)
 			else
