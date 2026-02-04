@@ -27,9 +27,7 @@
 	<Script file="Container.lua"/>
 	<Script file="Contribution.lua"/>
 	<Script file="CooldownViewer.lua"/>
-	<Script file="CovenantPreview.lua"/>
-	<Script file="CovenantRenown.lua"/>
-	<Script file="CovenantSanctum.lua"/>
+	<Script file="Covenant.lua"/>
 	<Script file="DamageMeter.lua"/>
 	<Script file="DeathRecap.lua"/>
 	<Script file="DebugTools.lua"/>
