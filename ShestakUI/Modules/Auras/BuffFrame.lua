@@ -140,3 +140,22 @@ BuffFrame.CollapseAndExpandButton:Kill()
 
 -- Hide debuffs
 DebuffFrame.AuraContainer:Hide()
+
+-- Move Private Auras
+hooksecurefunc(DebuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
+	local previousBuff, aboveBuff
+	for index, aura in ipairs(auras) do
+		aura:ClearAllPoints()
+		if (index > 1) and (mod(index, rowbuffs) == 1) then
+			aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -space)
+			aboveBuff = aura
+		elseif index == 1 then
+			aura:SetPoint("TOPRIGHT", BuffsAnchor, "RIGHT", 0, 0)
+			aboveBuff = aura
+		else
+			aura:SetPoint("RIGHT", previousBuff, "LEFT", -space, 0)
+		end
+
+		previousBuff = aura
+	end
+end)
