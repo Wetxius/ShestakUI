@@ -2553,8 +2553,8 @@ do
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
 	low_health.Text:SetWidth(250)
 
-	-- local cast_color = ns.CreateCheckBox(parent, "cast_color")
-	-- cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
+	local cast_color = ns.CreateCheckBox(parent, "cast_color")
+	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
 
 	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	-- ListButton:SetPoint("LEFT", cast_color, "RIGHT", 430, 0)
@@ -2584,8 +2584,7 @@ do
 	-- kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
 	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
-	-- enhance_threat:SetPoint("TOPLEFT", kick_color, "BOTTOMLEFT", 0, 0)
-	enhance_threat:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -10)
+	enhance_threat:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
 	local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
 	good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 24, -4)
