@@ -743,9 +743,13 @@ local function Shared(self, unit)
 		end
 
 		if unit == "player" then
-			self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)	-- BETA Not tested
-			self.PrivateAuras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 2, 19)
-			self.PrivateAuras:SetSize(60, 30)
+			-- self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)	-- BETA Not tested
+			-- self.PrivateAuras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 2, 25)
+			-- self.PrivateAuras:SetSize(60, T.Scale(C.aura.debuff_size))
+			-- self.PrivateAuras.size = T.Scale(C.aura.debuff_size)
+			-- self.PrivateAuras.spacing = T.Scale(3)
+			-- self.PrivateAuras.PostCreateAura = T.PostCreateIcon
+			-- self.PrivateAuras.PostUpdate = T.PostUpdatePrivate
 
 			if C.aura.player_auras then
 				self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)

@@ -652,21 +652,6 @@ T.UpdateClassMana = function(self, elapsed)
 	end
 end
 
-T.UpdatePvPStatus = function(self)
-	local unit = self.unit
-
-	if self.Status then
-		local factionGroup = UnitFactionGroup(unit)
-		if UnitIsPVPFreeForAll(unit) then
-			self.Status:SetText(PVP)
-		elseif factionGroup and UnitIsPVP(unit) then
-			self.Status:SetText(PVP)
-		else
-			self.Status:SetText("")
-		end
-	end
-end
-
 local ticks = {}
 local setBarTicks = function(Castbar, numTicks)
 	for _, v in pairs(ticks) do
@@ -941,7 +926,6 @@ T.CreateAuraTimer = function(self, elapsed)
 	-- end
 end
 
-
 local playerUnits = {
 	player = true,
 	pet = true,
@@ -1006,73 +990,53 @@ T.PostUpdateIcon = function(element, button, unit, data)
 	button.first = true
 end
 
+local function formatTime(s)
+	if s > 60 then
+		return format("%dm", s / 60), s % 60
+	else
+		return format("%d", s), s - floor(s)
+	end
+end
+
+T.CreateRaidAuraTimer = function(self, elapsed)
+	self.elapsed = (self.elapsed or 0) + elapsed
+	if self.elapsed >= 0.1 then
+		local start, duration = self.Cooldown:GetCooldownTimes()
+		local timeleft
+		if duration and duration > 0 then
+			timeleft = (duration + start) / 1000 - GetTime()
+		end
+		if timeleft and timeleft > 0 then
+			local time = formatTime(timeleft)
+			self.remaining:SetText(time)
+		else
+			self.remaining:Hide()
+			self.remaining:SetText("")
+			self:SetScript("OnUpdate", nil)
+		end
+		self.elapsed = 0
+	end
+end
+
+T.PostUpdateRaidButton = function(element, button, unit, data)
+	if C.aura.debuff_color_type then
+		local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
+		button:SetBackdropBorderColor(color:GetRGBA())
+	else
+		button:SetBackdropBorderColor(1, 0, 0)
+	end
+
+	if data.expirationTime and C.raidframe.plugins_aura_watch_timer then
+		button.remaining:Show()
+		button:SetScript("OnUpdate", T.CreateRaidAuraTimer)
+	else
+		button.remaining:Hide()
+		button:SetScript("OnUpdate", nil)
+	end
+end
+
 T.PostUpdateGapButton = function(_, _, button)
 	button:Hide()
-end
-
-T.CustomFilter = function(_, unit, data)
-	if C.aura.player_aura_only then
-		if data.isHarmfulAura then
-			if not UnitIsFriend("player", unit) and not data.isPlayerAura then
-				return false
-			end
-		end
-	end
-	return true
-end
-
-T.CustomFilterBoss = function(_, unit, data)
-	if data.isHarmfulAura then
-		if data.isPlayerAura then
-		-- if data.isPlayerAura or UnitIsUnit(unit, data.sourceUnit) then
-		-- if (data.isPlayerAura or data.sourceUnit == unit) then
-			-- if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then -- BETA secret value
-				return true
-			-- end
-		end
-		return false
-	end
-	return true
-end
-
-T.UpdateThreat = function(self, unit, status, color)
-	local parent = self:GetParent()
-	local badunit = not unit or parent.unit ~= unit
-
-	if not badunit and color and status and status > 1 then
-		parent.backdrop:SetBackdropBorderColor(color:GetRGB())
-	else
-		parent.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
-	end
-end
-
-local CountOffSets = {
-	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
-	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
-	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
-	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
-	LEFT = {"LEFT", "RIGHT", 1, 0},
-	RIGHT = {"RIGHT", "LEFT", 2, 0},
-	TOP = {"RIGHT", "LEFT", 2, 0},
-	BOTTOM = {"RIGHT", "LEFT", 2, 0},
-}
-
-T.CreateAuraWatchIcon = function(_, aura)
-	aura:CreateBorder(nil, true)
-	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	aura.icon:SetDrawLayer("ARTWORK")
-	if aura.cd then
-		aura.cd:SetReverse(true)
-		aura.cd:SetHideCountdownNumbers(true)
-		if C.raidframe.plugins_buffs_timer then
-			aura.parent = CreateFrame("Frame", nil, aura)
-			aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
-			aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-			aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-			aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
-			aura.remaining:SetJustifyH("CENTER")
-		end
-	end
 end
 
 T.CreateRaidBuffIcon = function(element, button)
@@ -1105,6 +1069,35 @@ T.CreateRaidBuffIcon = function(element, button)
 		button.remaining:SetParent(button.parent)
 	else
 		button.Cooldown:SetAlpha(0)
+	end
+end
+
+local CountOffSets = {
+	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
+	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
+	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
+	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
+	LEFT = {"LEFT", "RIGHT", 1, 0},
+	RIGHT = {"RIGHT", "LEFT", 2, 0},
+	TOP = {"RIGHT", "LEFT", 2, 0},
+	BOTTOM = {"RIGHT", "LEFT", 2, 0},
+}
+
+T.CreateAuraWatchIcon = function(_, aura)
+	aura:CreateBorder(nil, true)
+	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	aura.icon:SetDrawLayer("ARTWORK")
+	if aura.cd then
+		aura.cd:SetReverse(true)
+		aura.cd:SetHideCountdownNumbers(true)
+		if C.raidframe.plugins_buffs_timer then
+			aura.parent = CreateFrame("Frame", nil, aura)
+			aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
+			aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+			aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+			aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
+			aura.remaining:SetJustifyH("CENTER")
+		end
 	end
 end
 
@@ -1162,6 +1155,10 @@ T.CreateAuraWatch = function(self)
 	end
 
 	self.AuraWatch = auras
+end
+
+T.PostUpdatePrivate = function(self)
+	self:SetTemplate("Default")
 end
 
 T.CreateHealthPrediction = function(self)
@@ -1231,4 +1228,55 @@ T.CreateHealthPrediction = function(self)
 		oha:SetWidth(6)
 		self.HealthPrediction.overHealAbsorbIndicator = oha
 	end
+end
+
+T.UpdateThreat = function(self, unit, status, color)
+	local parent = self:GetParent()
+	local badunit = not unit or parent.unit ~= unit
+
+	if not badunit and color and status and status > 1 then
+		parent.backdrop:SetBackdropBorderColor(color:GetRGB())
+	else
+		parent.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+	end
+end
+
+T.UpdatePvPStatus = function(self)
+	local unit = self.unit
+
+	if self.Status then
+		local factionGroup = UnitFactionGroup(unit)
+		if UnitIsPVPFreeForAll(unit) then
+			self.Status:SetText(PVP)
+		elseif factionGroup and UnitIsPVP(unit) then
+			self.Status:SetText(PVP)
+		else
+			self.Status:SetText("")
+		end
+	end
+end
+
+T.CustomFilter = function(_, unit, data)
+	if C.aura.player_aura_only then
+		if data.isHarmfulAura then
+			if not UnitIsFriend("player", unit) and not data.isPlayerAura then
+				return false
+			end
+		end
+	end
+	return true
+end
+
+T.CustomFilterBoss = function(_, unit, data)
+	if data.isHarmfulAura then
+		if data.isPlayerAura then
+		-- if data.isPlayerAura or UnitIsUnit(unit, data.sourceUnit) then
+		-- if (data.isPlayerAura or data.sourceUnit == unit) then
+			-- if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then -- BETA secret value
+				return true
+			-- end
+		end
+		return false
+	end
+	return true
 end

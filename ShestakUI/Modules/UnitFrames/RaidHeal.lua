@@ -267,7 +267,6 @@ local function Shared(self, unit)
 		self.Buffs.growthX = "LEFT"
 
 		self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
-		-- self.Buffs.PostUpdateButton = T.PostUpdateIcon
 
 		self.Buffs.disableMouse = true
 		self.Buffs.filter = "HELPFUL|PLAYER|RAID"
@@ -280,7 +279,7 @@ local function Shared(self, unit)
 		self.Debuffs:SetPoint("CENTER", self, 0, 1)
 
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
-		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
+		self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
 
 		self.Debuffs.disableMouse = true
 		self.Debuffs.filter = "HARMFUL|RAID"
