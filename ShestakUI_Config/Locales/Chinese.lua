@@ -180,6 +180,7 @@ L_GUI_UF_PLUGINS_RUNE_BAR = "符文"
 L_GUI_UF_PLUGINS_TOTEM_BAR = "图腾"
 L.unitframe_class_bar_totem_other = "其他职业图腾"
 L.unitframe_class_bar_essence = "精华"
+L.unitframe_class_bar_soul = "Enable Soul fragments bar" -- Need review
 
 -- Raid Frames options
 L_GUI_UF_RAIDFRAMES_SUBTEXT = "定制队伍/团队框架"

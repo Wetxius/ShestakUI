@@ -1748,8 +1748,11 @@ do
 	local shard = ns.CreateCheckBox(parent, "shard", L_GUI_UF_PLUGINS_SHARD_BAR)
 	shard:SetPoint("TOPLEFT", holy, "BOTTOMLEFT", 0, 0)
 
+	local soul = ns.CreateCheckBox(parent, "soul")
+	soul:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", 0, 0)
+
 	local rune = ns.CreateCheckBox(parent, "rune", L_GUI_UF_PLUGINS_RUNE_BAR)
-	rune:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", 0, 0)
+	rune:SetPoint("TOPLEFT", soul, "BOTTOMLEFT", 0, 0)
 
 	local totem = ns.CreateCheckBox(parent, "totem", L_GUI_UF_PLUGINS_TOTEM_BAR)
 	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", 0, 0)

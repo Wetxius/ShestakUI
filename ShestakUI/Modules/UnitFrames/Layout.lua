@@ -313,6 +313,28 @@ local function Shared(self, unit)
 			end
 		end
 
+		if C.unitframe_class_bar.shard and T.class == "DEMONHUNTER" then
+			self.SoulFragments = CreateFrame("StatusBar", self:GetName().."_SoulFragments", self)
+			self.SoulFragments:CreateBackdrop("Default")
+			self.SoulFragments:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
+			self.SoulFragments:SetSize(player_width, 7)
+			self.SoulFragments:SetStatusBarTexture(C.media.texture)
+
+			self.SoulFragments:GetStatusBarTexture():SetVertexColor(0.4, 0, 1, 1)
+
+			self.SoulFragments.bg = self.SoulFragments:CreateTexture(nil, "BORDER")
+			self.SoulFragments.bg:SetAllPoints()
+			self.SoulFragments.bg:SetTexture(C.media.texture)
+			self.SoulFragments.bg:SetVertexColor(0.4, 0, 1, 0.2)
+
+			self.SoulFragments.Text = T.SetFontString(self.SoulFragments, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			self.SoulFragments.Text:SetPoint("CENTER", self.SoulFragments, "CENTER", 0, 0)
+
+			if C.unitframe.plugins_smooth_bar == true then
+				self.SoulFragments.smoothing = Enum.StatusBarInterpolation.ExponentialEaseOut or 1
+			end
+		end
+
 		if T.class == "MAGE" then
 			-- Arcane Charge bar
 			if C.unitframe_class_bar.arcane == true then

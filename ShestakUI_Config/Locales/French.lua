@@ -178,6 +178,7 @@ L_GUI_UF_PLUGINS_RUNE_BAR = "Activer la barre de Rune"
 L_GUI_UF_PLUGINS_TOTEM_BAR = "Activer la barre totem pour Shaman"
 L.unitframe_class_bar_totem_other = "Activer la barre totem pour les autres classes"
 L.unitframe_class_bar_essence = "Activer la barre d'essence pour l'Evoker"
+L.unitframe_class_bar_soul = "Enable Soul fragments bar" -- Need review
 
 -- Raid Frames options
 L_GUI_UF_RAIDFRAMES_SUBTEXT = "Personnalisez l’apparence des cadres de raid."

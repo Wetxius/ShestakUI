@@ -160,6 +160,7 @@ C["unitframe_class_bar"] = {
 	["stagger"] = true,							-- Stagger bar (for Monk Tanks)
 	["holy"] = true,							-- Holy Power bar
 	["shard"] = true,							-- Shard/Burning bar
+	["soul"] = true,							-- Soul fragments bar
 	["rune"] = true,							-- Rune bar
 	["totem"] = true,							-- Totem bar for Shaman
 	["totem_other"] = true,						-- Totem bar for other classes

@@ -181,6 +181,7 @@ L_GUI_UF_PLUGINS_RUNE_BAR = "Индикатор рун"
 L_GUI_UF_PLUGINS_TOTEM_BAR = "Индикатор тотемов для шаманов"
 L.unitframe_class_bar_totem_other = "Индикатор 'тотемов' для других классов"
 L.unitframe_class_bar_essence = "Индикатор сущности"
+L.unitframe_class_bar_soul = "Индикатор фрагментов души"
 
 -- Raid Frames options
 L_GUI_UF_RAIDFRAMES_SUBTEXT = "Настройка внешнего вида рейдовых рамок."
