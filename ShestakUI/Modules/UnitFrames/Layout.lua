@@ -770,8 +770,6 @@ local function Shared(self, unit)
 			-- self.PrivateAuras:SetSize(60, T.Scale(C.aura.debuff_size))
 			-- self.PrivateAuras.size = T.Scale(C.aura.debuff_size)
 			-- self.PrivateAuras.spacing = T.Scale(3)
-			-- self.PrivateAuras.PostCreateAura = T.PostCreateIcon
-			-- self.PrivateAuras.PostUpdate = T.PostUpdatePrivate
 
 			if C.aura.player_auras then
 				self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)

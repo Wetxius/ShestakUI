@@ -1157,10 +1157,6 @@ T.CreateAuraWatch = function(self)
 	self.AuraWatch = auras
 end
 
-T.PostUpdatePrivate = function(self)
-	self:SetTemplate("Default")
-end
-
 T.CreateHealthPrediction = function(self)
 	-- Player healing
 	local mhpb = CreateFrame("StatusBar", nil, self.Health)
