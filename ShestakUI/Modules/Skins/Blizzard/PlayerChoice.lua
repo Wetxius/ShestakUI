@@ -92,6 +92,14 @@ local function LoadSkin()
 					end
 					if reward.Name then reward.Name:SetTextColor(1, 1, 1) end
 					if reward.IconBorder then reward.IconBorder:SetTexture("") end
+					local item = reward.itemButton
+					if item and not item.isSkinned then
+						item.NormalTexture:SetAlpha(0)
+						item.icon:SkinIcon()
+						T.SkinIconBorder(item.IconBorder, item.backdrop)
+						item.IconBorder:SetVertexColor(item.IconBorder:GetVertexColor())
+						item.isSkinned = true
+					end
 					local r, g, b
 					if reward.IconBorder and reward.IconBorder:IsShown() then
 						r, g, b = reward.IconBorder:GetVertexColor()
