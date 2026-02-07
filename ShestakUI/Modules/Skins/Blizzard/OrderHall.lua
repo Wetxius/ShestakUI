@@ -5,33 +5,6 @@ if C.skins.blizzard_frames ~= true then return end
 --	OrderHallUI skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	OrderHallCommandBar:StripTextures()
-	OrderHallCommandBar:SetTemplate("Transparent")
-	OrderHallCommandBar:ClearAllPoints()
-	OrderHallCommandBar:SetPoint("TOP", UIParent, 0, -1)
-	OrderHallCommandBar.ClassIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
-	OrderHallCommandBar.ClassIcon:SetSize(46, 20)
-	OrderHallCommandBar.CurrencyIcon:SetAtlas("legionmission-icon-currency", false)
-	OrderHallCommandBar.AreaName:ClearAllPoints()
-	OrderHallCommandBar.AreaName:SetPoint("LEFT", OrderHallCommandBar.CurrencyIcon, "RIGHT", 25, 0)
-	OrderHallCommandBar.AreaName:SetVertexColor(unpack(C.media.classborder_color))
-	OrderHallCommandBar.WorldMapButton:Kill()
-	OrderHallTalentFramePortrait:SetAlpha(0)
-
-	hooksecurefunc(OrderHallCommandBar, "RefreshCategories", function(self)
-		local index = 0
-		C_Timer.After(0.5, function()
-			for _, child in ipairs({self:GetChildren()}) do
-				if child.Icon and child.Count and child.TroopPortraitCover then
-					index = index + 1
-					child.TroopPortraitCover:Hide()
-					child.Icon:SetSize(38, 21)
-				end
-			end
-			self:SetWidth(270 + index * 112)
-		end)
-	end)
-
 	-- TalentFrame skin from ElvUI
 	local function colorBorder(child, backdrop, atlas)
 		if child.AlphaIconOverlay:IsShown() then -- isBeingResearched or (talentAvailability and not selected)
@@ -58,11 +31,9 @@ local function LoadSkin()
 		end
 	end
 
-	OrderHallTalentFrame:StripTextures()
-	OrderHallTalentFrame:SetTemplate("Transparent")
+	T.SkinFrame(OrderHallTalentFrame)
 	OrderHallTalentFrame.NineSlice:Hide()
-	OrderHallTalentFrame.OverlayElements:Hide()
-	T.SkinCloseButton(OrderHallTalentFrameCloseButton)
+	-- OrderHallTalentFrame.Background:SetAlpha(0)
 
 	hooksecurefunc(OrderHallTalentFrame, "SetUseThemedTextures", function(self)
 		self.Background:ClearAllPoints()
