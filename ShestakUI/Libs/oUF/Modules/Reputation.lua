@@ -35,23 +35,7 @@ local function GetReputation()
 	local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
 	local friendshipID = repInfo and repInfo.friendshipFactionID
 
-	if C_Reputation.IsFactionParagon(factionID) then
-		local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
-		if(value) then
-			cur = value % nextThreshold
-			min = 0
-			max = nextThreshold
-			pendingReward = hasRewardPending
-			standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
-			standingText = PARAGON
-		end
-	elseif C_Reputation.IsMajorFaction(factionID) then
-		local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
-		min, max = 0, majorFactionData.renownLevelThreshold
-		cur = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
-		standingID = MAX_REPUTATION_REACTION + 2
-		standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
-	elseif friendshipID and friendshipID > 0 then
+	if friendshipID and friendshipID > 0 then
 		local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
 		local currentRank = rankInfo and rankInfo.currentLevel
 		local maxRank = rankInfo and rankInfo.maxLevel
@@ -66,6 +50,22 @@ local function GetReputation()
 			min, max, cur = 0, 1, 1 -- force a full bar when maxed out
 		end
 		standingID = 5 -- force friends' color
+	elseif C_Reputation.IsMajorFaction(factionID) then
+		local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
+		min, max = 0, majorFactionData.renownLevelThreshold
+		cur = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
+		standingID = MAX_REPUTATION_REACTION + 2
+		standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
+	elseif C_Reputation.IsFactionParagon(factionID) then
+		local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+		if(value) then
+			cur = value % nextThreshold
+			min = 0
+			max = nextThreshold
+			pendingReward = hasRewardPending
+			standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
+			standingText = PARAGON
+		end
 	end
 
 	max = max - min
@@ -79,8 +79,8 @@ local function GetReputation()
 	return cur, max, name, factionID, standingID, standingText, pendingReward
 end
 
-oUF.colors.reaction[MAX_REPUTATION_REACTION + 1] = {0.64, 0.2, 0.93}	-- paragon color
-oUF.colors.reaction[MAX_REPUTATION_REACTION + 2] = {0, 0.5, 0.9}		-- major faction color
+oUF.colors.reaction[MAX_REPUTATION_REACTION + 1] = oUF:CreateColor(0.64, 0.2, 0.93)	-- paragon color
+oUF.colors.reaction[MAX_REPUTATION_REACTION + 2] = oUF:CreateColor(0, 0.5, 0.9)		-- major faction color
 
 -- Changed tooltip for ShestakUI
 local function UpdateTooltip(element)
@@ -138,9 +138,9 @@ local function Update(self, _, unit)
 		element:SetValue(cur)
 
 		if(element.colorStanding) then
-			local colors = self.colors.reaction[standingID]
-			element:SetStatusBarColor(colors[1], colors[2], colors[3])
-			element.bg:SetVertexColor(colors[1], colors[2], colors[3], 0.2)	-- ShestakUI
+			local color = self.colors.reaction[standingID]
+			element:SetStatusBarColor(color.r, color.g, color.b)
+			element.bg:SetVertexColor(color.r, color.g, color.b, 0.2)	-- ShestakUI
 		end
 
 		if(element.Reward) then
