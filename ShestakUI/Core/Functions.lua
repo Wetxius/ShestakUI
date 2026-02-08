@@ -4,6 +4,7 @@ local T, C, L = unpack(ShestakUI)
 --	Number value function
 ----------------------------------------------------------------------------------------
 T.Round = function(number, decimals)
+	if not canaccessvalue(number) then return number end
 	if not decimals then decimals = 0 end
 	if decimals and decimals > 0 then
 		local mult = 10 ^ decimals
