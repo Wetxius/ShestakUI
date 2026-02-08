@@ -32,8 +32,8 @@ ExtraAbilityContainer:SetScript("OnShow", nil)
 ExtraAbilityContainer:SetScript("OnUpdate", nil)
 ExtraAbilityContainer.OnUpdate = nil -- remove BaseLayoutMixin.OnUpdate
 ExtraAbilityContainer.IsLayoutFrame = nil -- dont let it get readded
-ExtraAbilityContainer.HighlightSystem = T.dummy
-ExtraAbilityContainer.ClearHighlight = T.dummy
+ExtraAbilityContainer.HighlightSystem = T.dummy -- NOTE: This cause taint when open edit mode (How to fix?)
+ExtraAbilityContainer.ClearHighlight = T.dummy -- NOTE: This cause taint when open edit mode (How to fix?)
 
 -- Zone Ability button
 local zoneAnchor = CreateFrame("Frame", "ZoneButtonAnchor", UIParent)
