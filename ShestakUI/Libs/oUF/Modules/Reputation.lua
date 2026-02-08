@@ -35,7 +35,25 @@ local function GetReputation()
 	local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
 	local friendshipID = repInfo and repInfo.friendshipFactionID
 
-	if friendshipID and friendshipID > 0 then
+	if C_Reputation.IsFactionParagonForCurrentPlayer(factionID) then
+		if C_Reputation.IsFactionParagon(factionID) then
+			local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+			if(value) then
+				cur = value % nextThreshold
+				min = 0
+				max = nextThreshold
+				pendingReward = hasRewardPending
+				standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
+				standingText = PARAGON
+			end
+		end
+	elseif C_Reputation.IsMajorFaction(factionID) then
+		local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
+		min, max = 0, majorFactionData.renownLevelThreshold
+		cur = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
+		standingID = MAX_REPUTATION_REACTION + 2
+		standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
+	elseif friendshipID and friendshipID > 0 then
 		local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
 		local currentRank = rankInfo and rankInfo.currentLevel
 		local maxRank = rankInfo and rankInfo.maxLevel
@@ -50,22 +68,6 @@ local function GetReputation()
 			min, max, cur = 0, 1, 1 -- force a full bar when maxed out
 		end
 		standingID = 5 -- force friends' color
-	elseif C_Reputation.IsMajorFaction(factionID) then
-		local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
-		min, max = 0, majorFactionData.renownLevelThreshold
-		cur = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
-		standingID = MAX_REPUTATION_REACTION + 2
-		standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
-	elseif C_Reputation.IsFactionParagon(factionID) then
-		local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
-		if(value) then
-			cur = value % nextThreshold
-			min = 0
-			max = nextThreshold
-			pendingReward = hasRewardPending
-			standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
-			standingText = PARAGON
-		end
 	end
 
 	max = max - min

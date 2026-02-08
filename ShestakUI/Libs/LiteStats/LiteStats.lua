@@ -1237,9 +1237,24 @@ if experience.enabled then
 				if data then
 					repname, standing, minrep, maxrep, currep, factionID = data.name, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.factionID
 					if not factionID then factionID = 0 end
-					local reputationInfo = C_GossipInfo.GetFriendshipReputation(factionID)
-					local friendshipID = reputationInfo and reputationInfo.friendshipFactionID
-					if friendshipID and friendshipID > 0 then
+					local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
+					local friendshipID = repInfo and repInfo.friendshipFactionID
+					if C_Reputation.IsFactionParagonForCurrentPlayer(factionID) then
+						local value, nextThreshold = C_Reputation.GetFactionParagonInfo(factionID)
+						if value then
+							currep = value % nextThreshold
+							minrep = 0
+							maxrep = nextThreshold
+							standing = 8
+							standingText = PARAGON
+						end
+					elseif C_Reputation.IsMajorFaction(factionID) then
+						local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
+						minrep, maxrep = 0, majorFactionData.renownLevelThreshold
+						currep = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
+						standing = 7
+						standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
+					elseif friendshipID and friendshipID > 0 then
 						local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
 						local currentRank = rankInfo and rankInfo.currentLevel
 						local maxRank = rankInfo and rankInfo.maxLevel
@@ -1255,21 +1270,6 @@ if experience.enabled then
 							minrep, maxrep, currep = 0, 1, 1
 						end
 						standing = 5
-					elseif C_Reputation.IsMajorFaction(factionID) then
-						local majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
-						minrep, maxrep = 0, majorFactionData.renownLevelThreshold
-						currep = C_MajorFactions.HasMaximumRenown(factionID) and majorFactionData.renownLevelThreshold or majorFactionData.renownReputationEarned or 0
-						standing = 7
-						standingText = RENOWN_LEVEL_LABEL:format(majorFactionData.renownLevel)
-					else
-						local value, nextThreshold = C_Reputation.GetFactionParagonInfo(factionID)
-						if value then
-							currep = value % nextThreshold
-							minrep = 0
-							maxrep = nextThreshold
-							standing = 8
-							standingText = PARAGON
-						end
 					end
 				end
 				local color = {}
@@ -1341,8 +1341,11 @@ if experience.enabled then
 				if repname == NONE then GameTooltip:Hide() return end
 				local desc, war, watched
 				for i = 1, C_Reputation.GetNumFactions() do
-					_, desc, _, _, _, _, war, _, _, _, _, watched = C_Reputation.GetFactionDataByIndex(i)
-					if watched then break end
+					local data  = C_Reputation.GetFactionDataByIndex(i)
+					if data then
+						desc, war, watched = data.description, data.atWarWith, data.isWatched
+						if watched then break end
+					end
 				end
 				GameTooltip:AddLine(repname, tthead.r, tthead.g, tthead.b)
 				GameTooltip:AddLine(desc, ttsubh.r, ttsubh.g, ttsubh.b, 1)
