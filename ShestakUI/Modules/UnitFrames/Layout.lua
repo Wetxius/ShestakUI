@@ -313,7 +313,7 @@ local function Shared(self, unit)
 			end
 		end
 
-		if C.unitframe_class_bar.shard and T.class == "DEMONHUNTER" then
+		if C.unitframe_class_bar.soul and T.class == "DEMONHUNTER" then
 			self.SoulFragments = CreateFrame("StatusBar", self:GetName().."_SoulFragments", self)
 			self.SoulFragments:CreateBackdrop("Default")
 			self.SoulFragments:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
