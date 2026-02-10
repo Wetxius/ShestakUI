@@ -13,7 +13,9 @@ EMPTY_SOCKET_BLUE = "|cff6060ff"..EMPTY_SOCKET_BLUE.."|r"
 if T.client ~= "ruRU" then return end
 
 GUILD_ACHIEVEMENT = "Уведомл. для гильдии"
-ADDON_LIST_PERFORMANCE_PEAK_CPU = "Макс. нагрузка ЦП: %s";
+ADDON_LIST_PERFORMANCE_PEAK_CPU = "Макс. нагрузка ЦП: %s"
+COOLDOWN_DURATION_HOURS = "%dч"
+COOLDOWN_DURATION_MIN = "%dм"
 
 local ttext
 local replace = {
