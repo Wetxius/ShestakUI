@@ -194,6 +194,7 @@ if IsWetxius then
 	C["skins"].minimap_buttons = true
 	C["skins"].bigwigs = true
 	C["skins"].details = true
+	C["skins"].rarescanner = true
 	C["unitframe"].castbar_icon = true
 	C["unitframe"].plugins_enemy_spec = true
 	C["raidframe"].solo_mode = true
@@ -241,6 +242,8 @@ if IsWetxius then
 	C["automation"].auto_role = true
 	C["automation"].tab_binder = true
 	C["automation"].open_items = true
+	C["automation"].minimap_zoom = true
+	C["automation"].reputation = true
 	C["automation"].auto_collapse = "SCENARIO"
 	C["enemycooldown"].show_inparty = true
 	C["enemycooldown"].class_color = true

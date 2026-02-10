@@ -571,6 +571,8 @@ C["automation"] = {
 	["open_items"] = false,						-- Auto opening of items in bag
 	["resurrection"] = false,					-- Auto confirm resurrection
 	["summon"] = false,							-- Auto confirm summon after 10 sec
+	["minimap_zoom"] = false,					-- Auto change minimap zoom level when moving
+	["reputation"] = false,						-- Auto track reputation gain
 	["whisper_invite"] = false,					-- Auto invite when whisper keyword
 	["invite_keyword"] = "inv +",				-- List of keyword (separated by space)
 }

@@ -1862,43 +1862,43 @@ do
 	local plugins_aura_watch = ns.CreateCheckBox(parent, "plugins_aura_watch")
 	plugins_aura_watch:SetPoint("TOPLEFT", plugins_debuffhighlight, "BOTTOMLEFT", 0, 0)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", plugins_aura_watch, "RIGHT", 400, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["raidframe"] then
-			C.options["raidframe"] = {}
-		end
-		if not C.options["raidframe"]["plugins_aura_watch_list"] then
-			C.options["raidframe"]["plugins_aura_watch_list"] = {}
-		end
-		BuildSpellList(C.options["raidframe"]["plugins_aura_watch_list"])
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", plugins_aura_watch, "RIGHT", 400, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["raidframe"] then
+			-- C.options["raidframe"] = {}
+		-- end
+		-- if not C.options["raidframe"]["plugins_aura_watch_list"] then
+			-- C.options["raidframe"]["plugins_aura_watch_list"] = {}
+		-- end
+		-- BuildSpellList(C.options["raidframe"]["plugins_aura_watch_list"])
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = plugins_aura_watch:GetChecked()
-		ListButton:SetEnabled(shown)
-	end
+	-- local function toggleListButton()
+		-- local shown = plugins_aura_watch:GetChecked()
+		-- ListButton:SetEnabled(shown)
+	-- end
 
-	plugins_aura_watch:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- plugins_aura_watch:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
 	local plugins_aura_watch_timer = ns.CreateCheckBox(parent, "plugins_aura_watch_timer")
 	plugins_aura_watch_timer:SetPoint("TOPLEFT", plugins_aura_watch, "BOTTOMLEFT", 20, 0)
 
-	local plugins_debuffhighlight_icon = ns.CreateCheckBox(parent, "plugins_debuffhighlight_icon")
-	plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_aura_watch_timer, "BOTTOMLEFT", 0, 0)
+	-- local plugins_debuffhighlight_icon = ns.CreateCheckBox(parent, "plugins_debuffhighlight_icon")
+	-- plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_aura_watch_timer, "BOTTOMLEFT", 0, 0)
 
-	local plugins_pvp_debuffs = ns.CreateCheckBox(parent, "plugins_pvp_debuffs")
-	plugins_pvp_debuffs:SetPoint("TOPLEFT", plugins_debuffhighlight_icon, "BOTTOMLEFT", 0, 0)
+	-- local plugins_pvp_debuffs = ns.CreateCheckBox(parent, "plugins_pvp_debuffs")
+	-- plugins_pvp_debuffs:SetPoint("TOPLEFT", plugins_debuffhighlight_icon, "BOTTOMLEFT", 0, 0)
 
 	plugins_aura_watch.children = {plugins_aura_watch_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
 
 	local plugins_buffs_timer = ns.CreateCheckBox(parent, "plugins_buffs_timer")
-	plugins_buffs_timer:SetPoint("TOPLEFT", plugins_pvp_debuffs, "BOTTOMLEFT", -20, 0)
+	plugins_buffs_timer:SetPoint("TOPLEFT", plugins_aura_watch_timer, "BOTTOMLEFT", -20, 0)
 
 	local plugins_healcomm = ns.CreateCheckBox(parent, "plugins_healcomm", L_GUI_UF_PLUGINS_HEALCOMM)
 	plugins_healcomm:SetPoint("TOPLEFT", plugins_buffs_timer, "BOTTOMLEFT", 0, 0)
@@ -3077,8 +3077,14 @@ do
 	local summon = ns.CreateCheckBox(parent, "summon")
 	summon:SetPoint("TOPLEFT", resurrection, "BOTTOMLEFT", 0, 0)
 
+	local minimap_zoom = ns.CreateCheckBox(parent, "minimap_zoom")
+	minimap_zoom:SetPoint("TOPLEFT", summon, "BOTTOMLEFT", 0, 0)
+
+	local reputation = ns.CreateCheckBox(parent, "reputation")
+	reputation:SetPoint("TOPLEFT", minimap_zoom, "BOTTOMLEFT", 0, 0)
+
 	local whisper_invite = ns.CreateCheckBox(parent, "whisper_invite")
-	whisper_invite:SetPoint("TOPLEFT", summon, "BOTTOMLEFT", 0, 0)
+	whisper_invite:SetPoint("TOPLEFT", reputation, "BOTTOMLEFT", 0, 0)
 	whisper_invite.needsReload = false
 
 	local invite_keyword = ns.CreateEditBox(parent, "invite_keyword", true)

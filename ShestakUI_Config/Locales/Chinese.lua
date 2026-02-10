@@ -180,7 +180,7 @@ L_GUI_UF_PLUGINS_RUNE_BAR = "符文"
 L_GUI_UF_PLUGINS_TOTEM_BAR = "图腾"
 L.unitframe_class_bar_totem_other = "其他职业图腾"
 L.unitframe_class_bar_essence = "精华"
-L.unitframe_class_bar_soul = "Enable Soul fragments bar" -- Need review
+L.unitframe_class_bar_soul = "灵魂碎片(恶魔猎手)"
 
 -- Raid Frames options
 L_GUI_UF_RAIDFRAMES_SUBTEXT = "定制队伍/团队框架"
@@ -551,6 +551,8 @@ L.automation_buff_on_scroll_desc = "指定Buff缺失时使用鼠标滚轮施放"
 L.automation_open_items = "自动打开背包中的封装物品"
 L.automation_resurrection = "自动确认复活"
 L.automation_summon = "自动确认召唤"
+L.automation_minimap_zoom = "Сhange minimap zoom level when moving" -- Needs review
+L.automation_reputation = "Auto track reputation gain" -- Needs review
 L.automation_whisper_invite = "密语自动邀请"
 L.automation_invite_keyword = "添加关键词(需加空隔键)"
 L.automation_invite_keyword_desc = "通过关键词自动邀请对方进组"
