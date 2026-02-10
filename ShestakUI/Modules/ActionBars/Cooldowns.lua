@@ -30,6 +30,7 @@ local function Timer_ForceUpdate(self)
 end
 
 local function Timer_OnSizeChanged(self, width)
+	if not canaccessvalue(width) then return end
 	local fontScale = T.Round(width) / 40
 	if fontScale == self.fontScale then
 		return
@@ -164,6 +165,8 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 	if not canaccessvalue(start) then
 		cooldown:SetCountdownFont("ShestakUI_TimerFont")
 		cooldown:GetRegions():SetAlpha(1)
+		cooldown:SetCountdownAbbrevThreshold(60)
+		deactivateDisplay(cooldown)
 		return
 	end
 
