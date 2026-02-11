@@ -108,9 +108,7 @@ local function Update(self, event, unit)
 		return
 	end
 
-	-- local aura = C_UnitAuras.GetAuraDataByIndex(unit, 1, "HARMFUL|RAID_PLAYER_DISPELLABLE")	-- BETA should be enable in 12.0.1
-	-- local aura = C_UnitAuras.GetAuraDataByIndex(unit, 1, "HARMFUL|RAID")
-	local aura = C_UnitAuras.GetAuraDataByIndex(unit, 1, "HARMFUL")
+	local aura = C_UnitAuras.GetAuraDataByIndex(unit, 1, "HARMFUL|RAID_PLAYER_DISPELLABLE")
 	local auraInstanceID = aura and aura.auraInstanceID or nil
 
 	if auraInstanceID then
