@@ -1041,13 +1041,17 @@ T.PostUpdateRaidButton = function(element, button, unit, data)
 		button:SetBackdropBorderColor(1, 0, 0)
 	end
 
-	if data.expirationTime and C.raidframe.plugins_aura_watch_timer then
-		button.remaining:Show()
-		button:SetScript("OnUpdate", T.CreateRaidAuraTimer)
-	else
-		button.remaining:Hide()
-		button:SetScript("OnUpdate", nil)
+	if not C.aura.plugins_aura_watch_timer then
+		button.Cooldown:SetHideCountdownNumbers(true)
 	end
+
+	-- if data.expirationTime and C.raidframe.plugins_aura_watch_timer then
+		-- button.remaining:Show()
+		-- button:SetScript("OnUpdate", T.CreateRaidAuraTimer)
+	-- else
+		-- button.remaining:Hide()
+		-- button:SetScript("OnUpdate", nil)
+	-- end
 end
 
 T.PostUpdateGapButton = function(_, _, button)
