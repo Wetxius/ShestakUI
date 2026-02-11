@@ -868,6 +868,7 @@ T.PostCreateIcon = function(element, button)
 		button.Cooldown:SetHideCountdownNumbers(true)
 	end
 	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+	button.Cooldown:SetCountdownAbbrevThreshold(60)
 
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
 	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)

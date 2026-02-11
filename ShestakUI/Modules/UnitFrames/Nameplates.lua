@@ -274,6 +274,7 @@ local AurasPostCreateIcon = function(element, button)
 		button.Cooldown:SetHideCountdownNumbers(true)
 	end
 	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+	button.Cooldown:SetCountdownAbbrevThreshold(60)
 
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
@@ -296,7 +297,7 @@ end
 local AurasPostUpdateIcon = function(_, button, unit, data)
 	if not UnitIsFriend("player", unit) then
 		if data.isHarmfulAura then
-			if C.nameplate.track_debuffs and data.isPlayerAura or data.sourceUnit == "pet" then
+			if C.nameplate.track_debuffs and data.isPlayerAura or (canaccessvalue(data.sourceUnit) and data.sourceUnit == "pet") then
 				if C.nameplate.track_buffs then
 					SetColorBorder(button, unpack(C.media.border_color))
 				end
