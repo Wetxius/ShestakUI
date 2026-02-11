@@ -215,6 +215,9 @@ local function UpdateAuras(self, event, unit, updateInfo)
 
 	local auras = self.Auras
 	if(auras) then
+		isFullUpdate = auras.needFullUpdate or isFullUpdate
+		auras.needFullUpdate = false
+
 		--[[ Callback: Auras:PreUpdate(unit, isFullUpdate)
 		Called before the element has been updated.
 
@@ -499,6 +502,9 @@ local function UpdateAuras(self, event, unit, updateInfo)
 
 	local buffs = self.Buffs
 	if(buffs) then
+		isFullUpdate = buffs.needFullUpdate or isFullUpdate
+		buffs.needFullUpdate = false
+
 		if(buffs.PreUpdate) then buffs:PreUpdate(unit, isFullUpdate) end
 
 		local buffsChanged = false
@@ -608,6 +614,9 @@ local function UpdateAuras(self, event, unit, updateInfo)
 
 	local debuffs = self.Debuffs
 	if(debuffs) then
+		isFullUpdate = debuffs.needFullUpdate or isFullUpdate
+		debuffs.needFullUpdate = false
+
 		if(debuffs.PreUpdate) then debuffs:PreUpdate(unit, isFullUpdate) end
 
 		local debuffsChanged = false
@@ -760,6 +769,7 @@ local function Enable(self)
 			auras.anchoredButtons = 0
 			auras.visibleButtons = 0
 			auras.tooltipAnchor = auras.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
+			auras.needFullUpdate = true
 
 			if(not auras.dispelColorCurve) then
 				auras.dispelColorCurve = C_CurveUtil.CreateColorCurve()
@@ -785,6 +795,7 @@ local function Enable(self)
 			buffs.anchoredButtons = 0
 			buffs.visibleButtons = 0
 			buffs.tooltipAnchor = buffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
+			buffs.needFullUpdate = true
 
 			if(not buffs.dispelColorCurve) then
 				buffs.dispelColorCurve = C_CurveUtil.CreateColorCurve()
@@ -810,6 +821,7 @@ local function Enable(self)
 			debuffs.anchoredButtons = 0
 			debuffs.visibleButtons = 0
 			debuffs.tooltipAnchor = debuffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
+			debuffs.needFullUpdate = true
 
 			if(not debuffs.dispelColorCurve) then
 				debuffs.dispelColorCurve = C_CurveUtil.CreateColorCurve()
