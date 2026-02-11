@@ -2457,73 +2457,73 @@ do
 	track_debuffs:SetPoint("TOPLEFT", clamp, "BOTTOMLEFT", 0, 0)
 	track_debuffs.Text:SetWidth(350)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", track_debuffs, "RIGHT", 400, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:RegisterForClicks("AnyUp")
-	ListButton:SetScript("OnClick", function(_, btn)
-		if not C.options["nameplate"] then
-			C.options["nameplate"] = {}
-		end
-		if btn == "LeftButton" then
-			if not C.options["nameplate"]["debuffs_list"] then
-				C.options["nameplate"]["debuffs_list"] = {}
-			end
-			BuildSpellList(C.options["nameplate"]["debuffs_list"])
-		else
-			if not C.options["nameplate"]["ignore_list"] then
-				C.options["nameplate"]["ignore_list"] = {}
-			end
-			BuildSpellList(C.options["nameplate"]["ignore_list"])
-		end
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", track_debuffs, "RIGHT", 400, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:RegisterForClicks("AnyUp")
+	-- ListButton:SetScript("OnClick", function(_, btn)
+		-- if not C.options["nameplate"] then
+			-- C.options["nameplate"] = {}
+		-- end
+		-- if btn == "LeftButton" then
+			-- if not C.options["nameplate"]["debuffs_list"] then
+				-- C.options["nameplate"]["debuffs_list"] = {}
+			-- end
+			-- BuildSpellList(C.options["nameplate"]["debuffs_list"])
+		-- else
+			-- if not C.options["nameplate"]["ignore_list"] then
+				-- C.options["nameplate"]["ignore_list"] = {}
+			-- end
+			-- BuildSpellList(C.options["nameplate"]["ignore_list"])
+		-- end
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local tooltip_show = function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 3, 3)
-		GameTooltip:ClearLines()
-		GameTooltip:SetText(RIGHT_BUTTON_STRING..": "..IGNORE)
-	end
+	-- local tooltip_show = function(self)
+		-- GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 3, 3)
+		-- GameTooltip:ClearLines()
+		-- GameTooltip:SetText(RIGHT_BUTTON_STRING..": "..IGNORE)
+	-- end
 
-	ListButton:HookScript("OnEnter", tooltip_show)
-	ListButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
+	-- ListButton:HookScript("OnEnter", tooltip_show)
+	-- ListButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
-	local function toggleListButton()
-		local shown = track_debuffs:GetChecked()
-		ListButton:SetEnabled(shown)
-	end
+	-- local function toggleListButton()
+		-- local shown = track_debuffs:GetChecked()
+		-- ListButton:SetEnabled(shown)
+	-- end
 
-	track_debuffs:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- track_debuffs:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
 	local track_buffs = ns.CreateCheckBox(parent, "track_buffs", L_GUI_NAMEPLATE_SHOW_BUFFS)
 	track_buffs:SetPoint("TOPLEFT", track_debuffs, "BOTTOMLEFT", 0, 0)
 
-	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	ListButton:SetPoint("LEFT", track_buffs, "RIGHT", 400, 0)
-	ListButton:SetSize(100, 23)
-	ListButton:SetText(ADD)
-	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton:SetScript("OnClick", function()
-		if not C.options["nameplate"] then
-			C.options["nameplate"] = {}
-		end
-		if not C.options["nameplate"]["buffs_list"] then
-			C.options["nameplate"]["buffs_list"] = {}
-		end
-		BuildSpellList(C.options["nameplate"]["buffs_list"])
-	end)
-	tinsert(ns.buttons, ListButton)
+	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	-- ListButton:SetPoint("LEFT", track_buffs, "RIGHT", 400, 0)
+	-- ListButton:SetSize(100, 23)
+	-- ListButton:SetText(ADD)
+	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	-- ListButton:SetScript("OnClick", function()
+		-- if not C.options["nameplate"] then
+			-- C.options["nameplate"] = {}
+		-- end
+		-- if not C.options["nameplate"]["buffs_list"] then
+			-- C.options["nameplate"]["buffs_list"] = {}
+		-- end
+		-- BuildSpellList(C.options["nameplate"]["buffs_list"])
+	-- end)
+	-- tinsert(ns.buttons, ListButton)
 
-	local function toggleListButton()
-		local shown = track_buffs:GetChecked()
-		ListButton:SetEnabled(shown)
-	end
+	-- local function toggleListButton()
+		-- local shown = track_buffs:GetChecked()
+		-- ListButton:SetEnabled(shown)
+	-- end
 
-	track_buffs:HookScript("OnClick", toggleListButton)
-	ListButton:HookScript("OnShow", toggleListButton)
+	-- track_buffs:HookScript("OnClick", toggleListButton)
+	-- ListButton:HookScript("OnShow", toggleListButton)
 
 	local auras_size = ns.CreateNumberSlider(parent, "auras_size", nil, nil, 0, 35 / multScale, 1, true, L_GUI_NAMEPLATE_DEBUFFS_SIZE)
 	auras_size:SetPoint("TOPLEFT", track_buffs, "BOTTOMLEFT", 0, -20)
