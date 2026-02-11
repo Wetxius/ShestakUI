@@ -152,6 +152,7 @@ end
 
 local font = CreateFont("ShestakUI_TimerFont")
 font:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+font:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
 
 hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, modRate)
 	if cooldown.noCooldownCount or cooldown:IsForbidden() or hideNumbers[cooldown] then return end
@@ -162,29 +163,30 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 		return
 	end
 
-	if not canaccessvalue(start) then
+	-- if not canaccessvalue(start) then
 		cooldown:SetCountdownFont("ShestakUI_TimerFont")
-		cooldown:GetRegions():SetAlpha(1)
 		cooldown:SetCountdownAbbrevThreshold(60)
-		deactivateDisplay(cooldown)
-		return
-	end
+		local textCD = cooldown:GetRegions()
+		textCD:SetAlpha(1)
+		textCD:SetPoint("CENTER", 1, 0)
+		-- deactivateDisplay(cooldown)
+		-- return
+	-- end
 
-	local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
+	-- local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
+	-- if show then
+		-- local parent = cooldown:GetParent()
+		-- if parent and parent.chargeCooldown == cooldown then return end
 
-	if show then
-		local parent = cooldown:GetParent()
-		if parent and parent.chargeCooldown == cooldown then return end
-
-		local timer = cooldown.timer or Timer_Create(cooldown)
-		timer.start = start
-		timer.duration = duration
-		timer.enabled = true
-		timer.nextUpdate = 0
-		if timer and timer.fontScale and timer.fontScale >= 0.5 then timer:Show() end
-	else
-		deactivateDisplay(cooldown)
-	end
+		-- local timer = cooldown.timer or Timer_Create(cooldown)
+		-- timer.start = start
+		-- timer.duration = duration
+		-- timer.enabled = true
+		-- timer.nextUpdate = 0
+		-- if timer and timer.fontScale and timer.fontScale >= 0.5 then timer:Show() end
+	-- else
+		-- deactivateDisplay(cooldown)
+	-- end
 end)
 
 hooksecurefunc(Cooldown_MT, "Clear", deactivateDisplay)

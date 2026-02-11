@@ -276,6 +276,9 @@ local AurasPostCreateIcon = function(element, button)
 	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 	button.Cooldown:SetCountdownAbbrevThreshold(60)
 
+	local textCD = button.Cooldown:GetRegions()
+	textCD:SetPoint("CENTER", button, "CENTER", 1, 0)
+
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)

@@ -870,6 +870,9 @@ T.PostCreateIcon = function(element, button)
 	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 	button.Cooldown:SetCountdownAbbrevThreshold(60)
 
+	local textCD = button.Cooldown:GetRegions()
+	textCD:SetPoint("CENTER", button, "CENTER", 1, 0)
+
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
 	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
