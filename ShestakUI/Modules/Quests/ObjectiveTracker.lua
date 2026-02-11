@@ -341,7 +341,7 @@ local function SkinProgressBar(tracker, key)
 		bar:CreateBackdrop("Transparent")
 
 		label:ClearAllPoints()
-		label:SetPoint("CENTER", 0, -1)
+		label:SetPoint("CENTER", 0, 0)
 		label:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 		label:SetDrawLayer("OVERLAY")
 
