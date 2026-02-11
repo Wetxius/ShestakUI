@@ -850,6 +850,10 @@ T.AuraTrackerTime = function(self, elapsed)
 	end
 end
 
+local font = CreateFont("ShestakUI_AuraTimerFont")
+font:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+font:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
 T.PostCreateIcon = function(element, button)
 	button:SetTemplate("Default")
 
@@ -860,7 +864,10 @@ T.PostCreateIcon = function(element, button)
 
 	button.Cooldown.noCooldownCount = true
 	button.Cooldown:SetDrawEdge(false)
-	button.Cooldown:SetHideCountdownNumbers(true)
+	if not C.aura.show_timer then
+		button.Cooldown:SetHideCountdownNumbers(true)
+	end
+	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
 	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -959,7 +966,9 @@ T.PostUpdateIcon = function(element, button, unit, data)
 		else
 			if C.aura.debuff_color_type then
 				local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
-				button:SetBackdropBorderColor(color:GetRGBA())
+				if color then
+					button:SetBackdropBorderColor(color:GetRGBA())
+				end
 				button.Icon:SetDesaturated(false)
 			else
 				button:SetBackdropBorderColor(1, 0, 0)
@@ -980,7 +989,7 @@ T.PostUpdateIcon = function(element, button, unit, data)
 	if data.expirationTime and C.aura.show_timer then
 		button.remaining:Show()
 		-- button.timeLeft = data.expirationTime
-		button:SetScript("OnUpdate", T.CreateAuraTimer)
+		-- button:SetScript("OnUpdate", T.CreateAuraTimer)
 	else
 		button.remaining:Hide()
 		-- button.timeLeft = math.huge
@@ -1021,7 +1030,9 @@ end
 T.PostUpdateRaidButton = function(element, button, unit, data)
 	if C.aura.debuff_color_type then
 		local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
-		button:SetBackdropBorderColor(color:GetRGBA())
+		if color then
+			button:SetBackdropBorderColor(color:GetRGBA())
+		end
 	else
 		button:SetBackdropBorderColor(1, 0, 0)
 	end

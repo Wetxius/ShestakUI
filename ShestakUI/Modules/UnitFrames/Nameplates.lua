@@ -270,7 +270,10 @@ local AurasPostCreateIcon = function(element, button)
 
 	button.Cooldown.noCooldownCount = true
 	button.Cooldown:SetDrawEdge(false)
-	button.Cooldown:SetHideCountdownNumbers(true)
+	if not C.aura.show_timer then
+		button.Cooldown:SetHideCountdownNumbers(true)
+	end
+	button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
@@ -313,7 +316,7 @@ local AurasPostUpdateIcon = function(_, button, unit, data)
 	if data.expirationTime and C.aura.show_timer then
 		button.remaining:Show()
 		-- button.timeLeft = data.expirationTime
-		button:SetScript("OnUpdate", T.CreateAuraTimer)
+		-- button:SetScript("OnUpdate", T.CreateAuraTimer)
 	else
 		button.remaining:Hide()
 		-- button.timeLeft = math.huge
