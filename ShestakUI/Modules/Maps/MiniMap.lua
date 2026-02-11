@@ -372,7 +372,7 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 			MinimapCluster.Tracking.Button.menu:SetPoint("TOPRIGHT", Minimap, "LEFT", -4, 0)
 		end
 	elseif button == "LeftButton" then
-		Minimap.OnClick(self)
+		-- Minimap.OnClick(self) -- BETA
 	end
 end)
 
