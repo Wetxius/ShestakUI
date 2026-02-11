@@ -163,15 +163,12 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 		return
 	end
 
-	-- if not canaccessvalue(start) then
-		cooldown:SetCountdownFont("ShestakUI_TimerFont")
-		cooldown:SetCountdownAbbrevThreshold(60)
-		local textCD = cooldown:GetRegions()
-		textCD:SetAlpha(1)
-		textCD:SetPoint("CENTER", 1, 0)
-		-- deactivateDisplay(cooldown)
-		-- return
-	-- end
+	cooldown:SetCountdownFont("ShestakUI_TimerFont")
+	cooldown:SetCountdownAbbrevThreshold(60)
+	local textCD = cooldown:GetRegions()
+	textCD:SetPoint("CENTER", 1, 0)
+	-- FIXME actionbar keybind is overlap
+
 
 	-- local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 	-- if show then
