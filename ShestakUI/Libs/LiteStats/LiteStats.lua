@@ -1680,7 +1680,7 @@ end
 if ping.enabled then
 	Inject("Ping", {
 		OnLoad = function(self)
-			-- self:RegisterEvent("MINIMAP_PING") -- BETA
+			-- self:RegisterEvent("MINIMAP_PING") -- BETA not event now and callback is secret
 			self.animGroup = self.text:CreateAnimationGroup()
 			self.anim = self.animGroup:CreateAnimation("Alpha")
 			self.animGroup:SetScript("OnFinished", function() self.text:Hide() end)

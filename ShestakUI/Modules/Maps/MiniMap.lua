@@ -355,7 +355,12 @@ frame:SetScript("OnEvent", function()
 	end
 end)
 
-Minimap:SetScript("OnMouseUp", function(self, button)
+local MinimapArea = CreateFrame("Frame", nil, Minimap)
+MinimapArea:SetPassThroughButtons("LeftButton")
+MinimapArea:SetPropagateMouseMotion(true)
+MinimapArea:SetAllPoints()
+
+MinimapArea:SetScript("OnMouseUp", function(self, button)
 	local position = MinimapAnchor:GetPoint()
 	if button == "RightButton" then
 		if position:match("LEFT") then
@@ -371,8 +376,6 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 		else
 			MinimapCluster.Tracking.Button.menu:SetPoint("TOPRIGHT", Minimap, "LEFT", -4, 0)
 		end
-	elseif button == "LeftButton" then
-		-- Minimap.OnClick(self) -- BETA
 	end
 end)
 
