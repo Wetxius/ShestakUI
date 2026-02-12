@@ -191,6 +191,9 @@ local function SkinSpell(widget)
 		widget.Icon:SkinIcon(true)
 		widget.Border:SetAlpha(0)
 		widget.DebuffBorder:SetAlpha(0)
+		if widget.StackCount then
+			widget.StackCount:SetParent(widget.Icon.b)
+		end
 		widget.styled = true
 	end
 	widget.IconMask:Hide()
