@@ -1275,6 +1275,33 @@ function T.SkinModelControl(frame)
 	end
 end
 
+do
+	local font = CreateFont("ShestakUI_AuraTimerFont")
+	font:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+	font:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	local font = CreateFont("ShestakUI_ActionBarTimerFont")
+	font:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+	font:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
+end
+
+function T.SkinCooldown(cooldown, name)
+	if name == "aura" then
+		cooldown:SetDrawEdge(false)
+		if not C.aura.show_timer then
+			cooldown:SetHideCountdownNumbers(true)
+		end
+		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+	elseif name == "actionbar" then
+		cooldown:SetCountdownFont("ShestakUI_ActionBarTimerFont")
+	end
+
+	cooldown:SetCountdownAbbrevThreshold(60)
+
+	local textCD = cooldown:GetRegions()
+	textCD:SetPoint("CENTER", 1, 0)
+end
+
 local LoadBlizzardSkin = CreateFrame("Frame")
 LoadBlizzardSkin:RegisterEvent("ADDON_LOADED")
 LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addonName)

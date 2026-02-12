@@ -99,7 +99,7 @@
 	<Script file="Modules\ActionBars\Style.lua"/>
 	<Script file="Modules\ActionBars\Range.lua"/>
 	<Script file="Modules\ActionBars\VehicleExit.lua"/>
-	<Script file="Modules\ActionBars\Cooldowns.lua"/>
+	<!-- <Script file="Modules\ActionBars\Cooldowns.lua"/> -->
 	<Script file="Modules\ActionBars\ExtraBar.lua"/>
 	<Script file="Modules\ActionBars\MicroMenu.lua"/>
 

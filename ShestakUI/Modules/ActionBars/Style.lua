@@ -76,6 +76,8 @@ local function StyleNormalButton(button, size)
 			count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
 			count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 			count:SetHeight(C.font.action_bars_font_size)
+			count:SetParent(button)
+			count:SetDrawLayer("ARTWORK") -- for cooldown
 		end
 
 		if btname then
@@ -99,6 +101,7 @@ local function StyleNormalButton(button, size)
 			hotkey:SetWidth(C.actionbar.button_size - 1)
 			hotkey:SetHeight(C.font.action_bars_font_size)
 			hotkey:SetParent(button)
+			hotkey:SetDrawLayer("ARTWORK") -- for cooldown
 			hooksecurefunc(hotkey, "SetVertexColor", function(_, _, g)
 				if g < 0.8 then
 					hotkey:SetVertexColor(ACTIONBAR_HOTKEY_FONT_COLOR:GetRGB())
@@ -186,6 +189,10 @@ local function StyleNormalButton(button, size)
 
 		if assist then
 			assist:SetScale(0.5)
+		end
+
+		if button.chargeCooldown then
+			button.chargeCooldown:SetInside(button)
 		end
 
 		if loc then
@@ -455,4 +462,11 @@ hooksecurefunc(AssistedCombatManager, "SetAssistedHighlightFrameShown", function
 			highlightFrame.InactiveTexture:SetSize(C.actionbar.button_size * 1.4, C.actionbar.button_size * 1.4)
 		end
 	end
+end)
+
+local Cooldown_MT = getmetatable(_G.ActionButton1Cooldown).__index
+hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown)
+	if cooldown:IsForbidden() then return end
+
+	T.SkinCooldown(cooldown, "actionbar")
 end)
