@@ -6,7 +6,7 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider)
 frame:SetPoint(unpack(C.position.micro_menu))
-frame:SetSize(250, 25)
+frame:SetSize(273, 25)
 
 if C.actionbar.micromenu_mouseover then
 	frame:SetAlpha(0)
