@@ -125,8 +125,13 @@ local function Shared(self, unit)
 		self.Health.value:SetPoint("TOP", self.Info, "BOTTOM", 0, -1)
 		self.Health.value:SetTextColor(1, 1, 1)
 
+		self.Health.short_value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		self.Health.short_value:SetPoint("TOP", self.Info, "BOTTOM", 0, -1)
+		self.Health.short_value:SetTextColor(1, 1, 1)
+
 		if C.raidframe.hide_health_value then
-			self.Health.value:SetAlpha(0)
+			self.Health.value:Hide()
+			self.Health.short_value:Hide()
 		end
 
 		self.Health.PostUpdate = T.PostUpdateRaidHealth

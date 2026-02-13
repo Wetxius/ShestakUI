@@ -115,6 +115,32 @@ local function Shared(self, unit)
 			self.Health.value:SetJustifyH("LEFT")
 		end
 
+		-- THis value for full health
+		self.Health.short_value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		if unit == "player" or unit == "pet" or unit == "focus" then
+			self.Health.short_value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+			self.Health.short_value:SetJustifyH("RIGHT")
+		elseif unit == "arena" then
+			if C.unitframe.arena_on_right == true then
+				self.Health.short_value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Health.short_value:SetJustifyH("LEFT")
+			else
+				self.Health.short_value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Health.short_value:SetJustifyH("RIGHT")
+			end
+		elseif unit == "boss" then
+			if C.unitframe.boss_on_right == true then
+				self.Health.short_value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Health.short_value:SetJustifyH("LEFT")
+			else
+				self.Health.short_value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Health.short_value:SetJustifyH("RIGHT")
+			end
+		else
+			self.Health.short_value:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+			self.Health.short_value:SetJustifyH("LEFT")
+		end
+
 		-- Power bar
 		self.Power = CreateFrame("StatusBar", self:GetName().."_Power", self)
 		if unit == "player" or unit == "target" or unit == "arena" or unit == "boss" then
@@ -176,6 +202,32 @@ local function Shared(self, unit)
 			else
 				self.Power.value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
 				self.Power.value:SetJustifyH("LEFT")
+			end
+
+			-- THis value for full power
+			self.Power.short_value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			if unit == "player" then
+				self.Power.short_value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+				self.Power.short_value:SetJustifyH("RIGHT")
+			elseif unit == "arena" then
+				if C.unitframe.arena_on_right == true then
+					self.Power.short_value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+					self.Power.short_value:SetJustifyH("LEFT")
+				else
+					self.Power.short_value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+					self.Power.short_value:SetJustifyH("RIGHT")
+				end
+			elseif unit == "boss" then
+				if C.unitframe.boss_on_right == true then
+					self.Power.short_value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+					self.Power.short_value:SetJustifyH("LEFT")
+				else
+					self.Power.short_value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+					self.Power.short_value:SetJustifyH("RIGHT")
+				end
+			else
+				self.Power.short_value:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+				self.Power.short_value:SetJustifyH("LEFT")
 			end
 		end
 	end

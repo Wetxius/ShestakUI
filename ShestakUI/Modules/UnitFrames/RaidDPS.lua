@@ -97,8 +97,17 @@ local function Shared(self, unit)
 		end
 		self.Health.value:SetTextColor(1, 1, 1)
 
+		self.Health.short_value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		if unit == "tank" then
+			self.Health.short_value:SetPoint("CENTER", self.Health, "CENTER", 0, -5)
+		else
+			self.Health.short_value:SetPoint("RIGHT", self.Health, "RIGHT", 1, 0)
+		end
+		self.Health.short_value:SetTextColor(1, 1, 1)
+
 		if unit == "raid" and C.raidframe.hide_health_value then
-			self.Health.value:SetAlpha(0)
+			self.Health.value:Hide()
+			self.Health.short_value:Hide()
 		end
 
 		self.Health.PostUpdate = T.PostUpdateRaidHealth
@@ -142,6 +151,10 @@ local function Shared(self, unit)
 			self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.Power.value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
 			self.Power.value:SetJustifyH("RIGHT")
+
+			self.Power.short_value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			self.Power.short_value:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
+			self.Power.short_value:SetJustifyH("RIGHT")
 		end
 	end
 
@@ -157,7 +170,7 @@ local function Shared(self, unit)
 		self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 4)
 	else
 		self.Info:SetPoint("LEFT", self.Health, "LEFT", 3, 0)
-		self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
+		self.Info:SetPoint("RIGHT", self.Health.value or self.Health, "LEFT", 0, 0)
 		self.Info:SetJustifyH("LEFT")
 	end
 	if suffix == "pet" or (suffix == "target" and unit ~= "tank") then
@@ -240,7 +253,7 @@ local function Shared(self, unit)
 	end
 
 	-- Debuff highlight
-	if C.raidframe.plugins_debuffhighlight then
+	if C.raidframe.plugins_debuffhighlight and not (suffix == "target" or suffix == "targettarget") then
 		self.DispelColor = self.Health:CreateTexture(nil, "OVERLAY")
 		self.DispelColor:SetAllPoints(self.Health)
 		self.DispelColor:SetTexture(C.media.highlight)
@@ -372,6 +385,7 @@ oUF:Factory(function(self)
 				"initial-width", T.Scale(raid_width),
 				"initial-height", T.Scale(raid_height),
 				"showRaid", true,
+				-- "showSolo", true, -- for test
 				"yOffset", T.Scale(-7),
 				"point", "TOPLEFT",
 				"groupFilter", tostring(i),
@@ -383,6 +397,7 @@ oUF:Factory(function(self)
 				"columnSpacing", T.Scale(7),
 				"columnAnchorPoint", "TOP"
 			)
+			-- raidgroup:SetVisibility("custom show") -- for test
 			raidgroup:SetVisibility("custom [@raid6,exists] show;hide")
 			if i == 1 then
 				_G["RaidDPSAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_dps))
