@@ -350,7 +350,7 @@ local OnTooltipSetUnit = function(self)
 			local line = _G["GameTooltipTextLeft"..i]
 			if not line or not line:GetText() or UnitIsBattlePetCompanion(unit) then return end
 			if not canaccessvalue(line) or not canaccessvalue(creatureType) then return end
-			if (level and line:GetText():find("^"..LEVEL)) or (creatureType and line:GetText():find("^"..creatureType)) then -- BETA This can be secret
+			if (level and line:GetText():find("^"..LEVEL)) or (creatureType and line:GetText():find("^"..creatureType)) then
 				line:SetFormattedText("|cff%02x%02x%02x%s%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, classification, creatureType or "")
 				break
 			end
@@ -368,7 +368,7 @@ local OnTooltipSetUnit = function(self)
 		end
 
 
-		if not IsInInstance() and UnitIsUnit("player", unit.."target") then -- BETA
+		if not C_Secrets.ShouldUnitComparisonBeSecret("player", unit.."target") and UnitIsUnit("player", unit.."target") then
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r ".."|cffff0000> "..UNIT_YOU.." <|r"
 		else
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r "..UnitName(unit.."target")
