@@ -263,22 +263,6 @@ end
 local AurasPostCreateIcon = function(element, button)
 	CreateBorderFrame(button)
 
-	-- button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * 1 / Mult, C.font.auras_font_style)
-	-- button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	-- button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
-	-- button.remaining:SetJustifyH("CENTER")
-
-	-- button.Cooldown.noCooldownCount = true
-	-- button.Cooldown:SetDrawEdge(false)
-	-- if not C.aura.show_timer then
-		-- button.Cooldown:SetHideCountdownNumbers(true)
-	-- end
-	-- button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
-	-- button.Cooldown:SetCountdownAbbrevThreshold(60)
-
-	-- local textCD = button.Cooldown:GetRegions()
-	-- textCD:SetPoint("CENTER", button, "CENTER", 1, 0)
-
 	T.SkinCooldown(button.Cooldown, "aura")
 
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -293,7 +277,6 @@ local AurasPostCreateIcon = function(element, button)
 		button.parent = CreateFrame("Frame", nil, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)
-		-- button.remaining:SetParent(button.parent)
 	else
 		button.Cooldown:SetAlpha(0)
 	end
@@ -317,18 +300,6 @@ local AurasPostUpdateIcon = function(_, button, unit, data)
 			-- end
 		end
 	end
-
-	-- if data.duration and data.duration > 0 and C.aura.show_timer then
-	-- if data.expirationTime and C.aura.show_timer then
-		-- button.remaining:Show()
-		-- -- button.timeLeft = data.expirationTime
-		-- -- button:SetScript("OnUpdate", T.CreateAuraTimer)
-	-- else
-		-- button.remaining:Hide()
-		-- -- button.timeLeft = math.huge
-		-- button:SetScript("OnUpdate", nil)
-	-- end
-	-- button.first = true
 end
 
 local function UpdateTarget(self)
@@ -371,7 +342,7 @@ end
 local function UpdateName(self)
 	if C.nameplate.healer_icon then
 		local name = self.unitName
-		if name and canaccessvalue(name) then -- BETA
+		if name and canaccessvalue(name) then
 			if healList[name] then
 				if exClass[healList[name]] then
 					self.HealerIcon:Hide()
@@ -401,7 +372,7 @@ local function UpdateName(self)
 
 	if C.nameplate.totem_icons then
 		local name = self.unitName
-		if name and canaccessvalue(name) then -- BETA
+		if name and canaccessvalue(name) then
 			if totemData[name] then
 				self.Totem.Icon:SetTexture(totemData[name])
 				self.Totem:Show()
@@ -649,7 +620,6 @@ local function callback(self, _, unit)
 	if unit then
 		local unitGUID = UnitGUID(unit)
 		self.npcID = unitGUID and canaccessvalue(unitGUID) and select(6, strsplit('-', unitGUID))
-		-- self.npcID = unitGUID and select(6, strsplit('-', unitGUID)) -- BETA
 		self.unitName = UnitName(unit)
 		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
 		if self.npcID and T.PlateBlacklist[self.npcID] then

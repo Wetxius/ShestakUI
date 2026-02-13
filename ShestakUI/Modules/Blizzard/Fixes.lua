@@ -72,7 +72,6 @@ end
 ----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
-if C_AddOns.IsAddOnLoaded("!!NoTaint2") then return end
 if not NoTaint2_Proc_ResetActionButtonAction then
 	NoTaint2_Proc_ResetActionButtonAction = 1
 
