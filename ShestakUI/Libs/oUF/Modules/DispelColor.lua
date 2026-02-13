@@ -80,6 +80,10 @@ local function CheckSpec()
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
+		-- Poison Cleansing Totem (talent)
+		if C_SpellBook.IsSpellKnown(383013) then
+			color_poison = CreateColor(0, 0.6, 0)
+		end
 	end
 
 	dispelColorCurve:SetToDefaults()
