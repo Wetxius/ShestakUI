@@ -853,22 +853,6 @@ end
 T.PostCreateIcon = function(element, button)
 	button:SetTemplate("Default")
 
-	-- button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-	-- button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	-- button.remaining:SetPoint("CENTER", button, "CENTER", 1, 1)
-	-- button.remaining:SetJustifyH("CENTER")
-
-	-- button.Cooldown.noCooldownCount = true
-	-- button.Cooldown:SetDrawEdge(false)
-	-- if not C.aura.show_timer then
-		-- button.Cooldown:SetHideCountdownNumbers(true)
-	-- end
-	-- button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
-	-- button.Cooldown:SetCountdownAbbrevThreshold(60)
-
-	-- local textCD = button.Cooldown:GetRegions()
-	-- textCD:SetPoint("CENTER", button, "CENTER", 1, 0)
-
 	T.SkinCooldown(button.Cooldown, "aura")
 
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
@@ -887,59 +871,10 @@ T.PostCreateIcon = function(element, button)
 		button.parent = CreateFrame("Frame", nil, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)
-		-- button.remaining:SetParent(button.parent)
 	else
 		button.Cooldown:SetAlpha(0)
 	end
 end
-
-local day, hour, minute = 86400, 3600, 60
-local FormatTime = function(s)
-	if s >= day then
-		return format("%dd", floor(s / day + 0.5))
-	elseif s >= hour then
-		return format("%dh", floor(s / hour + 0.5))
-	elseif s >= minute then
-		return format("%dm", floor(s / minute + 0.5))
-	elseif s >= 5 then
-		return floor(s + 0.5)
-	end
-	return format("%.1f", s)
-end
-
-T.CreateAuraTimer = function(self, elapsed)
-	-- if self.timeLeft then
-		self.elapsed = (self.elapsed or 0) + elapsed
-		if self.elapsed >= 0.1 then
-			-- if not self.first then
-				-- self.timeLeft = self.timeLeft - self.elapsed
-			-- else
-				-- self.timeLeft = self.timeLeft - GetTime()
-				-- self.first = false
-			-- end
-			local start, duration = self.Cooldown:GetCooldownTimes()
-			local timeleft
-			if duration and duration > 0 then
-				timeleft = (duration + start) / 1000 - GetTime()
-			end
-			if timeleft and timeleft > 0 then
-				local time = FormatTime(timeleft)
-				self.remaining:SetText(time)
-			else
-				self.remaining:Hide()
-				self.remaining:SetText("")
-				self:SetScript("OnUpdate", nil)
-			end
-			self.elapsed = 0
-		end
-	-- end
-end
-
-local playerUnits = {
-	player = true,
-	pet = true,
-	vehicle = true,
-}
 
 local dispelIndex = {
 	[0] = CreateColor(1, 0, 0),			-- None
@@ -986,46 +921,35 @@ T.PostUpdateIcon = function(element, button, unit, data)
 		end
 		button.Icon:SetDesaturated(false)
 	end
-
-	-- if data.duration and (canaccessvalue(data.duration) and data.duration > 0) and C.aura.show_timer then
-	-- if data.expirationTime and C.aura.show_timer then
-		-- button.remaining:Show()
-		-- -- button.timeLeft = data.expirationTime
-		-- -- button:SetScript("OnUpdate", T.CreateAuraTimer)
-	-- else
-		-- button.remaining:Hide()
-		-- -- button.timeLeft = math.huge
-		-- button:SetScript("OnUpdate", nil)
-	-- end
-
-	-- button.first = true
 end
 
-local function formatTime(s)
-	if s > 60 then
-		return format("%dm", s / 60), s % 60
-	else
-		return format("%d", s), s - floor(s)
+T.PostUpdateGapButton = function(_, _, button)
+	button:Hide()
+end
+
+T.CreateRaidBuffIcon = function(element, button)
+	if not C.raidframe.plugins_buffs_timer then
+		button.Cooldown:SetHideCountdownNumbers(true)
 	end
-end
+	T.SkinCooldown(button.Cooldown, "aura")
 
-T.CreateRaidAuraTimer = function(self, elapsed)
-	self.elapsed = (self.elapsed or 0) + elapsed
-	if self.elapsed >= 0.1 then
-		local start, duration = self.Cooldown:GetCooldownTimes()
-		local timeleft
-		if duration and duration > 0 then
-			timeleft = (duration + start) / 1000 - GetTime()
-		end
-		if timeleft and timeleft > 0 then
-			local time = formatTime(timeleft)
-			self.remaining:SetText(time)
-		else
-			self.remaining:Hide()
-			self.remaining:SetText("")
-			self:SetScript("OnUpdate", nil)
-		end
-		self.elapsed = 0
+	button:CreateBorder(nil, true)
+	button.oborder:SetOutside(button.Icon, 1, 1)
+
+	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 4, -1)
+	button.Count:SetJustifyH("RIGHT")
+	button.Count:SetFont(C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	if C.aura.show_spiral then
+		button.Cooldown:SetReverse(true)
+		button.parent = CreateFrame("Frame", nil, button)
+		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		button.Count:SetParent(button.parent)
+	else
+		button.Cooldown:SetAlpha(0)
 	end
 end
 
@@ -1042,137 +966,92 @@ T.PostUpdateRaidButton = function(element, button, unit, data)
 	if not C.aura.plugins_aura_watch_timer then
 		button.Cooldown:SetHideCountdownNumbers(true)
 	end
+end
 
-	-- if data.expirationTime and C.raidframe.plugins_aura_watch_timer then
-		-- button.remaining:Show()
-		-- button:SetScript("OnUpdate", T.CreateRaidAuraTimer)
-	-- else
-		-- button.remaining:Hide()
-		-- button:SetScript("OnUpdate", nil)
+-- local CountOffSets = {
+	-- TOPLEFT = {"LEFT", "RIGHT", 1, 0},
+	-- TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
+	-- BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
+	-- BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
+	-- LEFT = {"LEFT", "RIGHT", 1, 0},
+	-- RIGHT = {"RIGHT", "LEFT", 2, 0},
+	-- TOP = {"RIGHT", "LEFT", 2, 0},
+	-- BOTTOM = {"RIGHT", "LEFT", 2, 0},
+-- }
+
+-- T.CreateAuraWatchIcon = function(_, aura)
+	-- aura:CreateBorder(nil, true)
+	-- aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	-- aura.icon:SetDrawLayer("ARTWORK")
+	-- if aura.cd then
+		-- aura.cd:SetReverse(true)
+		-- aura.cd:SetHideCountdownNumbers(true)
+		-- if C.raidframe.plugins_buffs_timer then
+			-- aura.parent = CreateFrame("Frame", nil, aura)
+			-- aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
+			-- aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
+			-- aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+			-- aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
+			-- aura.remaining:SetJustifyH("CENTER")
+		-- end
 	-- end
-end
+-- end
 
-T.PostUpdateGapButton = function(_, _, button)
-	button:Hide()
-end
+-- T.CreateAuraWatch = function(self)
+	-- local auras = CreateFrame("Frame", nil, self)
+	-- auras:SetPoint("TOPLEFT", self.Health, 0, 0)
+	-- auras:SetPoint("BOTTOMRIGHT", self.Health, 0, 0)
+	-- auras.icons = {}
+	-- auras.PostCreateIcon = T.CreateAuraWatchIcon
 
-T.CreateRaidBuffIcon = function(element, button)
-	-- button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-	-- button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	-- button.remaining:SetPoint("CENTER", button, "CENTER", 1, 1)
-	-- button.remaining:SetJustifyH("CENTER")
+	-- if not C.aura.show_timer then
+		-- auras.hideCooldown = true
+	-- end
 
-	button.Cooldown.noCooldownCount = true
-	button.Cooldown:SetDrawEdge(false)
-	button.Cooldown:SetHideCountdownNumbers(true)
+	-- local buffs = {}
 
-	button.Icon:SetPoint("TOPLEFT", 2, -2)
-	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
-	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	-- if T.RaidBuffs["ALL"] then
+		-- for _, value in pairs(T.RaidBuffs["ALL"]) do
+			-- tinsert(buffs, value)
+		-- end
+	-- end
 
-	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
-	button.Count:SetJustifyH("RIGHT")
-	button.Count:SetFont(C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	button.Count:Hide()
+	-- if T.RaidBuffs[T.class] then
+		-- for _, value in pairs(T.RaidBuffs[T.class]) do
+			-- tinsert(buffs, value)
+		-- end
+	-- end
 
-	if C.aura.show_spiral then
-		button.Cooldown:SetReverse(true)
-		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
-		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
-		button.parent = CreateFrame("Frame", nil, button)
-		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		button.Count:SetParent(button.parent)
-		-- button.remaining:SetParent(button.parent)
-	else
-		button.Cooldown:SetAlpha(0)
-	end
-end
+	-- if buffs then
+		-- for _, spell in pairs(buffs) do
+			-- local aura = CreateFrame("Frame", nil, auras)
+			-- aura.spellID = spell[1]
+			-- aura.anyUnit = spell[4]
+			-- aura.strictMatching = spell[5]
+			-- aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
+			-- aura:SetPoint(spell[2], 0, 0)
 
-local CountOffSets = {
-	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
-	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
-	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
-	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
-	LEFT = {"LEFT", "RIGHT", 1, 0},
-	RIGHT = {"RIGHT", "LEFT", 2, 0},
-	TOP = {"RIGHT", "LEFT", 2, 0},
-	BOTTOM = {"RIGHT", "LEFT", 2, 0},
-}
+			-- local tex = aura:CreateTexture(nil, "OVERLAY")
+			-- tex:SetAllPoints(aura)
+			-- tex:SetTexture(C.media.blank)
+			-- if spell[3] then
+				-- tex:SetVertexColor(unpack(spell[3]))
+			-- else
+				-- tex:SetVertexColor(0.8, 0.8, 0.8)
+			-- end
+			-- aura.icon = tex
 
-T.CreateAuraWatchIcon = function(_, aura)
-	aura:CreateBorder(nil, true)
-	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	aura.icon:SetDrawLayer("ARTWORK")
-	if aura.cd then
-		aura.cd:SetReverse(true)
-		aura.cd:SetHideCountdownNumbers(true)
-		if C.raidframe.plugins_buffs_timer then
-			aura.parent = CreateFrame("Frame", nil, aura)
-			aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
-			aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-			aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-			aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
-			aura.remaining:SetJustifyH("CENTER")
-		end
-	end
-end
+			-- local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			-- local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
+			-- count:SetPoint(point, aura, anchorPoint, x, y)
+			-- aura.count = count
 
-T.CreateAuraWatch = function(self)
-	local auras = CreateFrame("Frame", nil, self)
-	auras:SetPoint("TOPLEFT", self.Health, 0, 0)
-	auras:SetPoint("BOTTOMRIGHT", self.Health, 0, 0)
-	auras.icons = {}
-	auras.PostCreateIcon = T.CreateAuraWatchIcon
+			-- auras.icons[spell[1]] = aura
+		-- end
+	-- end
 
-	if not C.aura.show_timer then
-		auras.hideCooldown = true
-	end
-
-	local buffs = {}
-
-	if T.RaidBuffs["ALL"] then
-		for _, value in pairs(T.RaidBuffs["ALL"]) do
-			tinsert(buffs, value)
-		end
-	end
-
-	if T.RaidBuffs[T.class] then
-		for _, value in pairs(T.RaidBuffs[T.class]) do
-			tinsert(buffs, value)
-		end
-	end
-
-	if buffs then
-		for _, spell in pairs(buffs) do
-			local aura = CreateFrame("Frame", nil, auras)
-			aura.spellID = spell[1]
-			aura.anyUnit = spell[4]
-			aura.strictMatching = spell[5]
-			aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
-			aura:SetPoint(spell[2], 0, 0)
-
-			local tex = aura:CreateTexture(nil, "OVERLAY")
-			tex:SetAllPoints(aura)
-			tex:SetTexture(C.media.blank)
-			if spell[3] then
-				tex:SetVertexColor(unpack(spell[3]))
-			else
-				tex:SetVertexColor(0.8, 0.8, 0.8)
-			end
-			aura.icon = tex
-
-			local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-			local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
-			count:SetPoint(point, aura, anchorPoint, x, y)
-			aura.count = count
-
-			auras.icons[spell[1]] = aura
-		end
-	end
-
-	self.AuraWatch = auras
-end
+	-- self.AuraWatch = auras
+-- end
 
 T.CreateHealthPrediction = function(self)
 	-- Player healing

@@ -259,10 +259,11 @@ local function Shared(self, unit)
 
 		-- Raid Buffs
 		self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
-		self.Buffs:SetSize(self:GetWidth(), 12 * C.raidframe.icon_multiplier)
-		self.Buffs.size = 12 * C.raidframe.icon_multiplier
+		self.Buffs:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
+		self.Buffs.size = 8 * C.raidframe.icon_multiplier
+		self.Buffs.spacing = 3
 		self.Buffs.num = 5
-		self.Buffs:SetPoint("TOPRIGHT", self, 2, 2)
+		self.Buffs:SetPoint("TOPRIGHT", self, 0, 0)
 		self.Buffs.initialAnchor = "TOPRIGHT"
 		self.Buffs.growthX = "LEFT"
 
