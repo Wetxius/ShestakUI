@@ -170,7 +170,7 @@ oUF.Tags.Methods["NameplateHealth"] = function(unit)
 	-- local maxhp = UnitHealthMax(unit)
 	local perc = UnitHealthPercent(unit, true, CurveConstants.ScaleTo100)
 
-	return ("%s - %d%%"):format(AbbreviateNumbers(hp), perc)
+	return ("%s - %d%%"):format(T.ShortValue(hp), perc)
 
 	-- if maxhp == 0 then
 		-- return 0
@@ -183,11 +183,7 @@ oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT
 oUF.Tags.Methods["Absorbs"] = function(unit)
 	local absorb = UnitGetTotalAbsorbs(unit)
 	if absorb then
-		AbbreviateNumbers(absorb)
+		return T.ShortValue(absorb)
 	end
-
-	-- if absorb and absorb > 0 then
-		-- return T.ShortValue(absorb)
-	-- end
 end
 oUF.Tags.Events["Absorbs"] = "UNIT_ABSORB_AMOUNT_CHANGED"

@@ -247,8 +247,7 @@ if C.tooltip.health_value == true then
 				self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 1.5)
 			end
 			self.text:Show()
-			local hp = AbbreviateNumbers(min).." / "..AbbreviateNumbers(max)
-			-- local hp = T.ShortValue(min).." / "..T.ShortValue(max)
+			local hp = T.ShortValue(min).." / "..T.ShortValue(max)
 			self.text:SetText(hp)
 		end
 	end)
@@ -340,6 +339,7 @@ local OnTooltipSetUnit = function(self)
 		for i = n + 1, lines do
 			local line = _G["GameTooltipTextLeft"..i]
 			if not line or not line:GetText() then return end
+			if not canaccessvalue(line) then return end
 			if line and line:GetText() and (line:GetText() == FACTION_HORDE or line:GetText() == FACTION_ALLIANCE) then
 				line:SetText()
 				break

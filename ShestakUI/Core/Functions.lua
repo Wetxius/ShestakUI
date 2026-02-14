@@ -13,26 +13,23 @@ T.Round = function(number, decimals)
 	return floor(number + 0.5)
 end
 
-T.ShortValue = function(value)
-	if not canaccessvalue(value) then return AbbreviateNumbers(value) end
-	if value >= 1e11 then
-		return ("%.0fb"):format(value / 1e9)
-	elseif value >= 1e10 then
-		return ("%.1fb"):format(value / 1e9):gsub("%.?0+([km])$", "%1")
-	elseif value >= 1e9 then
-		return ("%.2fb"):format(value / 1e9):gsub("%.?0+([km])$", "%1")
-	elseif value >= 1e8 then
-		return ("%.0fm"):format(value / 1e6)
-	elseif value >= 1e7 then
-		return ("%.1fm"):format(value / 1e6):gsub("%.?0+([km])$", "%1")
-	elseif value >= 1e6 then
-		return ("%.2fm"):format(value / 1e6):gsub("%.?0+([km])$", "%1")
-	elseif value >= 1e5 then
-		return ("%.0fk"):format(value / 1e3)
-	elseif value >= 1e3 then
-		return ("%.1fk"):format(value / 1e3):gsub("%.?0+([km])$", "%1")
-	else
-		return value
+do
+	local abbreviateConfig = {
+		breakpointData = {
+			{breakpoint = 1e11, abbreviation = "b", significandDivisor = 1e9, fractionDivisor = 1, abbreviationIsGlobal = false,},	-- 123b
+			{breakpoint = 1e10, abbreviation = "b", significandDivisor = 1e8, fractionDivisor = 10, abbreviationIsGlobal = false,},	-- 12.3b
+			{breakpoint = 1e9, abbreviation = "b", significandDivisor = 1e7, fractionDivisor = 100, abbreviationIsGlobal = false,},	-- 1.23b
+			{breakpoint = 1e8, abbreviation = "m", significandDivisor = 1e6, fractionDivisor = 1, abbreviationIsGlobal = false,},	-- 123m
+			{breakpoint = 1e7, abbreviation = "m", significandDivisor = 1e5, fractionDivisor = 10, abbreviationIsGlobal = false,},	-- 12.3m
+			{breakpoint = 1e6, abbreviation = "m", significandDivisor = 1e4, fractionDivisor = 100, abbreviationIsGlobal = false,},	-- 1.23m
+			{breakpoint = 1e5, abbreviation = "k", significandDivisor = 1e3, fractionDivisor = 1, abbreviationIsGlobal = false,},	-- 123k
+			{breakpoint = 1e4, abbreviation = "k", significandDivisor = 100, fractionDivisor = 10, abbreviationIsGlobal = false,},	-- 12.3k
+			{breakpoint = 1e3, abbreviation = "k", significandDivisor = 100, fractionDivisor = 10, abbreviationIsGlobal = false,},	-- 1.2k
+		},
+	}
+
+	T.ShortValue = function(value)
+		return AbbreviateNumbers(value, abbreviateConfig)
 	end
 end
 
