@@ -130,16 +130,20 @@ frame:SetScript("OnEvent", function()
 		end
 
 		for i = 1, 12 do
-			_G["ActionButton"..i]:StyleButton()
-			_G["MultiBarBottomLeftButton"..i]:StyleButton()
-			_G["MultiBarBottomRightButton"..i]:StyleButton()
-			_G["MultiBarLeftButton"..i]:StyleButton()
-			_G["MultiBarRightButton"..i]:StyleButton()
-			StyleNormalButton(_G["ActionButton"..i])
-			StyleNormalButton(_G["MultiBarBottomLeftButton"..i])
-			StyleNormalButton(_G["MultiBarBottomRightButton"..i])
-			StyleNormalButton(_G["MultiBarLeftButton"..i])
-			StyleNormalButton(_G["MultiBarRightButton"..i])
+			_G["MultiBarBottomLeftActionButton"..i]:StyleButton()
+			_G["MultiBarBottomRightActionButton"..i]:StyleButton()
+			_G["MultiBarLeftActionButton"..i]:StyleButton()
+			_G["MultiBarRightActionButton"..i]:StyleButton()
+			_G["MultiBar5ActionButton"..i]:StyleButton()
+			_G["MultiBar6ActionButton"..i]:StyleButton()
+			_G["MultiBar7ActionButton"..i]:StyleButton()
+			StyleNormalButton(_G["MultiBarBottomLeftActionButton"..i])
+			StyleNormalButton(_G["MultiBarBottomRightActionButton"..i])
+			StyleNormalButton(_G["MultiBarLeftActionButton"..i])
+			StyleNormalButton(_G["MultiBarRightActionButton"..i])
+			StyleNormalButton(_G["MultiBar5ActionButton"..i])
+			StyleNormalButton(_G["MultiBar6ActionButton"..i])
+			StyleNormalButton(_G["MultiBar7ActionButton"..i])
 		end
 
 		for i = 1, 10 do
