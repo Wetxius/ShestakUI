@@ -47,18 +47,6 @@ local function StyleNormalButton(button, size)
 			button.NewActionTexture:SetAlpha(0)
 		end
 
-		-- if normal then -- BETA remove?
-			-- normal:SetTexture()
-			-- normal:Hide()
-			-- normal:SetAlpha(0)
-		-- end
-
-		-- if normal2 then
-			-- normal2:SetTexture()
-			-- normal2:Hide()
-			-- normal2:SetAlpha(0)
-		-- end
-
 		flash:SetTexture("")
 		button:SetNormalTexture(0)
 
@@ -131,12 +119,6 @@ local function StyleNormalButton(button, size)
 
 		icon:CropIcon()
 		icon:SetDrawLayer("BACKGROUND", 7)
-
-		-- if normal then -- BETA remove?
-			-- normal:ClearAllPoints()
-			-- normal:SetPoint("TOPLEFT")
-			-- normal:SetPoint("BOTTOMRIGHT")
-		-- end
 
 		if highlight then
 			highlight:ClearAllPoints()

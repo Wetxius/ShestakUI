@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C_AddOns.IsAddOnLoaded("OmniCC") or C_AddOns.IsAddOnLoaded("ncCooldown") or C_AddOns.IsAddOnLoaded("tullaCC") then return end
-
+-- Disabled in xml now
 ----------------------------------------------------------------------------------------
 --	Cooldown count(tullaCC by Tuller)
 ----------------------------------------------------------------------------------------
@@ -167,8 +167,6 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 	cooldown:SetCountdownAbbrevThreshold(60)
 	local textCD = cooldown:GetRegions()
 	textCD:SetPoint("CENTER", 1, 0)
-	-- FIXME actionbar keybind is overlap
-
 
 	-- local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 	-- if show then

@@ -4,22 +4,17 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Hide Blizzard ActionBars stuff(by Tukz)
 ----------------------------------------------------------------------------------------
-local MainMenuBar = MainMenuBar and MainMenuBar or MainActionBar -- BETA
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	MainMenuBar:SetScale(0.00001)
-	MainMenuBar:EnableMouse(false)
+	MainActionBar:SetScale(0.00001)
+	MainActionBar:EnableMouse(false)
 	OverrideActionBar:SetScale(0.00001)
 	OverrideActionBar:EnableMouse(false)
 	PetActionBar:EnableMouse(false)
 	PetActionBar:UnregisterAllEvents()
 	StanceBar:EnableMouse(false)
 	StanceBar:UnregisterAllEvents()
-	--BETA MicroButtonAndBagsBar:SetScale(0.00001)
-	-- MicroButtonAndBagsBar:EnableMouse(false)
-	-- MicroButtonAndBagsBar:ClearAllPoints()
-	-- MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
 	BagsBar:Hide()
 	BagsBar:UnregisterAllEvents()
 
@@ -29,16 +24,16 @@ frame:SetScript("OnEvent", function()
 		PlayerSpellsMicroButton:SetPoint("TOP", UIParent, "TOP", 0, 100) -- hide missing talent alert
 	end
 
-	MainMenuBar:SetMovable(true)
-	MainMenuBar:SetUserPlaced(true)
-	MainMenuBar.ignoreFramePositionManager = true
-	MainMenuBar:SetAttribute("ignoreFramePositionManager", true)
+	MainActionBar:SetMovable(true)
+	MainActionBar:SetUserPlaced(true)
+	MainActionBar.ignoreFramePositionManager = true
+	MainActionBar:SetAttribute("ignoreFramePositionManager", true)
 
 	EditModeUtil.GetRightActionBarWidth = function() return 100 end -- prevent error in GetRightContainerAnchor, abs is nil
 	-- EditModeUtil.GetBottomActionBarHeight = function() return 225 end
 
 	local elements = {
-		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame,
+		MainActionBar, OverrideActionBar, PossessBarFrame,
 		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow,
 		StatusTrackingBarManager
 	}
@@ -52,7 +47,7 @@ frame:SetScript("OnEvent", function()
 			element:UnregisterAllEvents()
 		end
 
-		if element ~= MainMenuBar then
+		if element ~= MainActionBar then
 			element:Hide()
 		end
 		element:SetAlpha(0)
