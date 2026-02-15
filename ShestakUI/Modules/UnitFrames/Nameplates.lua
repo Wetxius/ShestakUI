@@ -683,7 +683,6 @@ local function callback(self, _, unit)
 end
 
 local function style(self, unit)
-	local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
 	local main = self
 	self.unit = unit
 
