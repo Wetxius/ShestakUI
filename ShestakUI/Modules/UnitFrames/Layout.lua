@@ -302,7 +302,7 @@ local function Shared(self, unit)
 		-- Combat icon
 		if C.unitframe.icons_combat == true then
 			self.CombatIndicator = self.Health:CreateTexture(nil, "OVERLAY")
-			self.CombatIndicator:SetSize(16, 16)
+			self.CombatIndicator:SetSize(14, 14)
 			self.CombatIndicator:SetPoint("TOPRIGHT", 4, 8)
 		end
 
@@ -938,12 +938,6 @@ local function Shared(self, unit)
 		self.Castbar.Overlay:SetPoint("TOPLEFT", -2, 2)
 		self.Castbar.Overlay:SetPoint("BOTTOMRIGHT", 2, -2)
 
-		-- self.Castbar.Shield = self.Castbar:CreateTexture(nil, 'ARTWORK') -- BETA delete if not need
-		-- self.Castbar.Shield:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", 0, 0)
-		-- self.Castbar.Shield:SetPoint("BOTTOMRIGHT", self.Castbar:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		-- self.Castbar.Shield:SetTexture(C.media.texture)
-		-- self.Castbar.Shield:SetVertexColor(0.8, 0, 0)
-
 		self.Castbar.PostCastStart = T.PostCastStart
 		self.Castbar.PostCastInterruptible = T.PostCastStart
 
@@ -1231,7 +1225,7 @@ local function Shared(self, unit)
 	end
 
 	-- Debuff highlight
-	if C.raidframe.plugins_debuffhighlight and unit ~= "arenatarget" then
+	if C.raidframe.plugins_debuffhighlight and not unit:match('%wtarget$') then
 		self.DispelColor = self.Health:CreateTexture(nil, "OVERLAY")
 		self.DispelColor:SetAllPoints(self.Health)
 		self.DispelColor:SetTexture(C.media.highlight)
