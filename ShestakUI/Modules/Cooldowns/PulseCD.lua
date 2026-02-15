@@ -234,7 +234,7 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 hooksecurefunc("UseAction", function(slot)
 	local actionType, itemID = GetActionInfo(slot)
 	if actionType == "item" then
-		local texture = GetActionTexture(slot)
+		local texture = C_ActionBar.GetActionTexture(slot)
 		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)

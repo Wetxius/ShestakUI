@@ -228,7 +228,7 @@ end
 
 -- MoneyFrameFix v1.2.1 addon by Galehad
 function SetTooltipMoney(frame,money,type,prefixText,suffixText)
-	frame:AddLine((prefixText or "") .. "  " .. GetCoinTextureString(money) .. " " .. (suffixText or ""),0,1,1)
+	frame:AddLine((prefixText or "") .. "  " .. C_CurrencyInfo.GetCoinTextureString(money) .. " " .. (suffixText or ""),0,1,1)
 end
 
 ----------------------------------------------------------------------------------------

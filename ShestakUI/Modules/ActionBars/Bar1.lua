@@ -94,7 +94,7 @@ bar:SetScript("OnEvent", function(self, event)
 			local icon = button.icon
 
 			if action >= 120 then
-				local texture = GetActionTexture(action)
+				local texture = C_ActionBar.GetActionTexture(action)
 
 				if texture then
 					icon:SetTexture(texture)

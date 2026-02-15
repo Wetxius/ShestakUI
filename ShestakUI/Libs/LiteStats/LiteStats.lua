@@ -1544,8 +1544,8 @@ if coords.enabled then
 		text = {string = Coords},
 		OnClick = function()
 			if IsShiftKeyDown() then
-				ChatFrameUtil.ActivateChat(ChatEdit_ChooseBoxForSend())
-				ChatEdit_ChooseBoxForSend():Insert(format(" (%s: %s)", GetZoneText(), Coords()))
+				ChatFrameUtil.ActivateChat(ChatFrameUtil.ChooseBoxForSend())
+				ChatFrameUtil.ChooseBoxForSend():Insert(format(" (%s: %s)", GetZoneText(), Coords()))
 			else
 				ToggleFrame(WorldMapFrame)
 			end
@@ -1632,8 +1632,8 @@ if location.enabled then
 					C_Map.SetUserWaypoint(mapPoint)
 				end
 				local hyperlink = C_Map.GetUserWaypointHyperlink() or ""
-				ChatFrameUtil.ActivateChat(ChatEdit_ChooseBoxForSend())
-				ChatEdit_ChooseBoxForSend():Insert(format(" (%s: %s) %s", self.zone, Coords(), hyperlink))
+				ChatFrameUtil.ActivateChat(ChatFrameUtil.ChooseBoxForSend())
+				ChatFrameUtil.ChooseBoxForSend():Insert(format(" (%s: %s) %s", self.zone, Coords(), hyperlink))
 				C_Map.ClearUserWaypoint()
 			else
 				ToggleFrame(WorldMapFrame)

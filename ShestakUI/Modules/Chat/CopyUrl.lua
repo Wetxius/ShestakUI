@@ -43,7 +43,7 @@ end
 local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
 function _G.ItemRefTooltip:SetHyperlink(link, ...)
 	if link and (strsub(link, 1, 3) == "url") then
-		local editbox = ChatEdit_ChooseBoxForSend()
+		local editbox = ChatFrameUtil.ChooseBoxForSend()
 		ChatFrameUtil.ActivateChat(editbox)
 		editbox:Insert(string.sub(link, 5))
 		editbox:HighlightText()
