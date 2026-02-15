@@ -1,42 +1,3 @@
---[[
-# Element: PrivateAuras
-
-Handles positioning and configuration of private aura frames on player and group.
-
-## Notes
-
-These auras are fully controlled by Blizzard, so the structure of this element is unconventional.
-oUF provides a means to create the auras and initiate them into Blizzard's care, but is otherwise
-unable to provide customizations other than size and positioning.
-
-## Options
-
-.disableCooldown     - Disables the cooldown spiral (boolean)
-.disableCooldownText - Disables the cooldown duration text (boolean)
-.size                - Private aura anchor frame size. Defaults to 16 (number)
-.width               - Private aura anchor frame width. Takes priority over `size` (number)
-.height              - Private aura anchor frame height. Takes priority over `size` (number)
-.spacing             - Spacing between each private aura anchor frame. Defaults to 0 (number)
-.spacingX            - Horizontal spacing between each private aura anchor frame. Takes priority over `spacing` (number)
-.spacingY            - Vertical spacing between each private aura anchor frame. Takes priority over `spacing` (number)
-.growthX             - Horizontal growth direction. Defaults to 'RIGHT' (string)
-.growthY             - Vertical growth direction. Defaults to 'UP' (string)
-.initialAnchor       - Anchor point for the private aura anchor frame. Defaults to 'BOTTOMLEFT' (string)
-.num                 - Number of private aura anchor frames to create. Defaults to 6 (number)
-.maxCols             - Maximum number of private aura columns before wrapping to a new row. Defaults to element width divided by private aura anchor frame size (number)
-.borderScale         - Scale of the private aura border (number?)
-
-## Examples
-
-    -- Position
-    local PrivateAuras = CreateFrame('Frame', nil, self)
-    PrivateAuras:SetPoint('CENTER', self)
-    PrivateAuras:SetSize(60, 30)
-
-    -- Register with oUF
-    self.PrivateAuras = PrivateAuras
---]]
-
 local _, ns = ...
 local oUF = ns.oUF
 
@@ -167,7 +128,7 @@ local function Path(self, ...)
 end
 
 local function ForceUpdate(element)
-	return Update(element)
+	return Path(element.__owner)
 end
 
 local function Disable(self)

@@ -4,11 +4,6 @@ local Private = oUF.Private
 
 local unitExists = Private.unitExists
 
--- TODO: Replace with atlases in the next major
-local READY_CHECK_READY_TEXTURE = "Interface\\RaidFrame\\ReadyCheck-Ready"
-local READY_CHECK_NOT_READY_TEXTURE = "Interface\\RaidFrame\\ReadyCheck-NotReady"
-local READY_CHECK_WAITING_TEXTURE = "Interface\\RaidFrame\\ReadyCheck-Waiting"
-
 local function OnFinished(self)
 	local element = self:GetParent()
 	element:Hide()
@@ -39,11 +34,23 @@ local function Update(self, event)
 	local status = GetReadyCheckStatus(unit)
 	if(unitExists(unit) and status) then
 		if(status == 'ready') then
-			element:SetTexture(element.readyTexture)
+			if(element.readyTexture) then
+				element:SetTexture(element.readyTexture) -- DEPRECATED
+			else
+				element:SetAtlas('UI-LFG-ReadyMark-Raid', element.useAtlasSize)
+			end
 		elseif(status == 'notready') then
-			element:SetTexture(element.notReadyTexture)
+			if(element.notReadyTexture) then
+				element:SetTexture(element.notReadyTexture) -- DEPRECATED
+			else
+				element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
+			end
 		else
-			element:SetTexture(element.waitingTexture)
+			if(element.waitingTexture) then
+				element:SetTexture(element.waitingTexture) -- DEPRECATED
+			else
+				element:SetAtlas('UI-LFG-PendingMark-Raid', element.useAtlasSize)
+			end
 		end
 
 		element.status = status
@@ -55,7 +62,11 @@ local function Update(self, event)
 
 	if(event == 'READY_CHECK_FINISHED') then
 		if(element.status == 'waiting') then
-			element:SetTexture(element.notReadyTexture)
+			if(element.notReadyTexture) then
+				element:SetTexture(element.notReadyTexture) -- DEPRECATED
+			else
+				element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
+			end
 		end
 
 		element.Animation:Play()
@@ -93,10 +104,6 @@ local function Enable(self, unit)
 	if(element and (unit == 'party' or unit == 'raid')) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
-
-		element.readyTexture = element.readyTexture or READY_CHECK_READY_TEXTURE
-		element.notReadyTexture = element.notReadyTexture or READY_CHECK_NOT_READY_TEXTURE
-		element.waitingTexture = element.waitingTexture or READY_CHECK_WAITING_TEXTURE
 
 		local AnimationGroup = element:CreateAnimationGroup()
 		AnimationGroup:HookScript('OnFinished', OnFinished)
