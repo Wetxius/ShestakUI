@@ -748,7 +748,6 @@ T.OpenItems = {
 	[244466] = true,	-- Dagran's Pouch of Shards
 	[243235] = true,	-- Adventurer's Footlocker
 	[242386] = true,	-- Lorewalker's Crate of Memorabilia
-	[239546] = true,	-- Confiscated Cultist's Bag
 	[239489] = true,	-- Radiant Officer's Cache
 	[239440] = true,	-- Dastardly Prize Purse
 	[239128] = true,	-- Theatre Troupe's Trove

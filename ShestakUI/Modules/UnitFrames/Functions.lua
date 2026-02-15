@@ -837,11 +837,6 @@ T.PostUpdateIcon = function(element, button, unit, data)
 	else
 		local color = C_CurveUtil.EvaluateColorFromBoolean(data.isStealable, {r = 1, g = 0.85, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
 		button:SetBackdropBorderColor(color:GetRGB())
-		if (T.class == "MAGE" or T.class == "PRIEST" or T.class == "SHAMAN" or T.class == "HUNTER") and data.dispelName == "Magic" and not UnitIsFriend("player", unit) then -- this is work? data.dispelName is often nil
-			button:SetBackdropBorderColor(1, 0.85, 0)
-		else
-			button:SetBackdropBorderColor(unpack(C.media.border_color))
-		end
 		button.Icon:SetDesaturated(false)
 	end
 end
