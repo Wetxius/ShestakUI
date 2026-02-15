@@ -13,7 +13,7 @@ frame:SetScript("OnEvent", function()
 	end
 end)
 
-hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", function(self, ...)
+local function checkBuff(self, ...)
 	if not UnitIsPlayer(...) or UnitIsUnit(..., "player") then return end
 	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
 	local id = aura and aura.spellId
@@ -36,4 +36,7 @@ hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", function(self, ...)
 		self:AddLine(" ")
 		self:Show()
 	end
-end)
+end
+
+hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", checkBuff)
+hooksecurefunc(GameTooltip, "SetUnitAuraByAuraInstanceID", checkBuff)
