@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.unitframe.enable ~= true then return end
+if C.unitframe.enable ~= true and C.nameplate.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Unit frames functions
