@@ -198,6 +198,15 @@ GhostFrameContentsFrame:CreateBackdrop("Overlay")
 GhostFrameContentsFrame.backdrop:SetPoint("TOPLEFT", GhostFrameContentsFrameIcon, -2, 2)
 GhostFrameContentsFrame.backdrop:SetPoint("BOTTOMRIGHT", GhostFrameContentsFrameIcon, 2, -2)
 
+-- DurabilityFrame
+hooksecurefunc(DurabilityFrame, "SetPoint", function(self, _, parent)
+	if parent and parent ~= UIParent then
+		self:SetClampedToScreen(false)
+		self:ClearAllPoints()
+		self:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 0, LPSTAT_CONFIG.Durability.man and 200 or -90)
+	end
+end)
+
 -- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(_, d)

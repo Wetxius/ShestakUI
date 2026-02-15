@@ -1020,7 +1020,7 @@ end
 if durability.enabled then
 	Inject("Durability", {
 		OnLoad = function(self)
-			if durability.man then DurabilityFrame.Show = DurabilityFrame.Hide end
+			-- if durability.man then DurabilityFrame.Show = DurabilityFrame.Hide end -- NOTE: This cause taint when open edit mode
 			RegEvents(self, "UPDATE_INVENTORY_DURABILITY MERCHANT_SHOW PLAYER_LOGIN")
 		end,
 		OnEvent = function(self, event)
