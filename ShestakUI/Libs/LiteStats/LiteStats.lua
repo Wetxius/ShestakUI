@@ -1650,11 +1650,13 @@ if damage.enabled then
 		text = {
 			string = function()
 				if C_AddOns.IsAddOnLoaded("Details") then
-					_detalhes.data_broker_text = "{dps}"
-					_detalhes:BrokerTick()
-					local effectiveDPS = _detalhes.databroker.text
-					if effectiveDPS and effectiveDPS ~= "0" then
-						return format(damage.alt_fmt, DAMAGE, effectiveDPS)
+					if Details.databroker then
+						Details.data_broker_text = "{dps}"
+						Details:BrokerTick()
+						local effectiveDPS = Details.databroker.text
+						if effectiveDPS and effectiveDPS ~= "0" then
+							return format(damage.alt_fmt, DAMAGE, effectiveDPS)
+						end
 					end
 				elseif C_AddOns.IsAddOnLoaded("Numeration") then
 					local text = LibStub:GetLibrary("LibDataBroker-1.1"):GetDataObjectByName("Numeration").text
@@ -1666,7 +1668,7 @@ if damage.enabled then
 		},
 		OnClick = function()
 			if C_AddOns.IsAddOnLoaded("Details") then
-				_detalhes:ToggleWindows()
+				Details:ToggleWindows()
 			elseif C_AddOns.IsAddOnLoaded("Numeration") then
 				Numeration:ToggleVisibility()
 			end
