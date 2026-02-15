@@ -773,7 +773,7 @@ T.AuraTrackerTime = function(self, elapsed)
 	end
 end
 
-T.PostCreateIcon = function(element, button)
+T.PostCreateIcon = function(_, button)
 	button:SetTemplate("Default")
 
 	T.SkinCooldown(button.Cooldown, "aura")
@@ -816,7 +816,7 @@ for i, color in pairs(dispelIndex) do
 end
 T.DispelCurve = curve
 
-T.PostUpdateIcon = function(element, button, unit, data)
+T.PostUpdateIcon = function(_, button, unit, data)
 	if data.isHarmfulAura then
 		if not UnitIsFriend("player", unit) and not data.isPlayerAura then
 			if not C.aura.player_aura_only then
@@ -845,7 +845,7 @@ T.PostUpdateGapButton = function(_, _, button)
 	button:Hide()
 end
 
-T.CreateRaidBuffIcon = function(element, button)
+T.CreateRaidBuffIcon = function(_, button)
 	if not C.raidframe.plugins_buffs_timer then
 		button.Cooldown:SetHideCountdownNumbers(true)
 	end
@@ -871,7 +871,7 @@ T.CreateRaidBuffIcon = function(element, button)
 	end
 end
 
-T.PostUpdateRaidButton = function(element, button, unit, data)
+T.PostUpdateRaidButton = function(_, button, unit, data)
 	if C.aura.debuff_color_type then
 		local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
 		if color then

@@ -13,8 +13,6 @@ local function StyleNormalButton(button, size)
 		local hotkey = _G[name.."HotKey"]
 		local border = button.Border or _G[name.."Border"]
 		local btname = _G[name.."Name"]
-		local normal = button.NormalTexture or _G[name.."NormalTexture"]
-		local normal2 = button:GetNormalTexture()
 		local float = _G[name.."FloatingBG"]
 		local highlight = button.SpellHighlightTexture
 		local isExtraAction = name:match("ExtraAction")

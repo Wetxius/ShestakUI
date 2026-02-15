@@ -1718,7 +1718,6 @@ end
 
 function Stuffing:Restack()
 	local st = {}
-	local sr = {}
 	local did_restack = false
 
 	if not (Stuffing.bankFrame and Stuffing.bankFrame:IsShown()) then

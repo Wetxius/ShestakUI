@@ -753,7 +753,6 @@ T.OpenItems = {
 	[239128] = true,	-- Theatre Troupe's Trove
 	[239122] = true,	-- The General's War Chest
 	[239118] = true,	-- Pinnacle Cache
-	[239004] = true,	-- Radiant Service Satchel
 	[238208] = true,	-- Nanny's Surge Dividends
 	[237760] = true,	-- Arathi Champion's Spoils
 	[237759] = true,	-- Arathi Cleric's Chest
