@@ -26,9 +26,6 @@ bar:RegisterUnitEvent("UNIT_AURA", "pet")
 bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_ENTERING_WORLD" then
 		T.StylePet()
-		PetActionBar_ShowGrid = T.dummy
-		PetActionBar_HideGrid = T.dummy
-		PetActionBar.showgrid = nil
 		for i = 1, 10 do
 			local button = _G["PetActionButton"..i]
 			button:ClearAllPoints()

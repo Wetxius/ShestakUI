@@ -39,7 +39,7 @@ frame:SetScript("OnEvent", function()
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_TALENT_CHANGES, true)
 
-	 -- Enable Blizzard cd, cause our not worked in combat
+	-- Keep it work always
 	SetCVar("countdownForCooldowns", 1)
 
 	if C.chat.enable then
