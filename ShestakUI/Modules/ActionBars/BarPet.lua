@@ -23,7 +23,7 @@ bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
 bar:RegisterEvent("PET_UI_UPDATE")
 bar:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 bar:RegisterUnitEvent("UNIT_AURA", "pet")
-bar:SetScript("OnEvent", function(self, event, arg1)
+bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_ENTERING_WORLD" then
 		T.StylePet()
 		PetActionBar_ShowGrid = T.dummy

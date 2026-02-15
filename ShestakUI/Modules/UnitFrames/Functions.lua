@@ -457,31 +457,31 @@ T.PostUpdatePowerColor = function(power, unit, color, altR, altG, altB)
 	end
 end
 
-local SetUpAnimGroup = function(self)
-	self.anim = self:CreateAnimationGroup()
-	self.anim:SetLooping("BOUNCE")
-	self.anim.fade = self.anim:CreateAnimation("Alpha")
-	self.anim.fade:SetFromAlpha(1)
-	self.anim.fade:SetToAlpha(0)
-	self.anim.fade:SetDuration(0.6)
-	self.anim.fade:SetSmoothing("IN_OUT")
-end
+-- local SetUpAnimGroup = function(self)
+	-- self.anim = self:CreateAnimationGroup()
+	-- self.anim:SetLooping("BOUNCE")
+	-- self.anim.fade = self.anim:CreateAnimation("Alpha")
+	-- self.anim.fade:SetFromAlpha(1)
+	-- self.anim.fade:SetToAlpha(0)
+	-- self.anim.fade:SetDuration(0.6)
+	-- self.anim.fade:SetSmoothing("IN_OUT")
+-- end
 
-local Flash = function(self)
-	if not self.anim then
-		SetUpAnimGroup(self)
-	end
+-- local Flash = function(self)
+	-- if not self.anim then
+		-- SetUpAnimGroup(self)
+	-- end
 
-	if not self.anim:IsPlaying() then
-		self.anim:Play()
-	end
-end
+	-- if not self.anim:IsPlaying() then
+		-- self.anim:Play()
+	-- end
+-- end
 
-local StopFlash = function(self)
-	if self.anim then
-		self.anim:Finish()
-	end
-end
+-- local StopFlash = function(self)
+	-- if self.anim then
+		-- self.anim:Finish()
+	-- end
+-- end
 
 local low_mana = C_CurveUtil.CreateColorCurve()
 low_mana:SetType(Enum.LuaCurveType.Step)
@@ -515,7 +515,7 @@ T.UpdateManaLevel = function(self, elapsed)
 		end
 	elseif T.class ~= "DRUID" and T.class ~= "PRIEST" and T.class ~= "SHAMAN" then
 		self.ManaLevel:SetText()
-		StopFlash(self)
+		-- StopFlash(self)
 	end
 end
 

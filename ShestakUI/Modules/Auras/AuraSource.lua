@@ -4,7 +4,7 @@ if C.aura.cast_by ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Tells you who cast a buff or debuff in its tooltip(prButler by Renstrom)
 ----------------------------------------------------------------------------------------
-local function addAuraSource(self, func, unit, index, filter, instanceID)
+local function addAuraSource(self, unit, index, filter, instanceID)
 	local srcUnit
 	if instanceID then
 		local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, index)
@@ -43,22 +43,23 @@ local function addAuraSource(self, func, unit, index, filter, instanceID)
 end
 
 local funcs = {
-	SetUnitAura = UnitAura,
-	SetUnitBuff = UnitBuff,
-	SetUnitDebuff = UnitDebuff,
-	SetUnitBuffByAuraInstanceID = UnitBuff,
-	SetUnitDebuffByAuraInstanceID = UnitDebuff,
-	SetUnitAuraByAuraInstanceID = UnitAura,
+	"SetUnitAura",
+	"SetUnitBuff",
+	"SetUnitDebuff",
+	"SetUnitBuffByAuraInstanceID",
+	"SetUnitDebuffByAuraInstanceID",
+	"SetUnitAuraByAuraInstanceID"
 }
 
-for k, v in pairs(funcs) do
-	if k == "SetUnitBuffByAuraInstanceID" or k == "SetUnitDebuffByAuraInstanceID" or k == "SetUnitAuraByAuraInstanceID" then
-		hooksecurefunc(GameTooltip, k, function(self, unit, index, filter)
-			addAuraSource(self, v, unit, index, filter, true)
+for i = 1, #funcs do
+	local func = funcs[i]
+	if i > 3 then -- InstanceID
+		hooksecurefunc(GameTooltip, func, function(self, unit, index, filter)
+			addAuraSource(self, unit, index, filter, true)
 		end)
 	else
-		hooksecurefunc(GameTooltip, k, function(self, unit, index, filter)
-			addAuraSource(self, v, unit, index, filter)
+		hooksecurefunc(GameTooltip, func, function(self, unit, index, filter)
+			addAuraSource(self, unit, index, filter)
 		end)
 	end
 end
