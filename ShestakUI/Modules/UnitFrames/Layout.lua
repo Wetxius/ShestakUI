@@ -302,7 +302,7 @@ local function Shared(self, unit)
 		-- Combat icon
 		if C.unitframe.icons_combat == true then
 			self.CombatIndicator = self.Health:CreateTexture(nil, "OVERLAY")
-			self.CombatIndicator:SetSize(18, 18)
+			self.CombatIndicator:SetSize(16, 16)
 			self.CombatIndicator:SetPoint("TOPRIGHT", 4, 8)
 		end
 
