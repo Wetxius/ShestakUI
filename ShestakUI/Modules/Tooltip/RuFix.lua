@@ -14,8 +14,8 @@ if T.client ~= "ruRU" then return end
 
 GUILD_ACHIEVEMENT = "Уведомл. для гильдии"
 ADDON_LIST_PERFORMANCE_PEAK_CPU = "Макс. нагрузка ЦП: %s"
-COOLDOWN_DURATION_HOURS = "%dh"
-COOLDOWN_DURATION_MIN = "%dm"
+-- COOLDOWN_DURATION_HOURS = "%dh" -- causes taint
+-- COOLDOWN_DURATION_MIN = "%dm"	-- causes taint
 
 local ttext
 local replace = {

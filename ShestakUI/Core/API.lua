@@ -1286,20 +1286,30 @@ do
 end
 
 function T.SkinCooldown(cooldown, name)
+	if cooldown.styled then return end
+	local text = cooldown:GetRegions()
+
 	if name == "aura" then
 		cooldown:SetDrawEdge(false)
 		if not C.aura.show_timer then
 			cooldown:SetHideCountdownNumbers(true)
 		end
 		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+		text:SetHeight(C.font.auras_font_size)
 	elseif name == "actionbar" then
 		cooldown:SetCountdownFont("ShestakUI_ActionBarTimerFont")
+		text:SetHeight(C.font.cooldown_timers_font_size)
 	end
 
-	cooldown:SetCountdownAbbrevThreshold(60)
+	cooldown:SetCountdownAbbrevThreshold(59)
 
-	local textCD = cooldown:GetRegions()
-	textCD:SetPoint("CENTER", 1, 0)
+	-- text:SetPoint("CENTER", 1, 0)
+	text:ClearAllPoints()
+	text:SetPoint("LEFT", -2, 0)
+	text:SetPoint("RIGHT", 5, 0)
+	text:SetJustifyH("CENTER")
+
+	cooldown.styled = true
 end
 
 local LoadBlizzardSkin = CreateFrame("Frame")
