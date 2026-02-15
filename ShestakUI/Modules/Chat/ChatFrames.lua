@@ -190,7 +190,7 @@ end
 
 -- Setup chatframes 1 to 10 on login
 local function SetupChat()
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 		local frame = _G[format("ChatFrame%s", i)]
 		SetChatStyle(frame)
 	end
@@ -217,7 +217,7 @@ local function SetupChat()
 end
 
 local function SetupChatPosAndFont()
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 		local chat = _G[format("ChatFrame%s", i)]
 		local id = chat:GetID()
 		local _, fontSize = FCF_GetChatWindowInfo(id)
@@ -298,7 +298,7 @@ local function SetupChatPosAndFont()
 end
 
 -- Reposition 3 chat frame tab if it don't fit to 1
--- for i = 3, NUM_CHAT_WINDOWS do
+-- for i = 3, Constants.ChatFrameConstants.MaxChatWindows do
 	-- local tab = _G[format("ChatFrame%sTab", i)]
 	-- hooksecurefunc(tab, "SetPoint", function(self, point, anchor, attachTo, x, y)
 		-- if anchor == GeneralDockManagerScrollFrameChild and y == -1 then
@@ -351,18 +351,18 @@ local function RemoveRealmName(_, _, msg, author, ...)
 		return false, gsub(msg, "%-"..realm, ""), author, ...
 	end
 end
-ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveRealmName)
+ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveRealmName)
 
 ----------------------------------------------------------------------------------------
 --	Save slash command typo
 ----------------------------------------------------------------------------------------
 local function TypoHistory_Posthook_AddMessage(chat, text)
 	if text and canaccessvalue(text) and strfind(text, HELP_TEXT_SIMPLE) then
-		ChatEdit_AddHistory(chat.editBox)
+		ChatFrameEditBoxMixin.AddHistory(chat.editBox)
 	end
 end
 
-for i = 1, NUM_CHAT_WINDOWS do
+for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 	if i ~= 2 then
 		hooksecurefunc(_G["ChatFrame"..i], "AddMessage", TypoHistory_Posthook_AddMessage)
 	end
@@ -381,7 +381,7 @@ if C.chat.loot_icons == true then
 		return false, message, ...
 	end
 
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
+	ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
 end
 
 ----------------------------------------------------------------------------------------
@@ -406,7 +406,7 @@ local function UpdateTabChannelSwitch(self)
 			for j = h, r, step do
 				if cycles[j]:use(self, currChatType) then
 					self:SetAttribute("chatType", cycles[j].chatType)
-					ChatEdit_UpdateHeader(self)
+					ChatFrameEditBoxMixin.UpdateHeaderr(self)
 					return
 				end
 			end

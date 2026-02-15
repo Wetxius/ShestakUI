@@ -33,7 +33,7 @@ local function OnHyperlinkLeave(frame, link, ...)
 	if orig1[frame] then return orig1[frame](frame, link, ...) end
 end
 
-for i = 1, NUM_CHAT_WINDOWS do
+for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 	local frame = _G["ChatFrame"..i]
 	orig1[frame] = frame:GetScript("OnHyperlinkEnter")
 	frame:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)

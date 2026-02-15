@@ -141,5 +141,5 @@ local function ParseChatEvent(_, event, message, sender, ...)
 end
 
 for _, event in pairs(events) do
-	ChatFrame_AddMessageEventFilter(event, ParseChatEvent)
+	ChatFrameUtil.AddMessageEventFilter(event, ParseChatEvent)
 end

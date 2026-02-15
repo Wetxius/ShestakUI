@@ -83,5 +83,5 @@ Handler:SetScript("OnEvent", function()
 	end
 end)
 
-ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_WHISPER", MessageFilter)
-ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_WHISPER_INFORM", MessageFilter)
+ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_BN_WHISPER", MessageFilter)
+ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_BN_WHISPER_INFORM", MessageFilter)

@@ -37,7 +37,7 @@ end
 
 --
 function hcic:Init()
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 		local f = _G["ChatFrame"..i]
 		if f:IsShown() then
 			local chatMouseover = CreateFrame("Frame", "HCIC"..i, UIParent)

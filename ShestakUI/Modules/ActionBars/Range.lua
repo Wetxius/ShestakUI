@@ -70,10 +70,10 @@ function Addon.GetActionState(slot)
 	end
 
 	if isUsable == nil then
-		isUsable, notEnoughMana = IsUsableAction(slot)
+		isUsable, notEnoughMana = C_ActionBar.IsUsableAction(slot)
 	end
 
-	local outOfRange = IsActionInRange(slot) == false
+	local outOfRange = C_ActionBar.IsActionInRange(slot) == false
 	if isUsable then
 		return outOfRange and 'oor' or 'normal', outOfRange
 	end
@@ -207,7 +207,7 @@ local function petBar_Update(bar)
 		if button.icon:IsVisible() then
 			-- icon coloring
 			local icon = button.icon
-			local iconState, outOfRange = getState(index)
+			local iconState = getState(index)
 
 			states[icon] = iconState
 

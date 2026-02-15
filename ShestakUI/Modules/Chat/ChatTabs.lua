@@ -109,7 +109,7 @@ end)
 
 hooksecurefunc("FCFTab_UpdateColors", faneifyTab)
 
-for i = 1, NUM_CHAT_WINDOWS do
+for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 	faneifyTab(_G["ChatFrame"..i.."Tab"])
 end
 

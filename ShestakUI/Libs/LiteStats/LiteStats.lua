@@ -147,7 +147,7 @@ local function zsub(s, ...) local t = {...} for i = 1, #t, 2 do s = gsub(s, t[i]
 local function abbr(t, s) return t[s] or zsub(_G[strupper(s).."_ONELETTER_ABBR"], "%%d", "", "^%s*", "") end
 local function fmttime(sec, t)
 	local t = t or {}
-	local d, h, m, s = ChatFrame_TimeBreakDown(floor(sec))
+	local d, h, m, s = ChatFrameUtil.TimeBreakDown(floor(sec))
 	local string = zsub(format(" %dd %dh %dm "..((d == 0 and h == 0) and "%ds" or ""), d, h, m, s), " 0[dhms]", " ", "%s+", " ")
 	string = strtrim(gsub(string, "([dhms])", {d = abbr(t, "day"), h = abbr(t, "hour"), m = abbr(t, "minute"), s = abbr(t, "second")}), " ")
 	return strmatch(string, "^%s*$") and "0"..abbr(t, "second") or string
@@ -180,7 +180,7 @@ local function Inject(name, stat)
 	if not stat.text then stat.text = {} end
 
 	-- retrieve font variables and insert them into text table
-	for k,v in pairs(font) do
+	for k, v in pairs(font) do
 		if not stat.text[k] then
 			stat.text[k] = m[k] or v
 		end
@@ -1205,8 +1205,8 @@ if experience.enabled then
 		OnLoad = function(self)
 			RegEvents(self, "TIME_PLAYED_MSG PLAYER_LOGOUT PLAYER_LOGIN UPDATE_FACTION CHAT_MSG_COMBAT_XP_GAIN PLAYER_LEVEL_UP")
 			-- Filter first time played message
-			local ofunc = ChatFrame_DisplayTimePlayed
-			function ChatFrame_DisplayTimePlayed() ChatFrame_DisplayTimePlayed = ofunc end
+			local ofunc = ChatFrameUtil.DisplayTimePlayed
+			function ChatFrameUtil.DisplayTimePlayed() ChatFrameUtil.DisplayTimePlayed = ofunc end
 			RequestTimePlayed()
 			if not conf.ExpMode or conf.ExpMode == "xp" or conf.ExpMode == "art" then
 				conf.ExpMode = UnitLevel(P) ~= MAX_PLAYER_LEVEL and "xp" or "played"
@@ -1544,7 +1544,7 @@ if coords.enabled then
 		text = {string = Coords},
 		OnClick = function()
 			if IsShiftKeyDown() then
-				ChatEdit_ActivateChat(ChatEdit_ChooseBoxForSend())
+				ChatFrameUtil.ActivateChat(ChatEdit_ChooseBoxForSend())
 				ChatEdit_ChooseBoxForSend():Insert(format(" (%s: %s)", GetZoneText(), Coords()))
 			else
 				ToggleFrame(WorldMapFrame)
@@ -1632,7 +1632,7 @@ if location.enabled then
 					C_Map.SetUserWaypoint(mapPoint)
 				end
 				local hyperlink = C_Map.GetUserWaypointHyperlink() or ""
-				ChatEdit_ActivateChat(ChatEdit_ChooseBoxForSend())
+				ChatFrameUtil.ActivateChat(ChatEdit_ChooseBoxForSend())
 				ChatEdit_ChooseBoxForSend():Insert(format(" (%s: %s) %s", self.zone, Coords(), hyperlink))
 				C_Map.ClearUserWaypoint()
 			else

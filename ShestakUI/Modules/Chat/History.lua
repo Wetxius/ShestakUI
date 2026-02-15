@@ -34,7 +34,7 @@ end
 
  -- element fading timestamp comes from GetTime() (ScrollingMessageFrame.lua:583), causing restored elements to effectively not fade if you restart your computer
 function t.timestamps(frame)
-	local nameorid, timestamp = CF[frame] > NUM_CHAT_WINDOWS and frame.name or CF[frame], GetTime()
+	local nameorid, timestamp = CF[frame] > Constants.ChatFrameConstants.MaxChatWindows and frame.name or CF[frame], GetTime()
 	if DB[nameorid] then
 		for element = #DB[nameorid], 1, -1 do
 			DB[nameorid][element].timestamp = timestamp
@@ -64,7 +64,7 @@ function t.ADDON_LOADED(addon)
 			cfid[id] = frame -- access by id, used for /tcfh and ordered iteration of t.missed
 		end)
 		hooksecurefunc("FCFManager_RegisterDedicatedFrame", function(frame)
-			if CF[frame] > NUM_CHAT_WINDOWS then
+			if CF[frame] > Constants.ChatFrameConstants.MaxChatWindows then
 				t.pushfront(frame)
 				if DB[frame.name] then
 					t.timestamps(frame)
@@ -73,7 +73,7 @@ function t.ADDON_LOADED(addon)
 			end
 		end) -- restore any history for Pet Combat Log and whispers
 		hooksecurefunc("FCFManager_UnregisterDedicatedFrame", function(frame)
-			if CF[frame] > NUM_CHAT_WINDOWS then
+			if CF[frame] > Constants.ChatFrameConstants.MaxChatWindows then
 				DB[frame.name] = frame.historyBuffer.elements
 			end
 		end) -- save any history for Pet Combat Log and whispers
@@ -95,7 +95,7 @@ function t.PLAYER_ENTERING_WORLD()
 		if cfid[id] ~= COMBATLOG then
 			t.pushfront(cfid[id])
 			t.timestamps(cfid[id])
-			if id <= NUM_CHAT_WINDOWS and DB[id] and #DB[id] > 0 then
+			if id <= Constants.ChatFrameConstants.MaxChatWindows and DB[id] and #DB[id] > 0 then
 				cfid[id].historyBuffer:ReplaceElements(DB[id])
 			end -- restore any history for ChatFrame1-10 (excluding Combat Log)
 			prnt(cfid[id], "|cffBCEE68--- "..HISTORY.." ---|r")
@@ -107,7 +107,7 @@ end
 function t.PLAYER_LEAVING_WORLD()
 	for frame, id in next, CF do
 		if frame ~= COMBATLOG then
-			DB[id > NUM_CHAT_WINDOWS and frame.name or id] = frame.historyBuffer.elements
+			DB[id > Constants.ChatFrameConstants.MaxChatWindows and frame.name or id] = frame.historyBuffer.elements
 		end
 	end -- save any history for all ChatFrames (excluding Combat Log)
 end

@@ -29,7 +29,7 @@ local function InstallUI()
 
 	-- Setting chat frames
 	if C.chat.enable == true and not (C_AddOns.IsAddOnLoaded("Prat-3.0") or C_AddOns.IsAddOnLoaded("Chatter")) then
-		for i = 1, NUM_CHAT_WINDOWS do
+		for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 			local frame = _G[format("ChatFrame%s", i)]
 			local chatFrameId = frame:GetID()
 

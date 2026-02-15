@@ -67,7 +67,7 @@ vehicle:SetScript("OnEnter", function(self)
 		GameTooltip:SetText(TAXI_CANCEL, 1, 1, 1)
 		GameTooltip:AddLine(TAXI_CANCEL_DESCRIPTION, 1, 0.8, 0, true)
 		GameTooltip:Show()
-	elseif IsPossessBarVisible() then
+	elseif C_ActionBar.IsPossessBarVisible() then
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 		GameTooltip_SetTitle(GameTooltip, CANCEL)
 	else

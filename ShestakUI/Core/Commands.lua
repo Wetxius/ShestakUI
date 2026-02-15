@@ -285,7 +285,7 @@ SLASH_FRAMESTK1 = nil -- fix LFGFilter
 --	Clear chat
 ----------------------------------------------------------------------------------------
 SlashCmdList.CLEAR_CHAT = function()
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 		_G[format("ChatFrame%d", i)]:Clear()
 	end
 end

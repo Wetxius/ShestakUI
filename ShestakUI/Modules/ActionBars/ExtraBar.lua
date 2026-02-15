@@ -65,7 +65,7 @@ end)
 hooksecurefunc("ExtraActionBar_Update", function()
 	local positionTable = T.CurrentProfile()
 	if positionTable["ZoneButtonAnchor"] then return end
-	if HasExtraActionBar() then
+	if C_ActionBar.HasExtraActionBar() then
 		zoneAnchor:SetPoint("BOTTOMRIGHT", anchor, "BOTTOMLEFT", -3, 0)
 	else
 		if C.actionbar.split_bars then

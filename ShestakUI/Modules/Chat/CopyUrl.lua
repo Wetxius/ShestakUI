@@ -30,7 +30,7 @@ for _, event in next, {
 	"CHAT_MSG_CHANNEL",
 	"CHAT_MSG_SYSTEM"
 } do
-	ChatFrame_AddMessageEventFilter(event, function(_, _, str, ...)
+	ChatFrameUtil.AddMessageEventFilter(event, function(_, _, str, ...)
 		for _, pattern in pairs(patterns) do
 			local result, match = string.gsub(str, pattern, "|cff00FF00|Hurl:%1|h[%1]|h|r")
 			if match > 0 then
@@ -44,7 +44,7 @@ local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
 function _G.ItemRefTooltip:SetHyperlink(link, ...)
 	if link and (strsub(link, 1, 3) == "url") then
 		local editbox = ChatEdit_ChooseBoxForSend()
-		ChatEdit_ActivateChat(editbox)
+		ChatFrameUtil.ActivateChat(editbox)
 		editbox:Insert(string.sub(link, 5))
 		editbox:HighlightText()
 		return

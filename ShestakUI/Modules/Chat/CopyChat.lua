@@ -96,7 +96,7 @@ local function Copy(cf)
 	C_Timer.After(0, scrollDown)
 end
 
-for i = 1, NUM_CHAT_WINDOWS do
+for i = 1, Constants.ChatFrameConstants.MaxChatWindows do
 	local cf = _G[format("ChatFrame%d", i)]
 	local button = CreateFrame("Button", format("ButtonCF%d", i), cf)
 	button:SetPoint("BOTTOMRIGHT", 0, 1)

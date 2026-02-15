@@ -60,10 +60,10 @@ local function LootClick(frame)
 		DressUpItemLink(frame.link)
 	elseif IsShiftKeyDown() then
 		local _, item = C_Item.GetItemInfo(frame.link)
-		if ChatEdit_GetActiveWindow() then
-			ChatEdit_InsertLink(item)
+		if ChatFrameUtil.GetActiveWindow() then
+			ChatFrameUtil.InsertLink(item)
 		else
-			ChatFrame_OpenChat(item)
+			ChatFrameUtil.OpenChat(item)
 		end
 	end
 end
