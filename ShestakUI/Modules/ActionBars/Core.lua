@@ -107,7 +107,7 @@ function RightBarMouseOver(alpha)
 
 	if C.actionbar.petbar_horizontal == false and C.actionbar.petbar_hide == false then
 		if PetHolder:IsShown() then
-			for i = 1, NUM_PET_ACTION_SLOTS do
+			for i = 1, 10 do
 				local b = _G["PetActionButton"..i]
 				b:SetAlpha(alpha)
 				local c = _G["PetActionButton"..i.."Cooldown"]
@@ -141,7 +141,7 @@ function StanceBarMouseOver(alpha)
 end
 
 function PetBarMouseOver(alpha)
-	for i = 1, NUM_PET_ACTION_SLOTS do
+	for i = 1, 10 do
 		local b = _G["PetActionButton"..i]
 		b:SetAlpha(alpha)
 		local c = _G["PetActionButton"..i.."Cooldown"]
@@ -366,7 +366,7 @@ if (C.actionbar.rightbars_mouseover == true and C.actionbar.petbar_horizontal ==
 	local EventPetSpiral = CreateFrame("Frame")
 	EventPetSpiral:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
 	EventPetSpiral:SetScript("OnEvent", function()
-		for i = 1, NUM_PET_ACTION_SLOTS do
+		for i = 1, 10 do
 			local c = _G["PetActionButton"..i.."Cooldown"]
 			T.HideSpiral(c, 0)
 		end
@@ -482,7 +482,7 @@ end
 
 T.PetBarUpdate = function()
 	local petActionButton, petActionIcon, petAutoCastOverlay
-	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
+	for i = 1, 10, 1 do
 		local buttonName = "PetActionButton"..i
 		petActionButton = _G[buttonName]
 		petActionIcon = _G[buttonName.."Icon"]

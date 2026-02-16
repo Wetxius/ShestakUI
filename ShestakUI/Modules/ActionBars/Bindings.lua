@@ -334,7 +334,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			b:HookScript("OnEnter", function(self) bind:Update(self, "STANCE") end)
 		end
 
-		for i = 1, NUM_PET_ACTION_SLOTS do
+		for i = 1, 10 do
 			local b = _G["PetActionButton"..i]
 			b:HookScript("OnEnter", function(self) bind:Update(self, "PET") end)
 		end

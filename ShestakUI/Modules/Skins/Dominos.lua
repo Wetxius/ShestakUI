@@ -154,7 +154,7 @@ frame:SetScript("OnEvent", function()
 			StyleSmallButton(button, icon, name, hotkey)
 		end
 
-		for i = 1, NUM_PET_ACTION_SLOTS do
+		for i = 1, 10 do
 			local name = "DominosPetActionButton"..i
 			local button = _G[name]
 			local icon = _G[name.."Icon"]

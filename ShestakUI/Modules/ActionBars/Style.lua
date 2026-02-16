@@ -262,7 +262,7 @@ function T.StyleShift()
 end
 
 function T.StylePet()
-	for i = 1, NUM_PET_ACTION_SLOTS do
+	for i = 1, 10 do
 		local name = "PetActionButton"..i
 		local button = _G[name]
 		StyleSmallButton(button, name, true)

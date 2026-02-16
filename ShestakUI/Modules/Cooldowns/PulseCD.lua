@@ -61,7 +61,7 @@ local function memoize(f)
 end
 
 local function GetPetActionIndexByName(name)
-	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
+	for i = 1, 10, 1 do
 		if GetPetActionInfo(i) == name then
 			return i
 		end
