@@ -299,9 +299,9 @@ local OnTooltipSetUnit = function(self)
 	end
 
 	if isPlayer then
-		if UnitIsAFK(unit) then
+		if T.CheckUnitStatus(UnitIsAFK, unit) then
 			self:AppendText((" %s"):format("|cffE7E716"..L_CHAT_AFK.."|r"))
-		elseif UnitIsDND(unit) then
+		elseif T.CheckUnitStatus(UnitIsDND, unit) then
 			self:AppendText((" %s"):format("|cffFF0000"..L_CHAT_DND.."|r"))
 		end
 

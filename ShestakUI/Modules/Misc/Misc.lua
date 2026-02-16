@@ -77,7 +77,7 @@ if C.misc.afk_spin_camera == true then
 		if event == "PLAYER_LEAVING_WORLD" then
 			SpinStop()
 		else
-			if UnitIsAFK("player") and not InCombatLockdown() then
+			if T.CheckUnitStatus(UnitIsAFK, "player") and not InCombatLockdown() then
 				SpinStart()
 			else
 				SpinStop()
