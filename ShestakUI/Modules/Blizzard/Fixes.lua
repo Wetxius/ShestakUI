@@ -44,20 +44,6 @@ if T.client == "ruRU" then
 end
 
 ----------------------------------------------------------------------------------------
---	Fix Keybind taint
-----------------------------------------------------------------------------------------
-_G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
-
-----------------------------------------------------------------------------------------
---	Fix LFG FilterButton width
-----------------------------------------------------------------------------------------
-hooksecurefunc(LFGListFrame.SearchPanel.FilterButton, "SetWidth", function(self, width)	-- FIXME check after while for possible Blizzard fix
-	if width ~= 94 then
-		self:SetWidth(94)
-	end
-end)
-
-----------------------------------------------------------------------------------------
 --	Hide right-click line on unitframes
 ----------------------------------------------------------------------------------------
 function UnitFrame_UpdateTooltip(self)
@@ -66,6 +52,24 @@ function UnitFrame_UpdateTooltip(self)
 		self.UpdateTooltip = UnitFrame_UpdateTooltip
 	else
 		self.UpdateTooltip = nil
+	end
+end
+
+----------------------------------------------------------------------------------------
+--	Hide Settings if close in combat (from ElvUI)
+----------------------------------------------------------------------------------------
+local settingsHider = CreateFrame("Frame")
+settingsHider:SetScript("OnEvent", function(frame, event)
+	HideUIPanel(_G.SettingsPanel)
+	frame:UnregisterEvent(event)
+end)
+
+_G.SettingsPanel.TransitionBackOpeningPanel = function(self)
+	if InCombatLockdown() then
+		settingsHider:RegisterEvent("PLAYER_REGEN_ENABLED")
+		self:SetScale(0.00001)
+	else
+		HideUIPanel(self)
 	end
 end
 
@@ -226,7 +230,9 @@ if not NoTaint2_Proc_CleanActionButtonFlyout then
 	end)
 end
 
--- MoneyFrameFix v1.2.1 addon by Galehad
+----------------------------------------------------------------------------------------
+--	MoneyFrameFix v1.2.1 addon by Galehad
+----------------------------------------------------------------------------------------
 function SetTooltipMoney(frame,money,type,prefixText,suffixText)
 	frame:AddLine((prefixText or "") .. "  " .. C_CurrencyInfo.GetCoinTextureString(money) .. " " .. (suffixText or ""),0,1,1)
 end
