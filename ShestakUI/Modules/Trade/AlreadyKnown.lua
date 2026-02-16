@@ -111,7 +111,7 @@ local function MerchantFrame_UpdateBuybackInfo()
 		local button = _G["MerchantItem"..i.."ItemButton"]
 		if button and button:IsShown() then
 			local _, _, _, _, _, isUsable = GetBuybackItemInfo(i)
-			if isUsable and IsKnown(GetBuybackItemLink(i)) then
+			if isUsable and IsKnown(GetBuybackItemLink(i)) then -- TODO maybe delete isUsable check?
 				SetItemButtonTextureVertexColor(button, color.r, color.g, color.b)
 			end
 		end
