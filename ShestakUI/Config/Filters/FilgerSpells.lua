@@ -1639,7 +1639,7 @@ C["filger_spells"] = {
 			-- Mind Blast
 			{spellID = 8092, filter = "CD"},
 			-- Power Word: Shield
-			{spellID = 17, filter = "CD"},
+			{spellID = 17, filter = "CD", absID = true},
 			-- Shadow Word: Death
 			{spellID = 32379, filter = "CD"},
 			-- Circle of Healing
@@ -1647,7 +1647,7 @@ C["filger_spells"] = {
 			-- Angelic Feather
 			{spellID = 121536, filter = "CD"},
 			-- Prayer of Mending
-			{spellID = 33076, filter = "CD"},
+			{spellID = 33076, filter = "CD", absID = true},
 			-- Divine Star
 			{spellID = 110744, filter = "CD"},
 			-- Archangel
