@@ -48,7 +48,7 @@ local SpellGroups = {}
 local tempActiveTable = {}
 
 function Filger:TooltipOnEnter()
-	if self.spellID > 20 then
+	if self.spellID > 15 then
 		GameTooltip:ClearLines()
 		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 3)
 		GameTooltip:SetHyperlink(format("spell:%s", self.spellID))

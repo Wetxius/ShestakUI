@@ -422,7 +422,6 @@ for i = 1, #headers do
 			if T.IsFramePositionedLeft(ObjectiveTrackerFrame) then
 				GameTooltip:ClearAllPoints()
 				GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
-				GameTooltip:Show()
 			end
 		end)
 

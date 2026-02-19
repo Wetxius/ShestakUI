@@ -3,34 +3,42 @@ local T, C, L = unpack(ShestakUI)
 ----------------------------------------------------------------------------------------
 --	Kill all stuff on default UI that we don't need
 ----------------------------------------------------------------------------------------
+local function HideFrames()
+	CompactRaidFrameManager:UnregisterAllEvents()
+	CompactRaidFrameContainer:UnregisterAllEvents()
+	CompactRaidFrameManager:SetAlpha(0)
+	if not InCombatLockdown() then
+		CompactRaidFrameManager:Hide()
+		local shown = CompactRaidFrameManager_GetSetting("IsShown")
+		if shown and shown ~= "0" then
+			CompactRaidFrameManager_SetSetting("IsShown", "0")
+		end
+	end
+end
+
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function()
-	if ClassPowerBar then
-		ClassPowerBar.OnEvent = T.dummy -- Fix error with druid on logon
-	end
-
+frame:SetScript("OnEvent", function(self, event, addon)
 	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
 		if CompactRaidFrameManager then
-			local function HideFrames()
-				CompactRaidFrameManager:UnregisterAllEvents()
-				CompactRaidFrameContainer:UnregisterAllEvents()
-				CompactRaidFrameManager:SetAlpha(0)
-				if not InCombatLockdown() then
-					CompactRaidFrameManager:Hide()
-					local shown = CompactRaidFrameManager_GetSetting("IsShown")
-					if shown and shown ~= "0" then
-						CompactRaidFrameManager_SetSetting("IsShown", "0")
-					end
-				end
-			end
 			hooksecurefunc("CompactRaidFrameManager_UpdateShown", HideFrames)
 			CompactRaidFrameManager:HookScript("OnShow", HideFrames)
 			CompactRaidFrameContainer:HookScript("OnShow", HideFrames)
 			HideFrames()
+			CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
+			UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE") -- Hide/Show party member frames with UpdateRaidAndPartyFrames()
+			self:UnregisterAllEvents()
 		end
-		CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
-		UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE")
+	else
+		self:UnregisterAllEvents()
+	end
+end)
+
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_LOGIN")
+frame:SetScript("OnEvent", function()
+	if ClassPowerBar then
+		ClassPowerBar.OnEvent = T.dummy -- Fix error with druid on logon
 	end
 
 	TutorialFrameAlertButton:Kill()
@@ -46,17 +54,6 @@ frame:SetScript("OnEvent", function()
 		SetCVar("chatStyle", "im")
 	end
 
-	if C.unitframe.enable then
-		if T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune ~= true then
-			RuneFrame:Kill()
-		end
-		SetCVar("showPartyBackground", 0)
-	end
-
-	if C.nameplate.enable then
-		SetCVar("ShowClassColorInNameplate", 1)
-	end
-
 	if C.minimap.enable then
 		SetCVar("minimapTrackingShowAll", 1)
 	end
@@ -67,15 +64,6 @@ frame:SetScript("OnEvent", function()
 	end
 
 	SetCVar("timeMgrUseMilitaryTime", 1) -- TODO: delete afterwhile
-
-	-- BETA not used
-	-- if C.combattext.enable then
-		-- if C.combattext.incoming then
-			-- SetCVar("enableFloatingCombatText", 1)
-		-- else
-			-- SetCVar("enableFloatingCombatText", 0)
-		-- end
-	-- end
 end)
 
 local function AcknowledgeTips()
