@@ -144,9 +144,9 @@ end
 local OnMouseDown = function(self, button)
 	if button == "LeftButton" then
 		if self.isResses then
-			C_ChatInfo.SendChatMessage(sformat(L_COOLDOWNS_COMBATRESS_REMAINDER.."%d, "..L_COOLDOWNS_NEXTTIME.."%s.", currentNumResses, self.right:GetText()), T.CheckChat())
+			T.SendChatMessage(sformat(L_COOLDOWNS_COMBATRESS_REMAINDER.."%d, "..L_COOLDOWNS_NEXTTIME.."%s.", currentNumResses, self.right:GetText()), T.CheckChat())
 		else
-			C_ChatInfo.SendChatMessage(sformat(L_COOLDOWNS.."%s - %s: %s", self.name, C_Spell.GetSpellLink(self.spellId), self.right:GetText()), T.CheckChat())
+			T.SendChatMessage(sformat(L_COOLDOWNS.."%s - %s: %s", self.name, C_Spell.GetSpellLink(self.spellId), self.right:GetText()), T.CheckChat())
 		end
 	elseif button == "RightButton" then
 		StopTimer(self)

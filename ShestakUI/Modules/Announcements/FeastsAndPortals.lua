@@ -17,37 +17,37 @@ frame:SetScript("OnEvent", function()
 	if subEvent == "SPELL_CAST_SUCCESS" then
 		-- Feasts and Cauldron
 		if C.announcements.feasts and T.AnnounceFeast[spellID] then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_PRE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_PRE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		-- Refreshment Table
 		elseif C.announcements.feasts and spellID == 43987 then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_PRE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_PRE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		-- Ritual of Summoning
 		elseif C.announcements.portals and spellID == 698 then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_CLICK, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_CLICK, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		-- Piccolo of the Flaming Fire
 		elseif C.announcements.toys and spellID == 182346 then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		end
 	elseif subEvent == "SPELL_SUMMON" then
 		-- Repair Bots and Codex
 		if C.announcements.feasts and T.AnnounceBots[spellID] then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		end
 	elseif subEvent == "SPELL_CREATE" then
 		-- Healthstone and MOLL-E
 		if C.announcements.feasts and (spellID == 29893 or spellID == 54710) then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		-- Toys
 		elseif C.announcements.toys and T.AnnounceToys[spellID] then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_PUT, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		-- Portals
 		elseif C.announcements.portals and T.AnnouncePortals[spellID] then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_CAST, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_CAST, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		end
 	elseif subEvent == "SPELL_AURA_APPLIED" then
 		-- Turkey Feathers and Party G.R.E.N.A.D.E.
 		if C.announcements.toys and (spellID == 61781 or ((spellID == 51508 or spellID == 51510) and destName == T.name)) then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, srcName, C_Spell.GetSpellLink(spellID)), T.CheckChat(true))
 		end
 	end
 end)

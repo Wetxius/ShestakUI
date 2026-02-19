@@ -21,17 +21,17 @@ frame:SetScript("OnEvent", function()
 		if not sourceName then return end
 
 		if destName then
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID).." -> "..destName), T.CheckChat())
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID).." -> "..destName), T.CheckChat())
 		else
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
 		end
 	else
 		if not isPlayerCast then return end
 
 		if destName then
-			C_ChatInfo.SendChatMessage(C_Spell.GetSpellLink(spellID).." -> "..destName, T.CheckChat())
+			T.SendChatMessage(C_Spell.GetSpellLink(spellID).." -> "..destName, T.CheckChat())
 		else
-			C_ChatInfo.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
+			T.SendChatMessage(string.format(L_ANNOUNCE_FP_USE, sourceName, C_Spell.GetSpellLink(spellID)), T.CheckChat())
 		end
 	end
 end)
