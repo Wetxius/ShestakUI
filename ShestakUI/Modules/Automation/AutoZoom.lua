@@ -9,7 +9,8 @@ frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 frame:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 frame:RegisterEvent("PLAYER_STARTED_MOVING")
 frame:RegisterEvent("PLAYER_STOPPED_MOVING")
-frame:RegisterEvent("PLAYER_IS_GLIDING_CHANGED") -- dragonriding
+frame:RegisterEvent("PLAYER_IS_GLIDING_CHANGED")	-- dragonriding
+frame:RegisterEvent("NEW_WMO_CHUNK")				-- change zone in Dornogal
 frame:SetScript("OnEvent", function()
 	C_Timer.After(0.5, function()
 		if IsFlying() then
