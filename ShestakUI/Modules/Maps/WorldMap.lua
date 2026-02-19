@@ -24,9 +24,10 @@ local maxQuest = 35
 local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
 numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 if C.skins.blizzard_frames then
-	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 80, -21)
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 90, -20)
+	numQuest:SetFrameLevel(6)
 else
-	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -17)
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 90, -5)
 end
 numQuest.text:SetJustifyH("LEFT")
 numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..maxQuest)
