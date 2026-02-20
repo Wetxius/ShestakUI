@@ -280,6 +280,21 @@ local function SkinQuestIcons(_, block)
 
 		finder.skinned = true
 	end
+
+	if finder and finder.icon and not finder.icon.styled then
+		finder.border = CreateFrame("Frame", nil, finder)
+		finder.border:SetTemplate("Default")
+		finder.border:SetAllPoints(finder)
+		finder.border:SetFrameLevel(1)
+
+		finder.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		finder.icon:SetPoint("TOPLEFT", finder.border, 2, -2)
+		finder.icon:SetPoint("BOTTOMRIGHT", finder.border, -2, 2)
+
+		finder.Cooldown:SetAllPoints(finder.icon)
+
+		finder.icon.styled = true
+	end
 end
 
 -- WorldQuestsList button skin
