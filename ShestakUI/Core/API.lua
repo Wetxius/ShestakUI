@@ -1291,6 +1291,7 @@ function T.SkinCooldown(cooldown, name)
 
 	if name == "aura" then
 		cooldown:SetDrawEdge(false)
+		cooldown:SetSwipeColor(0, 0, 0, 0.8)
 		if not C.aura.show_timer then
 			cooldown:SetHideCountdownNumbers(true)
 		end
@@ -1308,6 +1309,7 @@ function T.SkinCooldown(cooldown, name)
 	text:SetPoint("LEFT", -2, 0)
 	text:SetPoint("RIGHT", 5, 0)
 	text:SetJustifyH("CENTER")
+	cooldown.text = text
 
 	cooldown.styled = true
 end

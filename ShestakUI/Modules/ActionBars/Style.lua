@@ -444,9 +444,52 @@ hooksecurefunc(AssistedCombatManager, "SetAssistedHighlightFrameShown", function
 	end
 end)
 
+----------------------------------------------------------------------------------------
+--	Cooldowns
+----------------------------------------------------------------------------------------
+local curve = C_CurveUtil.CreateColorCurve()
+curve:SetType(Enum.LuaCurveType.Step)
+curve:AddPoint(0, CreateColor(1, 0.2, 0.2, 1))
+curve:AddPoint(5.2, CreateColor(1, 1, 1, 1))
+
+local function ApplyColor(cooldown)
+	local color = cooldown.duration:EvaluateRemainingDuration(curve)
+
+	if color then
+		cooldown.text:SetTextColor(color:GetRGBA())
+	else
+		cooldown.text:SetTextColor(1, 1, 1, 1)
+	end
+end
+
+local function onUpdate(self, elapsed)
+	self.elapsed = (self.elapsed or 0) + elapsed
+	if self.elapsed < 0.3 then return end
+	self.elapsed = 0
+	ApplyColor(self)
+end
+
+local function startWatching(cooldown, durationObject)
+	cooldown.duration = durationObject
+	ApplyColor(cooldown) -- refresh color, can be red
+
+	if not cooldown.hooked then
+		cooldown:HookScript("OnUpdate", onUpdate)
+		cooldown.hooked = true
+	end
+end
+
 local Cooldown_MT = getmetatable(_G.ActionButton1Cooldown).__index
 hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown)
 	if cooldown:IsForbidden() then return end
 
 	T.SkinCooldown(cooldown, "actionbar")
+
+	local parent = cooldown:GetParent()
+	if parent and parent.action then
+		local durationObject = C_ActionBar.GetActionCooldownDuration(parent.action)
+		if durationObject then
+			startWatching(cooldown, durationObject)
+		end
+	end
 end)
