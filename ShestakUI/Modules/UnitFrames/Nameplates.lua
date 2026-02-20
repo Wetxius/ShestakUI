@@ -227,28 +227,29 @@ local AurasCustomFilter = function(_, unit, data)
 
 	if not UnitIsFriend("player", unit) then
 		if data.isHarmfulAura then
-			-- if C.nameplate.track_debuffs and (data.isPlayerAura or data.sourceUnit == "pet") and not T.DebuffBlackList[data.name] then
 			if C.nameplate.track_debuffs and data.isPlayerAura then
-				local filter = C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "INCLUDE_NAME_PLATE_ONLY")
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|PLAYER|")
 				if filter then
 					allow = true
 				end
-				-- if data.nameplateShowAll or data.nameplateShowPersonal then
-					-- allow = true
-				-- elseif T.DebuffWhiteList[data.name] then
-					-- allow = true
-				-- end
 			end
 		else
-			local filter = C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "INCLUDE_NAME_PLATE_ONLY")
-			if filter then
-				allow = true
+			if C.nameplate.track_buffs then
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HELPFUL|EXTERNAL_DEFENSIVE")
+				if filter then
+					allow = true
+				end
+
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HELPFUL|BIG_DEFENSIVE")
+				if filter then
+					allow = true
+				end
+
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HELPFUL|RAID_PLAYER_DISPELLABLE")
+				if filter then
+					allow = true
+				end
 			end
-			-- if canaccessvalue(data.name) and T.BuffWhiteList[data.name] then -- BETA value is secret in combat
-				-- allow = true
-			-- elseif canaccessvalue(data.isStealable) and data.isStealable then
-				-- allow = true
-			-- end
 		end
 	end
 
