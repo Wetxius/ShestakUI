@@ -24,7 +24,7 @@ local function CheckFaction(msg)
 	if not factionName then return end -- not found
 	for i = 1, C_Reputation.GetNumFactions() do
 		local data  = C_Reputation.GetFactionDataByIndex(i)
-		if data and factionName == data.name then
+		if data and strlower(factionName) == strlower(data.name) then
 			C_Reputation.SetWatchedFactionByID(data.factionID)
 			break
 		end
