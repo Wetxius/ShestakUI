@@ -53,23 +53,11 @@ if C.actionbar.bottombars == 1 then
 	bar:Hide()
 end
 
+-- Mouseover bar
 if C.actionbar.bottombars_mouseover then
-	for i = 1, 12 do
-		local b = _G["MultiBarBottomLeftButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then BottomBarMouseOver(0) end end)
-	end
+	SetupMouseOver("MultiBarBottomLeftButton", BottomBarMouseOver)
 end
 
 if C.actionbar.editor and C.actionbar.bar2_mouseover then
-	for i = 1, 12 do
-		local b = _G["MultiBarBottomLeftButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() Bar2MouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then Bar2MouseOver(0) end end)
-	end
-
-	bar:SetScript("OnEnter", function() Bar2MouseOver(1) end)
-	bar:SetScript("OnLeave", function() if not HoverBind.enabled then Bar2MouseOver(0) end end)
+	SetupMouseOver("MultiBarBottomLeftButton", Bar2MouseOver, bar)
 end

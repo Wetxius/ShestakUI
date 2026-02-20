@@ -121,23 +121,11 @@ bar:SetScript("OnEvent", function(self, event)
 	end
 end)
 
+-- Mouseover bar
 if C.actionbar.bottombars_mouseover then
-	for i = 1, 12 do
-		local b = _G["ActionButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then BottomBarMouseOver(0) end end)
-	end
+	SetupMouseOver("ActionButton", BottomBarMouseOver)
 end
 
 if C.actionbar.editor and C.actionbar.bar1_mouseover then
-	for i = 1, 12 do
-		local b = _G["ActionButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() Bar1MouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then Bar1MouseOver(0) end end)
-	end
-
-	bar:SetScript("OnEnter", function() Bar1MouseOver(1) end)
-	bar:SetScript("OnLeave", function() if not HoverBind.enabled then Bar1MouseOver(0) end end)
+	SetupMouseOver("ActionButton", Bar1MouseOver, bar)
 end

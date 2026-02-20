@@ -43,13 +43,5 @@ end
 
 -- Mouseover bar
 if C.actionbar.bar7_mouseover then
-	for i = 1, 12 do
-		local b = _G["MultiBar6Button"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() Bar7MouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then Bar7MouseOver(0) end end)
-	end
-
-	bar:SetScript("OnEnter", function() Bar7MouseOver(1) end)
-	bar:SetScript("OnLeave", function() if not HoverBind.enabled then Bar7MouseOver(0) end end)
+	SetupMouseOver("MultiBar6Button", Bar7MouseOver, bar)
 end

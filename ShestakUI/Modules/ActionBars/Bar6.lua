@@ -54,23 +54,10 @@ if C.actionbar.rightbars < 3 then
 end
 
 -- Mouseover bar
-if C.actionbar.rightbars_mouseover == true then
-	for i = 1, 12 do
-		local b = _G["MultiBar5Button"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
-	end
+if C.actionbar.rightbars_mouseover then
+	SetupMouseOver("MultiBar5Button", RightBarMouseOver)
 end
 
 if C.actionbar.editor and C.actionbar.bar6_mouseover then
-	for i = 1, 12 do
-		local b = _G["MultiBar5Button"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() Bar6MouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then Bar6MouseOver(0) end end)
-	end
-
-	bar:SetScript("OnEnter", function() Bar6MouseOver(1) end)
-	bar:SetScript("OnLeave", function() if not HoverBind.enabled then Bar6MouseOver(0) end end)
+	SetupMouseOver("MultiBar5Button", Bar6MouseOver, bar)
 end

@@ -292,6 +292,20 @@ function Bar8MouseOver(alpha)
 	end
 end
 
+function SetupMouseOver(b, func, bar)
+	for i = 1, 12 do
+		local b = _G[b..i]
+		b:SetAlpha(0)
+		b:HookScript("OnEnter", function() func(1) end)
+		b:HookScript("OnLeave", function() if not HoverBind.enabled then func(0) end end)
+	end
+
+	if bar then
+		bar:SetScript("OnEnter", function() func(1) end)
+		bar:SetScript("OnLeave", function() if not HoverBind.enabled then func(0) end end)
+	end
+end
+
 ----------------------------------------------------------------------------------------
 --	Fix cooldown spiral alpha (WoD bug)
 ----------------------------------------------------------------------------------------

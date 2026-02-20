@@ -55,22 +55,9 @@ end
 
 -- Mouseover bar
 if C.actionbar.rightbars_mouseover == true then
-	for i = 1, 12 do
-		local b = _G["MultiBarRightButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
-	end
+	SetupMouseOver("MultiBarRightButton", RightBarMouseOver)
 end
 
 if C.actionbar.editor and C.actionbar.bar4_mouseover then
-	for i = 1, 12 do
-		local b = _G["MultiBarRightButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() Bar4MouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then Bar4MouseOver(0) end end)
-	end
-
-	bar:SetScript("OnEnter", function() Bar4MouseOver(1) end)
-	bar:SetScript("OnLeave", function() if not HoverBind.enabled then Bar4MouseOver(0) end end)
+	SetupMouseOver("MultiBarRightButton", Bar4MouseOver, bar)
 end
