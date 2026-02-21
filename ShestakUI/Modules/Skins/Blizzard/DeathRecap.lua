@@ -10,14 +10,24 @@ local function LoadSkin()
 	DeathRecapFrame.CloseButton:SkinButton(true)
 	T.SkinCloseButton(DeathRecapFrame.CloseXButton)
 
-	for i = 1, NUM_DEATH_RECAP_EVENTS do
-		local recap = DeathRecapFrame["Recap"..i].SpellInfo
+	T.SkinScrollBar(DeathRecapFrame.ScrollBar)
+
+	local function updateEntry(button)
+		local recap = button.SpellInfo
+		if not recap or recap.styled then return end
+
+		if recap.Icon then
+			recap.Icon:SkinIcon()
+			recap.Icon:SetSize(26, 26)
+		end
 		recap.IconBorder:Hide()
-		recap.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		recap:CreateBackdrop("Default")
-		recap.backdrop:SetPoint("TOPLEFT", recap.Icon, "TOPLEFT", -2, 2)
-		recap.backdrop:SetPoint("BOTTOMRIGHT", recap.Icon, "BOTTOMRIGHT", 2, -2)
+
+		recap.styled = true
 	end
+
+	hooksecurefunc(DeathRecapFrame.ScrollBox, "Update", function(self)
+		self:ForEachFrame(updateEntry)
+	end)
 end
 
 T.SkinFuncs["Blizzard_DeathRecap"] = LoadSkin
