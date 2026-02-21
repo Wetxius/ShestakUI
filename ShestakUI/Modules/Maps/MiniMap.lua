@@ -440,7 +440,7 @@ if C.minimap.on_top then
 	MinimapAnchor:ClearAllPoints()
 	MinimapAnchor:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -21, -21)
 	if BuffsAnchor then
-		local space = ButtonCollectFrame.col or 1
+		local space = (ButtonCollectFrame and ButtonCollectFrame.col) or 1
 		BuffsAnchor:ClearAllPoints()
 		BuffsAnchor:SetPoint("TOPRIGHT", MinimapAnchor, "TOPLEFT", -25 * space, 0)
 	end
