@@ -339,20 +339,24 @@ local OnTooltipSetUnit = function(self)
 		for i = n + 1, lines do
 			local line = _G["GameTooltipTextLeft"..i]
 			if not line or not line:GetText() then return end
-			if not canaccessvalue(line) then return end
-			if line and line:GetText() and (line:GetText() == FACTION_HORDE or line:GetText() == FACTION_ALLIANCE) then
-				line:SetText()
-				break
+			local text = line:GetText()
+			if T.NotSecretValue(text) then
+				if text == FACTION_HORDE or text == FACTION_ALLIANCE then
+					line:SetText()
+					break
+				end
 			end
 		end
 	else
 		for i = 2, lines do
 			local line = _G["GameTooltipTextLeft"..i]
 			if not line or not line:GetText() or UnitIsBattlePetCompanion(unit) then return end
-			if not canaccessvalue(line) or not canaccessvalue(creatureType) then return end
-			if (level and line:GetText():find("^"..LEVEL)) or (creatureType and line:GetText():find("^"..creatureType)) then
-				line:SetFormattedText("|cff%02x%02x%02x%s%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, classification, creatureType or "")
-				break
+			local text = line:GetText()
+			if T.NotSecretValue(text) then
+				if (level and text:find("^"..LEVEL)) or (creatureType and text:find("^"..creatureType)) then
+					line:SetFormattedText("|cff%02x%02x%02x%s%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, classification, creatureType or "")
+					break
+				end
 			end
 		end
 	end
