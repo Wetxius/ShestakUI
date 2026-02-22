@@ -795,7 +795,7 @@ T.PostCreateIcon = function(_, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)
 	else
-		button.Cooldown:SetAlpha(0)
+		-- button.Cooldown:SetAlpha(0)
 	end
 end
 
@@ -846,10 +846,9 @@ T.PostUpdateGapButton = function(_, _, button)
 end
 
 T.CreateRaidBuffIcon = function(_, button)
-	if not C.raidframe.plugins_buffs_timer then
-		button.Cooldown:SetHideCountdownNumbers(true)
-	end
 	T.SkinCooldown(button.Cooldown, "aura")
+
+	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
 
 	button:CreateBorder(nil, true)
 	button.oborder:SetOutside(button.Icon, 1, 1)
@@ -867,7 +866,7 @@ T.CreateRaidBuffIcon = function(_, button)
 		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
 		button.Count:SetParent(button.parent)
 	else
-		button.Cooldown:SetAlpha(0)
+		-- button.Cooldown:SetAlpha(0)
 	end
 end
 
@@ -881,9 +880,7 @@ T.PostUpdateRaidButton = function(_, button, unit, data)
 		button:SetBackdropBorderColor(1, 0, 0)
 	end
 
-	if not C.aura.plugins_aura_watch_timer then
-		button.Cooldown:SetHideCountdownNumbers(true)
-	end
+	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_aura_watch_timer)
 end
 
 -- local CountOffSets = {

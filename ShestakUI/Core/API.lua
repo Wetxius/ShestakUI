@@ -1291,7 +1291,7 @@ function T.SkinCooldown(cooldown, name)
 
 	if name == "aura" then
 		cooldown:SetDrawEdge(false)
-		cooldown:SetSwipeColor(0, 0, 0, 0.8)
+		cooldown:SetSwipeColor(0, 0, 0, C.aura.show_spiral and 0.8 or 0)
 		if not C.aura.show_timer then
 			cooldown:SetHideCountdownNumbers(true)
 		end
