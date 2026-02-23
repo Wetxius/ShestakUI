@@ -18,7 +18,7 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function(self, event, addon)
+frame:SetScript("OnEvent", function()
 	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
 		if CompactRaidFrameManager then
 			hooksecurefunc("CompactRaidFrameManager_UpdateShown", HideFrames)
@@ -27,10 +27,10 @@ frame:SetScript("OnEvent", function(self, event, addon)
 			HideFrames()
 			CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
 			UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE") -- Hide/Show party member frames with UpdateRaidAndPartyFrames()
-			self:UnregisterAllEvents()
+			frame:UnregisterAllEvents()
 		end
 	else
-		self:UnregisterAllEvents()
+		frame:UnregisterAllEvents()
 	end
 end)
 

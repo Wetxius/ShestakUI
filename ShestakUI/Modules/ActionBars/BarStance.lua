@@ -54,6 +54,8 @@ bar:SetScript("OnEvent", function(self, event)
 				button:Hide()
 			end
 		end
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		T.StyleShift()
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 		if InCombatLockdown() then return end
 		for i = 1, 10 do
@@ -66,8 +68,6 @@ bar:SetScript("OnEvent", function(self, event)
 			end
 		end
 		T.ShiftBarUpdate()
-	elseif event == "PLAYER_ENTERING_WORLD" then
-		T.StyleShift()
 	else
 		T.ShiftBarUpdate()
 	end
