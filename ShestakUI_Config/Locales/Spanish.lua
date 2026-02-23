@@ -220,6 +220,7 @@ L.raidframe_plugins_debuffhighlight_icon = "Remarcar textura de desventajas + ic
 L.raidframe_plugins_aura_watch = "'BANDA' Ver las auras"
 L.raidframe_plugins_aura_watch_timer = "Temporizador en los iconos de perjuicios de la banda"
 L.raidframe_plugins_pvp_debuffs = "Show PvP debuff icons (from the list)" -- Need review
+L.raidframe_plugins_buffs = "Raid buff icons (by Blizzard filter)" -- Need review
 L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review
 L_GUI_UF_PLUGINS_HEALCOMM = "Barra de sanación entrante"
 L.raidframe_plugins_over_absorb = "Show over absorb bar on frame" -- Need review

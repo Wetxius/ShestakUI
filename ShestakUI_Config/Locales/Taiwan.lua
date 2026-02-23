@@ -222,6 +222,7 @@ L.raidframe_plugins_debuffhighlight_icon = "顯示可驅散"
 L.raidframe_plugins_aura_watch = "團隊法術監視"
 L.raidframe_plugins_aura_watch_timer = "團隊減益時間"
 L.raidframe_plugins_pvp_debuffs = "PvP DeBuff圖標"
+L.raidframe_plugins_buffs = "Raid buff icons (by Blizzard filter)" -- Need review
 L.raidframe_plugins_buffs_timer = "增益時間"
 L_GUI_UF_PLUGINS_HEALCOMM = "即將受到的治療"
 L.raidframe_plugins_over_absorb = "顯示吸收條"

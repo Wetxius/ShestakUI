@@ -258,11 +258,8 @@ local function Shared(self, unit)
 		end
 	end
 
-	if C.raidframe.plugins_aura_watch == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
-		-- Classbuffs
-		-- T.CreateAuraWatch(self, unit)
-
-		-- Raid Buffs
+	-- Raid Buffs
+	if C.raidframe.plugins_buffs == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
 		self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
 		self.Buffs:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
 		self.Buffs.size = 8 * C.raidframe.icon_multiplier
@@ -277,7 +274,23 @@ local function Shared(self, unit)
 		self.Buffs.disableMouse = true
 		self.Buffs.filter = "HELPFUL|PLAYER|RAID_IN_COMBAT"
 
-		-- Raid Debuffs
+		-- Defensive buffs
+		self.Auras = CreateFrame("Frame", self:GetName().."_DefensiveBuffs", self)
+		self.Auras:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
+		self.Auras.size = 8 * C.raidframe.icon_multiplier
+		self.Auras.spacing = 3
+		self.Auras.numBuffs = 1
+		self.Auras:SetPoint("LEFT", self, 0, 0)
+
+		self.Auras.PostCreateButton = T.CreateRaidBuffIcon
+
+		self.Auras.disableMouse = true
+		self.Auras.filter = "HELPFUL|EXTERNAL_DEFENSIVE"
+		-- self.Auras.filter = "HELPFUL|BIG_DEFENSIVE"
+	end
+
+	-- Raid Debuffs
+	if C.raidframe.plugins_aura_watch == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
 		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
 		self.Debuffs:SetSize(18, 18)
 		self.Debuffs.size = T.Scale(18)
@@ -289,6 +302,14 @@ local function Shared(self, unit)
 
 		self.Debuffs.disableMouse = true
 		self.Debuffs.filter = "HARMFUL|RAID"
+
+		-- self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)	-- BETA Not tested
+		-- self.PrivateAuras:SetPoint("BOTTOMRIGHT", self, 0, 0)
+		-- self.PrivateAuras.initialAnchor = "TOPRIGHT"
+		-- self.PrivateAuras.growthX = "LEFT"
+		-- self.PrivateAuras:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
+		-- self.PrivateAuras.size = 8 * C.raidframe.icon_multiplier
+		-- self.PrivateAuras.spacing = T.Scale(3)
 
 		-- -- Raid debuffs
 		-- self.RaidDebuffs = CreateFrame("Frame", nil, self)
