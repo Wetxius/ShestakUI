@@ -1812,7 +1812,7 @@ C["filger_spells"] = {
 			-- Nightblade
 			{spellID = 195452, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Ghostly Strike
-			{spellID = 196937, unitID = "target", caster = "player", filter = "DEBUFF"},
+			--BETA {spellID = 196937, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Deadly Poison
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crippling Poison
@@ -1820,7 +1820,7 @@ C["filger_spells"] = {
 			-- Wound Poison
 			{spellID = 8680, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crimson Tempest
-			{spellID = 121411, unitID = "target", caster = "player", filter = "DEBUFF"},
+			--BETA {spellID = 121411, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "PVE/PVP_CC",
@@ -1879,7 +1879,7 @@ C["filger_spells"] = {
 			-- Between the Eyes
 			{spellID = 315341, filter = "CD"},
 			-- Riposte
-			{spellID = 199754, filter = "CD"},
+			--BETA {spellID = 199754, filter = "CD"},
 			-- Cloak of Shadows
 			{spellID = 31224, filter = "CD"},
 			-- Grappling Hook
@@ -1889,7 +1889,7 @@ C["filger_spells"] = {
 			-- Garrote
 			{spellID = 703, filter = "CD"},
 			-- Exsanguinate
-			{spellID = 200806, filter = "CD"},
+			--BETA {spellID = 200806, filter = "CD"},
 			-- Shadowstep
 			{spellID = 36554, filter = "CD"},
 			-- Evasion
@@ -2077,7 +2077,7 @@ C["filger_spells"] = {
 			-- Empowered Life Tap
 			{spellID = 235156, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Soul Swap
-			{spellID = 86211, unitID = "player", caster = "player", filter = "BUFF"},
+			--BETA {spellID = 86211, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Regeneration
 			{spellID = 108359, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Rush
