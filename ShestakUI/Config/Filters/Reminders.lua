@@ -128,6 +128,18 @@ if C.reminder.solo_buffs_enable == true then
 				},
 				["instance"] = true
 			},
+			[2] = {	-- Rite of Sanctification/Adjuration group
+				["spells"] = {
+					SpellName(433568),	-- Rite of Sanctification
+					SpellName(433583),	-- Rite of Adjuration
+				},
+				["mainhand"] = true,
+				["spec"] = 2,
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+				["level"] = 80,
+			},
 		},
 		PRIEST = {
 			[1] = {	-- Stamina group
