@@ -4,6 +4,18 @@ if C.unitframe.enable ~= true or C.filger.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Lightweight buff/debuff tracking (Filger by Nils Ruesch, editors Affli/SinaC/Ildyria)
 ----------------------------------------------------------------------------------------
+P_BUFF_ICON_Anchor = CreateFrame("Frame", "P_BUFF_ICON_Anchor", UIParent)
+P_PROC_ICON_Anchor = CreateFrame("Frame", "P_PROC_ICON_Anchor", UIParent)
+SPECIAL_P_BUFF_ICON_Anchor = CreateFrame("Frame", "SPECIAL_P_BUFF_ICON_Anchor", UIParent)
+T_DEBUFF_ICON_Anchor = CreateFrame("Frame", "T_DEBUFF_ICON_Anchor", UIParent)
+T_CC_Anchor = CreateFrame("Frame", "T_CC_Anchor", UIParent)
+T_BUFF_Anchor = CreateFrame("Frame", "T_BUFF_Anchor", UIParent)
+PVE_PVP_DEBUFF_Anchor = CreateFrame("Frame", "PVE_PVP_DEBUFF_Anchor", UIParent)
+FOCUS_CC_Anchor = CreateFrame("Frame", "FOCUS_CC_Anchor", UIParent)
+COOLDOWN_Anchor = CreateFrame("Frame", "COOLDOWN_Anchor", UIParent)
+T_DE_BUFF_BAR_Anchor = CreateFrame("Frame", "T_DE_BUFF_BAR_Anchor", UIParent)
+P_BUFF_BAR_Anchor = CreateFrame("Frame", "P_BUFF_BAR_Anchor", UIParent)
+
 P_BUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.player_buff_icon))
 P_BUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
 
@@ -16,14 +28,17 @@ SPECIAL_P_BUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
 T_DEBUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.target_debuff_icon))
 T_DEBUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
 
-T_BUFF_Anchor:SetPoint(unpack(C.position.filger.target_buff_icon))
+T_CC_Anchor:SetPoint(unpack(C.position.filger.target_buff_icon))
+T_CC_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
+
+T_BUFF_Anchor:SetPoint("LEFT", T_CC_Anchor, "LEFT", C.filger.pvp_size + 3, 0)
 T_BUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
 
 PVE_PVP_DEBUFF_Anchor:SetPoint(unpack(C.position.filger.pve_debuff))
 PVE_PVP_DEBUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
 
-PVE_PVP_CC_Anchor:SetPoint(unpack(C.position.filger.pve_cc))
-PVE_PVP_CC_Anchor:SetSize(221, 25)
+FOCUS_CC_Anchor:SetPoint(unpack(C.position.filger.focus_cc))
+FOCUS_CC_Anchor:SetSize(221, 25)
 
 COOLDOWN_Anchor:SetPoint(C.position.filger.cooldown[1], C.position.filger.cooldown[2], C.position.filger.cooldown[3], C.position.filger.cooldown[4], C.unitframe.plugins_swing and C.position.filger.cooldown[5] + 12 or C.position.filger.cooldown[5])
 COOLDOWN_Anchor:SetSize(C.filger.cooldown_size, C.filger.cooldown_size)
@@ -38,6 +53,227 @@ P_BUFF_BAR_Anchor:SetSize(218, 25)
 
 SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 
+local SPELL_HOLDER = 100
+
+C["filger_spells"] = {
+	["ALL"] = {
+		{
+			Name = "P_BUFF_ICON",
+			Direction = "LEFT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", P_BUFF_ICON_Anchor},
+			Filter = "HELPFUL|PLAYER|RAID_IN_COMBAT",
+			Unit = "player",
+
+			-- Player buffs
+			{spellID = SPELL_HOLDER, unitID = "player", caster = "player", filter = "BUFF"},
+		},
+		-- {
+			-- Name = "T_DEBUFF_ICON",
+			-- Direction = "RIGHT",
+			-- Mode = "ICON",
+			-- Interval = C.filger.buffs_space,
+			-- Alpha = 1,
+			-- IconSize = C.filger.buffs_size,
+			-- Position = {"TOP", T_DEBUFF_ICON_Anchor},
+			-- Filter = "HARMFUL|PLAYER",
+			-- FilterExclude = {"HARMFUL|CROWD_CONTROL"},
+			-- Unit = "target",
+
+			-- -- Player debuffs on target
+			-- {spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "DEBUFF"},
+		-- },
+		-- {
+			-- Name = "T_DE/BUFF_BAR",
+			-- Direction = "UP",
+			-- IconSide = "LEFT",
+			-- Mode = "BAR",
+			-- Interval = 3,
+			-- Alpha = 1,
+			-- IconSize = 25,
+			-- BarWidth = 186,
+			-- Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+			-- Filter = "HELPFUL|PLAYER|RAID_IN_COMBAT",
+			-- Unit = "target",
+
+			-- -- Player hots on target
+			-- {spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "BUFF"},
+		-- },
+		{
+			Name = "FOCUS_CC",
+			Direction = "DOWN",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 189,
+			Position = {"LEFT", FOCUS_CC_Anchor},
+			Filter = "HARMFUL|CROWD_CONTROL",
+			Unit = "focus",
+
+			-- Crowd Controls on focus
+			{spellID = SPELL_HOLDER, unitID = "focus", caster = "player", filter = "DEBUFF"},
+		},
+		{
+			Name = "SPECIAL_P_BUFF_ICON",
+			Direction = "LEFT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", SPECIAL_P_BUFF_ICON_Anchor},
+			Filter = "HELPFUL",
+			FilterInclude = {"HELPFUL|BIG_DEFENSIVE", "HELPFUL|EXTERNAL_DEFENSIVE"},
+			Unit = "player",
+
+			-- Defensive spells
+			{spellID = SPELL_HOLDER, unitID = "player", caster = "player", filter = "BUFF"},
+		},
+		-- {
+			-- Name = "P_BUFF_BAR",
+			-- Direction = "UP",
+			-- IconSide = "RIGHT",
+			-- Mode = "BAR",
+			-- Interval = 3,
+			-- Alpha = 1,
+			-- IconSize = 25,
+			-- BarWidth = 186,
+			-- Position = {"RIGHT", P_BUFF_BAR_Anchor},
+			-- -- Filter = "HARMFUL|CROWD_CONTROL",
+			-- Unit = "player",
+
+			-- -- Spell holder to enable this section
+			-- {spellID = SPELL_HOLDER, unitID = "player", caster = "all", filter = "BUFF"},
+		-- },
+		{
+			Name = "PVE/PVP_DEBUFF",
+			Direction = "UP",
+			Mode = "ICON",
+			Interval = C.filger.pvp_space,
+			Alpha = 1,
+			IconSize = C.filger.pvp_size,
+			Position = {"TOP", PVE_PVP_DEBUFF_Anchor},
+			Filter = "HARMFUL|CROWD_CONTROL",
+			Unit = "player",
+
+			-- Crowd Controls
+			{spellID = SPELL_HOLDER, unitID = "player", caster = "all", filter = "DEBUFF"},
+		},
+		{
+			Name = "T_CC",
+			Direction = "UP",
+			Mode = "ICON",
+			Interval = C.filger.pvp_space,
+			Alpha = 1,
+			IconSize = C.filger.pvp_size,
+			Position = {"TOP", T_CC_Anchor},
+			Filter = "HARMFUL|CROWD_CONTROL",
+			Unit = "target",
+
+			-- Crowd Controls on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "all", filter = "DEBUFF"},
+		},
+		{
+			Name = "T_BUFF",
+			Direction = "UP",
+			Mode = "ICON",
+			Interval = C.filger.pvp_space,
+			Alpha = 1,
+			IconSize = C.filger.pvp_size,
+			Position = {"TOP", T_BUFF_Anchor},
+			Filter = "HELPFUL",
+			FilterInclude = {"HELPFUL|BIG_DEFENSIVE", "HELPFUL|EXTERNAL_DEFENSIVE"},
+			Unit = "target",
+
+			-- Defensive spells on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "all", filter = "BUFF"},
+		},
+	},
+}
+
+if T.class == "PRIEST" or T.class == "WARLOCK" then
+	tinsert(C["filger_spells"]["ALL"],
+		{
+			Name = "T_DEBUFF_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", T_DEBUFF_ICON_Anchor},
+			Filter = "HELPFUL|PLAYER|RAID_IN_COMBAT",
+			Unit = "target",
+
+			-- Player hots on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "DEBUFF"},
+		}
+	)
+	tinsert(C["filger_spells"]["ALL"],
+		{
+			Name = "T_DE/BUFF_BAR",
+			Direction = "UP",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 186,
+			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+			Filter = "HARMFUL|PLAYER",
+			FilterExclude = {"HARMFUL|CROWD_CONTROL"},
+			Unit = "target",
+
+			-- Player debuffs on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "BUFF"},
+		}
+	)
+else
+	tinsert(C["filger_spells"]["ALL"],
+		{
+			Name = "T_DEBUFF_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", T_DEBUFF_ICON_Anchor},
+			Filter = "HARMFUL|PLAYER",
+			FilterExclude = {"HARMFUL|CROWD_CONTROL"},
+			Unit = "target",
+
+			-- Player debuffs on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "DEBUFF"},
+		}
+	)
+	tinsert(C["filger_spells"]["ALL"],
+		{
+			Name = "T_DE/BUFF_BAR",
+			Direction = "UP",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 186,
+			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+			Filter = "HELPFUL|PLAYER|RAID_IN_COMBAT",
+			Unit = "target",
+
+			-- Player hots on target
+			{spellID = SPELL_HOLDER, unitID = "target", caster = "player", filter = "BUFF"},
+		}
+	)
+end
+
+if not C["filger_spells"][T.class] then
+	C["filger_spells"][T.class] = C["filger_spells"]["ALL"]
+end
+
+
 -- Cache
 local GetTime, GetSpellCooldown, GetSpellInfo = GetTime, GetSpellCooldown, GetSpellInfo
 local pairs, ipairs, unpack, format = pairs, ipairs, unpack, string.format
@@ -48,12 +284,10 @@ local SpellGroups = {}
 local tempActiveTable = {}
 
 function Filger:TooltipOnEnter()
-	if self.spellID > 15 then
-		GameTooltip:ClearLines()
-		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 3)
-		GameTooltip:SetHyperlink(format("spell:%s", self.spellID))
-		GameTooltip:Show()
-	end
+	GameTooltip:ClearLines()
+	GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 0, 3)
+	GameTooltip:SetUnitAuraByAuraInstanceID(self.unit, self.spellID)
+	GameTooltip:Show()
 end
 
 function Filger:TooltipOnLeave()
@@ -61,23 +295,7 @@ function Filger:TooltipOnLeave()
 end
 
 function Filger:UpdateCD()
-	local time = self.value.start + self.value.duration - GetTime()
-	local parent = self:GetParent()
-
-	if parent.Mode == "BAR" then
-		self.statusbar:SetValue(time)
-		if time <= 60 then
-			self.time:SetFormattedText("%.1f", time)
-		else
-			self.time:SetFormattedText("%d:%.2d", time / 60, time % 60)
-		end
-	end
-
-	if time < 0 then
-		parent.actives[self.value.spid] = nil
-		self:SetScript("OnUpdate", nil)
-		Filger.DisplayActives(parent)
-	end
+	self.time:SetFormattedText("%.1f", self.duration:GetRemainingDuration())
 end
 
 function Filger:DisplayActives()
@@ -123,6 +341,8 @@ function Filger:DisplayActives()
 					bar.cooldown:SetReverse(true)
 					bar.cooldown:SetDrawEdge(false)
 					bar.cooldown:SetFrameLevel(3)
+					T.SkinCooldown(bar.cooldown, "actionbar")
+					bar.cooldown:SetSwipeColor(0, 0, 0, 0.5)
 				end
 
 				if not bar.count then
@@ -196,14 +416,14 @@ function Filger:DisplayActives()
 		table.insert(tempActiveTable, value)
 	end
 
-	local function sortTable(a, b)
-		if C.filger.expiration and a.data.filter == "CD" then
-			return (a.start + a.duration) < (b.start + b.duration)
-		else
-			return a.sort < b.sort
-		end
-	end
-	table.sort(tempActiveTable, sortTable)
+	-- local function sortTable(a, b)
+		-- if C.filger.expiration and a.data.filter == "CD" then
+			-- return (a.start + a.duration) < (b.start + b.duration)
+		-- else
+			-- return a.sort < b.sort
+		-- end
+	-- end
+	-- table.sort(tempActiveTable, sortTable)
 
 	local iconSize = self.IconSize or C.filger.buffs_size
 	local limit = (C.actionbar.button_size * 12) / iconSize
@@ -219,28 +439,42 @@ function Filger:DisplayActives()
 			bar.spellname:SetText(bar.spellName)
 		end
 		bar.icon:SetTexture(value.icon)
-		if value.count and value.count > 1 then
-			bar.count:SetText(value.count)
-			bar.count:Show()
+		if value.count then
+			bar.count:SetText(C_UnitAuras.GetAuraApplicationDisplayCount(value.unit, value.auraInstanceID, 2, 999))
 		else
-			bar.count:Hide()
+			bar.count:SetText()
 		end
-		if value.duration and value.duration > 0 then
+		if value.duration then
 			if self.Mode == "ICON" then
-				if value.start + value.duration - GetTime() > 0.3 then
-					bar.cooldown:SetCooldown(value.start + 0.1, value.duration)
+				if value.unit and value.auraInstanceID then
+					local duration = C_UnitAuras.GetAuraDuration(value.unit, value.auraInstanceID)
+					if duration then
+						bar.cooldown:SetCooldownFromDurationObject(duration)
+						bar.cooldown:Show()
+					else
+						bar.cooldown:Hide()
+					end
 				end
-				if value.data.filter == "CD" or value.data.filter == "ICD" then
-					bar.value = value
+
+				-- if value.start + value.duration - GetTime() > 0.3 then
+					-- bar.cooldown:SetCooldown(value.start, value.duration)
+				-- end
+				-- if value.data.filter == "CD" or value.data.filter == "ICD" then
+					-- bar.value = value
+					-- bar:SetScript("OnUpdate", Filger.UpdateCD)
+				-- else
+					-- bar:SetScript("OnUpdate", nil)
+				-- end
+				-- bar.cooldown:Show()
+			else
+				local duration = C_UnitAuras.GetAuraDuration(value.unit, value.auraInstanceID)
+				if duration then
+					bar.statusbar:SetTimerDuration(duration, Enum.StatusBarInterpolation.Immediate, Enum.StatusBarTimerDirection.RemainingTime)
+					bar.duration = duration
 					bar:SetScript("OnUpdate", Filger.UpdateCD)
 				else
 					bar:SetScript("OnUpdate", nil)
 				end
-				bar.cooldown:Show()
-			else
-				bar.statusbar:SetMinMaxValues(0, value.duration)
-				bar.value = value
-				bar:SetScript("OnUpdate", Filger.UpdateCD)
 			end
 		else
 			if self.Mode == "ICON" then
@@ -252,8 +486,9 @@ function Filger:DisplayActives()
 			end
 			bar:SetScript("OnUpdate", nil)
 		end
-		bar.spellID = value.spid
+		bar.spellID = value.auraInstanceID
 		if C.filger.show_tooltip then
+			bar.unit = self.Unit
 			bar:EnableMouse(true)
 			bar:SetScript("OnEnter", Filger.TooltipOnEnter)
 			bar:SetScript("OnLeave", Filger.TooltipOnLeave)
@@ -270,6 +505,26 @@ function Filger:DisplayActives()
 	end
 end
 
+local function checkFilters(self, unit, auraInstanceID)
+	if self.FilterInclude then
+		for i = 1, #self.FilterInclude do
+			local filter = self.FilterInclude[i]
+			local shown = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, auraInstanceID, filter)
+			return shown -- if not found then hide aura
+		end
+	elseif self.FilterExclude then
+		for i = 1, #self.FilterExclude do
+			local filter = self.FilterExclude[i]
+			local shown = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, auraInstanceID, filter)
+			if shown then
+				return false -- if not found then allow aura
+			end
+		end
+	end
+
+	return true
+end
+
 local function FindAuras(self, unit)
 	for spid in pairs(self.actives) do
 		if self.actives[spid].data.filter ~= "CD" and self.actives[spid].data.filter ~= "ICD" and self.actives[spid].data.unitID == unit then
@@ -277,36 +532,19 @@ local function FindAuras(self, unit)
 		end
 	end
 
-	for i = 1, 2 do
-		local filter = (i == 1 and "HELPFUL" or "HARMFUL")
-		local index = 1
-		while true do
-			local auraData = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
-			local name, icon, count, _, duration, expirationTime, caster, _, _, spid
-			if auraData then
-				name, icon, count, _, duration, expirationTime, caster, _, _, spid = auraData.name, auraData.icon, auraData.applications, _, auraData.duration, auraData.expirationTime, auraData.sourceUnit, _, _,  auraData.spellId
-			end
-			if not name then break end
-			if not canaccessvalue(duration) then return end
-
-			local data = SpellGroups[self.Id].spells[name] or SpellGroups[self.Id].spells[spid]
-			if data and (data.caster ~= 1 and (caster == data.caster or data.caster == "all") or MyUnits[caster]) and (not data.unitID or data.unitID == unit) and (not data.absID or spid == data.spellID) then
-				local isKnown = data.requireSpell and C_SpellBook.IsSpellKnown(data.requireSpell)
-				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
-					if not data.count or count >= data.count then
-						self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = duration, spid = spid, sort = data.sort}
-					end
-				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
-					if data.slotID then
-						local slotLink = GetInventoryItemLink("player", data.slotID)
-						_, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
-					end
-					self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = data.duration, spid = spid, sort = data.sort}
+	if unit == self.Unit then
+		for i, auraData in ipairs(C_UnitAuras.GetUnitAuras(unit, self.Filter, 6, Enum.UnitAuraSortRule.Expiration)) do
+			if auraData and auraData.auraInstanceID then
+				local allow = checkFilters(self, unit, auraData.auraInstanceID)
+				local spell_name = GetSpellInfo(SPELL_HOLDER)
+				local data = SpellGroups[self.Id].spells[spell_name] or SpellGroups[self.Id].spells[SPELL_HOLDER]
+				if data and allow then
+					self.actives[i] = {data = data, unit = unit, auraData = auraData, auraInstanceID = auraData.auraInstanceID, name = auraData.name, icon = auraData.icon, count = auraData.applications, duration = auraData.duration, spid = auraData.spellId}
 				end
 			end
-			index = index + 1
 		end
 	end
+
 	Filger.DisplayActives(self)
 end
 
@@ -383,43 +621,43 @@ function Filger:OnEvent(event, ...)
 				FindAuras(self, "pet")
 			end
 		elseif event == "SPELL_UPDATE_COOLDOWN" then
-			for spid in pairs(self.actives) do
-				if self.actives[spid].data.filter == "CD" then
-					self.actives[spid] = nil
-				end
-			end
+			-- for spid in pairs(self.actives) do
+				-- if self.actives[spid].data.filter == "CD" then
+					-- self.actives[spid] = nil
+				-- end
+			-- end
 		end
 
-		for i = 1, #C["filger_spells"][T.class][self.Id], 1 do
-			local data = C["filger_spells"][T.class][self.Id][i]
+		-- for i = 1, #C["filger_spells"][T.class][self.Id], 1 do
+			-- local data = C["filger_spells"][T.class][self.Id][i]
 
-			if data.filter == "CD" and (not data.spec or data.spec == T.Spec) then
-				local name, icon, start, duration, spid
-				if data.spellID then
-					name, _, icon = GetSpellInfo(data.spellID)
-					if name then
-						if data.absID then
-							start, duration = GetSpellCooldown(data.spellID)
-						else
-							start, duration = GetSpellCooldown(name)
-						end
-						spid = data.spellID
-					end
-				elseif data.slotID then
-					spid = data.slotID
-					local slotLink = GetInventoryItemLink("player", data.slotID)
-					if slotLink then
-						name, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
-						start, duration = GetInventoryItemCooldown("player", data.slotID)
-					end
-				end
-				if name and canaccessvalue(duration) and (duration or 0) > 1.9 and duration < 900 then
-					if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
-						self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
-					end
-				end
-			end
-		end
+			-- if data.filter == "CD" and (not data.spec or data.spec == T.Spec) then
+				-- local name, icon, start, duration, spid
+				-- if data.spellID then
+					-- name, _, icon = GetSpellInfo(data.spellID)
+					-- if name then
+						-- if data.absID then
+							-- start, duration = GetSpellCooldown(data.spellID)
+						-- else
+							-- start, duration = GetSpellCooldown(name)
+						-- end
+						-- spid = data.spellID
+					-- end
+				-- elseif data.slotID then
+					-- spid = data.slotID
+					-- local slotLink = GetInventoryItemLink("player", data.slotID)
+					-- if slotLink then
+						-- name, _, _, _, _, _, _, _, _, icon = C_Item.GetItemInfo(slotLink)
+						-- start, duration = GetInventoryItemCooldown("player", data.slotID)
+					-- end
+				-- end
+				-- if name and canaccessvalue(duration) and (duration or 0) > 1.9 and duration < 900 then
+					-- if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
+						-- self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
+					-- end
+				-- end
+			-- end
+		-- end
 
 		Filger.DisplayActives(self)
 	end
@@ -453,47 +691,8 @@ if C["filger_spells"] and C["filger_spells"]["ALL"] then
 	end
 end
 
-for _, spell in pairs(C.filger.buff_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"P_BUFF_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.proc_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.debuff_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"T_DEBUFF_ICON", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.aura_bar_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"T_DE/BUFF_BAR", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.aura_bar_player_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"P_BUFF_BAR", {spellID = spell[1], unitID = "player", caster = "all", filter = "BUFF", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.cd_spells_list) do
-	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = spell[1], filter = "CD", absID = true, custom = true}})
-	end
-end
-
-for _, spell in pairs(C.filger.ignore_spells_list) do
-	if spell[2] == T.class then
-		T.FilgerIgnoreSpell[GetSpellInfo(spell[1])] = true
-	end
-end
+T.CustomFilgerSpell = T.CustomFilgerSpell or {}
+T.FilgerIgnoreSpell = T.FilgerIgnoreSpell or {}
 
 if C["filger_spells"] and C["filger_spells"][T.class] then
 	for class in pairs(C["filger_spells"]) do
@@ -559,15 +758,16 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 
 	local isEnabled = {
 		["P_BUFF_ICON"] = C.filger.show_buff,
-		["P_PROC_ICON"] = C.filger.show_proc,
+		-- ["P_PROC_ICON"] = C.filger.show_proc,
 		["T_DEBUFF_ICON"] = C.filger.show_debuff,
 		["T_DE/BUFF_BAR"] = C.filger.show_aura_bar,
-		["P_BUFF_BAR"] = C.filger.show_aura_bar,
-		["PVE/PVP_CC"] = C.filger.show_aura_bar,
+		-- ["P_BUFF_BAR"] = C.filger.show_aura_bar,
+		["FOCUS_CC"] = C.filger.show_aura_bar,
 		["SPECIAL_P_BUFF_ICON"] = C.filger.show_special,
 		["PVE/PVP_DEBUFF"] = C.filger.show_pvp_player,
+		["T_CC"] = C.filger.show_pvp_target,
 		["T_BUFF"] = C.filger.show_pvp_target,
-		["COOLDOWN"] = C.filger.show_cd,
+		-- ["COOLDOWN"] = C.filger.show_cd,
 	}
 
 	for i = 1, #SpellGroups, 1 do
@@ -585,6 +785,10 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 			frame.BarWidth = data.BarWidth or 186
 			frame.Position = data.Position or "CENTER"
 			frame:SetPoint(unpack(data.Position))
+			frame.Filter = data.Filter or ""
+			frame.FilterInclude = data.FilterInclude
+			frame.FilterExclude = data.FilterExclude
+			frame.Unit = data.Unit or "player"
 			frame.actives = {}
 
 			if C.filger.test_mode then

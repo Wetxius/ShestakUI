@@ -38,7 +38,7 @@
 	<Script file="Config\Filters\Cooldowns.lua"/>
 	<Script file="Config\Filters\Diminishing.lua"/>
 	<Script file="Config\Filters\Errors.lua"/>
-	<Script file="Config\Filters\FilgerSpells.lua"/>
+	<!-- <Script file="Config\Filters\FilgerSpells.lua"/> -->
 	<Script file="Config\Filters\Nameplates.lua"/>
 	<Script file="Config\Filters\OpenItems.lua"/>
 	<Script file="Config\Filters\RaidAuraWatch.lua"/>
