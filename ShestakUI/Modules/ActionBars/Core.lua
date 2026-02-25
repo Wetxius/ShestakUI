@@ -14,8 +14,6 @@ frame:SetScript("OnEvent", function()
 	MainActionBar:EnableMouse(false)
 	MainActionBar:UnregisterAllEvents()
 
-	OverrideActionBar:SetScale(0.00001)
-	OverrideActionBar:EnableMouse(false)
 	PetActionBar:EnableMouse(false)
 	PetActionBar:UnregisterAllEvents()
 	StanceBar:EnableMouse(false)
@@ -34,7 +32,7 @@ frame:SetScript("OnEvent", function()
 	-- EditModeUtil.GetBottomActionBarHeight = function() return 225 end
 
 	local elements = {
-		OverrideActionBar, PossessBarFrame, StatusTrackingBarManager, BagsBar,
+		OverrideActionBar, PossessActionBar, StatusTrackingBarManager, BagsBar,
 		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow,
 	}
 
@@ -42,13 +40,19 @@ frame:SetScript("OnEvent", function()
 		tinsert(elements, IconIntroTracker)
 	end
 
-	for _, element in pairs(elements) do
-		if element.UnregisterAllEvents then
-			element:UnregisterAllEvents()
+	for i = 1, #elements do
+		local f = elements[i]
+		if i < 3 then -- OverrideActionBar, PossessActionBar
+			f:SetScale(0.00001)
+			f:EnableMouse(false)
 		end
 
-		element:Hide()
-		element:SetAlpha(0)
+		if f.UnregisterAllEvents then
+			f:UnregisterAllEvents()
+		end
+
+		f:Hide()
+		f:SetAlpha(0)
 	end
 
 	for i = 1, 6 do
