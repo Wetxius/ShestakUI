@@ -45,8 +45,8 @@ local function LoadSkin()
 			option.backdrop:SetPoint("BOTTOMRIGHT", 2, -8)
 			option.backdrop:SetShown(not IsAnima and hasArtwork)
 
-			if option.Header.Ribbon then option.Header.Ribbon:SetAlpha(0) end
-			if option.Header.Contents then option.Header.Contents.Text:SetTextColor(1, .8, 0) end
+			if option.Header and option.Header.Ribbon then option.Header.Ribbon:SetAlpha(0) end
+			if option.Header and option.Header.Contents then option.Header.Contents.Text:SetTextColor(1, .8, 0) end
 			option.OptionText:SetTextColor(1, 1, 1)
 
 			if option.Background then option.Background:SetShown(not hasArtwork) end
