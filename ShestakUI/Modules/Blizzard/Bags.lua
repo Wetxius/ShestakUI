@@ -350,7 +350,7 @@ function Stuffing:SlotUpdate(b)
 	SetItemButtonDesaturated(b.frame, locked)
 
 	local mult = itemSpellID[b.spellID]
-	if mult and count then
+	if mult and count and b.count then
 		b.count:SetText(mult * count) -- replace item count with anima count
 		b.count:SetTextColor(1, 1, 0)
 	end
