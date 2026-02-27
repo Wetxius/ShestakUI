@@ -187,20 +187,15 @@ end
 
 local function StyleSmallButton(button, name, isPet)
 	if not button.isSkinned then
-		local normal = _G[name.."NormalTexture"]
 		local flash = _G[name.."Flash"]
 		local hotkey = _G[name.."HotKey"]
 		local icon = _G[name.."Icon"]
 
-		button:SetNormalTexture(0)
-
-		if normal then
-			normal:SetAlpha(0)
-		end
-
 		if button.IconMask then
 			button.IconMask:Hide()
 		end
+
+		button:SetNormalTexture(0)
 
 		hooksecurefunc(button, "SetNormalTexture", function(self, texture)
 			if texture and texture ~= "" then
@@ -235,12 +230,6 @@ local function StyleSmallButton(button, name, isPet)
 			local autocast = button.AutoCastOverlay
 			autocast:SetSize(C.actionbar.button_size * 1.05, C.actionbar.button_size * 1.05)
 			autocast:SetPoint("CENTER", 0, 0)
-		end
-
-		if normal then
-			normal:ClearAllPoints()
-			normal:SetPoint("TOPLEFT")
-			normal:SetPoint("BOTTOMRIGHT")
 		end
 
 		if button.QuickKeybindHighlightTexture then
