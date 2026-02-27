@@ -195,7 +195,7 @@ C["filger_spells"] = {
 	},
 }
 
-if T.class == "PRIEST" or T.class == "WARLOCK" then
+if C.filger.show_aura_bar and (T.class == "PRIEST" or T.class == "WARLOCK") then
 	tinsert(C["filger_spells"]["ALL"],
 		{
 			Name = "T_DEBUFF_ICON",
@@ -272,7 +272,6 @@ end
 if not C["filger_spells"][T.class] then
 	C["filger_spells"][T.class] = C["filger_spells"]["ALL"]
 end
-
 
 -- Cache
 local GetTime, GetSpellCooldown, GetSpellInfo = GetTime, GetSpellCooldown, GetSpellInfo
