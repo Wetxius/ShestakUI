@@ -209,6 +209,17 @@ local function SkinSpell(widget)
 	end
 end
 
+local function SkinItemDisplay(widget)
+	if not widget.styled then
+		widget.Item.Icon:SkinIcon(true)
+		T.SkinIconBorder(widget.Item.IconBorder, widget.Item.Icon.b)
+		widget.Item.IconBorder:SetVertexColor(widget.Item.IconBorder:GetVertexColor())
+		widget.Item.ItemName:SetFont(C.media.normal_font, 14, "")
+		widget.styled = true
+	end
+	widget.Item.IconMask:Hide()
+end
+
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("UPDATE_UI_WIDGET")
 frame:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
@@ -219,6 +230,8 @@ frame:SetScript("OnEvent", function()
 			SkinStatusBar(widget)
 		elseif widget.widgetType == _G.Enum.UIWidgetVisualizationType.DoubleStatusBar then
 			SkinDoubleStatusBar(widget)
+		elseif widget.widgetType == _G.Enum.UIWidgetVisualizationType.ItemDisplay then
+			SkinItemDisplay(widget)
 		end
 	end
 
