@@ -260,19 +260,21 @@ local function Shared(self, unit)
 
 	-- Raid Buffs
 	if C.raidframe.plugins_buffs == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
-		self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
-		self.Buffs:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
-		self.Buffs.size = 8 * C.raidframe.icon_multiplier
-		self.Buffs.spacing = 3
-		self.Buffs.num = 5
-		self.Buffs:SetPoint("TOPRIGHT", self, 0, 0)
-		self.Buffs.initialAnchor = "TOPRIGHT"
-		self.Buffs.growthX = "LEFT"
+		T.CreateAuraWatch(self, unit)
 
-		self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
+		-- self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
+		-- self.Buffs:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
+		-- self.Buffs.size = 8 * C.raidframe.icon_multiplier
+		-- self.Buffs.spacing = 3
+		-- self.Buffs.num = 5
+		-- self.Buffs:SetPoint("TOPRIGHT", self, 0, 0)
+		-- self.Buffs.initialAnchor = "TOPRIGHT"
+		-- self.Buffs.growthX = "LEFT"
 
-		self.Buffs.disableMouse = true
-		self.Buffs.filter = "HELPFUL|PLAYER|RAID_IN_COMBAT"
+		-- self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
+
+		-- self.Buffs.disableMouse = true
+		-- self.Buffs.filter = "HELPFUL|PLAYER|RAID_IN_COMBAT"
 
 		-- Defensive buffs
 		self.Auras = CreateFrame("Frame", self:GetName().."_DefensiveBuffs", self)

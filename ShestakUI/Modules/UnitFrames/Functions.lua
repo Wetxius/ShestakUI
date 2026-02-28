@@ -883,24 +883,27 @@ T.PostUpdateRaidButton = function(_, button, unit, data)
 	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_aura_watch_timer)
 end
 
--- local CountOffSets = {
-	-- TOPLEFT = {"LEFT", "RIGHT", 1, 0},
-	-- TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
-	-- BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
-	-- BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
-	-- LEFT = {"LEFT", "RIGHT", 1, 0},
-	-- RIGHT = {"RIGHT", "LEFT", 2, 0},
-	-- TOP = {"RIGHT", "LEFT", 2, 0},
-	-- BOTTOM = {"RIGHT", "LEFT", 2, 0},
--- }
+local CountOffSets = {
+	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
+	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
+	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
+	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
+	LEFT = {"LEFT", "RIGHT", 1, 0},
+	RIGHT = {"RIGHT", "LEFT", 2, 0},
+	TOP = {"RIGHT", "LEFT", 2, 0},
+	BOTTOM = {"RIGHT", "LEFT", 2, 0},
+}
 
--- T.CreateAuraWatchIcon = function(_, aura)
-	-- aura:CreateBorder(nil, true)
-	-- aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	-- aura.icon:SetDrawLayer("ARTWORK")
-	-- if aura.cd then
-		-- aura.cd:SetReverse(true)
-		-- aura.cd:SetHideCountdownNumbers(true)
+T.CreateAuraWatchIcon = function(_, aura)
+	aura:CreateBorder(nil, true)
+	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	aura.icon:SetDrawLayer("ARTWORK")
+
+	if aura.cd then
+		T.SkinCooldown(aura.cd, "aura")
+		aura.cd:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
+		aura.cd:SetReverse(true)
+
 		-- if C.raidframe.plugins_buffs_timer then
 			-- aura.parent = CreateFrame("Frame", nil, aura)
 			-- aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
@@ -909,64 +912,64 @@ end
 			-- aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
 			-- aura.remaining:SetJustifyH("CENTER")
 		-- end
-	-- end
--- end
+	end
+end
 
--- T.CreateAuraWatch = function(self)
-	-- local auras = CreateFrame("Frame", nil, self)
-	-- auras:SetPoint("TOPLEFT", self.Health, 0, 0)
-	-- auras:SetPoint("BOTTOMRIGHT", self.Health, 0, 0)
-	-- auras.icons = {}
-	-- auras.PostCreateIcon = T.CreateAuraWatchIcon
+T.CreateAuraWatch = function(self)
+	local auras = CreateFrame("Frame", nil, self)
+	auras:SetPoint("TOPLEFT", self.Health, 0, 0)
+	auras:SetPoint("BOTTOMRIGHT", self.Health, 0, 0)
+	auras.icons = {}
+	auras.PostCreateIcon = T.CreateAuraWatchIcon
 
-	-- if not C.aura.show_timer then
-		-- auras.hideCooldown = true
-	-- end
+	if not C.aura.show_timer then
+		auras.hideCooldown = true
+	end
 
-	-- local buffs = {}
+	local buffs = {}
 
-	-- if T.RaidBuffs["ALL"] then
-		-- for _, value in pairs(T.RaidBuffs["ALL"]) do
-			-- tinsert(buffs, value)
-		-- end
-	-- end
+	if T.RaidBuffs["ALL"] then
+		for _, value in pairs(T.RaidBuffs["ALL"]) do
+			tinsert(buffs, value)
+		end
+	end
 
-	-- if T.RaidBuffs[T.class] then
-		-- for _, value in pairs(T.RaidBuffs[T.class]) do
-			-- tinsert(buffs, value)
-		-- end
-	-- end
+	if T.RaidBuffs[T.class] then
+		for _, value in pairs(T.RaidBuffs[T.class]) do
+			tinsert(buffs, value)
+		end
+	end
 
-	-- if buffs then
-		-- for _, spell in pairs(buffs) do
-			-- local aura = CreateFrame("Frame", nil, auras)
-			-- aura.spellID = spell[1]
-			-- aura.anyUnit = spell[4]
-			-- aura.strictMatching = spell[5]
-			-- aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
-			-- aura:SetPoint(spell[2], 0, 0)
+	if buffs then
+		for _, spell in pairs(buffs) do
+			local aura = CreateFrame("Frame", nil, auras)
+			aura.spellID = spell[1]
+			aura.anyUnit = spell[4]
+			aura.strictMatching = spell[5]
+			aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
+			aura:SetPoint(spell[2], 0, 0)
 
-			-- local tex = aura:CreateTexture(nil, "OVERLAY")
-			-- tex:SetAllPoints(aura)
-			-- tex:SetTexture(C.media.blank)
-			-- if spell[3] then
-				-- tex:SetVertexColor(unpack(spell[3]))
-			-- else
-				-- tex:SetVertexColor(0.8, 0.8, 0.8)
-			-- end
-			-- aura.icon = tex
+			local tex = aura:CreateTexture(nil, "OVERLAY")
+			tex:SetAllPoints(aura)
+			tex:SetTexture(C.media.blank)
+			if spell[3] then
+				tex:SetVertexColor(unpack(spell[3]))
+			else
+				tex:SetVertexColor(0.8, 0.8, 0.8)
+			end
+			aura.icon = tex
 
-			-- local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-			-- local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
-			-- count:SetPoint(point, aura, anchorPoint, x, y)
-			-- aura.count = count
+			local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
+			count:SetPoint(point, aura, anchorPoint, x, y)
+			aura.count = count
 
-			-- auras.icons[spell[1]] = aura
-		-- end
-	-- end
+			auras.icons[spell[1]] = aura
+		end
+	end
 
-	-- self.AuraWatch = auras
--- end
+	self.AuraWatch = auras
+end
 
 T.CreateHealthPrediction = function(self)
 	-- Player healing
