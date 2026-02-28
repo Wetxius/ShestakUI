@@ -123,7 +123,6 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Auras group
 				["spells"] = {
 					SpellName(465),		-- Devotion Aura
-					SpellName(183435),	-- Retribution Aura
 					SpellName(317920),	-- Concentration Aura
 				},
 				["instance"] = true
@@ -134,11 +133,9 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(433583),	-- Rite of Adjuration
 				},
 				["mainhand"] = true,
-				["spec"] = 2,
 				["combat"] = true,
 				["instance"] = true,
 				["pvp"] = true,
-				["level"] = 80,
 			},
 		},
 		PRIEST = {
