@@ -66,6 +66,7 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 			Filter = "HELPFUL|PLAYER|RAID_IN_COMBAT",
+			FilterExclude = {"HELPFUL|BIG_DEFENSIVE", "HELPFUL|EXTERNAL_DEFENSIVE"},
 			Unit = "player",
 
 			-- Player buffs
