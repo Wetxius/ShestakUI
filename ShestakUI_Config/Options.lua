@@ -400,8 +400,8 @@ ns.HideSpellList = function()
 	InputSpell:SetText("")
 	InputSpell.value = ""
 	InputArg:SetText("")
-	UIDropDownMenu_SetText(ShestakUIOptionsPanelfilgercategory_listDropDown, "")
-	ShestakUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
+	-- UIDropDownMenu_SetText(ShestakUIOptionsPanelfilgercategory_listDropDown, "") -- BETA
+	-- ShestakUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
 	AddSpellButton:Disable()
 	SpellList:Hide()
 end
@@ -2870,18 +2870,18 @@ do
 	local show_tooltip = ns.CreateCheckBox(parent, "show_tooltip", L_GUI_FILGER_SHOW_TOOLTIP)
 	show_tooltip:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, 0)
 
-	local expiration = ns.CreateCheckBox(parent, "expiration", L_GUI_FILGER_EXPIRATION)
-	expiration:SetPoint("TOPLEFT", show_tooltip, "BOTTOMLEFT", 0, 0)
+	-- local expiration = ns.CreateCheckBox(parent, "expiration", L_GUI_FILGER_EXPIRATION)
+	-- expiration:SetPoint("TOPLEFT", show_tooltip, "BOTTOMLEFT", 0, 0)
 
 	-- Elements
 	local subheader = ns.addSubCategory(parent, L.filger_subheader_elements)
-	subheader:SetPoint("TOPLEFT", expiration, "BOTTOMLEFT", 0, -10)
+	subheader:SetPoint("TOPLEFT", expiration or show_tooltip, "BOTTOMLEFT", 0, -10)
 
 	local show_buff = ns.CreateCheckBox(parent, "show_buff")
 	show_buff:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
 
-	local show_proc = ns.CreateCheckBox(parent, "show_proc")
-	show_proc:SetPoint("LEFT", show_buff, "RIGHT", 320, 0)
+	-- local show_proc = ns.CreateCheckBox(parent, "show_proc")
+	-- show_proc:SetPoint("LEFT", show_buff, "RIGHT", 320, 0)
 
 	local show_debuff = ns.CreateCheckBox(parent, "show_debuff")
 	show_debuff:SetPoint("TOPLEFT", show_buff, "BOTTOMLEFT", 0, 0)
@@ -2898,8 +2898,8 @@ do
 	local show_special = ns.CreateCheckBox(parent, "show_special")
 	show_special:SetPoint("TOPLEFT", show_pvp_player, "BOTTOMLEFT", 0, 0)
 
-	local show_cd = ns.CreateCheckBox(parent, "show_cd")
-	show_cd:SetPoint("LEFT", show_special, "RIGHT", 320, 0)
+	-- local show_cd = ns.CreateCheckBox(parent, "show_cd")
+	-- show_cd:SetPoint("LEFT", show_special, "RIGHT", 320, 0)
 
 	-- Size
 	local subheader = ns.addSubCategory(parent, L.filger_subheader_size)
@@ -2917,38 +2917,38 @@ do
 	local pvp_space = ns.CreateNumberSlider(parent, "pvp_space", nil, nil, 0, 10, 1, true)
 	pvp_space:SetPoint("LEFT", pvp_size, "RIGHT", 120, 0)
 
-	local cooldown_size = ns.CreateNumberSlider(parent, "cooldown_size", nil, nil, 0, 60, 1, true, L_GUI_FILGER_COOLDOWN_SIZE)
-	cooldown_size:SetPoint("TOPLEFT", pvp_size, "BOTTOMLEFT", 0, -20)
+	-- local cooldown_size = ns.CreateNumberSlider(parent, "cooldown_size", nil, nil, 0, 60, 1, true, L_GUI_FILGER_COOLDOWN_SIZE)
+	-- cooldown_size:SetPoint("TOPLEFT", pvp_size, "BOTTOMLEFT", 0, -20)
 
-	local cooldown_space = ns.CreateNumberSlider(parent, "cooldown_space", nil, nil, 0, 10, 1, true)
-	cooldown_space:SetPoint("LEFT", cooldown_size, "RIGHT", 120, 0)
+	-- local cooldown_space = ns.CreateNumberSlider(parent, "cooldown_space", nil, nil, 0, 10, 1, true)
+	-- cooldown_space:SetPoint("LEFT", cooldown_size, "RIGHT", 120, 0)
 
 	-- Testing
-	local subheader = ns.addSubCategory(parent, L.filger_subheader_test)
-	subheader:SetPoint("TOPLEFT", cooldown_size, "BOTTOMLEFT", 0, -11)
+	-- local subheader = ns.addSubCategory(parent, L.filger_subheader_test)
+	-- subheader:SetPoint("TOPLEFT", cooldown_size or pvp_size, "BOTTOMLEFT", 0, -11)
 
-	local test_mode = ns.CreateCheckBox(parent, "test_mode", L_GUI_FILGER_TEST_MODE)
-	test_mode:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
+	-- local test_mode = ns.CreateCheckBox(parent, "test_mode", L_GUI_FILGER_TEST_MODE)
+	-- test_mode:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
 
-	local max_test_icon = ns.CreateNumberSlider(parent, "max_test_icon", nil, nil, 0, 10, 1, true, L_GUI_FILGER_MAX_TEST_ICON)
-	max_test_icon:SetPoint("TOPLEFT", test_mode, "BOTTOMLEFT", 0, -20)
+	-- local max_test_icon = ns.CreateNumberSlider(parent, "max_test_icon", nil, nil, 0, 10, 1, true, L_GUI_FILGER_MAX_TEST_ICON)
+	-- max_test_icon:SetPoint("TOPLEFT", test_mode, "BOTTOMLEFT", 0, -20)
 
 	-- Spell List
-	local subheader = ns.addSubCategory(parent, L.filger_subheader_spells)
-	subheader:SetPoint("TOPLEFT", max_test_icon, "BOTTOMLEFT", 0, -11)
+	-- local subheader = ns.addSubCategory(parent, L.filger_subheader_spells)
+	-- subheader:SetPoint("TOPLEFT", max_test_icon, "BOTTOMLEFT", 0, -11)
 
-	local category_list = ns.CreateDropDown(parent, "category_list", true, L.filger_category_list, FilgerTable)
-	category_list:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
+	-- local category_list = ns.CreateDropDown(parent, "category_list", true, L.filger_category_list, FilgerTable)
+	-- category_list:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
 
-	hooksecurefunc(category_list, "SetValue", function()
-		if not C.options["filger"] then
-			C.options["filger"] = {}
-		end
-		if not C.options["filger"][FilgerDropDownText[category_list.selectedValue]] then
-			C.options["filger"][FilgerDropDownText[category_list.selectedValue]] = {}
-		end
-		BuildSpellList(C.options["filger"][FilgerDropDownText[category_list.selectedValue]], false, true)
-	end)
+	-- hooksecurefunc(category_list, "SetValue", function()
+		-- if not C.options["filger"] then
+			-- C.options["filger"] = {}
+		-- end
+		-- if not C.options["filger"][FilgerDropDownText[category_list.selectedValue]] then
+			-- C.options["filger"][FilgerDropDownText[category_list.selectedValue]] = {}
+		-- end
+		-- BuildSpellList(C.options["filger"][FilgerDropDownText[category_list.selectedValue]], false, true)
+	-- end)
 end
 
 -- Announcements
