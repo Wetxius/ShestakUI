@@ -74,6 +74,20 @@ _G.SettingsPanel.TransitionBackOpeningPanel = function(self)
 end
 
 ----------------------------------------------------------------------------------------
+--	Fix SetPassThroughButtons taint (by fang2hou)
+----------------------------------------------------------------------------------------
+local FixPass = CreateFrame("Frame")
+FixPass:RegisterEvent("PLAYER_ENTERING_WORLD")
+FixPass:SetScript("OnEvent", function(self)
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
+	_G.QuestPinMixin.SetPassThroughButtons = T.dummy
+	_G.BonusObjectivePinMixin.SetPassThroughButtons = T.dummy
+	_G.WorldQuestPinMixin.SetPassThroughButtons = T.dummy
+	_G.FlightPointPinMixin.SetPassThroughButtons = T.dummy
+end)
+
+----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
 if not NoTaint2_Proc_ResetActionButtonAction then
