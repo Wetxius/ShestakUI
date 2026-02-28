@@ -81,10 +81,10 @@ FixPass:RegisterEvent("PLAYER_ENTERING_WORLD")
 FixPass:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	_G.QuestPinMixin.SetPassThroughButtons = T.dummy
-	_G.BonusObjectivePinMixin.SetPassThroughButtons = T.dummy
-	_G.WorldQuestPinMixin.SetPassThroughButtons = T.dummy
-	_G.FlightPointPinMixin.SetPassThroughButtons = T.dummy
+	_G.QuestPinMixin.SetPassThroughButtons = nop
+	_G.BonusObjectivePinMixin.SetPassThroughButtons = nop
+	_G.WorldQuestPinMixin.SetPassThroughButtons = nop
+	-- _G.FlightPointPinMixin.SetPassThroughButtons = nop
 end)
 
 ----------------------------------------------------------------------------------------
