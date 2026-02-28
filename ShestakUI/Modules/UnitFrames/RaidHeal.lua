@@ -278,11 +278,11 @@ local function Shared(self, unit)
 
 		-- Defensive buffs
 		self.Auras = CreateFrame("Frame", self:GetName().."_DefensiveBuffs", self)
-		self.Auras:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
-		self.Auras.size = 8 * C.raidframe.icon_multiplier
+		self.Auras:SetSize(self:GetWidth(), 7 * C.raidframe.icon_multiplier)
+		self.Auras.size = 7 * C.raidframe.icon_multiplier
 		self.Auras.spacing = 3
-		self.Auras.numBuffs = 1
-		self.Auras:SetPoint("LEFT", self, 0, 0)
+		self.Auras.numTotal = 1
+		self.Auras:SetPoint("LEFT", self, 0, 2)
 
 		self.Auras.PostCreateButton = T.CreateRaidBuffIcon
 
