@@ -70,9 +70,10 @@ local function AcknowledgeTips()
 	if InCombatLockdown() then return end
 
 	for frame in _G.HelpTip.framePool:EnumerateActive() do
-		frame:Acknowledge()
+		-- frame:Acknowledge() -- this cause taint aftet respec MultiBarLeftButton5:SetShown()
+		frame:Hide()
 	end
 end
 
-AcknowledgeTips()
+C_Timer.After(1, function() AcknowledgeTips() end)
 hooksecurefunc(_G.HelpTip, "Show", AcknowledgeTips)
