@@ -89,13 +89,14 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if AddOnFrames[addon] then
 		for _, v in pairs(AddOnFrames[addon]) do
 			if _G[v] then
-				if v == "PlayerSpellsFrame" and InCombatLockdown() then return end -- prevent error when open in combat
-				_G[v]:EnableMouse(true)
-				_G[v]:SetMovable(true)
-				_G[v]:SetClampedToScreen(true)
-				_G[v]:RegisterForDrag("LeftButton")
-				_G[v]:SetScript("OnDragStart", function(self) self:StartMoving() end)
-				_G[v]:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+				if (v == "PlayerSpellsFrame" or v == "ProfessionsBookFrame") and not InCombatLockdown() then -- prevent error when open in combat
+					_G[v]:EnableMouse(true)
+					_G[v]:SetMovable(true)
+					_G[v]:SetClampedToScreen(true)
+					_G[v]:RegisterForDrag("LeftButton")
+					_G[v]:SetScript("OnDragStart", function(self) self:StartMoving() end)
+					_G[v]:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+				end
 			end
 		end
 	end
