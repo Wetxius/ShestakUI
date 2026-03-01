@@ -170,7 +170,11 @@ T.PostUpdateHealthColor = function(health, unit, color)
 			if C.unitframe.own_color then
 				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
 			else
-				r, g, b = health:GetStatusBarColor()
+				if color then
+					r, g, b = color:GetRGB()
+				else
+					r, g, b = 0.3, 0.7, 0.3
+				end
 			end
 
 			local curve = C_CurveUtil.CreateColorCurve()
@@ -286,7 +290,11 @@ T.PostUpdateRaidHealthColor = function(health, unit, color)
 			if C.unitframe.own_color then
 				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
 			else
-				r, g, b = health:GetStatusBarColor()
+				if color then
+					r, g, b = color:GetRGB()
+				else
+					r, g, b = 0.3, 0.7, 0.3
+				end
 			end
 
 			local curve = C_CurveUtil.CreateColorCurve()
