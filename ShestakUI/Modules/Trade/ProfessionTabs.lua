@@ -113,11 +113,11 @@ local function UpdateSelectedTabs(object)
 	for index = 1, #tabs[object] do
 		local tab = tabs[object][index]
 		if tab.spellID and C_Spell.IsCurrentSpell(tab.spellID) then
-			tab:Disable()
 			tab:SetChecked(true)
+			tab.cover:Show()
 		else
-			tab:Enable()
 			tab:SetChecked(false)
+			tab.cover:Hide()
 		end
 	end
 end
@@ -146,6 +146,10 @@ local function UpdateTab(object, name, texture, spellID)
 		tab:GetHighlightTexture():SetBlendMode("ADD")
 		tab:SetCheckedTexture("Interface\\Buttons\\CheckButtonHilight")
 		tab:GetCheckedTexture():SetBlendMode("ADD")
+
+		tab.cover = CreateFrame("Frame", nil, tab)
+		tab.cover:SetAllPoints()
+		tab.cover:EnableMouse(true)
 	end
 
 	if C_AddOns.IsAddOnLoaded("Aurora") then
