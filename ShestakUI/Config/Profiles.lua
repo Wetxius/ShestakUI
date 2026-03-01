@@ -135,7 +135,7 @@ if T.name == "Oz" and T.realm == "Pozzo dell'Eternità" then
 	C["raidframe"].raid_tanks_tt = true
 	C["raidframe"].raid_groups = 8
 	C["raidframe"].icons_role = true
-	C["raidframe"].plugins_aura_watch_timer = true
+	C["raidframe"].plugins_debuffs_timer = true
 	C["raidframe"].plugins_auto_resurrection = true
 	C["toppanel"].enable = false
 	C["stats"].battleground = true

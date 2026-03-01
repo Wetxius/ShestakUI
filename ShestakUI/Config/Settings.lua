@@ -201,8 +201,8 @@ C["raidframe"] = {
 	["icons_phase"] = true,						-- Phase icons on frames
 	-- Plugins
 	["plugins_debuffhighlight"] = true,			-- Show texture for dispellable debuff
-	["plugins_aura_watch"] = true,				-- Raid debuff icons (by Blizzard filter)
-	["plugins_aura_watch_timer"] = false,		-- Timer on raid debuff icons
+	["plugins_debuffs"] = true,				-- Raid debuff icons (by Blizzard filter)
+	["plugins_debuffs_timer"] = false,		-- Timer on raid debuff icons
 	["plugins_buffs"] = true,					-- Raid buff icons (by Blizzard filter)
 	["plugins_buffs_timer"] = false,			-- Timer on raid buffs icons
 	["plugins_debuffhighlight_icon"] = false,	-- Show dispellable debuff icon

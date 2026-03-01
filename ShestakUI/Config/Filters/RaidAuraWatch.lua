@@ -1,100 +1,101 @@
 local T, C, L = unpack(ShestakUI)
-if C.raidframe.plugins_aura_watch ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
 --	Example: Renew -> http://www.wowhead.com/spell=139
 --	Take the number ID at the end of the URL, and add it to the list
 ----------------------------------------------------------------------------------------
-T.RaidBuffs = {
-	DRUID = {
-		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},					-- Rejuvenation
-		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
-		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
-		{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
-		-- {391891, "TOP", {0.2, 0.7, 0.2}},					-- Adaptive Swarm
-		-- {102351, "BOTTOM", {0.2, 0.7, 0.2}},				-- Cenarion Ward
-		-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
-		{155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
-	},
-	EVOKER = {
-		-- Preservation
-		{355941, "TOPRIGHT", {0.20, 0.58, 0.50}},			-- Dream Breath
-		{363502, "BOTTOMLEFT", {0.26, 0.73, 0.63}},			-- Dream Flight
-		{366155, "RIGHT", {0.14, 1.00, 0.88}},				-- Reversion
-		{364343, "TOP", {0.13, 0.87, 0.50}},				-- Echo
-		{373267, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Life Bind (Verdant Embrace)
-		-- {357170, "BOTTOM", {0.11, 0.57, 0.71}},				-- Time Dilation
-		{376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath
-		-- Augmentation
-		{360827, "TOPRIGHT", {0.33, 0.33, 0.77}},			-- Blistering Scales
-		{410089, "TOP", {0.13, 0.87, 0.50}},				-- Prescience
-		{395152, "BOTTOMRIGHT", {0.14, 1.00, 0.88}},		-- Ebon Might
-		-- {406732, "RIGHT", {0.82, 0.29, 0.24}},				-- Spatial Paradox < on yourself
-	},
-	MONK = {
-		{119611, "TOPRIGHT", {0.2, 0.7, 0.7}},				-- Renewing Mist
-		-- {116841, "RIGHT", {0.12, 1.00, 0.53}},				-- Tiger's Lust (Freedom)
-		{115175, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Soothing Mist
-		{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},			-- Enveloping Mist
-		-- {325209, "BOTTOM", {0.3, 0.6, 0.6}},				-- Enveloping Breath
-		{450769, "TOPLEFT", {0.3, 0.6, 0.6}},				-- Aspect of Harmony
-		-- {116849, "LEFT", {0.81, 0.85, 0.1}, true},			-- Life Cocoon
-	},
-	PALADIN = {
-		{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
-		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
-		{1244893, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of the Savior
-		-- {157047, "TOP", {0.15, 0.58, 0.84}},				-- Saved by the Light (T25 Talent)
-		-- {1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
-		-- {1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
-		-- {6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
-		-- {204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
-		{156322, "BOTTOMLEFT", {0.9, 0.5, 0.1}},				-- Eternal Flame
-	},
-	PRIEST = {
-		{194384, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement
-		{139, "TOP", {0.4, 0.7, 0.2}},						-- Renew
-		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
-		{6788, "BOTTOMLEFT", {1, 0, 0}},					-- Weakened Soul
-		{17, "TOPLEFT", {0.81, 0.85, 0.1}},					-- Power Word: Shield
-		-- {33206, "LEFT", {0.89, 0.1, 0.1}, true},			-- Pain Suppression
-		-- {47788, "LEFT", {0.86, 0.52, 0}, true},				-- Guardian Spirit
-	},
-	SHAMAN = {
-		{61295, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Riptide
-		{974, "BOTTOMRIGHT", {0.91, 0.80, 0.44}},			-- Earth Shield
-	},
-	HUNTER = {
-		{35079, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
-		{90361, "TOP", {0.34, 0.47, 0.31}},					-- Spirit Mend (HoT)
-	},
-	ROGUE = {
-		{57934, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
-	},
-	WARRIOR  = {
-		{3411, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Intervene
-	},
-	WARLOCK = {
-		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
-	},
-	ALL = {
-		{23333, "LEFT", {1, 0, 0}, true},					-- Warsong flag, Horde
-		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
-		{34976, "LEFT", {1, 0, 0}, true},					-- Netherstorm Flag
-	},
-}
+if C.raidframe.plugins_buffs then
+	T.RaidBuffs = {
+		DRUID = {
+			{774, "TOPRIGHT", {0.8, 0.4, 0.8}},					-- Rejuvenation
+			{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
+			{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
+			{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
+			-- {391891, "TOP", {0.2, 0.7, 0.2}},					-- Adaptive Swarm
+			-- {102351, "BOTTOM", {0.2, 0.7, 0.2}},				-- Cenarion Ward
+			-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
+			{155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
+		},
+		EVOKER = {
+			-- Preservation
+			{355941, "TOPRIGHT", {0.20, 0.58, 0.50}},			-- Dream Breath
+			{363502, "BOTTOMLEFT", {0.26, 0.73, 0.63}},			-- Dream Flight
+			{366155, "RIGHT", {0.14, 1.00, 0.88}},				-- Reversion
+			{364343, "TOP", {0.13, 0.87, 0.50}},				-- Echo
+			{373267, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Life Bind (Verdant Embrace)
+			-- {357170, "BOTTOM", {0.11, 0.57, 0.71}},				-- Time Dilation
+			{376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath
+			-- Augmentation
+			{360827, "TOPRIGHT", {0.33, 0.33, 0.77}},			-- Blistering Scales
+			{410089, "TOP", {0.13, 0.87, 0.50}},				-- Prescience
+			{395152, "BOTTOMRIGHT", {0.14, 1.00, 0.88}},		-- Ebon Might
+			-- {406732, "RIGHT", {0.82, 0.29, 0.24}},				-- Spatial Paradox < on yourself
+		},
+		MONK = {
+			{119611, "TOPRIGHT", {0.2, 0.7, 0.7}},				-- Renewing Mist
+			-- {116841, "RIGHT", {0.12, 1.00, 0.53}},				-- Tiger's Lust (Freedom)
+			{115175, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Soothing Mist
+			{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},			-- Enveloping Mist
+			-- {325209, "BOTTOM", {0.3, 0.6, 0.6}},				-- Enveloping Breath
+			{450769, "TOPLEFT", {0.3, 0.6, 0.6}},				-- Aspect of Harmony
+			-- {116849, "LEFT", {0.81, 0.85, 0.1}, true},			-- Life Cocoon
+		},
+		PALADIN = {
+			{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
+			{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
+			{1244893, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of the Savior
+			-- {157047, "TOP", {0.15, 0.58, 0.84}},				-- Saved by the Light (T25 Talent)
+			-- {1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
+			-- {1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
+			-- {6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
+			-- {204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
+			{156322, "BOTTOMLEFT", {0.9, 0.5, 0.1}},				-- Eternal Flame
+		},
+		PRIEST = {
+			{194384, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement
+			{139, "TOP", {0.4, 0.7, 0.2}},						-- Renew
+			{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
+			{6788, "BOTTOMLEFT", {1, 0, 0}},					-- Weakened Soul
+			{17, "TOPLEFT", {0.81, 0.85, 0.1}},					-- Power Word: Shield
+			-- {33206, "LEFT", {0.89, 0.1, 0.1}, true},			-- Pain Suppression
+			-- {47788, "LEFT", {0.86, 0.52, 0}, true},				-- Guardian Spirit
+		},
+		SHAMAN = {
+			{61295, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Riptide
+			{974, "BOTTOMRIGHT", {0.91, 0.80, 0.44}},			-- Earth Shield
+		},
+		HUNTER = {
+			{35079, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
+			{90361, "TOP", {0.34, 0.47, 0.31}},					-- Spirit Mend (HoT)
+		},
+		ROGUE = {
+			{57934, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
+		},
+		WARRIOR  = {
+			{3411, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Intervene
+		},
+		WARLOCK = {
+			{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
+		},
+		ALL = {
+			{23333, "LEFT", {1, 0, 0}, true},					-- Warsong flag, Horde
+			{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
+			{34976, "LEFT", {1, 0, 0}, true},					-- Netherstorm Flag
+		},
+	}
 
-T.RaidBuffsIgnore = {
-	--[spellID] = true,			-- Spell name
-}
+	T.RaidBuffsIgnore = {
+		--[spellID] = true,			-- Spell name
+	}
+end
 
 local function SpellName(id)
 	local name = GetSpellInfo(id)
 	if name then
 		return name
 	else
-		print("|cffff0000ShestakUI: RaidAuraWatch spell ID ["..tostring(id).."] no longer exists!|r")
+		print("|cffff0000ShestakUI: RaidDebuffs spell ID ["..tostring(id).."] no longer exists!|r")
 		return "Empty"
 	end
 end
@@ -102,6 +103,8 @@ end
 ----------------------------------------------------------------------------------------
 --	Debuffs
 ----------------------------------------------------------------------------------------
+if C.raidframe.plugins_debuffs ~= true then return end
+
 local RaidDebuffs = {
 	-- Manaforge Omega
 	-- Plexus Sentinel
@@ -592,7 +595,7 @@ local OtherDebuffs = {
 }
 
 -- Add spells from GUI
-for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
+for _, spell in pairs(C.raidframe.plugins_debuffs_list) do
 	OtherDebuffs[SpellName(spell)] = 3
 end
 

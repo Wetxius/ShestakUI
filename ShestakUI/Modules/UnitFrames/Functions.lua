@@ -765,21 +765,21 @@ T.PostUpdatePips = function(element)
 	end
 end
 
-T.AuraTrackerTime = function(self, elapsed)
-	if self.active then
-		self.timeleft = self.timeleft - elapsed
-		if self.timeleft <= 5 then
-			self.text:SetTextColor(1, 0, 0)
-		else
-			self.text:SetTextColor(1, 1, 1)
-		end
-		if self.timeleft <= 0 then
-			self.icon:SetTexture("")
-			self.text:SetText("")
-		end
-		self.text:SetFormattedText("%.1f", self.timeleft)
-	end
-end
+--BETA T.AuraTrackerTime = function(self, elapsed)
+	-- if self.active then
+		-- self.timeleft = self.timeleft - elapsed
+		-- if self.timeleft <= 5 then
+			-- self.text:SetTextColor(1, 0, 0)
+		-- else
+			-- self.text:SetTextColor(1, 1, 1)
+		-- end
+		-- if self.timeleft <= 0 then
+			-- self.icon:SetTexture("")
+			-- self.text:SetText("")
+		-- end
+		-- self.text:SetFormattedText("%.1f", self.timeleft)
+	-- end
+-- end
 
 T.PostCreateIcon = function(_, button)
 	button:SetTemplate("Default")
@@ -888,7 +888,7 @@ T.PostUpdateRaidButton = function(_, button, unit, data)
 		button:SetBackdropBorderColor(1, 0, 0)
 	end
 
-	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_aura_watch_timer)
+	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_debuffs_timer)
 end
 
 local CountOffSets = {

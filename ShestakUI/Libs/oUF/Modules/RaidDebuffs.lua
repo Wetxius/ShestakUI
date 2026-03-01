@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.unitframe.enable ~= true or C.raidframe.plugins_aura_watch ~= true then return end
+if C.unitframe.enable ~= true or C.raidframe.plugins_debuffs ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on oUF_RaidDebuffs(by Yleaf)

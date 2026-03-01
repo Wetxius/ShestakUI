@@ -1859,11 +1859,11 @@ do
 	local plugins_debuffhighlight = ns.CreateCheckBox(parent, "plugins_debuffhighlight")
 	plugins_debuffhighlight:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local plugins_aura_watch = ns.CreateCheckBox(parent, "plugins_aura_watch")
-	plugins_aura_watch:SetPoint("TOPLEFT", plugins_debuffhighlight, "BOTTOMLEFT", 0, 0)
+	local plugins_debuffs = ns.CreateCheckBox(parent, "plugins_debuffs")
+	plugins_debuffs:SetPoint("TOPLEFT", plugins_debuffhighlight, "BOTTOMLEFT", 0, 0)
 
 	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-	-- ListButton:SetPoint("LEFT", plugins_aura_watch, "RIGHT", 400, 0)
+	-- ListButton:SetPoint("LEFT", plugins_debuffs, "RIGHT", 400, 0)
 	-- ListButton:SetSize(100, 23)
 	-- ListButton:SetText(ADD)
 	-- ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
@@ -1871,34 +1871,34 @@ do
 		-- if not C.options["raidframe"] then
 			-- C.options["raidframe"] = {}
 		-- end
-		-- if not C.options["raidframe"]["plugins_aura_watch_list"] then
-			-- C.options["raidframe"]["plugins_aura_watch_list"] = {}
+		-- if not C.options["raidframe"]["plugins_debuffs_list"] then
+			-- C.options["raidframe"]["plugins_debuffs_list"] = {}
 		-- end
-		-- BuildSpellList(C.options["raidframe"]["plugins_aura_watch_list"])
+		-- BuildSpellList(C.options["raidframe"]["plugins_debuffs_list"])
 	-- end)
 	-- tinsert(ns.buttons, ListButton)
 
 	-- local function toggleListButton()
-		-- local shown = plugins_aura_watch:GetChecked()
+		-- local shown = plugins_debuffs:GetChecked()
 		-- ListButton:SetEnabled(shown)
 	-- end
 
-	-- plugins_aura_watch:HookScript("OnClick", toggleListButton)
+	-- plugins_debuffs:HookScript("OnClick", toggleListButton)
 	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local plugins_aura_watch_timer = ns.CreateCheckBox(parent, "plugins_aura_watch_timer")
-	plugins_aura_watch_timer:SetPoint("TOPLEFT", plugins_aura_watch, "BOTTOMLEFT", 20, 0)
+	local plugins_debuffs_timer = ns.CreateCheckBox(parent, "plugins_debuffs_timer")
+	plugins_debuffs_timer:SetPoint("TOPLEFT", plugins_debuffs, "BOTTOMLEFT", 20, 0)
 
 	-- local plugins_debuffhighlight_icon = ns.CreateCheckBox(parent, "plugins_debuffhighlight_icon")
-	-- plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_aura_watch_timer, "BOTTOMLEFT", 0, 0)
+	-- plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
 
 	-- local plugins_pvp_debuffs = ns.CreateCheckBox(parent, "plugins_pvp_debuffs")
 	-- plugins_pvp_debuffs:SetPoint("TOPLEFT", plugins_debuffhighlight_icon, "BOTTOMLEFT", 0, 0)
 
-	plugins_aura_watch.children = {plugins_aura_watch_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
+	plugins_debuffs.children = {plugins_debuffs_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
 
 	local plugins_buffs = ns.CreateCheckBox(parent, "plugins_buffs")
-	plugins_buffs:SetPoint("TOPLEFT", plugins_aura_watch_timer, "BOTTOMLEFT", -20, 0)
+	plugins_buffs:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", -20, 0)
 
 	local plugins_buffs_timer = ns.CreateCheckBox(parent, "plugins_buffs_timer")
 	plugins_buffs_timer:SetPoint("TOPLEFT", plugins_buffs, "BOTTOMLEFT", 20, 0)

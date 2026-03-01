@@ -292,7 +292,7 @@ local function Shared(self, unit)
 	end
 
 	-- Raid Debuffs
-	if C.raidframe.plugins_aura_watch == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
+	if C.raidframe.plugins_debuffs == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
 		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
 		self.Debuffs:SetSize(18, 18)
 		self.Debuffs.size = T.Scale(18)
@@ -326,7 +326,7 @@ local function Shared(self, unit)
 		-- self.RaidDebuffs.icon:SetPoint("TOPLEFT", 2, -2)
 		-- self.RaidDebuffs.icon:SetPoint("BOTTOMRIGHT", -2, 2)
 
-		-- if C.raidframe.plugins_aura_watch_timer == true then
+		-- if C.raidframe.plugins_debuffs_timer == true then
 			-- self.RaidDebuffs.time = T.SetFontString(self.RaidDebuffs, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			-- self.RaidDebuffs.time:SetPoint("CENTER", 1, 1)
 			-- self.RaidDebuffs.time:SetTextColor(1, 1, 1)
@@ -346,7 +346,7 @@ local function Shared(self, unit)
 			-- self.RaidDebuffs.cd:SetHideCountdownNumbers(true)
 			-- self.RaidDebuffs.parent = CreateFrame("Frame", nil, self.RaidDebuffs)
 			-- self.RaidDebuffs.parent:SetFrameLevel(self.RaidDebuffs.cd:GetFrameLevel() + 1)
-			-- if C.raidframe.plugins_aura_watch_timer == true then
+			-- if C.raidframe.plugins_debuffs_timer == true then
 				-- self.RaidDebuffs.time:SetParent(self.RaidDebuffs.parent)
 			-- end
 			-- self.RaidDebuffs.count:SetParent(self.RaidDebuffs.parent)
