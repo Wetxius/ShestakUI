@@ -465,32 +465,6 @@ T.PostUpdatePowerColor = function(power, unit, color, altR, altG, altB)
 	end
 end
 
--- local SetUpAnimGroup = function(self)
-	-- self.anim = self:CreateAnimationGroup()
-	-- self.anim:SetLooping("BOUNCE")
-	-- self.anim.fade = self.anim:CreateAnimation("Alpha")
-	-- self.anim.fade:SetFromAlpha(1)
-	-- self.anim.fade:SetToAlpha(0)
-	-- self.anim.fade:SetDuration(0.6)
-	-- self.anim.fade:SetSmoothing("IN_OUT")
--- end
-
--- local Flash = function(self)
-	-- if not self.anim then
-		-- SetUpAnimGroup(self)
-	-- end
-
-	-- if not self.anim:IsPlaying() then
-		-- self.anim:Play()
-	-- end
--- end
-
--- local StopFlash = function(self)
-	-- if self.anim then
-		-- self.anim:Finish()
-	-- end
--- end
-
 local low_mana = C_CurveUtil.CreateColorCurve()
 low_mana:SetType(Enum.LuaCurveType.Step)
 low_mana:AddPoint(0, CreateColor(1, 1, 1, 1))
@@ -502,28 +476,15 @@ T.UpdateManaLevel = function(self, elapsed)
 	self.elapsed = 0
 
 	if UnitPowerType("player") == 0 then
-		-- local cur = UnitPower("player", 0) -- BETA can't calculate
-		-- local max = UnitPowerMax("player", 0)
-		-- local percMana = max > 0 and (cur / max * 100) or 100
-		-- if percMana <= 20 and not UnitIsDeadOrGhost("player") then
-			-- self.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
-			-- Flash(self)
-		-- else
-			-- self.ManaLevel:SetText()
-			-- StopFlash(self)
-		-- end
-
 		if UnitIsDeadOrGhost("player") then
-			self.ManaLevel:SetText()
+			self.Text:SetAlpha(0)
 		else
 			local color = UnitPowerPercent("player", 0, true, low_mana)
 			local _, _, _, alpha = color:GetRGBA()
-			self.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
-			self.ManaLevel:SetAlpha(alpha)
+			self.Text:SetAlpha(alpha)
 		end
 	elseif T.class ~= "DRUID" and T.class ~= "PRIEST" and T.class ~= "SHAMAN" then
-		self.ManaLevel:SetText()
-		-- StopFlash(self)
+		self.Text:SetAlpha(0)
 	end
 end
 
@@ -539,44 +500,27 @@ T.UpdateClassMana = function(self, elapsed)
 	if self.unit ~= "player" then return end
 
 	if UnitPowerType("player") ~= 0 then
-		-- local min = UnitPower("player", 0) -- BETA can't calculate
-		-- local max = UnitPowerMax("player", 0)
-		-- local percMana = max > 0 and (min / max * 100) or 100
-		local percMana = UnitPowerPercent("player", 0, true, CurveConstants.ScaleTo100)
-		-- if percMana <= 20 and not UnitIsDeadOrGhost("player") then
-			-- self.FlashInfo.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
-			-- Flash(self.FlashInfo)
-		-- else
-			-- self.FlashInfo.ManaLevel:SetText()
-			-- StopFlash(self.FlashInfo)
-		-- end
-
 		if UnitIsDeadOrGhost("player") then
 			self.ClassMana:SetAlpha(0)
-			self.FlashInfo.ManaLevel:SetText()
+			self.LowMana.Text:SetAlpha(0)
 		else
 			local color = UnitPowerPercent("player", 0, true, low_mana)
 			local _, _, _, alpha = color:GetRGBA()
-			self.FlashInfo.ManaLevel:SetText("|cffaf5050"..MANA_LOW.."|r")
-			self.FlashInfo.ManaLevel:SetAlpha(alpha)
+			self.LowMana.Text:SetAlpha(alpha)
 
 			local color = UnitPowerPercent("player", 0, true, full_mana)
 			local _, _, _, alpha = color:GetRGBA()
-
-			-- if min ~= max then
-				if self.Power.value:GetText() then
-					self.ClassMana:SetPoint("RIGHT", self.Power.value, "LEFT", -1, 0)
-					self.ClassMana:SetFormattedText("%d%%|r |cffD7BEA5-|r", percMana)
-					self.ClassMana:SetJustifyH("RIGHT")
-				else
-					self.ClassMana:SetPoint("LEFT", self.Power, "LEFT", 4, 0)
-					self.ClassMana:SetFormattedText("%d%%", percMana)
-				end
-			-- else
-				-- self.ClassMana:SetText()
-			-- end
-
 			self.ClassMana:SetAlpha(alpha)
+
+			local percMana = UnitPowerPercent("player", 0, true, CurveConstants.ScaleTo100)
+			if self.Power.value:GetText() then
+				self.ClassMana:SetPoint("RIGHT", self.Power.value, "LEFT", -1, 0)
+				self.ClassMana:SetFormattedText("%d%%|r |cffD7BEA5-|r", percMana)
+				self.ClassMana:SetJustifyH("RIGHT")
+			else
+				self.ClassMana:SetPoint("LEFT", self.Power, "LEFT", 4, 0)
+				self.ClassMana:SetFormattedText("%d%%", percMana)
+			end
 		end
 	else
 		self.ClassMana:SetAlpha(0)
