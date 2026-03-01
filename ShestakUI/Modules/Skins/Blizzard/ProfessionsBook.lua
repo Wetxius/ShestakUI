@@ -76,7 +76,7 @@ local function LoadSkin()
 			hooksecurefunc(button, "UpdateButton", replaceHighlight)
 
 			if not button.backdrop then
-				button:SetFrameLevel(button:GetFrameLevel() + 2)
+				-- button:SetFrameLevel(button:GetFrameLevel() + 2)
 				button:CreateBackdrop("Default")
 				button.backdrop:SetPoint("TOPLEFT", 2, -2)
 				button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
