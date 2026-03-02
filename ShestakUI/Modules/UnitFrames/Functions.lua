@@ -923,72 +923,106 @@ T.CreateAuraWatch = function(self)
 	self.AuraWatch = auras
 end
 
-T.CreateHealthPrediction = function(self)
+T.CreateHealthPrediction = function(self, vertical)
 	-- Player healing
 	local mhpb = CreateFrame("StatusBar", nil, self.Health)
-	mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-	mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	if vertical then
+		mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "TOPLEFT", 0, 0)
+		mhpb:SetPoint("BOTTOMRIGHT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		mhpb:SetOrientation("VERTICAL")
+	else
+		mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	end
 	mhpb:SetStatusBarTexture(C.media.texture)
 	mhpb:SetStatusBarColor(0, 1, 0.5, 0.2)
+	self.Health.HealingPlayer = mhpb
 
 	-- Other healing
 	local ohpb = CreateFrame("StatusBar", nil, self.Health)
-	ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-	ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	if vertical then
+		ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "TOPLEFT", 0, 0)
+		ohpb:SetPoint("BOTTOMRIGHT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		ohpb:SetOrientation("VERTICAL")
+	else
+		ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	end
 	ohpb:SetStatusBarTexture(C.media.texture)
 	ohpb:SetStatusBarColor(0, 1, 0, 0.2)
+	self.Health.HealingOther = ohpb
 
 	-- Absorb
 	local absorb = CreateFrame("StatusBar", nil, self.Health)
-	absorb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-	absorb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	if vertical then
+		absorb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "TOPLEFT", 0, 0)
+		absorb:SetPoint("BOTTOMRIGHT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		absorb:SetOrientation("VERTICAL")
+	else
+		absorb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		absorb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	end
 	absorb:SetStatusBarTexture(C.media.texture)
 	absorb:SetStatusBarColor(1, 1, 0, 0.2)
+	self.Health.DamageAbsorb = absorb
 
 	-- From enemy - heal absorb
 	local hab = CreateFrame("StatusBar", nil, self.Health)
-	hab:SetPoint("TOPRIGHT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-	hab:SetPoint("BOTTOMRIGHT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	if vertical then
+		hab:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPLEFT", 0, 0)
+		hab:SetPoint("TOPRIGHT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		hab:SetOrientation("VERTICAL")
+	else
+		hab:SetPoint("TOPRIGHT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		hab:SetPoint("BOTTOMRIGHT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+	end
 	hab:SetStatusBarTexture(C.media.texture)
 	hab:SetStatusBarColor(1, 0, 0, 0.4)
 	hab:SetReverseFill(true)
+	self.Health.HealAbsorb = hab
 
-	self.HealthPrediction = {
-		healingPlayer = mhpb,
-		healingOther = ohpb,
-		damageAbsorb = absorb,
-		healAbsorb = hab,
-		incomingHealOverflow = 1
-	}
+	self.Health.incomingHealOverflow = 1
 
 	-- Over absorb in right
 	if C.raidframe.plugins_over_absorb then
 		local oa = self.Health:CreateTexture(nil, "ARTWORK")
 		oa:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
-		oa:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", -6, 0)
-		oa:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMRIGHT", -6, 0)
+		if vertical then
+			oa:SetPoint("TOPLEFT", self.Health, "TOPLEFT", 0, 0)
+			oa:SetPoint("TOPRIGHT", self.Health, "TOPRIGHT", 0, 0)
+			oa:SetHeight(6)
+		else
+			oa:SetPoint("TOPRIGHT", self.Health, "TOPRIGHT", 0, 0)
+			oa:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, 0)
+			oa:SetWidth(6)
+		end
 		oa:SetVertexColor(0.5, 0.5, 1)
 		oa:SetHorizTile(true)
 		oa:SetVertTile(true)
 		oa:SetAlpha(0.4)
 		oa:SetBlendMode("ADD")
-		oa:SetWidth(6)
-		self.HealthPrediction.overDamageAbsorbIndicator = oa
+		self.Health.OverDamageAbsorbIndicator = oa
 	end
 
 	-- Over heal absorb from enemy in left
 	if C.raidframe.plugins_over_heal_absorb then
 		local oha = self.Health:CreateTexture(nil, "ARTWORK")
 		oha:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
-		oha:SetPoint("TOPRIGHT", self.Health, "TOPLEFT", 6, 0)
-		oha:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMLEFT", 6, 0)
+		if vertical then
+			oha:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
+			oha:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 0, 0)
+			oha:SetHeight(6)
+		else
+			oha:SetPoint("TOPLEFT", self.Health, "TOPLEFT", 0, 0)
+			oha:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
+			oha:SetWidth(6)
+		end
 		oha:SetVertexColor(1, 0, 0)
 		oha:SetHorizTile(true)
 		oha:SetVertTile(true)
 		oha:SetAlpha(0.4)
 		oha:SetBlendMode("ADD")
-		oha:SetWidth(6)
-		self.HealthPrediction.overHealAbsorbIndicator = oha
+		self.Health.OverHealAbsorbIndicator = oha
 	end
 end
 

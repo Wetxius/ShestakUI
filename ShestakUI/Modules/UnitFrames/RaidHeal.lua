@@ -242,7 +242,7 @@ local function Shared(self, unit)
 
 	-- Incoming heals and heal/damage absorbs
 	if C.raidframe.plugins_healcomm == true then
-		T.CreateHealthPrediction(self)
+		T.CreateHealthPrediction(self, C.raidframe.vertical_health)
 	end
 
 	-- Range alpha
