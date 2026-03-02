@@ -1287,7 +1287,7 @@ end
 
 function T.SkinCooldown(cooldown, name)
 	if cooldown.styled then return end
-	local text = cooldown:GetRegions()
+	local text = cooldown:GetCountdownFontString()
 
 	if name == "aura" then
 		cooldown:SetDrawEdge(false)
@@ -1304,7 +1304,6 @@ function T.SkinCooldown(cooldown, name)
 
 	cooldown:SetCountdownAbbrevThreshold(59)
 
-	-- text:SetPoint("CENTER", 1, 0)
 	text:ClearAllPoints()
 	text:SetPoint("LEFT", -2, 0)
 	text:SetPoint("RIGHT", 5, 0)
