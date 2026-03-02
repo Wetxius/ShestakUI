@@ -1239,18 +1239,14 @@ local function Shared(self, unit)
 
 	-- Power Prediction bar
 	if C.unitframe.plugins_power_prediction == true and unit == "player" then
-		local mainBar = CreateFrame("StatusBar", self:GetName().."_PowerPrediction", self.Power)
-		mainBar:SetReverseFill(true)
-		mainBar:SetPoint("TOP")
-		mainBar:SetPoint("BOTTOM")
-		mainBar:SetPoint("RIGHT", self.Power:GetStatusBarTexture(), "RIGHT")
-		mainBar:SetStatusBarTexture(C.media.texture)
-		mainBar:SetStatusBarColor(1, 1, 1, 0.5)
-		mainBar:SetWidth(player_width)
-
-		self.PowerPrediction = {
-			mainBar = mainBar
-		}
+		self.Power.CostPrediction = CreateFrame("StatusBar", self:GetName().."_PowerPrediction", self.Power)
+		self.Power.CostPrediction:SetReverseFill(true)
+		self.Power.CostPrediction:SetPoint("TOP")
+		self.Power.CostPrediction:SetPoint("BOTTOM")
+		self.Power.CostPrediction:SetPoint("RIGHT", self.Power:GetStatusBarTexture(), "RIGHT")
+		self.Power.CostPrediction:SetStatusBarTexture(C.media.texture)
+		self.Power.CostPrediction:SetStatusBarColor(1, 1, 1, 0.5)
+		self.Power.CostPrediction:SetWidth(player_width)
 	end
 
 	-- Fader

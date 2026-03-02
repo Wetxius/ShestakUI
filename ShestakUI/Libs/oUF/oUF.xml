@@ -17,12 +17,10 @@
 	<Script file="Elements\CombatIndicator.lua"/>
 	<Script file="Elements\GroupRoleIndicator.lua"/>
 	<Script file="Elements\Health.lua"/>
-	<Script file="Elements\HealthPrediction.lua"/>
 	<Script file="Elements\LeaderIndicator.lua"/>
 	<Script file="Elements\PhaseIndicator.lua"/>
 	<Script file="Elements\Portraits.lua"/>
 	<Script file="Elements\Power.lua"/>
-	<Script file="Elements\PowerPrediction.lua"/>
 	<Script file="Elements\PrivateAuras.lua"/>
 	<Script file="Elements\QuestIndicator.lua"/>
 	<Script file="Elements\RaidTargetIndicator.lua"/>
