@@ -113,6 +113,7 @@ local function Update(frame, _, unit)
 	local key, icon
 	local guid = UnitGUID(unit)
 	if not guid then return end
+	if T.IsSecretValue(guid) then return end
 	if not GUIDs[guid] then setupGUID(guid) end
 
 	for _, icon in pairs(icons) do
