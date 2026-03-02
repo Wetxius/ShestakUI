@@ -23,7 +23,8 @@ local function LoadSkin()
 		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
 		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
 		CommunitiesFrame.ApplicantList.ScrollBar,
-		CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar
+		CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar,
+		CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame.ScrollBar
 	}
 
 	for i = 1, #scrollbars do
