@@ -884,7 +884,7 @@ if guild.enabled then
 				AltUpdate(self)
 				if not self.gmotd then
 					if self.elapsed > 1 then C_GuildInfo.GuildRoster(); self.elapsed = 0 end
-					if GetGuildRosterMOTD() ~= "" then self.gmotd = true; if self.hovered then self:GetScript("OnEnter")(self) end end
+					if not InCombatLockdown() and GetGuildRosterMOTD() ~= "" then self.gmotd = true; if self.hovered then self:GetScript("OnEnter")(self) end end
 					self.elapsed = self.elapsed + u
 				end
 			end
@@ -956,7 +956,7 @@ if guild.enabled then
 				C_GuildInfo.GuildRoster()
 				local name, rank, level, zone, note, officernote, connected, status, class, isMobile, zone_r, zone_g, zone_b, classc, levelc, grouped
 				local total, numOnline, online = GetNumGuildMembers()
-				local gmotd = GetGuildRosterMOTD()
+				local gmotd = InCombatLockdown() and "" or GetGuildRosterMOTD()
 				if not online then online = numOnline > 0 and numOnline or 0 end
 
 				GameTooltip:SetOwner(self, "ANCHOR_NONE")
