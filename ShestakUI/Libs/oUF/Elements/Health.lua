@@ -225,14 +225,9 @@ Used to toggle coloring if the unit is offline.
 * state    - the desired state (boolean)
 * isForced - forces the event update even if the state wasn't changed (boolean)
 --]]
-local function SetColorDisconnected(element, state, isForced)
+local function SetColorDisconnected(element, state, isForced) -- DEPRECATED
 	if(element.colorDisconnected ~= state or isForced) then
 		element.colorDisconnected = state
-		if(state) then
-			element.__owner:RegisterEvent('UNIT_CONNECTION', ColorPath)
-		else
-			element.__owner:UnregisterEvent('UNIT_CONNECTION', ColorPath)
-		end
 	end
 end
 
@@ -308,7 +303,7 @@ local function SetColorThreat(element, state, isForced)
 	end
 end
 
-local function Enable(self)
+local function Enable(self, unit)
 	local element = self.Health
 	if(element) then
 		element.__owner = self
@@ -355,9 +350,11 @@ local function Enable(self)
 
 		self:RegisterEvent('UNIT_HEALTH', Path)
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
+		self:RegisterEvent('UNIT_CONNECTION', Path)
 
-		if(element.colorDisconnected) then
-			self:RegisterEvent('UNIT_CONNECTION', ColorPath)
+		if(unit == 'party' or unit == 'raid') then
+			self:RegisterEvent('PARTY_MEMBER_ENABLE', Path)
+			self:RegisterEvent('PARTY_MEMBER_DISABLE', Path)
 		end
 
 		if(element.colorSelection) then
@@ -505,7 +502,9 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
 		self:UnregisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 		self:UnregisterEvent('UNIT_MAX_HEALTH_MODIFIERS_CHANGED', Path)
-		self:UnregisterEvent('UNIT_CONNECTION', ColorPath)
+		self:UnregisterEvent('UNIT_CONNECTION', Path)
+		self:UnregisterEvent('PARTY_MEMBER_ENABLE', Path)
+		self:UnregisterEvent('PARTY_MEMBER_DISABLE', Path)
 		self:UnregisterEvent('UNIT_FACTION', ColorPath)
 		self:UnregisterEvent('UNIT_FLAGS', ColorPath)
 		self:UnregisterEvent('UNIT_THREAT_LIST_UPDATE', ColorPath)

@@ -106,15 +106,12 @@ local tagStrings = {
 	end]],
 
 	['group'] = [[function(unit)
-		local name, server = UnitName(unit)
-		if(server and server ~= '') then
-			name = string.format('%s-%s', name, server)
-		end
-
-		for i=1, GetNumGroupMembers() do
-			local raidName, _, group = GetRaidRosterInfo(i)
-			if( raidName == name ) then
-				return group
+		if(IsInRaid()) then
+			for index = 1, GetNumGroupMembers() do
+				if(UnitIsUnit(unit, 'raid' .. index)) then
+					local _, _, group = GetRaidRosterInfo(index)
+					return group
+				end
 			end
 		end
 	end]],
@@ -424,7 +421,7 @@ local tagEvents = {
 	['missinghp']           = 'UNIT_HEALTH UNIT_MAXHEALTH',
 	['missingpp']           = 'UNIT_MAXPOWER UNIT_POWER_UPDATE',
 	['name']                = 'UNIT_NAME_UPDATE',
-	['offline']             = 'UNIT_HEALTH UNIT_CONNECTION',
+	['offline']             = 'UNIT_HEALTH UNIT_CONNECTION PARTY_MEMBER_ENABLE PARTY_MEMBER_DISABLE',
 	['perhp']               = 'UNIT_HEALTH UNIT_MAXHEALTH',
 	['perpp']               = 'UNIT_MAXPOWER UNIT_POWER_UPDATE',
 	['plus']                = 'UNIT_CLASSIFICATION_CHANGED',
@@ -436,7 +433,7 @@ local tagEvents = {
 	['shortclassification'] = 'UNIT_CLASSIFICATION_CHANGED',
 	['smartlevel']          = 'UNIT_LEVEL PLAYER_LEVEL_UP UNIT_CLASSIFICATION_CHANGED',
 	['soulshards']          = 'UNIT_POWER_UPDATE',
-	['status']              = 'UNIT_HEALTH PLAYER_UPDATE_RESTING UNIT_CONNECTION',
+	['status']              = 'UNIT_HEALTH PLAYER_UPDATE_RESTING UNIT_CONNECTION PARTY_MEMBER_ENABLE PARTY_MEMBER_DISABLEON',
 	['threat']              = 'UNIT_THREAT_SITUATION_UPDATE',
 	['threatcolor']         = 'UNIT_THREAT_SITUATION_UPDATE',
 }
