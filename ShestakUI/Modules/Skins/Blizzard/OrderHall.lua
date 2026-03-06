@@ -49,6 +49,9 @@ local function LoadSkin()
 		if self.portrait then
 			self.portrait:SetAlpha(0)
 		end
+		if self.OverlayElements and self.OverlayElements.CornerLogo then
+			self.OverlayElements.CornerLogo:SetAlpha(0)
+		end
 		if self.skinned then return end
 		self.Currency.Icon:SkinIcon()
 		self.BackButton:SkinButton()
