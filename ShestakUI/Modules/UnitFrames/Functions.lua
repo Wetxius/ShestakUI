@@ -936,6 +936,7 @@ T.CreateHealthPrediction = function(self, vertical)
 	end
 	mhpb:SetStatusBarTexture(C.media.texture)
 	mhpb:SetStatusBarColor(0, 1, 0.5, 0.2)
+	mhpb:SetValue(0)
 	self.Health.HealingPlayer = mhpb
 
 	-- Other healing
@@ -950,6 +951,7 @@ T.CreateHealthPrediction = function(self, vertical)
 	end
 	ohpb:SetStatusBarTexture(C.media.texture)
 	ohpb:SetStatusBarColor(0, 1, 0, 0.2)
+	ohpb:SetValue(0)
 	self.Health.HealingOther = ohpb
 
 	-- Absorb
@@ -964,6 +966,7 @@ T.CreateHealthPrediction = function(self, vertical)
 	end
 	absorb:SetStatusBarTexture(C.media.texture)
 	absorb:SetStatusBarColor(1, 1, 0, 0.2)
+	absorb:SetValue(0)
 	self.Health.DamageAbsorb = absorb
 
 	-- From enemy - heal absorb
@@ -979,6 +982,7 @@ T.CreateHealthPrediction = function(self, vertical)
 	hab:SetStatusBarTexture(C.media.texture)
 	hab:SetStatusBarColor(1, 0, 0, 0.4)
 	hab:SetReverseFill(true)
+	hab:SetValue(0)
 	self.Health.HealAbsorb = hab
 
 	self.Health.incomingHealOverflow = 1
