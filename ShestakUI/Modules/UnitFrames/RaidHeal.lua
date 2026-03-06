@@ -305,13 +305,19 @@ local function Shared(self, unit)
 		self.Debuffs.disableMouse = true
 		self.Debuffs.filter = "HARMFUL|RAID"
 
-		-- self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)	-- BETA Not tested
-		-- self.PrivateAuras:SetPoint("BOTTOMRIGHT", self, 0, 0)
-		-- self.PrivateAuras.initialAnchor = "TOPRIGHT"
-		-- self.PrivateAuras.growthX = "LEFT"
-		-- self.PrivateAuras:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
-		-- self.PrivateAuras.size = 8 * C.raidframe.icon_multiplier
-		-- self.PrivateAuras.spacing = T.Scale(3)
+		-- Blizzard private auras
+		if C.raidframe.plugins_private_auras then
+			self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)
+			self.PrivateAuras:SetPoint("CENTER", self, 0, 1)
+			self.PrivateAuras:SetSize(18, 18)
+			self.PrivateAuras.size = T.Scale(18)
+			self.PrivateAuras.num = 1
+			self.PrivateAuras.borderScale = 1
+			self.PrivateAuras.disableCooldownText = true	-- not C.raidframe.plugins_debuffs_timer
+			self.PrivateAuras.disableCooldown = not C.aura.show_spiral
+
+			self.Debuffs:SetFrameLevel(7)
+		end
 
 		-- -- Raid debuffs
 		-- self.RaidDebuffs = CreateFrame("Frame", nil, self)
