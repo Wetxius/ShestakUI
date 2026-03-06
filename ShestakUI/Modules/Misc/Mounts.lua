@@ -6,7 +6,7 @@
 function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	if not underwatermount then underwatermount = groundmount end
 	if not dragonridingmount then dragonridingmount = flyingmount end
-	local flyablex, swimablex, vjswim, InVj, nofly
+	local flyablex, swimablex, vjswim, InVj, nofly, riding
 	local num = C_MountJournal.GetNumMounts()
 	if not num or IsMounted() then
 		Dismount()
@@ -22,10 +22,20 @@ function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	if not nofly and IsFlyableArea() then
 		flyablex = true
 	end
+	if IsAdvancedFlyableArea() and IsOutdoors() then
+		riding = true
+		flyablex = true
+		if not IsControlKeyDown() then
+			flyingmount = ""
+			groundmount = ""
+		end
+	end
+
+	local sid
 	for i = 1, 40 do
-		local sid
 		local auraData = C_UnitAuras.GetBuffDataByIndex("player", i)
-		if auraData and canaccessvalue(auraData.spellId) then
+		if not auraData then break end
+		if canaccessvalue(auraData.spellId) then
 			sid = auraData.spellId
 		end
 		if sid == 73701 or sid == 76377 then
@@ -37,16 +47,6 @@ function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	end
 	if IsSwimming() and not flyablex and not vjswim then
 		swimablex = true
-	end
-
-	local riding
-	if IsAdvancedFlyableArea() and IsOutdoors() then
-		riding = true
-		flyablex = true
-		if not IsControlKeyDown() then
-			flyingmount = ""
-			groundmount = ""
-		end
 	end
 
 	if IsControlKeyDown() then
