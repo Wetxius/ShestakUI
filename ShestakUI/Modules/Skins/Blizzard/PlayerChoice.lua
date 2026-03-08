@@ -134,14 +134,17 @@ local function LoadSkin()
 						end
 					elseif widgetFrame.widgetType == _G.Enum.UIWidgetVisualizationType.ItemDisplay then
 						local element = widgetFrame.Item
-						element.NameFrame:Hide()
 						if not element.backdrop then
+							element.NameFrame:SetAlpha(0)
 							element.Icon:SkinIcon()
+							if element.IconBorder then
+								T.SkinIconBorder(element.IconBorder, element.backdrop)
+								element.IconBorder:SetVertexColor(element.IconBorder:GetVertexColor())
+							end
 						end
 						if element.Icon:GetWidth() < 25 then
 							element.Icon:SetSize(20, 20)
 						end
-						element.IconBorder:Hide()
 						element.IconMask:Hide()
 						if element.IconOverlay then element.IconOverlay:Hide() end
 					end
