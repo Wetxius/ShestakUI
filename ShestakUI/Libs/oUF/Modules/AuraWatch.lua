@@ -130,18 +130,18 @@ local function Update(frame, _, unit)
 				name, count, duration, remaining, caster, spellId = auraData.name, auraData.applications, auraData.duration, auraData.expirationTime, auraData.sourceUnit, auraData.spellId
 			end
 			if not name then break end
-			if not canaccessvalue(duration) then break end
-
-			if watch.strictMatching then
-				key = spellID
-			else
-				key = name
-			end
-			icon = icons[key]
-			if icon and not T.RaidBuffsIgnore[spellID] and (icon.anyUnit or (caster and icon.fromUnits and icon.fromUnits[caster])) then
-				resetIcon(icon, count, duration, remaining)
-				GUIDs[guid][key] = true
-				found[key] = true
+			if canaccessvalue(duration) then
+				if watch.strictMatching then
+					key = spellID
+				else
+					key = name
+				end
+				icon = icons[key]
+				if icon and not T.RaidBuffsIgnore[spellID] and (icon.anyUnit or (caster and icon.fromUnits and icon.fromUnits[caster])) then
+					resetIcon(icon, count, duration, remaining)
+					GUIDs[guid][key] = true
+					found[key] = true
+				end
 			end
 			index = index + 1
 		end
