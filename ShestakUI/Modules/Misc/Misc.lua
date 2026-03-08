@@ -150,3 +150,15 @@ UIErrorsFrame:SetFrameLevel(0)
 ----------------------------------------------------------------------------------------
 AddonList.ScrollBox.wheelPanScalar = 6
 AddonList.ScrollBar.wheelPanScalar = 6
+
+
+----------------------------------------------------------------------------------------
+--	Allow mousewheel in ItemTextScrollFrame
+----------------------------------------------------------------------------------------
+ItemTextScrollFrame:SetScript("OnMouseWheel", function(_, delta)
+	if delta < 0 then
+		ItemTextNextPageButton:Click()
+	else
+		ItemTextPrevPageButton:Click()
+	end
+end)
