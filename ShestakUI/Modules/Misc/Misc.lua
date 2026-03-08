@@ -155,10 +155,10 @@ AddonList.ScrollBar.wheelPanScalar = 6
 ----------------------------------------------------------------------------------------
 --	Allow mousewheel in ItemTextScrollFrame
 ----------------------------------------------------------------------------------------
-ItemTextScrollFrame:SetScript("OnMouseWheel", function(_, delta)
-	if delta < 0 then
+ItemTextScrollFrame:HookScript("OnMouseWheel", function(_, delta)
+	if delta < 0 and ItemTextNextPageButton:IsShown() then
 		ItemTextNextPageButton:Click()
-	else
+	elseif delta > 0 and ItemTextPrevPageButton:IsShown() then
 		ItemTextPrevPageButton:Click()
 	end
 end)
