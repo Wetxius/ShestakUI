@@ -28,8 +28,10 @@ end
 
 local AddUnit = function(unit)
 	local threatpct, _, threatval = select(3, UnitDetailedThreatSituation(unit, "target"))
-	if threatval and threatval < 0 then
-		threatval = threatval + 410065408
+	if canaccessvalue(threatval) then
+		if threatval and threatval < 0 then
+			threatval = threatval + 410065408
+		end
 	end
 	local guid = UnitGUID(unit)
 	if not canaccessvalue(guid) then return end -- BETA
