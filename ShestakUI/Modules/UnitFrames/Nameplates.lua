@@ -594,8 +594,11 @@ local function HealthPostUpdateColor(self, unit, color)
 		self:SetStatusBarColor(r, g, b)
 		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
 	elseif not UnitIsTapDenied(unit) and not isPlayer then
+		local special = UnitClassification(unit)
 		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then
 			r, g, b = unpack(T.ColorPlate[main.npcID])
+		elseif special == "rare" or special == "rareelite" then
+			r, g, b = 0, 0.7, 0.6
 		else
 			local reaction = T.oUF_colors.reaction[unitReaction]
 			if reaction then
