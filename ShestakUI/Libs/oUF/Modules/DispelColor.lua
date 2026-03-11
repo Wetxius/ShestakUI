@@ -68,6 +68,13 @@ local function CheckSpec()
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
+		if C_SpellBook.IsSpellKnown(213644) then
+			color_poison = CreateColor(0, 0.6, 0)
+			color_disease = CreateColor(0.6, 0.4, 0)
+		else
+			color_poison = CreateColor(0, 0, 0, 0)
+			color_disease = CreateColor(0, 0, 0, 0)
+		end
 	elseif T.class == "PRIEST" then
 		if spec == 3 then
 			color_magic = CreateColor(0, 0, 0, 0)
