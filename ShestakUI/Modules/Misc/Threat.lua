@@ -28,13 +28,14 @@ end
 
 local AddUnit = function(unit)
 	local threatpct, _, threatval = select(3, UnitDetailedThreatSituation(unit, "target"))
+	if T.IsSecretValue(threatpct) then return end
 	if canaccessvalue(threatval) then
 		if threatval and threatval < 0 then
 			threatval = threatval + 410065408
 		end
 	end
 	local guid = UnitGUID(unit)
-	if not canaccessvalue(guid) then return end -- BETA
+	if T.IsSecretValue(guid) then return end -- BETA
 	if not tList[guid] then
 		tinsert(barList, guid)
 		tList[guid] = {
