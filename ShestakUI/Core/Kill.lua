@@ -25,7 +25,7 @@ frame:SetScript("OnEvent", function()
 			CompactRaidFrameManager:HookScript("OnShow", HideFrames)
 			CompactRaidFrameContainer:HookScript("OnShow", HideFrames)
 			HideFrames()
-			CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end)
+			-- CompactArenaFrame:HookScript("OnShow", function(self) self:Hide() end) -- need?
 			UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE") -- Hide/Show party member frames with UpdateRaidAndPartyFrames()
 			frame:UnregisterAllEvents()
 		end

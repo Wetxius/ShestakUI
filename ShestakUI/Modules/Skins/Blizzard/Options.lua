@@ -30,10 +30,10 @@ local function LoadSkin()
 	frame.CloseButton:SkinButton()
 	frame.Container.SettingsList.Header.DefaultsButton:SkinButton()
 
-	T.SkinScrollBar(SettingsPanel.Container.SettingsList.ScrollBar)
-	SettingsPanel.Container.SettingsList.ScrollBar.Back:SetSize(17, 15)
-	SettingsPanel.Container.SettingsList.ScrollBar.Track.Thumb:SetWidth(17)
-	SettingsPanel.Container.SettingsList.ScrollBar.Forward:SetSize(17, 15)
+	-- T.SkinScrollBar(SettingsPanel.Container.SettingsList.ScrollBar) -- taint when open in combat
+	-- SettingsPanel.Container.SettingsList.ScrollBar.Back:SetSize(17, 15)
+	-- SettingsPanel.Container.SettingsList.ScrollBar.Track.Thumb:SetWidth(17)
+	-- SettingsPanel.Container.SettingsList.ScrollBar.Forward:SetSize(17, 15)
 
 	SettingsPanel.CategoryList:CreateBackdrop("Overlay")
 	SettingsPanel.Container:CreateBackdrop("Overlay")
