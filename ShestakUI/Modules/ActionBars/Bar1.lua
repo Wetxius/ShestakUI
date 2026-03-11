@@ -87,7 +87,7 @@ bar:SetScript("OnEvent", function(self, event)
 		RegisterStateDriver(self, "page", GetBar())
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
 		local alpha = 1
-		if UnitHasVehicleUI("player") or C_ActionBar.IsPossessBarVisible() or ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_OVERRIDE then
+		if C_ActionBar.HasVehicleActionBar() or C_ActionBar.IsPossessBarVisible() or ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_OVERRIDE then
 			alpha = 0
 		end
 
