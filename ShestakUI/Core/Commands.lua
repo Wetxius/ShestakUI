@@ -327,6 +327,7 @@ SlashCmdList.TEST_ACHIEVEMENT = function()
 		-- rewardData.icon = 7252953
 		HousingItemEarnedAlertFrameSystem:AddAlert(rewardData)
 	end
+	-- InitiativeTaskCompleteAlertFrameSystem:AddAlert("Test")
 	-- BonusRollFrame_StartBonusRoll(242969, 'test', 20, 515, 15, 14)
 end
 SLASH_TEST_ACHIEVEMENT1 = "/tach"

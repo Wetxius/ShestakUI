@@ -269,3 +269,11 @@ T.CurrentProfile = function(reset)
 		end
 	end
 end
+
+----------------------------------------------------------------------------------------
+--	Timer functions
+----------------------------------------------------------------------------------------
+T.After = function(delay, func, ...)
+	local args = {...}
+	C_Timer.After(delay, function() func(unpack(args)) end)
+end

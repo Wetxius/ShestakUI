@@ -885,22 +885,25 @@ local function LoadSkin()
 		frame.LightRays2:Kill()
 		frame.Divider:Kill()
 
-		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		frame.Icon:SetDrawLayer("BORDER", 5)
-		frame.Icon:ClearAllPoints()
-		frame.Icon:SetPoint("LEFT", frame.backdrop, 9, 0)
-		frame.Icon:SetSize(50, 50)
+		if frame.Icon then
+			frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			frame.Icon:SetDrawLayer("BORDER", 5)
+			frame.Icon:ClearAllPoints()
+			frame.Icon:SetPoint("LEFT", frame.backdrop, 9, 0)
+			frame.Icon:SetSize(50, 50)
 
-		-- Icon border
-		if not frame.Icon.b then
-			frame.Icon.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.b:SetTemplate("Default")
-			frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
-			frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
-			frame.Icon:SetParent(frame.Icon.b)
+			-- Icon border
+			if not frame.Icon.b then
+				frame.Icon.b = CreateFrame("Frame", nil, frame)
+				frame.Icon.b:SetTemplate("Default")
+				frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
+				frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
+				frame.Icon:SetParent(frame.Icon.b)
+			end
 		end
 	end
 	hooksecurefunc(HousingItemEarnedAlertFrameSystem, "setUpFunction", SkinHousingItemAlert)
+	hooksecurefunc(InitiativeTaskCompleteAlertFrameSystem, "setUpFunction", SkinHousingItemAlert)
 
 	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
 		if frame.RewardFrames then
