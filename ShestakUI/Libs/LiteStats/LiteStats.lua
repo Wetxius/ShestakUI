@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L, _ = unpack(ShestakUI)
 
 ----------------------------------------------------------------------------------------
 --	Based on LiteStats(by Katae)

@@ -261,7 +261,7 @@ if T.screenHeight > 1200 then
 	Mult = T.mult
 end
 
-local AurasPostCreateIcon = function(element, button)
+local AurasPostCreateIcon = function(_, button)
 	CreateBorderFrame(button)
 
 	T.SkinCooldown(button.Cooldown, "aura")
