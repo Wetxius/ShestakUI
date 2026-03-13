@@ -109,8 +109,9 @@ local function LoadSkin()
 
 	frame.CharacterPreview.Gradients:Hide()
 	frame.CharacterPreview:StripTextures()
-	frame.CharacterPreview:CreateBackdrop("Overlay")
-	frame.CharacterPreview.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
+	frame.CharacterPreview:SetFrameLevel(10)
+	frame.CharacterPreview:CreateBackdrop("Transparent")
+	frame.CharacterPreview.backdrop:SetBackdropColor(0.13, 0.13, 0.13, 0.8)
 	frame.CharacterPreview.backdrop:SetPoint("TOPLEFT", 2, -10)
 	frame.CharacterPreview.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 
@@ -119,6 +120,8 @@ local function LoadSkin()
 	frame.WardrobeCollection.TabContent.backdrop.overlay:SetVertexColor(0.13, 0.13, 0.13, 1)
 	frame.WardrobeCollection.TabContent.backdrop:SetPoint("TOPLEFT", 2, -10)
 	frame.WardrobeCollection.TabContent.backdrop:SetPoint("BOTTOMRIGHT", -4, 2)
+
+	T.SkinDropDownBox(frame.WardrobeCollection.TabContent.ItemsFrame.WeaponDropdown)
 
 	frame.WardrobeCollection.TabContent.SituationsFrame.Situations:StripTextures()
 
