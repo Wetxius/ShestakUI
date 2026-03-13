@@ -1569,46 +1569,61 @@ end
 ----------------------------------------------------------------------------------------
 --	Auto reposition heal raid frame
 ----------------------------------------------------------------------------------------
+local function adjustAnchor(offset)
+	if C.unitframe.castbar_icon then
+		if oUF_Player_Castbar then
+			oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
+		end
+	else
+		if oUF_Player_Castbar then
+			oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
+		end
+	end
+
+	player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
+	target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
+end
+
 if C.raidframe.auto_position == "DYNAMIC" then
 	local prevNum = 5
 	local function Reposition(self, event)
-		if (C.raidframe.layout == "HEAL" or C.raidframe.layout == "AUTO") and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
-			if InCombatLockdown() then
-				self:RegisterEvent("PLAYER_REGEN_ENABLED")
-				return
-			end
-			local maxGroup = 5
-			local num = GetNumGroupMembers()
-			if num > 5 then
-				local _, _, subgroup = GetRaidRosterInfo(num)
-				if subgroup and subgroup > maxGroup then
-					maxGroup = subgroup
-				end
-			end
-			if maxGroup >= C.raidframe.raid_groups then
-				maxGroup = C.raidframe.raid_groups
-			end
-			if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then maxGroup = 5 end
-			if prevNum ~= maxGroup then
-				-- local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7) + ((maxGroup - ((maxGroup - 5))) * (C.raidframe.heal_raid_height - 26))
-				local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7)
-				if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then offset = 0 end
-				if C.unitframe.castbar_icon then
-					if oUF_Player_Castbar then
-						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
-					end
-				else
-					if oUF_Player_Castbar then
-						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
-					end
+		if (C.raidframe.layout == "HEAL" or C.raidframe.layout == "AUTO") and not C.raidframe.raid_groups_vertical then
+			if C.raidframe.raid_groups > 5 then
+				if InCombatLockdown() then
+					self:RegisterEvent("PLAYER_REGEN_ENABLED")
+					return
 				end
 
-				player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
-				target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
-				prevNum = maxGroup
-			end
-			if event == "PLAYER_REGEN_ENABLED" then
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+				local maxGroup = 5
+				local num = GetNumGroupMembers()
+				if num > 5 then
+					local _, _, subgroup = GetRaidRosterInfo(num)
+					if subgroup and subgroup > maxGroup then
+						maxGroup = subgroup
+					end
+				end
+				if maxGroup >= C.raidframe.raid_groups then
+					maxGroup = C.raidframe.raid_groups
+				end
+				if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then maxGroup = 5 end
+				if prevNum ~= maxGroup then
+					local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7) + ((maxGroup - ((maxGroup - 5))) * (C.raidframe.heal_raid_height - 26))
+					-- local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7)
+					if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then offset = 0 end
+					adjustAnchor(offset)
+					prevNum = maxGroup
+				end
+
+				if event == "PLAYER_REGEN_ENABLED" then
+					self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+				end
+			elseif C.raidframe.raid_groups == 5 and C.raidframe.heal_raid_height > 26 then
+				local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_raid_height - 26))
+				if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then offset = 0 end
+				adjustAnchor(offset)
+				self:UnregisterEvent("GROUP_ROSTER_UPDATE")
+			else
+				self:UnregisterAllEvents()
 			end
 		else
 			self:UnregisterAllEvents()
@@ -1624,22 +1639,11 @@ if C.raidframe.auto_position == "DYNAMIC" then
 	frame:SetScript("OnEvent", Reposition)
 elseif C.raidframe.auto_position == "STATIC" then
 	local function Reposition(self)
-		if (C.raidframe.layout == "HEAL" or C.raidframe.layout == "AUTO") and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
-			-- local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_raid_height - 26))
-			local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7)
+		if (C.raidframe.layout == "HEAL" or C.raidframe.layout == "AUTO") and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups >= 5 then
+			local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_raid_height - 26))
+			-- local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7)
 			if C.raidframe.layout == "AUTO" and not T.IsHealerSpec() then offset = 0 end
-			if C.unitframe.castbar_icon then
-				if oUF_Player_Castbar then
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
-				end
-			else
-				if oUF_Player_Castbar then
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
-				end
-			end
-
-			player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
-			target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
+			adjustAnchor(offset)
 		else
 			self:UnregisterAllEvents()
 		end
