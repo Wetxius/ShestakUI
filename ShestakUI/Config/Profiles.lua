@@ -80,7 +80,6 @@ if T.name == "Oz" and T.realm == "Pozzo dell'Eternità" then
 	C["skins"].blizzard_frames = true
 	C["skins"].minimap_buttons = true
 	C["skins"].dbm = true
-	C["skins"].npcscan = true
 	C["skins"].skada = true
 	C["skins"].my_role_play = true
 	C["combattext"].icons = false
