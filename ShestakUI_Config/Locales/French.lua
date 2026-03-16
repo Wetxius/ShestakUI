@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight = "Afficher la texture de l'affaiblissement 
 L.raidframe_plugins_debuffhighlight_icon = "Afficher l’icône d'affaiblissement dispellable"
 L.raidframe_plugins_debuffs = "Icônes d'affaiblissement de raid (de la liste)"
 L.raidframe_plugins_debuffs_timer = "Durée sur les icônes d'affaiblissement du raid"
+L.raidframe_plugins_private_auras = "Blizzard 'Private Auras'" -- Need review
 L.raidframe_plugins_pvp_debuffs = "Afficher les icônes d'affaiblissement JcJ (de la liste)"
 L.raidframe_plugins_buffs = "Raid buff icons (by Blizzard filter)" -- Need review
 L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review

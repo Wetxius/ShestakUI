@@ -1888,16 +1888,19 @@ do
 	local plugins_debuffs_timer = ns.CreateCheckBox(parent, "plugins_debuffs_timer")
 	plugins_debuffs_timer:SetPoint("TOPLEFT", plugins_debuffs, "BOTTOMLEFT", 20, 0)
 
+	local plugins_private_auras = ns.CreateCheckBox(parent, "plugins_private_auras")
+	plugins_private_auras:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
+
 	-- local plugins_debuffhighlight_icon = ns.CreateCheckBox(parent, "plugins_debuffhighlight_icon")
 	-- plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
 
 	-- local plugins_pvp_debuffs = ns.CreateCheckBox(parent, "plugins_pvp_debuffs")
 	-- plugins_pvp_debuffs:SetPoint("TOPLEFT", plugins_debuffhighlight_icon, "BOTTOMLEFT", 0, 0)
 
-	plugins_debuffs.children = {plugins_debuffs_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
+	plugins_debuffs.children = {plugins_debuffs_timer, plugins_private_auras, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
 
 	local plugins_buffs = ns.CreateCheckBox(parent, "plugins_buffs")
-	plugins_buffs:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", -20, 0)
+	plugins_buffs:SetPoint("TOPLEFT", plugins_private_auras, "BOTTOMLEFT", -20, 0)
 
 	local plugins_buffs_timer = ns.CreateCheckBox(parent, "plugins_buffs_timer")
 	plugins_buffs_timer:SetPoint("TOPLEFT", plugins_buffs, "BOTTOMLEFT", 20, 0)

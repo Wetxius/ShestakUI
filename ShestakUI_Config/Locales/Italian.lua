@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- N
 L.raidframe_plugins_debuffhighlight_icon = "Evidenzia texture + icona delle penalità" -- Need review
 L.raidframe_plugins_debuffs = "Icone delle penalità d'incursione"
 L.raidframe_plugins_debuffs_timer = "Timer sulle icone delle penalità d'incursione"
+L.raidframe_plugins_private_auras = "Blizzard 'Private Auras'" -- Need review
 L.raidframe_plugins_pvp_debuffs = "Mostra anche un’icona per le penalità PvP (dall’elenco)"
 L.raidframe_plugins_buffs = "Raid buff icons (by Blizzard filter)" -- Need review
 L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review

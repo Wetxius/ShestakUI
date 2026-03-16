@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight = "Show texture for dispellable debuff" -- N
 L.raidframe_plugins_debuffhighlight_icon = "Remarcar textura de desventajas + icono" -- Need review
 L.raidframe_plugins_debuffs = "'BANDA' Ver las auras"
 L.raidframe_plugins_debuffs_timer = "Temporizador en los iconos de perjuicios de la banda"
+L.raidframe_plugins_private_auras = "Blizzard 'Private Auras'" -- Need review
 L.raidframe_plugins_pvp_debuffs = "Show PvP debuff icons (from the list)" -- Need review
 L.raidframe_plugins_buffs = "Raid buff icons (by Blizzard filter)" -- Need review
 L.raidframe_plugins_buffs_timer = "Timer on raid buffs icons" -- Need review
