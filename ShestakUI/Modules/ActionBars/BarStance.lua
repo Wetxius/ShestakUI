@@ -18,7 +18,7 @@ if C.actionbar.stancebar_hide then
 end
 
 -- Create bar
-local bar = CreateFrame("Frame", "StanceHolder", UIParent, "SecureHandlerStateTemplate")
+local bar = CreateFrame("Frame", "StanceHolder", T_PetBattleFrameHider)
 bar:SetAllPoints(StanceBarAnchor)
 
 bar:RegisterEvent("PLAYER_LOGIN")
