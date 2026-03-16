@@ -595,7 +595,7 @@ local function HealthPostUpdateColor(self, unit, color)
 		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
 	elseif not UnitIsTapDenied(unit) and not isPlayer then
 		local special = UnitClassification(unit)
-		if special == "elite" and UnitClassBase(unit) == "PALADIN" then
+		if special == "elite" and IsInInstance() and UnitClassBase(unit) == "PALADIN" then
 			main.npcID = "caster"
 		end
 		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then
