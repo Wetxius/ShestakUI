@@ -111,3 +111,12 @@ local function LoadModelPreviewSkin()
 end
 
 T.SkinFuncs["Blizzard_HousingModelPreview"] = LoadModelPreviewSkin
+
+local function LoadHouseListSkin()
+	local frame = _G.HouseListFrame
+	T.SkinFrame(frame)
+
+	T.SkinScrollBar(frame.ScrollBar)
+end
+
+T.SkinFuncs["Blizzard_HouseList"] = LoadHouseListSkin
