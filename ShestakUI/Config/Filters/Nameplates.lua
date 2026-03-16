@@ -158,6 +158,8 @@ end
 local color = C.nameplate.mob_color
 local color_alt = C.nameplate.mob_color_alt
 T.ColorPlate = {
+	-- Midnight
+	["caster"] = color,		-- All caster mobs
 	-- Algeth'ar Academy
 	["196548"] = color,		-- Ancient Branch
 	-- The Azure Vault
