@@ -183,9 +183,15 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		MovieFrame.CloseDialog:SetScale(C.general.uiscale)
 		MovieFrame.CloseDialog:StripTextures()
 		MovieFrame.CloseDialog:SetTemplate("Transparent")
-		MovieFrame.CloseDialog.ConfirmButton:SkinButton()
-		MovieFrame.CloseDialog.ResumeButton:SkinButton()
-		MovieFrame.CloseDialog.ResumeButton:SetPoint("LEFT", MovieFrame.CloseDialog.ConfirmButton, "RIGHT", 15, 0)
+		if MovieFrame.CloseDialog.ConfirmButton then -- BETA
+			MovieFrame.CloseDialog.ConfirmButton:SkinButton()
+			MovieFrame.CloseDialog.ResumeButton:SkinButton()
+			MovieFrame.CloseDialog.ResumeButton:SetPoint("LEFT", MovieFrame.CloseDialog.ConfirmButton, "RIGHT", 15, 0)
+		elseif MovieFrame.CloseDialog.Buttons.ConfirmButton then
+			MovieFrame.CloseDialog.Buttons.ConfirmButton:SkinButton()
+			MovieFrame.CloseDialog.Buttons.ResumeButton:SkinButton()
+			MovieFrame.CloseDialog.Buttons.ResumeButton:SetPoint("LEFT", MovieFrame.CloseDialog.Buttons.ConfirmButton, "RIGHT", 15, 0)
+		end
 
 		-- PetBattle popup
 		_G["PetBattleQueueReadyFrame"]:SetTemplate("Transparent")
