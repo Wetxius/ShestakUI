@@ -48,7 +48,7 @@ local function LoadSkin()
 		end)
 	end
 
-	local button = T.newPatch and DressUpFrame.ToggleCustomSetDetailsButton or DressUpFrame.ToggleOutfitDetailsButton
+	local button = DressUpFrame.ToggleCustomSetDetailsButton
 	button:SetNormalTexture(134331)
 	button:SetPushedTexture(134331)
 	button:StyleButton(true)
@@ -58,7 +58,7 @@ local function LoadSkin()
 	button:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button:GetPushedTexture():SetInside()
 
-	local panel = T.newPatch and DressUpFrame.CustomSetDetailsPanel or DressUpFrame.OutfitDetailsPanel
+	local panel = DressUpFrame.CustomSetDetailsPanel
 	panel:StripTextures()
 	panel:CreateBackdrop("Transparent")
 	panel.backdrop:SetPoint("TOPLEFT", 10, 0)
@@ -83,7 +83,7 @@ local function LoadSkin()
 	DressUpFrame.LinkButton:SkinButton()
 	DressUpFrame.LinkButton:SetPoint("BOTTOMLEFT", 4, 4)
 
-	local dropdown = T.newPatch and DressUpFrameCustomSetDropdown or DressUpFrameOutfitDropdown
+	local dropdown = DressUpFrameCustomSetDropdown
 	T.SkinDropDownBox(dropdown, 195, 21)
 	dropdown.SaveButton:SkinButton()
 	dropdown.SaveButton:ClearAllPoints()
@@ -98,15 +98,6 @@ local function LoadSkin()
 	SideDressUpFrame.BGTopLeft:SetSize(183, 292)
 	SideDressUpFrame.BGBottomLeft:SetSize(183, 93)
 	T.SkinCloseButton(SideDressUpFrameCloseButton, SideDressUpFrame)
-
-	if not T.newPatch then
-		WardrobeOutfitEditFrame:StripTextures(true)
-		WardrobeOutfitEditFrame:SetTemplate("Transparent")
-		WardrobeOutfitEditFrame.AcceptButton:SkinButton()
-		WardrobeOutfitEditFrame.CancelButton:SkinButton()
-		WardrobeOutfitEditFrame.DeleteButton:SkinButton()
-		T.SkinEditBox(WardrobeOutfitEditFrame.EditBox, 250, 25)
-	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

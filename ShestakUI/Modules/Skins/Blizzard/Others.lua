@@ -28,7 +28,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"ReadyCheckFrame",
 			"ColorPickerFrame",
 			"LFDRoleCheckPopup",
-			"LFDReadyCheckPopup",
 			"GuildInviteFrame",
 			"RolePollPopup",
 			"OpacityFrame",
@@ -362,7 +361,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"RolePollPopupAcceptButton",
 			"LFDRoleCheckPopupDeclineButton",
 			"LFDRoleCheckPopupAcceptButton",
-			"LFDReadyCheckPopupAcceptButton",
 			"RaidUtilityConvertButton",
 			"RaidUtilityMainTankButton",
 			"RaidUtilityMainAssistButton",
@@ -381,10 +379,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			if buttons then
 				buttons:SkinButton()
 			end
-		end
-		if not T.newPatch then
-			LFDReadyCheckPopup.YesButton:SkinButton(true)
-			LFDReadyCheckPopup.NoButton:SkinButton(true)
 		end
 
 		-- ColorPickerFrame
