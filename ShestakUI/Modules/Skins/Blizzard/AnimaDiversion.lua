@@ -17,10 +17,7 @@ local function LoadSkin()
 	hooksecurefunc(AnimaDiversionFrame, "SetupCurrencyFrame", function()
 		local cur = AnimaDiversionFrame.AnimaDiversionCurrencyFrame.CurrencyFrame.Quantity
 
-		local text = cur and cur:GetText()
-		if not text or text == '' then return end
-		local new, count = gsub(text, "|T([^:]-):[%d+:]+|t", "|T%1:14:14:0:0:64:64:5:59:5:59|t")
-		if count > 0 then cur:SetFormattedText("%s", new) end
+		T.ReplaceIconString(cur)
 	end)
 end
 

@@ -121,18 +121,10 @@ local function LoadSkinSanctum()
 	talentsList.BackgroundTile:SetAlpha(0)
 	talentsList.IntroBox.Background:Hide()
 
-	local function HandleIconString(self, text)
-		if not text then text = self:GetText() end
-		if not text or text == '' then return end
-
-		local new, count = gsub(text, '|T([^:]-):[%d+:]+|t', '|T%1:14:14:0:0:64:64:5:59:5:59|t')
-		if count > 0 then self:SetFormattedText('%s', new) end
-	end
-
 	for frame in frame.UpgradesTab.CurrencyDisplayGroup.currencyFramePool:EnumerateActive() do
 		if not frame.IsSkinned then
-			HandleIconString(frame.Text)
-			hooksecurefunc(frame.Text, "SetText", HandleIconString)
+			T.ReplaceIconString(frame.Text)
+			hooksecurefunc(frame.Text, "SetText", T.ReplaceIconString)
 
 			frame.IsSkinned = true
 		end
