@@ -1225,7 +1225,7 @@ local iconColors = {
 	["legendary"]	= BAG_ITEM_QUALITY_COLORS[5],
 }
 
-function T.SkinIconBorder(frame, parent, useAtlas)
+function T.SkinIconBorder(frame, parent, useAtlas, force)
 	local border = parent or frame:GetParent().backdrop
 	frame:SetAlpha(0)
 	if not useAtlas then
@@ -1255,13 +1255,18 @@ function T.SkinIconBorder(frame, parent, useAtlas)
 			border:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 	end)
+
+	if force then
+		frame:SetVertexColor(frame:GetVertexColor())
+	end
 end
 
-function T.ReplaceIconString(frame, text)
+function T.ReplaceIconString(frame, text, iconSize)
 	if not text then text = frame:GetText() end
 	if not text or text == "" then return end
+	if not iconSize then iconSize = 14 end
 
-	local newText, count = gsub(text, "|T([^:]-):[%d+:]+|t", "|T%1:14:14:0:0:64:64:5:59:5:59|t")
+	local newText, count = gsub(text, "|T([^:]-):[%d+:]+|t", "|T%1:"..iconSize..":"..iconSize..":0:0:64:64:5:59:5:59|t")
 	if count > 0 then frame:SetFormattedText("%s", newText) end
 end
 

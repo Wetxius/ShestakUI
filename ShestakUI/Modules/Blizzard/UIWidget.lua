@@ -213,12 +213,27 @@ end
 local function SkinItemDisplay(widget)
 	if not widget.styled then
 		widget.Item.Icon:SkinIcon(true)
-		T.SkinIconBorder(widget.Item.IconBorder, widget.Item.Icon.b)
-		widget.Item.IconBorder:SetVertexColor(widget.Item.IconBorder:GetVertexColor())
+		T.SkinIconBorder(widget.Item.IconBorder, widget.Item.Icon.b, nil, true)
 		widget.Item.ItemName:SetFont(C.media.normal_font, 14, "")
 		widget.styled = true
 	end
 	widget.Item.IconMask:Hide()
+end
+
+local function SkinItem(widget)
+	if not widget.styled then
+		widget.Icon:SkinIcon(true)
+		T.SkinIconBorder(widget.IconBorder, widget.Icon.b, nil, true)
+		widget.styled = true
+	end
+end
+
+local function SkinText(widget, widgetInfo)
+	if widgetInfo.enabledState == 3 then
+		T.ReplaceIconString(widget.Text, nil, 30)	-- this is for major faction icon
+	else
+		T.ReplaceIconString(widget.Text)			-- find in Worldsoul Memory tooltip
+	end
 end
 
 local frame = CreateFrame("Frame")
@@ -243,9 +258,9 @@ frame:SetScript("OnEvent", function()
 	end
 end)
 
-hooksecurefunc(UIWidgetTemplateScenarioHeaderCurrenciesAndBackgroundMixin, "Setup", function(widgetInfo)
-	widgetInfo.Frame:SetAlpha(0)
-	for frame in widgetInfo.currencyPool:EnumerateActive() do
+hooksecurefunc(UIWidgetTemplateScenarioHeaderCurrenciesAndBackgroundMixin, "Setup", function(widget)
+	widget.Frame:SetAlpha(0)
+	for frame in widget.currencyPool:EnumerateActive() do
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
 end)
@@ -256,4 +271,14 @@ end)
 
 hooksecurefunc(UIWidgetBaseSpellTemplateMixin, "Setup", function(widget)
 	SkinSpell(widget)
+end)
+
+hooksecurefunc(UIWidgetBaseItemTemplateMixin, "Setup", function(widget)
+	SkinItem(widget)
+end)
+
+-- Find all widgets in tooltip
+-- /dump C_UIWidgetManager.GetAllWidgetsBySetID(1333)
+hooksecurefunc(UIWidgetTemplateTextWithStateMixin, "Setup", function(...)
+	SkinText(...)
 end)
