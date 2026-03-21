@@ -494,7 +494,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		if quality then
 			ret.frame.quality = quality
 		-- else
-			-- C_Timer.After(1, function() -- TODO: Test it if quality not returned after first open
+			-- C_Timer.After(1, function() -- NOTE: Test it if quality not returned after first open
 				-- ret.frame.quality = GetInventoryItemQuality("player", ret.frame.ID)
 			-- end)
 		end
@@ -510,7 +510,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
 	ret.icon:CropIcon()
 
-	-- C_Timer.After(2, function() -- TODO: Test it if quality not returned after first open
+	-- C_Timer.After(2, function() -- NOTE: Test it if quality not returned after first open
 	if ret.frame.quality and ret.frame.quality > 1 then
 		local r, g, b = C_Item.GetItemQualityColor(ret.frame.quality)
 		ret.frame:SetBackdropBorderColor(r, g, b)
