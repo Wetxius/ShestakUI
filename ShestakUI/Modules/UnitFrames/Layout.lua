@@ -1136,7 +1136,27 @@ local function Shared(self, unit)
 		self.FactionIcon:SetSize(16, 16)
 		self.FactionIcon:SetPoint("TOP", 0, 0)
 
-		-- TODO rework to use auras with filter?
+		-- Crowd control icon
+		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
+		self.Debuffs:SetSize(31 + T.extraHeight, 31 + T.extraHeight)
+		self.Debuffs:SetFrameStrata("HIGH")
+		self.Debuffs.size = T.Scale(31 + T.extraHeight)
+		self.Debuffs.num = 1
+		if C.unitframe.boss_on_right then
+			self.Debuffs:SetPoint("RIGHT", self, "LEFT", -5, 0)
+			self.Debuffs.initialAnchor = "RIGHT"
+			self.Debuffs.growthX = "LEFT"
+		else
+			self.Debuffs:SetPoint("LEFT", self, "RIGHT", 5, 0)
+			self.Debuffs.initialAnchor = "LEFT"
+			self.Debuffs.growthX = "RIGHT"
+		end
+
+		self.Debuffs.PostCreateButton = T.PostCreateIcon
+		self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
+
+		self.Debuffs.filter = "HARMFUL|CROWD_CONTROL"
+
 		--BETA self.AuraTracker = CreateFrame("Frame", self:GetName().."_AuraTracker", self)
 		-- self.AuraTracker:SetWidth(self.Trinket:GetWidth())
 		-- self.AuraTracker:SetHeight(self.Trinket:GetHeight())
