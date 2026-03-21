@@ -1129,8 +1129,7 @@ function T.SkinProfessionsFlyout(_, parent)
 						button:SetNormalTexture(0)
 						button:SetPushedTexture(0)
 						button:GetHighlightTexture():Hide()
-						T.SkinIconBorder(button.IconBorder, button)
-						button.IconBorder:SetVertexColor(button.IconBorder:GetVertexColor())
+						T.SkinIconBorder(button.IconBorder, button, nil, true)
 
 						button.styled = true
 					end

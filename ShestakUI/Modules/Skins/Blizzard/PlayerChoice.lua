@@ -96,8 +96,7 @@ local function LoadSkin()
 					if item and not item.isSkinned then
 						item.NormalTexture:SetAlpha(0)
 						item.icon:SkinIcon()
-						T.SkinIconBorder(item.IconBorder, item.backdrop)
-						item.IconBorder:SetVertexColor(item.IconBorder:GetVertexColor())
+						T.SkinIconBorder(item.IconBorder, item.backdrop, nil, true)
 						item.isSkinned = true
 					end
 					local r, g, b
@@ -138,8 +137,7 @@ local function LoadSkin()
 							element.NameFrame:SetAlpha(0)
 							element.Icon:SkinIcon()
 							if element.IconBorder then
-								T.SkinIconBorder(element.IconBorder, element.backdrop)
-								element.IconBorder:SetVertexColor(element.IconBorder:GetVertexColor())
+								T.SkinIconBorder(element.IconBorder, element.backdrop, nil, true)
 							end
 						end
 						if element.Icon:GetWidth() < 25 then
