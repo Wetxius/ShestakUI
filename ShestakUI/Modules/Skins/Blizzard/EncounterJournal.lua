@@ -203,10 +203,44 @@ local function LoadSkin()
 
 				button.NormalTexture:SetAlpha(0)
 
-				-- TODO
 				local collapse = button.HeaderCollapseIndicator
 				if collapse then
+					collapse:SetAlpha(0)
 
+					local b = CreateFrame("Button", nil, frame)
+					b:SetPoint("TOPLEFT", collapse)
+					b:SetFrameLevel(4)
+					b:Hide()
+					b:SetSize(17, 17)
+					b:StripTextures()
+					b:SetTemplate("Overlay")
+
+					b.minus = b:CreateTexture(nil, "OVERLAY")
+					b.minus:SetSize(7, 1)
+					b.minus:SetPoint("CENTER")
+					b.minus:SetTexture(C.media.blank)
+
+					b.plus = b:CreateTexture(nil, "OVERLAY")
+					b.plus:SetSize(1, 7)
+					b.plus:SetPoint("CENTER")
+					b.plus:SetTexture(C.media.blank)
+
+					b:HookScript("OnEnter", T.SetModifiedBackdrop)
+					b:HookScript("OnLeave", T.SetOriginalBackdrop)
+
+					b:SetScript("OnMouseUp", function() button:OnClick() end)
+
+					hooksecurefunc(collapse, "SetShown", function(_, show)
+						b:SetShown(show)
+					end)
+
+					hooksecurefunc(collapse, "SetAtlas", function(_, atlas)
+						if atlas == "campaign_headericon_closed" then
+							b.plus:Show()
+						else
+							b.plus:Hide()
+						end
+					end)
 				end
 
 				button.IsSkinned = true
