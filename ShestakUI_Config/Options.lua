@@ -2646,11 +2646,11 @@ do
 	enable.children = {blizz_head_numbers, damage_style}
 
 	-- Damage and healing
-	-- local subheader = ns.addSubCategory(parent, L.combattext_subheader_damage)
-	-- subheader:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, -10)
+	local subheader = ns.addSubCategory(parent, L.combattext_subheader_damage)
+	subheader:SetPoint("TOPLEFT", damage_style, "BOTTOMLEFT", -20, -10)
 
-	-- local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
-	-- incoming:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+	local incoming = ns.CreateCheckBox(parent, "incoming", L.combattext_incoming)
+	incoming:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
 	-- local damage = ns.CreateCheckBox(parent, "damage", L_GUI_COMBATTEXT_DAMAGE)
 	-- damage:SetPoint("TOPLEFT", incoming, "BOTTOMLEFT", 0, 0)
@@ -2764,11 +2764,11 @@ do
 
 	-- damage.children = {pet_damage, dot_damage, dispel, interrupt, killingblow}
 
-	-- local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-	-- status:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", -30, -15)
-	-- status:SetWidth(600)
-	-- status:SetTextColor(0.9, 0.9, 0.9)
-	-- status:SetText(L.combattext_subheader_combat_module_top_extra)
+	local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	status:SetPoint("TOPLEFT", dk_runes or incoming, "BOTTOMLEFT", -30, -15)
+	status:SetWidth(600)
+	status:SetTextColor(0.9, 0.9, 0.9)
+	status:SetText(L.combattext_subheader_combat_module_top_extra)
 end
 
 -- Bag
