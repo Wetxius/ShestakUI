@@ -10,7 +10,7 @@ local function addLine(self, id, isItem)
 		local line = _G[self:GetName().."TextLeft"..i]
 		if not line then break end
 		local text = line:GetText()
-		if not canaccessvalue(text) then return end
+		if T.IsSecretValue(text) or T.IsSecretValue(id) then break end
 		if text and strfind(text, id) then return end
 	end
 	if isItem then
