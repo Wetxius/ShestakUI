@@ -128,8 +128,9 @@ local function SkinStatusBar(widget)
 		bar.BorderRight:SetAlpha(0)
 		bar.BorderCenter:SetAlpha(0)
 		bar.Spark:SetAlpha(0)
+		-- if widget.widgetSetID == 260 then -- nameplate (better check?)
 		local parent = widget:GetParent():GetParent()
-		if parent.castBar or parent.UnitFrame then -- nameplate
+		if parent and (parent.castBar or parent.UnitFrame) then -- nameplate
 			widget:SetIgnoreParentScale(true)
 			Mixin(bar, BackdropTemplateMixin)
 			bar:SetBackdrop({
