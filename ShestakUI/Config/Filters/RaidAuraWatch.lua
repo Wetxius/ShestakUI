@@ -25,7 +25,7 @@ if C.raidframe.plugins_buffs then
 			{364343, "TOP", {0.13, 0.87, 0.50}},				-- Echo
 			{373267, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Life Bind (Verdant Embrace)
 			-- {357170, "BOTTOM", {0.11, 0.57, 0.71}},				-- Time Dilation
-			{376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath
+			-- {376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath (Echo)
 			-- Augmentation
 			{360827, "TOPRIGHT", {0.33, 0.33, 0.77}},			-- Blistering Scales
 			{410089, "TOP", {0.13, 0.87, 0.50}},				-- Prescience
