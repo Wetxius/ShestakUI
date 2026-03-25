@@ -17,7 +17,6 @@ ADDON_LIST_PERFORMANCE_PEAK_CPU = "Макс. нагрузка ЦП: %s"
 -- COOLDOWN_DURATION_HOURS = "%dh" -- causes taint
 -- COOLDOWN_DURATION_MIN = "%dm"	-- causes taint
 
-local ttext
 local replace = {
 	["красного цвета"] = "|cffFF4040красного цвета|r",
 	["синего цвета"] = "|cff6060ffсинего цвета|r",
@@ -70,16 +69,29 @@ local whiteTooltip = {
 local function UpdateTooltip(self)
 	if whiteTooltip[self] and not self:IsForbidden() then
 		if not TooltipUtil.GetDisplayedItem(self) then return end
+		local ttext, text
 		local tname = self:GetName()
 		for i = 3, self:NumLines() do
+			-- Check left side text
 			ttext = _G[tname.."TextLeft"..i]
-			local class = ttext:GetText() and (string.find(ttext:GetText(), "Класс") or string.find(ttext:GetText(), "Требуется"))
-			if ttext then ttext:SetText(Translate(ttext:GetText())) end
-			if ttext and class then ttext:SetText(TranslateClass(ttext:GetText())) end
+			if ttext then
+				text = ttext:GetText()
+			end
+			if text and T.NotSecretValue(text) then
+				ttext:SetText(Translate(text))
+				local class = string.find(text, "Класс") or string.find(text, "Требуется")
+				if class then ttext:SetText(TranslateClass(text)) end
+			end
+
+			-- Check right side text
 			ttext = _G[tname.."TextRight"..i]
-			if ttext then ttext:SetText(Translate(ttext:GetText())) end
+			if ttext then
+				text = ttext:GetText()
+			end
+			if text and T.NotSecretValue(text) then
+				ttext:SetText(Translate(text))
+			end
 		end
-		ttext = nil
 	end
 end
 
