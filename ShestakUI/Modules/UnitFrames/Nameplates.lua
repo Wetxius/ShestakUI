@@ -469,6 +469,16 @@ local function castColor(self)
 	-- end
 end
 
+local function CastInterrupted(self, unit, interruptedBy)
+	self:GetStatusBarTexture():SetVertexColor(0.2, 0.2, 0.2)
+	if interruptedBy then
+		local unitName = UnitNameFromGUID(interruptedBy)
+		if unitName then
+			self.Text:SetFormattedText("%s [%s]", INTERRUPTED, unitName)
+		end
+	end
+end
+
 -- Health color
 local function threatColor(self, forced)
 	if UnitIsPlayer(self.unit) then return end
@@ -788,6 +798,9 @@ local function style(self, unit)
 		self.Castbar.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 		self.Castbar.Text:SetHeight(C.font.nameplates_font_size)
 		self.Castbar.Text:SetJustifyH("LEFT")
+
+		self.Castbar.timeToHold = 1.5 -- for interrupted
+		self.Castbar.PostCastInterrupted = CastInterrupted
 	end
 
 	-- Cast Bar Icon
