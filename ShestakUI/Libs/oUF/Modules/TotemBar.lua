@@ -29,6 +29,7 @@ local function UpdateSlot(self, slot)
 
 	local totem = element[slot]
 	local haveTotem, _, startTime, duration = GetTotemInfo(slot)
+	local durationObj = GetTotemDuration(slot)
 
 	totem:SetStatusBarColor(unpack(element.colors[slot]))
 
@@ -36,25 +37,32 @@ local function UpdateSlot(self, slot)
 	if totem.bg.multiplier then
 		local mu = totem.bg.multiplier
 		local r, g, b = totem:GetStatusBarColor()
-		r, g, b = r * mu, g * mu, b * mu
-		totem.bg:SetVertexColor(r, g, b)
+		-- r, g, b = r * mu, g * mu, b * mu -- secret value error
+		-- totem.bg:SetVertexColor(r, g, b)
+		totem.bg:SetVertexColor(0.2, 0.2, 0.2, 1)
 	end
-	if (canaccessvalue(haveTotem) and haveTotem) and duration > 0 then
-		totem.finish = startTime + duration
-		totem:SetMinMaxValues(0, duration)
-		totem:SetValue(duration)
-		totem:SetScript('OnUpdate', onUpdate)
 
-		if T.class ~= "SHAMAN" then
-			totem:Show()
-		end
-	else
-		totem:SetValue(0)
-		totem:SetScript("OnUpdate", nil)
-		if T.class ~= "SHAMAN" then
-			totem:Hide()
-		end
+	totem:SetAlphaFromBoolean(haveTotem, 1, 0)
+	if durationObj then
+		totem:SetTimerDuration(durationObj, Enum.StatusBarInterpolation.Immediate, Enum.StatusBarTimerDirection.RemainingTime)
 	end
+
+	-- if (canaccessvalue(haveTotem) and haveTotem) and duration > 0 then
+		-- totem.finish = startTime + duration
+		-- totem:SetMinMaxValues(0, duration)
+		-- totem:SetValue(duration)
+		-- totem:SetScript('OnUpdate', onUpdate)
+
+		-- if T.class ~= "SHAMAN" then
+			-- totem:Show()
+		-- end
+	-- else
+		-- totem:SetValue(0)
+		-- totem:SetScript("OnUpdate", nil)
+		-- if T.class ~= "SHAMAN" then
+			-- totem:Hide()
+		-- end
+	-- end
 end
 
 local function Update(self)
