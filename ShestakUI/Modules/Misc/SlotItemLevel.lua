@@ -64,14 +64,16 @@ end
 -- end
 
 local slotsToCheck = {
-	[INVSLOT_BACK] = true,
+	[INVSLOT_HEAD] = true,
+	[INVSLOT_SHOULDER] = true,
+	-- [INVSLOT_BACK] = true,
 	[INVSLOT_CHEST] = true,
-	[INVSLOT_MAINHAND] = true,
+	-- [INVSLOT_WRIST] = true,
+	[INVSLOT_LEGS] = true,
+	[INVSLOT_FEET] = true,
 	[INVSLOT_FINGER1] = true,
 	[INVSLOT_FINGER2] = true,
-	[INVSLOT_WRIST] = true,
-	[INVSLOT_FEET] = true,
-	[INVSLOT_LEGS] = true,
+	[INVSLOT_MAINHAND] = true,
 }
 
 local function _updateItems(unit, frame)
