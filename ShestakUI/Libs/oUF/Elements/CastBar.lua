@@ -28,7 +28,7 @@ local function UpdatePips(element, stages)
 	local elementSize = isHoriz and element:GetWidth() or element:GetHeight()
 
 	local lastOffset = 0
-	for stage, stageSection in next, stages do
+	for stage, stageSection in next, (stages or {}) do
 		local offset = lastOffset + (elementSize * stageSection)
 		lastOffset = offset
 
