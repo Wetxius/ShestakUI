@@ -120,8 +120,8 @@ local function LoadSkin()
 		if currencyRewards then
 			for _, reward in ipairs(currencyRewards) do
 				local info = C_CurrencyInfo.GetCurrencyInfo(reward.id)
-				if info and info.quality == ITEMQUALITY_ARTIFACT then
-					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil_GetCurrencyContainerInfo(reward.id, reward.quantity, info.name, info.iconFileID, info.quality)
+				if info and info.quality == Enum.ItemQuality.Artifact then
+					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, info.name, info.iconFileID, info.quality)
 				end
 			end
 		end

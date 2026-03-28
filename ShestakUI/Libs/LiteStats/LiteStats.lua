@@ -675,7 +675,7 @@ if friends.enabled then
 								notCheckable = true,
 								func = function(_, arg1)
 									menuFrame:Hide()
-									ChatFrame_SendBNetTell(arg1)
+									ChatFrameUtil.SendBNetTell(arg1)
 								end
 							}
 

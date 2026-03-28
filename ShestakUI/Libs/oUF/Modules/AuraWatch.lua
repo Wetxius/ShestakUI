@@ -124,10 +124,10 @@ local function Update(frame, _, unit)
 		local filter = (i == 1 and "HELPFUL" or "HARMFUL")
 		local index = 1
 		while true do
-			local name, count, duration, remaining, caster, spellId
+			local name, count, duration, remaining, caster, spellID
 			local auraData = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
 			if auraData then
-				name, count, duration, remaining, caster, spellId = auraData.name, auraData.applications, auraData.duration, auraData.expirationTime, auraData.sourceUnit, auraData.spellId
+				name, count, duration, remaining, caster, spellID = auraData.name, auraData.applications, auraData.duration, auraData.expirationTime, auraData.sourceUnit, auraData.spellId
 			end
 			if not name then break end
 			if canaccessvalue(duration) then

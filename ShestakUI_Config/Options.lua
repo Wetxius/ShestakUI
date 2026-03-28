@@ -2767,7 +2767,7 @@ do
 	local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 	status:SetPoint("TOPLEFT", dk_runes or incoming, "BOTTOMLEFT", -30, -15)
 	status:SetWidth(600)
-	status:SetTextColor(0.9, 0.9, 0.9)
+	status:SetTextColor(0.9, 0.7, 0.9)
 	status:SetText(L.combattext_subheader_combat_module_top_extra)
 end
 

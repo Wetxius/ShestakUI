@@ -149,8 +149,8 @@ local function LoadSkinSanctum()
 				frame.Highlight:SetColorTexture(1, 1, 1, 0.3)
 				frame.Highlight:SetInside(frame.backdrop)
 
-				HandleIconString(frame.InfoText)
-				hooksecurefunc(frame.InfoText, "SetText", HandleIconString)
+				T.ReplaceIconString(frame.InfoText)
+				hooksecurefunc(frame.InfoText, "SetText", T.ReplaceIconString)
 			end
 		end
 	end)

@@ -8,8 +8,8 @@ local function LoadSkin()
 	GuildControlUI:StripTextures()
 	GuildControlUIHbar:StripTextures()
 	GuildControlUI:SetTemplate("Transparent")
-	GuildControlUI:ClearAllPoints()
-	GuildControlUI:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 3, 0)
+	-- GuildControlUI:ClearAllPoints()
+	-- GuildControlUI:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 3, 0) -- GuildFrame not exist anymore
 	GuildControlUI:SetFrameLevel(GuildControlUI:GetFrameLevel() + 2)
 
 	local function SkinGuildRanks()

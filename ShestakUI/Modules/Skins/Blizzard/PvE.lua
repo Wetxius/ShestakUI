@@ -34,7 +34,6 @@ local function LoadSkin()
 		LFGDungeonReadyDialogBackground,
 		RaidFinderQueueFrameBackground,
 		LFGDungeonReadyDialogBottomArt,
-		LFGDungeonReadyDialogFiligree,
 		RaidFinderQueueFrameScrollFrameScrollBackground,
 		RaidFinderQueueFrameScrollFrameScrollBackgroundTopLeft,
 		RaidFinderQueueFrameScrollFrameScrollBackgroundBottomRight,

@@ -50,8 +50,6 @@ local function LoadSkin()
 		WhoFrameWhoButton,
 		WhoFrameAddFriendButton,
 		WhoFrameGroupInviteButton,
-		FriendsFrameIgnorePlayerButton,
-		FriendsFrameUnsquelchButton,
 		AddFriendEntryFrameAcceptButton,
 		AddFriendEntryFrameCancelButton,
 		QuickJoinFrame.JoinQueueButton,

@@ -21,6 +21,6 @@ MovieFrame_PlayMovie = function(...)
 	if IsControlKeyDown() then
 		PlayMovie_hook(...)
 	else
-		GameMovieFinished()
+		CinematicFinished(Enum.CinematicType.GameMovie, true, false)
 	end
 end

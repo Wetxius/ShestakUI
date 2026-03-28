@@ -22,7 +22,7 @@ local function GetLinkColor(data)
 			return "|cffffd100"
 		end
 	elseif type == "currency" then
-		local link = GetCurrencyLink(arg1)
+		local link = C_CurrencyInfo.GetCurrencyLink(arg1)
 		if link then
 			return gsub(link, 0, 10)
 		else
@@ -76,9 +76,24 @@ local Handler = CreateFrame("Frame")
 Handler:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 Handler:SetScript("OnEvent", function()
 	if #queuedMessages > 0 then
-		for index, data in next, queuedMessages do
-			ChatFrame_MessageEventHandler(unpack(data))
-			queuedMessages[index] = nil
+		for i = 1, #queuedMessages do
+			local data = queuedMessages[i]
+			if data and type(data) == "table" then
+				local frame = data[1]
+				if frame and frame.GetScript then
+					local onEvent = frame:GetScript("OnEvent")
+					if type(onEvent) == "function" then
+						onEvent(unpack(data))
+					end
+				end
+				queuedMessages[i] = nil
+			end
+		end
+
+		for i = #queuedMessages, 1, -1 do
+			if queuedMessages[i] == nil then
+				table.remove(queuedMessages, i)
+			end
 		end
 	end
 end)

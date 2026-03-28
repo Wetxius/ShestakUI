@@ -178,33 +178,6 @@ else
 	hooksecurefunc("QuestInfo_ShowRewards", QuestInfo_ShowRewards)
 end
 
--- Guild rewards frame
-local function GuildRewards_Update()
-	local offset = HybridScrollFrame_GetOffset(GuildRewardsContainer)
-	local buttons = GuildRewardsContainer.buttons
-	local _, _, standingID = GetGuildFactionInfo()
-
-	for i = 1, #buttons do
-		local button = buttons[i]
-		if button and button:IsShown() then
-			local achievementID, itemID, itemName, _, repLevel = GetGuildRewardInfo(offset + i)
-			if itemName and not (achievementID and achievementID > 0) and repLevel <= standingID then
-				local _, itemLink = C_Item.GetItemInfo(itemID)
-				if IsKnown(itemLink) then
-					button.icon:SetVertexColor(color.r, color.g, color.b)
-				end
-			end
-		end
-	end
-end
-
-local isBlizzard_GuildUILoaded
-if C_AddOns.IsAddOnLoaded("Blizzard_GuildUI") then
-	isBlizzard_GuildUILoaded = true
-	hooksecurefunc("GuildRewards_Update", GuildRewards_Update)
-	hooksecurefunc(GuildRewardsContainer, "update", GuildRewards_Update)
-end
-
 -- GuildBank frame
 local function GuildBankFrame_Update()
 	if GuildBankFrame.mode ~= "bank" then return end
@@ -293,13 +266,9 @@ end
 
 -- LoD addons
 local isBlizzard_AuctionUILoaded
-if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded and isBlizzard_BlackMarketUILoaded) then
+if not (isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded and isBlizzard_BlackMarketUILoaded) then
 	local function OnEvent(self, event, addon)
-		if addon == "Blizzard_GuildUI" then
-			isBlizzard_GuildUILoaded = true
-			hooksecurefunc("GuildRewards_Update", GuildRewards_Update)
-			hooksecurefunc(GuildRewardsContainer, "update", GuildRewards_Update)
-		elseif addon == "Blizzard_GuildBankUI" then
+		if addon == "Blizzard_GuildBankUI" then
 			isBlizzard_GuildBankUILoaded = true
 			hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
 		elseif addon == "Blizzard_AuctionHouseUI" then
@@ -311,7 +280,7 @@ if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard
 			hooksecurefunc(BlackMarketItemMixin, "Init", BlackMarketScrollFrame_Update)
 		end
 
-		if isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded and isBlizzard_BlackMarketUILoaded then
+		if isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded and isBlizzard_BlackMarketUILoaded then
 			self:UnregisterEvent(event)
 			self:SetScript("OnEvent", nil)
 			OnEvent = nil
