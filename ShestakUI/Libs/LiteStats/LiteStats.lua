@@ -327,7 +327,7 @@ if clock.enabled then
 			end
 
 			-- In 9.0 seals not available
-			-- if T.level == MAX_PLAYER_LEVEL then
+			-- if T.level == GetMaxPlayerLevel() then
 				-- local c = 0
 				-- for _, q in ipairs({52834, 52835, 52837, 52838, 52839, 52840}) do
 					-- if C_QuestLog.IsQuestFlaggedCompleted(q) then
@@ -1209,7 +1209,7 @@ if experience.enabled then
 			function ChatFrameUtil.DisplayTimePlayed() ChatFrameUtil.DisplayTimePlayed = ofunc end
 			RequestTimePlayed()
 			if not conf.ExpMode or conf.ExpMode == "xp" or conf.ExpMode == "art" then
-				conf.ExpMode = UnitLevel(P) ~= MAX_PLAYER_LEVEL and "xp" or "played"
+				conf.ExpMode = UnitLevel(P) ~= GetMaxPlayerLevel() and "xp" or "played"
 			end
 		end,
 		OnEvent = function(self, event, ...)
@@ -1361,7 +1361,7 @@ if experience.enabled then
 			if button == "RightButton" then
 				conf.ExpMode = conf.ExpMode == "xp" and "played"
 					or conf.ExpMode == "played" and "rep"
-					or (conf.ExpMode == "rep" and UnitLevel(P) ~= MAX_PLAYER_LEVEL) and "xp"
+					or (conf.ExpMode == "rep" and UnitLevel(P) ~= GetMaxPlayerLevel()) and "xp"
 					or conf.ExpMode == "rep" and "played"
 				if conf.ExpMode == "rep" then
 					self:GetScript("OnEvent")(self, "UPDATE_FACTION")
@@ -1849,7 +1849,7 @@ if gold.enabled then
 				Currency(1535)	-- Drust
 			end
 
-			-- if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+			-- if C.stats.currency_raid and T.level == GetMaxPlayerLevel() then
 				-- titleName = L_STATS_CURRENCY_RAID
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 			-- end

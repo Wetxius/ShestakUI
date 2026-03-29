@@ -57,7 +57,7 @@ function Butsu:LOOT_OPENED(_, autoLoot)
 				local color = ITEM_QUALITY_COLORS[quality]
 				local r, g, b = color.r, color.g, color.b
 
-				if GetLootSlotType(i) == LOOT_SLOT_MONEY then
+				if GetLootSlotType(i) == Enum.LootSlotType.Money then
 					item = item:gsub("\n", ", ")
 				end
 
@@ -205,7 +205,7 @@ close:SetScript("OnClick", function() CloseLoot() end)
 ----------------------------------------------------------------------------------------
 local function Announce(chn)
 	local nums = GetNumLootItems()
-	if nums == 0 or (nums == 1 and GetLootSlotType(1) == LOOT_SLOT_MONEY) then return end
+	if nums == 0 or (nums == 1 and GetLootSlotType(1) == Enum.LootSlotType.Money) then return end
 	if UnitIsPlayer("target") or not UnitExists("target") then
 		T.SendChatMessage(">> "..LOOT..":", chn)
 	else
@@ -215,7 +215,7 @@ local function Announce(chn)
 		if LootSlotHasItem(i) then
 			local link = GetLootSlotLink(i)
 			local messlink = "- %s"
-			if GetLootSlotType(i) ~= LOOT_SLOT_MONEY then
+			if GetLootSlotType(i) ~= Enum.LootSlotType.Money then
 				T.SendChatMessage(format(messlink, link), chn)
 			end
 		end

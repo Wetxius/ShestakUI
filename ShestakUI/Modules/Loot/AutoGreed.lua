@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-if C.loot.auto_greed ~= true or T.level ~= MAX_PLAYER_LEVEL then return end
+if C.loot.auto_greed ~= true or T.level ~= GetMaxPlayerLevel() then return end
 
 ----------------------------------------------------------------------------------------
 --	Auto greed/disenchant on green items(by Tekkub)

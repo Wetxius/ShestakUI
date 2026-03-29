@@ -210,7 +210,7 @@ local function START_LOOT_ROLL(rollID, time)
 	f.button.icon:SetTexture(texture)
 	f.button.link = GetLootRollItemLink(rollID)
 
-	if C.loot.auto_greed and T.level == MAX_PLAYER_LEVEL and quality == 2 and not bop then return end
+	if C.loot.auto_greed and T.level == GetMaxPlayerLevel() and quality == 2 and not bop then return end
 
 	if canNeed then
 		f.need:Enable()

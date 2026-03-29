@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if C.automation.buff_on_scroll ~= true or T.level ~= MAX_PLAYER_LEVEL then return end
+if C.automation.buff_on_scroll ~= true or T.level ~= GetMaxPlayerLevel() then return end
 
 ----------------------------------------------------------------------------------------
 --	Cast buff on mouse scroll(by Gsuz)

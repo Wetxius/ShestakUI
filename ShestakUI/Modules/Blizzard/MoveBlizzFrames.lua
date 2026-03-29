@@ -55,7 +55,6 @@ local AddOnFrames = {
 	["Blizzard_ProfessionsBook"] = {"ProfessionsBookFrame"},
 	["Blizzard_QuestChoice"] = {"QuestChoiceFrame"},
 	["Blizzard_ReforgingUI"] = {"ReforgingFrame"},
-	["Blizzard_TalentUI"] = {"PlayerTalentFrame"},
 	["Blizzard_TalkingHeadUI"] = {"TalkingHeadFrame"},
 	["Blizzard_TrainerUI"] = {"ClassTrainerFrame"},
 }

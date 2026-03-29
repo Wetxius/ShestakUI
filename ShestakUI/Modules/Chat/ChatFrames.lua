@@ -433,9 +433,9 @@ if C.chat.role_icons == true then
 		DAMAGER = "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Damager.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
 	}
 
-	local GetColoredName_orig = _G.GetColoredName
-	local function GetColoredName_hook(event, arg1, arg2, ...)
-		local ret = GetColoredName_orig(event, arg1, arg2, ...)
+	local func_orig = _G.ChatFrameUtil.GetDecoratedSenderName
+	local function setRoleIcon(event, arg1, arg2, ...)
+		local ret = func_orig(event, arg1, arg2, ...)
 		if chats[event] then
 			local role = UnitGroupRolesAssigned(arg2)
 			if role == "NONE" and arg2:match(" *- *"..GetRealmName().."$") then
@@ -447,7 +447,7 @@ if C.chat.role_icons == true then
 		end
 		return ret
 	end
-	_G.GetColoredName = GetColoredName_hook
+	_G.ChatFrameUtil.GetDecoratedSenderName = setRoleIcon
 end
 
 ----------------------------------------------------------------------------------------

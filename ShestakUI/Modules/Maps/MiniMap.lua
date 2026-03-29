@@ -339,7 +339,7 @@ if not IsTrialAccount() and C_StorePublic.IsEnabled() then
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
 end
 
-if T.level == MAX_PLAYER_LEVEL then
+if T.level == GetMaxPlayerLevel() then
 	tinsert(micromenu, {text = RATED_PVP_WEEKLY_VAULT, notCheckable = 1, func = function()
 		if not WeeklyRewardsFrame then
 			WeeklyRewards_LoadUI()
