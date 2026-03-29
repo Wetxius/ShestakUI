@@ -26,7 +26,7 @@ SlashCmdList.ROLECHECK = function() InitiateRolePoll() end
 SLASH_ROLECHECK1 = "/role"
 SLASH_ROLECHECK2 = "/кщду"
 
-SlashCmdList.CLEARCOMBAT = function() CombatLogClearEntries() end
+SlashCmdList.CLEARCOMBAT = function() C_CombatLog.ClearEntries() end
 SLASH_CLEARCOMBAT1 = "/clc"
 SLASH_CLEARCOMBAT2 = "/сдс"
 

@@ -8,7 +8,7 @@ if C.announcements.spells ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
-	local _, event, _, sourceGUID, sourceName, _, _, _, destName, _, _, spellID = CombatLogGetCurrentEventInfo()
+	local _, event, _, sourceGUID, sourceName, _, _, _, destName, _, _, spellID = C_CombatLog.GetCurrentEventInfo()
 	if event ~= "SPELL_CAST_SUCCESS" or not T.AnnounceSpells[spellID] then return end
 	local _, _, difficultyID = GetInstanceInfo()
 	if difficultyID == 0 then return end

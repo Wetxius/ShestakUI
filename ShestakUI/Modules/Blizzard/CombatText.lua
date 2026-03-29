@@ -51,7 +51,7 @@ local function SetUnit()
 	else
 		ct.unit = "player"
 	end
-	CombatTextSetActiveUnit(ct.unit)
+	C_CombatText.SetActiveUnit(ct.unit)
 end
 
 -- Limit lines
@@ -749,10 +749,10 @@ if C.combattext.merge_aoe_spam then
 end
 
 local unpack, select, time = unpack, select, time
-local gflags = bit.bor(COMBATLOG_OBJECT_AFFILIATION_MINE,
-	COMBATLOG_OBJECT_REACTION_FRIENDLY,
-	COMBATLOG_OBJECT_CONTROL_PLAYER,
-	COMBATLOG_OBJECT_TYPE_GUARDIAN
+local gflags = bit.bor(Enum.CombatLogObject.AffiliationMine,
+	Enum.CombatLogObject.ReactionFriendly,
+	Enum.CombatLogObject.ControlPlayer,
+	Enum.CombatLogObject.TypeGuardian
 )
 
 -- Damage
@@ -774,10 +774,10 @@ if C.combattext.damage then
 	local misstypes = {ABSORB = ABSORB, BLOCK = BLOCK, DEFLECT = DEFLECT, DODGE = DODGE, EVADE = EVADE, IMMUNE = IMMUNE, MISS = MISS, MISFIRE = MISS, PARRY = PARRY, REFLECT = REFLECT, RESIST = RESIST}
 	local dmg = function()
 		local msg, icon
-		local _, eventType, _, sourceGUID, _, sourceFlags, _, destGUID = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, sourceGUID, _, sourceFlags, _, destGUID = C_CombatLog.GetCurrentEventInfo()
 		if (sourceGUID == ct.pguid and destGUID ~= ct.pguid) or (sourceGUID == UnitGUID("pet") and C.combattext.pet_damage) or (sourceFlags == gflags) then
 			if eventType == "SWING_DAMAGE" then
-				local amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
+				local amount, _, _, _, _, _, critical = select(12, C_CombatLog.GetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
 					local rawamount = amount
 					if C.combattext.short_numbers == true then
@@ -817,7 +817,7 @@ if C.combattext.damage then
 					xCT4:AddMessage(amount..""..msg, unpack(color))
 				end
 			elseif eventType == "RANGE_DAMAGE" then
-				local spellId, _, _, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
+				local spellId, _, _, amount, _, _, _, _, _, critical = select(12, C_CombatLog.GetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
 					local rawamount = amount
 					if C.combattext.short_numbers == true then
@@ -853,7 +853,7 @@ if C.combattext.damage then
 					xCT4:AddMessage(amount..""..msg)
 				end
 			elseif eventType == "SPELL_DAMAGE" or (eventType == "SPELL_PERIODIC_DAMAGE" and C.combattext.dot_damage) then
-				local spellId, _, spellSchool, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
+				local spellId, _, spellSchool, amount, _, _, _, _, _, critical = select(12, C_CombatLog.GetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
 					local color = {}
 					local rawamount = amount
@@ -884,7 +884,7 @@ if C.combattext.damage then
 					end
 					if C.combattext.merge_aoe_spam then
 						spellId = T.merge[spellId] or spellId
-						if bit.band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) ~= COMBATLOG_OBJECT_AFFILIATION_MINE then
+						if bit.band(sourceFlags, Enum.CombatLogObject.AffiliationMine) ~= Enum.CombatLogObject.AffiliationMine then
 							spellId = 6603
 						end
 						if (sourceGUID == UnitGUID("pet") or sourceFlags == gflags or C.combattext.merge_all) and not T.aoespam[spellId] then
@@ -907,7 +907,7 @@ if C.combattext.damage then
 					xCT4:AddMessage(amount..""..msg, unpack(color))
 				end
 			elseif eventType == "SWING_MISSED" then
-				local missType = select(12, CombatLogGetCurrentEventInfo())
+				local missType = select(12, C_CombatLog.GetCurrentEventInfo())
 				if C.combattext.icons then
 					if sourceGUID == UnitGUID("pet") or sourceFlags == gflags then
 						icon = PET_ATTACK_TEXTURE
@@ -920,7 +920,7 @@ if C.combattext.damage then
 				end
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_MISSED" or eventType == "RANGE_MISSED" then
-				local spellId, _, _, missType = select(12, CombatLogGetCurrentEventInfo())
+				local spellId, _, _, missType = select(12, C_CombatLog.GetCurrentEventInfo())
 				if missType == "IMMUNE" and spellId == 204242 then return end -- Consecration slow
 				if C.combattext.icons then
 					icon = C_Spell.GetSpellTexture(spellId)
@@ -930,7 +930,7 @@ if C.combattext.damage then
 				end
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_DISPEL" and C.combattext.dispel then
-				local id, effect, _, etype = select(15, CombatLogGetCurrentEventInfo())
+				local id, effect, _, etype = select(15, C_CombatLog.GetCurrentEventInfo())
 				local color
 				if C.combattext.icons then
 					icon = C_Spell.GetSpellTexture(id)
@@ -949,7 +949,7 @@ if C.combattext.damage then
 				end
 				xCT3:AddMessage(ACTION_SPELL_DISPEL..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_STOLEN" and C.combattext.dispel then
-				local id, effect = select(15, CombatLogGetCurrentEventInfo())
+				local id, effect = select(15, C_CombatLog.GetCurrentEventInfo())
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
 					icon = C_Spell.GetSpellTexture(id)
@@ -963,7 +963,7 @@ if C.combattext.damage then
 				end
 				xCT3:AddMessage(ACTION_SPELL_STOLEN..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_INTERRUPT" and C.combattext.interrupt then
-				local id, effect = select(15, CombatLogGetCurrentEventInfo())
+				local id, effect = select(15, C_CombatLog.GetCurrentEventInfo())
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
 					icon = C_Spell.GetSpellTexture(id)
@@ -977,7 +977,7 @@ if C.combattext.damage then
 				end
 				xCT3:AddMessage(ACTION_SPELL_INTERRUPT..": "..effect..msg, unpack(color))
 			elseif eventType == "PARTY_KILL" and C.combattext.killingblow then
-				local destGUID, tname = select(8, CombatLogGetCurrentEventInfo())
+				local destGUID, tname = select(8, C_CombatLog.GetCurrentEventInfo())
 				local classIndex = select(2, GetPlayerInfoByGUID(destGUID))
 				local color = classIndex and RAID_CLASS_COLORS[classIndex] or {r = 0.2, g = 1, b = 0.2}
 				xCT3:AddMessage("|cff33FF33"..ACTION_PARTY_KILL..": |r"..tname, color.r, color.g, color.b)
@@ -997,11 +997,11 @@ if C.combattext.healing then
 	end
 	local heal = function()
 		local msg, icon
-		local _, eventType, _, sourceGUID, _, sourceFlags = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, sourceGUID, _, sourceFlags = C_CombatLog.GetCurrentEventInfo()
 		if sourceGUID == ct.pguid or sourceFlags == gflags then
 			if eventType == "SPELL_HEAL" or (eventType == "SPELL_PERIODIC_HEAL" and C.combattext.show_hots) then
 				if C.combattext.healing then
-					local spellId, _, _, amount, overhealing, _, critical = select(12, CombatLogGetCurrentEventInfo())
+					local spellId, _, _, amount, overhealing, _, critical = select(12, C_CombatLog.GetCurrentEventInfo())
 					if T.healfilter[spellId] then
 						return
 					end

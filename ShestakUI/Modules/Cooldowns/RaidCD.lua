@@ -10,7 +10,7 @@ local show = {
 	arena = C.raidcooldown.show_inarena,
 }
 
-local filter = COMBATLOG_OBJECT_AFFILIATION_RAID + COMBATLOG_OBJECT_AFFILIATION_PARTY + COMBATLOG_OBJECT_AFFILIATION_MINE
+local filter = Enum.CombatLogObject.AffiliationRaid + Enum.CombatLogObject.AffiliationParty+ Enum.CombatLogObject.AffiliationMine
 local band = bit.band
 local sformat = string.format
 local floor = math.floor
@@ -307,7 +307,7 @@ local OnEvent = function(self, event)
 		end
 	end
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		-- local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId = CombatLogGetCurrentEventInfo()
+		-- local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId = C_CombatLog.GetCurrentEventInfo()
 		-- if band(sourceFlags, filter) == 0 then return end
 		-- if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
 			-- if sourceName then

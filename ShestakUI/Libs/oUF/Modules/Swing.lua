@@ -29,7 +29,7 @@ local function OnDurationUpdate(self)
 end
 
 local function Melee(self)
-	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType = CombatLogGetCurrentEventInfo()
+	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType = C_CombatLog.GetCurrentEventInfo()
 	local bar = self.Swing
 
 	if UnitGUID(self.unit) == tarGUID then

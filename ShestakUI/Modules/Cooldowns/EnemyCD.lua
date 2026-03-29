@@ -140,18 +140,18 @@ end
 
 local OnEvent = function(_, event)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, eventType, _, sourceGUID, sourceName, sourceFlags, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, sourceGUID, sourceName, sourceFlags, _, _, _, _, _, spellID = C_CombatLog.GetCurrentEventInfo()
 
 		if eventType == "SPELL_CAST_SUCCESS" and sourceName ~= T.name then
 			local _, instanceType = IsInInstance()
 			if show[instanceType] then
-				if band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) ~= 0 then
+				if band(sourceFlags, Enum.CombatLogObject.ReactionHostile) ~= 0 then
 					if T.EnemySpells[spellID] then
 						StartTimer(sourceGUID, spellID, sourceName)
 					end
 				end
 			elseif instanceType == "party" and C.enemycooldown.show_inparty then
-				if band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY) ~= 0 then
+				if band(sourceFlags, Enum.CombatLogObject.AffiliationParty) ~= 0 then
 					if T.EnemySpells[spellID] then
 						StartTimer(sourceGUID, spellID, sourceName)
 					end
