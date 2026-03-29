@@ -643,7 +643,7 @@ ns.addCategory("actionbar", L_GUI_ACTIONBAR, ACTIONBARS_SUBTEXT, 3)
 ns.addCategory("tooltip", L.tooltip, L.tooltip_subtext)
 ns.addCategory("chat", SOCIALS, L.chat_subtext)
 ns.addCategory("nameplate", UNIT_NAMEPLATES, L_GUI_NAMEPLATE_SUBTEXT, 2)
-ns.addCategory("combattext", L_GUI_COMBATTEXT, COMBATTEXT_SUBTEXT.." "..L_GUI_COMBATTEXT_SUBTEXT, 2)
+ns.addCategory("combattext", L_GUI_COMBATTEXT, COMBATTEXT_SUBTEXT.." "..L_GUI_COMBATTEXT_SUBTEXT, 1) -- BETA
 ns.addCategory("bag", L_GUI_BAGS, L_GUI_BAGS_SUBTEXT)
 ns.addCategory("minimap", MINIMAP_LABEL, L_GUI_MINIMAP_SUBTEXT)
 ns.addCategory("loot", LOOT, L_GUI_LOOT_SUBTEXT)
@@ -2678,17 +2678,17 @@ do
 	-- local icon_size = ns.CreateNumberSlider(parent, "icon_size", nil, nil, 0, 40, 1, true, L_GUI_COMBATTEXT_ICON_SIZE, L_GUI_COMBATTEXT_ICON_SIZE_DESC)
 	-- icon_size:SetPoint("TOPLEFT", icons, "BOTTOMLEFT", 0, -20)
 
-	-- local max_lines = ns.CreateNumberSlider(parent, "max_lines", nil, nil, 0, 30, 1, true, L_GUI_COMBATTEXT_MAX_LINES, L_GUI_COMBATTEXT_MAX_LINES_DESC)
-	-- max_lines:SetPoint("TOPLEFT", icon_size, "BOTTOMLEFT", 0, -20)
+	local max_lines = ns.CreateNumberSlider(parent, "max_lines", nil, nil, 0, 30, 1, true, L_GUI_COMBATTEXT_MAX_LINES, L_GUI_COMBATTEXT_MAX_LINES_DESC)
+	max_lines:SetPoint("TOPLEFT", icon_size or incoming, "BOTTOMLEFT", 0, -20)
 
-	-- local time_visible = ns.CreateNumberSlider(parent, "time_visible", nil, nil, 0, 10, 1, true, L_GUI_COMBATTEXT_TIME_VISIBLE, L_GUI_COMBATTEXT_TIME_VISIBLE_DESC)
-	-- time_visible:SetPoint("LEFT", max_lines, "RIGHT", 120, 0)
+	local time_visible = ns.CreateNumberSlider(parent, "time_visible", nil, nil, 0, 10, 1, true, L_GUI_COMBATTEXT_TIME_VISIBLE, L_GUI_COMBATTEXT_TIME_VISIBLE_DESC)
+	time_visible:SetPoint("LEFT", max_lines, "RIGHT", 120, 0)
 
-	-- local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
-	-- damage_color:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -10)
+	local damage_color = ns.CreateCheckBox(parent, "damage_color", L_GUI_COMBATTEXT_DAMAGE_COLOR)
+	damage_color:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -10)
 
-	-- local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
-	-- short_numbers:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
+	local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
+	short_numbers:SetPoint("TOPLEFT", damage_color, "BOTTOMLEFT", 0, 0)
 
 	-- local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam")
 	-- merge_aoe_spam:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
@@ -2725,11 +2725,12 @@ do
 
 	-- merge_aoe_spam.children = {merge_melee, merge_all}
 
-	-- local direction = ns.CreateCheckBox(parent, "direction")
+	local direction = ns.CreateCheckBox(parent, "direction")
 	-- direction:SetPoint("TOPLEFT", merge_all, "BOTTOMLEFT", -20, 0)
+	direction:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
 
-	-- local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
-	-- scrollable:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 0, 0)
+	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
+	scrollable:SetPoint("TOPLEFT", direction, "BOTTOMLEFT", 0, 0)
 
 	-- -- Panel 2
 	-- local parent = ShestakUIOptionsPanel.combattext2
@@ -2765,7 +2766,7 @@ do
 	-- damage.children = {pet_damage, dot_damage, dispel, interrupt, killingblow}
 
 	local status = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-	status:SetPoint("TOPLEFT", dk_runes or incoming, "BOTTOMLEFT", -30, -15)
+	status:SetPoint("TOPLEFT", dk_runes or scrollable, "BOTTOMLEFT", -30, -15)
 	status:SetWidth(600)
 	status:SetTextColor(0.9, 0.7, 0.9)
 	status:SetText(L.combattext_subheader_combat_module_top_extra)
