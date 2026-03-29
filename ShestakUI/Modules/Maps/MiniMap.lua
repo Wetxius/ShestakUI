@@ -363,7 +363,7 @@ MinimapArea:SetPassThroughButtons("LeftButton")
 MinimapArea:SetPropagateMouseMotion(true)
 MinimapArea:SetAllPoints()
 
-MinimapArea:SetScript("OnMouseUp", function(self, button)
+MinimapArea:SetScript("OnMouseUp", function(_, button)
 	local position = MinimapAnchor:GetPoint()
 	if button == "RightButton" then
 		if position:match("LEFT") then

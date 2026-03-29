@@ -16,7 +16,7 @@ local update = function(self)
 	oGlow:CallFilters("loot", slotFrame, _E and itemLink)
 end
 
-local enable = function(self)
+local enable = function()
 	_E = true
 
 	if not hook then
@@ -26,7 +26,7 @@ local enable = function(self)
 	end
 end
 
-local disable = function(self)
+local disable = function()
 	_E = nil
 end
 

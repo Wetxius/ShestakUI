@@ -395,7 +395,7 @@ if C.actionbar.hotkey == true then
 end
 
 if C.actionbar.hide_highlight == true then
-	local function HideHighlightButton(self, button)
+	local function HideHighlightButton(_, button)
 		local alertFrame = button.SpellActivationAlert
 		if alertFrame then
 			alertFrame:Hide()
@@ -404,7 +404,7 @@ if C.actionbar.hide_highlight == true then
 	end
 	hooksecurefunc(ActionButtonSpellAlertManager, "ShowAlert", HideHighlightButton)
 else
-	hooksecurefunc(ActionButtonSpellAlertManager, "ShowAlert", function(self, button)
+	hooksecurefunc(ActionButtonSpellAlertManager, "ShowAlert", function(_, button)
 		-- Make proc glow better
 		local alertFrame = button.SpellActivationAlert
 		if alertFrame then

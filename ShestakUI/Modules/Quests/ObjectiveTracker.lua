@@ -440,7 +440,7 @@ for i = 1, #headers do
 					GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
 
 					if block.TryShowRewardsTooltip and not block.hook then
-						hooksecurefunc(block, "TryShowRewardsTooltip", function(self)
+						hooksecurefunc(block, "TryShowRewardsTooltip", function()
 							GameTooltip:ClearAllPoints()
 							GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
 						end)

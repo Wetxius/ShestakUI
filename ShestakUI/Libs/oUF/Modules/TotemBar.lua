@@ -15,28 +15,29 @@ local colors = {
 	[4] = {0.42, 0.18, 0.74},
 }
 
-local function onUpdate(self, elapsed)
-	self.elapsed = (self.elapsed or 0) + elapsed
-	if self.elapsed < 0.1 then return end
-	self.elapsed = 0
-	local time = self.finish - GetTime()
-	self:SetValue(time)
-end
+-- local function onUpdate(self, elapsed)
+	-- self.elapsed = (self.elapsed or 0) + elapsed
+	-- if self.elapsed < 0.1 then return end
+	-- self.elapsed = 0
+	-- local time = self.finish - GetTime()
+	-- self:SetValue(time)
+-- end
 
 local function UpdateSlot(self, slot)
 	local element = self.TotemBar
 	if not element[slot] then return end
 
 	local totem = element[slot]
-	local haveTotem, _, startTime, duration = GetTotemInfo(slot)
+	-- local haveTotem, _, startTime, duration = GetTotemInfo(slot)
+	local haveTotem = GetTotemInfo(slot)
 	local durationObj = GetTotemDuration(slot)
 
 	totem:SetStatusBarColor(unpack(element.colors[slot]))
 
 	-- Multipliers
 	if totem.bg.multiplier then
-		local mu = totem.bg.multiplier
-		local r, g, b = totem:GetStatusBarColor()
+		-- local mu = totem.bg.multiplier
+		-- local r, g, b = totem:GetStatusBarColor()
 		-- r, g, b = r * mu, g * mu, b * mu -- secret value error
 		-- totem.bg:SetVertexColor(r, g, b)
 		totem.bg:SetVertexColor(0.2, 0.2, 0.2, 1)

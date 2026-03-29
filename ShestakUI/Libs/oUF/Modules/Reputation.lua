@@ -179,7 +179,7 @@ local function ElementDisable(self)
 	Path(self, 'ElementDisable', 'player')
 end
 
-local function Visibility(self, event, _, selectedFactionIndex)
+local function Visibility(self, _, _, selectedFactionIndex)
 	local shouldEnable
 	if(selectedFactionIndex ~= nil) then
 		if(selectedFactionIndex > 0) then

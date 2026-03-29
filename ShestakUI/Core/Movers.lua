@@ -386,7 +386,7 @@ do
 		ShowControls(self)
 	end)
 
-	chatInfo:SetScript("OnLeave", function(self)
+	chatInfo:SetScript("OnLeave", function()
 		if not MouseIsOver(controls) then controls:Hide() end
 	end)
 end

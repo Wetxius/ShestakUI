@@ -68,7 +68,7 @@ local function Shared(self, unit)
 		end
 	end
 
-	self.Health.PostUpdateColor = function(element, unit, color)
+	self.Health.PostUpdateColor = function(element, _, color)
 		T.PostUpdateBackdropColor(element, color)
 	end
 

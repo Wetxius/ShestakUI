@@ -110,7 +110,7 @@ local function CheckSpec()
 	end
 end
 
-local function Update(self, event, unit)
+local function Update(self, _, unit)
 	if(self.unit ~= unit) then return end
 	local element = self.DispelColor
 
