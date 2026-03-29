@@ -1492,7 +1492,6 @@ do
 		{"flyout_button"},
 		{"mage_nuggets"},
 		{"my_role_play"},
-		{"nug_running"},
 		{"omen"},
 		{"opie"},
 		{"ovale"},

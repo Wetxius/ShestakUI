@@ -71,7 +71,6 @@ C["skins"] = {
 	["flyout_button"] = false,					-- FlyoutButtonCustom skin
 	["mage_nuggets"] = false,					-- MageNuggets skin
 	["my_role_play"] = false,					-- MyRolePlay skin
-	["nug_running"] = false,					-- NugRunning skin
 	["omen"] = false,							-- Omen skin
 	["opie"] = false,							-- OPie skin
 	["ovale"] = false,							-- OvaleSpellPriority skin
