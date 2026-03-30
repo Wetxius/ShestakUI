@@ -474,13 +474,7 @@ local function CastInterrupted(self, unit, interruptedBy)
 	if interruptedBy then
 		local unitName = UnitNameFromGUID(interruptedBy)
 		if unitName then
-			local _, class = UnitClass(unit)
-			local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-			local hex = "ffffffff"
-			if color then
-				hex = color:GenerateHexColor()
-			end
-			self.Text:SetFormattedText("%s |c%s[%s]|r", INTERRUPTED, hex, unitName)
+			self.Text:SetFormattedText("%s [%s]", INTERRUPTED, unitName)
 		end
 	end
 end
