@@ -1,4 +1,5 @@
 local T, C, L = unpack(ShestakUI)
+if T.newPatch then return end -- BETA not work
 if C.stats.battleground ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -13,8 +14,8 @@ BGFrame:SetScript("OnEnter", function(self)
 	local columns = C_PvP.GetMatchPVPStatColumns()
 
 	for i = 1, GetNumBattlefieldScores() do
-		local name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
-		if name and name == T.name then
+		local name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i) -- Deprecated: local data = C_PvP.GetScoreInfo(i)
+		if name and name == T.name then -- BETA name is secret now
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, 1)
@@ -80,7 +81,7 @@ local function Update(_, t)
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
 			local name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
-			if name and name == T.name then
+			if name and name == T.name then -- BETA name is secret now
 				if healingDone > damageDone then
 					dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
 				else

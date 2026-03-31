@@ -3387,11 +3387,11 @@ do
 	local coords = ns.CreateCheckBox(parent, "coords", L_GUI_STATS_COORDS)
 	coords:SetPoint("TOPLEFT", location, "BOTTOMLEFT", 0, 0)
 
-	local battleground = ns.CreateCheckBox(parent, "battleground", L_GUI_STATS_BG)
-	battleground:SetPoint("TOPLEFT", coords, "BOTTOMLEFT", 0, 0)
+	-- local battleground = ns.CreateCheckBox(parent, "battleground", L_GUI_STATS_BG)
+	-- battleground:SetPoint("TOPLEFT", coords, "BOTTOMLEFT", 0, 0)
 
 	local damage = ns.CreateCheckBox(parent, "damage", DAMAGE)
-	damage:SetPoint("TOPLEFT", battleground, "BOTTOMLEFT", 0, 0)
+	damage:SetPoint("TOPLEFT", battleground or coords, "BOTTOMLEFT", 0, 0)
 
 	local bottom_line = ns.CreateCheckBox(parent, "bottom_line")
 	bottom_line:SetPoint("TOPLEFT", damage, "BOTTOMLEFT", 0, 0)
