@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if T.newPatch then return end -- BETA not work
+if T.Midnight then return end -- BETA not work
 if C.unitframe.enable ~= true or C.unitframe.show_arena ~= true or C.unitframe.plugins_diminishing ~= true then return end
 
 ----------------------------------------------------------------------------------------

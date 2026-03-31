@@ -12,7 +12,8 @@ T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
-T.newPatch = select(4, GetBuildInfo()) >= 120000
+T.newPatch = select(4, GetBuildInfo()) >= 120005
+T.Midnight = select(4, GetBuildInfo()) >= 120000
 
 -- NOTE: Restore old function
 GetContainerItemInfo = function(bagIndex, slotIndex)

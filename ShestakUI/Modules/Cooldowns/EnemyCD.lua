@@ -1,5 +1,5 @@
 ﻿local T, C, L = unpack(ShestakUI)
-if T.newPatch then return end -- BETA not work
+if T.Midnight then return end -- BETA not work
 if C.enemycooldown.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
