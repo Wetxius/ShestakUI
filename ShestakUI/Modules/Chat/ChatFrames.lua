@@ -406,7 +406,7 @@ local function UpdateTabChannelSwitch(self)
 			for j = h, r, step do
 				if cycles[j]:use(self, currChatType) then
 					self:SetAttribute("chatType", cycles[j].chatType)
-					ChatFrameEditBoxMixin.UpdateHeaderr(self)
+					ChatFrameEditBoxMixin.UpdateHeader(self)
 					return
 				end
 			end
