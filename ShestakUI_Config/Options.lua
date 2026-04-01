@@ -2396,11 +2396,11 @@ do
 	local loot_icons = ns.CreateCheckBox(parent, "loot_icons")
 	loot_icons:SetPoint("TOPLEFT", damage_meter_spam, "BOTTOMLEFT", 0, 0)
 
-	local role_icons = ns.CreateCheckBox(parent, "role_icons", L.tooltip_unit_role)
-	role_icons:SetPoint("TOPLEFT", loot_icons, "BOTTOMLEFT", 0, 0)
+	-- local role_icons = ns.CreateCheckBox(parent, "role_icons", L.tooltip_unit_role)
+	-- role_icons:SetPoint("TOPLEFT", loot_icons, "BOTTOMLEFT", 0, 0)
 
 	local history = ns.CreateCheckBox(parent, "history", HISTORY)
-	history:SetPoint("TOPLEFT", role_icons, "BOTTOMLEFT", 0, 0)
+	history:SetPoint("TOPLEFT", role_icons or loot_icons, "BOTTOMLEFT", 0, 0)
 
 	local hide_combat = ns.CreateCheckBox(parent, "hide_combat")
 	hide_combat:SetPoint("TOPLEFT", history, "BOTTOMLEFT", 0, 0)
