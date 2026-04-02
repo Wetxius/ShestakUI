@@ -18,12 +18,11 @@ end
 if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true then
 	T.ReminderBuffs = {
 		Flask = {
-			SpellName(432021),	-- Flask of Alchemical Chaos
-			SpellName(431974),	-- Flask of Tempered Mastery
-			SpellName(431971),	-- Flask of Tempered Aggression
-			SpellName(431972),	-- Flask of Tempered Swiftness
-			SpellName(431973),	-- Flask of Tempered Versatility
-			SpellName(432473),	-- Flask of Saving Graces
+			SpellName(1235057),		-- Flask of Thalassian Resistance
+			SpellName(1235110),		-- Flask of the Blood Knights
+			SpellName(1235108),		-- Flask of the Magisters
+			SpellName(1235111),		-- Flask of the Shattered Sun
+			SpellName(1239355),		-- Vicious Thalassian Flask of Honor
 		},
 		BattleElixir = {
 			-- SpellName(spellID),	-- Spell name
