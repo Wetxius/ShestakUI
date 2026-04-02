@@ -243,6 +243,10 @@ local function updateRaid(self, event)
 	end
 end
 
+local function isEventlessUnit(unit) -- ShestakUI
+	return unit and unit:match('%w+target')
+end
+
 local function initObject(unit, style, styleFunc, header, ...)
 	local num = select('#', ...)
 	for i = 1, num do
@@ -272,7 +276,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 		-- frame will be stuck with the 'vehicle' unit.
 		object:RegisterEvent('PLAYER_ENTERING_WORLD', evalUnitAndUpdate, true)
 
-		if(not objectUnit:match('%w+target')) then
+		if(not isEventlessUnit(objectUnit)) then -- ShestakUI
 			object:RegisterEvent('UNIT_ENTERED_VEHICLE', evalUnitAndUpdate)
 			object:RegisterEvent('UNIT_EXITED_VEHICLE', evalUnitAndUpdate)
 
@@ -290,7 +294,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 			object:SetAttribute('*type2', 'togglemenu')
 			object:SetAttribute('toggleForVehicle', true)
 
-			if(objectUnit:match('%w+target')) then
+			if(isEventlessUnit(objectUnit)) then -- ShestakUI
 				oUF:HandleEventlessUnit(object)
 			else
 				oUF:HandleUnit(object)
