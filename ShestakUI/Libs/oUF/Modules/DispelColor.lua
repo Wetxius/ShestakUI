@@ -22,22 +22,21 @@ local color_magic = CreateColor(0, 0, 0, 0)
 local color_curse = CreateColor(0, 0, 0, 0)
 local color_disease = CreateColor(0, 0, 0, 0)
 local color_poison = CreateColor(0, 0, 0, 0)
+local color_bleed = CreateColor(0, 0, 0, 0)
 
 if T.class == "DRUID" then
 	color_curse = CreateColor(0.6, 0, 1)
 	color_poison = CreateColor(0, 0.6, 0)
 elseif T.class == "EVOKER" then
-	color_curse = CreateColor(0.6, 0, 1)
 	color_poison = CreateColor(0, 0.6, 0)
-	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "MAGE" then
 	color_curse = CreateColor(0.6, 0, 1)
 elseif T.class == "MONK" then
 	color_poison = CreateColor(0, 0.6, 0)
 	color_disease = CreateColor(0.6, 0.4, 0)
-elseif T.class == "PALADIN" then
-	color_poison = CreateColor(0, 0.6, 0)
-	color_disease = CreateColor(0.6, 0.4, 0)
+-- elseif T.class == "PALADIN" then
+	-- color_poison = CreateColor(0, 0.6, 0)
+	-- color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "PRIEST" then
 	color_disease = CreateColor(0.6, 0.4, 0)
 elseif T.class == "SHAMAN" then
@@ -56,6 +55,22 @@ local function CheckSpec()
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
+	elseif T.class == "EVOKER" then
+		if spec == 2 then
+			color_magic = CreateColor(0.2, 0.6, 1)
+		else
+			color_magic = CreateColor(0, 0, 0, 0)
+		end
+		-- Cauterizing Flame (talent)
+		if C_SpellBook.IsSpellKnown(374251) then
+			color_bleed = CreateColor(1, 0, 0.5)
+			color_curse = CreateColor(0.6, 0, 1)
+			color_disease = CreateColor(0.6, 0.4, 0)
+		else
+			color_bleed = CreateColor(0, 0, 0, 0)
+			color_curse = CreateColor(0, 0, 0, 0)
+			color_disease = CreateColor(0, 0, 0, 0)
+		end
 	elseif T.class == "MONK" then
 		if spec == 2 then
 			color_magic = CreateColor(0.2, 0.6, 1)
@@ -68,6 +83,7 @@ local function CheckSpec()
 		else
 			color_magic = CreateColor(0, 0, 0, 0)
 		end
+		-- Cleanse Toxins (talent)
 		if C_SpellBook.IsSpellKnown(213644) then
 			color_poison = CreateColor(0, 0.6, 0)
 			color_disease = CreateColor(0.6, 0.4, 0)
@@ -102,7 +118,8 @@ local function CheckSpec()
 		[2] = color_curse,
 		[3] = color_disease,
 		[4] = color_poison,
-		[9] = CreateColor(0, 0, 0, 0),
+		[9] = CreateColor(0, 0, 0, 0), -- enrage
+		[11] = color_bleed
 	}
 
 	for i, color in pairs(dispelIndex) do
