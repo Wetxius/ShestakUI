@@ -317,10 +317,9 @@ function Stuffing:SlotUpdate(b)
 			b.frame.Conduit2:Show()
 		end
 
-		local profQual = C_TradeSkillUI.GetItemReagentQualityByItemInfo(clink) or C_TradeSkillUI.GetItemCraftedQualityByItemInfo(clink)
-		if profQual then
-			local atlas = ("Professions-Icon-Quality-Tier%d-Inv"):format(profQual)
-			b.frame.profQuality:SetAtlas(atlas, TextureKitConstants.UseAtlasSize)
+		local profQual = C_TradeSkillUI.GetItemReagentQualityInfo(clink) or C_TradeSkillUI.GetItemCraftedQualityInfo(clink)
+		if profQual and profQual.iconInventory then
+			b.frame.profQuality:SetAtlas(profQual.iconInventory, TextureKitConstants.UseAtlasSize)
 			b.frame.profQuality:Show()
 		end
 
