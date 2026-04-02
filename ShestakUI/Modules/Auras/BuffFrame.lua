@@ -142,6 +142,10 @@ BuffFrame.CollapseAndExpandButton:Kill()
 DebuffFrame.AuraContainer:Hide()
 
 -- Move Private Auras
+local PrivateAnchor = CreateFrame("Frame", "PrivateAnchor", UIParent)
+PrivateAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
+PrivateAnchor:SetSize((3 * C.aura.player_buff_size) + space, (C.aura.player_buff_size * 2) - space)
+
 hooksecurefunc(DebuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
 	local previousBuff, aboveBuff
 	for index, aura in ipairs(auras) do
@@ -150,7 +154,7 @@ hooksecurefunc(DebuffFrame.AuraContainer, "UpdateGridLayout", function(_, auras)
 			aura:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -space)
 			aboveBuff = aura
 		elseif index == 1 then
-			aura:SetPoint("TOPRIGHT", BuffsAnchor, "RIGHT", 0, 0)
+			aura:SetPoint("TOPRIGHT", PrivateAnchor, "TOPRIGHT", 0, 0)
 			aboveBuff = aura
 		else
 			aura:SetPoint("RIGHT", previousBuff, "LEFT", -space, 0)
