@@ -310,9 +310,10 @@ local function Shared(self, unit)
 		if C.raidframe.plugins_private_auras then
 			self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)
 			self.PrivateAuras:SetPoint("CENTER", self, 0, 1)
-			self.PrivateAuras:SetSize(18, 18)
+			local numAuras = 1
+			self.PrivateAuras:SetSize(numAuras * 18, 18)
 			self.PrivateAuras.size = T.Scale(18)
-			self.PrivateAuras.num = 1
+			self.PrivateAuras.num = numAuras
 			self.PrivateAuras.borderScale = 1
 			self.PrivateAuras.disableCooldownText = true	-- not C.raidframe.plugins_debuffs_timer
 			self.PrivateAuras.disableCooldown = not C.aura.show_spiral

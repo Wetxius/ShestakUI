@@ -148,7 +148,7 @@ local function LoadSkin()
 			context:SetPoint(point, relativeTo, relativePoint, xOfs - 7, yOfs)
 		end
 		if button.IconBorder then button.IconBorder:SetAlpha(0) end
-		if button.IconOverlay then button.IconOverlay:SetAlpha(0) end --BETA
+		if button.IconOverlay then button.IconOverlay:SetAlpha(0) end -- decor
 		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button:CreateBackdrop("Default")
 		button.backdrop:ClearAllPoints()

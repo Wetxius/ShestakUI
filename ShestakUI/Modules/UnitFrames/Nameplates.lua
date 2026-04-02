@@ -436,13 +436,13 @@ local function castColor(self)
 	-- else
 		-- if C.nameplate.kick_color then
 			-- local start = GetSpellCooldown(kickID)
-			-- -- if (canaccessvalue(start) and start ~= 0) or start then -- BETA
-				-- -- self:SetStatusBarColor(1, 0.5, 0)
-				-- -- self.bg:SetColorTexture(1, 0.5, 0, 0.2)
-			-- -- else
-				-- -- self:SetStatusBarColor(1, 0.8, 0)
-				-- -- self.bg:SetColorTexture(1, 0.8, 0, 0.2)
-			-- -- end
+			-- if (canaccessvalue(start) and start ~= 0) or start then -- BETA
+				-- self:SetStatusBarColor(1, 0.5, 0)
+				-- self.bg:SetColorTexture(1, 0.5, 0, 0.2)
+			-- else
+				-- self:SetStatusBarColor(1, 0.8, 0)
+				-- self.bg:SetColorTexture(1, 0.8, 0, 0.2)
+			-- end
 		-- else
 			-- self:SetStatusBarColor(1, 0.8, 0)
 			-- self.bg:SetColorTexture(1, 0.8, 0, 0.2)
