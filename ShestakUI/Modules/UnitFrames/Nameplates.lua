@@ -108,7 +108,7 @@ if C.nameplate.healer_icon then
 			local playerFaction = numFactions[UnitFactionGroup("player")]
 			for i = 1, GetNumBattlefieldScores() do
 				local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-				if name and healerSpecs[talentSpec] and faction == playerFaction then
+				if T.NotSecretValue(name) and name and healerSpecs[talentSpec] and faction == playerFaction then
 					name = name:match("(.+)%-.+") or name
 					healList[name] = talentSpec
 				end
@@ -126,7 +126,7 @@ if C.nameplate.healer_icon then
 				if specID and specID > 0 then
 					local name = UnitName(format("arena%d", i))
 					local _, talentSpec = GetSpecializationInfoByID(specID)
-					if name and healerSpecs[talentSpec] then
+					if T.NotSecretValue(name) and name and healerSpecs[talentSpec] then
 						healList[name] = talentSpec
 						local nameplate = C_NamePlate.GetNamePlateForUnit(format("arena%d", i))
 						if nameplate then

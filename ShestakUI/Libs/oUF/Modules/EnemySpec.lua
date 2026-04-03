@@ -15,7 +15,7 @@ local function Update(object, _, unit)
 	if instanceType == "pvp" then
 		for i = 1, GetNumBattlefieldScores() do
 			local name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-			if GetUnitName(unit, true) == name then
+			if T.NotSecretValue(name) and GetUnitName(unit, true) == name then
 				object.EnemySpec:SetText(talentSpec)
 			end
 		end
