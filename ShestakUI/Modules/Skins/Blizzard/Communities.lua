@@ -21,7 +21,6 @@ local function LoadSkin()
 		CommunitiesFrame.RecruitmentDialog.RecruitmentMessageFrame.RecruitmentMessageInput.ScrollBar,
 		CommunitiesFrameCommunitiesList.ScrollBar,
 		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
-		CommunitiesFrameGuildDetailsFrameNews.ScrollBar,
 		CommunitiesFrame.ApplicantList.ScrollBar,
 		CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar,
 		CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame.ScrollBar
@@ -308,8 +307,8 @@ local function LoadSkin()
 	CommunitiesFrame.NotificationSettingsDialog.Selector.CancelButton:SkinButton()
 
 	hooksecurefunc(CommunitiesNotificationSettingsStreamEntryMixin, "SetFilter", function(self)
-		self.ShowNotificationsButton:SetSize(18, 18)
-		self.HideNotificationsButton:SetSize(18, 18)
+		self.ShowNotificationsButton:SetSize(20, 20)
+		self.HideNotificationsButton:SetSize(20, 20)
 		T.SkinCheckBox(self.ShowNotificationsButton)
 		T.SkinCheckBox(self.HideNotificationsButton)
 	end)
@@ -323,6 +322,8 @@ local function LoadSkin()
 
 	T.SkinEditBox(EditStreamDialog.NameEdit, nil, 18)
 	T.SkinEditBox(EditStreamDialog.Description)
+
+	T.SkinCheckBox(EditStreamDialog.TypeCheckbox)
 
 	EditStreamDialog.Accept:SkinButton()
 	EditStreamDialog.Delete:SkinButton()
@@ -472,7 +473,7 @@ local function LoadSkin()
 	CommunitiesFrame.GuildBenefitsFrame:StripTextures()
 	CommunitiesFrame.GuildBenefitsFrame.Perks:StripTextures()
 	CommunitiesFrame.GuildBenefitsFrame.Perks:CreateBackdrop("Overlay")
-	CommunitiesFrame.GuildBenefitsFrame.Perks.backdrop:SetPoint("TOPLEFT", 4, -2)
+	CommunitiesFrame.GuildBenefitsFrame.Perks.backdrop:SetPoint("TOPLEFT", 3, -2)
 	CommunitiesFrame.GuildBenefitsFrame.Perks.backdrop:SetPoint("BOTTOMRIGHT", -2, -2)
 
 	local GuildFactionBar = CommunitiesFrame.GuildBenefitsFrame.FactionFrame.Bar
@@ -503,8 +504,8 @@ local function LoadSkin()
 
 	CommunitiesFrame.GuildBenefitsFrame.Rewards:StripTextures()
 	CommunitiesFrame.GuildBenefitsFrame.Rewards:CreateBackdrop("Overlay")
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.backdrop:SetPoint("TOPLEFT", 2, -2)
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.backdrop:SetPoint("BOTTOMRIGHT", -2, -2)
+	CommunitiesFrame.GuildBenefitsFrame.Rewards.backdrop:SetPoint("TOPLEFT", 1, -2)
+	CommunitiesFrame.GuildBenefitsFrame.Rewards.backdrop:SetPoint("BOTTOMRIGHT", -4, -2)
 
 	hooksecurefunc(CommunitiesFrame.GuildBenefitsFrame.Rewards.ScrollBox, "Update", function(frame)
 		for _, button in next, {frame.ScrollTarget:GetChildren()} do
@@ -514,7 +515,7 @@ local function LoadSkin()
 				if button.Icon then
 					button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 					button.Icon:ClearAllPoints()
-					button.Icon:SetPoint("TOPLEFT", 2, -3)
+					button.Icon:SetPoint("TOPLEFT", 3, -3)
 					button:CreateBackdrop("Default")
 					button.backdrop:SetPoint("TOPLEFT", button.Icon, "TOPLEFT", -2, 2)
 					button.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, "BOTTOMRIGHT", 2, -2)
@@ -565,13 +566,9 @@ local function LoadSkin()
 	backdrop3:SetTemplate("Overlay")
 	backdrop3:SetFrameLevel(CommunitiesFrameGuildDetailsFrameInfo:GetFrameLevel() - 1)
 	backdrop3:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo, "TOPLEFT", 2, -236)
-	backdrop3:SetPoint("BOTTOMRIGHT", CommunitiesFrameGuildDetailsFrameInfo, "BOTTOMRIGHT", -8, -1)
+	backdrop3:SetPoint("BOTTOMRIGHT", CommunitiesFrameGuildDetailsFrameInfo, "BOTTOMRIGHT", -8, 0)
 
-	local backdrop4 = CreateFrame("Frame", nil, CommunitiesFrameGuildDetailsFrameInfo)
-	backdrop4:SetTemplate("Overlay")
-	backdrop4:SetFrameLevel(CommunitiesFrameGuildDetailsFrameInfo:GetFrameLevel() - 1)
-	backdrop4:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo, "TOPLEFT", 591, -22)
-	backdrop4:SetPoint("BOTTOMRIGHT", CommunitiesFrameGuildDetailsFrameInfo, "BOTTOMRIGHT", 20, -1)
+	CommunitiesFrameGuildDetailsFrameNews:SetTemplate("Overlay")
 
 	-- Guild Message EditBox
 	CommunitiesGuildTextEditFrame:StripTextures()
