@@ -82,22 +82,11 @@ C["togglemainmenu"] = {
 -- Definde toggle functions
 C["toggleaddons"] = {
 	-- Damage Meters
-	["alDamageMeter"] = function()
-		ToggleFrame(alDamageMeterFrame)
-	end,
-	["Recount"] = function()
-		ToggleFrame(Recount.MainWindow)
-		Recount.RefreshMainWindow()
+	["Details"] = function()
+		Details:ToggleWindows()
 	end,
 	["Skada"] = function()
 		Skada:ToggleWindow()
-	end,
-	["TinyDPS"] = function()
-		ToggleFrame(tdpsFrame)
-	end,
-	-- Threat Meters
-	["Omen"] = function()
-		ToggleFrame(Omen.Anchor)
 	end,
 	-- Boss Addons
 	["BigWigs"] = function()
