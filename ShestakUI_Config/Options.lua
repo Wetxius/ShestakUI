@@ -1482,7 +1482,6 @@ do
 		{"assistedcombat"},
 		{"atlasloot"},
 		{"bigwigs"},
-		{"blood_shield_tracker"},
 		{"capping"},
 		{"clique"},
 		{"dbm"},

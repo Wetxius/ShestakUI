@@ -201,7 +201,6 @@
 	<Script file="Modules\Skins\Aurora.lua"/>
 	<Script file="Modules\Skins\BaudErrorFrame.lua"/>
 	<Script file="Modules\Skins\BigWigs.lua"/>
-	<Script file="Modules\Skins\BloodShieldTracker.lua"/>
 	<Script file="Modules\Skins\Capping.lua"/>
 	<Script file="Modules\Skins\Clique.lua"/>
 	<Script file="Modules\Skins\DBM.lua"/>
@@ -210,14 +209,14 @@
 	<Script file="Modules\Skins\FlyoutButtonCustom.lua"/>
 	<Script file="Modules\Skins\MageNuggets.lua"/>
 	<Script file="Modules\Skins\MyRolePlay.lua"/>
+	<Script file="Modules\Skins\OPie.lua"/>
+	<Script file="Modules\Skins\Plater.lua"/>
+	<Script file="Modules\Skins\Postal.lua"/>
 	<Script file="Modules\Skins\RareScanner.lua"/>
+	<Script file="Modules\Skins\Rematch.lua"/>
 	<Script file="Modules\Skins\Skada.lua"/>
 	<Script file="Modules\Skins\VanasKoS.lua"/>
 	<Script file="Modules\Skins\WeakAuras.lua"/>
-	<Script file="Modules\Skins\oPie.lua"/>
-	<Script file="Modules\Skins\Rematch.lua"/>
-	<Script file="Modules\Skins\Plater.lua"/>
-	<Script file="Modules\Skins\Postal.lua"/>
 
 	<Script file="Modules\Tooltip\Tooltip.lua"/>
 	<Script file="Modules\Tooltip\HyperLink.lua"/>
