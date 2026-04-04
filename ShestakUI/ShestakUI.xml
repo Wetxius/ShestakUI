@@ -210,7 +210,6 @@
 	<Script file="Modules\Skins\FlyoutButtonCustom.lua"/>
 	<Script file="Modules\Skins\MageNuggets.lua"/>
 	<Script file="Modules\Skins\MyRolePlay.lua"/>
-	<Script file="Modules\Skins\Ovale.lua"/>
 	<Script file="Modules\Skins\RareScanner.lua"/>
 	<Script file="Modules\Skins\Skada.lua"/>
 	<Script file="Modules\Skins\VanasKoS.lua"/>

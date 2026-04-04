@@ -71,7 +71,6 @@ C["skins"] = {
 	["mage_nuggets"] = false,					-- MageNuggets skin
 	["my_role_play"] = false,					-- MyRolePlay skin
 	["opie"] = false,							-- OPie skin
-	["ovale"] = false,							-- OvaleSpellPriority skin
 	["plater"] = false,							-- Plater skin
 	["postal"] = false,							-- Postal skin
 	["rarescanner"] = false,					-- RareScanner skin

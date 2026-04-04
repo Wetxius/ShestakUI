@@ -1492,7 +1492,6 @@ do
 		{"mage_nuggets"},
 		{"my_role_play"},
 		{"opie"},
-		{"ovale"},
 		{"plater"},
 		{"postal"},
 		{"rarescanner"},
