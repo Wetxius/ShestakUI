@@ -33,10 +33,10 @@ L.profile_error_lib = "To enable export and import - install Media_ShestakUI" --
 L.profile_error_code = "Error in imported code!" -- Need review
 
 -- General options
-L_GUI_GENERAL_SUBTEXT = "These settings control the general user interface settings. Type in chat '/uihelp' for help." -- Need review
-L_GUI_GENERAL_WELCOME_MESSAGE = "Messaggio di benvenuto in chat"
-L_GUI_GENERAL_AUTOSCALE = "Ridimensionamento automatico dell'interfaccia"
-L_GUI_GENERAL_UISCALE = "Scala dell'interfaccia (se il ridimensionamento automatico è disabilitato)"
+L.general_subtext = "These settings control the general user interface settings. Type in chat '/uihelp' for help." -- Need review
+L.general_welcome_message = "Messaggio di benvenuto in chat"
+L.general_auto_scale = "Ridimensionamento automatico dell'interfaccia"
+L.general_uiscale = "Scala dell'interfaccia (se il ridimensionamento automatico è disabilitato)"
 L.general_subheader_blizzard = "Blizzard UI elements" -- Need review
 L.general_error_filter = "Error filtering" -- Need review
 L.general_error_blacklist = "Blacklist" -- Need review
@@ -88,16 +88,16 @@ L.font_quest_tracker_font_mult = "Quest text scale" -- Need review
 L.font_global_font = "Disable Pixel font" -- Need review
 
 -- Skins options
-L_GUI_SKINS = "Restyling"
-L_GUI_SKINS_SUBTEXT = "Change the appearance of the standard interface." -- Need review
-L_GUI_SKINS_BLIZZARD = "Attiva il restyling dei riquadri Blizzard"
-L_GUI_SKINS_MINIMAP_BUTTONS = "Attiva il restyling dei pulsanti delle AddOns sulla minimappa"
-L_GUI_SKINS_SUBHEADER = "Stylization of addons" -- Need review
+L.skins = "Restyling"
+L.skins_subtext = "Change the appearance of the standard interface." -- Need review
+L.skins_blizzard_frames = "Attiva il restyling dei riquadri Blizzard"
+L.skins_minimap_buttons = "Attiva il restyling dei pulsanti delle AddOns sulla minimappa"
+L.skins_subheader = "Stylization of addons" -- Need review
 L.skins_minimap_buttons_mouseover = "Addons icons on mouseover" -- Need review
 L.skins_bubbles = "Restyling dei fumetti delle chats"
 
 -- Unit Frames options
-L_GUI_UF_SUBTEXT = "Customize player, target frames and etc." -- Need review
+L.unitframe_subtext = "Customize player, target frames and etc." -- Need review
 L_GUI_UF_ENABLE = "Abilita i riquadri delle unità"
 L_GUI_UF_OWN_COLOR = "Scegli il colore per la tua barra della salute"
 L_GUI_UF_UF_COLOR = "Colore barre salute"
@@ -330,30 +330,30 @@ L.chat_custom_time_color = "Enable custom timestamp coloring" -- Needs review
 L.chat_time_color = "Colorazione orario dei messaggi"
 
 -- Nameplate options
-L_GUI_NAMEPLATE_SUBTEXT = "Nameplate settings" -- Need review
-L_GUI_NAMEPLATE_ENABLE = "Attiva le barre delle unità"
-L_GUI_NAMEPLATE_COMBAT = "Mostra automaticamente le barre delle unità in combattimento"
-L_GUI_NAMEPLATE_HEALTH = "Valore numerico della salute"
-L_GUI_NAMEPLATE_HEIGHT = "Altezza delle barre delle unità"
-L_GUI_NAMEPLATE_WIDTH = "Larghezza delle barre delle unità"
+L.nameplate_subtext = "Nameplate settings" -- Need review
+L.nameplate_enable = "Attiva le barre delle unità"
+L.nameplate_combat = "Mostra automaticamente le barre delle unità in combattimento"
+L.nameplate_health_value = "Valore numerico della salute"
+L.nameplate_height = "Altezza delle barre delle unità"
+L.nameplate_width = "Larghezza delle barre delle unità"
 L.nameplate_alpha = "Alpha" -- Needs review
 L.nameplate_alpha_desc = "Non-target nameplate alpha" -- Needs review
 L.nameplate_ad_height = "Additional height" -- Need review
 L.nameplate_ad_width = "Additional width" -- Need review
 L.nameplate_ad_height_desc = "Additional height for selected nameplate" -- Needs review
 L.nameplate_ad_width_desc = "Additional width for selected nameplate" -- Needs review
-L_GUI_NAMEPLATE_CASTBAR_NAME = "Mostra il nome di incantesimi/abilità sulle barre incantesimi"
+L.nameplate_show_castbar_name = "Mostra il nome di incantesimi/abilità sulle barre incantesimi"
 L.nameplate_cast_target = "Mostra il nome del bersaglio dell'incantesimo" -- Needs review
-L_GUI_NAMEPLATE_CLASS_ICON = "Icone delle classi in PvP"
-L_GUI_NAMEPLATE_NAME_ABBREV = "Mostra nomi abbreviati"
+L.nameplate_class_icons = "Icone delle classi in PvP"
+L.nameplate_name_abbrev = "Mostra nomi abbreviati"
 L.nameplate_short_name = "Replace names with short ones" -- Need review
 L.nameplate_clamp = "Aggancia le barre delle unità in cima allo schermo quando sono fuori portata visiva" -- Need review
 L.nameplate_clamp_desc = "Aggancia le barre delle unità in cima allo schermo quando sono fuori portata visiva"
-L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Mostra le penalità sulle barre delle unità (l'ozpione 'Mostra nomi abbreviati' deve essere disabilitata)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Show dispellable enemy buffs and buffs from the list" -- Need review
-L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Dimensioni delle penalità sulle barre delle unità" -- Need review
-L_GUI_NAMEPLATE_HEALER_ICON = "Nei Campi di Battaglia, mostra un'icona 'guaritore' accanto alle barre delle unità di tutti i guaritori nemici"
-L_GUI_NAMEPLATE_TOTEM_ICONS = "Mostra un’icona sopra la barra dei totem nemici"
+L.nameplate_track_debuffs = "Mostra le penalità sulle barre delle unità (l'ozpione 'Mostra nomi abbreviati' deve essere disabilitata)"
+L.nameplate_track_buffs = "Show dispellable enemy buffs and buffs from the list" -- Need review
+L.nameplate_auras_size = "Dimensioni delle penalità sulle barre delle unità" -- Need review
+L.nameplate_healer_icon = "Nei Campi di Battaglia, mostra un'icona 'guaritore' accanto alle barre delle unità di tutti i guaritori nemici"
+L.nameplate_totem_icons = "Mostra un’icona sopra la barra dei totem nemici"
 L.nameplate_target_glow = "Show glow texture for target" -- Need review
 L.nameplate_only_name = "Show only name for friendly units" -- Need review
 L.nameplate_quests = "Show quest icon" -- Need review
@@ -361,11 +361,11 @@ L.nameplate_cast_color = "Show color border for casting important spells" -- Nee
 L.nameplate_kick_color = "Change cast color if interrupt on cd" -- Need review
 L.nameplate_low_health_value = "Health value" -- Need review
 L.nameplate_low_health = "Low health highlight" -- Need review
-L_GUI_NAMEPLATE_THREAT = "Attiva il sensore di rilevamento minaccia (si adatta automaticamente al tuo ruolo)"
-L_GUI_NAMEPLATE_GOOD_COLOR = "Colore se il PG è minacciato (in base a difensore o assaltatore/guaritore)"
-L_GUI_NAMEPLATE_NEAR_COLOR = "Colore per perdita/guadagno minaccia"
-L_GUI_NAMEPLATE_BAD_COLOR = "Colore se il PG non è minacciato (se difensore o assaltatore/guaritore)"
-L_GUI_NAMEPLATE_OFFTANK_COLOR = "Colore della minaccia per il difensore secondario"
+L.nameplate_enhance_threat = "Attiva il sensore di rilevamento minaccia (si adatta automaticamente al tuo ruolo)"
+L.nameplate_good_color = "Colore se il PG è minacciato (in base a difensore o assaltatore/guaritore)"
+L.nameplate_near_color = "Colore per perdita/guadagno minaccia"
+L.nameplate_bad_color = "Colore se il PG non è minacciato (se difensore o assaltatore/guaritore)"
+L.nameplate_offtank_color = "Colore della minaccia per il difensore secondario"
 L.nameplate_extra_color = "Explosive and Spiteful affix color" -- Need review
 L.nameplate_mob_color_enable = "Change color for important mobs in dungeons" -- Need review
 L.nameplate_mob_color = "Color for mobs" -- Need review
@@ -503,8 +503,8 @@ L.filger_subheader_spells = "Adding new spells" -- Need review
 L.filger_category_list = "Spell list category" -- Need review
 
 -- Announcements options
-L_GUI_ANNOUNCEMENTS = "Annunci"
-L_GUI_ANNOUNCEMENTS_SUBTEXT = "Settings that add chat announcements about spells or items." -- Need review
+L.announcements = "Annunci"
+L.announcements_subtext = "Settings that add chat announcements about spells or items." -- Need review
 L.announcements_drinking = "Annuncia in chat quando un nemico in arena sta bevendo"
 L.announcements_interrupts = "Interrupts" -- Need review
 L.announcements_interrupts_desc = "Annuncia in gruppo/incursione quando tu interrompi un incantesimo/abilità"
@@ -528,8 +528,8 @@ L.announcements_safari_hat = "Safari Hat" -- Needs review
 L.announcements_safari_hat_desc = "Controlla se il Cappello da Safari sia indossato o meno"
 
 -- Automation options
-L_GUI_AUTOMATION = "Automatismi"
-L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L.automation = "Automatismi"
+L.automation_subtext = "This block contains settings that facilitate the routine." -- Need review
 L.automation_release = "'Auto-risorgi' nei Campi di Battaglia"
 L.automation_screenshot = "Cattura una schermata quando completi un'impresa"
 L.automation_solve_artifact = "Popup automatico restauro manufatto"
@@ -646,8 +646,8 @@ L_GUI_STATS_CURRENCY_ARCHAEOLOGY = "Mostra i frammenti di archeologia sotto la l
 L_GUI_STATS_CURRENCY_RAID = "Mostra i sigilli delle incursioni"
 
 -- Trade options
-L_GUI_TRADE = "Trade" -- Need review
-L_GUI_TRADE_SUBTEXT = "Settings related to professions and trade" -- Need review"
+L.trade = "Trade" -- Need review
+L.trade_subtext = "Settings related to professions and trade" -- Need review"
 L.trade_profession_tabs = "Professions tabs" -- Need review
 L.trade_profession_tabs_desc = "Visualizza la linguetta delle professioni sul riquadro abilità di commercio/commercio"
 L.trade_already_known = "Colorizes already known items" -- Need review
@@ -663,7 +663,7 @@ L.trade_merchant_itemlevel = "Item level in merchant" -- Need review
 L.trade_merchant_itemlevel_desc = "Mostra il livello dell’oggetto di armi e armature in vendita"
 
 -- Miscellaneous options
-L_GUI_MISC_SUBTEXT = "Other settings that add interesting features." -- Need review
+L.misc_subtext = "Other settings that add interesting features." -- Need review
 L.misc_shift_marking = "Marks mouseover target" -- Need review
 L.misc_shift_marking_desc = "Marks mouseover target when you push Shift (only in group)" -- Need review
 L.misc_afk_spin_camera = "Ruota la camera mentre sei assente"

@@ -632,24 +632,24 @@ do
 end
 
 -- Category
-ns.addCategory("general", GENERAL_LABEL, L_GUI_GENERAL_SUBTEXT, 2)
+ns.addCategory("general", GENERAL_LABEL, L.general_subtext, 2)
 ns.addCategory("font", L.font, L.font_subtext, 4)
-ns.addCategory("skins", L_GUI_SKINS, L_GUI_SKINS_SUBTEXT)
-ns.addCategory("unitframe", UNITFRAME_LABEL, L_GUI_UF_SUBTEXT, 3)
+ns.addCategory("skins", L.skins, L.skins_subtext)
+ns.addCategory("unitframe", UNITFRAME_LABEL, L.unitframe_subtext, 3)
 ns.addCategory("unitframe_class_bar", L_GUI_UF_PLUGINS_CLASS_BAR, L_GUI_UF_PLUGINS_CLASS_BAR_SUBTEXT)
 ns.addCategory("raidframe", RAID_FRAMES_LABEL, L_GUI_UF_RAIDFRAMES_SUBTEXT, 2)
 ns.addCategory("aura", BUFFOPTIONS_LABEL, BUFFOPTIONS_SUBTEXT)
 ns.addCategory("actionbar", L_GUI_ACTIONBAR, ACTIONBARS_SUBTEXT, 3)
 ns.addCategory("tooltip", L.tooltip, L.tooltip_subtext)
 ns.addCategory("chat", SOCIALS, L.chat_subtext)
-ns.addCategory("nameplate", UNIT_NAMEPLATES, L_GUI_NAMEPLATE_SUBTEXT, 2)
+ns.addCategory("nameplate", UNIT_NAMEPLATES, L.nameplate_subtext, 2)
 ns.addCategory("combattext", L_GUI_COMBATTEXT, COMBATTEXT_SUBTEXT.." "..L_GUI_COMBATTEXT_SUBTEXT, 1) -- BETA
 ns.addCategory("bag", L_GUI_BAGS, L_GUI_BAGS_SUBTEXT)
 ns.addCategory("minimap", MINIMAP_LABEL, L_GUI_MINIMAP_SUBTEXT)
 ns.addCategory("loot", LOOT, L_GUI_LOOT_SUBTEXT)
 ns.addCategory("filger", L_GUI_FILGER, L_GUI_FILGER_SUBTEXT)
-ns.addCategory("announcements", L_GUI_ANNOUNCEMENTS, L_GUI_ANNOUNCEMENTS_SUBTEXT)
-ns.addCategory("automation", L_GUI_AUTOMATION, L_GUI_AUTOMATION_SUBTEXT)
+ns.addCategory("announcements", L.announcements, L.announcements_subtext)
+ns.addCategory("automation", L.automation, L.automation_subtext)
 ns.addCategory("reminder", L_GUI_REMINDER, L_GUI_REMINDER_SUBTEXT)
 ns.addCategory("raidcooldown", L_GUI_COOLDOWN_RAID, L_GUI_COOLDOWN_RAID_SUBTEXT)
 -- ns.addCategory("enemycooldown", L_GUI_COOLDOWN_ENEMY, L_GUI_COOLDOWN_ENEMY_SUBTEXT)
@@ -657,20 +657,20 @@ ns.addCategory("raidcooldown", L_GUI_COOLDOWN_RAID, L_GUI_COOLDOWN_RAID_SUBTEXT)
 ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
 ns.addCategory("toppanel", L_GUI_TOP_PANEL, L_GUI_TOP_PANEL_SUBTEXT)
 ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
-ns.addCategory("trade", L_GUI_TRADE, L_GUI_TRADE_SUBTEXT)
-ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT)
+ns.addCategory("trade", L.trade, L.trade_subtext)
+ns.addCategory("misc", OTHER, L.misc_subtext)
 
 -- General
 do
 	local parent = ShestakUIOptionsPanel.general
 
-	local welcome_message = ns.CreateCheckBox(parent, "welcome_message", L_GUI_GENERAL_WELCOME_MESSAGE)
+	local welcome_message = ns.CreateCheckBox(parent, "welcome_message")
 	welcome_message:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local auto_scale = ns.CreateCheckBox(parent, "auto_scale", L_GUI_GENERAL_AUTOSCALE)
+	local auto_scale = ns.CreateCheckBox(parent, "auto_scale")
 	auto_scale:SetPoint("TOPLEFT", welcome_message, "BOTTOMLEFT", 0, 0)
 
-	local uiscale = ns.CreateNumberSlider(parent, "uiscale", nil, nil, 0.4, 1.1, 0.01, true, L_GUI_GENERAL_UISCALE)
+	local uiscale = ns.CreateNumberSlider(parent, "uiscale", nil, nil, 0.4, 1.1, 0.01, true)
 	uiscale:SetPoint("TOPLEFT", auto_scale, "BOTTOMLEFT", 0, -20)
 
 	local function toggleUIScaleOptions()
@@ -1457,13 +1457,13 @@ end
 do
 	local parent = ShestakUIOptionsPanel.skins
 
-	local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
+	local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames")
 	blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
 	local bubbles = ns.CreateCheckBox(parent, "bubbles")
 	bubbles:SetPoint("TOPLEFT", blizzard_frames, "BOTTOMLEFT", 0, 0)
 
-	local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons", L_GUI_SKINS_MINIMAP_BUTTONS)
+	local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons")
 	minimap_buttons:SetPoint("TOPLEFT", bubbles, "BOTTOMLEFT", 0, 0)
 
 	local minimap_buttons_mouseover = ns.CreateCheckBox(parent, "minimap_buttons_mouseover")
@@ -1472,7 +1472,7 @@ do
 	minimap_buttons.children = {minimap_buttons_mouseover}
 
 	-- Addons
-	local subheader = ns.addSubCategory(parent, L_GUI_SKINS_SUBHEADER)
+	local subheader = ns.addSubCategory(parent, L.skins_subheader)
 	subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -10)
 
 	local ace3 = ns.CreateCheckBox(parent, "ace3")
@@ -2412,13 +2412,13 @@ do
 
 	local multScale = 768 / select(2, GetPhysicalScreenSize())
 
-	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_NAMEPLATE_ENABLE)
+	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 150 / multScale, 1, true, L_GUI_NAMEPLATE_WIDTH)
+	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 150 / multScale, 1, true)
 	width:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 20 / multScale, 1, true, L_GUI_NAMEPLATE_HEIGHT)
+	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 20 / multScale, 1, true)
 	height:SetPoint("LEFT", width, "RIGHT", 120, 0)
 
 	local ad_width = ns.CreateNumberSlider(parent, "ad_width", nil, nil, 0, 80 / multScale, 1, true)
@@ -2430,22 +2430,22 @@ do
 	local alpha = ns.CreateNumberSlider(parent, "alpha", nil, nil, 0, 1, 0.05, true)
 	alpha:SetPoint("TOPLEFT", ad_width, "BOTTOMLEFT", 0, -20)
 
-	local combat = ns.CreateCheckBox(parent, "combat", L_GUI_NAMEPLATE_COMBAT)
+	local combat = ns.CreateCheckBox(parent, "combat")
 	combat:SetPoint("TOPLEFT", alpha, "BOTTOMLEFT", 0, -10)
 
-	local health_value = ns.CreateCheckBox(parent, "health_value", L_GUI_NAMEPLATE_HEALTH)
+	local health_value = ns.CreateCheckBox(parent, "health_value")
 	health_value:SetPoint("TOPLEFT", combat, "BOTTOMLEFT", 0, 0)
 
-	local show_castbar_name = ns.CreateCheckBox(parent, "show_castbar_name", L_GUI_NAMEPLATE_CASTBAR_NAME)
+	local show_castbar_name = ns.CreateCheckBox(parent, "show_castbar_name")
 	show_castbar_name:SetPoint("TOPLEFT", health_value, "BOTTOMLEFT", 0, 0)
 
 	local cast_target = ns.CreateCheckBox(parent, "cast_target")
 	cast_target:SetPoint("TOPLEFT", show_castbar_name, "BOTTOMLEFT", 20, 0)
 
-	local class_icons = ns.CreateCheckBox(parent, "class_icons", L_GUI_NAMEPLATE_CLASS_ICON)
+	local class_icons = ns.CreateCheckBox(parent, "class_icons")
 	class_icons:SetPoint("TOPLEFT", cast_target, "BOTTOMLEFT", -20, 0)
 
-	local name_abbrev = ns.CreateCheckBox(parent, "name_abbrev", L_GUI_NAMEPLATE_NAME_ABBREV)
+	local name_abbrev = ns.CreateCheckBox(parent, "name_abbrev")
 	name_abbrev:SetPoint("TOPLEFT", class_icons, "BOTTOMLEFT", 0, 0)
 
 	local short_name = ns.CreateCheckBox(parent, "short_name")
@@ -2454,7 +2454,7 @@ do
 	local clamp = ns.CreateCheckBox(parent, "clamp")
 	clamp:SetPoint("TOPLEFT", short_name, "BOTTOMLEFT", 0, 0)
 
-	local track_debuffs = ns.CreateCheckBox(parent, "track_debuffs", L_GUI_NAMEPLATE_SHOW_DEBUFFS)
+	local track_debuffs = ns.CreateCheckBox(parent, "track_debuffs")
 	track_debuffs:SetPoint("TOPLEFT", clamp, "BOTTOMLEFT", 0, 0)
 	track_debuffs.Text:SetWidth(350)
 
@@ -2499,7 +2499,7 @@ do
 	-- track_debuffs:HookScript("OnClick", toggleListButton)
 	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local track_buffs = ns.CreateCheckBox(parent, "track_buffs", L_GUI_NAMEPLATE_SHOW_BUFFS)
+	local track_buffs = ns.CreateCheckBox(parent, "track_buffs")
 	track_buffs:SetPoint("TOPLEFT", track_debuffs, "BOTTOMLEFT", 0, 0)
 
 	-- local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
@@ -2526,13 +2526,13 @@ do
 	-- track_buffs:HookScript("OnClick", toggleListButton)
 	-- ListButton:HookScript("OnShow", toggleListButton)
 
-	local auras_size = ns.CreateNumberSlider(parent, "auras_size", nil, nil, 0, 35 / multScale, 1, true, L_GUI_NAMEPLATE_DEBUFFS_SIZE)
+	local auras_size = ns.CreateNumberSlider(parent, "auras_size", nil, nil, 0, 35 / multScale, 1, true)
 	auras_size:SetPoint("TOPLEFT", track_buffs, "BOTTOMLEFT", 0, -20)
 
-	local healer_icon = ns.CreateCheckBox(parent, "healer_icon", L_GUI_NAMEPLATE_HEALER_ICON)
+	local healer_icon = ns.CreateCheckBox(parent, "healer_icon")
 	healer_icon:SetPoint("TOPLEFT", auras_size, "BOTTOMLEFT", 0, -10)
 
-	local totem_icons = ns.CreateCheckBox(parent, "totem_icons", L_GUI_NAMEPLATE_TOTEM_ICONS)
+	local totem_icons = ns.CreateCheckBox(parent, "totem_icons")
 	totem_icons:SetPoint("TOPLEFT", healer_icon, "BOTTOMLEFT", 0, 0)
 
 	local target_glow = ns.CreateCheckBox(parent, "target_glow")
@@ -2587,19 +2587,19 @@ do
 	-- local kick_color = ns.CreateCheckBox(parent, "kick_color")
 	-- kick_color:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
-	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
+	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat")
 	enhance_threat:SetPoint("TOPLEFT", cast_color, "BOTTOMLEFT", 0, 0)
 
-	local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
+	local good_color = ns.CreateColourPicker(parent, "good_color", true)
 	good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 24, -4)
 
-	local near_color = ns.CreateColourPicker(parent, "near_color", true, L_GUI_NAMEPLATE_NEAR_COLOR)
+	local near_color = ns.CreateColourPicker(parent, "near_color", true)
 	near_color:SetPoint("TOPLEFT", good_color, "BOTTOMLEFT", 0, -8)
 
-	local bad_color = ns.CreateColourPicker(parent, "bad_color", true, L_GUI_NAMEPLATE_BAD_COLOR)
+	local bad_color = ns.CreateColourPicker(parent, "bad_color", true)
 	bad_color:SetPoint("TOPLEFT", near_color, "BOTTOMLEFT", 0, -8)
 
-	local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true, L_GUI_NAMEPLATE_OFFTANK_COLOR)
+	local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true)
 	offtank_color:SetPoint("TOPLEFT", bad_color, "BOTTOMLEFT", 0, -8)
 
 	-- local extra_color = ns.CreateColourPicker(parent, "extra_color", true)

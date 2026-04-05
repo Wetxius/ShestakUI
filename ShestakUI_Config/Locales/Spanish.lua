@@ -33,10 +33,10 @@ L.profile_error_lib = "To enable export and import - install Media_ShestakUI" --
 L.profile_error_code = "Error in imported code!" -- Need review
 
 -- General options
-L_GUI_GENERAL_SUBTEXT = "These settings control the general user interface settings. Type in chat '/uihelp' for help." -- Need review
-L_GUI_GENERAL_WELCOME_MESSAGE = "Mensaje de bienvenida en el chat"
-L_GUI_GENERAL_AUTOSCALE = "Auto escalado de la UI"
-L_GUI_GENERAL_UISCALE = "Escalado de la UI (si auto escalado está desactivado)"
+L.general_subtext = "These settings control the general user interface settings. Type in chat '/uihelp' for help." -- Need review
+L.general_welcome_message = "Mensaje de bienvenida en el chat"
+L.general_auto_scale = "Auto escalado de la UI"
+L.general_uiscale = "Escalado de la UI (si auto escalado está desactivado)"
 L.general_subheader_blizzard = "Blizzard UI elements" -- Need review
 L.general_error_filter = "Error filtering" -- Need review
 L.general_error_blacklist = "Blacklist" -- Need review
@@ -88,16 +88,16 @@ L.font_quest_tracker_font_mult = "Quest text scale" -- Need review
 L.font_global_font = "Disable Pixel font" -- Need review
 
 -- Skins options
-L_GUI_SKINS = "Estilización"
-L_GUI_SKINS_SUBTEXT = "Change the appearance of the standard interface." -- Need review
-L_GUI_SKINS_BLIZZARD = "Activar estilizado de marcos de Blizzard"
-L_GUI_SKINS_MINIMAP_BUTTONS = "Activar estilizado de los iconos de los addons en el minimapa"
-L_GUI_SKINS_SUBHEADER = "Stylization of addons" -- Need review
+L.skins = "Estilización"
+L.skins_subtext = "Change the appearance of the standard interface." -- Need review
+L.skins_blizzard_frames = "Activar estilizado de marcos de Blizzard"
+L.skins_minimap_buttons = "Activar estilizado de los iconos de los addons en el minimapa"
+L.skins_subheader = "Stylization of addons" -- Need review
 L.skins_minimap_buttons_mouseover = "Addons icons on mouseover" -- Need review
 L.skins_bubbles = "Estilizar las burbujas de chat"
 
 -- Unit Frames options
-L_GUI_UF_SUBTEXT = "Customize player, target frames and etc." -- Need review
+L.unitframe_subtext = "Customize player, target frames and etc." -- Need review
 L_GUI_UF_ENABLE = "Activar marcos de unidades"
 L_GUI_UF_OWN_COLOR = "Color para las barras de vida"
 L_GUI_UF_UF_COLOR = "Color de las Barras de vida"
@@ -330,30 +330,30 @@ L.chat_custom_time_color = "Enable custom timestamp coloring" -- Needs review
 L.chat_time_color = "Color de la marca de tiempo"
 
 -- Nameplate options
-L_GUI_NAMEPLATE_SUBTEXT = "Nameplate settings" -- Need review
-L_GUI_NAMEPLATE_ENABLE = "Activar placas de nombre"
-L_GUI_NAMEPLATE_COMBAT = "Mostrar automáticamente placa de nombre en combate"
-L_GUI_NAMEPLATE_HEALTH = "Valor de la vida en números"
-L_GUI_NAMEPLATE_HEIGHT = "Altura de la placa de nombre"
-L_GUI_NAMEPLATE_WIDTH = "Anchura de la placa de nombre"
+L.nameplate_subtext = "Nameplate settings" -- Need review
+L.nameplate_enable = "Activar placas de nombre"
+L.nameplate_combat = "Mostrar automáticamente placa de nombre en combate"
+L.nameplate_health_value = "Valor de la vida en números"
+L.nameplate_height = "Altura de la placa de nombre"
+L.nameplate_width = "Anchura de la placa de nombre"
 L.nameplate_alpha = "Alpha" -- Needs review
 L.nameplate_alpha_desc = "Non-target nameplate alpha" -- Needs review
 L.nameplate_ad_height = "Additional height" -- Need review
 L.nameplate_ad_width = "Additional width" -- Need review
 L.nameplate_ad_height_desc = "Additional height for selected nameplate" -- Needs review
 L.nameplate_ad_width_desc = "Additional width for selected nameplate" -- Needs review
-L_GUI_NAMEPLATE_CASTBAR_NAME = "Mostrar nombre del hechizo en la barra de lanzamiento"
+L.nameplate_show_castbar_name = "Mostrar nombre del hechizo en la barra de lanzamiento"
 L.nameplate_cast_target = "Mostrar el nombre del objetivo del hechizo" -- Needs review
-L_GUI_NAMEPLATE_CLASS_ICON = "Iconos de clase en JcJ"
-L_GUI_NAMEPLATE_NAME_ABBREV = "Mostrar los nombres abreviados"
+L.nameplate_class_icons = "Iconos de clase en JcJ"
+L.nameplate_name_abbrev = "Mostrar los nombres abreviados"
 L.nameplate_short_name = "Replace names with short ones" -- Need review
 L.nameplate_clamp = "Clamp nameplates to the top of the screen when outside of view" -- Need review
 L.nameplate_clamp_desc = "Clamp nameplates to the top of the screen when outside of view" -- Need review
-L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Mostrar perjuicios (Nombres abreviados debe ser desactivado)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Show dispellable enemy buffs and buffs from the list" -- Need review
-L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Tamaño de los perjuicios" -- Need review
-L_GUI_NAMEPLATE_HEALER_ICON = "Show icon above enemy healers nameplate in battlegrounds" -- Needs review
-L_GUI_NAMEPLATE_TOTEM_ICONS = "Show icon above enemy totems nameplate" -- Need review
+L.nameplate_track_debuffs = "Mostrar perjuicios (Nombres abreviados debe ser desactivado)"
+L.nameplate_track_buffs = "Show dispellable enemy buffs and buffs from the list" -- Need review
+L.nameplate_auras_size = "Tamaño de los perjuicios" -- Need review
+L.nameplate_healer_icon = "Show icon above enemy healers nameplate in battlegrounds" -- Needs review
+L.nameplate_totem_icons = "Show icon above enemy totems nameplate" -- Need review
 L.nameplate_target_glow = "Show glow texture for target" -- Need review
 L.nameplate_only_name = "Show only name for friendly units" -- Need review
 L.nameplate_quests = "Show quest icon" -- Need review
@@ -361,11 +361,11 @@ L.nameplate_cast_color = "Show color border for casting important spells" -- Nee
 L.nameplate_kick_color = "Change cast color if interrupt on cd" -- Need review
 L.nameplate_low_health_value = "Health value" -- Need review
 L.nameplate_low_health = "Low health highlight" -- Need review
-L_GUI_NAMEPLATE_THREAT = "Activar visor de amenaza, cambia automáticamente según tu rol"
-L_GUI_NAMEPLATE_GOOD_COLOR = "Color de alta amenaza, varía dependiendo si eres tanque o dps/sanador"
-L_GUI_NAMEPLATE_NEAR_COLOR = "Color de perdiendo/ganando amenaza"
-L_GUI_NAMEPLATE_BAD_COLOR = "Color de baja amenaza, varía dependiendo si eres tanque o dps/sanador"
-L_GUI_NAMEPLATE_OFFTANK_COLOR = "Offtank threat color" -- Need review
+L.nameplate_enhance_threat = "Activar visor de amenaza, cambia automáticamente según tu rol"
+L.nameplate_good_color = "Color de alta amenaza, varía dependiendo si eres tanque o dps/sanador"
+L.nameplate_near_color = "Color de perdiendo/ganando amenaza"
+L.nameplate_bad_color = "Color de baja amenaza, varía dependiendo si eres tanque o dps/sanador"
+L.nameplate_offtank_color = "Offtank threat color" -- Need review
 L.nameplate_extra_color = "Explosive and Spiteful affix color" -- Need review
 L.nameplate_mob_color_enable = "Change color for important mobs in dungeons" -- Need review
 L.nameplate_mob_color = "Color for mobs" -- Need review
@@ -503,8 +503,8 @@ L.filger_subheader_spells = "Adding new spells" -- Need review
 L.filger_category_list = "Spell list category" -- Need review
 
 -- Announcements options
-L_GUI_ANNOUNCEMENTS = "Anuncios"
-L_GUI_ANNOUNCEMENTS_SUBTEXT = "Settings that add chat announcements about spells or items." -- Need review
+L.announcements = "Anuncios"
+L.announcements_subtext = "Settings that add chat announcements about spells or items." -- Need review
 L.announcements_drinking = "Anunciar en el chat cuando un enemigo en la arena beba"
 L.announcements_interrupts = "Interrupts" -- Need review
 L.announcements_interrupts_desc = "Anunciar en el grupo/banda cuando interrumpes"
@@ -528,8 +528,8 @@ L.announcements_safari_hat = "Safari Hat" -- Needs review
 L.announcements_safari_hat_desc = "Check Safari Hat when starting Pet Battle" -- Needs review
 
 -- Automation options
-L_GUI_AUTOMATION = "Automation" -- Needs review
-L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L.automation = "Automation" -- Needs review
+L.automation_subtext = "This block contains settings that facilitate the routine." -- Need review
 L.automation_release = "Auto resurrección en los Campos de Batalla" -- Need review
 L.automation_screenshot = "Tomar una captura de pantalla cuando consigas un logro"
 L.automation_solve_artifact = "Auto popup for solve artifact" -- Needs review
@@ -646,8 +646,8 @@ L_GUI_STATS_CURRENCY_ARCHAEOLOGY = "Show Archaeology Fragments" -- Needs review
 L_GUI_STATS_CURRENCY_RAID = "Show Raid Seals" -- Needs review
 
 -- Trade options
-L_GUI_TRADE = "Trade" -- Need review
-L_GUI_TRADE_SUBTEXT = "Settings related to professions and trade" -- Need review
+L.trade = "Trade" -- Need review
+L.trade_subtext = "Settings related to professions and trade" -- Need review
 L.trade_profession_tabs = "Professions tabs" -- Need review
 L.trade_profession_tabs_desc = "Pestanas de profesiones de artesania y marcos de comercio"
 L.trade_already_known = "Colorizes already known items" -- Need review
@@ -663,7 +663,7 @@ L.trade_merchant_itemlevel = "Item level in merchant" -- Need review
 L.trade_merchant_itemlevel_desc = "Show item level for weapons and armor in merchant" -- Need review
 
 -- Miscellaneous options
-L_GUI_MISC_SUBTEXT = "Other settings that add interesting features." -- Need review
+L.misc_subtext = "Other settings that add interesting features." -- Need review
 L.misc_shift_marking = "Marks mouseover target" -- Need review
 L.misc_shift_marking_desc = "Marks mouseover target when you push Shift (only in group)" -- Need review
 L.misc_afk_spin_camera = "Rotar cámara mientras estás ausente"
