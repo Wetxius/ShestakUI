@@ -343,6 +343,7 @@ L.nameplate_ad_width = "Largeur additionnelle"
 L.nameplate_ad_height_desc = "Epaisseur additionnelle pour la barre de Noms de la cible"
 L.nameplate_ad_width_desc = "LArgeur additionnelle pour la barre de Noms de la cible"
 L_GUI_NAMEPLATE_CASTBAR_NAME = "Afficher le nom du sort"
+L.nameplate_cast_target = "Afficher le nom de la cible du sort" -- Needs review
 L_GUI_NAMEPLATE_CLASS_ICON = "Icône de classe en JcJ"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Afficher les noms abrégés"
 L.nameplate_short_name = "Remplacer les noms par des noms courts"

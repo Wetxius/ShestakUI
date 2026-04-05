@@ -416,7 +416,7 @@ if C.nameplate.kick_color then
 end
 
 -- Cast color
-local function castColor(self)
+local function castColor(self, unit)
 	-- Check if notInterruptible
 	local color = C_CurveUtil.EvaluateColorFromBoolean(self.notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
 
@@ -453,6 +453,20 @@ local function castColor(self)
 		local color = C_CurveUtil.EvaluateColorFromBoolean(C_Spell.IsSpellImportant(self.spellID), {r = 1, g = 0.8, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
 		SetColorBorder(self, color:GetRGB())
 		SetColorBorder(self.Border, color:GetRGB())
+	end
+
+	if C.nameplate.cast_target then
+		local target = UnitSpellTargetName(unit)
+		if target then
+			local class = UnitSpellTargetClass(unit)
+			if class then
+				local classColor = C_ClassColor.GetClassColor(class)
+				if classColor then
+					target = classColor:WrapTextInColorCode(target)
+				end
+			end
+			self.Text:SetText("-> "..target)
+		end
 	end
 
 	-- if C.nameplate.cast_color and canaccessvalue(self.spellID) then -- BETA not work
@@ -797,7 +811,7 @@ local function style(self, unit)
 	self.Castbar.Time:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 
 	-- Cast Name Text
-	if C.nameplate.show_castbar_name then
+	if C.nameplate.show_castbar_name or C.nameplate.cast_target then
 		self.Castbar.Text = self.Castbar:CreateFontString(nil, "OVERLAY")
 		self.Castbar.Text:SetPoint("LEFT", self.Castbar, "LEFT", 3, 0)
 		self.Castbar.Text:SetPoint("RIGHT", self.Castbar.Time, "LEFT", -1, 0)

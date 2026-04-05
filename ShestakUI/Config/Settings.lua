@@ -391,6 +391,7 @@ C["nameplate"] = {
 	["combat"] = false,							-- Automatically show nameplate in combat
 	["health_value"] = false,					-- Numeral health value
 	["show_castbar_name"] = false,				-- Show castbar name
+	["cast_target"] = false,					-- Show name of the spell's target unit
 	["class_icons"] = false,					-- Icons by class in PvP
 	["name_abbrev"] = false,					-- Display abbreviated names
 	["short_name"] = false,						-- Replace names with short ones (from the list)

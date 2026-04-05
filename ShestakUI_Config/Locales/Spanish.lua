@@ -343,6 +343,7 @@ L.nameplate_ad_width = "Additional width" -- Need review
 L.nameplate_ad_height_desc = "Additional height for selected nameplate" -- Needs review
 L.nameplate_ad_width_desc = "Additional width for selected nameplate" -- Needs review
 L_GUI_NAMEPLATE_CASTBAR_NAME = "Mostrar nombre del hechizo en la barra de lanzamiento"
+L.nameplate_cast_target = "Mostrar el nombre del objetivo del hechizo" -- Needs review
 L_GUI_NAMEPLATE_CLASS_ICON = "Iconos de clase en JcJ"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Mostrar los nombres abreviados"
 L.nameplate_short_name = "Replace names with short ones" -- Need review

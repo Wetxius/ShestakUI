@@ -345,6 +345,7 @@ L.nameplate_ad_width = "额外宽度"
 L.nameplate_ad_height_desc = "目标的单位姓名板额外高度"
 L.nameplate_ad_width_desc = "目标的单位姓名板额外宽度"
 L_GUI_NAMEPLATE_CASTBAR_NAME = "法术名称"
+L.nameplate_cast_target = "显示法术目标的名称" -- Needs review
 L_GUI_NAMEPLATE_CLASS_ICON = "PvP时显示职业图标"
 L_GUI_NAMEPLATE_NAME_ABBREV = "名字缩写"
 L.nameplate_short_name = "替换名称"

@@ -343,6 +343,7 @@ L.nameplate_ad_width = "Zusätzliche Breite"
 L.nameplate_ad_height_desc = "Zusätzliche Höhe für ausgewähltes Nameplate"
 L.nameplate_ad_width_desc = "Zusätzliche Breite für ausgewählte Nameplate"
 L_GUI_NAMEPLATE_CASTBAR_NAME = "Zeige den Namen in der Zauberleiste"
+L.nameplate_cast_target = "Namen des Zauberziels anzeigen" -- Needs review
 L_GUI_NAMEPLATE_CLASS_ICON = "Zeige Klassensymbole an (PvP)"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Namen abgekürzt anzeigen"
 L.nameplate_short_name = "Replace names with short ones" -- Need review
