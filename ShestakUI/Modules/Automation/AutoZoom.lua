@@ -17,6 +17,7 @@ frame:SetScript("OnEvent", function()
 			Minimap:SetZoom(0)
 		else
 			local speed = GetUnitSpeed("player")
+			if T.IsSecretValue(speed) then return end -- secret in combat
 			if speed == 0 then -- stand
 				Minimap:SetZoom(4)
 			elseif speed < 10 then -- run
