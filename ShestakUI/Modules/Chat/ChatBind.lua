@@ -13,5 +13,5 @@ BINDING_NAME_SAY_MESSAGE = SAY
 BINDING_NAME_TARGET_MESSAGE = TARGET
 
 function ChatKey_Chat(arg)
-	ChatFrameUtil.OpenChat(arg)
+	T.OpenChat(arg)
 end

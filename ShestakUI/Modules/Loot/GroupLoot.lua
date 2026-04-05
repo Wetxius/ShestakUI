@@ -63,7 +63,7 @@ local function LootClick(frame)
 		if ChatFrameUtil.GetActiveWindow() then
 			ChatFrameUtil.InsertLink(item)
 		else
-			ChatFrameUtil.OpenChat(item)
+			T.OpenChat(item)
 		end
 	end
 end

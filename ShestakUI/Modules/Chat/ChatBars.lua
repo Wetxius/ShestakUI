@@ -24,11 +24,11 @@ local function CreateButton(b, l, r, m)
 	b:RegisterForClicks("AnyUp")
 	b:SetScript("OnClick", function(_, b)
 		if b == "LeftButton" then
-			ChatFrameUtil.OpenChat(l, SELECTED_DOCK_FRAME)
+			T.OpenChat(l, SELECTED_DOCK_FRAME)
 		elseif b == "RightButton" then
-			ChatFrameUtil.OpenChat(r, SELECTED_DOCK_FRAME)
+			T.OpenChat(r, SELECTED_DOCK_FRAME)
 		elseif m and b == "MiddleButton" then
-			ChatFrameUtil.OpenChat(m, SELECTED_DOCK_FRAME)
+			T.OpenChat(m, SELECTED_DOCK_FRAME)
 		end
 	end)
 

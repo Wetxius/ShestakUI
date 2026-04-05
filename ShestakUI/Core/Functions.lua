@@ -79,6 +79,11 @@ T.SendChatMessage = function(...)
 	return C_ChatInfo.SendChatMessage(...)
 end
 
+T.OpenChat = function(...)
+	if C_ChatInfo.InChatMessagingLockdown() then return end
+	return ChatFrameUtil.OpenChat(...)
+end
+
 ----------------------------------------------------------------------------------------
 --	Player's role check
 ----------------------------------------------------------------------------------------
