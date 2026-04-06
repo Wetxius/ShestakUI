@@ -1070,7 +1070,7 @@ end
 T.CustomFilterBoss = function(_, unit, data)
 	if data.isHarmfulAura then
 		if data.isPlayerAura then
-		-- if data.isPlayerAura or UnitIsUnit(unit, data.sourceUnit) then
+		-- if data.isPlayerAura or T.unitIsUnit(unit, data.sourceUnit) then
 		-- if (data.isPlayerAura or data.sourceUnit == unit) then
 			-- if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then -- BETA secret value
 				return true

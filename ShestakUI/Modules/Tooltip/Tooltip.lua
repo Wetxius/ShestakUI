@@ -153,7 +153,7 @@ local function AddTargetedBy()
 	if numParty > 0 or numRaid > 0 then
 		for i = 1, (numRaid > 0 and numRaid or numParty) do
 			local unit = (numRaid > 0 and "raid"..i or "party"..i)
-			if UnitIsUnit(unit.."target", token) and not UnitIsUnit(unit, "player") then
+			if T.unitIsUnit(unit.."target", token) and not T.unitIsUnit(unit, "player") then
 				local _, class = UnitClass(unit)
 				targetedList[#targetedList + 1] = ClassColors[class]
 				targetedList[#targetedList + 1] = UnitName(unit)
@@ -373,7 +373,7 @@ local OnTooltipSetUnit = function(self)
 		end
 
 
-		if not C_Secrets.ShouldUnitComparisonBeSecret("player", unit.."target") and UnitIsUnit("player", unit.."target") then
+		if not C_Secrets.ShouldUnitComparisonBeSecret("player", unit.."target") and T.unitIsUnit("player", unit.."target") then
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r ".."|cffff0000> "..UNIT_YOU.." <|r"
 		else
 			text = "|cfffed100"..STATUS_TEXT_TARGET..":|r "..UnitName(unit.."target")

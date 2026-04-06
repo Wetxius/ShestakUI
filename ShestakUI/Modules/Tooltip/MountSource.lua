@@ -14,7 +14,7 @@ frame:SetScript("OnEvent", function()
 end)
 
 local function checkBuff(self, ...)
-	if not UnitIsPlayer(...) or UnitIsUnit(..., "player") then return end
+	if not UnitIsPlayer(...) or T.unitIsUnit(..., "player") then return end
 	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
 	local id = aura and aura.spellId
 

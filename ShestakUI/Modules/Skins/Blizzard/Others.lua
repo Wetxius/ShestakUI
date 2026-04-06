@@ -411,7 +411,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end
 		_G["GeneralDockManagerOverflowButtonList"]:SetFrameStrata("HIGH")
 		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
-		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end)
+		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if T.unitIsUnit("player", self.initiator) then self:Hide() end end)
 
 		-- StackSplit
 		StackSplitFrame:SetFrameStrata("TOOLTIP")

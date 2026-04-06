@@ -56,6 +56,13 @@ T.CheckUnitStatus = function(func, unit)
 	return T.NotSecretValue(status) and status
 end
 
+-- Safe check unit
+T.unitIsUnit = function(unit1, unit2)
+	-- TODO: use C_Secrets.CanCompareUnitTokens instead of pcall
+	local isOk, isUnit = pcall(UnitIsUnit, unit1, unit2)
+	return isOk and isUnit
+end
+
 ----------------------------------------------------------------------------------------
 --	Chat channel check
 ----------------------------------------------------------------------------------------
