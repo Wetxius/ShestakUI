@@ -159,20 +159,21 @@ local color = C.nameplate.mob_color
 local color_alt = C.nameplate.mob_color_alt
 T.ColorPlate = {
 	-- Midnight
-	["caster"] = color,		-- All caster mobs
+	["caster"] = color,			-- All caster mobs
+	["miniboss"] = color_alt,	-- All miniboss
 	-- Algeth'ar Academy
-	["196548"] = color,		-- Ancient Branch
+	["196548"] = color,			-- Ancient Branch
 	-- The Azure Vault
-	["187159"] = color_alt,	-- Shrieking Whelp
+	["187159"] = color_alt,		-- Shrieking Whelp
 	-- The Nokhud Offensive
-	["194894"] = color,		-- Primalist Stormspeaker
+	["194894"] = color,			-- Primalist Stormspeaker
 	-- Temple of the Jade Serpent
-	["59555"] = color,		-- Haunting Sha
-	["59545"] = color,		-- The Golden Beetle
+	["59555"] = color,			-- Haunting Sha
+	["59545"] = color,			-- The Golden Beetle
 	-- Court of Stars
-	["104251"] = color_alt,	-- Duskwatch Sentry
+	["104251"] = color_alt,		-- Duskwatch Sentry
 	-- PvP
-	["5925"] = color,		-- Grounding Totem
+	["5925"] = color,			-- Grounding Totem
 }
 
 for word in gmatch(C.nameplate.mob_color_list, "%S+") do
