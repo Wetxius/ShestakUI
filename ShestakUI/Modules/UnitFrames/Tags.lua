@@ -183,6 +183,7 @@ oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT
 oUF.Tags.Methods["Absorbs"] = function(unit)
 	local absorb = UnitGetTotalAbsorbs(unit)
 	if absorb then
+		oUF_Player.Absorbs:SetAlpha(absorb) -- hack to hide when value is zero
 		return T.ShortValue(absorb)
 	end
 end
