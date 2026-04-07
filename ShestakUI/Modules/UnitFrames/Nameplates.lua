@@ -12,7 +12,6 @@ frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end
 if C.nameplate.combat then
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 	function frame:PLAYER_REGEN_ENABLED()
 		SetCVar("nameplateShowEnemies", 0)
@@ -21,8 +20,13 @@ if C.nameplate.combat then
 	function frame:PLAYER_REGEN_DISABLED()
 		SetCVar("nameplateShowEnemies", 1)
 	end
+end
 
-	function frame:PLAYER_ENTERING_WORLD()
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+function frame:PLAYER_ENTERING_WORLD()
+	C_NamePlate.SetNamePlateSize(C.nameplate.width * 1.2, (C.nameplate.height + C.font.nameplates_font_size + 8) * 2)
+
+	if C.nameplate.combat then
 		if InCombatLockdown() then
 			SetCVar("nameplateShowEnemies", 1)
 		else
@@ -56,7 +60,7 @@ function frame:PLAYER_LOGIN()
 	if C.nameplate.only_name then
 		SetCVar("nameplateShowOnlyNameForFriendlyPlayerUnits", 1)
 	end
-	-- SetCVar("nameplateShowOnlyNames", 0)
+	SetCVar("nameplateUseClassColorForFriendlyPlayerUnitNames", 1)
 
 	local function changeFont(self, size)
 		local mult = size or 1
@@ -712,6 +716,9 @@ local function callback(self, _, unit)
 
 			if C.nameplate.only_name then
 				if UnitIsFriend("player", unit) then
+					if not InCombatLockdown() then
+						nameplate:SetSize(C.nameplate.width * 0.5, C.font.nameplates_font_size + 8)
+					end
 					self.Health:SetAlpha(0)
 					self.Name:ClearAllPoints()
 					self.Name:SetPoint("CENTER", self, "CENTER", 0, 0)
@@ -721,6 +728,9 @@ local function callback(self, _, unit)
 						self.Glow:SetAlpha(0)
 					end
 				else
+					if not InCombatLockdown() then
+						nameplate:SetSize(C.nameplate.width * 1.2, (C.nameplate.height + C.font.nameplates_font_size + 8) * 2)
+					end
 					self.Health:SetAlpha(1)
 					self.Name:ClearAllPoints()
 					self.Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -3, 4)
@@ -973,3 +983,4 @@ oUF:SpawnNamePlates("ShestakNameplates")
 oUFShestakUI_NamePlateDriver:SetTargetCallback(callback)
 oUFShestakUI_NamePlateDriver:SetAddedCallback(callback)
 oUFShestakUI_NamePlateDriver:SetRemovedCallback(callback)
+-- oUFShestakUI_NamePlateDriver:SetFriendlyInteractible(false)
