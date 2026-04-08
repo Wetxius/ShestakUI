@@ -235,21 +235,35 @@ end
 if C.tooltip.health_value == true then
 	GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 		if not value then return end
-		local min, max = self:GetMinMaxValues()
-		if canaccessvalue(min) then
-			if (value < min) or (value > max) then return end
-		end
-		self:SetStatusBarColor(0, 1, 0)
+		-- local min, max = self:GetMinMaxValues()
+		-- if canaccessvalue(min) then
+			-- if (value < min) or (value > max) then return end
+		-- end
+		self:SetStatusBarColor(0, 1, 0)	-- without will gray
 		local _, unit = GameTooltip:GetUnit()
-		if unit and canaccessvalue(unit) then
-			min, max = UnitHealth(unit), UnitHealthMax(unit)
+		if unit then
 			if not self.text then
 				self.text = self:CreateFontString(nil, "OVERLAY", "Tooltip_Med")
 				self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 1.5)
 			end
-			self.text:Show()
-			local hp = T.ShortValue(min).." / "..T.ShortValue(max)
-			self.text:SetText(hp)
+
+			local okCur, cur = pcall(UnitHealth, unit)
+			local okMax, max = pcall(UnitHealthMax, unit)
+
+			if okCur and okMax and cur and max then
+				self.text:Show()
+				local hp = T.ShortValue(cur).." / "..T.ShortValue(max)
+				self.text:SetText(hp)
+
+				return
+			end
+
+			local ok, perc = pcall(UnitHealthPercent, unit, true, ScaleTo100)
+			if ok and perc then
+				self.text:SetFormattedText("%d%%", perc)
+			else
+				self.text:SetText("")
+			end
 		end
 	end)
 end
