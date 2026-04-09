@@ -823,7 +823,7 @@ do
 
 	local ProfileBox = CreateFrame("CheckButton", nil, ProfileList, "InterfaceOptionsCheckButtonTemplate")
 	ProfileBox:SetPoint("TOPLEFT", ProfileList, "TOPLEFT", 1, -78)
-	ProfileBox.tooltipText = L_GUI_SET_SAVED_SETTTINGS_DESC
+	ProfileBox.tooltipText = L_GUI_SET_SAVED_SETTINGS_DESC
 	ProfileBox:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 0, 0)
 		GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, true)
@@ -835,7 +835,7 @@ do
 	options.ProfileBox = ProfileBox
 
 	local label = ProfileBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-	label:SetText(L_GUI_SET_SAVED_SETTTINGS)
+	label:SetText(L_GUI_SET_SAVED_SETTINGS)
 	label:SetTextColor(1, 1, 1)
 	label:SetPoint("LEFT", ProfileBox, "RIGHT", 10, 0)
 	label:SetWordWrap(false)
@@ -3019,7 +3019,7 @@ do
 	local pull_countdown = ns.CreateCheckBox(parent, "pull_countdown")
 	pull_countdown:SetPoint("TOPLEFT", drinking, "BOTTOMLEFT", 0, 0)
 
-	-- Self announce
+	-- Self announcements
 	local subheader = ns.addSubCategory(parent, L.announcements_subheader_self)
 	subheader:SetPoint("TOPLEFT", pull_countdown, "BOTTOMLEFT", 0, -10)
 

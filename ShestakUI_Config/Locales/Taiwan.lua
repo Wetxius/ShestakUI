@@ -5,8 +5,8 @@ if GetLocale() ~= "zhTW" then return end
 --	Localization for zhTW client
 --	Translation: Leg883, Mania, Tat2dawn, Tibles, Sakaras, Joe
 ----------------------------------------------------------------------------------------
-L_GUI_SET_SAVED_SETTTINGS = "角色專用設定"
-L_GUI_SET_SAVED_SETTTINGS_DESC = "在 一般設定 與 角色專用設定 之間切換。"
+L_GUI_SET_SAVED_SETTINGS = "角色專用設定"
+L_GUI_SET_SAVED_SETTINGS_DESC = "在 一般設定 與 角色專用設定 之間切換。"
 L_GUI_RESET_CHAR = "確定要重置你所有角色的 ShestakUI 設定?"
 L_GUI_RESET_ALL = "確定要重置全部 ShestakUI 到預設值?"
 L_GUI_PER_CHAR = "確定要設定/取消 角色專用設定 模式?"

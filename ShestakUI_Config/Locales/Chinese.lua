@@ -5,8 +5,8 @@ if GetLocale() ~= "zhCN" then return end
 --	Localization for zhCN client
 --	Translation: Mania, Tat2dawn, Sakaras, Joe
 ----------------------------------------------------------------------------------------
-L_GUI_SET_SAVED_SETTTINGS = "角色专用设定"
-L_GUI_SET_SAVED_SETTTINGS_DESC = "在 一般设定 与 角色专用设定 之间切换。"
+L_GUI_SET_SAVED_SETTINGS = "角色专用设定"
+L_GUI_SET_SAVED_SETTINGS_DESC = "在 一般设定 与 角色专用设定 之间切换。"
 L_GUI_RESET_CHAR = "确定要重置你所有角色的 ShestakUI 设定?"
 L_GUI_RESET_ALL = "确定要重置全部 ShestakUI 到预设值?"
 L_GUI_PER_CHAR = "确定要设定/取消 角色专用设定 模式?"

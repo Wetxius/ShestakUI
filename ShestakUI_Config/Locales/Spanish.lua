@@ -5,8 +5,8 @@ if GetLocale() ~= "esES" and GetLocale() ~= "esMX" then return end
 --	Localization for esES and esMX client
 --	Translation: eXecrate
 ----------------------------------------------------------------------------------------
-L_GUI_SET_SAVED_SETTTINGS = "Cambios aplicables sólo a este PJ"
-L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
+L_GUI_SET_SAVED_SETTINGS = "Cambios aplicables sólo a este PJ"
+L_GUI_SET_SAVED_SETTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
 L_GUI_RESET_CHAR = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para este PJ?"
 L_GUI_RESET_ALL = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para todos los PJs?"
 L_GUI_PER_CHAR = "¿Estás segudo de que quieres cambiar a o desde 'Cambios sólo a este PJ'?"
@@ -47,7 +47,7 @@ L.general_vehicle_mouseover = "Marco del Vehículo al pasar el ratón por encima
 L.general_move_blizzard = "Move some Blizzard frames" -- Needs review
 L.general_color_picker = "Improved ColorPicker" -- Needs review
 L.general_color_picker_desc = "Add copy/paste buttons and digit text entry for Blizzard color picker frame" -- Need review
-L.general_minimize_mouseover = "Mouseover for quest minimize button" -- Need review
+L.general_minimize_mouseover = "Quest minimize button on mouseover" -- Need review
 L.general_hide_banner = "Hide Boss Banner Loot Frame" -- Need review
 L.general_hide_talking_head = "Hide Talking Head Frame" -- Need review
 
@@ -289,7 +289,7 @@ L.tooltip_hidebuttons = "Ocultar descripciones de las barras de acción"
 L.tooltip_hide_combat = "Ocultar descripción en combate"
 L.tooltip_subheader = "Plugins" -- Need review
 L.tooltip_show_shift = "Show when Shift is pushed" -- Need review
-L.tooltip_show_shift_desc = "Show items level and spec when Shift is pushed" -- Need review
+L.tooltip_show_shift_desc = "Show item levels and spec when Shift is pressed" -- Need review
 L.tooltip_achievements = "Comparar logros en la descripción"
 L.tooltip_target = "Jugador objetivo en la descripción"
 L.tooltip_title = "Player title in tooltip" -- Need review
@@ -453,7 +453,7 @@ L_GUI_BAGS_BAG = "Número de columnas en la bolsa principal"
 -- Minimap options
 L_GUI_MINIMAP_SUBTEXT = "Minimap settings." -- Need review
 L_GUI_MINIMAP_ENABLE = "Activar minimapa"
-L.minimap_on_top = "Move minimap on top right corner" -- Need review
+L.minimap_on_top = "Move minimap to top right corner" -- Need review
 L_GUI_MINIMAP_ICON = "Icono de seguimiento"
 L_GUI_GARRISON_ICON = "Covenant icon" -- Need review
 L_GUI_MINIMAP_SIZE = "Tamaño del minimapa"
@@ -480,7 +480,7 @@ L_GUI_FILGER_ENABLE = "Enable Filger" -- Need review
 L_GUI_FILGER_TEST_MODE = "Test icon mode" -- Need review
 L_GUI_FILGER_MAX_TEST_ICON = "The number of icons to the test" -- Need review
 L_GUI_FILGER_SHOW_TOOLTIP = "Show tooltip" -- Need review
-L.filger_subheader_elements = "Showing elements" -- Need review
+L.filger_subheader_elements = "Displayed elements" -- Need review
 L.filger_show_buff = "Player buffs" -- Need review
 L.filger_show_proc = "Player procs" -- Need review
 L.filger_show_debuff = "Debuffs on target" -- Need review
@@ -521,7 +521,7 @@ L.announcements_flask_food_raid = "Announce to raid channel" -- Needs review
 L.announcements_flask_food_auto = "Auto check when ReadyCheck" -- Needs review
 L.announcements_feasts = "Feasts/Souls/Repair Bots" -- Needs review
 L.announcements_portals = "Portals/Ritual of Summoning" -- Needs review
-L.announcements_subheader_self = "Self announce" -- Needs review
+L.announcements_subheader_self = "Self announcements" -- Needs review
 L.announcements_bad_gear = "Check your bad gear" -- Need review
 L.announcements_bad_gear_desc = "Check your bad gear in instance (fishing pole, from the list)" -- Needs review
 L.announcements_safari_hat = "Safari Hat" -- Needs review
@@ -636,7 +636,7 @@ L_GUI_STATS_CLOCK = "Reloj"
 L_GUI_STATS_LATENCY = "Latencia"
 L_GUI_STATS_FPS = "FPS (Marcos por segundo)"
 L_GUI_STATS_EXPERIENCE = "Experiencia"
-L_GUI_STATS_TALENTS_DESC = "Date-text allows you to change the spec and loot on click" -- Need review
+L_GUI_STATS_TALENTS_DESC = "Data-text allows you to change the spec and loot on click" -- Need review
 L_GUI_STATS_COORDS = "Coordenadas"
 L_GUI_STATS_LOCATION = "Localización"
 L_GUI_STATS_BG = "Campo de Batalla"

@@ -38,7 +38,7 @@ C["general"] = {
 	["move_blizzard"] = false,					-- Move some Blizzard frames
 	["color_picker"] = false,					-- Improved ColorPicker
 	["vehicle_mouseover"] = false,				-- Vehicle frame on mouseover
-	["minimize_mouseover"] = false,				-- Mouseover for quest minimize button
+	["minimize_mouseover"] = false,				-- Quest minimize button on mouseover
 	["hide_banner"] = false,					-- Hide Boss Banner Loot Frame
 	["hide_talking_head"] = false,				-- Hide Talking Head Frame
 }
@@ -340,7 +340,7 @@ C["tooltip"] = {
 	["rank"] = true,							-- Player guild-rank in tooltip
 	["target"] = true,							-- Target player in tooltip
 	["average_lvl"] = false,					-- Average items level
-	["show_shift"] = true,						-- Show items level and spec when Shift is pushed
+	["show_shift"] = true,						-- Show item levels and spec when Shift is pressed
 	["raid_icon"] = false,						-- Raid icon
 	["unit_role"] = false,						-- Unit role in tooltip
 	["who_targetting"] = false,					-- Show who is targetting the unit (in raid or party)
@@ -475,7 +475,7 @@ C["bag"] = {
 ----------------------------------------------------------------------------------------
 C["minimap"] = {
 	["enable"] = true,							-- Enable minimap
-	["on_top"] = false,							-- Move minimap on top right corner
+	["on_top"] = false,							-- Move minimap to top right corner
 	["tracking_icon"] = false,					-- Tracking icon
 	["garrison_icon"] = false,					-- Expansion Summary icon
 	["size"] = 130,								-- Minimap size

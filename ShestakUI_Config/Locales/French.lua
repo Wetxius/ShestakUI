@@ -5,8 +5,8 @@ if GetLocale() ~= "frFR" then return end
 --	Localization for frFR client
 --	Translation: Cranan, Puree, AlbertDuval, Skyzo-be
 ----------------------------------------------------------------------------------------
-L_GUI_SET_SAVED_SETTTINGS = "Définir les paramètres par personnage"
-L_GUI_SET_SAVED_SETTTINGS_DESC = "Basculez entre un profil qui s’applique à tous les personnages et un profil qui est unique à ce personnage."
+L_GUI_SET_SAVED_SETTINGS = "Définir les paramètres par personnage"
+L_GUI_SET_SAVED_SETTINGS_DESC = "Basculez entre un profil qui s’applique à tous les personnages et un profil qui est unique à ce personnage."
 L_GUI_RESET_CHAR = "Êtes-vous sûr de vouloir réinitialiser les paramètres de votre personnage pour ShestakUI ?"
 L_GUI_RESET_ALL = "Voulez-vous vraiment réinitialiser tous les paramètres de ShestakUI"
 L_GUI_PER_CHAR = "Modifier la configuration du personnage ?"
