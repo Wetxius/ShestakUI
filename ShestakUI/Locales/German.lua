@@ -167,8 +167,8 @@ L_INFO_SKIN_DISABLED1 = "Stilisierung für "
 L_INFO_SKIN_DISABLED2 = " ist ausgeschaltet."
 
 -- Moving elements
-L_MOVE_RIGHT_CLICK = "Right-click to reset position" -- Needs review
-L_MOVE_MIDDLE_CLICK = "Middle-click to temp hide" -- Needs review
+L_MOVE_RIGHT_CLICK = "Rechts-Klick zum Zurücksetzen der Position"
+L_MOVE_MIDDLE_CLICK = "Mittelklick zum temporären Verstecken"
 
 -- Popups
 L_POPUP_INSTALLUI = "Dies ist Ihre erste Benutzung von ShestakUI mit diesem Charakter. Um das Interface zu konfigurieren, wird das UI nun neugeladen."
@@ -293,6 +293,6 @@ L_SLASHCMD_HELP = {
 	"/pulsecd - Pulsierende Abklingzeiten testen.",
 	"/threat - Bedrohungsmeter testen.",
 	"/testuf - Einheitenfenster testen.",
-	"/moveui - Ermöglicht das Bewegen der Interface Elemente.", -- Need review
+	"/moveui - Ermöglicht das Verschieben der Interface-Elemente.",
 	"/cfg - Interface Einstellungen öffnen.",
 }
