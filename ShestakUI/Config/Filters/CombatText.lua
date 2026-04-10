@@ -95,7 +95,6 @@ if T.class == "DEATHKNIGHT" then
 		T.merge[66198] = 222024		-- Obliterate Off-Hand
 		T.merge[66196] = 222026		-- Frost Strike Off-Hand
 		T.merge[66188] = 49998		-- Death Strike Off-Hand
-		--BETA T.merge[70890] = 55090		-- Scourge Strike (Shadow damage)
 	end
 	if C.combattext.healing then
 		T.healfilter[206931] = true	-- Blooddrinker
@@ -375,7 +374,6 @@ elseif T.class == "PALADIN" then
 		T.aoespam[114852] = 0		-- Holy Prism
 		T.aoespam[119952] = 3		-- Arcing Light
 		T.aoespam[183811] = 6		-- Judgment of Light
-		--BETA T.aoespam[225311] = 1		-- Light of Dawn
 		T.aoespam[377129] = 3		-- Golden Path
 		-- Damaging spells
 		T.aoespam[53600] = 0.5		-- Shield of the Righteous
@@ -630,7 +628,6 @@ elseif T.class == "WARRIOR" then
 		T.merge[199852] = 199667	-- Whirlwind Off-Hand (Fury)
 		T.aoespam[46968] = 0		-- Shockwave
 		T.aoespam[6343] = 0			-- Thunder Clap
-		--BETA T.aoespam[115767] = 3		-- Deep Wounds
 		T.aoespam[50622] = 3		-- Bladestorm
 		T.aoespam[52174] = 0		-- Heroic Leap
 		T.aoespam[118000] = 0		-- Dragon Roar

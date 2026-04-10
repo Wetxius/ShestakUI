@@ -96,7 +96,7 @@ local function LoadSkin()
 
 			local ap, p, rp, x, y = window.DamageMeterTypeDropdown:GetPoint()
 			window.DamageMeterTypeDropdown:SetPoint(ap, p, rp, x, y - 4)
-		else -- BETA
+		else -- BETA 12.0.5
 			local ap, p, rp, x, y = window.DamageMeterTypeDropdown:GetPoint()
 			window.DamageMeterTypeDropdown:SetPoint(ap, p, rp, x, y - 10)
 		end
