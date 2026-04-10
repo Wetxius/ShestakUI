@@ -435,7 +435,6 @@ elseif T.class == "PRIEST" then
 		T.merge[94472] = 81751		-- Atonement
 		-- Damaging spells
 		T.aoespam[204213] = 4		-- Purge the Wicked
-		T.aoespam[205386] = 0.5		-- Shadow Crash
 		T.aoespam[263165] = 5		-- Void Torrent
 		T.aoespam[228361] = 1		-- Void Eruption
 		T.merge[228360] = 228361	-- Void Eruption

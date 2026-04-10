@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿llocal T, C, L = unpack(ShestakUI)
 
 -- Change damage font
 if C.combattext.damage_style then
@@ -1063,27 +1063,27 @@ if C.combattext.healing then
 end
 
 -- Check outdated spells
-if C.combattext.merge_aoe_spam then
-	for spell in pairs(T.aoespam) do
-		local name = GetSpellInfo(spell)
-		if not name then
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
-		end
-	end
+--BETA if C.combattext.merge_aoe_spam then
+	-- for spell in pairs(T.aoespam) do
+		-- local name = GetSpellInfo(spell)
+		-- if not name then
+			-- print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+		-- end
+	-- end
 
-	for spell in pairs(T.merge) do
-		local name = GetSpellInfo(spell)
-		if not name then
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
-		end
-	end
-end
+	-- for spell in pairs(T.merge) do
+		-- local name = GetSpellInfo(spell)
+		-- if not name then
+			-- print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+		-- end
+	-- end
+-- end
 
-if C.combattext.healing then
-	for spell in pairs(T.healfilter) do
-		local name = GetSpellInfo(spell)
-		if not name then
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
-		end
-	end
-end
+-- if C.combattext.healing then
+	-- for spell in pairs(T.healfilter) do
+		-- local name = GetSpellInfo(spell)
+		-- if not name then
+			-- print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+		-- end
+	-- end
+-- end
