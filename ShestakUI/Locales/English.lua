@@ -61,8 +61,8 @@ L_TOGGLE_ADDON = "Addon "
 L_TOGGLE_ADDONS = " addons"
 L_TOGGLE_EXPAND = "Expand "
 L_TOGGLE_COLLAPSE = "Collapse "
-L_TOGGLE_RCLICK = "Right click to enable or disable "
-L_TOGGLE_LCLICK = "Left click to toggle window "
+L_TOGGLE_RCLICK = "Right-click to enable or disable "
+L_TOGGLE_LCLICK = "Left-click to toggle window "
 L_TOGGLE_RELOAD = " (needs UI reload)"
 L_TOGGLE_NOT_FOUND = " not found."
 
@@ -113,7 +113,7 @@ L_BAG_RIGHT_CLICK_CLOSE = "Right-click to open menu"
 
 -- Grab mail
 L_MAIL_STOPPED = "Stopped, inventory is full."
-L_MAIL_UNIQUE = "Stopped. Found a duplicate unique item in bag or in bank."
+L_MAIL_UNIQUE = "Stopped. Found a duplicate unique item in bag or bank."
 L_MAIL_COMPLETE = "All done."
 L_MAIL_NEED = "Need a mailbox."
 L_MAIL_MESSAGES = "messages"
@@ -130,8 +130,8 @@ L_LOOT_TO_SAY = "  say"
 
 -- LitePanels AFK module
 L_PANELS_AFK = "You are AFK!"
-L_PANELS_AFK_RCLICK = "Right-Click to hide."
-L_PANELS_AFK_LCLICK = "Left-Click to go back."
+L_PANELS_AFK_RCLICK = "Right-click to hide."
+L_PANELS_AFK_LCLICK = "Left-click to go back."
 
 -- Cooldowns
 L_COOLDOWNS = "CD: "
@@ -142,14 +142,14 @@ L_COOLDOWNS_NEXTTIME = "Next time: "
 -- Bind key
 L_BIND_SAVED = "All keybindings have been saved."
 L_BIND_DISCARD = "All newly set keybindings have been discarded."
-L_BIND_INSTRUCT = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbutton's keybinding."
+L_BIND_INSTRUCT = "Hover your mouse over any action button to bind it. Press the Escape key or right-click to clear the current action button's keybinding."
 L_BIND_CLEARED = "All keybindings cleared for"
 L_BIND_BINDING = "Binding"
 L_BIND_KEY = "Key"
 L_BIND_NO_SET = "No bindings set"
 
 -- Info text
-L_INFO_ERRORS = "No error yet."
+L_INFO_ERRORS = "No errors yet."
 L_INFO_INVITE = "Accepted invite from "
 L_INFO_DUEL = "Declined duel request from "
 L_INFO_PET_DUEL = "Declined pet duel request from "
@@ -180,7 +180,7 @@ L_POPUP_ARMORY = "Armory"
 
 -- Welcome message
 L_WELCOME_LINE_1 = "Welcome to ShestakUI "
-L_WELCOME_LINE_2_1 = "Type /cfg to config interface, or visit https://github.com/Wetxius/ShestakUI_Help/wiki/English"
+L_WELCOME_LINE_2_1 = "Type /cfg to configure the interface, or visit https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 L_WELCOME_LINE_2_2 = "for more information."
 
 -- Combat text
@@ -213,10 +213,10 @@ L_STATS_JUNK_LIST = "Junk List"
 L_STATS_JUNK_PROFIT = "Junk profit"
 L_STATS_JUNK_CLEARED = "Junk list cleared."
 L_STATS_JUNK_CLEAR_ADDITIONS = "Clear additions list."
-L_STATS_JUNK_ADDED = "Added junk additions"
+L_STATS_JUNK_ADDED = "Added junk items"
 L_STATS_JUNK_ADD_ITEM = "Add/remove items."
-L_STATS_JUNK_REMOVED = "Removed junk additions"
-L_STATS_JUNK_ITEMS_LIST = "List for sell items."
+L_STATS_JUNK_REMOVED = "Removed junk items"
+L_STATS_JUNK_ITEMS_LIST = "List of items to sell."
 L_STATS_KILLS = "K"
 L_STATS_XP_RATE = "Level XP rate"
 L_STATS_HR = "hr"
@@ -238,8 +238,8 @@ L_STATS_SORTING_BY = "Sorting by"
 L_STATS_SEALS = "Seals this week"
 L_STATS_SPEC = "Spec"
 L_STATS_TIPS = "tips:"
-L_STATS_OPEN_CALENDAR = "Left-Click opens calendar."
-L_STATS_RC_TIME_MANAGER = "Right-Click opens time manager frame."
+L_STATS_OPEN_CALENDAR = "Left-click opens calendar."
+L_STATS_RC_TIME_MANAGER = "Right-click opens time manager."
 L_STATS_TOGGLE_TIME = "Local/realm & 24hr time can be toggled from the time manager."
 L_STATS_MEMORY = "Memory"
 L_STATS_RC_COLLECTS_GARBAGE = "Right-Click collects Lua garbage."
@@ -256,12 +256,12 @@ L_STATS_TOOLTIP_TIME_PLAYED = "When at max level, the tooltip will show time pla
 L_STATS_OPEN_TALENT = "Left-Click toggles your talent specialization."
 L_STATS_RC_TALENT = "Right-Click toggles your loot specialization."
 L_STATS_LOCATION = "Location/Coords"
-L_STATS_WORLD_MAP = "Clicking opens world map."
-L_STATS_INSERTS_COORDS = "Shift-Clicking location or coords module inserts your coords into chat."
-L_STATS_OPEN_CURRENCY = "Left-Click opens currency tab."
-L_STATS_RC_AUTO_SELLING = "Right-Click toggles auto selling."
-L_STATS_NEED_TO_SELL = "Use /junk to configure which items need to sell."
-L_STATS_WATCH_CURRENCY = "Watched currency tab items will reflect onto the tooltip."
+L_STATS_WORLD_MAP = "Clicking opens the world map."
+L_STATS_INSERTS_COORDS = "Shift-clicking location or coords inserts your coordinates into chat."
+L_STATS_OPEN_CURRENCY = "Left-click opens the currency tab."
+L_STATS_RC_AUTO_SELLING = "Right-click toggles auto selling."
+L_STATS_NEED_TO_SELL = "Use /junk to configure which items should be sold."
+L_STATS_WATCH_CURRENCY = "Watched currency tab items will be shown in the tooltip."
 L_STATS_OTHER_OPTIONS = "Other options may be configured in %s"
 
 -- Slash commands
@@ -281,7 +281,7 @@ L_SLASHCMD_HELP = {
 	"/resetui - Resets general settings to default.",
 	"/resetuf - Resets the unit frames to their default position.",
 	"/resetconfig - Resets ShestakUI_Config settings.",
-	"/resetstats - Resets the statistics of gold and time spent.",
+	"/resetstats - Resets statistics for gold and time spent.",
 	"/settings - Applies settings to msbt, dbm, skada, bw addons.",
 	"/ls - Help for LiteStats.",
 	"/xct - Manage the combat text.",

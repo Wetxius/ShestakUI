@@ -6,26 +6,26 @@ if T.client ~= "esES" and T.client ~= "esMX" then return end
 --	Translation: eXecrate, Seal
 ----------------------------------------------------------------------------------------
 -- Announce flasks and food
-L_ANNOUNCE_FF_NOFOOD = "No Food: " -- Needs review
-L_ANNOUNCE_FF_NOFLASK = "No Flask: " -- Needs review
-L_ANNOUNCE_FF_ALLBUFFED = "All Buffed!" -- Needs review
-L_ANNOUNCE_FF_CHECK_BUTTON = "Check food and flask" -- Needs review
+L_ANNOUNCE_FF_NOFOOD = "Sin comida: "
+L_ANNOUNCE_FF_NOFLASK = "Sin frasco: "
+L_ANNOUNCE_FF_ALLBUFFED = "¡Todos los beneficios activos!"
+L_ANNOUNCE_FF_CHECK_BUTTON = "Comprobar comida y frasco"
 
 -- Says thanks for some spells
-L_ANNOUNCE_SS_THANKS = "Thanks for " -- Needs review
-L_ANNOUNCE_SS_RECEIVED = " received from " -- Needs review
+L_ANNOUNCE_SS_THANKS = "Gracias por "
+L_ANNOUNCE_SS_RECEIVED = " recibido de "
 
 -- Pull countdown announce
-L_ANNOUNCE_PC_GO = "GO!" -- Needs review
-L_ANNOUNCE_PC_MSG = "Pulling %s in %s.." -- Needs review
-L_ANNOUNCE_PC_ABORTED = "Pull ABORTED!" -- Needs review
+L_ANNOUNCE_PC_GO = "¡YA!"
+L_ANNOUNCE_PC_MSG = "Iniciando pull de %s en %s.."
+L_ANNOUNCE_PC_ABORTED = "¡PULL CANCELADO!"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_PRE = "%s has prepared a %s." -- Needs review
-L_ANNOUNCE_FP_PUT = "%s has put down a %s." -- Needs review
-L_ANNOUNCE_FP_CAST = "%s is casting %s." -- Needs review
-L_ANNOUNCE_FP_CLICK = "%s is casting %s. Click!" -- Needs review
-L_ANNOUNCE_FP_USE = "%s used a %s." -- Needs review
+L_ANNOUNCE_FP_PRE = "%s ha preparado un %s."
+L_ANNOUNCE_FP_PUT = "%s ha colocado un %s."
+L_ANNOUNCE_FP_CAST = "%s está lanzando %s."
+L_ANNOUNCE_FP_CLICK = "%s está lanzando %s. ¡Clic!"
+L_ANNOUNCE_FP_USE = "%s usó un %s."
 
 -- Announce your interrupts
 L_ANNOUNCE_INTERRUPTED = INTERRUPTED
@@ -39,16 +39,16 @@ L_TOOLTIP_SPELL_ID = "ID del hechizo:"
 L_TOOLTIP_ITEM_ID = "ID del objeto:"
 L_TOOLTIP_WHO_TARGET = "Marcado por"
 L_TOOLTIP_ITEM_COUNT = "Contador del objeto:"
-L_TOOLTIP_INSPECT_OPEN = "Inspect Frame is open" -- Needs review
+L_TOOLTIP_INSPECT_OPEN = "El marco de inspección está abierto"
 
 -- Misc
 L_MISC_UNDRESS = "Desvestir"
-L_MISC_DRINKING = " esta bebiendo."
+L_MISC_DRINKING = " está bebiendo."
 L_MISC_BUY_STACK = "Alt-Click para comprar un lote"
-L_MISC_HEADER_MARK = "Mouseover Raid Icons" -- Needs review
-L_MISC_BINDER_OPEN = "Mouse Bindings" -- Needs review
+L_MISC_HEADER_MARK = "Iconos de raid al pasar el ratón"
+L_MISC_BINDER_OPEN = "Asignaciones de ratón"
 L_MISC_SCROLL = "Pergamino"
-L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
+L_MISC_HEADER_QUEST = "Botón de misión automática"
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "Disolver grupo"
@@ -67,7 +67,7 @@ L_TOGGLE_COLLAPSE = "Colapsar "
 L_TOGGLE_RCLICK = "Click derecho para activar o desactivar "
 L_TOGGLE_LCLICK = "Click izquierdo para cambiar de ventana "
 L_TOGGLE_RELOAD = " (necesita reiniciar la UI)"
-L_TOGGLE_NOT_FOUND = " not found." -- Needs review
+L_TOGGLE_NOT_FOUND = " no encontrado."
 
 -- UnitFrame
 L_UF_GHOST = "Fantasma"
@@ -77,14 +77,14 @@ L_UF_MANA = "Mana bajo"
 
 -- Map
 L_MAP_CURSOR = "Cursor: "
-L_MAP_BOUNDS = "Fuera de los limites!"
-L_MAP_FOG = "Fog of War" -- Needs review
-L_MAP_COORDS = "Coordinates" -- Needs review
+L_MAP_BOUNDS = "¡Fuera de los límites!"
+L_MAP_FOG = "Niebla de guerra"
+L_MAP_COORDS = "Coordenadas"
 
 -- Minimap
 L_MINIMAP_CALENDAR = "Calendario"
-L_MINIMAP_FARM = "Minimap size" -- Need review
-L_MINIMAP_TOGGLE = "Toggle action bars" -- Need review
+L_MINIMAP_FARM = "Tamaño del minimapa"
+L_MINIMAP_TOGGLE = "Alternar barras de acción"
 
 -- Chat
 L_CHAT_WHISPER = "De"
@@ -98,10 +98,10 @@ L_CHAT_PARTY_LEADER = "LG"
 L_CHAT_RAID = "B"
 L_CHAT_RAID_LEADER = "LB"
 L_CHAT_RAID_WARNING = "AB"
-L_CHAT_INSTANCE_CHAT = "I" -- Needs review
-L_CHAT_INSTANCE_CHAT_LEADER = "IL" -- Needs review
+L_CHAT_INSTANCE_CHAT = "I"
+L_CHAT_INSTANCE_CHAT_LEADER = "IL"
 L_CHAT_OFFICER = "O"
-L_CHAT_PET_BATTLE = "PB" -- Needs review
+L_CHAT_PET_BATTLE = "PB"
 L_CHAT_COME_ONLINE = "se ha |cff298F00conectado|r."
 L_CHAT_GONE_OFFLINE = "se ha |cffff0000desconectado|r."
 
@@ -112,7 +112,7 @@ L_ERRORFRAME_L = "Click para ver errores."
 L_BAG_SHOW_BAGS = "Mostrar Bolsas"
 L_BAG_RIGHT_CLICK_SEARCH = "Click derecho para buscar"
 L_BAG_STACK_MENU = "Amontonar"
-L_BAG_RIGHT_CLICK_CLOSE = "Right-click to open menu" -- Need review
+L_BAG_RIGHT_CLICK_CLOSE = "Click derecho para abrir el menú"
 
 -- Grab mail
 L_MAIL_STOPPED = "Sin espacio, inventario lleno."
@@ -132,15 +132,15 @@ L_LOOT_TO_GUILD = "  hermandad"
 L_LOOT_TO_SAY = "  decir"
 
 -- LitePanels AFK module
-L_PANELS_AFK = "Estas ausente!"
+L_PANELS_AFK = "¡Estás ausente!"
 L_PANELS_AFK_RCLICK = "Botón derecho para ocultar."
-L_PANELS_AFK_LCLICK = "Botón izquierdo para retroceder."
+L_PANELS_AFK_LCLICK = "Botón izquierdo para volver."
 
 -- Cooldowns
 L_COOLDOWNS = "TR: "
-L_COOLDOWNS_COMBATRESS = "CombatRess" -- Needs review
-L_COOLDOWNS_COMBATRESS_REMAINDER = "Combat resurrect: " -- Needs review
-L_COOLDOWNS_NEXTTIME = "Next time: " -- Needs review
+L_COOLDOWNS_COMBATRESS = "Resurrección en combate"
+L_COOLDOWNS_COMBATRESS_REMAINDER = "Resurrección en combate restante: "
+L_COOLDOWNS_NEXTTIME = "Próxima vez: "
 
 -- Bind key
 L_BIND_SAVED = "La configuración de las teclas ha sido guardada."
@@ -152,10 +152,10 @@ L_BIND_KEY = "Tecla"
 L_BIND_NO_SET = "No tiene asignación"
 
 -- Info text
-L_INFO_ERRORS = "Ningún error aun."
+L_INFO_ERRORS = "Ningún error aún."
 L_INFO_INVITE = "Invitación aceptada de "
 L_INFO_DUEL = "Duelo rechazado de "
-L_INFO_PET_DUEL = "Declined pet duel request from " -- Needs review
+L_INFO_PET_DUEL = "Solicitud de duelo de mascota rechazada de "
 L_INFO_DISBAND = "Deshaciendo banda..."
 L_INFO_SETTINGS_DBM = "Escribe /settings dbm, para aplicar las preferencias del DBM."
 L_INFO_SETTINGS_BIGWIGS = "Escribe /settings bw, para aplicar las preferencias del BigWigs."
@@ -167,16 +167,16 @@ L_INFO_SKIN_DISABLED1 = "Estilizacion para "
 L_INFO_SKIN_DISABLED2 = " esta desactivado."
 
 -- Moving elements
-L_MOVE_RIGHT_CLICK = "Right-click to reset position" -- Needs review
-L_MOVE_MIDDLE_CLICK = "Middle-click to temp hide" -- Needs review
+L_MOVE_RIGHT_CLICK = "Clic derecho para restablecer posición"
+L_MOVE_MIDDLE_CLICK = "Clic central para ocultar temporalmente"
 
 -- Popups
-L_POPUP_INSTALLUI = "Es la primera vez que usas ShestakUI con este personaje. Usted debe volver a cargar la interfaz de usuario para configurarlo."
-L_POPUP_RESETUI = "¿Estás seguro de que desea restablecer ShestakUI?"
-L_POPUP_RESETSTATS = "¿Estás seguro de que quieres reiniciar las estadísticas de tiempo empleado en el juego y oro adquirido?"
+L_POPUP_INSTALLUI = "Es la primera vez que usas ShestakUI con este personaje. Debes volver a cargar la interfaz para configurarla."
+L_POPUP_RESETUI = "¿Estás seguro de que deseas restablecer ShestakUI?"
+L_POPUP_RESETSTATS = "¿Estás seguro de que quieres reiniciar las estadísticas de tiempo empleado y oro adquirido?"
 L_POPUP_DISBAND_RAID = "¿Estás seguro de que quieres disolver el grupo?"
 L_POPUP_DISABLEUI = "ShestakUI no funciona con esta resolución, ¿Quieres desactivar ShestakUI? (Pulsa cancelar si quieres probar otra resolución)"
-L_POPUP_SETTINGS_ALL = "¿Aplicar modificaciones para todos los addons? (DBM, BigWigs, Skada o MSBT)"
+L_POPUP_SETTINGS_ALL = "¿Aplicar modificaciones para todos los addons? (DBM, BigWigs, Skada y MSBT)"
 L_POPUP_SETTINGS_DBM = "Necesito cambiar la posición de los elementos del DBM."
 L_POPUP_SETTINGS_BW = "Necesito cambiar la posición de los elementos del BigWigs."
 L_POPUP_ARMORY = "Arsenal"
@@ -192,34 +192,34 @@ L_COMBATTEXT_TEST_DISABLED = "Modo Texto de combate deshabilitado."
 L_COMBATTEXT_TEST_ENABLED = "Modo Texto de combate habilitado."
 L_COMBATTEXT_TEST_USE_MOVE = "Escribe /xct move para mover y cambiar el tamaño del marco de texto de combate."
 L_COMBATTEXT_TEST_USE_TEST = "Escribe /xct test para probar el modo Texto de combate."
-L_COMBATTEXT_TEST_USE_RESET = "Type /xct reset to restore default positions." -- Need review
+L_COMBATTEXT_TEST_USE_RESET = "Escribe /xct reset para restaurar las posiciones predeterminadas."
 L_COMBATTEXT_POPUP = "Para guardar la posición de la ventana de texto de combate necesitas recargar tu UI."
 L_COMBATTEXT_UNSAVED = "La posición de la ventana de texto de combate no está guardada, no olvides recargar la UI."
 L_COMBATTEXT_UNLOCKED = "Texto de combate desbloqueado."
 
 -- LiteStats
-L_STATS_AUTO_REPAIR = "Reparación auto."
-L_STATS_GUILD_REPAIR = "Reparar con dinero de la hermandad"
+L_STATS_AUTO_REPAIR = "Reparación automática"
+L_STATS_GUILD_REPAIR = "Reparar con dinero de hermandad"
 L_STATS_AUTO_SELL = "Auto-vender basura"
 L_STATS_BANDWIDTH = "Ancho de banda:"
 L_STATS_DOWNLOAD = "Descarga:"
-L_STATS_CURRENCY_RAID = "Raid Seals" -- Need review
-L_STATS_MEMORY_USAGE = "Blizzard UI Memory Usage:" -- Needs review
-L_STATS_TOTAL_MEMORY_USAGE = "Uso total de la memoria:"
-L_STATS_TOTAL_CPU_USAGE = "Total CPU Usage:" -- Need review
+L_STATS_CURRENCY_RAID = "Sellos de raid"
+L_STATS_MEMORY_USAGE = "Uso de memoria de la UI de Blizzard:"
+L_STATS_TOTAL_MEMORY_USAGE = "Uso total de memoria:"
+L_STATS_TOTAL_CPU_USAGE = "Uso total de CPU:"
 L_STATS_GARBAGE_COLLECTED = "Basura recogida"
 L_STATS_HIDDEN = "Oculto"
-L_STATS_JUNK_ALREADY_ADDITIONS = "is already in additions list." -- Need review
+L_STATS_JUNK_ALREADY_ADDITIONS = "ya está en la lista de adiciones."
 L_STATS_JUNK_ITEMLINK = "enlace del objeto"
-L_STATS_JUNK_ADDITIONS = "Junk additions" -- Need review
+L_STATS_JUNK_ADDITIONS = "Adiciones de basura"
 L_STATS_JUNK_LIST = "Lista de basura"
 L_STATS_JUNK_PROFIT = "Ganancia con la basura"
-L_STATS_JUNK_CLEARED = "Junk list cleared." -- Need review
-L_STATS_JUNK_CLEAR_ADDITIONS = "Clear additions list." -- Need review
-L_STATS_JUNK_ADDED = "Added junk additions" -- Need review
-L_STATS_JUNK_ADD_ITEM = "Add/remove items." -- Need review
-L_STATS_JUNK_REMOVED = "Removed junk additions" -- Need review
-L_STATS_JUNK_ITEMS_LIST = "List for sell items." -- Need review
+L_STATS_JUNK_CLEARED = "Lista de basura vaciada."
+L_STATS_JUNK_CLEAR_ADDITIONS = "Vaciar lista de adiciones."
+L_STATS_JUNK_ADDED = "Adiciones de basura añadidas"
+L_STATS_JUNK_ADD_ITEM = "Añadir/eliminar objetos."
+L_STATS_JUNK_REMOVED = "Adiciones de basura eliminadas"
+L_STATS_JUNK_ITEMS_LIST = "Lista de objetos para vender."
 L_STATS_KILLS = "A"
 L_STATS_XP_RATE = "EXP en este nivel"
 L_STATS_HR = "hr"
@@ -231,40 +231,40 @@ L_STATS_ACC_PLAYED = "Jugado"
 L_STATS_PLAYED_TOTAL = "Total jugado"
 L_STATS_QUEST = "M"
 L_STATS_QUESTS_TO = "Misiones/Muertes para %s"
-L_STATS_CURRENT_XP = "Actual/Max EXP"
+L_STATS_CURRENT_XP = "Actual/Máx EXP"
 L_STATS_REMAINING_XP = "EXP Restante"
 L_STATS_RESTED_XP = "EXP de descanso"
 L_STATS_SERVER_GOLD = "Oro del servidor"
-L_STATS_SESSION_GAIN = "Sesion ganado/perdido"
-L_STATS_SESSION_XP = "EXP en esta sesion"
+L_STATS_SESSION_GAIN = "Sesión ganado/perdido"
+L_STATS_SESSION_XP = "EXP en esta sesión"
 L_STATS_SORTING_BY = "Ordenado por"
-L_STATS_SEALS = "Seals this week" -- Needs review
-L_STATS_SPEC = "Spec" -- Need review
+L_STATS_SEALS = "Sellos esta semana"
+L_STATS_SPEC = "Espec"
 L_STATS_TIPS = "consejos:"
 L_STATS_OPEN_CALENDAR = "Click-Izquierdo abre el calendario."
 L_STATS_RC_TIME_MANAGER = "Click-Derecho abre el administrador de tiempo."
 L_STATS_TOGGLE_TIME = "Hora Local/Reino y el reloj de 24hr se pueden activar desde el administrador de tiempo."
 L_STATS_MEMORY = "Memoria"
 L_STATS_RC_COLLECTS_GARBAGE = "Click-Derecho recolecta basura de Lua."
-L_STATS_VIEW_NOTES = "Manten pulsada la tecla Alt para ver rangos, notas y notas de oficiales."
-L_STATS_CHANGE_SORTING = "[Hermandad] Click-Derecho para cambiar la clasificacion, Shift-Click-Derecho para invertir el orden."
-L_STATS_OPEN_CHARACTER = "Click-Izquierdo abre la pestana de personaje."
+L_STATS_VIEW_NOTES = "Mantén pulsada la tecla Alt para ver rangos, notas y notas de oficiales."
+L_STATS_CHANGE_SORTING = "[Hermandad] Click-Derecho para cambiar la clasificación, Shift-Click-Derecho para invertir el orden."
+L_STATS_OPEN_CHARACTER = "Click-Izquierdo abre la pestaña de personaje."
 L_STATS_RC_AUTO_REPAIRING1 = "Click-Derecho activa el Auto-Reparar."
-L_STATS_RC_AUTO_REPAIRING2 = "Middle-Click toggles Guild AutoRepairing." -- Need review
+L_STATS_RC_AUTO_REPAIRING2 = "Click central alterna la reparación automática con fondos de hermandad."
 L_STATS_EQUIPMENT_CHANGER = "Shift-Click o Alt-Click para el cambiador de equipamiento."
 L_STATS_RC_EXPERIENCE = "Clic derecho para alternar experiencia, tiempo jugado y facciones."
 L_STATS_WATCH_FACTIONS = "Mirar facciones desde la herramienta de facciones."
-L_STATS_TOOLTIP_EXPERIENCE = "Cuando no estes a nivel max, la descripcion mostrara detalles de la experiencia."
-L_STATS_TOOLTIP_TIME_PLAYED = "Cuando estes a nivel max, la descripcion mostrara detalles del tiempo jugado de la cuenta."
-L_STATS_OPEN_TALENT = "Click-Izquierdo activa tu especializacion de talentos."
-L_STATS_RC_TALENT = "Right-Click toggles your loot specialization." -- Need review
+L_STATS_TOOLTIP_EXPERIENCE = "Cuando no estés a nivel máximo, la descripción mostrará detalles de la experiencia."
+L_STATS_TOOLTIP_TIME_PLAYED = "Cuando estés a nivel máximo, la descripción mostrará detalles del tiempo jugado de la cuenta."
+L_STATS_OPEN_TALENT = "Click-Izquierdo activa tu especialización de talentos."
+L_STATS_RC_TALENT = "Click derecho alterna tu especialización de botín."
 L_STATS_LOCATION = "Situación/Coordenadas"
 L_STATS_WORLD_MAP = "Clickeando abres el Mapa del Mundo."
-L_STATS_INSERTS_COORDS = "Shift-Click en los modulos de localizacion o coordenadas inserta las coords en el chat."
-L_STATS_OPEN_CURRENCY = "Click-Izquierdo abre la pestana de dinero."
+L_STATS_INSERTS_COORDS = "Shift-Click en los módulos de localización o coordenadas inserta las coords en el chat."
+L_STATS_OPEN_CURRENCY = "Click-Izquierdo abre la pestaña de dinero."
 L_STATS_RC_AUTO_SELLING = "Click-Derecho activa el Auto-Vender."
-L_STATS_NEED_TO_SELL = "Use /junk to configure which items need to sell." -- Need review
-L_STATS_WATCH_CURRENCY = "Elementos vistos en la pestana de dinero se reflejaran en la descripcion."
+L_STATS_NEED_TO_SELL = "Usa /junk para configurar qué objetos deben venderse."
+L_STATS_WATCH_CURRENCY = "Elementos vistos en la pestaña de dinero se reflejarán en la descripción."
 L_STATS_OTHER_OPTIONS = "Otras opciones se pueden configurar en %s"
 
 -- Slash commands
@@ -276,7 +276,7 @@ L_SLASHCMD_HELP = {
 	"/dis ADDON_NAME - Desactiva el addon.",
 	"/en ADDON_NAME - Activa el addon.",
 	"/rd - Rompe el grupo o la banda.",
-	"/toraid - Convierte el grupo a bandaConvert to party or raid.",
+	"/toraid - Convierte el grupo en banda.",
 	"/teleport - Teleportarse desde una mazmorra aleatoria.",
 	"/ss - Cambia entre especializaciones de talentos.",
 	"/tt - Susurrar objetivo.",
@@ -293,6 +293,6 @@ L_SLASHCMD_HELP = {
 	"/pulsecd - Prueba de tus propios enfriamientos.",
 	"/threat - Prueba del medidor de amenaza.",
 	"/testuf - Prueba de los marcos de unidades.",
-	"/moveui - Permite mover los elementos de la interfaz.", -- Need review
+	"/moveui - Permite mover los elementos de la interfaz.",
 	"/cfg - Abre la configuración de la interfaz.",
 }

@@ -18,7 +18,7 @@ L_ANNOUNCE_SS_RECEIVED = " reçu de "
 -- Pull countdown announce
 L_ANNOUNCE_PC_GO = "Départ !"
 L_ANNOUNCE_PC_MSG = "Pull %s dans %s.."
-L_ANNOUNCE_PC_ABORTED = "Pull ABANDONNE !"
+L_ANNOUNCE_PC_ABORTED = "Pull ABANDONNÉ !"
 
 -- Announce feasts and portals
 L_ANNOUNCE_FP_PRE = "%s a préparé un %s."
@@ -128,7 +128,7 @@ L_LOOT_FISH = "Pêche"
 L_LOOT_ANNOUNCE = "Déclarer"
 L_LOOT_TO_RAID = "  raid"
 L_LOOT_TO_PARTY = "  groupe"
-L_LOOT_TO_GUILD = "  corps"
+L_LOOT_TO_GUILD = "  guilde"
 L_LOOT_TO_SAY = "  dire"
 
 -- LitePanels AFK module
@@ -167,8 +167,8 @@ L_INFO_SKIN_DISABLED1 = "Personnalisation pour "
 L_INFO_SKIN_DISABLED2 = " est désactivé."
 
 -- Moving elements
-L_MOVE_RIGHT_CLICK = "Clique droit de la souris pour réinitialiser la position"
-L_MOVE_MIDDLE_CLICK = "Clique du milieu de la souris pour cacher temporairement"
+L_MOVE_RIGHT_CLICK = "Clic droit de la souris pour réinitialiser la position"
+L_MOVE_MIDDLE_CLICK = "Clic du milieu de la souris pour cacher temporairement"
 
 -- Popups
 L_POPUP_INSTALLUI = "Première utilisation de ShestakUI avec ce personnage. Vous devez recharger l'interface utilisateur pour le configurer."
@@ -192,9 +192,9 @@ L_COMBATTEXT_TEST_DISABLED = "Mode test de la fenêtre des textes de combat dés
 L_COMBATTEXT_TEST_ENABLED = "Mode test de la fenêtre des textes de combat activé."
 L_COMBATTEXT_TEST_USE_MOVE = "Tapez /xct move pour bouger et redimensionner la fenêtre des textes de combat."
 L_COMBATTEXT_TEST_USE_TEST = "Tapez /xct test pour activer le mode test de la fenêtre des textes de combat."
-L_COMBATTEXT_TEST_USE_RESET = "Type /xct reset pour réstaurer les positions par défaut."
-L_COMBATTEXT_POPUP = "Pour sauvegardez vos modifications vous devez recharger l'interface."
-L_COMBATTEXT_UNSAVED = "Position de la fenêtre des textes de combat non saugardez, n'oubliez pas de recharger l'interface."
+L_COMBATTEXT_TEST_USE_RESET = "Tapez /xct reset pour restaurer les positions par défaut."
+L_COMBATTEXT_POPUP = "Pour sauvegarder vos modifications vous devez recharger l'interface."
+L_COMBATTEXT_UNSAVED = "Position de la fenêtre des textes de combat non sauvegardée, n'oubliez pas de recharger l'interface."
 L_COMBATTEXT_UNLOCKED = "Fenêtre des textes de combat déverrouillée."
 
 -- LiteStats
@@ -260,10 +260,10 @@ L_STATS_OPEN_TALENT = "Clic-Gauche permet de modifier votre spécialisation."
 L_STATS_RC_TALENT = "Clic-Droit pour modifier la spécialisation utilisée pour le butin."
 L_STATS_LOCATION = "Position/Coords"
 L_STATS_WORLD_MAP = "Clic ouvre la carte du monde."
-L_STATS_INSERTS_COORDS = "Maj-clic sur l'emplacement ou coords insère le module de vos coords au chat"
+L_STATS_INSERTS_COORDS = "Maj-clic sur l'emplacement ou coords insère le module de vos coords au chat."
 L_STATS_OPEN_CURRENCY = "Clic-Gauche ouvre l'onglet monnaie."
 L_STATS_RC_AUTO_SELLING = "Clic-Droit permet de basculer en mode vente automatique."
-L_STATS_NEED_TO_SELL = "Utiliser /junk pour définir quels objets doivent être vendu."
+L_STATS_NEED_TO_SELL = "Utiliser /junk pour définir quels objets doivent être vendus."
 L_STATS_WATCH_CURRENCY = "Consulté onglet monnaie articles se reflétera dans l'info bulle."
 L_STATS_OTHER_OPTIONS = "Les autres options peuvent être configurées dans %s"
 
@@ -284,7 +284,7 @@ L_SLASHCMD_HELP = {
 	"/resetui - Remet les paramètres généraux à leurs valeurs par défaut.",
 	"/resetuf - Remet les cadres d'unité à leur position par défaut.",
 	"/resetconfig - Remet les paramètres ShestakUI_Config à leurs valeurs par défaut.",
-	"/resetstats - Remet à zéro les statitisques or et temps passé en jeu.",
+	"/resetstats - Remet à zéro les statistiques or et temps passé en jeu.",
 	"/settings - Applique les paramètres pour msbt, dbm, skada, ou à tous les addons.",
 	"/ls - Menu d'aide pour LiteStats.",
 	"/xct - Menu d'aide pour le texte de combat.",

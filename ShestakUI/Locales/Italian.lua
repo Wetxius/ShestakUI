@@ -48,7 +48,7 @@ L_MISC_BUY_STACK = "Alt + click per comprarne una pila"
 L_MISC_HEADER_MARK = "Marchi d'incursione al passaggio del mouse"
 L_MISC_BINDER_OPEN = "Assegnazione pulsanti mouse"
 L_MISC_SCROLL = "Pergamena"
-L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
+L_MISC_HEADER_QUEST = "Pulsante missione automatica"
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "Sciogli il gruppo"
@@ -62,7 +62,7 @@ L_WATCH_WOWHEAD_LINK = "Collegamento a Wowhead"
 -- Toggle Menu
 L_TOGGLE_ADDON = "AddOn "
 L_TOGGLE_ADDONS = " AddOns"
-L_TOGGLE_EXPAND = "Espandi"
+L_TOGGLE_EXPAND = "Espandi "
 L_TOGGLE_COLLAPSE = "Rimpicciolisci "
 L_TOGGLE_RCLICK = "Clicca col destro per attivare o disattivare "
 L_TOGGLE_LCLICK = "Clicca col sinistro per mostrare la finestra "
@@ -83,8 +83,8 @@ L_MAP_COORDS = "Coordinate"
 
 -- Minimap
 L_MINIMAP_CALENDAR = "Calendario"
-L_MINIMAP_FARM = "Minimap size" -- Need review
-L_MINIMAP_TOGGLE = "Toggle action bars" -- Need review
+L_MINIMAP_FARM = "Dimensione minimappa"
+L_MINIMAP_TOGGLE = "Attiva/disattiva barre delle azioni"
 
 -- Chat
 L_CHAT_WHISPER = "Da"
@@ -167,8 +167,8 @@ L_INFO_SKIN_DISABLED1 = "Restyling per "
 L_INFO_SKIN_DISABLED2 = " è disabilitato."
 
 -- Moving elements
-L_MOVE_RIGHT_CLICK = "Right-click to reset position" -- Needs review
-L_MOVE_MIDDLE_CLICK = "Middle-click to temp hide" -- Needs review
+L_MOVE_RIGHT_CLICK = "Clic destro per ripristinare la posizione"
+L_MOVE_MIDDLE_CLICK = "Clic centrale per nascondere temporaneamente"
 
 -- Popups
 L_POPUP_INSTALLUI = "È la prima volta che utilizzi la ShestakUI con questo personaggio. Devi riavviare l'interfaccia utente per configurarla."
@@ -192,7 +192,7 @@ L_COMBATTEXT_TEST_DISABLED = "Modalità 'prova' del testo di combattimento disab
 L_COMBATTEXT_TEST_ENABLED = "Modalità 'prova' del testo di combattimento abilitata."
 L_COMBATTEXT_TEST_USE_MOVE = "Digita '/xct move' per sbloccare e quindi poter muovere e ridimensionare i riquadri del testo di combattimento."
 L_COMBATTEXT_TEST_USE_TEST = "Digita '/xct test' per attivare la modalità 'prova' per il testo di combattimento."
-L_COMBATTEXT_TEST_USE_RESET = "Digita '/xct reset' to ripristinare le posizioni predefinite."
+L_COMBATTEXT_TEST_USE_RESET = "Digita '/xct reset' per ripristinare le posizioni predefinite."
 L_COMBATTEXT_POPUP = "Per poter salvare la posizione delle finestre del testo di combattimento è necessario riavviare la tua interfaccia utente."
 L_COMBATTEXT_UNSAVED = "La posizione delle finestre del testo di combattimento non è ancora stata salvata: non dimenticare di riavviare l'interfaccia utente."
 L_COMBATTEXT_UNLOCKED = "Testo di combattimento sbloccato."
@@ -206,20 +206,20 @@ L_STATS_DOWNLOAD = "Download:"
 L_STATS_CURRENCY_RAID = "Sigilli d’incursione"
 L_STATS_MEMORY_USAGE = "Utilizzo memoria interfaccia Blizzard:"
 L_STATS_TOTAL_MEMORY_USAGE = "Utilizzo totale memoria:"
-L_STATS_TOTAL_CPU_USAGE = "Total CPU Usage:" -- Need review
+L_STATS_TOTAL_CPU_USAGE = "Utilizzo totale CPU:"
 L_STATS_GARBAGE_COLLECTED = "Spazzatura raccolta"
 L_STATS_HIDDEN = "Nascosto/a"
-L_STATS_JUNK_ALREADY_ADDITIONS = "is already in additions list." -- Need review
+L_STATS_JUNK_ALREADY_ADDITIONS = "è già nella lista delle aggiunte."
 L_STATS_JUNK_ITEMLINK = "Collegamento all'oggetto"
-L_STATS_JUNK_ADDITIONS = "Junk additions" -- Need review
+L_STATS_JUNK_ADDITIONS = "Aggiunte cianfrusaglie"
 L_STATS_JUNK_LIST = "Elenco cianfrusaglie"
 L_STATS_JUNK_PROFIT = "Profitto vendita cianfrusaglie"
-L_STATS_JUNK_CLEARED = "Junk list cleared." -- Need review
-L_STATS_JUNK_CLEAR_ADDITIONS = "Clear additions list." -- Need review
-L_STATS_JUNK_ADDED = "Added junk additions" -- Need review
-L_STATS_JUNK_ADD_ITEM = "Add/remove items." -- Need review
-L_STATS_JUNK_REMOVED = "Removed junk additions" -- Need review
-L_STATS_JUNK_ITEMS_LIST = "List for sell items." -- Need review
+L_STATS_JUNK_CLEARED = "Lista cianfrusaglie svuotata."
+L_STATS_JUNK_CLEAR_ADDITIONS = "Svuota lista aggiunte."
+L_STATS_JUNK_ADDED = "Aggiunte cianfrusaglie aggiunte"
+L_STATS_JUNK_ADD_ITEM = "Aggiungi/rimuovi oggetti."
+L_STATS_JUNK_REMOVED = "Aggiunte cianfrusaglie rimosse"
+L_STATS_JUNK_ITEMS_LIST = "Lista oggetti da vendere."
 L_STATS_KILLS = "U"
 L_STATS_XP_RATE = "Andamento PE per il livello"
 L_STATS_HR = "o"
@@ -239,10 +239,10 @@ L_STATS_SESSION_GAIN = "Guadagno/perdita della sessione"
 L_STATS_SESSION_XP = "Andamento PE della sessione"
 L_STATS_SORTING_BY = "Suddivisi per"
 L_STATS_SEALS = "Sigilli in questa settimana"
-L_STATS_SPEC = "Spec" -- Need review
+L_STATS_SPEC = "Spec"
 L_STATS_TIPS = "suggerimenti:"
 L_STATS_OPEN_CALENDAR = "Clicca col sinistro per aprire il calendario."
-L_STATS_RC_TIME_MANAGER = "Clicca col destro per aprire le impostazionni orologio."
+L_STATS_RC_TIME_MANAGER = "Clicca col destro per aprire le impostazioni orologio."
 L_STATS_TOGGLE_TIME = "L'orario 'locale/reame' e quello '24 ore' possono essere attivati con le impostazioni orologio."
 L_STATS_MEMORY = "Memoria"
 L_STATS_RC_COLLECTS_GARBAGE = "Clicca col destro per raccogliere la 'spazzatura Lua'."
@@ -250,20 +250,20 @@ L_STATS_VIEW_NOTES = "Tieni premuto il tasto Alt per visualizzare ranghi, note e
 L_STATS_CHANGE_SORTING = "[Gilda] Clicca col destro per invitare e sussurrare, clicca col tasto centrale per cambiare l'ordine, clicca Shift + tasto centrale per invertirlo."
 L_STATS_OPEN_CHARACTER = "Clicca col sinistro per aprire il pannello personaggio."
 L_STATS_RC_AUTO_REPAIRING1 = "Clicca col destro per attivare/disattivare la riparazione automatica."
-L_STATS_RC_AUTO_REPAIRING2 = "Middle-Click toggles Guild AutoRepairing." -- Need review
-L_STATS_EQUIPMENT_CHANGER = "Tieni premuto Shift o Alt è clicca per cambiare il set d'equipaggiamento." -- Need review
+L_STATS_RC_AUTO_REPAIRING2 = "Clic centrale attiva/disattiva riparazione automatica con fondi di gilda."
+L_STATS_EQUIPMENT_CHANGER = "Tieni premuto Shift o Alt e clicca per cambiare il set d'equipaggiamento."
 L_STATS_RC_EXPERIENCE = "Clicca col destro per navigare tra esperienza, tempo giocato e il visualizzatore fazione sotto osservazione."
 L_STATS_WATCH_FACTIONS = "Fazioni sotto osservazione dal pannello delle fazioni del personaggio."
 L_STATS_TOOLTIP_EXPERIENCE = "A livelli inferiori a quello massimo, un suggerimento mostrerà dettagli sull'esperienza."
 L_STATS_TOOLTIP_TIME_PLAYED = "A livello massimo, un suggerimento mostrerà i dettagli su quanto tempo hai giocato con questo account."
 L_STATS_OPEN_TALENT = "Clicca col sinistro per cambiare la spec. talenti attiva."
-L_STATS_RC_TALENT = "Right-Click toggles your loot specialization." -- Need review
+L_STATS_RC_TALENT = "Clic destro cambia la specializzazione di bottino."
 L_STATS_LOCATION = "Località/Coordinate"
 L_STATS_WORLD_MAP = "Clicca per aprire la mappa del mondo."
 L_STATS_INSERTS_COORDS = "Tieni premuto Shift e clicca sul nome della località o sulle coordinate per inserirli automaticamente in chat."
 L_STATS_OPEN_CURRENCY = "Clicca col sinistro per aprire il pannello Valuta."
-L_STATS_RC_AUTO_SELLING = "Clicca col destro per attivare/disattivare la vendita automatica delle cianfrusaglie"
-L_STATS_NEED_TO_SELL = "Use /junk to configure which items need to sell." -- Need review
+L_STATS_RC_AUTO_SELLING = "Clicca col destro per attivare/disattivare la vendita automatica delle cianfrusaglie."
+L_STATS_NEED_TO_SELL = "Usa /junk per configurare quali oggetti devono essere venduti."
 L_STATS_WATCH_CURRENCY = "Gli oggetti attualmente osservati nel pannello Valuta saranno inseriti nei suggerimenti."
 L_STATS_OTHER_OPTIONS = "Altre opzioni potranno essere configurate tra %s"
 
@@ -293,6 +293,6 @@ L_SLASHCMD_HELP = {
 	"/pulsecd - Prova i tuoi recuperi con effetto 'pulse'.",
 	"/threat - Prova il Contatore Minaccia.",
 	"/testuf - Prova i riquadri delle unità.",
-	"/moveui - Consenti lo spostamento degli elementi dell'interfaccia.", -- Need review
+	"/moveui - Consenti lo spostamento degli elementi dell'interfaccia.",
 	"/cfg - Apri il pannello impostazioni interfaccia.",
 }
