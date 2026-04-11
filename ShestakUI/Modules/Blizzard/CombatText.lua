@@ -1,4 +1,4 @@
-﻿llocal T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(ShestakUI)
 
 -- Change damage font
 if C.combattext.damage_style then
