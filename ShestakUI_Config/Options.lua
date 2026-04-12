@@ -2540,6 +2540,11 @@ do
 
 	local only_name = ns.CreateCheckBox(parent, "only_name")
 	only_name:SetPoint("TOPLEFT", target_glow, "BOTTOMLEFT", 0, 0)
+	only_name.Text:SetWidth(250)
+
+	local click_through = ns.CreateCheckBox(parent, "click_through")
+	click_through:SetPoint("LEFT", only_name.Text, "RIGHT", 20, 0)
+	click_through.Text:SetWidth(250)
 
 	local quests = ns.CreateCheckBox(parent, "quests")
 	quests:SetPoint("TOPLEFT", only_name, "BOTTOMLEFT", 0, 0)

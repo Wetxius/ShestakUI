@@ -356,6 +356,7 @@ L.nameplate_healer_icon = "Affiche une icône de soigneur sur les barres ennemis
 L.nameplate_totem_icons = "Afficher l’icône des totems"
 L.nameplate_target_glow = "Montrer une lueur sur la texture pour la cible sélectionner"
 L.nameplate_only_name = "Afficher uniquement le nom (san les barres) pour les unités amies"
+L.nameplate_click_through = "Désactiver l'interaction avec les noms alliés"
 L.nameplate_quests = "Afficher l’icône de quête"
 L.nameplate_cast_color = "Afficher la bordure de couleur pour certains sorts importants"
 L.nameplate_kick_color = "Changer la couleur de cast pour le cooldown d’interruption"

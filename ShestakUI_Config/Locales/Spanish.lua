@@ -356,6 +356,7 @@ L.nameplate_healer_icon = "Mostrar icono encima de la placa de nombre de sanador
 L.nameplate_totem_icons = "Mostrar icono encima de la placa de nombre de tótems enemigos"
 L.nameplate_target_glow = "Mostrar textura de brillo para el objetivo"
 L.nameplate_only_name = "Mostrar solo nombre para unidades amistosas"
+L.nameplate_click_through = "Desactivar interacción con nombres aliados"
 L.nameplate_quests = "Mostrar icono de misión"
 L.nameplate_cast_color = "Mostrar borde de color para hechizos importantes"
 L.nameplate_kick_color = "Cambiar color de lanzamiento si la interrupción está en reutilización"

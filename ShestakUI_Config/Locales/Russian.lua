@@ -359,6 +359,7 @@ L.nameplate_healer_icon = "Иконка над вражескими целите
 L.nameplate_totem_icons = "Иконка тотемов"
 L.nameplate_target_glow = "Выделять текущую цель"
 L.nameplate_only_name = "Отображать только имя для союзников"
+L.nameplate_click_through = "Отключить взаимодействие с именами"
 L.nameplate_quests = "Иконка квестов"
 L.nameplate_cast_color = "Выделить цветом чтение важных заклинаний"
 L.nameplate_kick_color = "Изменить цвет чтения заклинания, если ваше прерывание на кд"

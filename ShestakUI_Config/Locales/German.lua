@@ -356,6 +356,7 @@ L.nameplate_healer_icon = "Zeige Heilersymbol auf allen gegnerischen Heiler-Name
 L.nameplate_totem_icons = "Symbol über dem Namensschild des feindlichen Totems anzeigen"
 L.nameplate_target_glow = "Leucht-Textur für das aktuelle Ziel anzeigen"
 L.nameplate_only_name = "Bei befreundeten Einheiten nur den Namen anzeigen"
+L.nameplate_click_through = "Interaktion mit freundlichen Namen deaktivieren"
 L.nameplate_quests = "Quest-Symbol anzeigen"
 L.nameplate_cast_color = "Farbigen Rahmen bei wichtigen Zaubern anzeigen"
 L.nameplate_kick_color = "Zauberfarbe ändern, wenn Unterbrechung auf CD ist"

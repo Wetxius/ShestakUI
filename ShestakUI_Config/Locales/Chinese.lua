@@ -358,6 +358,7 @@ L.nameplate_healer_icon = "战场中显示治疗职业图标"
 L.nameplate_totem_icons = "显示敌对图腾图标"
 L.nameplate_target_glow = "目标边框高亮"
 L.nameplate_only_name = "友方玩家只显示名称"
+L.nameplate_click_through = "禁用与友方名称的交互" -- Needs review
 L.nameplate_quests = "任务图标"
 L.nameplate_cast_color = "重要法术施法条边框高亮"
 L.nameplate_kick_color = "当断法技能冷却中则施法条变色"

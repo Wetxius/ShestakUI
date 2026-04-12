@@ -356,6 +356,7 @@ L.nameplate_healer_icon = "Nei Campi di Battaglia, mostra un'icona 'guaritore' a
 L.nameplate_totem_icons = "Mostra un’icona sopra la barra dei totem nemici"
 L.nameplate_target_glow = "Mostra texture di glow per il bersaglio"
 L.nameplate_only_name = "Mostra solo il nome per le unità amichevoli"
+L.nameplate_click_through = "Disabilita interazione con i nomi alleati"
 L.nameplate_quests = "Mostra icona missione"
 L.nameplate_cast_color = "Mostra bordo colorato per incantesimi importanti"
 L.nameplate_kick_color = "Cambia colore del cast se l'interruzione è in cooldown"
