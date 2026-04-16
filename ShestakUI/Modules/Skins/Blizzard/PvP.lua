@@ -18,11 +18,6 @@ end)
 
 if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
-	-- Set texture to hide circle
-	-- PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
-	-- PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
-	-- PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
-
 	for i = 1, #PVPQueueFrame.CategoryButtons do
 		local button = PVPQueueFrame.CategoryButtons[i]
 		if button then
@@ -178,7 +173,7 @@ local function LoadSkin()
 		T.SkinCheckBox(button)
 	end
 
-	for _, bar in pairs({HonorFrame.ConquestBar, ConquestFrame.ConquestBar}) do
+	for _, bar in pairs({HonorFrame.ConquestBar, ConquestFrame.ConquestBar, TrainingGroundsFrame.ConquestBar}) do
 		bar:StripTextures()
 		bar:CreateBackdrop("Overlay")
 		bar:SetStatusBarTexture(C.media.texture)
