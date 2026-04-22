@@ -254,7 +254,7 @@ end
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetItem)
 
 local function GetTooltipGUID()
-	local _, unitID = GameTooltip:GetUnit()
+	local unitID = T.GetUnit(GameTooltip)
 	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if UnitIsPlayer(unitID) and CanInspect(unitID) then
@@ -268,7 +268,7 @@ lastInspectRequest = 0
 local FailTimeout = 1
 f:SetScript("OnUpdate", function()
 	if InCombatLockdown() then return end -- BETA
-	local _, unitID = GameTooltip:GetUnit()
+	local unitID = T.GetUnit(GameTooltip)
 	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if not guid or (InspectFrame and InspectFrame:IsVisible()) then return end
@@ -416,7 +416,7 @@ end
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(self)
 	if self ~= GameTooltip or self:IsForbidden() then return end
 	if C.tooltip.show_shift and not IsShiftKeyDown() then return end
-	local _, unitID = self:GetUnit()
+	local unitID = T.GetUnit(self)
 	if not canaccessvalue(unitID) then return end -- BETA
 	local guid = unitID and UnitGUID(unitID)
 	if guid and UnitIsPlayer(unitID) then

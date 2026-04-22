@@ -240,7 +240,8 @@ if C.tooltip.health_value == true then
 			-- if (value < min) or (value > max) then return end
 		-- end
 		self:SetStatusBarColor(0, 1, 0)	-- without will gray
-		local _, unit = GameTooltip:GetUnit()
+
+		local unit = T.GetUnit(GameTooltip)
 		if unit then
 			if not self.text then
 				self.text = self:CreateFontString(nil, "OVERLAY", "Tooltip_Med")
@@ -258,7 +259,7 @@ if C.tooltip.health_value == true then
 				return
 			end
 
-			local ok, perc = pcall(UnitHealthPercent, unit, true, ScaleTo100)
+			local ok, perc = pcall(UnitHealthPercent, unit, true, CurveConstants.ScaleTo100)
 			if ok and perc then
 				self.text:SetFormattedText("%d%%", perc)
 			else
@@ -268,14 +269,29 @@ if C.tooltip.health_value == true then
 	end)
 end
 
+local function GetUnitToken(tt)
+	local mouseover = UnitExists("mouseover") and "mouseover"
+
+	local unit = T.GetUnit(tt)
+	if unit then
+		return (T.NotSecretValue(unit) and UnitExists(unit) and unit) or mouseover or nil
+	end
+
+	-- Check focus if not find mousover unit
+	local focusUnit = GetMouseFoci()[1] and GetMouseFoci()[1].GetAttribute and GetMouseFoci()[1]:GetAttribute("unit")
+	if focusUnit then
+		return (T.NotSecretValue(focusUnit) and UnitExists(focusUnit) and focusUnit) or mouseover or nil
+	end
+end
+
 local OnTooltipSetUnit = function(self)
 	if self ~= GameTooltip or self:IsForbidden() then return end
 	local lines = self:NumLines()
-	local unit = (select(2, self:GetUnit())) or (GetMouseFoci()[1] and GetMouseFoci()[1].GetAttribute and GetMouseFoci()[1]:GetAttribute("unit")) or (UnitExists("mouseover") and "mouseover") or nil
 
+	local unit = GetUnitToken(self)
 	if not unit then return end
 
-	if not canaccessvalue(unit) then return end
+	if not canaccessvalue(unit) then return end -- need?
 
 	local name, realm = UnitName(unit)
 	local race, englishRace = UnitRace(unit)

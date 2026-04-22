@@ -63,6 +63,17 @@ T.unitIsUnit = function(unit1, unit2)
 	return isOk and isUnit
 end
 
+T.GetUnit = function(tt)
+	if not tt:IsTooltipType(Enum.TooltipDataType.Unit) then
+		return
+	end
+
+	local data = tt:GetPrimaryTooltipData()
+	if not data or not data.guid then return end
+
+	return UnitTokenFromGUID(data.guid)
+end
+
 ----------------------------------------------------------------------------------------
 --	Chat channel check
 ----------------------------------------------------------------------------------------

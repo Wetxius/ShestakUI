@@ -22,7 +22,7 @@ local function OnTooltipSetUnit(self)
 	if self ~= GameTooltip or self:IsForbidden() then return end
 	local _, instanceType = IsInInstance()
 	if instanceType == "scenario" then return end
-	local _, unit = GameTooltip:GetUnit()
+	local unit = T.GetUnit(GameTooltip)
 	if not canaccessvalue(unit) then return end
 	if unit and (UnitIsPlayer(unit) or UnitInPartyIsAI(unit)) and ((UnitInParty(unit) or UnitInRaid(unit)) and GetNumGroupMembers() > 0) then
 		local leaderText = UnitIsGroupLeader(unit) and "|cfFFFFFFF - "..LEADER.."|r" or ""
