@@ -50,14 +50,8 @@ bar:SetScript("OnEvent", function(self, event)
 		RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
 		hooksecurefunc(PetActionBar, "Update", T.PetBarUpdate)
 		C_Timer.After(1, function()
-			-- Fix range and keybind
-			if PetHasActionBar() and UnitIsVisible("pet") then
-				if InCombatLockdown() then
-					PetActionBar:Update()
-				else
-					PetActionBar:Show()
-				end
-			end
+			-- Fix range color and keybind
+			PetActionBar:UnregisterAllEvents() -- wait for properly update than disable
 		end)
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 		PetActionBar:UpdateCooldowns()

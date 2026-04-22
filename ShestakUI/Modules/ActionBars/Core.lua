@@ -15,7 +15,7 @@ frame:SetScript("OnEvent", function()
 	MainActionBar:UnregisterAllEvents()
 
 	PetActionBar:EnableMouse(false)
-	PetActionBar:UnregisterAllEvents()
+	-- PetActionBar:UnregisterAllEvents() -- need to wait entering world
 	StanceBar:EnableMouse(false)
 	StanceBar:UnregisterAllEvents()
 
@@ -60,6 +60,12 @@ frame:SetScript("OnEvent", function()
 		b:UnregisterAllEvents()
 		b:SetAttribute("statehidden", true)
 		-- b:SetAttribute("showgrid", 1)
+	end
+
+	-- Enable grid showing
+	for i = 1, 10 do
+		local b = _G["PetActionButton"..i]
+		b:SetAttribute("showgrid", C.actionbar.show_grid and 1 or 0)
 	end
 end)
 
