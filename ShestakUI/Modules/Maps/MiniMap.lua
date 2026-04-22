@@ -247,9 +247,9 @@ local micromenu = {
 		ToggleCharacter("PaperDollFrame")
 	end},
 	{text = PROFESSIONS_BUTTON, notCheckable = 1, func = function()
-		if InCombatLockdown() then
-			print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
-		end
+		-- if InCombatLockdown() then
+			-- print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
+		-- end
 		ToggleProfessionsBook()
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
@@ -312,9 +312,9 @@ local micromenu = {
 		end
 	end},
 	{text = COLLECTIONS, notCheckable = 1, func = function()
-		if InCombatLockdown() then
-			print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
-		end
+		-- if InCombatLockdown() then
+			-- print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
+		-- end
 		ToggleCollectionsJournal()
 	end},
 	{text = HOUSING_MICRO_BUTTON, notCheckable = 1, func = function()
@@ -366,6 +366,10 @@ MinimapArea:SetAllPoints()
 MinimapArea:SetScript("OnMouseUp", function(_, button)
 	local position = MinimapAnchor:GetPoint()
 	if button == "RightButton" then
+		if InCombatLockdown() then	-- 12.0.5 we cant open any frame in combat except of battlefield zone map
+			_G.UIErrorsFrame:AddMessage(ERR_NOT_IN_COMBAT, 1.0, 0.2, 0.2, 1.0)
+			print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
+		end
 		if position:match("LEFT") then
 			EasyMenu(micromenu, menuFrame, "cursor", 0, 0, "MENU")
 		else
