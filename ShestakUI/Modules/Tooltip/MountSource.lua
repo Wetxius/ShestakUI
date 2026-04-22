@@ -18,7 +18,7 @@ local function checkBuff(self, ...)
 	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
 	local id = aura and aura.spellId
 
-	if id and MountCache[id] then
+	if id and T.NotSecretValue(id) and MountCache[id] then
 		local text = NOT_COLLECTED
 		local r, g, b = 1, 0, 0
 		local collected = select(11, C_MountJournal.GetMountInfoByID(MountCache[id]))
