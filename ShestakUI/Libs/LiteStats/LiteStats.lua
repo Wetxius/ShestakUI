@@ -508,6 +508,7 @@ if fps.enabled then
 				if AddonList:IsShown() then
 					AddonList_OnCancel()
 				else
+					if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 					PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 					ShowUIPanel(AddonList)
 				end
@@ -602,8 +603,10 @@ if friends.enabled then
 		OnUpdate = AltUpdate,
 		OnClick = function(self, b)
 			if b == "MiddleButton" then
+				if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 				ToggleIgnorePanel()
 			elseif b == "LeftButton" then
+				if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 				ToggleFriendsFrame(1)
 			elseif b == "RightButton" then
 				HideTT(self)
@@ -891,6 +894,7 @@ if guild.enabled then
 		end,
 		OnClick = function(self, b)
 			if b == "LeftButton" then
+				if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 				ToggleGuildFrame()
 			elseif b == "MiddleButton" and IsInGuild() then
 				local s = CURRENT_GUILD_SORTING
@@ -1121,7 +1125,7 @@ if durability.enabled then
 				end
 				EasyMenu(menulist, LSMenus, "cursor", 0, 0, "MENU")
 			elseif button == "LeftButton" then
-				ToggleCharacter("PaperDollFrame")
+				if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ToggleCharacter("PaperDollFrame") end
 			end
 		end
 	})
@@ -1371,7 +1375,7 @@ if experience.enabled then
 				self:GetScript("OnEnter")(self)
 			elseif button == "LeftButton" then
 				if conf.ExpMode == "rep" then
-					ToggleCharacter("ReputationFrame")
+					if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ToggleCharacter("ReputationFrame") end
 				end
 			end
 		end
@@ -1494,6 +1498,7 @@ if talents.enabled then
 			end
 			if b == "LeftButton" then
 				if IsShiftKeyDown() then
+					if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 					PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
 				else
 					for index = 1, 4 do
@@ -1908,7 +1913,7 @@ if gold.enabled then
 		end,
 		OnClick = function(self, button)
 			if button == "LeftButton" then
-				ToggleCharacter("TokenFrame")
+				if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ToggleCharacter("TokenFrame") end
 			elseif button == "RightButton" then
 				conf.AutoSell = not conf.AutoSell
 				self:GetScript("OnEnter")(self)
@@ -2043,13 +2048,15 @@ if stats.enabled then
 		OnUpdate = function(self, u)
 			self.elapsed = self.elapsed + u
 			if self.fired and self.elapsed > 2.5 then
-				self.text:SetText(gsub(stats.fmt, "%[(%w-)%]", tags))
-				LP_Stat.text:SetText(gsub(stat[format("spec%dfmt", C_SpecializationInfo.GetSpecialization() and C_SpecializationInfo.GetSpecialization() or 1)], "%[(%w-)%]", tags))
-				self.elapsed, self.fired = 0, false
+				if not C_Secrets.ShouldAurasBeSecret() then -- combat secret check
+					self.text:SetText(gsub(stats.fmt, "%[(%w-)%]", tags))
+					LP_Stat.text:SetText(gsub(stat[format("spec%dfmt", C_SpecializationInfo.GetSpecialization() and C_SpecializationInfo.GetSpecialization() or 1)], "%[(%w-)%]", tags))
+					self.elapsed, self.fired = 0, false
+				end
 				if self.hovered then self:GetScript("OnEnter")(self) end
 			end
 		end,
-		OnClick = function() ToggleCharacter("PaperDollFrame") end,
+		OnClick = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ToggleCharacter("PaperDollFrame") end end,
 		OnEnter = function(self)
 			self.hovered = true
 			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)
@@ -2064,18 +2071,18 @@ if stats.enabled then
 				GameTooltip:AddDoubleLine(statName, value, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			end
 			local leech = tonumber(tags"leech")
-			if leech > 0 then
+			if leech and leech > 0 then
 				GameTooltip:AddDoubleLine(STAT_LIFESTEAL, leech.."%", ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			end
 			local reduceaoe = tonumber(tags"reduceaoe")
-			if reduceaoe > 0 then
+			if reduceaoe and reduceaoe > 0 then
 				GameTooltip:AddDoubleLine(STAT_AVOIDANCE, reduceaoe.."%", ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			end
 			if T.Role == "Tank" then
 				GameTooltip:AddDoubleLine(STAT_DODGE, tags"dodge".."%", ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 				GameTooltip:AddDoubleLine(STAT_PARRY, tags"parry".."%", ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 				local block = tonumber(tags"block")
-				if block > 0 then
+				if block and block > 0 then
 					GameTooltip:AddDoubleLine(STAT_BLOCK, block.."%", ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 				end
 			end
@@ -2092,7 +2099,7 @@ if stats.enabled then
 	})
 
 	Inject("Stat", {
-		OnClick = function() ToggleCharacter("PaperDollFrame") end,
+		OnClick = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ToggleCharacter("PaperDollFrame") end end,
 		OnEnter = function() LP_Stats:GetScript("OnEnter")(LP_Stats) end,
 		OnLeave = function()
 			LP_Stats.hovered = false
