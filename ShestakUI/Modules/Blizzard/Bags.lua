@@ -713,7 +713,7 @@ function Stuffing:SearchUpdate(str)
 				local _, _, _, _, minLevel, class, subclass, _, equipSlot, _, _, _, _, bindType = C_Item.GetItemInfo(ilink)
 				class = class or ""
 				subclass = subclass or ""
-				equipSlot = equipSlot or ""
+				equipSlot = _G[equipSlot] or ""
 				bindType = bind[bindType] or ""
 				minLevel = minLevel or 1
 				local isBoA = false
