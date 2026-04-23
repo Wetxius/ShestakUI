@@ -181,6 +181,11 @@ local QuickQuestDB = {
 			[75165] = true, -- In Need of Concentrated Primal Foci
 			[75166] = true, -- In Need of Many Primal Foci
 			[75167] = true, -- In Need of Many Concentrated Primal Foci
+
+			-- 12.0 bonus rolls
+			[95279] = true, -- Nebulous Voidcores: Gold
+			[95304] = true, -- Nebulous Voidcores: Veteran Dawncrest
+			[95290] = true, -- Nebulous Voidcores: Voidlight Marl
 		},
 	},
 }
