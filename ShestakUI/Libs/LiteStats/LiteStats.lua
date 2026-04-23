@@ -2201,7 +2201,7 @@ if nameplates.enabled then
 	Inject("Nameplates", {
 		OnLoad = function(self) RegEvents(self, "PLAYER_LOGIN CVAR_UPDATE") end,
 		OnEvent = function(self)
-			if GetCVar("nameplateMotion") == "0" then
+			if C_CVar.GetCVarBitfield("nameplateStackingTypes", 1) then
 				self.text:SetText(format(nameplates.fmt, "|cff55ff55"..L_STATS_ON.."|r"))
 			else
 				self.text:SetText(format(nameplates.fmt, "|cffff5555"..strupper(OFF).."|r"))
@@ -2209,11 +2209,11 @@ if nameplates.enabled then
 		end,
 		OnClick = function(self, button)
 			if button == "RightButton" or button == "LeftButton" then
-				if GetCVar("nameplateMotion") == "0" then
-					SetCVar("nameplateMotion", "1")
+				if C_CVar.GetCVarBitfield("nameplateStackingTypes", 1) then
+					C_CVar.SetCVarBitfield("nameplateStackingTypes", Enum.NamePlateStackType.Enemy, false)
 					self.text:SetText(format(nameplates.fmt, "|cffff5555"..strupper(OFF).."|r"))
 				else
-					SetCVar("nameplateMotion", "0")
+					C_CVar.SetCVarBitfield("nameplateStackingTypes", Enum.NamePlateStackType.Enemy, true)
 					self.text:SetText(format(nameplates.fmt, "|cff55ff55"..L_STATS_ON.."|r"))
 				end
 			end
