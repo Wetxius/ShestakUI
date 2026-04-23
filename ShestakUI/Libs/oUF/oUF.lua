@@ -873,7 +873,7 @@ do
 			local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
 			if(not nameplate) then return end
 
-			oUF:DisableBlizzardNamePlate(nameplate)
+			oUF:DisableBlizzard(unit)
 
 			if(not nameplate.unitFrame) then
 				nameplate.style = self.style
@@ -889,6 +889,9 @@ do
 			else
 				Private.UpdateUnits(nameplate.unitFrame, unit)
 			end
+
+			nameplate:ClearAllHitTestPoints() -- to prevent lingering hit test points on default
+			nameplate:SetAllHitTestPoints(nameplate.unitFrame)
 
 			nameplate.unitFrame:SetAttribute('unit', unit)
 

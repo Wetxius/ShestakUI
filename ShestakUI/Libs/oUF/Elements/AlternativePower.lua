@@ -1,5 +1,8 @@
 local _, ns = ...
 local oUF = ns.oUF
+local Private = oUF.Private
+
+local unitIsUnit = Private.unitIsUnit
 
 -- sourced from Blizzard_UnitFrame/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10
@@ -40,7 +43,7 @@ local function UpdateColor(self, event, unit, powerType)
 	end
 
 	if(color) then
-		element:GetStatusBarTexture():SetVertexColor(color:GetRGB())
+		element:SetStatusBarColor(color:GetRGB())
 	end
 
 	--[[ Callback: AlternativePower:PostUpdateColor(unit, color)
@@ -105,7 +108,9 @@ local function Path(self, ...)
 	* unit  - the unit accompanying the event (string)
 	* ...   - the arguments accompanying the event
 	--]]
-	(self.AlternativePower.Override or Update) (self, ...);
+	do
+		(self.AlternativePower.Override or Update) (self, ...)
+	end
 
 	--[[ Override: AlternativePower.UpdateColor(self, event, unit, ...)
 	Used to completely override the internal function for updating the widgets' colors.
@@ -128,7 +133,7 @@ local function Visibility(self, event, unit)
 	element.__barInfo = barInfo
 	if(barInfo and (barInfo.showOnRaid and (UnitInParty(unit) or UnitInRaid(unit))
 		or not barInfo.hideFromOthers
-		or UnitIsUnit(unit, 'player')))
+		or unitIsUnit(unit, 'player')))
 	then
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)

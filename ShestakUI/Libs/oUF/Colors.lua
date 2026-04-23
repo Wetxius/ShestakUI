@@ -158,10 +158,14 @@ for eclass, color in next, _G.FACTION_BAR_COLORS do
 	colors.reaction[eclass] = oUF:CreateColor(color.r, color.g, color.b)
 end
 
-local staggerIndices = {
+local stageIndices = {
+	-- stagger
 	green = 1,
 	yellow = 2,
 	red = 3,
+	-- soul fragments
+	voidMetamorphosisProgess = 1,
+	collapsingStarProgess = 2,
 }
 
 for power, color in next, PowerBarColor do
@@ -177,11 +181,11 @@ for power, color in next, PowerBarColor do
 				colors.power[power]:SetAtlas("UI-HUD-UnitFrame-Player-PortraitOn-Bar-" .. color.atlasElementName)
 			end
 		else
-			-- special handling for stagger
+			-- special handling of colours with stages
 			colors.power[power] = {}
 
 			for name, color_ in next, color do
-				local index = staggerIndices[name]
+				local index = stageIndices[name]
 				if(index) then
 					colors.power[power][index] = oUF:CreateColor(color_.r, color_.g, color_.b)
 
@@ -223,6 +227,10 @@ colors.power[Enum.PowerType.Essence or 19] = colors.power.ESSENCE
 -- alternate power, sourced from Blizzard_UnitFrame/Mainline/CompactUnitFrame.lua
 colors.power.ALTERNATE = oUF:CreateColor(0.7, 0.7, 0.6)
 colors.power[Enum.PowerType.Alternate or 10] = colors.power.ALTERNATE
+
+-- fake power types, no ID equivalent will exist to avoid collisions
+colors.power.ICICLES = oUF:CreateColor(116, 217, 246) -- based on spell icon
+colors.power.TIP_OF_THE_SPEAR = oUF:CreateColor(108, 188, 40) -- based on spell icon
 
 for i = 0, 3 do
 	colors.threat[i] = oUF:CreateColor(GetThreatStatusColor(i))

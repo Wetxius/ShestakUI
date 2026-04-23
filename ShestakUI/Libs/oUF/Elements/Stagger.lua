@@ -1,5 +1,8 @@
 local _, ns = ...
 local oUF = ns.oUF
+local Private = oUF.Private
+
+local unitIsUnit = Private.unitIsUnit
 
 -- sourced from Blizzard_FrameXMLBase/Constants.lua
 local SPEC_MONK_BREWMASTER = _G.SPEC_MONK_BREWMASTER or 1
@@ -32,7 +35,7 @@ local function UpdateColor(self, event, unit)
 	end
 
 	if(color) then
-		element:GetStatusBarTexture():SetVertexColor(color:GetRGB())
+		element:SetStatusBarColor(color:GetRGB())
 	end
 
 	--[[ Callback: Stagger:PostUpdateColor(color)
@@ -90,7 +93,9 @@ local function Path(self, ...)
 	* event - the event triggering the update (string)
 	* unit  - the unit accompanying the event (string)
 	--]]
-	(self.Stagger.Override or Update)(self, ...);
+	do
+		(self.Stagger.Override or Update)(self, ...)
+	end
 
 	--[[ Override: Stagger.UpdateColor(self, event, unit)
 	Used to completely override the internal function for updating the widgets' colors.
@@ -173,7 +178,7 @@ local function Enable(self, unit)
 	end
 
 	local element = self.Stagger
-	if(element and UnitIsUnit(unit, 'player')) then
+	if(element and unitIsUnit(unit, 'player')) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
