@@ -17,7 +17,8 @@ local function LoadSkin()
 		tab.backdrop:SetPoint("BOTTOMRIGHT", -2, 0)
 	end
 
-	T.SkinCheckBox(frame.CharacterPreview.HideIgnoredToggle.Checkbox)
+	T.SkinCheckBox(frame.CharacterPreview.ToggleOptions.HideIgnoredToggle.Checkbox)
+	T.SkinCheckBox(frame.CharacterPreview.ToggleOptions.SheatheWeaponToggle.Checkbox)
 
 	T.SkinModelControl(frame.CharacterPreview.ModelScene)
 
