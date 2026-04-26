@@ -9,7 +9,7 @@ frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
 	MainActionBar:SetMovable(true) -- need for scale
 	MainActionBar:SetUserPlaced(true)
-	MainActionBar:SetScale(0.00001)
+	MainActionBar:SetScale(0.0001)
 	MainActionBar:SetAlpha(0)
 	MainActionBar:EnableMouse(false)
 	MainActionBar:UnregisterAllEvents()
@@ -43,7 +43,7 @@ frame:SetScript("OnEvent", function()
 	for i = 1, #elements do
 		local f = elements[i]
 		if i < 3 then -- OverrideActionBar, PossessActionBar
-			f:SetScale(0.00001)
+			f:SetScale(0.0001)
 			f:EnableMouse(false)
 		end
 

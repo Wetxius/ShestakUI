@@ -181,7 +181,7 @@ if IsWetxius then
 		end
 		if PTR_IssueReporter then
 			PTR_IssueReporter:SetAlpha(0)
-			PTR_IssueReporter:SetScale(0.001)
+			PTR_IssueReporter:SetScale(0.0001)
 		end
 		SetCVar("lootUnderMouse", 1)
 		SetCVar("nameplateShowFriendlyNPCs", 0)

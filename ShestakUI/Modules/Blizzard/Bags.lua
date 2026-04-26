@@ -1883,7 +1883,7 @@ function Stuffing:ADDON_LOADED(addon)
 
 	-- Hide Blizzard Bank
 	BankFrame:UnregisterAllEvents()
-	BankFrame:SetScale(0.00001)
+	BankFrame:SetScale(0.0001)
 	BankFrame:SetAlpha(0)
 	BankFrame:ClearAllPoints()
 	BankFrame:SetPoint("TOPLEFT")

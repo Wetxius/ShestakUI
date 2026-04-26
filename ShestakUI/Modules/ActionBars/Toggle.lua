@@ -44,12 +44,12 @@ local MainBars = function()
 			for i = 1, 3 do
 				local b = _G["MultiBarBottomRightButton"..i]
 				b:SetAlpha(0)
-				b:SetScale(0.000001)
+				b:SetScale(0.0001)
 			end
 			for i = 7, 9 do
 				local b = _G["MultiBarBottomRightButton"..i]
 				b:SetAlpha(0)
-				b:SetScale(0.000001)
+				b:SetScale(0.0001)
 			end
 		elseif ShestakUISettingsPerChar.BottomBars == 2 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size * 2 + C.actionbar.button_space)
