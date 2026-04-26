@@ -23,7 +23,7 @@ local function LoadSkin()
 	BonusRollFrame.PromptFrame.IconBackdrop:SetPoint("TOPLEFT", BonusRollFrame.PromptFrame.Icon, -2, 2)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetPoint("BOTTOMRIGHT", BonusRollFrame.PromptFrame.Icon, 2, -2)
 
-	BonusRollFrame.PromptFrame.Timer:CreateBackdrop("Default")
+	BonusRollFrame.PromptFrame.Timer:CreateBackdrop("Overlay")
 	BonusRollFrame.PromptFrame.Timer:SetStatusBarTexture(C.media.texture)
 	BonusRollFrame.PromptFrame.Timer:SetPoint("BOTTOMLEFT", BonusRollFrame.PromptFrame, "BOTTOMLEFT", 0, 1)
 
@@ -55,8 +55,8 @@ local function LoadSkin()
 	hooksecurefunc("BonusRollFrame_StartBonusRoll", function()
 		local ccf, pfifc = BonusRollFrame.CurrentCountFrame.Text, BonusRollFrame.PromptFrame.InfoFrame.Cost
 		local text1, text2 = ccf and ccf:GetText(), pfifc and pfifc:GetText()
-		if text1 and text1:find("|t") then ccf:SetText(text1:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
-		if text2 and text2:find("|t") then pfifc:SetText(text2:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
+		if text1 and text1:find("|t") then ccf:SetText(text1:gsub("|T(.-):.-|t", "|T%1:14:14:0:0:64:64:5:59:5:59|t")) end
+		if text2 and text2:find("|t") then pfifc:SetText(text2:gsub("|T(.-):.-|t", "|T%1:14:14:0:0:64:64:5:59:5:59|t")) end
 	end)
 
 	-- Group loot roll
