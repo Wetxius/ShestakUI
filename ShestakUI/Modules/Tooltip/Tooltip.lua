@@ -325,7 +325,7 @@ local OnTooltipSetUnit = function(self)
 	local r, g, b = GetColor(unit)
 	_G["GameTooltipTextLeft1"]:SetFormattedText("|cff%02x%02x%02x%s|r", r * 255, g * 255, b * 255, name or "")
 
-	if realm and realm ~= "" and C.tooltip.realm then
+	if realm and T.NotSecretValue(realm) and realm ~= "" and C.tooltip.realm then
 		self:AddLine(FRIENDS_LIST_REALM.."|cffffffff"..realm.."|r")
 	end
 
