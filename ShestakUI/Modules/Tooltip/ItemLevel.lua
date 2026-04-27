@@ -255,7 +255,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetI
 
 local function GetTooltipGUID()
 	local unitID = T.GetUnit(GameTooltip)
-	if C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
+	if not unitID or C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
 	local guid = unitID and UnitGUID(unitID)
 	if UnitIsPlayer(unitID) and CanInspect(unitID) then
 		return guid
@@ -269,7 +269,7 @@ local FailTimeout = 1
 f:SetScript("OnUpdate", function()
 	if InCombatLockdown() then return end -- BETA
 	local unitID = T.GetUnit(GameTooltip)
-	if C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
+	if not unitID or C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
 	local guid = unitID and UnitGUID(unitID)
 	if not guid or (InspectFrame and InspectFrame:IsVisible()) then return end
 	local timeSince = GetTime() - lastInspectRequest
@@ -417,7 +417,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(self
 	if self ~= GameTooltip or self:IsForbidden() then return end
 	if C.tooltip.show_shift and not IsShiftKeyDown() then return end
 	local unitID = T.GetUnit(self)
-	if C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
+	if not unitID or C_Secrets.ShouldUnitIdentityBeSecret(unitID) then return end
 	local guid = unitID and UnitGUID(unitID)
 	if guid and UnitIsPlayer(unitID) then
 		local cache = GuidCache[guid]
