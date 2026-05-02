@@ -249,11 +249,14 @@ end
 
 ns.EventHandler = EventHandler
 
-local NPC_ID_PATTERN = '%w+%-.-%-.-%-.-%-.-%-(.-)%-'
-function ns.GetNPCID(unit)
-	local npcGUID = UnitGUID(unit or 'npc')
-	if npcGUID then
-		return tonumber(npcGUID:match(NPC_ID_PATTERN))
+function ns.IsNPCIgnored()
+	local npcID = UnitCreatureID('npc')
+	if npcID ~= nil and issecretvalue(npcID) then
+		npcID = nil
+	end
+
+	if npcID then
+		return QuickQuestDB.blocklist.npcs[npcID]
 	end
 end
 
@@ -352,8 +355,7 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		return
 	end
 
-	local npcID = ns.GetNPCID()
-	if QuickQuestDB.blocklist.npcs[npcID] then
+	if ns.IsNPCIgnored() then
 		return
 	end
 
@@ -443,7 +445,7 @@ local function handleGossipQuests()
 		return
 	end
 
-	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+	if ns.IsNPCIgnored() then
 		return
 	end
 
@@ -484,7 +486,7 @@ local function handleQuestList()
 		return
 	end
 
-	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+	if ns.IsNPCIgnored() then
 		return
 	end
 
