@@ -1685,9 +1685,26 @@ end
 --	Ping
 ----------------------------------------------------------------------------------------
 if ping.enabled then
+	local function OnEvent(self, unit)
+		-- if unit == P and ping.hide_self then return end
+		if UnitIsUnit(unit, "player") and ping.hide_self then return end
+		local class = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2, UnitClass(unit))]
+		self.text:SetText(format(ping.fmt, UnitName(unit)))
+		if class then
+			self.text:SetTextColor(class.r, class.g, class.b, 1)
+		else
+			self.text:SetTextColor(1, 1, 1, 1)
+		end
+		self.animGroup:Stop()
+		self.text:Show()
+		self.animGroup:Play()
+	end
+
 	Inject("Ping", {
 		OnLoad = function(self)
-			-- self:RegisterEvent("MINIMAP_PING") -- BETA not event now and callback is secret
+			if T.newPatch then
+				self:RegisterEventCallback("MINIMAP_PING", OnEvent)
+			end
 			self.animGroup = self.text:CreateAnimationGroup()
 			self.anim = self.animGroup:CreateAnimation("Alpha")
 			self.animGroup:SetScript("OnFinished", function() self.text:Hide() end)
@@ -1695,19 +1712,6 @@ if ping.enabled then
 			self.anim:SetToAlpha(0)
 			self.anim:SetDuration(2.8)
 			self.anim:SetStartDelay(5)
-		end,
-		OnEvent = function(self, _, unit)
-			if unit == P and ping.hide_self then return end
-			local class = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2, UnitClass(unit))]
-			self.text:SetText(format(ping.fmt, UnitName(unit)))
-			if class then
-				self.text:SetTextColor(class.r, class.g, class.b, 1)
-			else
-				self.text:SetTextColor(1, 1, 1, 1)
-			end
-			self.animGroup:Stop()
-			self.text:Show()
-			self.animGroup:Play()
 		end
 	})
 end
