@@ -65,9 +65,13 @@ local function LoadSkin()
 	ContainerFrameCombinedBags.Bg:Hide()
 	T.SkinCloseButton(ContainerFrameCombinedBags.CloseButton)
 
-	ContainerFrameCombinedBags:ClearAllPoints()
-	ContainerFrameCombinedBags:SetPoint(unpack(C.position.bag))
-	ContainerFrameCombinedBags.SetPoint = T.dummy
+	local point, anchor, attachTo, x, y = unpack(C.position.bag)
+	hooksecurefunc(ContainerFrameCombinedBags, "SetPoint", function(self, _, _, _, newx, newy)
+		if newx ~= x and newy ~= y then
+			ContainerFrameCombinedBags:ClearAllPoints()
+			ContainerFrameCombinedBags:SetPoint(point, anchor, attachTo, x, y)
+		end
+	end)
 
 	ContainerFrameCombinedBags.MoneyFrame.Border:Hide()
 	ContainerFrame1MoneyFrame.Border:Hide()
