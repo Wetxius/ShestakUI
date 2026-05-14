@@ -952,10 +952,33 @@ local function style(self, unit)
 		absorb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		absorb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		absorb:SetStatusBarTexture(C.media.texture)
-		absorb:SetStatusBarColor(1, 1, 0, 1)
-		self.HealthPrediction = {
-			damageAbsorb = absorb
-		}
+		absorb:SetStatusBarColor(1, 1, 0, 0.8)
+		self.Health.DamageAbsorb = absorb
+
+		-- Over absorb in right
+		if C.raidframe.plugins_over_heal_absorb then
+			local oa = CreateFrame("StatusBar", nil, self)
+			oa:SetAllPoints(self.Health)
+			oa:SetFrameLevel(self.Health:GetFrameLevel())
+			oa:SetStatusBarTexture(C.media.blank)
+			oa:SetReverseFill(true)
+			oa:SetValue(0)
+
+			local texture = oa:GetStatusBarTexture()
+			texture:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
+			texture:SetVertexColor(0.5, 0.5, 1)
+			texture:SetHorizTile(true)
+			texture:SetVertTile(true)
+			texture:SetAlpha(0.5)
+			texture:SetBlendMode("ADD")
+			self.Health.OverDamageAbsorbIndicator = oa
+
+			hooksecurefunc(self.Health, "PostUpdate", function(self, unit, _, max)
+				local absorb = UnitGetTotalAbsorbs(unit)
+				oa:SetMinMaxValues(0, max)
+				oa:SetValue(absorb)
+			end)
+		end
 	end
 
 	-- Every event should be register with this
