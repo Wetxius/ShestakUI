@@ -59,7 +59,7 @@ autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 				elseif event == "CHAT_MSG_BN_WHISPER" then
 					local bnetIDAccount = select(11, ...)
 					local accountInfo = C_BattleNet.GetAccountInfoByID(bnetIDAccount)
-					BNInviteFriend(accountInfo.gameAccountInfo.gameAccountID)
+					C_BattleNet.InviteFriend(accountInfo.gameAccountInfo.gameAccountID)
 				end
 			end
 		end

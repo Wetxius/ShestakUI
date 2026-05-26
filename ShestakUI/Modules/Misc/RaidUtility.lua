@@ -47,7 +47,7 @@ RaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef(
 RaidUtilityShowButton:SetScript("OnMouseUp", function(_, button)
 	if button == "RightButton" then
 		if CheckRaidStatus() then
-			DoReadyCheck()
+			C_PartyInfo.DoReadyCheck()
 		end
 	elseif button == "MiddleButton" then
 		if CheckRaidStatus() then
@@ -98,7 +98,7 @@ RaidUtilityMainAssistButton:SetAttribute("action", "toggle")
 
 -- Ready Check button
 CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityRoleButton:GetWidth() * 0.75, 18, "TOPLEFT", RaidUtilityMainTankButton, "BOTTOMLEFT", 0, -5, READY_CHECK)
-RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() DoReadyCheck() end)
+RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() C_PartyInfo.DoReadyCheck() end)
 
 -- World Marker button
 CreateButton("RaidUtilityMarkerToggle", RaidUtilityPanel, "UIPanelButtonTemplate, SecureHandlerClickTemplate", 18, 18, "TOPRIGHT", RaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, -5)

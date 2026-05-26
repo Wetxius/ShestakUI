@@ -695,7 +695,7 @@ if friends.enabled then
 										notCheckable = true,
 										func = function(_, arg1)
 											menuFrame:Hide()
-											BNInviteFriend(arg1)
+											C_BattleNet.InviteFriend(arg1)
 										end
 									}
 								end

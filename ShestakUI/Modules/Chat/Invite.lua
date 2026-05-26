@@ -16,7 +16,7 @@ hooksecurefunc("SetItemRef", function(link) -- Secure hook to avoid taint
 			if not bnID then return end
 			local accountInfo = C_BattleNet.GetAccountInfoByID(bnID)
 			if accountInfo.gameAccountInfo.clientProgram == BNET_CLIENT_WOW and CanCooperateWithGameAccount(accountInfo) then
-				BNInviteFriend(accountInfo.gameAccountInfo.gameAccountID)
+				C_BattleNet.InviteFriend(accountInfo.gameAccountInfo.gameAccountID)
 			end
 		end
 		ChatFrameUtil.ChooseBoxForSend():ClearChat() -- Secure hook opens whisper, so closing it.
