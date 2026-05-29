@@ -195,6 +195,7 @@ C["raidframe"] = {
 	["plugins_debuffhighlight"] = true,			-- Show texture for dispellable debuff
 	["plugins_debuffs"] = true,					-- Raid debuff icons (by Blizzard filter)
 	["plugins_debuffs_timer"] = false,			-- Timer on raid debuff icons
+	["plugins_debuffs_filter"] = false,			-- Enable blizzard filters for debuffs
 	["plugins_private_auras"] = false,			-- Blizzard 'Private Auras'
 	["plugins_buffs"] = true,					-- Raid buff icons (by Blizzard filter)
 	["plugins_buffs_timer"] = false,			-- Timer on raid buffs icons

@@ -219,6 +219,7 @@ L.raidframe_plugins_debuffhighlight = "Mostrar textura para perjuicios disipable
 L.raidframe_plugins_debuffhighlight_icon = "Resaltar textura de perjuicios + icono"
 L.raidframe_plugins_debuffs = "'BANDA' Ver las auras"
 L.raidframe_plugins_debuffs_timer = "Temporizador en los iconos de perjuicios de la banda"
+L.raidframe_plugins_debuffs_filter = "Activar filtros de Blizzard para efectos negativos" -- Needs review
 L.raidframe_plugins_private_auras = "Auras privadas de Blizzard"
 L.raidframe_plugins_pvp_debuffs = "Mostrar iconos de perjuicios JcJ (de la lista)"
 L.raidframe_plugins_buffs = "Iconos de beneficios de banda (filtro de Blizzard)"

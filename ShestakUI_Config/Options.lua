@@ -1881,8 +1881,11 @@ do
 	local plugins_debuffs_timer = ns.CreateCheckBox(parent, "plugins_debuffs_timer")
 	plugins_debuffs_timer:SetPoint("TOPLEFT", plugins_debuffs, "BOTTOMLEFT", 20, 0)
 
+	local plugins_debuffs_filter = ns.CreateCheckBox(parent, "plugins_debuffs_filter")
+	plugins_debuffs_filter:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
+
 	local plugins_private_auras = ns.CreateCheckBox(parent, "plugins_private_auras")
-	plugins_private_auras:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
+	plugins_private_auras:SetPoint("TOPLEFT", plugins_debuffs_filter, "BOTTOMLEFT", 0, 0)
 
 	-- local plugins_debuffhighlight_icon = ns.CreateCheckBox(parent, "plugins_debuffhighlight_icon")
 	-- plugins_debuffhighlight_icon:SetPoint("TOPLEFT", plugins_debuffs_timer, "BOTTOMLEFT", 0, 0)
