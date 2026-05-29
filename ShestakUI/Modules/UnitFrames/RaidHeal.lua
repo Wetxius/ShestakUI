@@ -302,9 +302,10 @@ local function Shared(self, unit)
 
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 		self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
+		self.Debuffs.FilterAura = T.CustomDebuffFilter
 
 		self.Debuffs.disableMouse = true
-		self.Debuffs.filter = "HARMFUL|RAID"
+		self.Debuffs.filter = "HARMFUL"
 
 		-- Blizzard private auras
 		if C.raidframe.plugins_private_auras then

@@ -1099,3 +1099,10 @@ T.CustomFilterBoss = function(_, unit, data)
 	end
 	return true
 end
+
+T.CustomDebuffFilter = function(_, _, data)
+	if T.NotSecretValue(data.spellId) and T.RaidDebuffsIgnore[data.spellId] then
+		return false
+	end
+	return true
+end
