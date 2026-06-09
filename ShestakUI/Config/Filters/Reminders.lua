@@ -33,6 +33,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		},
 		Food = {
 			SpellName(104280),	-- Well Fed
+			SpellName(1285644),	-- Hearty Well Fed
 		},
 		Stamina = {
 			SpellName(21562),	-- Power Word: Fortitude
