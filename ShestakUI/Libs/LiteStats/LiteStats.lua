@@ -1686,7 +1686,7 @@ end
 ----------------------------------------------------------------------------------------
 if ping.enabled then
 	local function OnEvent(self, unit)
-		-- if unit == P and ping.hide_self then return end
+		if unit == P and ping.hide_self then return end
 		if UnitIsUnit(unit, "player") and ping.hide_self then return end
 		local class = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2, UnitClass(unit))]
 		self.text:SetText(format(ping.fmt, UnitName(unit)))
@@ -1702,9 +1702,7 @@ if ping.enabled then
 
 	Inject("Ping", {
 		OnLoad = function(self)
-			if T.newPatch then
-				self:RegisterEventCallback("MINIMAP_PING", OnEvent)
-			end
+			self:RegisterEventCallback("MINIMAP_PING", OnEvent)
 			self.animGroup = self.text:CreateAnimationGroup()
 			self.anim = self.animGroup:CreateAnimation("Alpha")
 			self.animGroup:SetScript("OnFinished", function() self.text:Hide() end)
