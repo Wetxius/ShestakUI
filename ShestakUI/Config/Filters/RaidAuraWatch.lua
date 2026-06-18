@@ -301,6 +301,9 @@ T.RaidDebuffsIgnore = {
 	[390435] = true,	-- Exhaustion
 	[26013]  = true,	-- BG Deserter
 	[71041]  = true,	-- Dungeon Deserter
+	[1254550]  = true,	-- Arcane Empowerment
+	[206151]  = true,	-- Challenger's Burden
+	[308312]  = true,	-- Time Trial Practice
 }
 
 T.RaidDebuffs = OtherDebuffs
