@@ -292,18 +292,18 @@ T.RaidDebuffsIgnore = {
 	[25771] = true,			-- Forbearance
 
 	-- Midnight non-secret debuffs
-	[57723]  = true,	-- Exhaustion
-	[57724]  = true,	-- Sated
-	[80354]  = true,	-- Temporal Displacement
-	[95809]  = true,	-- Hunter Pet Insanity
+	[57723] = true,		-- Exhaustion
+	[57724] = true,		-- Sated
+	[80354] = true,		-- Temporal Displacement
+	[95809] = true,		-- Hunter Pet Insanity
 	[160455] = true,	-- Hunter Pet Fatigued
 	[264689] = true,	-- Hunter Pet Fatigued
 	[390435] = true,	-- Exhaustion
-	[26013]  = true,	-- BG Deserter
-	[71041]  = true,	-- Dungeon Deserter
-	[1254550]  = true,	-- Arcane Empowerment
-	[206151]  = true,	-- Challenger's Burden
-	[308312]  = true,	-- Time Trial Practice
+	[26013] = true,		-- BG Deserter
+	[71041] = true,		-- Dungeon Deserter
+	[1254550] = true,	-- Arcane Empowerment
+	[206151] = true,	-- Challenger's Burden
+	[308312] = true,	-- Time Trial Practice
 }
 
 T.RaidDebuffs = OtherDebuffs
