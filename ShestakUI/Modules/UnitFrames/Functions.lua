@@ -1102,6 +1102,10 @@ end
 
 if C.raidframe.plugins_debuffs_filter then
 	T.CustomDebuffFilter = function(_, unit, data)
+		if T.NotSecretValue(data.spellId) and T.RaidDebuffsIgnore[data.spellId] then
+			return false
+		end
+
 		local allow = false
 
 		local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|IMPORTANT")
