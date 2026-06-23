@@ -288,22 +288,23 @@ T.RaidDebuffsIgnore = {
 	[1943] = true,			-- Rupture
 	[425180] = true,		-- Vicious Brand
 	-- Class debuffs
-	[41425] = true,			-- Hypothermia
 	[25771] = true,			-- Forbearance
+	[41425] = true,			-- Hypothermia
 
 	-- Midnight non-secret debuffs
+	[26013] = true,		-- BG Deserter
 	[57723] = true,		-- Exhaustion
 	[57724] = true,		-- Sated
+	[71041] = true,		-- Dungeon Deserter
 	[80354] = true,		-- Temporal Displacement
 	[95809] = true,		-- Hunter Pet Insanity
+	[124255] = true,	-- Stagger
 	[160455] = true,	-- Hunter Pet Fatigued
-	[264689] = true,	-- Hunter Pet Fatigued
-	[390435] = true,	-- Exhaustion
-	[26013] = true,		-- BG Deserter
-	[71041] = true,		-- Dungeon Deserter
-	[1254550] = true,	-- Arcane Empowerment
 	[206151] = true,	-- Challenger's Burden
+	[264689] = true,	-- Hunter Pet Fatigued
 	[308312] = true,	-- Time Trial Practice
+	[390435] = true,	-- Exhaustion
+	[1254550] = true,	-- Arcane Empowerment
 }
 
 T.RaidDebuffs = OtherDebuffs
