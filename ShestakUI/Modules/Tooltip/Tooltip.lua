@@ -479,7 +479,7 @@ end)
 ----------------------------------------------------------------------------------------
 --	Fix GameTooltipMoneyFrame font size
 ----------------------------------------------------------------------------------------
-hooksecurefunc("SetTooltipMoney", function()
+hooksecurefunc("SetTooltipMoney", function() -- BETA need to use new function GameTooltip_AddMoneyLine?
 	for i = 1, 2 do
 		if _G["GameTooltipMoneyFrame"..i] then
 			_G["GameTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")

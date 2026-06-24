@@ -496,10 +496,12 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 
 			-- This is used to create icons for the GuildBankPopupFrame, MacroPopupFrame, and GearManagerDialogPopup
-			hooksecurefunc("BuildIconArray", function(_, baseName, _, rowSize, numRows)
-				local numIcons = rowSize * numRows
-				SkinIconArray(baseName, numIcons)
-			end)
+			if not T.newPatch then
+				hooksecurefunc("BuildIconArray", function(_, baseName, _, rowSize, numRows)
+					local numIcons = rowSize * numRows
+					SkinIconArray(baseName, numIcons)
+				end)
+			end
 
 			hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
 				T.SkinHelpBox(self)

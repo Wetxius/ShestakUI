@@ -1702,7 +1702,9 @@ if ping.enabled then
 
 	Inject("Ping", {
 		OnLoad = function(self)
-			self:RegisterEventCallback("MINIMAP_PING", OnEvent)
+			if not T.newPatch then -- 12.1.0 Can use only Blizzard
+				self:RegisterEventCallback("MINIMAP_PING", OnEvent)
+			end
 			self.animGroup = self.text:CreateAnimationGroup()
 			self.anim = self.animGroup:CreateAnimation("Alpha")
 			self.animGroup:SetScript("OnFinished", function() self.text:Hide() end)

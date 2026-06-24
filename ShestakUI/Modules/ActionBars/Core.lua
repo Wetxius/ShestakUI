@@ -595,5 +595,9 @@ function ValidateActionBarTransition()
 	end
 
 	-- MultiActionBar_Update()
-	UIParent_ManageFramePositions()
+	if T.newPatch then
+		ManageFramePositions()
+	else
+		UIParent_ManageFramePositions()
+	end
 end

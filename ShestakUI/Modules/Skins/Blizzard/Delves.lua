@@ -36,9 +36,11 @@ local function LoadFirstSkin()
 		end
 	end
 
-	SkinOptionSlot(frame.CompanionCombatRoleSlot, true)
-	SkinOptionSlot(frame.CompanionUtilityTrinketSlot)
-	SkinOptionSlot(frame.CompanionCombatTrinketSlot)
+	if not T.newPatch then
+		SkinOptionSlot(frame.CompanionCombatRoleSlot, true)
+		SkinOptionSlot(frame.CompanionUtilityTrinketSlot)
+		SkinOptionSlot(frame.CompanionCombatTrinketSlot)
+	end
 
 	local ablityFrame = _G.DelvesCompanionAbilityListFrame
 	T.SkinFrame(ablityFrame)

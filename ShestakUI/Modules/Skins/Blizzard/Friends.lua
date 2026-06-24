@@ -200,11 +200,13 @@ local function LoadSkin()
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame.backdrop:SetPoint("TOPLEFT", 4, -4)
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 
-	BattleTagInviteFrame:SetTemplate("Transparent")
-	for i = 1, BattleTagInviteFrame:GetNumChildren() do
-		local child = select(i, BattleTagInviteFrame:GetChildren())
-		if child:GetObjectType() == "Button" then
-			child:SkinButton()
+	if not T.newPatch then
+		BattleTagInviteFrame:SetTemplate("Transparent")
+		for i = 1, BattleTagInviteFrame:GetNumChildren() do
+			local child = select(i, BattleTagInviteFrame:GetChildren())
+			if child:GetObjectType() == "Button" then
+				child:SkinButton()
+			end
 		end
 	end
 
