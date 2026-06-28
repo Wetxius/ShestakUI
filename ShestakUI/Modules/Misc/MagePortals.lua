@@ -22,6 +22,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[15] = {344587, 344597}, 	-- Oribos
 	[16] = {395277, 395289}, 	-- Valdrakken
 	[17] = {446540, 446534}, 	-- Dornogal
+	[18] = {1259190, 1259194},	-- Silvermoon City
 } or { -- Alliance
 	[1] = {3561,10059},			-- Stormwind
 	[2] = {3562,11416},			-- Ironforge
@@ -40,6 +41,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[15] = {344587, 344597}, 	-- Oribos
 	[16] = {395277, 395289}, 	-- Valdrakken
 	[17] = {446540, 446534}, 	-- Dornogal
+	[18] = {1259190, 1259194},	-- Silvermoon City
 }
 
 local frame = CreateFrame("Frame", "TeleportMenu", UIParent)
