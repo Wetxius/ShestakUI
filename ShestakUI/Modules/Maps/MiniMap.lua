@@ -333,6 +333,13 @@ local micromenu = {
 	{text = BATTLEFIELD_MINIMAP, notCheckable = 1, func = function()
 		ToggleBattlefieldMap()
 	end},
+	{text = T.level == GetMaxPlayerLevel() and "Omnium Folio" or "Expansion Landing Page",
+	notCheckable = 1,
+	func = function()
+		if ExpansionLandingPageMinimapButton then
+			ExpansionLandingPageMinimapButton:Click()
+		end
+	end},
 }
 
 if not IsTrialAccount() and C_StorePublic.IsEnabled() then
