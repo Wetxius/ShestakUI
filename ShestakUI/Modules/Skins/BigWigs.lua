@@ -265,23 +265,10 @@ StaticPopupDialogs.SETTINGS_BIGWIGS = {
 	preferredIndex = 5,
 }
 
-SlashCmdList.BWTEST = function(msg)
-	if msg == "apply" then
-		SlashCmdList["BigWigs"]()
-		HideUIPanel(InterfaceOptionsFrame)
-		StaticPopup_Show("SETTINGS_BIGWIGS")
-	-- elseif msg == "test" then
-		-- SlashCmdList["BigWigs"]()
-		-- HideUIPanel(InterfaceOptionsFrame)
-		-- BigWigs:Test()
-		-- BigWigs:Test()
-		-- BigWigs:Test()
-		-- BigWigs:Test()
-		-- BigWigs:Test()
-	else
-		print("|cffffff00Type /bwtest apply to apply BigWigs settings.|r")
-		-- print("|cffffff00Type /bwtest test to launch BigWigs testmode.|r")
-	end
+SlashCmdList.BWSKIN = function()
+	SlashCmdList["BigWigs"]()
+	HideUIPanel(InterfaceOptionsFrame)
+	StaticPopup_Show("SETTINGS_BIGWIGS")
 end
-SLASH_BWTEST1 = "/bwtest"
-SLASH_BWTEST2 = "/ицеуые"
+SLASH_BWSKIN1 = "/bwskin"
+SLASH_BWSKIN2 = "/ицылшт"
