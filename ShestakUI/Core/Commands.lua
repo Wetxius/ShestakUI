@@ -273,7 +273,8 @@ SLASH_FRAMELIST4 = "/ад"
 --	Frame Stack on Cyrillic
 ----------------------------------------------------------------------------------------
 SlashCmdList.FSTACK = function()
-	UIParentLoadAddOn("Blizzard_DebugTools")
+	-- UIParentLoadAddOn("Blizzard_DebugTools")
+	C_AddOns.LoadAddOn("Blizzard_DebugTools")
 	FrameStackTooltip_Toggle(false, true, true)
 end
 SLASH_FSTACK1 = "/аыефсл"
