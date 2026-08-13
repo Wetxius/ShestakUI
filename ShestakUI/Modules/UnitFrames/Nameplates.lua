@@ -308,8 +308,8 @@ local AurasPostUpdateIcon = function(_, button, unit, data)
 end
 
 local function UpdateTarget(self)
-	local isTarget = T.unitIsUnit(self.unit, "target")
-	local isMe = T.unitIsUnit(self.unit, "player")
+	local isTarget = T.unitIsUnit(self.__unit, "target")
+	local isMe = T.unitIsUnit(self.__unit, "player")
 
 	if isTarget and not isMe then
 		if C.nameplate.ad_height > 0 or C.nameplate.ad_width > 0 then
@@ -345,7 +345,7 @@ local function UpdateTarget(self)
 end
 
 local function UpdateFocus(self)
-	if T.unitIsUnit(self.unit, "focus") then
+	if T.unitIsUnit(self.__unit, "focus") then
 		SetColorBorder(self.Health, 1, 0.8, 0)
 	else
 		SetColorBorder(self.Health, unpack(C.media.border_color))
@@ -369,9 +369,9 @@ local function UpdateName(self)
 	end
 
 	if C.nameplate.class_icons then
-		local reaction = UnitReaction(self.unit, "player")
-		if UnitIsPlayer(self.unit) and (reaction and reaction <= 4) then
-			local _, class = UnitClass(self.unit)
+		local reaction = UnitReaction(self.__unit, "player")
+		if UnitIsPlayer(self.__unit) and (reaction and reaction <= 4) then
+			local _, class = UnitClass(self.__unit)
 			local texcoord = CLASS_ICON_TCOORDS[class]
 			self.Class.Icon:SetTexCoord(texcoord[1] + 0.015, texcoord[2] - 0.02, texcoord[3] + 0.018, texcoord[4] - 0.02)
 			self.Class:Show()
@@ -514,15 +514,15 @@ end
 
 -- Health color
 local function threatColor(self, forced)
-	if UnitIsPlayer(self.unit) then return end
+	if UnitIsPlayer(self.__unit) then return end
 
 	if C.nameplate.enhance_threat ~= true then
 		SetColorBorder(self.Health, unpack(C.media.border_color))
 	end
-	if UnitIsTapDenied(self.unit) then
+	if UnitIsTapDenied(self.__unit) then
 		self.Health:SetStatusBarColor(0.6, 0.6, 0.6)
 	elseif UnitAffectingCombat("player") then
-		local threatStatus = UnitThreatSituation("player", self.unit)
+		local threatStatus = UnitThreatSituation("player", self.__unit)
 		if self.npcID == "120651" then	-- Explosives affix
 			self.Health:SetStatusBarColor(unpack(C.nameplate.extra_color))
 		elseif self.npcID == "174773" then	-- Spiteful Shade affix
@@ -568,7 +568,7 @@ local function threatColor(self, forced)
 					if IsInRaid() then
 						for i = 1, GetNumGroupMembers() do
 							if UnitExists("raid"..i) and not T.unitIsUnit("raid"..i, "player") and UnitGroupRolesAssigned("raid"..i) == "TANK" then
-								local isTanking = UnitDetailedThreatSituation("raid"..i, self.unit)
+								local isTanking = UnitDetailedThreatSituation("raid"..i, self.__unit)
 								if isTanking then
 									offTank = true
 									break
@@ -762,7 +762,7 @@ end
 
 local function style(self, unit)
 	local main = self
-	self.unit = unit
+	self.__unit = unit
 
 	self:ClearAllPoints()
 	self:SetPoint("CENTER")
@@ -996,14 +996,14 @@ local function style(self, unit)
 	end
 
 	-- Every event should be register with this
-	table.insert(self.__elements, UpdateName)
-	self:RegisterEvent("UNIT_NAME_UPDATE", UpdateName)
+	-- table.insert(self.__elements, UpdateName)
+	-- self:RegisterEvent("UNIT_NAME_UPDATE", UpdateName)
 
-	table.insert(self.__elements, UpdateTarget)
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", UpdateTarget, true)
+	-- table.insert(self.__elements, UpdateTarget)
+	-- self:RegisterEvent("PLAYER_TARGET_CHANGED", UpdateTarget, true)
 
-	table.insert(self.__elements, UpdateFocus)
-	self:RegisterEvent("PLAYER_FOCUS_CHANGED", UpdateFocus, true)
+	-- table.insert(self.__elements, UpdateFocus)
+	-- self:RegisterEvent("PLAYER_FOCUS_CHANGED", UpdateFocus, true)
 
 	-- Disable movement via /moveui
 	self.disableMovement = true
