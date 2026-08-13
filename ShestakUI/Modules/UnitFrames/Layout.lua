@@ -37,7 +37,7 @@ local function Shared(self, unit)
 		self:SetAttribute("type2", "focus")
 		self:SetAttribute("type3", "macro")
 		self:SetAttribute("macrotext3", "/clearfocus")
-		self:SetAttribute('oUF-enableArenaPrep', false)
+		self:SetAttribute("oUF-enableArenaPrep", false)
 	else
 		self:SetAttribute("*type2", "togglemenu")
 	end
@@ -873,35 +873,25 @@ local function Shared(self, unit)
 				-- self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
 				-- self.Auras.FilterAura = T.CustomFilter
 
-				local Auras = self:CreateAuras({
-					maxWidth = 500,
-					growthX = 'RIGHT',
-					growthY = 'UP',
-					initialAnchor = 'BOTTOMLEFT',
-				})
-
-				-- Position and size
-				-- Auras:SetHeight(165)
-				Auras:SetWidth(player_width - 6)
-				Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
-
-				-- Enable some sub-widgets
+				local Auras = self:CreateAuras()
 				Auras.showCount = true
-				Auras.size = T.Scale(C.aura.debuff_size)
-				Auras.spacing = T.Scale(3)
+				Auras.elementSpacing = T.Scale(3)
+				Auras.groupSpacing = T.Scale(C.aura.debuff_size)
+				Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
 
-				-- Register a group using a filter and some options
-				Auras:AddGroup('HELPFUL', {
+				Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
+				Auras.size = T.Scale(C.aura.debuff_size)
+
+				Auras:AddGroup("HELPFUL", {
 					maxFrameCount = 32,
-					-- initializeFrame = T.PostCreateIcon, -- overrides CreateButton override
-					showBuffBorder = true, -- group-specific option for its buttons
+					-- initializeFrame = T.PostCreateIcon,
+					showBuffBorder = true,
 				})
 
-				-- Register another group using a different filter and no options
-				Auras:AddGroup('HARMFUL', {
+				Auras:AddGroup("HARMFUL", {
 					maxFrameCount = 16,
-					-- initializeFrame = T.PostCreateIcon, -- overrides CreateButton override
-					showDebuffBorder = true, -- group-specific option for its buttons
+					-- initializeFrame = T.PostCreateIcon,
+					showDebuffBorder = true,
 				})
 			end
 
@@ -962,7 +952,7 @@ local function Shared(self, unit)
 	end
 
 	-- Castbar
-	if C.unitframe.unit_castbar and not unit:match('%wtarget$') then
+	if C.unitframe.unit_castbar and not unit:match("%wtarget$") then
 		self.Castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
 		self.Castbar:SetStatusBarTexture(C.media.texture, "ARTWORK")
 
@@ -1288,7 +1278,7 @@ local function Shared(self, unit)
 	end
 
 	-- Dispel highlight
-	if C.raidframe.plugins_debuffhighlight and not unit:match('%wtarget$') then
+	if C.raidframe.plugins_debuffhighlight and not unit:match("%wtarget$") then
 		-- self.DispelColor = self.Health:CreateTexture(nil, "OVERLAY")
 		-- self.DispelColor:SetAllPoints(self.Health)
 		-- self.DispelColor:SetTexture(C.media.highlight)
