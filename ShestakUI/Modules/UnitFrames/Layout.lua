@@ -973,7 +973,7 @@ local function Shared(self, unit)
 		self.Castbar.Overlay = CreateFrame("Frame", nil, self.Castbar)
 		self.Castbar.Overlay:SetTemplate("Default")
 		self.Castbar.Overlay:SetFrameStrata("BACKGROUND")
-		self.Castbar.Overlay:SetFrameLevel(3)
+		self.Castbar.Overlay:SetFrameLevel(2)
 		self.Castbar.Overlay:SetPoint("TOPLEFT", -2, 2)
 		self.Castbar.Overlay:SetPoint("BOTTOMRIGHT", 2, -2)
 
