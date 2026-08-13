@@ -497,7 +497,7 @@ T.UpdateClassMana = function(self, elapsed)
 	if self.elapsed < 0.05 then return end
 	self.elapsed = 0
 
-	if self.unit ~= "player" then return end
+	if self.__unit ~= "player" then return end
 
 	if UnitPowerType("player") ~= 0 then
 		if UnitIsDeadOrGhost("player") then
@@ -1061,7 +1061,7 @@ T.UpdateThreat = function(self, unit, status, color)
 end
 
 T.UpdatePvPStatus = function(self)
-	local unit = self.unit
+	local unit = self.__unit
 
 	if self.Status then
 		local factionGroup = UnitFactionGroup(unit)
