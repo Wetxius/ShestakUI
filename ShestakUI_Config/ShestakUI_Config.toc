@@ -1,8 +1,8 @@
-## Interface: 120007
+## Interface: 120100
 ## Title: ShestakUI Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 11.1.7
+## Version: 11.1.8
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
 ## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Logo.tga
