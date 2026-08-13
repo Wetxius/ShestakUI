@@ -717,7 +717,7 @@ local function Shared(self, unit)
 		end
 	end
 
-	-- Counter bar (Darkmoon Fair) -- Midnight secret error
+	-- Counter bar (Darkmoon Fair) -- Midnight secret error (BETA)
 	-- if unit == "player" or unit == "pet" then
 		-- self.CounterBar = CreateFrame("StatusBar", self:GetName().."_CounterBar", self)
 		-- self.CounterBar:CreateBackdrop("Default")
@@ -764,6 +764,28 @@ local function Shared(self, unit)
 		-- self.Debuffs.PostCreateButton = T.PostCreateIcon
 		-- self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 		-- self.Debuffs.FilterAura = T.CustomFilter
+
+		self.Debuffs = self:CreateAuras()
+		self.Debuffs.size = T.Scale(C.aura.debuff_size)
+		self.Debuffs.showCount = true
+		self.Debuffs.elementSpacing = T.Scale(3)
+		self.Debuffs.growthY = "DOWN"
+
+		if unit == "pet" or unit == "focus" then
+			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -17)
+			self.Debuffs.initialAnchor = "TOPRIGHT"
+			self.Debuffs.growthX = "LEFT"
+		else
+			self.Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -17)
+			self.Debuffs.initialAnchor = "TOPLEFT"
+			self.Debuffs.growthX = "RIGHT"
+		end
+
+		self.Debuffs:AddGroup("HARMFUL", {
+			maxFrameCount = 4,
+			-- initializeFrame = T.PostCreateIcon,
+			showDebuffBorder = true,
+		})
 
 		if unit == "pet" then
 			self:RegisterEvent("UNIT_PET", T.UpdateAllElements)
@@ -847,6 +869,31 @@ local function Shared(self, unit)
 
 				-- self.Debuffs.PostCreateButton = T.PostCreateIcon
 				-- self.Debuffs.PostUpdateButton = T.PostUpdateIcon
+
+				self.Debuffs = self:CreateAuras()
+				self.Debuffs.showCount = true
+				self.Debuffs.elementSpacing = T.Scale(3)
+				self.Debuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+				self.Debuffs.initialAnchor = "BOTTOMRIGHT"
+				self.Debuffs.growthX = "LEFT"
+
+				self.Debuffs.size = T.Scale(C.aura.debuff_size)
+
+				if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune)
+				or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo and C.unitframe_class_bar.combo_old ~= true)
+				or (T.class == "SHAMAN" and C.unitframe_class_bar.totem)
+				or (T.class == "WARLOCK" and C.unitframe_class_bar.shard) then
+					self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19)
+				else
+					self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5)
+				end
+
+				self.Debuffs:AddGroup("HARMFUL", {
+					maxFrameCount = 10,
+					-- initializeFrame = T.PostCreateIcon,
+					showDebuffBorder = true,
+				})
+
 			else
 				BuffFrame:Hide()
 				DebuffFrame:Hide()
@@ -873,22 +920,22 @@ local function Shared(self, unit)
 				-- self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
 				-- self.Auras.FilterAura = T.CustomFilter
 
-				local Auras = self:CreateAuras()
-				Auras.showCount = true
-				Auras.elementSpacing = T.Scale(3)
-				Auras.groupSpacing = T.Scale(C.aura.debuff_size)
-				Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
+				self.Auras = self:CreateAuras()
+				self.Auras.showCount = true
+				self.Auras.elementSpacing = T.Scale(3)
+				self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
+				self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
 
-				Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
-				Auras.size = T.Scale(C.aura.debuff_size)
+				self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
+				self.Auras.size = T.Scale(C.aura.debuff_size)
 
-				Auras:AddGroup("HELPFUL", {
+				self.Auras:AddGroup("HELPFUL", {
 					maxFrameCount = 32,
 					-- initializeFrame = T.PostCreateIcon,
 					showBuffBorder = true,
 				})
 
-				Auras:AddGroup("HARMFUL", {
+				self.Auras:AddGroup("HARMFUL", {
 					maxFrameCount = 16,
 					-- initializeFrame = T.PostCreateIcon,
 					showDebuffBorder = true,
@@ -1158,25 +1205,25 @@ local function Shared(self, unit)
 		self.FactionIcon:SetPoint("TOP", 0, 0)
 
 		-- Crowd control icon
-		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
-		self.Debuffs:SetSize(31 + T.extraHeight, 31 + T.extraHeight)
-		self.Debuffs:SetFrameStrata("HIGH")
-		self.Debuffs.size = T.Scale(31 + T.extraHeight)
-		self.Debuffs.num = 1
-		if C.unitframe.boss_on_right then
-			self.Debuffs:SetPoint("RIGHT", self, "LEFT", -5, 0)
-			self.Debuffs.initialAnchor = "RIGHT"
-			self.Debuffs.growthX = "LEFT"
-		else
-			self.Debuffs:SetPoint("LEFT", self, "RIGHT", 5, 0)
-			self.Debuffs.initialAnchor = "LEFT"
-			self.Debuffs.growthX = "RIGHT"
-		end
+		--BETA self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
+		-- self.Debuffs:SetSize(31 + T.extraHeight, 31 + T.extraHeight)
+		-- self.Debuffs:SetFrameStrata("HIGH")
+		-- self.Debuffs.size = T.Scale(31 + T.extraHeight)
+		-- self.Debuffs.num = 1
+		-- if C.unitframe.boss_on_right then
+			-- self.Debuffs:SetPoint("RIGHT", self, "LEFT", -5, 0)
+			-- self.Debuffs.initialAnchor = "RIGHT"
+			-- self.Debuffs.growthX = "LEFT"
+		-- else
+			-- self.Debuffs:SetPoint("LEFT", self, "RIGHT", 5, 0)
+			-- self.Debuffs.initialAnchor = "LEFT"
+			-- self.Debuffs.growthX = "RIGHT"
+		-- end
 
-		self.Debuffs.PostCreateButton = T.PostCreateIcon
-		self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
+		-- self.Debuffs.PostCreateButton = T.PostCreateIcon
+		-- self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
 
-		self.Debuffs.filter = "HARMFUL|CROWD_CONTROL"
+		-- self.Debuffs.filter = "HARMFUL|CROWD_CONTROL"
 
 		--BETA self.AuraTracker = CreateFrame("Frame", self:GetName().."_AuraTracker", self)
 		-- self.AuraTracker:SetWidth(self.Trinket:GetWidth())
@@ -1258,6 +1305,35 @@ local function Shared(self, unit)
 			-- self.Auras.PostUpdateButton = T.PostUpdateIcon
 			-- self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
 			-- self.Auras.FilterAura = T.CustomFilterBoss
+
+			self.Auras = self:CreateAuras()
+			self.Auras.showCount = true
+			self.Auras.elementSpacing = T.Scale(3)
+			self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
+			self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
+
+			if C.unitframe.boss_on_right then
+				self.Auras:SetPoint("RIGHT", self, "LEFT", -5, 0)
+				self.Auras.initialAnchor = "RIGHT"
+				self.Auras.growthX = "LEFT"
+			else
+				self.Auras:SetPoint("LEFT", self, "RIGHT", 5, 0)
+				self.Auras.initialAnchor = "LEFT"
+				self.Auras.growthX = "RIGHT"
+			end
+			self.Auras.size = T.Scale(31 + T.extraHeight)
+
+			self.Auras:AddGroup("HELPFUL", {
+				maxFrameCount = C.aura.boss_buffs,
+				-- initializeFrame = T.PostCreateIcon,
+				showBuffBorder = true,
+			})
+
+			self.Auras:AddGroup("HARMFUL", {
+				maxFrameCount = C.aura.boss_debuffs,
+				-- initializeFrame = T.PostCreateIcon,
+				showDebuffBorder = true,
+			})
 		end
 
 		self:HookScript("OnShow", T.UpdateAllElements)
