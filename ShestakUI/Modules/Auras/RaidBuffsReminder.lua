@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C.reminder.raid_buffs_enable ~= true then return end
-
+if T.newPatch then return end
 ----------------------------------------------------------------------------------------
 --	Raid buffs on player(by Elv22)
 ----------------------------------------------------------------------------------------

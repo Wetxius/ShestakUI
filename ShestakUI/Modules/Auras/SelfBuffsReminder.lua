@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C.reminder.solo_buffs_enable ~= true then return end
-
+if T.newPatch then return end
 ----------------------------------------------------------------------------------------
 --	Self buffs on player(by Tukz and Elv22)
 ----------------------------------------------------------------------------------------
