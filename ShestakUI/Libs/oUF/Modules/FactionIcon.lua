@@ -8,7 +8,7 @@ local _, ns = ...
 local oUF = ns.oUF
 
 local Update = function(self, event, unit)
-	if event == "ARENA_OPPONENT_UPDATE" and unit ~= self.unit then return end
+	if event == "ARENA_OPPONENT_UPDATE" and unit ~= self.__unit then return end
 	local element = self.FactionIcon
 
 	local _, instanceType = IsInInstance()
@@ -21,7 +21,7 @@ local Update = function(self, event, unit)
 
 	if element.PreUpdate then element:PreUpdate(event) end
 
-	if UnitIsEnemy(self.unit, "player") and UnitIsPlayer(self.unit) then
+	if UnitIsEnemy(self.__unit, "player") and UnitIsPlayer(self.__unit) then
 		element:Show()
 	else
 		element:Hide()

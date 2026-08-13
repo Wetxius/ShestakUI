@@ -25,7 +25,7 @@ local function GetSoulFragments()
 end
 
 local function Update(self, _, unit)
-	if(unit and unit ~= self.unit) then return end
+	if(unit and unit ~= self.__unit) then return end
 
 	local element = self.SoulFragments
 

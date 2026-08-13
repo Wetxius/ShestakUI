@@ -116,7 +116,7 @@ local function UpdateColor(element, isHonor, isRested)
 end
 
 local function Update(self, _, unit)
-	if(self.unit ~= unit or unit ~= 'player') then return end
+	if(self.__unit ~= unit or unit ~= 'player') then return end
 
 	local element = self.Experience
 	if(element.PreUpdate) then element:PreUpdate(unit) end

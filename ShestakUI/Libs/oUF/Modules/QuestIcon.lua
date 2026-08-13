@@ -98,8 +98,8 @@ local function Update(self, event, arg1)
 	local element = self.QuestIcon
 	if not element then return end
 
-	local unit = (event == "UNIT_NAME_UPDATE" and arg1) or self.unit
-	if unit ~= self.unit then return end
+	local unit = (event == "UNIT_NAME_UPDATE" and arg1) or self.__unit
+	if unit ~= self.__unit then return end
 
 	if element.PreUpdate then
 		element:PreUpdate()

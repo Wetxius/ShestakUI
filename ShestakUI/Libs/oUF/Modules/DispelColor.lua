@@ -128,7 +128,7 @@ local function CheckSpec()
 end
 
 local function Update(self, _, unit)
-	if(self.unit ~= unit) then return end
+	if(self.__unit ~= unit) then return end
 	local element = self.DispelColor
 
 	if not UnitCanAssist("player", unit) then

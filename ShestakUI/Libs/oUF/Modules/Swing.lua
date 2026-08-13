@@ -32,18 +32,18 @@ local function Melee(self)
 	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType = C_CombatLog.GetCurrentEventInfo()
 	local bar = self.Swing
 
-	if UnitGUID(self.unit) == tarGUID then
+	if UnitGUID(self.__unit) == tarGUID then
 		if string.find(event, "MISSED") then
 			if missType == "PARRY" and bar.max then
 				bar.max = bar.min + ((bar.max - bar.min) * 0.6)
 				bar:SetMinMaxValues(bar.min, bar.max)
 			end
 		end
-	elseif UnitGUID(self.unit) == GUID then
+	elseif UnitGUID(self.__unit) == GUID then
 		if not string.find(event, "SWING") then return end
 
 		bar.min = GetTime()
-		bar.max = bar.min + UnitAttackSpeed(self.unit)
+		bar.max = bar.min + UnitAttackSpeed(self.__unit)
 		local itemId = GetInventoryItemID("player", 17)
 
 		if itemId ~= nil then

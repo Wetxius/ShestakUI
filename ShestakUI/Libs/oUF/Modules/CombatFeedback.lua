@@ -61,7 +61,7 @@ local function createUpdateFrame()
 end
 
 local function combat(self, event, unit, eventType, flags, amount)
-	if unit ~= self.unit then return end
+	if unit ~= self.__unit then return end
 	if unit == "vehicle" then return end
 	local FeedbackText = self.CombatFeedbackText
 	local fColors = FeedbackText.colors

@@ -7,7 +7,7 @@ local oUF = ns.oUF
 local SPELL_POWER_ARCANE_CHARGES = Enum.PowerType.ArcaneCharges or 16
 
 local function Update(self, _, unit, powerType)
-	if(self.unit ~= unit or (powerType and powerType ~= "ARCANE_CHARGES")) then return end
+	if(self.__unit ~= unit or (powerType and powerType ~= "ARCANE_CHARGES")) then return end
 
 	local element = self.ArcaneCharge
 

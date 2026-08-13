@@ -7,7 +7,7 @@ local oUF = ns.oUF
 local SPELL_POWER_CHI = Enum.PowerType.Chi or 12
 
 local function Update(self, _, unit, powerType)
-	if(self.unit ~= unit and (powerType and (powerType ~= "CHI" and powerType ~= "DARK_FORCE"))) then return end
+	if(self.__unit ~= unit and (powerType and (powerType ~= "CHI" and powerType ~= "DARK_FORCE"))) then return end
 
 	local element = self.HarmonyBar
 

@@ -20,7 +20,7 @@ end
 
 local function Update(self, event)
 	local element = self.ReadyCheckIndicator
-	local unit = self.unit
+	local unit = self.__unit
 
 	--[[ Callback: ReadyCheckIndicator:PreUpdate()
 	Called before the element has been updated.
@@ -34,39 +34,22 @@ local function Update(self, event)
 	local status = GetReadyCheckStatus(unit)
 	if(unitExists(unit) and status) then
 		if(status == 'ready') then
-			if(element.readyTexture) then
-				element:SetTexture(element.readyTexture) -- DEPRECATED
-			else
-				element:SetAtlas('UI-LFG-ReadyMark-Raid', element.useAtlasSize)
-			end
+			element:SetAtlas('UI-LFG-ReadyMark-Raid', element.useAtlasSize)
 		elseif(status == 'notready') then
-			if(element.notReadyTexture) then
-				element:SetTexture(element.notReadyTexture) -- DEPRECATED
-			else
-				element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
-			end
+			element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
 		else
-			if(element.waitingTexture) then
-				element:SetTexture(element.waitingTexture) -- DEPRECATED
-			else
-				element:SetAtlas('UI-LFG-PendingMark-Raid', element.useAtlasSize)
-			end
+			element:SetAtlas('UI-LFG-PendingMark-Raid', element.useAtlasSize)
 		end
 
-		element.status = status
 		element:Show()
 	elseif(event ~= 'READY_CHECK_FINISHED') then
-		element.status = nil
+		status = nil
 		element:Hide()
 	end
 
 	if(event == 'READY_CHECK_FINISHED') then
-		if(element.status == 'waiting') then
-			if(element.notReadyTexture) then
-				element:SetTexture(element.notReadyTexture) -- DEPRECATED
-			else
-				element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
-			end
+		if(status == 'waiting') then
+			element:SetAtlas('UI-LFG-DeclineMark-Raid', element.useAtlasSize)
 		end
 
 		element.Animation:Play()

@@ -155,7 +155,7 @@ local UpdateDebuffFrame = function(rd, icon, count, debuffType, duration, expira
 end
 
 local Update = function(self, _, unit)
-	if unit ~= self.unit then return end
+	if unit ~= self.__unit then return end
 	local rd = self.RaidDebuffs
 	rd.priority = invalidPrio
 	local _icon, _count, _debuffType, _duration, _expirationTime, _spellId

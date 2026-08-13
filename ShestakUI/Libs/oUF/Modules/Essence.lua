@@ -8,7 +8,7 @@ lib.addEssence = function(self)
 		-- Essence bar
 		if C.unitframe_class_bar.essence == true then
 			self.Essence = CreateFrame("Frame", self:GetName().."_Essence", self, "BackdropTemplate", "BackdropTemplate")
-			local maxEssence = UnitPowerMax(self.unit, Enum.PowerType.Essence)
+			local maxEssence = UnitPowerMax(self.__unit, Enum.PowerType.Essence)
 			self.Essence:CreateBackdrop("Default")
 			self.Essence:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 1,7)
 			self.Essence:SetHeight(7)
@@ -42,8 +42,8 @@ local oUF = ns.oUF
 local SPELL_POWER_ESSENCE = Enum.PowerType.Essence
 
 local function Update(self, _, unit, powerType)
-	if(self.unit ~= unit or (powerType and powerType ~= "ESSENCE")) then return end
-	local maxEssence = UnitPowerMax(self.unit, Enum.PowerType.Essence)
+	if(self.__unit ~= unit or (powerType and powerType ~= "ESSENCE")) then return end
+	local maxEssence = UnitPowerMax(self.__unit, Enum.PowerType.Essence)
 	local element = self.Essence
 
 	if(element.PreUpdate) then

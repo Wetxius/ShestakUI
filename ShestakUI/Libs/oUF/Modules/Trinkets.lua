@@ -25,7 +25,7 @@ local Update = function(self, event, ...)
 	if event == "ARENA_COOLDOWNS_UPDATE" then
 		local unit = ...
 
-		if self.unit == unit then
+		if self.__unit == unit then
 			C_PvP.RequestCrowdControlSpell(unit)
 
 			local spellID, startTime, duration = C_PvP.GetArenaCrowdControlInfo(unit)
@@ -37,7 +37,7 @@ local Update = function(self, event, ...)
 	elseif event == "ARENA_CROWD_CONTROL_SPELL_UPDATE" then
 		local unit, spellID = ...
 
-		if self.unit == unit then
+		if self.__unit == unit then
 			local _, _, spellTexture = GetSpellInfo(spellID)
 
 			self.Trinket.Icon:SetTexture(spellTexture)

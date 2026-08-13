@@ -13,7 +13,7 @@ local OnUpdate = function(self, elapsed)
 end
 
 local Update = function(self, _, unit)
-	if self.unit ~= unit then return end
+	if self.__unit ~= unit then return end
 
 	local counterbar = self.CounterBar
 	if counterbar.PreUpdate then

@@ -7,7 +7,7 @@ local oUF = ns.oUF
 local MAX_COMBO_POINTS = MAX_COMBO_POINTS
 
 local function Update(self, _, unit, powerType)
-	if(self.unit ~= unit and (powerType and (powerType ~= "COMBO_POINTS"))) then return end
+	if(self.__unit ~= unit and (powerType and (powerType ~= "COMBO_POINTS"))) then return end
 
 	local element = self.ComboPoints
 	local cur, max
