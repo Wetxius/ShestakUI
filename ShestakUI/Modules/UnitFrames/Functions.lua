@@ -129,9 +129,10 @@ end
 T.PostUpdateBackdropColor = function(element, color)
 	local bg = element.bg
 	if bg and color then
-		local mu = bg.multiplier or 1
+		-- local mu = bg.multiplier or 1
 		local r, g, b = color:GetRGB()
-		bg:SetVertexColor(r * mu, g * mu, b * mu)
+		-- bg:SetVertexColor(r * mu, g * mu, b * mu)
+		bg:SetVertexColor(r, g, b, 0.2)
 	end
 end
 
