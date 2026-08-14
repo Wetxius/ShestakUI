@@ -22,11 +22,12 @@ local function addLine(self, id, isItem)
 end
 
 -- Spells
-hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
-	local aura = C_UnitAuras.GetAuraDataByIndex(...)
+hooksecurefunc(GameTooltip, "SetUnitAura", function(self, unit, index, filter)
+	if InCombatLockdown() or IsInInstance() then return end -- secret error
+	local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
 	local id = aura and aura.spellId
 	if id then addLine(self, id) end
-	if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(...)..": "..id) end
+	if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(unit, index, filter)..": "..id) end
 end)
 
 local function attachByAuraInstanceID(self, ...)

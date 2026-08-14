@@ -10,6 +10,7 @@ local function addAuraSource(self, unit, index, filter, instanceID)
 		local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, index)
 		srcUnit = aura and aura.sourceUnit
 	else
+		if InCombatLockdown() or IsInInstance() then return end -- secret error
 		local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
 		srcUnit = aura and aura.sourceUnit
 	end
