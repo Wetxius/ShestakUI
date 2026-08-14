@@ -372,10 +372,12 @@ local function UpdateName(self)
 		local reaction = UnitReaction(self.__unit, "player")
 		if UnitIsPlayer(self.__unit) and (reaction and reaction <= 4) then
 			local _, class = UnitClass(self.__unit)
-			local texcoord = CLASS_ICON_TCOORDS[class]
-			self.Class.Icon:SetTexCoord(texcoord[1] + 0.015, texcoord[2] - 0.02, texcoord[3] + 0.018, texcoord[4] - 0.02)
-			self.Class:Show()
-			self.Level:SetPoint("RIGHT", self.Name, "LEFT", -2, 0)
+			if canaccessvalue(class) then
+				local texcoord = CLASS_ICON_TCOORDS[class]
+				self.Class.Icon:SetTexCoord(texcoord[1] + 0.015, texcoord[2] - 0.02, texcoord[3] + 0.018, texcoord[4] - 0.02)
+				self.Class:Show()
+				self.Level:SetPoint("RIGHT", self.Name, "LEFT", -2, 0)
+			end
 		else
 			self.Class.Icon:SetTexCoord(0, 0, 0, 0)
 			self.Class:Hide()
@@ -641,8 +643,8 @@ local function HealthPostUpdateColor(self, unit, color)
 		if special == "elite" and IsInInstance() then
 			if UnitIsLieutenant(unit) then
 				main.npcID = "miniboss"
-			elseif UnitClassBase(unit) == "PALADIN" then
-				main.npcID = "caster"
+			-- elseif UnitClassBase(unit) == "PALADIN" then -- secret now
+				-- main.npcID = "caster"
 			end
 		end
 		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then

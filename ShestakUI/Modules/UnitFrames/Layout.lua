@@ -1601,7 +1601,7 @@ if C.unitframe.lines then
 	HorizontalTargetLine:RegisterEvent("PLAYER_TARGET_CHANGED")
 	HorizontalTargetLine:SetScript("OnEvent", function(self)
 		local _, class = UnitClass("target")
-		local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+		local color = canaccessvalue(class) and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 		if color then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
@@ -1614,7 +1614,7 @@ if C.unitframe.lines then
 	VerticalTargetLine:RegisterEvent("PLAYER_TARGET_CHANGED")
 	VerticalTargetLine:SetScript("OnEvent", function(self)
 		local _, class = UnitClass("target")
-		local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+		local color = canaccessvalue(class) and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 		if color then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
