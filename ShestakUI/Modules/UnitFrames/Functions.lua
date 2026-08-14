@@ -9,9 +9,9 @@ local oUF = ns.oUF
 T.oUF = oUF
 
 T.UpdateAllElements = function(frame)
-	for _, v in ipairs(frame.__elements) do
-		v(frame, "UpdateElement", frame.unit)
-	end
+	--BETA for _, v in ipairs(frame.__elements) do
+		-- v(frame, "UpdateElement", frame.unit)
+	-- end
 end
 
 T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
