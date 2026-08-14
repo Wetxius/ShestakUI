@@ -232,7 +232,7 @@ local AurasCustomFilter = function(_, unit, data)
 	if not UnitIsFriend("player", unit) then
 		if data.isHarmfulAura then
 			if C.nameplate.track_debuffs and data.isPlayerAura then
-				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|PLAYER|")
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|PLAYER")
 				if filter then
 					allow = true
 				end
@@ -279,9 +279,9 @@ local AurasPostCreateIcon = function(_, button)
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
-		button.parent = CreateFrame("Frame", nil, button)
-		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		button.Count:SetParent(button.parent)
+		-- button.parent = CreateFrame("Frame", nil, button)
+		-- button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		-- button.Count:SetParent(button.parent)
 	else
 		-- button.Cooldown:SetAlpha(0)
 	end
@@ -428,7 +428,7 @@ if C.nameplate.kick_color then
 end
 
 -- Cast color
-local function castColor(self, unit, _, notInterruptible)
+local function castColor(self, unit, spellID, notInterruptible)
 	-- Check if notInterruptible
 	local color = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
 
@@ -462,7 +462,7 @@ local function castColor(self, unit, _, notInterruptible)
 	-- end
 
 	if C.nameplate.cast_color then
-		local color = C_CurveUtil.EvaluateColorFromBoolean(C_Spell.IsSpellImportant(self.spellID), {r = 1, g = 0.8, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
+		local color = C_CurveUtil.EvaluateColorFromBoolean(C_Spell.IsSpellImportant(spellID), {r = 1, g = 0.8, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
 		SetColorBorder(self, color:GetRGB())
 		SetColorBorder(self.Border, color:GetRGB())
 	end
@@ -930,21 +930,36 @@ local function style(self, unit)
 
 	-- Aura tracking
 	if C.nameplate.track_debuffs or C.nameplate.track_buffs then
-		self.Auras = CreateFrame("Frame", nil, self)
+		self.Auras = self:CreateAuras({
+			initialAnchor = "BOTTOMRIGHT",
+			growthX = "LEFT",
+			growthY = "UP",
+			layoutLimit = 20 + C.nameplate.width,
+		})
+
 		self.Auras:SetPoint("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, C.font.nameplates_font_size + 8)
-		self.Auras.initialAnchor = "BOTTOMRIGHT"
-		self.Auras.growthX = "LEFT"
-		self.Auras.growthY = "UP"
-		self.Auras.numDebuffs = C.nameplate.track_debuffs and 6 or 0
-		self.Auras.numBuffs = C.nameplate.track_buffs and 4 or 0
-		self.Auras:SetSize(20 + C.nameplate.width, C.nameplate.auras_size)
-		self.Auras.spacing = 5 * 1
+		self.Auras.elementSpacing = 5 * 1
 		self.Auras.size = C.nameplate.auras_size * 1 - 3
 		self.Auras.disableMouse = true
+		self.Auras.showCount = true
 
-		self.Auras.FilterAura = AurasCustomFilter
+		-- self.Auras.FilterAura = AurasCustomFilter
 		self.Auras.PostCreateButton = AurasPostCreateIcon
-		self.Auras.PostUpdateButton = AurasPostUpdateIcon
+		-- self.Auras.PostUpdateButton = AurasPostUpdateIcon
+
+		if C.nameplate.track_buffs then
+			self.Auras:AddGroup("HELPFUL", {
+				maxFrameCount = 4,
+			})
+		end
+
+		if C.nameplate.track_debuffs then
+			self.Auras:AddGroup("HARMFUL|PLAYER", {
+				maxFrameCount = 6,
+				-- showDebuffBorder = true,
+			})
+		end
+
 	end
 
 	-- Health color
