@@ -925,16 +925,18 @@ local function Shared(self, unit)
 				-- self.Auras.PostUpdateGapButton = T.PostUpdateGapButton
 				-- self.Auras.FilterAura = T.CustomFilter
 
-				self.Auras = self:CreateAuras()
+				self.Auras = self:CreateAuras({
+					initialAnchor = "BOTTOMLEFT",
+					growthX = "RIGHT",
+					growthY = "UP",
+					layoutLimit = player_width - 6,
+				})
+				self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
 				self.Auras.showCount = true
 				self.Auras.elementSpacing = T.Scale(3)
+				self.Auras.size = T.Scale(C.aura.debuff_size)
 				self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 				self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
-				self.Auras.layoutLimit = player_width - 56
-
-				self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
-				self.Auras.size = T.Scale(C.aura.debuff_size)
-
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
 				self.Auras:AddGroup("HELPFUL", {
