@@ -428,21 +428,21 @@ if C.nameplate.kick_color then
 end
 
 -- Cast color
-local function castColor(self, unit)
+local function castColor(self, unit, _, notInterruptible)
 	-- Check if notInterruptible
-	local color = C_CurveUtil.EvaluateColorFromBoolean(self.notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
+	local color = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
 
 	-- if C.nameplate.kick_color then
 		-- local start, _, enabled = GetSpellCooldown(kickID)
 		-- local col = C_CurveUtil.EvaluateColorFromBoolean(enabled, {r = 1, g = 0.5, b = 0, a = 1}, {r = 1, g = 0.8, b = 0, a = 1})
 		-- -- Rewrite color for notInterruptible
-		-- color = C_CurveUtil.EvaluateColorFromBoolean(self.notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = col.r, g = col.g, b = col.b, a = 1})
+		-- color = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.78, g = 0.25, b = 0.25, a = 1}, {r = col.r, g = col.g, b = col.b, a = 1})
 	-- end
 
 	self:GetStatusBarTexture():SetVertexColor(color:GetRGBA())
 	self.bg:SetColorTexture(color.r, color.g, color.b, 0.2)
 
-	-- if canaccessvalue(self.notInterruptible) and self.notInterruptible then -- secret, need to create new element with alpha?
+	-- if canaccessvalue(notInterruptible) and notInterruptible then -- secret, need to create new element with alpha?
 		-- self:SetStatusBarColor(0.78, 0.25, 0.25)
 		-- self.bg:SetColorTexture(0.78, 0.25, 0.25, 0.2)
 	-- else
@@ -495,7 +495,7 @@ local function castColor(self, unit)
 	-- end
 end
 
-local function CastInterrupted(self, unit, interruptedBy)
+local function CastInterrupted(self, unit, _, interruptedBy)
 	self:GetStatusBarTexture():SetVertexColor(0.2, 0.2, 0.2)
 	if interruptedBy then
 		local _, class, _, _, _, unitName = GetPlayerInfoByGUID(interruptedBy)

@@ -571,7 +571,7 @@ local function castColor(unit)
 	return r, g, b
 end
 
-T.PostCastStart = function(Castbar, unit)
+T.PostCastStart = function(Castbar, unit, _, notInterruptible)
 	if unit == "vehicle" then unit = "player" end
 
 	if unit == "player" and C.unitframe.castbar_latency and Castbar.Latency then
@@ -602,12 +602,12 @@ T.PostCastStart = function(Castbar, unit)
 	end
 
 	if UnitCanAttack("player", unit) then -- check interrupt only for hostile
-		local color = C_CurveUtil.EvaluateColorFromBoolean(Castbar.notInterruptible, {r = 0.8, g = 0, b = 0, a = 1}, {r = r, g = g, b = b, a = 1})
-		local color_border = C_CurveUtil.EvaluateColorFromBoolean(Castbar.notInterruptible, {r = 0.8, g = 0, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
+		local color = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.8, g = 0, b = 0, a = 1}, {r = r, g = g, b = b, a = 1})
+		local color_border = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.8, g = 0, b = 0, a = 1}, {r = C.media.border_color[1], g = C.media.border_color[2], b = C.media.border_color[3], a = 1})
 
 		Castbar:GetStatusBarTexture():SetVertexColor(color:GetRGBA())
 		if C.unitframe.own_color then
-			local color_bg = C_CurveUtil.EvaluateColorFromBoolean(Castbar.notInterruptible, {r = 0.8, g = 0, b = 0, a = 0.2}, {r = C.unitframe.uf_color_bg[1], g = C.unitframe.uf_color_bg[2], b = C.unitframe.uf_color_bg[3], a = 1})
+			local color_bg = C_CurveUtil.EvaluateColorFromBoolean(notInterruptible, {r = 0.8, g = 0, b = 0, a = 0.2}, {r = C.unitframe.uf_color_bg[1], g = C.unitframe.uf_color_bg[2], b = C.unitframe.uf_color_bg[3], a = 1})
 			Castbar.bg:SetVertexColor(color_bg:GetRGBA())
 		else
 			Castbar.bg:SetVertexColor(color.r, color.g, color.b, 0.2)
