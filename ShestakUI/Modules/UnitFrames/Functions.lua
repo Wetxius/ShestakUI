@@ -815,9 +815,9 @@ T.CreateRaidBuffIcon = function(_, button)
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
-		button.parent = CreateFrame("Frame", nil, button)
-		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		button.Count:SetParent(button.parent)
+		-- button.parent = CreateFrame("Frame", nil, button)
+		-- button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		-- button.Count:SetParent(button.parent)
 	else
 		-- button.Cooldown:SetAlpha(0)
 	end

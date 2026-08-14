@@ -278,18 +278,20 @@ local function Shared(self, unit)
 		-- self.Buffs.filter = "HELPFUL|PLAYER|RAID_IN_COMBAT"
 
 		-- Defensive buffs
-		-- -- self.Auras = CreateFrame("Frame", self:GetName().."_DefensiveBuffs", self)
-		-- -- self.Auras:SetPoint("LEFT", self, 0, 2)
-		-- -- self.Auras:SetSize(self:GetWidth(), 7 * C.raidframe.icon_multiplier)
-		-- -- self.Auras.size = 7 * C.raidframe.icon_multiplier
-		-- -- self.Auras.spacing = 3
-		-- -- self.Auras.numTotal = 1
+		self.Auras = self:CreateAuras({
+			initialAnchor = "TOPRIGHT",
+			growthX = "LEFT",
+		})
+		self.Auras:SetPoint("LEFT", self, 0, 2)
+		self.Auras.showCount = true
+		self.Auras.elementSpacing = T.Scale(3)
+		self.Auras.size = 7 * C.raidframe.icon_multiplier
+		self.Auras.disableMouse = true
+		self.Auras.PostCreateButton = T.CreateRaidBuffIcon
 
-		-- -- self.Auras.PostCreateButton = T.CreateRaidBuffIcon
-
-		-- -- self.Auras.disableMouse = true
-		-- -- self.Auras.filter = "HELPFUL|EXTERNAL_DEFENSIVE"
-		-- -- -- self.Auras.filter = "HELPFUL|BIG_DEFENSIVE"
+		self.Auras:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
+			maxFrameCount = 1,
+		})
 	end
 
 	-- Raid Debuffs

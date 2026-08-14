@@ -884,6 +884,7 @@ local function Shared(self, unit)
 				self.Auras.lineSpacing = T.Scale(3)
 				self.Auras.size = T.Scale(C.aura.debuff_size)
 				self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
+				self.Auras.groupLineSpacing = T.Scale(3)
 				self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
@@ -896,9 +897,8 @@ local function Shared(self, unit)
 
 				self.Auras:AddGroup("HARMFUL", {
 					maxFrameCount = 16,
-					-- showDebuffBorder = true,
+					showDebuffBorder = true,
 				})
-
 			end
 
 			-- Rogue/Druid Combo bar on target
