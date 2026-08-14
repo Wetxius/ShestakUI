@@ -743,9 +743,9 @@ T.PostCreateIcon = function(_, button)
 		button.Cooldown:SetReverse(true)
 		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
-		button.parent = CreateFrame("Frame", nil, button)
-		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		button.Count:SetParent(button.parent)
+		-- button.parent = CreateFrame("Frame", nil, button)
+		-- button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		-- button.Count:SetParent(button.parent)
 	else
 		-- button.Cooldown:SetAlpha(0)
 	end

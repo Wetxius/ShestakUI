@@ -25,7 +25,13 @@ local function Shared(self, unit)
 
 	-- Register click
 	self:RegisterForClicks("AnyUp")
-	self:SetScript("OnEnter", UnitFrame_OnEnter)
+	self:SetScript("OnEnter", function(self)
+		local unit = self.__unit
+		if unit then
+			self.unit = unit
+			UnitFrame_OnEnter(self)
+		end
+	end)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
 	local unit = (unit and unit:find("arena%dtarget")) and "arenatarget"
@@ -772,7 +778,6 @@ local function Shared(self, unit)
 		self.Debuffs.growthY = "DOWN"
 
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
-		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 
 		if unit == "pet" or unit == "focus" then
 			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -17)
@@ -879,7 +884,6 @@ local function Shared(self, unit)
 				self.Debuffs.size = T.Scale(C.aura.debuff_size)
 
 				self.Debuffs.PostCreateButton = T.PostCreateIcon
-				self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 
 				if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune)
 				or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo and C.unitframe_class_bar.combo_old ~= true)
@@ -932,7 +936,6 @@ local function Shared(self, unit)
 				self.Auras.size = T.Scale(C.aura.debuff_size)
 
 				self.Auras.PostCreateButton = T.PostCreateIcon
-				self.Auras.PostUpdateButton = T.PostUpdateIcon
 
 				self.Auras:AddGroup("HELPFUL", {
 					maxFrameCount = 32,
@@ -1235,7 +1238,6 @@ local function Shared(self, unit)
 		self.Debuffs.growthY = "DOWN"
 
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
-		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
 
 		if C.unitframe.boss_on_right then
 			self.Debuffs:SetPoint("RIGHT", self, "LEFT", -5, 0)

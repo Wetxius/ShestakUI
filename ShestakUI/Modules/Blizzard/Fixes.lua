@@ -46,14 +46,15 @@ end
 ----------------------------------------------------------------------------------------
 --	Hide right-click line on unitframes tooltip
 ----------------------------------------------------------------------------------------
--- function UnitFrame_UpdateTooltip(self)
-	-- GameTooltip_SetDefaultAnchor(GameTooltip, self)
-	-- if GameTooltip:SetUnit(self.__unit, self.hideStatusOnTooltip) then
-		-- self.UpdateTooltip = UnitFrame_UpdateTooltip
-	-- else
-		-- self.UpdateTooltip = nil
-	-- end
--- end
+function UnitFrame_UpdateTooltip(self)
+	if not self.unit then return end
+	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	if GameTooltip:SetUnit(self.__unit, self.hideStatusOnTooltip) then
+		self.UpdateTooltip = UnitFrame_UpdateTooltip
+	else
+		self.UpdateTooltip = nil
+	end
+end
 
 ----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
