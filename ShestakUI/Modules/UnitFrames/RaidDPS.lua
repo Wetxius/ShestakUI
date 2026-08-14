@@ -240,18 +240,22 @@ local function Shared(self, unit)
 
 	-- Debuff icons
 	if unit == "party" and (not (suffix == "target")) and (not (suffix == "pet")) then
-		self.Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
+		self.Debuffs = self:CreateAuras({
+			initialAnchor = "LEFT",
+			growthY = "RIGHT",
+			growthY = "DOWN",
+			layoutLimit = 144,
+		})
 		self.Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -5)
-		self.Debuffs:SetHeight(18)
-		self.Debuffs:SetWidth(144)
 		self.Debuffs.size = T.Scale(18)
-		self.Debuffs.spacing = T.Scale(3)
-		self.Debuffs.initialAnchor = "LEFT"
-		self.Debuffs.num = 7
-		self.Debuffs.growthX = "RIGHT"
-		self.Debuffs.growthY = "DOWN"
+		self.Debuffs.elementSpacing = T.Scale(3)
+		self.Debuffs.showCount = true
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
-		self.Debuffs.PostUpdateButton = T.PostUpdateIcon
+
+		self.Debuffs:AddGroup("HARMFUL", {
+			maxFrameCount = 7,
+			showDebuffBorder = true,
+		})
 	end
 
 	-- Dispel highlight
