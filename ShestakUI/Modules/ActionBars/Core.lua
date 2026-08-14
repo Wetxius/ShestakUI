@@ -548,9 +548,9 @@ T.PetBarUpdate = function()
 
 		if texture then
 			if GetPetActionSlotUsable(i) then
-				SetDesaturation(petActionIcon, nil)
+				petActionIcon:SetDesaturated(false)
 			else
-				SetDesaturation(petActionIcon, 1)
+				petActionIcon:SetDesaturated(true)
 			end
 			petActionIcon:Show()
 		else
@@ -559,7 +559,7 @@ T.PetBarUpdate = function()
 
 		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
 			petActionButton:StopFlash()
-			SetDesaturation(petActionIcon, 1)
+			petActionIcon:SetDesaturated(true)
 			petActionButton:SetChecked(false)
 		end
 	end
