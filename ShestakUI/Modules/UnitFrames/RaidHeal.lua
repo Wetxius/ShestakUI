@@ -257,21 +257,23 @@ local function Shared(self, unit)
 
 	-- Raid Buffs
 	if C.raidframe.plugins_buffs == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
-		-- T.CreateAuraWatch(self, unit)
+		-- T.CreateAuraWatch(self, unit) -- BETA
 
-		-- self.Buffs = CreateFrame("Frame", self:GetName().."_Buffs", self)
-		-- self.Buffs:SetSize(self:GetWidth(), 8 * C.raidframe.icon_multiplier)
-		-- self.Buffs.size = 8 * C.raidframe.icon_multiplier
-		-- self.Buffs.spacing = 3
-		-- self.Buffs.num = 5
-		-- self.Buffs:SetPoint("TOPRIGHT", self, 0, 0)
-		-- self.Buffs.initialAnchor = "TOPRIGHT"
-		-- self.Buffs.growthX = "LEFT"
+		self.Buffs = self:CreateAuras({
+			initialAnchor = "TOPRIGHT",
+			growthX = "LEFT",
+		})
 
-		-- self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
+		self.Buffs:SetPoint("TOPRIGHT", self, 0, 0)
+		self.Buffs.size = 8 * C.raidframe.icon_multiplier
+		self.Buffs.elementSpacing = T.Scale(3)
+		self.Buffs.showCount = true
+		self.Buffs.disableMouse = true
+		self.Buffs.PostCreateButton = T.CreateRaidBuffIcon
 
-		-- self.Buffs.disableMouse = true
-		-- self.Buffs.filter = "HELPFUL|PLAYER|RAID_IN_COMBAT"
+		self.Buffs:AddGroup("HELPFUL|PLAYER|RAID_IN_COMBAT", {
+			maxFrameCount = 5,
+		})
 
 		-- Defensive buffs
 		self.Auras = self:CreateAuras({
@@ -292,35 +294,35 @@ local function Shared(self, unit)
 
 	-- Raid Debuffs
 	if C.raidframe.plugins_debuffs == true and not (suffix == "pet" or suffix == "target" or suffix == "targettarget") then
-		-- -- self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
-		-- -- self.Debuffs:SetPoint("CENTER", self, 0, 1)
-		-- -- self.Debuffs:SetSize(18 * C.raidframe.icon_multiplier, 18 * C.raidframe.icon_multiplier)
-		-- -- self.Debuffs.size = 18 * C.raidframe.icon_multiplier
-		-- -- self.Debuffs.num = 1
+		self.Debuffs = self:CreateAuras()
+		self.Debuffs:SetPoint("CENTER", self, 0, 1)
+		self.Debuffs.size = 18 * C.raidframe.icon_multiplier
+		self.Debuffs.maxFrameCount = 1
+		self.Debuffs.disableMouse = true
+		self.Debuffs.showCount = true
+		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
-		-- -- self.Debuffs.PostCreateButton = T.PostCreateIcon
-		-- -- self.Debuffs.PostUpdateButton = T.PostUpdateRaidButton
-		-- -- self.Debuffs.FilterAura = T.CustomDebuffFilter
+		self.Debuffs:AddGroup("HARMFUL|RAID_IN_COMBAT")
+		self.Debuffs:AddGroup("HARMFUL|RAID")
+		self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL")
+		self.Debuffs:AddGroup("HARMFUL|IMPORTANT")
 
-		-- -- self.Debuffs.disableMouse = true
-		-- -- self.Debuffs.filter = "HARMFUL"
+		-- Blizzard private auras
+		if C.raidframe.plugins_private_auras then
+			self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)
+			self.PrivateAuras:SetPoint("CENTER", self, 0, 1)
+			self.PrivateAuras:SetSize(18 * C.raidframe.icon_multiplier, 18 * C.raidframe.icon_multiplier)
+			self.PrivateAuras.size = 18 * C.raidframe.icon_multiplier
 
-		-- -- -- Blizzard private auras
-		-- -- if C.raidframe.plugins_private_auras then
-			-- -- self.PrivateAuras = CreateFrame("Frame", self:GetName().."_PrivateAuras", self)
-			-- -- self.PrivateAuras:SetPoint("CENTER", self, 0, 1)
-			-- -- self.PrivateAuras:SetSize(18 * C.raidframe.icon_multiplier, 18 * C.raidframe.icon_multiplier)
-			-- -- self.PrivateAuras.size = 18 * C.raidframe.icon_multiplier
+			self.PrivateAuras.borderScale = 1
+			self.PrivateAuras.disableCooldownText = true
+			self.PrivateAuras.disableCooldown = not C.aura.show_spiral
 
-			-- -- self.PrivateAuras.borderScale = 1
-			-- -- self.PrivateAuras.disableCooldownText = true
-			-- -- self.PrivateAuras.disableCooldown = not C.aura.show_spiral
+			self.PrivateAuras.SetPosition = T.PrivateAurasSetPosition -- show always one aura in center
+			self.PrivateAuras.PostUpdate = T.PrivateAurasPostUpdate -- hide tooltip
 
-			-- -- self.PrivateAuras.SetPosition = T.PrivateAurasSetPosition -- show always one aura in center
-			-- -- self.PrivateAuras.PostUpdate = T.PrivateAurasPostUpdate -- hide tooltip
-
-			-- -- self.Debuffs:SetFrameLevel(7)
-		-- -- end
+			self.Debuffs:SetFrameLevel(7)
+		end
 
 		-- -- Raid debuffs
 		-- self.RaidDebuffs = CreateFrame("Frame", nil, self)
