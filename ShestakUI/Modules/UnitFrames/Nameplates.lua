@@ -643,8 +643,8 @@ local function HealthPostUpdateColor(self, unit, color)
 		if special == "elite" and IsInInstance() then
 			if UnitIsLieutenant(unit) then
 				main.npcID = "miniboss"
-			-- elseif UnitClassBase(unit) == "PALADIN" then -- secret now
-				-- main.npcID = "caster"
+			elseif UnitHasPowerType(unit, Enum.PowerType.Mana) then
+				main.npcID = "caster"
 			end
 		end
 		if C.nameplate.mob_color_enable and T.ColorPlate[main.npcID] then
