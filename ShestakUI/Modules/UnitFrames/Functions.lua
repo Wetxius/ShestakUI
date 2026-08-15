@@ -726,7 +726,7 @@ end
 	-- end
 -- end
 
-T.PostCreateIcon = function(_, button)
+T.PostCreateIcon = function(element, button)
 	button:SetTemplate("Default")
 
 	T.SkinCooldown(button.Cooldown, "aura")
@@ -739,6 +739,17 @@ T.PostCreateIcon = function(_, button)
 	button.Count:SetJustifyH("RIGHT")
 	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	local DebuffIndicator = button:CreateTexture(nil, "BORDER", nil, 1)
+	DebuffIndicator:SetPoint('TOPLEFT', -3, 3)
+	DebuffIndicator:SetPoint('BOTTOMRIGHT', 3, -3)
+	DebuffIndicator:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
+	DebuffIndicator:SetBlendMode('ADD')
+    button:AddDispelTypeTexture(DebuffIndicator, {
+       style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
+       showWithoutDispelType = true,
+	   customDispelColorMap = element.__owner.colors.dispel,
+    })
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
@@ -1138,4 +1149,25 @@ else
 		end
 		return true
 	end
+end
+
+T.DispelColor = function(self)
+	local frame = self:CreateAuras()
+	frame:AddSlot("HARMFUL|RAID", {
+		CreateButton = function(button)
+			button:EnableMouse(false)
+			button:SetAllPoints(self.Health)
+			button:SetFrameLevel(self:GetFrameLevel() + 20)
+
+			local texture = button:CreateTexture(nil, "OVERLAY")
+			texture:SetAllPoints()
+			texture:SetTexture(C.media.highlight)
+			texture:SetVertexColor(0, 0, 0, 0)
+			texture:SetBlendMode("ADD")
+
+			-- button:AddDispelTypeTexture(texture, {
+				-- style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset
+			-- })
+		end
+	})
 end

@@ -772,7 +772,6 @@ local function Shared(self, unit)
 
 		self.Debuffs:AddGroup("HARMFUL", {
 			maxFrameCount = 4,
-			showDebuffBorder = true,
 		})
 
 		if unit == "pet" then
@@ -860,7 +859,6 @@ local function Shared(self, unit)
 
 				self.Debuffs:AddGroup("HARMFUL", {
 					maxFrameCount = 10,
-					showDebuffBorder = true,
 				})
 
 			else
@@ -897,7 +895,6 @@ local function Shared(self, unit)
 
 				self.Auras:AddGroup("HARMFUL", {
 					maxFrameCount = 16,
-					showDebuffBorder = true,
 				})
 			end
 
@@ -1272,7 +1269,6 @@ local function Shared(self, unit)
 
 			self.Auras:AddGroup("HARMFUL", {
 				maxFrameCount = C.aura.boss_debuffs,
-				showDebuffBorder = true,
 			})
 		end
 
@@ -1295,11 +1291,7 @@ local function Shared(self, unit)
 
 	-- Dispel highlight
 	if C.raidframe.plugins_debuffhighlight and not unit:match("%wtarget$") then
-		-- self.DispelColor = self.Health:CreateTexture(nil, "OVERLAY")
-		-- self.DispelColor:SetAllPoints(self.Health)
-		-- self.DispelColor:SetTexture(C.media.highlight)
-		-- self.DispelColor:SetVertexColor(0, 0, 0, 0)
-		-- self.DispelColor:SetBlendMode("ADD")
+		T.DispelColor(self)
 	end
 
 	-- Incoming heals and heal/damage absorbs
