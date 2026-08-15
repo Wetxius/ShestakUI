@@ -761,6 +761,10 @@ T.PostCreateIcon = function(element, button)
 	else
 		-- button.Cooldown:SetAlpha(0)
 	end
+
+	if element.isRaidDebuff then
+		button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
+	end
 end
 
 local dispelIndex = {

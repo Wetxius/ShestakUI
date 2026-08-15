@@ -300,12 +300,21 @@ local function Shared(self, unit)
 		self.Debuffs.maxFrameCount = 1
 		self.Debuffs.disableMouse = true
 		self.Debuffs.showCount = true
+		self.Debuffs.isRaidDebuff = true
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
-		self.Debuffs:AddGroup("HARMFUL|RAID_IN_COMBAT")
-		self.Debuffs:AddGroup("HARMFUL|RAID")
-		self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL")
-		self.Debuffs:AddGroup("HARMFUL|IMPORTANT")
+		if C.raidframe.plugins_debuffs_filter then
+			self.Debuffs:AddGroup("HARMFUL|RAID_IN_COMBAT")
+			self.Debuffs:AddGroup("HARMFUL|RAID")
+			self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL")
+			self.Debuffs:AddGroup("HARMFUL|IMPORTANT")
+		else
+			self.Debuffs:AddGroup("HARMFUL", {
+			  candidateFilters = {
+				excludeSpellIDs = T.RaidDebuffsIgnore
+			  }
+			})
+		end
 
 		-- Blizzard private auras
 		if C.raidframe.plugins_private_auras then
