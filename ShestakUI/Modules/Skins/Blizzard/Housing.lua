@@ -13,7 +13,8 @@ local function LoadSkin()
 
 	local tabs = {
 		frame.HouseInfoTabButton,
-		frame.CatalogTabButton
+		frame.CatalogTabButton,
+		frame.CollectionTabButton
 	}
 	for _, tab in pairs(tabs) do
 		tab:SetSize(34, 44)
@@ -24,6 +25,25 @@ local function LoadSkin()
 
 		tab.Icon:SetInside(tab.backdrop)
 		tab.Icon:SetTexCoord(0.18, 0.76, 0.18, 0.76)
+
+		if tab.Background then
+			tab.Background:SetAlpha(0)
+		end
+
+		if tab.SelectedTexture then
+			tab.SelectedTexture:SetDrawLayer('ARTWORK')
+			tab.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+			tab.SelectedTexture:SetInside(tab.backdrop)
+		end
+
+		if tab.HighlightTexture then
+			tab.HighlightTexture:SetColorTexture(1, 1, 1, 0.3)
+			tab.HighlightTexture:SetInside(tab.backdrop)
+		end
+
+		if tab.TabGlow then
+			tab.TabGlow:SetAlpha(0)
+		end
 
 		-- Hover texture
 		for _, region in next, {tab:GetRegions()} do
@@ -66,6 +86,7 @@ local function LoadSkin()
 	T.SkinFilter(content.Filters.FilterDropdown, true)
 
 	T.SkinScrollBar(content.OptionsContainer.ScrollBar)
+	T.SkinScrollBar(frame.CollectionContent.BlueprintCollection.ScrollBar)
 
 	for i = 1, 5 do
 		local button = select(i, content.PreviewFrame.ModelSceneControls:GetChildren())
