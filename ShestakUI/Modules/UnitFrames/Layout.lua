@@ -893,7 +893,8 @@ local function Shared(self, unit)
 					maxFrameCount = 32,
 				})
 
-				self.Auras:AddGroup("HARMFUL", {
+				local filter = C.aura.player_aura_only and "HARMFUL|PLAYER" or "HARMFUL"
+				self.Auras:AddGroup(filter, {
 					maxFrameCount = 16,
 				})
 			end
@@ -1267,7 +1268,7 @@ local function Shared(self, unit)
 				maxFrameCount = C.aura.boss_buffs,
 			})
 
-			self.Auras:AddGroup("HARMFUL", {
+			self.Auras:AddGroup("HARMFUL|PLAYER", {
 				maxFrameCount = C.aura.boss_debuffs,
 			})
 		end
