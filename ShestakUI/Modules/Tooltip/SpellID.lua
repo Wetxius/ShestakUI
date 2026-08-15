@@ -1,4 +1,6 @@
 local T, C, L = unpack(ShestakUI)
+C_CVar.SetCVar('tooltipShowAuraSpellIDs', C.tooltip.spell_id and 1 or 0)
+
 if C.tooltip.enable ~= true or C.tooltip.spell_id ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -22,24 +24,24 @@ local function addLine(self, id, isItem)
 end
 
 -- Spells
-hooksecurefunc(GameTooltip, "SetUnitAura", function(self, unit, index, filter)
-	if InCombatLockdown() or IsInInstance() then return end -- secret error
-	local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
-	local id = aura and aura.spellId
-	if id then addLine(self, id) end
-	if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(unit, index, filter)..": "..id) end
-end)
+-- hooksecurefunc(GameTooltip, "SetUnitAura", function(self, unit, index, filter)
+	-- if InCombatLockdown() or IsInInstance() then return end -- secret error
+	-- local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
+	-- local id = aura and aura.spellId
+	-- if id then addLine(self, id) end
+	-- if debuginfo == true and id and IsModifierKeyDown() then print(UnitAura(unit, index, filter)..": "..id) end
+-- end)
 
-local function attachByAuraInstanceID(self, ...)
-	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
-	local id = aura and aura.spellId
-	if id then addLine(self, id) end
-	if debuginfo == true and id and IsModifierKeyDown() then print(aura.name..": "..id) end
-end
+-- local function attachByAuraInstanceID(self, ...)
+	-- local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
+	-- local id = aura and aura.spellId
+	-- if id then addLine(self, id) end
+	-- if debuginfo == true and id and IsModifierKeyDown() then print(aura.name..": "..id) end
+-- end
 
-hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", attachByAuraInstanceID)
-hooksecurefunc(GameTooltip, "SetUnitDebuffByAuraInstanceID", attachByAuraInstanceID)
-hooksecurefunc(GameTooltip, "SetUnitAuraByAuraInstanceID", attachByAuraInstanceID)	-- from oUF Auras
+-- hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", attachByAuraInstanceID)
+-- hooksecurefunc(GameTooltip, "SetUnitDebuffByAuraInstanceID", attachByAuraInstanceID)
+-- hooksecurefunc(GameTooltip, "SetUnitAuraByAuraInstanceID", attachByAuraInstanceID)	-- from oUF Auras
 
 hooksecurefunc("SetItemRef", function(link)
 	local id = tonumber(link:match("spell:(%d+)"))
