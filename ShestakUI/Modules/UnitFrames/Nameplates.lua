@@ -952,6 +952,7 @@ local function style(self, unit)
 		if C.nameplate.track_buffs then
 			self.Auras:AddGroup("HELPFUL", {
 				maxFrameCount = 4,
+				showStealableBorder = true,
 			})
 		end
 
@@ -1012,15 +1013,10 @@ local function style(self, unit)
 		end
 	end
 
-	-- Every event should be register with this
-	-- table.insert(self.__elements, UpdateName)
-	-- self:RegisterEvent("UNIT_NAME_UPDATE", UpdateName)
-
-	-- table.insert(self.__elements, UpdateTarget)
-	-- self:RegisterEvent("PLAYER_TARGET_CHANGED", UpdateTarget, true)
-
-	-- table.insert(self.__elements, UpdateFocus)
-	-- self:RegisterEvent("PLAYER_FOCUS_CHANGED", UpdateFocus, true)
+	-- Register update functions as event handlers
+	self:RegisterEvent("UNIT_NAME_UPDATE", UpdateName)
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", UpdateTarget, true)
+	self:RegisterEvent("PLAYER_FOCUS_CHANGED", UpdateFocus, true)
 
 	-- Disable movement via /moveui
 	self.disableMovement = true
