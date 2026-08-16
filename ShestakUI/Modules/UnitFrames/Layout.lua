@@ -879,10 +879,10 @@ local function Shared(self, unit)
 				})
 				self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -2, 5)
 				self.Auras.showCount = true
+				self.Auras.maxFrameCount = 16
 				self.Auras.elementSpacing = T.Scale(3)
 				self.Auras.lineSpacing = T.Scale(3)
 				self.Auras.size = T.Scale(C.aura.debuff_size)
-				self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 				self.Auras.groupLineSpacing = T.Scale(3)
 				self.Auras.tooltipAnchor = "ANCHOR_TOPLEFT"
 				self.Auras.tooltipOffsetY = 3
@@ -891,14 +891,19 @@ local function Shared(self, unit)
 				--BETA self.Auras.FilterAura = T.CustomFilter -- find another way
 				-- self.Auras.PostUpdateButton = T.PostUpdateIcon -- need to change color of debuff and steal buff
 
-				self.Auras:AddGroup("HELPFUL", {
-					maxFrameCount = 32,
+				self.Auras:AddGroup("HELPFUL")
+
+				self.Auras:AddGroup("HARMFUL|PLAYER", {
+					layout = {
+						groupSpacing = T.Scale(C.aura.debuff_size + 3)
+					},
 				})
 
-				local filter = C.aura.player_aura_only and "HARMFUL|PLAYER" or "HARMFUL"
-				self.Auras:AddGroup(filter, {
-					maxFrameCount = 16,
-				})
+				if not C.aura.player_aura_only then
+					self.Auras:AddGroup("HARMFUL|!PLAYER", {
+						notPlayerDebuff = true,
+					})
+				end
 			end
 
 			-- Rogue/Druid Combo bar on target

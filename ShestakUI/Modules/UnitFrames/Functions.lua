@@ -736,7 +736,7 @@ local dispelColor = {
 	Bleed = CreateColor(1, 0, 0.5)
 }
 
-T.PostCreateIcon = function(element, button)
+T.PostCreateIcon = function(element, button, options)
 	button:SetTemplate("Default")
 
 	T.SkinCooldown(button.Cooldown, "aura")
@@ -750,7 +750,10 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-	if C.aura.debuff_color_type then
+	if options.notPlayerDebuff then
+		button:SetBackdropBorderColor(unpack(C.media.border_color))
+		button.Icon:SetDesaturated(true)
+	elseif C.aura.debuff_color_type then
 		local top = button:CreateTexture(nil, "BORDER", nil, 1)
 		top:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
 		top:SetPoint("TOPRIGHT", button, "TOPRIGHT", 0, 0)
