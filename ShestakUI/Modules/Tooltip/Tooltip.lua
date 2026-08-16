@@ -65,6 +65,13 @@ for _, tt in pairs(tooltips) do
 	end
 end
 
+-- Aura container skin
+AuraContainerInbound.SetTooltipBackdrop({
+	backdropInfo = backdrop,
+	borderColor = CreateColor(unpack(C.media.border_color)),
+	centerColor = CreateColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+})
+
 -- LibExtraTip skin
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
