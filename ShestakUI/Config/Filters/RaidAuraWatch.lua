@@ -12,8 +12,8 @@ if C.raidframe.plugins_buffs then
 			{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
 			{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
 			{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
-			-- {391891, "TOP", {0.2, 0.7, 0.2}},					-- Adaptive Swarm
-			-- {102351, "BOTTOM", {0.2, 0.7, 0.2}},				-- Cenarion Ward
+			{391891, "TOP", {0.2, 0.7, 0.2}},					-- Adaptive Swarm
+			{102351, "BOTTOM", {0.2, 0.7, 0.2}},				-- Cenarion Ward
 			-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
 			{155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
 		},
@@ -24,20 +24,20 @@ if C.raidframe.plugins_buffs then
 			{366155, "RIGHT", {0.14, 1.00, 0.88}},				-- Reversion
 			{364343, "TOP", {0.13, 0.87, 0.50}},				-- Echo
 			{373267, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Life Bind (Verdant Embrace)
-			-- {357170, "BOTTOM", {0.11, 0.57, 0.71}},				-- Time Dilation
-			-- {376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath (Echo)
+			{357170, "BOTTOM", {0.11, 0.57, 0.71}},				-- Time Dilation
+			{376788, "BOTTOMRIGHT", {0.11, 0.57, 0.71}},		-- Dream Breath (Echo)
 			-- Augmentation
 			{360827, "TOPRIGHT", {0.33, 0.33, 0.77}},			-- Blistering Scales
 			{410089, "TOP", {0.13, 0.87, 0.50}},				-- Prescience
 			{395152, "BOTTOMRIGHT", {0.14, 1.00, 0.88}},		-- Ebon Might
-			-- {406732, "RIGHT", {0.82, 0.29, 0.24}},				-- Spatial Paradox < on yourself
+			{406732, "RIGHT", {0.82, 0.29, 0.24}},				-- Spatial Paradox < on yourself
 		},
 		MONK = {
 			{119611, "TOPRIGHT", {0.2, 0.7, 0.7}},				-- Renewing Mist
-			-- {116841, "RIGHT", {0.12, 1.00, 0.53}},				-- Tiger's Lust (Freedom)
+			{116841, "RIGHT", {0.12, 1.00, 0.53}},				-- Tiger's Lust (Freedom)
 			{115175, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Soothing Mist
 			{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},			-- Enveloping Mist
-			-- {325209, "BOTTOM", {0.3, 0.6, 0.6}},				-- Enveloping Breath
+			{325209, "BOTTOM", {0.3, 0.6, 0.6}},				-- Enveloping Breath
 			{450769, "TOPLEFT", {0.3, 0.6, 0.6}},				-- Aspect of Harmony
 			-- {116849, "LEFT", {0.81, 0.85, 0.1}, true},			-- Life Cocoon
 		},
@@ -46,11 +46,11 @@ if C.raidframe.plugins_buffs then
 			{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
 			{1244893, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of the Savior
 			{157047, "TOP", {0.15, 0.58, 0.84}},				-- Saved by the Light (T25 Talent)
-			{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
+			-- {1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
 			{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
 			{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
 			{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
-			{156322, "BOTTOMLEFT", {0.9, 0.5, 0.1}},				-- Eternal Flame
+			{156322, "BOTTOMLEFT", {0.9, 0.5, 0.1}},			-- Eternal Flame
 		},
 		PRIEST = {
 			{194384, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement
