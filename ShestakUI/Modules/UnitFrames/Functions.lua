@@ -726,6 +726,16 @@ end
 	-- end
 -- end
 
+local dispelColor = {
+	None = CreateColor(1, 0, 0),
+	Magic = CreateColor(0.2, 0.6, 1),
+	Curse = CreateColor(0.6, 0, 1),
+	Disease = CreateColor(0.6, 0.4, 0),
+	Poison = CreateColor(0, 0.6, 0),
+	Enrage = CreateColor(0.95, 0.4, 0.95),
+	Bleed = CreateColor(1, 0, 0.5)
+}
+
 T.PostCreateIcon = function(element, button)
 	button:SetTemplate("Default")
 
@@ -740,16 +750,18 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-	local DebuffIndicator = button:CreateTexture(nil, "BORDER", nil, 1)
-	DebuffIndicator:SetPoint('TOPLEFT', -3, 3)
-	DebuffIndicator:SetPoint('BOTTOMRIGHT', 3, -3)
-	DebuffIndicator:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
-	DebuffIndicator:SetBlendMode('ADD')
-    button:AddDispelTypeTexture(DebuffIndicator, {
-       style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
-       showWithoutDispelType = true,
-	   customDispelColorMap = element.__owner.colors.dispel,
-    })
+	if C.aura.debuff_color_type then
+		local DebuffIndicator = button:CreateTexture(nil, "BORDER", nil, 1)
+		DebuffIndicator:SetPoint('TOPLEFT', -3, 3)
+		DebuffIndicator:SetPoint('BOTTOMRIGHT', 3, -3)
+		DebuffIndicator:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
+		DebuffIndicator:SetBlendMode('ADD')
+		button:AddDispelTypeTexture(DebuffIndicator, {
+		   style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
+		   showWithoutDispelType = true,
+		   customDispelColorMap = dispelColor,
+		})
+	end
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
@@ -766,23 +778,6 @@ T.PostCreateIcon = function(element, button)
 		button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
 	end
 end
-
-local dispelIndex = {
-	[0] = CreateColor(1, 0, 0),			-- None
-	[1] = CreateColor(0.2, 0.6, 1),		-- Magic
-	[2] = CreateColor(0.6, 0, 1),		-- Curse
-	[3] = CreateColor(0.6, 0.4, 0),		-- Disease
-	[4] = CreateColor(0, 0.6, 0),		-- Poison
-	[9] = CreateColor(0.95, 0.4, 0.95),	-- Enrage
-	[11] = CreateColor(1, 0, 0.5)		-- Bleed
-}
-
-local curve = C_CurveUtil.CreateColorCurve()
-curve:SetType(Enum.LuaCurveType.Step)
-for i, color in pairs(dispelIndex) do
-	curve:AddPoint(i, color)
-end
-T.DispelCurve = curve
 
 T.PostUpdateIcon = function(_, button, unit, data)
 	if data.isHarmfulAura then
@@ -813,7 +808,18 @@ T.PostUpdateGapButton = function(_, _, button)
 	button:Hide()
 end
 
-T.CreateRaidBuffIcon = function(_, button)
+local CountOffSets = {
+	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
+	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
+	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
+	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
+	LEFT = {"LEFT", "RIGHT", 1, 0},
+	RIGHT = {"RIGHT", "LEFT", 2, 0},
+	TOP = {"RIGHT", "LEFT", 2, 0},
+	BOTTOM = {"RIGHT", "LEFT", 2, 0},
+}
+
+T.CreateRaidBuffIcon = function(element, button)
 	T.SkinCooldown(button.Cooldown, "aura")
 
 	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
@@ -823,10 +829,26 @@ T.CreateRaidBuffIcon = function(_, button)
 
 	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 4, -1)
-	button.Count:SetJustifyH("RIGHT")
+	if element.point then
+		local point, anchorPoint, x, y = unpack(CountOffSets[element.point])
+		button.Count:SetPoint(point, button, anchorPoint, x, y)
+	else
+		button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 4, -1)
+		button.Count:SetJustifyH("RIGHT")
+	end
 	button.Count:SetFont(C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	if element.color then
+		local tex = button:CreateTexture(nil, "OVERLAY")
+		tex:SetAllPoints(button)
+		tex:SetTexture(C.media.blank)
+		-- if element.color then
+			tex:SetVertexColor(unpack(element.color))
+		-- else
+			-- tex:SetVertexColor(0.8, 0.8, 0.8)
+		-- end
+	end
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
@@ -851,49 +873,7 @@ T.PostUpdateRaidButton = function(_, button, unit, data)
 	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_debuffs_timer)
 end
 
-local CountOffSets = {
-	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
-	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
-	BOTTOMLEFT = {"LEFT", "RIGHT", 1, 0},
-	BOTTOMRIGHT = {"RIGHT", "LEFT", 2, 0},
-	LEFT = {"LEFT", "RIGHT", 1, 0},
-	RIGHT = {"RIGHT", "LEFT", 2, 0},
-	TOP = {"RIGHT", "LEFT", 2, 0},
-	BOTTOM = {"RIGHT", "LEFT", 2, 0},
-}
-
-T.CreateAuraWatchIcon = function(_, aura)
-	aura:CreateBorder(nil, true)
-	aura.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	aura.icon:SetDrawLayer("ARTWORK")
-
-	if aura.cd then
-		T.SkinCooldown(aura.cd, "aura")
-		aura.cd:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
-		aura.cd:SetReverse(true)
-
-		-- if C.raidframe.plugins_buffs_timer then
-			-- aura.parent = CreateFrame("Frame", nil, aura)
-			-- aura.parent:SetFrameLevel(aura.cd:GetFrameLevel() + 1)
-			-- aura.remaining = T.SetFontString(aura.parent, C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-			-- aura.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-			-- aura.remaining:SetPoint("CENTER", aura, "CENTER", 1, 0)
-			-- aura.remaining:SetJustifyH("CENTER")
-		-- end
-	end
-end
-
 T.CreateAuraWatch = function(self)
-	local auras = CreateFrame("Frame", nil, self)
-	auras:SetPoint("TOPLEFT", self.Health, 0, 0)
-	auras:SetPoint("BOTTOMRIGHT", self.Health, 0, 0)
-	auras.icons = {}
-	auras.PostCreateIcon = T.CreateAuraWatchIcon
-
-	if not C.aura.show_timer then
-		auras.hideCooldown = true
-	end
-
 	local buffs = {}
 
 	if T.RaidBuffs["ALL"] then
@@ -910,33 +890,29 @@ T.CreateAuraWatch = function(self)
 
 	if buffs then
 		for _, spell in pairs(buffs) do
-			local aura = CreateFrame("Frame", nil, auras)
-			aura.spellID = spell[1]
-			aura.anyUnit = spell[4]
-			aura.strictMatching = spell[5]
-			aura:SetSize(7 * C.raidframe.icon_multiplier, 7 * C.raidframe.icon_multiplier)
-			aura:SetPoint(spell[2], 0, 0)
+			local auras = self:CreateAuras()
+			auras.size = 7 * C.raidframe.icon_multiplier
+			auras:SetPoint(spell[2], 0, 0)
+			auras.showCount = true
+			auras.disableMouse = true
 
-			local tex = aura:CreateTexture(nil, "OVERLAY")
-			tex:SetAllPoints(aura)
-			tex:SetTexture(C.media.blank)
-			if spell[3] then
-				tex:SetVertexColor(unpack(spell[3]))
-			else
-				tex:SetVertexColor(0.8, 0.8, 0.8)
+			auras.point = spell[2]
+			auras.color = spell[3]
+			-- auras.anyUnit = spell[4]
+			-- auras.strictMatching = spell[5]
+
+			if not C.aura.show_timer then
+				auras.disableCooldown = true
 			end
-			aura.icon = tex
 
-			local count = T.SetFontString(aura, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-			local point, anchorPoint, x, y = unpack(CountOffSets[spell[2]])
-			count:SetPoint(point, aura, anchorPoint, x, y)
-			aura.count = count
+			auras.PostCreateButton = T.CreateRaidBuffIcon
 
-			auras.icons[spell[1]] = aura
+			auras:AddGroup("HELPFUL|PLAYER", {
+				candidateFilters = {includeSpellIDs = {[spell[1]] = true}},
+				maxFrameCount = 1,
+			})
 		end
 	end
-
-	self.AuraWatch = auras
 end
 
 T.PrivateAurasSetPosition = function(element, aura)
