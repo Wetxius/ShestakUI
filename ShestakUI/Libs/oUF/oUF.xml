@@ -37,13 +37,13 @@
 	<Script file="Finalize.lua"/>
 
 	<Script file="Modules\ArcaneCharge.lua"/>
-	<Script file="Modules\AuraTracker.lua"/>
+	<!-- <Script file="Modules\AuraTracker.lua"/> -->
 	<Script file="Modules\AuraWatch.lua"/>
 	<Script file="Modules\AutoResurrect.lua"/>
 	<Script file="Modules\CombatFeedback.lua"/>
 	<Script file="Modules\CounterBar.lua"/>
 	<Script file="Modules\ComboPoints.lua"/>
-	<Script file="Modules\DispelColor.lua"/>
+	<!-- <Script file="Modules\DispelColor.lua"/> -->
 	<Script file="Modules\EnemySpec.lua"/>
 	<Script file="Modules\Essence.lua"/>
 	<Script file="Modules\Experience.lua"/>
@@ -53,7 +53,7 @@
 	<Script file="Modules\HarmonyOrbs.lua"/>
 	<Script file="Modules\HolyPower.lua"/>
 	<Script file="Modules\QuestIcon.lua"/>
-	<Script file="Modules\RaidDebuffs.lua"/>
+	<!-- <Script file="Modules\RaidDebuffs.lua"/> -->
 	<Script file="Modules\Reputation.lua"/>
 	<Script file="Modules\SoulFragments.lua"/>
 	<Script file="Modules\SoulShards.lua"/>
