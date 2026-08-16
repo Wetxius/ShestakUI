@@ -751,16 +751,37 @@ T.PostCreateIcon = function(element, button)
 	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	if C.aura.debuff_color_type then
-		local DebuffIndicator = button:CreateTexture(nil, "BORDER", nil, 1)
-		DebuffIndicator:SetPoint('TOPLEFT', -3, 3)
-		DebuffIndicator:SetPoint('BOTTOMRIGHT', 3, -3)
-		DebuffIndicator:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
-		DebuffIndicator:SetBlendMode('ADD')
-		button:AddDispelTypeTexture(DebuffIndicator, {
-		   style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
-		   showWithoutDispelType = true,
-		   customDispelColorMap = dispelColor,
-		})
+		local top = button:CreateTexture(nil, "BORDER", nil, 1)
+		top:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
+		top:SetPoint("TOPRIGHT", button, "TOPRIGHT", 0, 0)
+		top:SetHeight(1)
+		top:SetTexture(C.media.blank)
+
+		local bottom = button:CreateTexture(nil, "BORDER", nil, 1)
+		bottom:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+		bottom:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
+		bottom:SetHeight(1)
+		bottom:SetTexture(C.media.blank)
+
+		local left = button:CreateTexture(nil, "BORDER", nil, 1)
+		left:SetPoint("TOPLEFT", button, "TOPLEFT")
+		left:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+		left:SetWidth(1)
+		left:SetTexture(C.media.blank)
+
+		local right = button:CreateTexture(nil, "BORDER", nil, 1)
+		right:SetPoint("TOPRIGHT", button, "TOPRIGHT")
+		right:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
+		right:SetWidth(1)
+		right:SetTexture(C.media.blank)
+
+		for _, border in pairs{top, bottom, left, right} do
+			button:AddDispelTypeTexture(border, {
+			   style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
+			   showWithoutDispelType = true,
+			   customDispelColorMap = dispelColor,
+			})
+		end
 	end
 
 	if C.aura.show_spiral then
