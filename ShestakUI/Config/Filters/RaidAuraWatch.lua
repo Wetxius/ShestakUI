@@ -45,11 +45,11 @@ if C.raidframe.plugins_buffs then
 			{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
 			{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
 			{1244893, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of the Savior
-			-- {157047, "TOP", {0.15, 0.58, 0.84}},				-- Saved by the Light (T25 Talent)
-			-- {1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
-			-- {1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
-			-- {6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
-			-- {204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
+			{157047, "TOP", {0.15, 0.58, 0.84}},				-- Saved by the Light (T25 Talent)
+			{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
+			{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
+			{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
+			{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
 			{156322, "BOTTOMLEFT", {0.9, 0.5, 0.1}},				-- Eternal Flame
 		},
 		PRIEST = {
@@ -305,6 +305,9 @@ T.RaidDebuffsIgnore = {
 	[308312] = true,	-- Time Trial Practice
 	[390435] = true,	-- Exhaustion
 	[1254550] = true,	-- Arcane Empowerment
+
+	-- Testing
+	[25163] = true,		-- Oozeling's Disgusting Aura
 }
 
 T.RaidDebuffs = OtherDebuffs

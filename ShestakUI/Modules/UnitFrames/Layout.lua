@@ -845,6 +845,7 @@ local function Shared(self, unit)
 				self.Debuffs.showCount = true
 				self.Debuffs.elementSpacing = T.Scale(3)
 				self.Debuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+				self.Debuffs.tooltipOffsetY = 3
 				self.Debuffs.size = T.Scale(C.aura.debuff_size)
 				self.Debuffs.PostCreateButton = T.PostCreateIcon
 
@@ -883,7 +884,8 @@ local function Shared(self, unit)
 				self.Auras.size = T.Scale(C.aura.debuff_size)
 				self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 				self.Auras.groupLineSpacing = T.Scale(3)
-				self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
+				self.Auras.tooltipAnchor = "ANCHOR_TOPLEFT"
+				self.Auras.tooltipOffsetY = 3
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
 				--BETA self.Auras.FilterAura = T.CustomFilter -- find another way
@@ -1249,6 +1251,7 @@ local function Shared(self, unit)
 			self.Auras.elementSpacing = T.Scale(3)
 			self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 			self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
+			self.Auras.tooltipOffsetY = 3
 			self.Auras.PostCreateButton = T.PostCreateIcon
 			self.Auras.size = T.Scale(31 + T.extraHeight)
 
