@@ -5,12 +5,13 @@ if C.aura.cast_by ~= true then return end
 --	Tells you who cast a buff or debuff in its tooltip(prButler by Renstrom)
 ----------------------------------------------------------------------------------------
 local function addAuraSource(self, unit, index, filter, instanceID)
+	if InCombatLockdown() or IsInInstance() then return end -- secret error
+
 	local srcUnit
 	if instanceID then
 		local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, index)
 		srcUnit = aura and aura.sourceUnit
 	else
-		if InCombatLockdown() or IsInInstance() then return end -- secret error
 		local aura = C_UnitAuras.GetAuraDataByIndex(unit, index, filter)
 		srcUnit = aura and aura.sourceUnit
 	end
