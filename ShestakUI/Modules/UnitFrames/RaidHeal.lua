@@ -293,8 +293,9 @@ local function Shared(self, unit)
 			self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL")
 			self.Debuffs:AddGroup("HARMFUL|IMPORTANT")
 		else
-			self.Debuffs:AddGroup("HARMFUL", {
+			self.Debuffs:AddGroup("HARMFUL|!PLAYER", {
 			  candidateFilters = {
+				maxDuration = 60,
 				excludeSpellIDs = T.RaidDebuffsIgnore
 			  }
 			})
