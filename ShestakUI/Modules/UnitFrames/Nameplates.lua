@@ -249,7 +249,7 @@ local AurasCustomFilter = function(_, unit, data)
 					allow = true
 				end
 
-				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HELPFUL|RAID_PLAYER_DISPELLABLE")
+				local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HELPFUL|DISPELLABLE")
 				if filter then
 					allow = true
 				end
@@ -265,8 +265,12 @@ if T.screenHeight > 1200 then
 	Mult = T.mult
 end
 
-local AurasPostCreateIcon = function(_, button)
+local AurasPostCreateIcon = function(_, button, options)
 	CreateBorderFrame(button)
+
+	if not options.isDebuff then
+		SetColorBorder(button, 0, 0.5, 0)
+	end
 
 	T.SkinCooldown(button.Cooldown, "aura")
 
@@ -950,16 +954,25 @@ local function style(self, unit)
 		-- self.Auras.PostUpdateButton = AurasPostUpdateIcon
 
 		if C.nameplate.track_buffs then
-			self.Auras:AddGroup("HELPFUL", {
-				maxFrameCount = 4,
+			self.Auras:AddGroup("HELPFUL|DISPELLABLE", {
+				maxFrameCount = 2,
 				showStealableBorder = true,
 			})
+
+			-- TODO find a way to show buffs only on enemy
+			-- self.Auras:AddGroup("HELPFUL|BIG_DEFENSIVE|!DISPELLABLE", {
+				-- maxFrameCount = 1,
+			-- })
+			-- self.Auras:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!DISPELLABLE", {
+				-- maxFrameCount = 1,
+			-- })
 		end
 
 		if C.nameplate.track_debuffs then
 			self.Auras:AddGroup("HARMFUL|PLAYER", {
+				candidateFilters = {includeSpellIDs = T.DebuffWhiteList, excludeSpellIDs = T.DebuffBlackList},
 				maxFrameCount = 6,
-				-- showDebuffBorder = true,
+				isDebuff = true,
 			})
 		end
 
