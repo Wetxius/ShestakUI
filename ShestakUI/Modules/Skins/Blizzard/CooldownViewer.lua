@@ -10,7 +10,8 @@ local function LoadSkin()
 
 	local tabs = {
 		frame.SpellsTab,
-		frame.AurasTab
+		frame.AurasTab,
+		frame.GroupBuffsTab
 	}
 	for _, tab in pairs(tabs) do
 		T.SkinFrameTab(tab)
@@ -42,6 +43,8 @@ local function LoadSkin()
 			end
 		end
 	end
+
+	T.SkinScrollBar(frame.GroupBuffFilter.Scroll.ScrollBar)
 
 	local function SkinHeaders(header)
 		if header and not header.IsSkinned then
@@ -102,12 +105,7 @@ local function LoadSkin()
 	end
 
 	local hookedItemPools = {}
-
-	local function RefreshLayout()
-		local CooldownViewer = _G.CooldownViewerSettings
-		if not CooldownViewer or not CooldownViewer.CooldownScroll then return end
-
-		local content = CooldownViewer.CooldownScroll.Content
+	local function RefreshContent(content)
 		if not content then return end
 
 		for _, child in next, {content:GetChildren()} do
@@ -124,6 +122,22 @@ local function LoadSkin()
 
 				hooksecurefunc(itemPool, "Acquire", HandleSettingItemPool)
 			end
+		end
+	end
+
+	local function RefreshLayout()
+		local CooldownViewer = _G.CooldownViewerSettings
+		if not CooldownViewer or not CooldownViewer.CooldownScroll then return end
+
+		local content = CooldownViewer.CooldownScroll.Content
+
+		if content then
+			RefreshContent(content)
+		end
+
+		local groupBuffFilter = CooldownViewer.GroupBuffFilter
+		if groupBuffFilter and groupBuffFilter.Scroll then
+			RefreshContent(groupBuffFilter.Scroll.Content)
 		end
 	end
 

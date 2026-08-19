@@ -1172,6 +1172,17 @@ function T.SkinFrameTab(frame)
 		frame.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
 	end
 
+	if frame.HighlightTexture then
+		frame.HighlightTexture:SetColorTexture(1, 1, 1, 0.3)
+		frame.HighlightTexture:ClearAllPoints()
+		frame.HighlightTexture:SetPoint("TOPLEFT", 4, -4)
+		frame.HighlightTexture:SetPoint("BOTTOMRIGHT", -4, 4)
+	end
+
+	if frame.TabGlow then
+		frame.TabGlow:SetAlpha(0)
+	end
+
 	-- Hover texture
 	for _, region in next, {frame:GetRegions()} do
 		if region:IsObjectType("Texture") then
