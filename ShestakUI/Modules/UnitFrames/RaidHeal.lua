@@ -269,6 +269,7 @@ local function Shared(self, unit)
 		self.Auras.elementSpacing = T.Scale(3)
 		self.Auras.size = 7 * C.raidframe.icon_multiplier
 		self.Auras.disableMouse = true
+		self.Auras.sortDirection = AuraContainerSortDirection.Reverse
 		self.Auras.PostCreateButton = T.CreateRaidBuffIcon
 
 		self.Auras:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
@@ -285,6 +286,7 @@ local function Shared(self, unit)
 		self.Debuffs.disableMouse = true
 		self.Debuffs.showCount = true
 		self.Debuffs.isRaidDebuff = true
+		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
 		if C.raidframe.plugins_debuffs_filter then

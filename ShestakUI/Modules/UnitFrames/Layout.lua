@@ -758,6 +758,7 @@ local function Shared(self, unit)
 		self.Debuffs.size = T.Scale(C.aura.debuff_size)
 		self.Debuffs.showCount = true
 		self.Debuffs.elementSpacing = T.Scale(3)
+		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
 		if unit == "pet" or unit == "focus" then
@@ -847,6 +848,7 @@ local function Shared(self, unit)
 				self.Debuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
 				self.Debuffs.tooltipOffsetY = 3
 				self.Debuffs.size = T.Scale(C.aura.debuff_size)
+				self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 				self.Debuffs.PostCreateButton = T.PostCreateIcon
 
 				if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune)
@@ -886,6 +888,7 @@ local function Shared(self, unit)
 				self.Auras.groupLineSpacing = T.Scale(3)
 				self.Auras.tooltipAnchor = "ANCHOR_TOPLEFT"
 				self.Auras.tooltipOffsetY = 3
+				self.Auras.sortDirection = AuraContainerSortDirection.Reverse
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
 				--BETA self.Auras.FilterAura = T.CustomFilter -- find another way
@@ -1176,6 +1179,7 @@ local function Shared(self, unit)
 		self.Debuffs.size = T.Scale(31 + T.extraHeight)
 		self.Debuffs.showCount = true
 		self.Debuffs.elementSpacing = T.Scale(3)
+		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
 		if C.unitframe.boss_on_right then
@@ -1257,6 +1261,7 @@ local function Shared(self, unit)
 			self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 			self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
 			self.Auras.tooltipOffsetY = 3
+			self.Auras.sortDirection = AuraContainerSortDirection.Reverse
 			self.Auras.PostCreateButton = T.PostCreateIcon
 			self.Auras.size = T.Scale(31 + T.extraHeight)
 
