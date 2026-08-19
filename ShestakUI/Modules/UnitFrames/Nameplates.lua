@@ -954,7 +954,7 @@ local function style(self, unit)
 		-- self.Auras.PostUpdateButton = AurasPostUpdateIcon
 
 		if C.nameplate.track_buffs then
-			self.Auras:AddGroup("HELPFUL|DISPELLABLE", {
+			self.Auras:AddGroup("HELPFUL|RAID_PLAYER_DISPELLABLE", {
 				maxFrameCount = 2,
 				showStealableBorder = true,
 			})
