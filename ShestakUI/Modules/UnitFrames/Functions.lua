@@ -1157,21 +1157,24 @@ end
 
 T.DispelColor = function(self)
 	local frame = self:CreateAuras()
-	frame:AddSlot("HARMFUL|RAID", {
-		CreateButton = function(button)
-			button:EnableMouse(false)
-			button:SetAllPoints(self.Health)
-			button:SetFrameLevel(self:GetFrameLevel() + 20)
+	frame:SetAllPoints(self.Health)
+	frame.disableMouse = true
+	frame.disableCooldown = true
 
-			local texture = button:CreateTexture(nil, "OVERLAY")
-			texture:SetAllPoints()
-			texture:SetTexture(C.media.highlight)
-			texture:SetVertexColor(0, 0, 0, 0)
-			texture:SetBlendMode("ADD")
+	frame.PostCreateButton = function(self, button)
+		button.Icon:SetAlpha(0)
 
-			-- button:AddDispelTypeTexture(texture, {
-				-- style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset
-			-- })
-		end
-	})
+		local texture = button:CreateTexture(nil, "OVERLAY")
+		texture:SetAllPoints(self)
+		texture:SetTexture(C.media.highlight)
+		texture:SetBlendMode("ADD")
+
+		button:AddDispelTypeTexture(texture, {
+			style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
+			showWhenHarmful = true,
+			customDispelColorMap = dispelColor,
+		})
+	end
+
+	frame:AddGroup("HARMFUL|RAID")
 end
