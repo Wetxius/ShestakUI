@@ -215,11 +215,11 @@ local function START_LOOT_ROLL(rollID, time)
 	if canNeed then
 		f.need:Enable()
 		f.need:SetAlpha(1)
-		SetDesaturation(f.need:GetNormalTexture(), false)
+		f.need:GetNormalTexture():SetDesaturated(false)
 	else
 		f.need:Disable()
 		f.need:SetAlpha(0.2)
-		SetDesaturation(f.need:GetNormalTexture(), true)
+		f.need:GetNormalTexture():SetDesaturated(true)
 		f.need.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed]
 	end
 
@@ -232,11 +232,11 @@ local function START_LOOT_ROLL(rollID, time)
 		if canGreed then
 			f.greed:Enable()
 			f.greed:SetAlpha(1)
-			SetDesaturation(f.greed:GetNormalTexture(), false)
+			f.greed:GetNormalTexture():SetDesaturated(false)
 		else
 			f.greed:Disable()
 			f.greed:SetAlpha(0.2)
-			SetDesaturation(f.greed:GetNormalTexture(), true)
+			f.greed:GetNormalTexture():SetDesaturated(true)
 			f.greed.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed]
 		end
 	end
@@ -244,11 +244,11 @@ local function START_LOOT_ROLL(rollID, time)
 	if canDisenchant then
 		f.disenchant:Enable()
 		f.disenchant:SetAlpha(1)
-		SetDesaturation(f.disenchant:GetNormalTexture(), false)
+		f.disenchant:GetNormalTexture():SetDesaturated(false)
 	else
 		f.disenchant:Disable()
 		f.disenchant:SetAlpha(0.2)
-		SetDesaturation(f.disenchant:GetNormalTexture(), true)
+		f.disenchant:GetNormalTexture():SetDesaturated(true)
 		f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
 	end
 
