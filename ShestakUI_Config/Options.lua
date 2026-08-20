@@ -937,26 +937,24 @@ do
 	local profileVar = "General"
 	local function startExport()
 		local Prefix = "ShestakUI:Profile:"
-		local LibDeflate = LibStub:GetLibrary("LibDeflate")
-		local LibSerialize = LibStub("LibSerialize")
 
 		local Serialized
 		if profileVar == "General" then
 			local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-			Serialized = LibSerialize:Serialize(ShestakUIOptions[i])
+			Serialized = C_EncodingUtil.SerializeCBOR(ShestakUIOptions[i])
 		elseif profileVar == "Personal" then
 			local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-			Serialized = LibSerialize:Serialize(ShestakUIOptionsPerChar[i])
+			Serialized = C_EncodingUtil.SerializeCBOR(ShestakUIOptionsPerChar[i])
 		elseif profileVar == "Mover" then
 			local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-			Serialized = LibSerialize:Serialize(ShestakUIPositions[i])
+			Serialized = C_EncodingUtil.SerializeCBOR(ShestakUIPositions[i])
 		elseif profileVar == "Mover_Personal" then
 			local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-			Serialized = LibSerialize:Serialize(ShestakUIPositionsPerChar[i])
+			Serialized = C_EncodingUtil.SerializeCBOR(ShestakUIPositionsPerChar[i])
 		end
 
-		local Compressed = LibDeflate:CompressDeflate(Serialized, {level = 9})
-		local Encoded = LibDeflate:EncodeForPrint(Compressed)
+		local Compressed = C_EncodingUtil.CompressString(Serialized, Enum.CompressionMethod.Deflate, Enum.CompressionLevel.Default)
+		local Encoded = C_EncodingUtil.EncodeBase64(Compressed)
 		local Result = Prefix..Encoded
 		StaticPopup_Show("SHESTAKUI_EXPORT_PROFILE", _, _, Result)
 	end
@@ -977,16 +975,14 @@ do
 		OnAccept = function()
 			local Code = selfTextImport
 			local Prefix = "ShestakUI:Profile:"
-			local LibDeflate = LibStub:GetLibrary("LibDeflate")
-			local LibSerialize = LibStub("LibSerialize")
 
 			local LibCode = string.gsub(Code, Prefix, "")
-			local Decoded = LibDeflate:DecodeForPrint(LibCode)
+			local Decoded = C_EncodingUtil.DecodeBase64(LibCode)
 
 			if Decoded then
-				local Decompressed = LibDeflate:DecompressDeflate(Decoded)
-				local Success, Table = LibSerialize:Deserialize(Decompressed)
-				if Success then
+				local Decompressed = C_EncodingUtil.DecompressString(Decoded, Enum.CompressionMethod.Deflate)
+				local Table = C_EncodingUtil.DeserializeCBOR(Decompressed)
+				if Table then
 					if profileVar == "General" then
 						local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
 						ShestakUIOptions[i] = Table
@@ -1066,18 +1062,6 @@ do
 	tinsert(ns.buttons, ImportMoveButton)
 
 	C_Timer.After(0.3, function() -- need to grab SavedVariables and loaded libraries
-		local LibDeflate = LibStub and LibStub:GetLibrary("LibDeflate", true)
-		local LibSerialize = LibStub and LibStub:GetLibrary("LibSerialize", true)
-		local LibsExist = LibDeflate and LibSerialize
-
-		if not LibsExist then
-			ExportButton:Disable()
-			ImportButton:Disable()
-			ExportMoveButton:Disable()
-			ImportMoveButton:Disable()
-			status:SetText(L.profile_error_lib)
-		end
-
 		-- Use existing function in Core.lua to create dropdown with name via SavedVariables
 		local function SaveValue(f, value)
 			if not C.options[f.group] then C.options[f.group] = {} end
