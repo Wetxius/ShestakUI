@@ -1,6 +1,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+-- ShestakUI modified
 local function Update(self, event)
 	local element = self.GroupRoleIndicator
 
@@ -19,13 +20,13 @@ local function Update(self, event)
 	end
 
 	if(role == Enum.LFGRole.Tank) then
-		element:SetAtlas('UI-LFG-RoleIcon-Tank-Micro-Raid', element.useAtlasSize)
+		element:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Tank.tga]])
 		element:Show()
 	elseif(role == Enum.LFGRole.Healer) then
-		element:SetAtlas('UI-LFG-RoleIcon-Healer-Micro-Raid', element.useAtlasSize)
+		element:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Healer.tga]])
 		element:Show()
 	elseif(role == Enum.LFGRole.Damage) then
-		element:SetAtlas('UI-LFG-RoleIcon-DPS-Micro-Raid', element.useAtlasSize)
+		element:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Damager.tga]])
 		element:Show()
 	else
 		element:Hide()
