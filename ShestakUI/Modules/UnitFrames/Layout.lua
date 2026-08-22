@@ -1297,7 +1297,8 @@ local function Shared(self, unit)
 	end
 
 	-- Dispel highlight
-	if C.raidframe.plugins_debuffhighlight and not unit:match("%wtarget$") then
+	-- if C.raidframe.plugins_debuffhighlight and not unit:match("%wtarget$") then
+	if C.raidframe.plugins_debuffhighlight and (unit == "player" or unit == "pet") then -- Can't filter enemy now
 		T.DispelColor(self)
 	end
 
