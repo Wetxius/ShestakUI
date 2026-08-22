@@ -71,7 +71,7 @@ announceFrame:SetScript("OnEvent", function(_, event)
 			end
 			if maxlevel then return end
 			PlaySound(12867, "master")
-			RaidNotice_AddMessage(RaidWarningFrame, RESISTANCE_NONE.." "..C_Spell.GetSpellLink(158486).."!", ChatTypeInfo["RAID_WARNING"])
+			RaidWarningUtil.AddMessage(RESISTANCE_NONE.." "..C_Spell.GetSpellLink(158486).."!", ChatTypeInfo["RAID_WARNING"])
 			print("|cffff3300"..RESISTANCE_NONE.." "..C_Spell.GetSpellLink(158486).."|cffff3300!|r")
 		end
 	end

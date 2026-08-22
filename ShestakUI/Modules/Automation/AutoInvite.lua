@@ -15,7 +15,7 @@ if C.automation.accept_invite == true then
 	ai:SetScript("OnEvent", function(_, _, name, _, _, _, _, _, inviterGUID)
 		if QueueStatusButton:IsShown() or GetNumGroupMembers() > 0 then return end
 		if CheckFriend(inviterGUID) then
-			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
+			RaidWarningUtil.AddMessage(L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
 			AcceptGroup()
 			for i = 1, 4 do
