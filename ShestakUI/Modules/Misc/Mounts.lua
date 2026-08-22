@@ -32,14 +32,16 @@ function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	end
 
 	local sid
-	for i = 1, 40 do
-		local auraData = C_UnitAuras.GetBuffDataByIndex("player", i)
-		if not auraData then break end
-		if canaccessvalue(auraData.spellId) then
-			sid = auraData.spellId
-		end
-		if sid == 73701 or sid == 76377 then
-			InVj = true
+	if not C_Secrets.ShouldAurasBeSecret() then
+		for i = 1, 40 do
+			local auraData = C_UnitAuras.GetBuffDataByIndex("player", i)
+			if not auraData then break end
+			if canaccessvalue(auraData.spellId) then
+				sid = auraData.spellId
+			end
+			if sid == 73701 or sid == 76377 then
+				InVj = true
+			end
 		end
 	end
 	if InVj and IsSwimming() then
