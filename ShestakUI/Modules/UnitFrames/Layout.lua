@@ -952,9 +952,8 @@ local function Shared(self, unit)
 			self.Status:SetPoint("CENTER", self.Health, "CENTER", 0, 0)
 			self.Status:SetTextColor(0.69, 0.31, 0.31)
 			self.Status:Hide()
-			self.Status.Override = T.dummy
 
-			self:SetScript("OnEnter", function(self) if self.LowMana then self.LowMana.Text:Hide() end T.UpdatePvPStatus(self) self.Status:Show() UnitFrame_OnEnter(self) end)
+			self:SetScript("OnEnter", function(self) if self.LowMana then self.LowMana.Text:Hide() end T.UpdatePvPStatus(self) self.Status:Show() T.UnitFrame_OnEnter(self) end)
 			self:SetScript("OnLeave", function(self) if self.LowMana then self.LowMana.Text:Show() end self.Status:Hide() UnitFrame_OnLeave(self) end)
 		end
 	end
