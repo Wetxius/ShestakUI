@@ -1,59 +1,10 @@
 local T, C, L = unpack(ShestakUI)
 
 ----------------------------------------------------------------------------------------
---	Fix blank tooltip
-----------------------------------------------------------------------------------------
-local bug = nil
-local FixTooltip = CreateFrame("Frame")
-FixTooltip:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
-FixTooltip:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
-FixTooltip:SetScript("OnEvent", function()
-	if GameTooltip:IsShown() then
-		bug = true
-	end
-end)
-
-local FixTooltipBags = CreateFrame("Frame")
-FixTooltipBags:RegisterEvent("BAG_UPDATE_DELAYED")
-FixTooltipBags:SetScript("OnEvent", function()
-	if StuffingFrameBags and StuffingFrameBags:IsShown() then
-		if GameTooltip:IsShown() then
-			bug = true
-		end
-	end
-end)
-
-GameTooltip:HookScript("OnTooltipCleared", function(self)
-	if self:IsForbidden() then return end
-	if bug and self:NumLines() == 0 then
-		self:Hide()
-		bug = false
-	end
-end)
-
-----------------------------------------------------------------------------------------
---	Fix RemoveTalent() taint
-----------------------------------------------------------------------------------------
-FCF_StartAlertFlash = T.dummy
-
-----------------------------------------------------------------------------------------
 --	Fix DeclensionFrame strata
 ----------------------------------------------------------------------------------------
 if T.client == "ruRU" then
 	_G["DeclensionFrame"]:SetFrameStrata("HIGH")
-end
-
-----------------------------------------------------------------------------------------
---	Hide right-click line on unitframes tooltip
-----------------------------------------------------------------------------------------
-function UnitFrame_UpdateTooltip(self)
-	if not self.unit then return end
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
-	if GameTooltip:SetUnit(self.unit, self.hideStatusOnTooltip) then
-		self.UpdateTooltip = UnitFrame_UpdateTooltip
-	else
-		self.UpdateTooltip = nil
-	end
 end
 
 ----------------------------------------------------------------------------------------
@@ -211,13 +162,6 @@ if not NoTaint2_Proc_CleanActionButtonFlyout then
 			end
 		end
 	end)
-end
-
-----------------------------------------------------------------------------------------
---	MoneyFrameFix v1.2.1 addon by Galehad
-----------------------------------------------------------------------------------------
-function SetTooltipMoney(frame, money, _, prefixText, suffixText)
-	frame:AddLine((prefixText or "").."  "..C_CurrencyInfo.GetCoinTextureString(money).." "..(suffixText or ""), 0, 1, 1)
 end
 
 ----------------------------------------------------------------------------------------
