@@ -129,25 +129,19 @@ anchor:SetSize(200, 40)
 anchor:SetPoint(unpack(C.position.tooltip))
 
 -- Hide unwanted lines
-local TooltipCheck = {[GameTooltip] = true, [GameTooltipTooltip] = true, [ItemRefTooltip] = true}
-
-local TEXTS_TO_REMOVE = {
-	[_G.FACTION_ALLIANCE] = true,
-	[_G.FACTION_HORDE] = true,
-	[_G.PVP] = true
-}
-
+local validTooltip = {[GameTooltip] = true, [GameTooltipTooltip] = true, [ItemRefTooltip] = true}
+local removeLines = {[_G.FACTION_ALLIANCE] = true, [_G.FACTION_HORDE] = true, [_G.PVP] = true}
 TooltipDataProcessor.AddLinePreCall(Enum.TooltipDataLineType.None, function(tooltip, lineData)
-	if not TooltipCheck[tooltip] or tooltip:IsForbidden() then return end
+	if not validTooltip[tooltip] or tooltip:IsForbidden() then return end
 	if not tooltip:IsTooltipType(Enum.TooltipDataType.Unit) then return end
 
-	if TEXTS_TO_REMOVE[lineData.leftText] then
+	if T.NotSecretValue(lineData.leftText) and removeLines[lineData.leftText] then
 		return true
 	end
 end)
 
 TooltipDataProcessor.AddLinePreCall(Enum.TooltipDataLineType.Blank, function(tooltip)
-	if not TooltipCheck[tooltip] or tooltip:IsForbidden() then return end
+	if not validTooltip[tooltip] or tooltip:IsForbidden() then return end
 	if not tooltip:IsTooltipType(Enum.TooltipDataType.Unit) then return end
 
 	return true
