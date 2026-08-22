@@ -1178,3 +1178,13 @@ T.DispelColor = function(self)
 
 	frame:AddGroup("HARMFUL|RAID")
 end
+
+T.UnitFrame_OnEnter = function(self)
+	if GameTooltip:IsForbidden() then
+		self.UpdateTooltip = nil
+	else
+		_G.GameTooltip_SetDefaultAnchor(GameTooltip, self)
+
+		self.UpdateTooltip = (T.NotSecretValue(self.__unit) and self.__unit and GameTooltip:SetUnit(self.__unit) and T.UnitFrame_OnEnter) or nil
+	end
+end

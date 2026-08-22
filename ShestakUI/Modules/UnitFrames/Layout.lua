@@ -25,13 +25,7 @@ local function Shared(self, unit)
 
 	-- Register click
 	self:RegisterForClicks("AnyUp")
-	self:SetScript("OnEnter", function(self)
-		local unit = self.__unit
-		if unit then
-			self.unit = unit
-			UnitFrame_OnEnter(self)
-		end
-	end)
+	self:SetScript("OnEnter", T.UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
 	local unit = (unit and unit:find("arena%dtarget")) and "arenatarget"
