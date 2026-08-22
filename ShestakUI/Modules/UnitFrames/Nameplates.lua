@@ -720,6 +720,15 @@ local function callback(self, _, unit)
 				end
 			end
 
+			-- Hide auras for ally
+			if self.Auras then
+				if UnitIsFriend("player", unit) then
+					self.Auras:SetAlpha(0)
+				else
+					self.Auras:SetAlpha(1)
+				end
+			end
+
 			if C.nameplate.only_name then
 				if UnitIsFriend("player", unit) then
 					if not InCombatLockdown() then
@@ -735,7 +744,6 @@ local function callback(self, _, unit)
 					end
 					if C.raidframe.plugins_healcomm then
 						self.Health.DamageAbsorb:Hide()
-
 						if C.raidframe.plugins_over_heal_absorb then
 							self.Health.OverDamageAbsorbIndicator:Hide()
 						end
@@ -755,7 +763,6 @@ local function callback(self, _, unit)
 					end
 					if C.raidframe.plugins_healcomm then
 						self.Health.DamageAbsorb:Show()
-
 						if C.raidframe.plugins_over_heal_absorb then
 							self.Health.OverDamageAbsorbIndicator:Show()
 						end
@@ -975,7 +982,6 @@ local function style(self, unit)
 				isDebuff = true,
 			})
 		end
-
 	end
 
 	-- Health color
