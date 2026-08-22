@@ -135,7 +135,7 @@ function button:PLAYER_LOGIN()
 		if self ~= GameTooltip or self:IsForbidden() then return end
 		local _, link = TooltipUtil.GetDisplayedItem(self)
 
-		if link and not InCombatLockdown() and IsAltKeyDown() and not (AuctionHouseFrame and AuctionHouseFrame:IsShown()) then
+		if link and not InCombatLockdown() and IsAltKeyDown() and not (AuctionHouseFrame and AuctionHouseFrame:IsShown()) and not (EquipmentFlyoutFrame and EquipmentFlyoutFrame:IsShown()) then
 			local itemID = GetItemInfoFromHyperlink(link)
 			if not itemID then return end
 			local spell, r, g, b
