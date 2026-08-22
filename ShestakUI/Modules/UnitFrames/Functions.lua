@@ -828,10 +828,6 @@ T.PostUpdateIcon = function(_, button, unit, data)
 	end
 end
 
-T.PostUpdateGapButton = function(_, _, button)
-	button:Hide()
-end
-
 local CountOffSets = {
 	TOPLEFT = {"LEFT", "RIGHT", 1, 0},
 	TOPRIGHT = {"RIGHT", "LEFT", 2, 0},
@@ -867,11 +863,7 @@ T.CreateRaidBuffIcon = function(element, button)
 		local tex = button:CreateTexture(nil, "OVERLAY")
 		tex:SetAllPoints(button)
 		tex:SetTexture(C.media.blank)
-		-- if element.color then
-			tex:SetVertexColor(unpack(element.color))
-		-- else
-			-- tex:SetVertexColor(0.8, 0.8, 0.8)
-		-- end
+		tex:SetVertexColor(unpack(element.color))
 	end
 
 	if C.aura.show_spiral then
@@ -882,19 +874,6 @@ T.CreateRaidBuffIcon = function(element, button)
 	else
 		-- button.Cooldown:SetAlpha(0)
 	end
-end
-
-T.PostUpdateRaidButton = function(_, button, unit, data)
-	if C.aura.debuff_color_type then
-		local color = C_UnitAuras.GetAuraDispelTypeColor(unit, data.auraInstanceID, T.DispelCurve)
-		if color then
-			button:SetBackdropBorderColor(color:GetRGBA())
-		end
-	else
-		button:SetBackdropBorderColor(1, 0, 0)
-	end
-
-	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_debuffs_timer)
 end
 
 T.CreateAuraWatch = function(self)
@@ -922,8 +901,6 @@ T.CreateAuraWatch = function(self)
 
 			auras.point = spell[2]
 			auras.color = spell[3]
-			-- auras.anyUnit = spell[4]
-			-- auras.strictMatching = spell[5]
 
 			if not C.aura.show_timer then
 				auras.disableCooldown = true
@@ -931,7 +908,8 @@ T.CreateAuraWatch = function(self)
 
 			auras.PostCreateButton = T.CreateRaidBuffIcon
 
-			auras:AddGroup("HELPFUL|PLAYER", {
+			local filter = spell[4] and "HELPFUL" or "HELPFUL|PLAYER"
+			auras:AddGroup(filter, {
 				candidateFilters = {includeSpellIDs = {[spell[1]] = true}},
 				maxFrameCount = 1,
 			})
@@ -1114,45 +1092,6 @@ T.CustomFilterBoss = function(_, unit, data)
 		return false
 	end
 	return true
-end
-
-if C.raidframe.plugins_debuffs_filter then
-	T.CustomDebuffFilter = function(_, unit, data)
-		if T.NotSecretValue(data.spellId) and T.RaidDebuffsIgnore[data.spellId] then
-			return false
-		end
-
-		local allow = false
-
-		local filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|IMPORTANT")
-		if filter then
-			allow = true
-		end
-
-		filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|CROWD_CONTROL")
-		if filter then
-			allow = true
-		end
-
-		filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|RAID")
-		if filter then
-			allow = true
-		end
-
-		filter = not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, "HARMFUL|RAID_IN_COMBAT")
-		if filter then
-			allow = true
-		end
-
-		return allow
-	end
-else
-	T.CustomDebuffFilter = function(_, _, data)
-		if T.NotSecretValue(data.spellId) and T.RaidDebuffsIgnore[data.spellId] then
-			return false
-		end
-		return true
-	end
 end
 
 T.DispelColor = function(self)
