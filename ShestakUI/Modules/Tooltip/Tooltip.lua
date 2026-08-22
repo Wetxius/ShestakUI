@@ -128,8 +128,30 @@ local anchor = CreateFrame("Frame", "TooltipAnchor", UIParent)
 anchor:SetSize(200, 40)
 anchor:SetPoint(unpack(C.position.tooltip))
 
--- Hide PVP text
-PVP_ENABLED = ""
+-- Hide unwanted lines
+local TooltipCheck = {[GameTooltip] = true, [GameTooltipTooltip] = true, [ItemRefTooltip] = true}
+
+local TEXTS_TO_REMOVE = {
+	[_G.FACTION_ALLIANCE] = true,
+	[_G.FACTION_HORDE] = true,
+	[_G.PVP] = true
+}
+
+TooltipDataProcessor.AddLinePreCall(Enum.TooltipDataLineType.None, function(tooltip, lineData)
+	if not TooltipCheck[tooltip] or tooltip:IsForbidden() then return end
+	if not tooltip:IsTooltipType(Enum.TooltipDataType.Unit) then return end
+
+	if TEXTS_TO_REMOVE[lineData.leftText] then
+		return true
+	end
+end)
+
+TooltipDataProcessor.AddLinePreCall(Enum.TooltipDataLineType.Blank, function(tooltip)
+	if not TooltipCheck[tooltip] or tooltip:IsForbidden() then return end
+	if not tooltip:IsTooltipType(Enum.TooltipDataType.Unit) then return end
+
+	return true
+end)
 
 -- Statusbar
 GameTooltipStatusBar:SetStatusBarTexture(C.media.texture)
@@ -372,18 +394,6 @@ local OnTooltipSetUnit = function(self)
 			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN, class or "")
 		else
 			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN)
-		end
-
-		for i = n + 1, lines do
-			local line = _G["GameTooltipTextLeft"..i]
-			if not line or not line:GetText() then return end
-			local text = line:GetText()
-			if T.NotSecretValue(text) then
-				if text == FACTION_HORDE or text == FACTION_ALLIANCE then
-					line:SetText()
-					break
-				end
-			end
 		end
 	else
 		for i = 2, lines do
