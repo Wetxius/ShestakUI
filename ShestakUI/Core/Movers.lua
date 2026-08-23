@@ -37,7 +37,7 @@ T.MoverFrames = {
 	FOCUS_CC_Anchor,
 	COOLDOWN_Anchor,
 	T_DE_BUFF_BAR_Anchor,
-	-- P_BUFF_BAR_Anchor, -- not used now
+	P_BUFF_BAR_Anchor, -- not used now
 	SplitBarLeft,
 	SplitBarRight,
 	UIWidgetPowerBarAnchor,
@@ -142,10 +142,10 @@ controls:SetFrameLevel(200)
 controls:SetClampedToScreen(true)
 controls:Hide()
 controls:SetScript("OnLeave", function(self)
-	if MouseIsOver(self) then return end
+	if self:IsMouseOver() then return end
 	if not self._frame then
 		self:Hide()
-	elseif not MouseIsOver(self._frame) then
+	elseif not self._frame:IsMouseOver() then
 		self:Hide()
 	end
 	controls.x:SetText("")
@@ -388,7 +388,7 @@ do
 	end)
 
 	chatInfo:SetScript("OnLeave", function()
-		if not MouseIsOver(controls) then controls:Hide() end
+		if not controls:IsMouseOver() then controls:Hide() end
 	end)
 end
 
@@ -421,7 +421,7 @@ local CreateMover = function(frame, unit)
 	mover:SetScript("OnLeave", function(self)
 		self.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
 		self.backdrop:SetBackdropBorderColor(0, 0.6, 0.6)
-		if not MouseIsOver(controls) then controls:Hide() end
+		if not controls:IsMouseOver() then controls:Hide() end
 	end)
 	mover:SetScript("OnMouseUp", RestoreDefaults)
 	mover:SetScript("OnMouseWheel", OnMouseWheel)
