@@ -1,7 +1,6 @@
 local T, C, L, _ = unpack(ShestakUI)
 if C.unitframe.enable ~= true or C.filger.enable ~= true then return end
-if T.newPatch then return end
-
+if T.Midnight then return end
 ----------------------------------------------------------------------------------------
 --	Lightweight buff/debuff tracking (Filger by Nils Ruesch, editors Affli/SinaC/Ildyria)
 ----------------------------------------------------------------------------------------
