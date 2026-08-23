@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C.aura.cast_by ~= true then return end
-
+if T.Midnight then return end
 ----------------------------------------------------------------------------------------
 --	Tells you who cast a buff or debuff in its tooltip(prButler by Renstrom)
 ----------------------------------------------------------------------------------------
