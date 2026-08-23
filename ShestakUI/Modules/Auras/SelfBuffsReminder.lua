@@ -117,7 +117,7 @@ local function OnEvent(self, event, arg1)
 		if reversecheck then
 			if group.negate_reversecheck and group.negate_reversecheck == T.Spec then self:Hide() return end
 			for i = 1, #group.spells do
-				local name = group.spells[i][1]
+				local name = group.spells[i][3]
 				if name and C_UnitAuras.GetPlayerAuraBySpellID(name) then
 					self:Show()
 					if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
@@ -126,7 +126,7 @@ local function OnEvent(self, event, arg1)
 			end
 		else
 			for i = 1, #group.spells do
-				local name = group.spells[i][1]
+				local name = group.spells[i][3]
 				if name and C_UnitAuras.GetPlayerAuraBySpellID(name) then
 					self:Hide()
 					return

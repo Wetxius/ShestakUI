@@ -6,9 +6,9 @@ local T, C, L = unpack(ShestakUI)
 --	Take the number ID at the end of the URL, and add it to the list
 ----------------------------------------------------------------------------------------
 local function SpellName(id)
-	local name, _, icon = GetSpellInfo(id)
+	local name, _, icon, _, _, _, spellID = GetSpellInfo(id)
 	if name then
-		return {name, icon}
+		return {name, icon, spellID}
 	else
 		print("|cffff0000ShestakUI: Reminders spell ID ["..tostring(id).."] no longer exists!|r")
 		return {"Empty", ""}
