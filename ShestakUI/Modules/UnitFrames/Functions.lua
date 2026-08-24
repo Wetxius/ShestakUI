@@ -1127,3 +1127,227 @@ T.UnitFrame_OnEnter = function(self)
 		self.UpdateTooltip = (T.NotSecretValue(self.__unit) and self.__unit and GameTooltip:SetUnit(self.__unit) and T.UnitFrame_OnEnter) or nil
 	end
 end
+
+local function createAnchors()
+	P_BUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.player_buff_icon))
+	P_BUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
+
+	P_PROC_ICON_Anchor:SetPoint(unpack(C.position.filger.player_proc_icon))
+	P_PROC_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
+
+	SPECIAL_P_BUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.special_proc_icon))
+	SPECIAL_P_BUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
+
+	T_DEBUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.target_debuff_icon))
+	T_DEBUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
+
+	T_CC_Anchor:SetPoint(unpack(C.position.filger.target_buff_icon))
+	T_CC_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
+
+	T_BUFF_Anchor:SetPoint("LEFT", T_CC_Anchor, "LEFT", C.filger.pvp_size + 3, 0)
+	T_BUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
+
+	PVE_PVP_DEBUFF_Anchor:SetPoint(unpack(C.position.filger.pve_debuff))
+	PVE_PVP_DEBUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
+
+	FOCUS_CC_Anchor:SetPoint(unpack(C.position.filger.focus_cc))
+	FOCUS_CC_Anchor:SetSize(221, 25)
+
+	local IsPortrait = C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY"
+
+	T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], IsPortrait and "oUF_Target_Portrait" or C.position.filger.target_bar[2], C.position.filger.target_bar[3], IsPortrait and C.position.filger.target_bar[4] - 3 or C.position.filger.target_bar[4], IsPortrait and C.position.filger.target_bar[5] + 38 or C.position.filger.target_bar[5])
+	T_DE_BUFF_BAR_Anchor:SetSize(218, 25)
+
+	P_BUFF_BAR_Anchor:SetPoint(C.position.filger.player_bar[1], IsPortrait and "oUF_Player_Portrait" or C.position.filger.player_bar[2], C.position.filger.player_bar[3], IsPortrait and C.position.filger.player_bar[4] + 3 or C.position.filger.player_bar[4], IsPortrait and C.position.filger.player_bar[5] + 38 or C.position.filger.player_bar[5])
+	P_BUFF_BAR_Anchor:SetSize(218, 25)
+
+	P_BUFF_ICON_Anchor.done = true
+end
+
+T.PostCreateFilgerIcon = function(element, button, options)
+	button:SetTemplate("Default")
+
+	T.SkinCooldown(button.Cooldown, "actionbar")
+
+	button.Icon:SetPoint("TOPLEFT", 2, -2)
+	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+	button.Count:SetPoint("BOTTOMRIGHT", 1, -2)
+	button.Count:SetJustifyH("RIGHT")
+	button.Count:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+	button.Count:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
+
+	button.Cooldown:SetReverse(true)
+	button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+	button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+	button.Cooldown:SetSwipeColor(0, 0, 0, 0.6)
+	button.Cooldown:SetDrawEdge(false)
+
+	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
+
+	-- local bar = CreateFrame("StatusBar", nil, button)
+	-- bar:SetMinMaxValues(0, 1)
+	-- bar:SetReverseFill(true)
+
+	-- button:SetDurationBar(bar, { interpolation = Enum.StatusBarInterpolation.Immediate, direction = Enum.StatusBarTimerDirection.ElapsedTime })
+end
+
+T.CreateFilgerAuras = function(self, unit)
+	if not P_BUFF_ICON_Anchor.done then
+		createAnchors()
+	end
+	if unit == "player" then
+		-- if C.filger.show_pvp_player then
+			-- -- Crowd controls
+			-- self.CCDebuffs = self:CreateAuras({
+				-- growthX = "LEFT",
+				-- growthY = "UP",
+				-- layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+			-- })
+			-- self.CCDebuffs.size = C.filger.pvp_size
+			-- self.CCDebuffs.showCount = true
+			-- self.CCDebuffs.elementSpacing = C.filger.pvp_space
+			-- self.CCDebuffs.sortDirection = AuraContainerSortDirection.Reverse
+			-- self.CCDebuffs.PostCreateButton = T.PostCreateFilgerIcon
+			-- self.CCDebuffs:SetPoint("TOPRIGHT", PVE_PVP_DEBUFF_Anchor)
+			-- self.CCDebuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+			-- self.CCDebuffs.tooltipOffsetY = 3
+			-- self.CCDebuffs.disableMouse = not C.filger.show_tooltip
+
+			-- self.CCDebuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
+				-- maxFrameCount = 2,
+			-- })
+		-- end
+		if C.filger.show_special then
+			-- Special buffs on player
+			self.SBuffs = self:CreateAuras({
+				growthX = "LEFT",
+				growthY = "UP",
+			})
+			self.SBuffs.size = C.filger.buffs_size
+			self.SBuffs.showCount = true
+			self.SBuffs.elementSpacing = C.filger.buffs_space
+			self.SBuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.SBuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.SBuffs:SetPoint("TOPRIGHT", SPECIAL_P_BUFF_ICON_Anchor)
+			self.SBuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+			self.SBuffs.tooltipOffsetY = 3
+			self.SBuffs.disableMouse = not C.filger.show_tooltip
+
+			self.SBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
+				maxFrameCount = 1,
+			})
+			self.SBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!BIG_DEFENSIVE", {
+				maxFrameCount = 1,
+			})
+		end
+		if C.filger.show_buff then
+			-- Player buffs
+			self.PBuffs = self:CreateAuras({
+				growthX = "LEFT",
+				growthY = "UP",
+			})
+			self.PBuffs.size = C.filger.buffs_size
+			self.PBuffs.showCount = true
+			self.PBuffs.elementSpacing = C.filger.buffs_space
+			self.PBuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.PBuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.PBuffs:SetPoint("TOPRIGHT", P_BUFF_ICON_Anchor)
+			self.PBuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+			self.PBuffs.tooltipOffsetY = 3
+			self.PBuffs.disableMouse = not C.filger.show_tooltip
+
+			self.PBuffs:AddGroup("HELPFUL|PLAYER", {
+				candidateFilters = {includeSpellIDs = T.Filger_P_BUFF},
+			})
+		end
+		if C.filger.show_proc then
+			-- Player's Proc
+			self.PProc = self:CreateAuras({
+				growthX = "RIGHT",
+				growthY = "UP",
+			})
+			self.PProc.size = C.filger.buffs_size
+			self.PProc.showCount = true
+			self.PProc.elementSpacing = C.filger.buffs_space
+			self.PProc.sortDirection = AuraContainerSortDirection.Reverse
+			self.PProc.PostCreateButton = T.PostCreateFilgerIcon
+			self.PProc:SetPoint("TOPLEFT", P_PROC_ICON_Anchor)
+			self.PProc.tooltipAnchor = "ANCHOR_TOPLEFT"
+			self.PProc.tooltipOffsetY = 3
+			self.PProc.disableMouse = not C.filger.show_tooltip
+
+			self.PProc:AddGroup("HELPFUL|PLAYER", {
+				candidateFilters = {includeSpellIDs = T.Filger_P_PROC},
+			})
+		end
+	elseif unit == "target" then
+		if C.filger.show_pvp_target then
+			-- Crowd controls
+			self.CCDebuffsT = self:CreateAuras({
+				growthX = "RIGHT",
+				growthY = "UP",
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+			})
+			self.CCDebuffsT.size = C.filger.pvp_size
+			self.CCDebuffsT.showCount = true
+			self.CCDebuffsT.elementSpacing = C.filger.pvp_space
+			self.CCDebuffsT.sortDirection = AuraContainerSortDirection.Reverse
+			self.CCDebuffsT.PostCreateButton = T.PostCreateFilgerIcon
+			self.CCDebuffsT:SetPoint("TOPLEFT", T_CC_Anchor)
+			self.CCDebuffsT.tooltipAnchor = "ANCHOR_TOPLEFT"
+			self.CCDebuffsT.tooltipOffsetY = 3
+			self.CCDebuffsT.disableMouse = not C.filger.show_tooltip
+
+			self.CCDebuffsT:AddGroup("HARMFUL|CROWD_CONTROL", {
+				maxFrameCount = 2,
+			})
+		end
+		if C.filger.show_pvp_target then
+			-- Defensive spells on target
+			self.TBuffs = self:CreateAuras({
+				growthX = "RIGHT",
+				growthY = "UP",
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+			})
+			self.TBuffs.size = C.filger.pvp_size
+			self.TBuffs.showCount = true
+			self.TBuffs.elementSpacing = C.filger.pvp_space
+			self.TBuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.TBuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.TBuffs:SetPoint("TOPLEFT", T_BUFF_Anchor)
+			self.TBuffs.tooltipAnchor = "ANCHOR_TOPLEFT"
+			self.TBuffs.tooltipOffsetY = 3
+			self.TBuffs.disableMouse = not C.filger.show_tooltip
+
+			self.TBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
+				maxFrameCount = 1,
+			})
+			self.TBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!BIG_DEFENSIVE", {
+				maxFrameCount = 1,
+			})
+		end
+		if C.filger.show_debuff then
+			-- Player's Debuffs on target
+			self.PDebuffs = self:CreateAuras({
+				growthX = "RIGHT",
+				growthY = "UP",
+			})
+			self.PDebuffs.size = C.filger.buffs_size
+			self.PDebuffs.showCount = true
+			self.PDebuffs.elementSpacing = C.filger.buffs_space
+			self.PDebuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.PDebuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.PDebuffs:SetPoint("TOPLEFT", T_DEBUFF_ICON_Anchor)
+			self.PDebuffs.tooltipAnchor = "ANCHOR_TOPLEFT"
+			self.PDebuffs.tooltipOffsetY = 3
+			self.PDebuffs.disableMouse = not C.filger.show_tooltip
+
+			self.PDebuffs:AddGroup("HARMFUL|PLAYER|!CROWD_CONTROL", {
+				maxFrameCount = 6,
+				candidateFilters = {includeSpellIDs = T.Filger_T_DEBUFF},
+			})
+		end
+	end
+end

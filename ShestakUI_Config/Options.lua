@@ -168,9 +168,9 @@ local FilgerTable = {
 	L.filger_show_buff,
 	L.filger_show_proc,
 	L.filger_show_debuff,
-	L.filger_show_aura_bar,
-	L.filger_show_aura_bar_player,
-	L.filger_show_cd,
+	-- L.filger_show_aura_bar,
+	-- L.filger_show_aura_bar_player,
+	-- L.filger_show_cd,
 	IGNORE
 }
 
@@ -2871,14 +2871,14 @@ do
 	local show_buff = ns.CreateCheckBox(parent, "show_buff")
 	show_buff:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
 
-	-- local show_proc = ns.CreateCheckBox(parent, "show_proc")
-	-- show_proc:SetPoint("LEFT", show_buff, "RIGHT", 320, 0)
+	local show_proc = ns.CreateCheckBox(parent, "show_proc")
+	show_proc:SetPoint("LEFT", show_buff, "RIGHT", 320, 0)
 
 	local show_debuff = ns.CreateCheckBox(parent, "show_debuff")
 	show_debuff:SetPoint("TOPLEFT", show_buff, "BOTTOMLEFT", 0, 0)
 
-	local show_aura_bar = ns.CreateCheckBox(parent, "show_aura_bar")
-	show_aura_bar:SetPoint("LEFT", show_debuff, "RIGHT", 320, 0)
+	-- local show_aura_bar = ns.CreateCheckBox(parent, "show_aura_bar")
+	-- show_aura_bar:SetPoint("LEFT", show_debuff, "RIGHT", 320, 0)
 
 	local show_pvp_player = ns.CreateCheckBox(parent, "show_pvp_player")
 	show_pvp_player:SetPoint("TOPLEFT", show_debuff, "BOTTOMLEFT", 0, 0)
@@ -2925,21 +2925,21 @@ do
 	-- max_test_icon:SetPoint("TOPLEFT", test_mode, "BOTTOMLEFT", 0, -20)
 
 	-- Spell List
-	-- local subheader = ns.addSubCategory(parent, L.filger_subheader_spells)
-	-- subheader:SetPoint("TOPLEFT", max_test_icon, "BOTTOMLEFT", 0, -11)
+	local subheader = ns.addSubCategory(parent, L.filger_subheader_spells)
+	subheader:SetPoint("TOPLEFT", pvp_size, "BOTTOMLEFT", 0, -11)
 
-	-- local category_list = ns.CreateDropDown(parent, "category_list", true, L.filger_category_list, FilgerTable)
-	-- category_list:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
+	local category_list = ns.CreateDropDown(parent, "category_list", true, L.filger_category_list, FilgerTable)
+	category_list:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
 
-	-- hooksecurefunc(category_list, "SetValue", function()
-		-- if not C.options["filger"] then
-			-- C.options["filger"] = {}
-		-- end
-		-- if not C.options["filger"][FilgerDropDownText[category_list.selectedValue]] then
-			-- C.options["filger"][FilgerDropDownText[category_list.selectedValue]] = {}
-		-- end
-		-- BuildSpellList(C.options["filger"][FilgerDropDownText[category_list.selectedValue]], false, true)
-	-- end)
+	hooksecurefunc(category_list, "SetValue", function()
+		if not C.options["filger"] then
+			C.options["filger"] = {}
+		end
+		if not C.options["filger"][FilgerDropDownText[category_list.selectedValue]] then
+			C.options["filger"][FilgerDropDownText[category_list.selectedValue]] = {}
+		end
+		BuildSpellList(C.options["filger"][FilgerDropDownText[category_list.selectedValue]], false, true)
+	end)
 end
 
 -- Announcements

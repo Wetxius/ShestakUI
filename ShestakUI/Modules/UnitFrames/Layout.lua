@@ -769,9 +769,9 @@ local function Shared(self, unit)
 			maxFrameCount = 4,
 		})
 
-		if unit == "pet" then
-			self:RegisterEvent("UNIT_PET", T.UpdateAllElements)
-		end
+		-- if unit == "pet" then
+			-- self:RegisterEvent("UNIT_PET", T.UpdateAllElements)
+		-- end
 	end
 
 	if unit == "player" or unit == "target" then
@@ -1279,7 +1279,7 @@ local function Shared(self, unit)
 			})
 		end
 
-		self:HookScript("OnShow", T.UpdateAllElements)
+		-- self:HookScript("OnShow", T.UpdateAllElements)
 	end
 
 	-- Aggro border
@@ -1330,6 +1330,13 @@ local function Shared(self, unit)
 			}
 		end
 		self.NormalAlpha = 1
+	end
+
+	-- Filger auras tracker
+	if C.filger.enable then
+		C_Timer.After(1, function()
+			T.CreateFilgerAuras(self, unit)
+		end)
 	end
 
 	-- Apply expert code

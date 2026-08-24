@@ -10,9 +10,10 @@ P_BUFF_ICON_Anchor = CreateFrame("Frame", "P_BUFF_ICON_Anchor", UIParent)
 P_PROC_ICON_Anchor = CreateFrame("Frame", "P_PROC_ICON_Anchor", UIParent)
 SPECIAL_P_BUFF_ICON_Anchor = CreateFrame("Frame", "SPECIAL_P_BUFF_ICON_Anchor", UIParent)
 T_DEBUFF_ICON_Anchor = CreateFrame("Frame", "T_DEBUFF_ICON_Anchor", UIParent)
+T_CC_Anchor = CreateFrame("Frame", "T_CC_Anchor", UIParent)
 T_BUFF_Anchor = CreateFrame("Frame", "T_BUFF_Anchor", UIParent)
 PVE_PVP_DEBUFF_Anchor = CreateFrame("Frame", "PVE_PVP_DEBUFF_Anchor", UIParent)
-PVE_PVP_CC_Anchor = CreateFrame("Frame", "PVE_PVP_CC_Anchor", UIParent)
+FOCUS_CC_Anchor = CreateFrame("Frame", "FOCUS_CC_Anchor", UIParent)
 COOLDOWN_Anchor = CreateFrame("Frame", "COOLDOWN_Anchor", UIParent)
 T_DE_BUFF_BAR_Anchor = CreateFrame("Frame", "T_DE_BUFF_BAR_Anchor", UIParent)
 P_BUFF_BAR_Anchor = CreateFrame("Frame", "P_BUFF_BAR_Anchor", UIParent)
@@ -3289,5 +3290,150 @@ do
 	-- Remove Serpent Sting if Serpentstalker's Trickery is pick up
 	if C_SpellBook.IsSpellKnown(378888) then
 		T.FilgerIgnoreSpell[GetSpellInfo(271788)] = true
+	end
+end
+
+-- Build spell list for Aura container system
+
+local SpellGroups = {}
+
+T.Filger_P_BUFF = {}
+T.Filger_P_PROC = {}
+T.Filger_T_DEBUFF = {}
+
+if C["filger_spells"] and C["filger_spells"]["ALL"] then
+	if not C["filger_spells"][T.class] then
+		C["filger_spells"][T.class] = {}
+	end
+
+	for i = 1, #C["filger_spells"]["ALL"], 1 do
+		local merge = false
+		local spellListAll = C["filger_spells"]["ALL"][i]
+		local spellListClass = nil
+		for j = 1, #C["filger_spells"][T.class], 1 do
+			spellListClass = C["filger_spells"][T.class][j]
+			local mergeAll = spellListAll.Merge or false
+			local mergeClass = spellListClass.Merge or false
+			if spellListClass.Name == spellListAll.Name and (mergeAll or mergeClass) then
+				merge = true
+				break
+			end
+		end
+		if not merge or not spellListClass then
+			table.insert(C["filger_spells"][T.class], C["filger_spells"]["ALL"][i])
+		else
+			for j = 1, #spellListAll, 1 do
+				table.insert(spellListClass, spellListAll[j])
+			end
+		end
+	end
+end
+
+for _, spell in pairs(C.filger.buff_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"P_BUFF_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.proc_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.debuff_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"T_DEBUFF_ICON", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.aura_bar_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"T_DE/BUFF_BAR", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.aura_bar_player_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"P_BUFF_BAR", {spellID = spell[1], unitID = "player", caster = "all", filter = "BUFF", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.cd_spells_list) do
+	if spell[2] == T.class then
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = spell[1], filter = "CD", absID = true, custom = true}})
+	end
+end
+
+for _, spell in pairs(C.filger.ignore_spells_list) do
+	if spell[2] == T.class then
+		T.FilgerIgnoreSpell[GetSpellInfo(spell[1])] = true
+	end
+end
+
+if C["filger_spells"] and C["filger_spells"][T.class] then
+	for class in pairs(C["filger_spells"]) do
+		if class ~= T.class then
+			C["filger_spells"][class] = nil
+		end
+	end
+
+	local idx = {}
+	for i = 1, #C["filger_spells"][T.class], 1 do
+		local jdx = {}
+		local data = C["filger_spells"][T.class][i]
+		local group = {spells = {}}
+
+		for _, import in pairs(T.CustomFilgerSpell) do
+			if data.Name == import[1] then
+				tinsert(data, import[2])
+			end
+		end
+
+		for j = 1, #data, 1 do
+			local name
+			if data[j].spellID then
+				name = GetSpellInfo(data[j].spellID)
+			else
+				local slotLink = GetInventoryItemLink("player", data[j].slotID)
+				if slotLink then
+					name = C_Item.GetItemInfo(slotLink)
+				end
+			end
+			if name or data[j].slotID then
+				if T.FilgerIgnoreSpell[name] and not data[j].custom then
+					table.insert(jdx, j)
+				else
+					if data.Name == "P_BUFF_ICON" and data[j].spellID then T.Filger_P_BUFF[data[j].spellID] = true end
+					if data.Name == "P_PROC_ICON" and data[j].spellID then T.Filger_P_PROC[data[j].spellID] = true end
+					if (data.Name == "T_DEBUFF_ICON" or data.Name == "T_DE/BUFF_BAR") and data[j].spellID then T.Filger_T_DEBUFF[data[j].spellID] = true end
+
+					local info = data[j].spellID and C_Spell.GetSpellInfo(data[j].spellID)
+					local id = data[j].absID and data[j].spellID or (info and info.name) or data[j].slotID
+					data[j].sort = j
+					group.spells[id] = data[j]
+				end
+			end
+			if not name and not data[j].slotID then
+				print("|cffff0000ShestakUI: Filger spell ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists!|r")
+				table.insert(jdx, j)
+			end
+		end
+
+		for _, v in ipairs(jdx) do
+			table.remove(data, v)
+		end
+
+		group.data = data
+		table.insert(SpellGroups, i, group)
+
+		if #data == 0 then
+			-- print("|cffff0000ShestakUI: Filger section ["..data.Name.."] is empty! Report this to Shestak.|r")
+			table.insert(idx, i)
+		end
+	end
+
+	for _, v in ipairs(idx) do
+		table.remove(C["filger_spells"][T.class], v)
 	end
 end
