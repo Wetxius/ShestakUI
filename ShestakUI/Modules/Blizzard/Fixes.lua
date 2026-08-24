@@ -8,6 +8,16 @@ if T.client == "ruRU" then
 end
 
 ----------------------------------------------------------------------------------------
+--	Fix ShouldShowMawBuffs taint
+----------------------------------------------------------------------------------------
+local orig = ShouldShowMawBuffs
+ShouldShowMawBuffs = function()
+    if C_Secrets.ShouldAurasBeSecret() then return false end
+
+    return orig()
+end
+
+----------------------------------------------------------------------------------------
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
 if not NoTaint2_Proc_ResetActionButtonAction then
