@@ -2100,6 +2100,8 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Nightfall
+			{spellID = 264571, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Backdraft
 			{spellID = 117828, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Grimore of Synergy
@@ -2142,9 +2144,7 @@ C["filger_spells"] = {
 			-- Immolate
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Unstable Affliction
-			{spellID = 316099, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Unstable Affliction (PvP Talent)
-			{spellID = 342938, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			{spellID = 1259790, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Siphon Life
 			{spellID = 63106, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Soul Effigy
