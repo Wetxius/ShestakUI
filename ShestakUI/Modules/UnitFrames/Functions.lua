@@ -1405,6 +1405,12 @@ T.CreateFilgerAuras = function(self, unit)
 				maxFrameCount = 6,
 				candidateFilters = {includeSpellIDs = T.Filger_T_BAR},
 			})
+
+			self.BarDebuffs:AddGroup("HELPFUL|PLAYER", {
+				isBar = true,
+				maxFrameCount = 6,
+				candidateFilters = {includeSpellIDs = T.Filger_T_BAR},
+			})
 		end
 	end
 end
