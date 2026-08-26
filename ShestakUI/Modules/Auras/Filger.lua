@@ -4,18 +4,6 @@ if T.Midnight then return end
 ----------------------------------------------------------------------------------------
 --	Lightweight buff/debuff tracking (Filger by Nils Ruesch, editors Affli/SinaC/Ildyria)
 ----------------------------------------------------------------------------------------
-P_BUFF_ICON_Anchor = CreateFrame("Frame", "P_BUFF_ICON_Anchor", UIParent)
-P_PROC_ICON_Anchor = CreateFrame("Frame", "P_PROC_ICON_Anchor", UIParent)
-SPECIAL_P_BUFF_ICON_Anchor = CreateFrame("Frame", "SPECIAL_P_BUFF_ICON_Anchor", UIParent)
-T_DEBUFF_ICON_Anchor = CreateFrame("Frame", "T_DEBUFF_ICON_Anchor", UIParent)
-T_CC_Anchor = CreateFrame("Frame", "T_CC_Anchor", UIParent)
-T_BUFF_Anchor = CreateFrame("Frame", "T_BUFF_Anchor", UIParent)
-PVE_PVP_DEBUFF_Anchor = CreateFrame("Frame", "PVE_PVP_DEBUFF_Anchor", UIParent)
-FOCUS_CC_Anchor = CreateFrame("Frame", "FOCUS_CC_Anchor", UIParent)
-COOLDOWN_Anchor = CreateFrame("Frame", "COOLDOWN_Anchor", UIParent)
-T_DE_BUFF_BAR_Anchor = CreateFrame("Frame", "T_DE_BUFF_BAR_Anchor", UIParent)
-P_BUFF_BAR_Anchor = CreateFrame("Frame", "P_BUFF_BAR_Anchor", UIParent)
-
 P_BUFF_ICON_Anchor:SetPoint(unpack(C.position.filger.player_buff_icon))
 P_BUFF_ICON_Anchor:SetSize(C.filger.buffs_size, C.filger.buffs_size)
 

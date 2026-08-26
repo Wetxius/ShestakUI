@@ -616,8 +616,6 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
-			-- Snapfire
-			--BETA {spellID = 370818, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Essence Burst
 			{spellID = 359618, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Leaping Flames
@@ -809,7 +807,7 @@ C["filger_spells"] = {
 			-- Mok'Nathal Tactics
 			{spellID = 201081, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mongoose Fury
-			--BETA {spellID = 190931, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 1252708, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Beast Cleave
 			{spellID = 118455, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Mend Pet
@@ -1810,16 +1808,12 @@ C["filger_spells"] = {
 			{spellID = 79140, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Nightblade
 			{spellID = 195452, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Ghostly Strike
-			--BETA {spellID = 196937, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Deadly Poison
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crippling Poison
 			{spellID = 3409, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Wound Poison
 			{spellID = 8680, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Crimson Tempest
-			--BETA {spellID = 121411, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "PVE/PVP_CC",
@@ -1877,8 +1871,6 @@ C["filger_spells"] = {
 			{spellID = 13750, filter = "CD"},
 			-- Between the Eyes
 			{spellID = 315341, filter = "CD"},
-			-- Riposte
-			--BETA {spellID = 199754, filter = "CD"},
 			-- Cloak of Shadows
 			{spellID = 31224, filter = "CD"},
 			-- Grappling Hook
@@ -1887,8 +1879,6 @@ C["filger_spells"] = {
 			{spellID = 185311, filter = "CD"},
 			-- Garrote
 			{spellID = 703, filter = "CD"},
-			-- Exsanguinate
-			--BETA {spellID = 200806, filter = "CD"},
 			-- Shadowstep
 			{spellID = 36554, filter = "CD"},
 			-- Evasion
@@ -2029,8 +2019,6 @@ C["filger_spells"] = {
 			{spellID = 117014, filter = "CD"},
 			-- Feral Lunge
 			{spellID = 196884, filter = "CD"},
-			-- Cloudburst Totem
-			--BETA {spellID = 157153, filter = "CD"},
 			-- Earthbind Totem
 			{spellID = 2484, filter = "CD"},
 			-- Thunderstorm
@@ -2076,7 +2064,7 @@ C["filger_spells"] = {
 			-- Empowered Life Tap
 			{spellID = 235156, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Soul Swap
-			--BETA {spellID = 86211, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 399680, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Regeneration
 			{spellID = 108359, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Rush
