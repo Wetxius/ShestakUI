@@ -1167,7 +1167,7 @@ end
 T.PostCreateFilgerIcon = function(element, button, options)
 	button:SetTemplate("Default")
 
-	T.SkinCooldown(button.Cooldown, "actionbar")
+	T.SkinCooldown(button.Cooldown, options.isBar and "bar" or "actionbar")
 
 	button.Icon:SetPoint("TOPLEFT", 2, -2)
 	button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -1212,14 +1212,20 @@ T.PostCreateFilgerIcon = function(element, button, options)
 		button.Count:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
 		button.Count:SetPoint("BOTTOMRIGHT", 1, 0)
 
-		local text = button.Cooldown:GetCountdownFontString()
-		button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
-		text:SetHeight(C.font.auras_font_size)
 		button.Cooldown:SetSwipeColor(0, 0, 0, 0)
 
+		local text = button.Cooldown.text
 		text:ClearAllPoints()
-		text:SetPoint("LEFT", 26, -3)
-		text:SetPoint("RIGHT", 26, -3)
+		text:SetPoint("RIGHT", statusBar, 0, 0)
+
+		statusBar.spellname = statusBar:CreateFontString("$parentSpellName", "OVERLAY")
+		statusBar.spellname:SetFont(C.font.filger_font, C.font.filger_font_size, C.font.filger_font_style)
+		statusBar.spellname:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
+		statusBar.spellname:SetPoint("LEFT", statusBar, 2, 0)
+		statusBar.spellname:SetPoint("RIGHT", text, "LEFT")
+		statusBar.spellname:SetJustifyH("LEFT")
+
+		button:SetSpellName(statusBar.spellname)
 	end
 end
 

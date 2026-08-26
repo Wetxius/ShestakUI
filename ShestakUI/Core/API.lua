@@ -1355,13 +1355,18 @@ function T.SkinCooldown(cooldown, name)
 		end
 		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 		text:SetHeight(C.font.auras_font_size)
-		-- cooldown:SetCountdownMillisecondsThreshold(5)
 	elseif name == "actionbar" then
 		cooldown:SetCountdownFont("ShestakUI_ActionBarTimerFont")
 		text:SetHeight(C.font.cooldown_timers_font_size)
+	elseif name == "bar" then
+		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+		text:SetHeight(C.font.auras_font_size)
+		cooldown:SetCountdownMillisecondsThreshold(60)
 	end
 
-	cooldown:SetCountdownFormatter(numberFormatter)
+	if name ~= "bar" then
+		cooldown:SetCountdownFormatter(numberFormatter)
+	end
 
 	text:ClearAllPoints()
 	text:SetPoint("LEFT", -2, 0)
