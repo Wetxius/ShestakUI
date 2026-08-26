@@ -106,8 +106,6 @@ C["filger_spells"] = {
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
 
-			-- Festering Wound
-			--BETA {spellID = 194310, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Virulent Plague
 			{spellID = 191587, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Blood Plague
@@ -3300,6 +3298,7 @@ local SpellGroups = {}
 T.Filger_P_BUFF = {}
 T.Filger_P_PROC = {}
 T.Filger_T_DEBUFF = {}
+T.Filger_T_BAR = {}
 
 if C["filger_spells"] and C["filger_spells"]["ALL"] then
 	if not C["filger_spells"][T.class] then
@@ -3406,7 +3405,8 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				else
 					if data.Name == "P_BUFF_ICON" and data[j].spellID then T.Filger_P_BUFF[data[j].spellID] = true end
 					if data.Name == "P_PROC_ICON" and data[j].spellID then T.Filger_P_PROC[data[j].spellID] = true end
-					if (data.Name == "T_DEBUFF_ICON" or data.Name == "T_DE/BUFF_BAR") and data[j].spellID then T.Filger_T_DEBUFF[data[j].spellID] = true end
+					if data.Name == "T_DEBUFF_ICON" and data[j].spellID then T.Filger_T_DEBUFF[data[j].spellID] = true end
+					if data.Name == "T_DE/BUFF_BAR" and data[j].spellID then T.Filger_T_BAR[data[j].spellID] = true end
 
 					local info = data[j].spellID and C_Spell.GetSpellInfo(data[j].spellID)
 					local id = data[j].absID and data[j].spellID or (info and info.name) or data[j].slotID

@@ -168,7 +168,7 @@ local FilgerTable = {
 	L.filger_show_buff,
 	L.filger_show_proc,
 	L.filger_show_debuff,
-	-- L.filger_show_aura_bar,
+	L.filger_show_aura_bar,
 	-- L.filger_show_aura_bar_player,
 	-- L.filger_show_cd,
 	IGNORE
@@ -2877,8 +2877,8 @@ do
 	local show_debuff = ns.CreateCheckBox(parent, "show_debuff")
 	show_debuff:SetPoint("TOPLEFT", show_buff, "BOTTOMLEFT", 0, 0)
 
-	-- local show_aura_bar = ns.CreateCheckBox(parent, "show_aura_bar")
-	-- show_aura_bar:SetPoint("LEFT", show_debuff, "RIGHT", 320, 0)
+	local show_aura_bar = ns.CreateCheckBox(parent, "show_aura_bar")
+	show_aura_bar:SetPoint("LEFT", show_debuff, "RIGHT", 320, 0)
 
 	local show_pvp_player = ns.CreateCheckBox(parent, "show_pvp_player")
 	show_pvp_player:SetPoint("TOPLEFT", show_debuff, "BOTTOMLEFT", 0, 0)

@@ -1186,11 +1186,41 @@ T.PostCreateFilgerIcon = function(element, button, options)
 
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 
-	-- local bar = CreateFrame("StatusBar", nil, button)
-	-- bar:SetMinMaxValues(0, 1)
-	-- bar:SetReverseFill(true)
+	if options.isBar then
+		local statusBar = CreateFrame("StatusBar", "nil", button)
+		statusBar:SetWidth(186)
+		statusBar:SetHeight(button:GetHeight() - 10)
+		statusBar:SetStatusBarTexture(C.media.texture)
+		statusBar:SetStatusBarColor(T.color.r, T.color.g, T.color.b, 1)
+		statusBar:SetPoint("BOTTOMLEFT", button, "BOTTOMRIGHT", 5, 2)
 
-	-- button:SetDurationBar(bar, { interpolation = Enum.StatusBarInterpolation.Immediate, direction = Enum.StatusBarTimerDirection.ElapsedTime })
+		statusBar.bg = CreateFrame("Frame", "$parentBG", statusBar)
+		statusBar.bg:SetAllPoints()
+		statusBar.bg:CreateBackdrop("Default")
+
+		statusBar.background = statusBar:CreateTexture(nil, "BACKGROUND")
+		statusBar.background:SetAllPoints()
+		statusBar.background:SetTexture(C.media.texture)
+		statusBar.background:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.2)
+
+		button:SetDurationBar(statusBar, {
+			interpolation = Enum.StatusBarInterpolation.ExponentialEaseOut,
+			direction = Enum.StatusBarTimerDirection.RemainingTime
+		})
+
+		button.Count:SetFont(C.font.filger_font, C.font.filger_font_size, C.font.filger_font_style)
+		button.Count:SetShadowOffset(C.font.filger_font_shadow and 1 or 0, C.font.filger_font_shadow and -1 or 0)
+		button.Count:SetPoint("BOTTOMRIGHT", 1, 0)
+
+		local text = button.Cooldown:GetCountdownFontString()
+		button.Cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
+		text:SetHeight(C.font.auras_font_size)
+		button.Cooldown:SetSwipeColor(0, 0, 0, 0)
+
+		text:ClearAllPoints()
+		text:SetPoint("LEFT", 26, -3)
+		text:SetPoint("RIGHT", 26, -3)
+	end
 end
 
 T.CreateFilgerAuras = function(self, unit)
@@ -1204,6 +1234,7 @@ T.CreateFilgerAuras = function(self, unit)
 				-- growthX = "LEFT",
 				-- growthY = "UP",
 				-- layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+				-- initialAnchor = "TOPRIGHT"
 			-- })
 			-- self.CCDebuffs.size = C.filger.pvp_size
 			-- self.CCDebuffs.showCount = true
@@ -1224,6 +1255,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.SBuffs = self:CreateAuras({
 				growthX = "LEFT",
 				growthY = "UP",
+				initialAnchor = "TOPRIGHT"
 			})
 			self.SBuffs.size = C.filger.buffs_size
 			self.SBuffs.showCount = true
@@ -1247,6 +1279,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PBuffs = self:CreateAuras({
 				growthX = "LEFT",
 				growthY = "UP",
+				initialAnchor = "TOPRIGHT"
 			})
 			self.PBuffs.size = C.filger.buffs_size
 			self.PBuffs.showCount = true
@@ -1258,7 +1291,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PBuffs.tooltipOffsetY = 3
 			self.PBuffs.disableMouse = not C.filger.show_tooltip
 
-			self.PBuffs:AddGroup("HELPFUL|PLAYER", {
+			self.PBuffs:AddGroup("HELPFUL|PLAYER|!BIG_DEFENSIVE", {
 				candidateFilters = {includeSpellIDs = T.Filger_P_BUFF},
 			})
 		end
@@ -1347,6 +1380,30 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PDebuffs:AddGroup("HARMFUL|PLAYER|!CROWD_CONTROL", {
 				maxFrameCount = 6,
 				candidateFilters = {includeSpellIDs = T.Filger_T_DEBUFF},
+			})
+		end
+		if C.filger.show_aura_bar then
+			-- Player's Debuffs bar on target
+			self.BarDebuffs = self:CreateAuras({
+				growthX = "RIGHT",
+				growthY = "UP",
+				layoutLimit = 28,
+				initialAnchor = "BOTTOMLEFT"
+			})
+			self.BarDebuffs.size = 25
+			self.BarDebuffs.showCount = true
+			self.BarDebuffs.lineSpacing = C.filger.buffs_space
+			self.BarDebuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.BarDebuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.BarDebuffs:SetPoint("BOTTOMLEFT", T_DE_BUFF_BAR_Anchor)
+			self.BarDebuffs.tooltipAnchor = "ANCHOR_TOPLEFT"
+			self.BarDebuffs.tooltipOffsetY = 3
+			self.BarDebuffs.disableMouse = not C.filger.show_tooltip
+
+			self.BarDebuffs:AddGroup("HARMFUL|PLAYER", {
+				isBar = true,
+				maxFrameCount = 6,
+				candidateFilters = {includeSpellIDs = T.Filger_T_BAR},
 			})
 		end
 	end
