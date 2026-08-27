@@ -1252,11 +1252,11 @@ T.CreateFilgerAuras = function(self, unit)
 			self.SBuffs.disableMouse = not C.filger.show_tooltip
 
 			self.SBuffs:AddGroup("HELPFUL|!BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 1,
+				maxFrameCount = 2,
 				candidateFilters = {includeSpellIDs = T.Filger_S_P_BUFF},
 			})
 			self.SBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 1,
+				maxFrameCount = 2,
 			})
 			self.SBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!BIG_DEFENSIVE", {
 				maxFrameCount = 1,
