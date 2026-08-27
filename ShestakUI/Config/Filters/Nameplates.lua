@@ -59,6 +59,7 @@ T.DebuffWhiteList = {
 	[15487] = true,		-- Silence
 	[589] = true,		-- Shadow Word: Pain
 	[34914] = true,		-- Vampiric Touch
+	[335467] = true,	-- Shadow Word: Madness
 	-- Rogue
 	[6770] = true,		-- Sap
 	[2094] = true,		-- Blind
