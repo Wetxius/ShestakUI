@@ -664,6 +664,27 @@ T.CustomCastDelayText = function(self, durationObject)
 	self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or elapsed, self.channeling and "-" or "+", abs(self.delay)))
 end
 
+local castTimeFormatter = C_StringUtil.CreateSecondsFormatter()
+castTimeFormatter:SetDefaultAbbreviation(Enum.SecondsFormatterAbbreviation.OneLetter)
+castTimeFormatter:SetMinInterval(Enum.SecondsFormatterInterval.Seconds)
+castTimeFormatter:SetMillisecondsThreshold(60)
+
+T.CustomCastbarTimeBinding = function()
+	local binding = C_DurationUtil.CreateDurationTextBinding()
+	binding:SetTextFormat("{}/{}", {
+		{
+			property = Enum.DurationTextBindingProperty.ElapsedDuration,
+			formatter = castTimeFormatter,
+		},
+		{
+			property = Enum.DurationTextBindingProperty.TotalDuration,
+			formatter = castTimeFormatter,
+		},
+	})
+
+	return binding
+end
+
 local colorStages = {
 	[1] = {1, 0, 0},
 	[2] = {1, 0.4, 0},
@@ -709,22 +730,6 @@ T.PostUpdatePips = function(element)
 		end
 	end
 end
-
---BETA T.AuraTrackerTime = function(self, elapsed)
-	-- if self.active then
-		-- self.timeleft = self.timeleft - elapsed
-		-- if self.timeleft <= 5 then
-			-- self.text:SetTextColor(1, 0, 0)
-		-- else
-			-- self.text:SetTextColor(1, 1, 1)
-		-- end
-		-- if self.timeleft <= 0 then
-			-- self.icon:SetTexture("")
-			-- self.text:SetText("")
-		-- end
-		-- self.text:SetFormattedText("%.1f", self.timeleft)
-	-- end
--- end
 
 local dispelColor = {
 	None = CreateColor(1, 0, 0),
@@ -786,6 +791,8 @@ T.PostCreateIcon = function(element, button, options)
 			})
 		end
 	end
+
+	-- TODO: add custom stealable border
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
@@ -1076,20 +1083,6 @@ T.CustomFilter = function(_, unit, data)
 				return false
 			end
 		end
-	end
-	return true
-end
-
-T.CustomFilterBoss = function(_, unit, data)
-	if data.isHarmfulAura then
-		if data.isPlayerAura then
-		-- if data.isPlayerAura or T.unitIsUnit(unit, data.sourceUnit) then
-		-- if (data.isPlayerAura or data.sourceUnit == unit) then
-			-- if (T.DebuffBlackList and not T.DebuffBlackList[data.name]) or not T.DebuffBlackList then -- BETA secret value
-				return true
-			-- end
-		end
-		return false
 	end
 	return true
 end

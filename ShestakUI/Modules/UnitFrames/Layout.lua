@@ -885,10 +885,9 @@ local function Shared(self, unit)
 				self.Auras.sortDirection = AuraContainerSortDirection.Reverse
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
-				--BETA self.Auras.FilterAura = T.CustomFilter -- find another way
-				-- self.Auras.PostUpdateButton = T.PostUpdateIcon -- need to change color of debuff and steal buff
-
-				self.Auras:AddGroup("HELPFUL")
+				self.Auras:AddGroup("HELPFUL", {
+					showStealableBorder = true,
+				})
 
 				self.Auras:AddGroup("HARMFUL|PLAYER", {
 					layout = {
@@ -1023,8 +1022,11 @@ local function Shared(self, unit)
 			self.Castbar.Time:SetPoint("RIGHT", self.Castbar, "RIGHT", 0, 0)
 			self.Castbar.Time:SetTextColor(1, 1, 1)
 			self.Castbar.Time:SetJustifyH("RIGHT")
-			self.Castbar.CustomTimeText = T.CustomCastTimeText
-			self.Castbar.CustomDelayText = T.CustomCastDelayText
+			self.Castbar.Time.binding = T.CustomCastbarTimeBinding()
+
+			self.Castbar.Delay = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			self.Castbar.Delay:SetPoint("RIGHT", self.Castbar.Time, "LEFT", -2, 0)
+			self.Castbar.Delay:SetTextColor(0.7, 0.3, 0.3)
 
 			self.Castbar.Text = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.Castbar.Text:SetPoint("LEFT", self.Castbar, "LEFT", 2, 0)
@@ -1111,8 +1113,11 @@ local function Shared(self, unit)
 				self.Castbar.Time:SetPoint("RIGHT", self.Castbar, "RIGHT", 0, 0)
 				self.Castbar.Time:SetTextColor(1, 1, 1)
 				self.Castbar.Time:SetJustifyH("RIGHT")
-				self.Castbar.CustomTimeText = T.CustomCastTimeText
-				self.Castbar.CustomDelayText = T.CustomCastDelayText
+				self.Castbar.Time.binding = T.CustomCastbarTimeBinding()
+
+				self.Castbar.Delay = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+				self.Castbar.Delay:SetPoint("RIGHT", self.Castbar.Time, "LEFT", -2, 0)
+				self.Castbar.Delay:SetTextColor(0.7, 0.3, 0.3)
 			end
 		end
 	end
@@ -1165,8 +1170,12 @@ local function Shared(self, unit)
 		self.FactionIcon:SetPoint("TOP", 0, 0)
 
 		-- Crowd control icon
+		local anchor = C.unitframe.arena_on_right and "RIGHT" or "LEFT"
+		local growth = C.unitframe.arena_on_right and "LEFT" or "RIGHT"
 		self.Debuffs = self:CreateAuras({
+			initialAnchor = anchor,
 			growthY = "DOWN",
+			growthX = growth
 		})
 		self.Debuffs:SetFrameStrata("HIGH")
 		self.Debuffs.size = T.Scale(31 + T.extraHeight)
@@ -1175,36 +1184,19 @@ local function Shared(self, unit)
 		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
-		if C.unitframe.boss_on_right then
+		if C.unitframe.arena_on_right then
 			self.Debuffs:SetPoint("RIGHT", self, "LEFT", -5, 0)
-			self.Debuffs.initialAnchor = "RIGHT"
-			self.Debuffs.growthX = "LEFT"
 		else
 			self.Debuffs:SetPoint("LEFT", self, "RIGHT", 5, 0)
-			self.Debuffs.initialAnchor = "LEFT"
-			self.Debuffs.growthX = "RIGHT"
 		end
 
 		self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
 			maxFrameCount = 1,
 		})
 
-		--BETA self.AuraTracker = CreateFrame("Frame", self:GetName().."_AuraTracker", self)
-		-- self.AuraTracker:SetWidth(self.Trinket:GetWidth())
-		-- self.AuraTracker:SetHeight(self.Trinket:GetHeight())
-		-- self.AuraTracker:SetPoint("CENTER", self.Trinket, "CENTER")
-		-- self.AuraTracker:SetFrameStrata("HIGH")
-
-		-- self.AuraTracker.icon = self.AuraTracker:CreateTexture(nil, "ARTWORK")
-		-- self.AuraTracker.icon:SetWidth(self.Trinket:GetWidth())
-		-- self.AuraTracker.icon:SetHeight(self.Trinket:GetHeight())
-		-- self.AuraTracker.icon:SetPoint("TOPLEFT", self.Trinket, 2, -2)
-		-- self.AuraTracker.icon:SetPoint("BOTTOMRIGHT", self.Trinket, -2, 2)
-		-- self.AuraTracker.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-		-- self.AuraTracker.text = T.SetFontString(self.AuraTracker, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-		-- self.AuraTracker.text:SetPoint("CENTER", self.AuraTracker, 0, 0)
-		-- self.AuraTracker:SetScript("OnUpdate", T.AuraTrackerTime)
+		-- self.Debuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
+			-- maxFrameCount = 1,
+		-- })
 
 		if C.unitframe.plugins_enemy_spec then
 			self.EnemySpec = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
@@ -1248,7 +1240,13 @@ local function Shared(self, unit)
 
 		-- Auras on boss
 		if C.aura.boss_auras then
-			self.Auras = self:CreateAuras()
+			local anchor = C.unitframe.boss_on_right and "RIGHT" or "LEFT"
+			local growth = C.unitframe.boss_on_right and "LEFT" or "RIGHT"
+			self.Auras = self:CreateAuras({
+				initialAnchor = anchor,
+				growthY = "DOWN",
+				growthX = growth
+			})
 			self.Auras.showCount = true
 			self.Auras.elementSpacing = T.Scale(3)
 			self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
@@ -1258,16 +1256,10 @@ local function Shared(self, unit)
 			self.Auras.PostCreateButton = T.PostCreateIcon
 			self.Auras.size = T.Scale(31 + T.extraHeight)
 
-			--BETA self.Auras.FilterAura = T.CustomFilterBoss
-
 			if C.unitframe.boss_on_right then
 				self.Auras:SetPoint("RIGHT", self, "LEFT", -5, 0)
-				self.Auras.initialAnchor = "RIGHT"
-				self.Auras.growthX = "LEFT"
 			else
 				self.Auras:SetPoint("LEFT", self, "RIGHT", 5, 0)
-				self.Auras.initialAnchor = "LEFT"
-				self.Auras.growthX = "RIGHT"
 			end
 
 			self.Auras:AddGroup("HELPFUL", {
