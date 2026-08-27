@@ -1594,7 +1594,7 @@ C["filger_spells"] = {
 			{spellID = 34914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shadow Word: Pain
 			{spellID = 589, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Devouring Plague
+			-- Shadow Word: Madness
 			{spellID = 335467, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Purge the Wicked
 			{spellID = 204197, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -3287,6 +3287,7 @@ T.Filger_P_BUFF = {}
 T.Filger_P_PROC = {}
 T.Filger_T_DEBUFF = {}
 T.Filger_T_BAR = {}
+T.Filger_S_P_BUFF = {}
 
 if C["filger_spells"] and C["filger_spells"]["ALL"] then
 	if not C["filger_spells"][T.class] then
@@ -3395,6 +3396,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 					if data.Name == "P_PROC_ICON" and data[j].spellID then T.Filger_P_PROC[data[j].spellID] = true end
 					if data.Name == "T_DEBUFF_ICON" and data[j].spellID then T.Filger_T_DEBUFF[data[j].spellID] = true end
 					if data.Name == "T_DE/BUFF_BAR" and data[j].spellID then T.Filger_T_BAR[data[j].spellID] = true end
+					if data.Name == "SPECIAL_P_BUFF_ICON" and data[j].spellID then T.Filger_S_P_BUFF[data[j].spellID] = true end
 
 					local info = data[j].spellID and C_Spell.GetSpellInfo(data[j].spellID)
 					local id = data[j].absID and data[j].spellID or (info and info.name) or data[j].slotID
