@@ -758,32 +758,17 @@ T.PostCreateIcon = function(element, button, options)
 	if options.notPlayerDebuff then
 		button:SetBackdropBorderColor(unpack(C.media.border_color))
 		button.Icon:SetDesaturated(true)
+	elseif options.showStealable then
+		for _, border in pairs{T.CreateBorderTexture(button)} do
+			button:AddDispelTypeTexture(border, {
+				style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
+				showWhenHelpful = true,
+				showWithoutDispelType = true,
+				stealableFilter = Enum.CustomAuraButtonDispelTypeStealableFilter.Stealable
+			})
+		end
 	elseif C.aura.debuff_color_type then
-		local top = button:CreateTexture(nil, "BORDER", nil, 1)
-		top:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
-		top:SetPoint("TOPRIGHT", button, "TOPRIGHT", 0, 0)
-		top:SetHeight(1)
-		top:SetTexture(C.media.blank)
-
-		local bottom = button:CreateTexture(nil, "BORDER", nil, 1)
-		bottom:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
-		bottom:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
-		bottom:SetHeight(1)
-		bottom:SetTexture(C.media.blank)
-
-		local left = button:CreateTexture(nil, "BORDER", nil, 1)
-		left:SetPoint("TOPLEFT", button, "TOPLEFT")
-		left:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
-		left:SetWidth(1)
-		left:SetTexture(C.media.blank)
-
-		local right = button:CreateTexture(nil, "BORDER", nil, 1)
-		right:SetPoint("TOPRIGHT", button, "TOPRIGHT")
-		right:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
-		right:SetWidth(1)
-		right:SetTexture(C.media.blank)
-
-		for _, border in pairs{top, bottom, left, right} do
+		for _, border in pairs{T.CreateBorderTexture(button)} do
 			button:AddDispelTypeTexture(border, {
 			   style = Enum.CustomAuraButtonDispelTypeTextureStyle.PreserveAsset,
 			   showWithoutDispelType = true,

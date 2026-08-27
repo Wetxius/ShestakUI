@@ -886,7 +886,7 @@ local function Shared(self, unit)
 				self.Auras.PostCreateButton = T.PostCreateIcon
 
 				self.Auras:AddGroup("HELPFUL", {
-					showStealableBorder = true,
+					showStealable = true,
 				})
 
 				self.Auras:AddGroup("HARMFUL|PLAYER", {

@@ -1221,6 +1221,34 @@ function T.SkinFrame(frame, backdrop, x, y)
 	if artFrameOverlay then artFrameOverlay:SetAlpha(0) end
 end
 
+function T.CreateBorderTexture(f)
+	local top = f:CreateTexture(nil, "BORDER", nil, 1)
+	top:SetPoint("TOPLEFT", f, "TOPLEFT", 0, 0)
+	top:SetPoint("TOPRIGHT", f, "TOPRIGHT", 0, 0)
+	top:SetHeight(1)
+	top:SetTexture(C.media.blank)
+
+	local bottom = f:CreateTexture(nil, "BORDER", nil, 1)
+	bottom:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT")
+	bottom:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT")
+	bottom:SetHeight(1)
+	bottom:SetTexture(C.media.blank)
+
+	local left = f:CreateTexture(nil, "BORDER", nil, 1)
+	left:SetPoint("TOPLEFT", f, "TOPLEFT")
+	left:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT")
+	left:SetWidth(1)
+	left:SetTexture(C.media.blank)
+
+	local right = f:CreateTexture(nil, "BORDER", nil, 1)
+	right:SetPoint("TOPRIGHT", f, "TOPRIGHT")
+	right:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT")
+	right:SetWidth(1)
+	right:SetTexture(C.media.blank)
+
+	return top, bottom, left, right
+end
+
 local iconColors = {
 	["uncollected"] = {r = borderr, g = borderg, b = borderb},
 	["gray"]		= {r = borderr, g = borderg, b = borderb},
@@ -1355,17 +1383,15 @@ function T.SkinCooldown(cooldown, name)
 		end
 		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 		text:SetHeight(C.font.auras_font_size)
+		cooldown:SetCountdownMillisecondsThreshold(5)
 	elseif name == "actionbar" then
 		cooldown:SetCountdownFont("ShestakUI_ActionBarTimerFont")
 		text:SetHeight(C.font.cooldown_timers_font_size)
+		cooldown:SetCountdownFormatter(numberFormatter)
 	elseif name == "bar" then
 		cooldown:SetCountdownFont("ShestakUI_AuraTimerFont")
 		text:SetHeight(C.font.auras_font_size)
 		cooldown:SetCountdownMillisecondsThreshold(60)
-	end
-
-	if name ~= "bar" then
-		cooldown:SetCountdownFormatter(numberFormatter)
 	end
 
 	text:ClearAllPoints()
