@@ -89,6 +89,7 @@ T.DebuffWhiteList = {
 	[5246] = true,		-- Intimidating Shout
 	[132168] = true,	-- Shockwave
 	[262115] = true,	-- Deep Wounds
+	[388539] = true,	-- Rend
 	-- Racial
 	[20549] = true,		-- War Stomp (Tauren)
 	[107079] = true,	-- Quaking Palm (Pandaren)
