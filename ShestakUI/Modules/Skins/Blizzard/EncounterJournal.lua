@@ -68,11 +68,11 @@ local function LoadSkin()
 	EncounterJournalJourneysFrame.JourneyProgress.DividerTexture:SetAlpha(0)
 	EncounterJournalJourneysFrame.JourneyProgress.ProgressDetailsFrame.JourneyLevelBar:SetAlpha(0)
 
-	local delvesBar = EncounterJournalJourneysFrame.JourneyProgress.DelveRewardProgressBar
-	delvesBar:StripTextures()
-	delvesBar:CreateBackdrop("Overlay")
-	delvesBar:SetStatusBarTexture(C.media.texture)
-	delvesBar:SetStatusBarColor(0, 1, 0.6)
+	-- local delvesBar = EncounterJournalJourneysFrame.JourneyProgress.DelveRewardProgressBar -- looks weird now
+	-- delvesBar:StripTextures()
+	-- delvesBar:CreateBackdrop("Overlay")
+	-- delvesBar:SetStatusBarTexture(C.media.texture)
+	-- delvesBar:SetStatusBarColor(0, 1, 0.6)
 
 	local delvesBtn = EncounterJournalJourneysFrame.JourneyProgress.DelvesCompanionConfigurationFrame.CompanionConfigBtn
 	delvesBtn:CreateBackdrop("Overlay")
@@ -168,6 +168,7 @@ local function LoadSkin()
 				local bar = button.JourneyCardProgressBar
 				if bar then
 					bar.JourneyCardProgressBarBG:SetAlpha(0)
+					bar.JourneyCardProgressBarFrame:SetAlpha(0)
 					bar:SetSize(320, 10)
 
 					bar.barBackdrop = CreateFrame("Frame", nil, bar)
