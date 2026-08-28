@@ -409,7 +409,8 @@ C["filger_spells"] = {
 			-- Bloodtalons
 			{spellID = 145152, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Clearcasting
-			{spellID = 16870, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 16870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 135700, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Soul of the Forest
 			{spellID = 114108, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Predatory Swiftness
