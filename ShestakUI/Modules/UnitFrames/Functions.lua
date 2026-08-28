@@ -1258,7 +1258,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.SBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
 				maxFrameCount = 2,
 			})
-			self.SBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!BIG_DEFENSIVE", {
+			self.SBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
 				maxFrameCount = 1,
 			})
 		end
@@ -1345,7 +1345,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.TBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
 				maxFrameCount = 1,
 			})
-			self.TBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE|!BIG_DEFENSIVE", {
+			self.TBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
 				maxFrameCount = 1,
 			})
 		end
