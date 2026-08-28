@@ -51,6 +51,7 @@ T.DebuffWhiteList = {
 	-- Paladin
 	[20066] = true,		-- Repentance
 	[853] = true,		-- Hammer of Justice
+	[105421] = true,	-- Blinding Light
 	[183218] = true,	-- Hand of Hindrance
 	-- Priest
 	[204213] = true,	-- Purge the Wicked
