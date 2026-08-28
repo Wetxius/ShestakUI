@@ -2238,7 +2238,7 @@ C["filger_spells"] = {
 			-- Enraged Regeneration
 			{spellID = 184364, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shield Block
-			{spellID = 2565, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 132404, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spell Reflection
 			{spellID = 23920, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Die by the Sword
@@ -2273,6 +2273,8 @@ C["filger_spells"] = {
 			{spellID = 85739, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enrage
 			{spellID = 184362, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Revenge!
+			{spellID = 5302, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -2286,7 +2288,7 @@ C["filger_spells"] = {
 			-- Siegebreaker
 			{spellID = 280773, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rend
-			{spellID = 772, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 388539, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Colossus Smash
 			{spellID = 167105, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hamstring
