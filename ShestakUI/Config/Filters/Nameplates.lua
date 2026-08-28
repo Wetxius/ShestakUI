@@ -27,6 +27,7 @@ T.DebuffWhiteList = {
 	-- Druid
 	[33786] = true,		-- Cyclone
 	[339] = true,		-- Entangling Roots
+	[102359] = true,	-- Mass Entanglement
 	[164812] = true,	-- Moonfire
 	[164815] = true,	-- Sunfire
 	[58180] = true,		-- Infected Wounds
