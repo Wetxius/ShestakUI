@@ -177,26 +177,25 @@ local function LoadSkin()
 
 		if container.DebuffBorder then
 			container.DebuffBorder:SetAlpha(0)
-			-- container.backdrop:SetBackdropBorderColor(1, 0, 0) -- BETA need?
 		end
 
-		for _, region in next, {container:GetRegions()} do
-			if region:IsObjectType("Texture") then
-				local texture = region:GetTexture()
-				local atlas = region:GetAtlas()
+		local _, mask, overlay = container:GetRegions()
+		mask:Hide()
+		overlay:Hide()
 
-				if texture == 6707800 then
-					region:SetTexture(C.media.blank)
-				elseif atlas == "UI-HUD-CoolDownManager-IconOverlay" then -- 6704514
-					region:SetAlpha(0)
-				end
-			end
+		local outOfRange = container.OutOfRange
+		if outOfRange then
+			outOfRange:SetColorTexture(0.8, 0.1, 0.1, 0.3)
 		end
 	end
 
 	local function SkinBar(frame, bar)
 		UpdateTextBar(bar)
 		bar:SetStatusBarTexture(C.media.texture)
+
+		if frame.DebuffBorder then
+			frame.DebuffBorder:SetAlpha(0)
+		end
 
 		if frame.Icon then
 			frame.Icon.Icon:ClearAllPoints()
