@@ -32,7 +32,6 @@ T.CastBarTicks = {
 	[SpellName(15407)] = 6,		-- Mind Flay
 	[SpellName(47540)] = 3,		-- Penance
 	[SpellName(64843)] = 4,		-- Divine Hymn
-	[SpellName(64902)] = 5,		-- Symbol of Hope (Mana Hymn)
 	-- Warlock
 	[SpellName(755)] = 5,		-- Health Funnel
 	[SpellName(198590)] = 5,	-- Drain Soul
@@ -45,12 +44,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("PLAYER_TALENT_UPDATE")
 f:SetScript("OnEvent", function()
-	if T.class ~= "PRIEST" then
+	if T.class == "PRIEST" then
+		-- Penance
+		local penanceTicks = C_SpellBook.IsSpellKnown(193134) and 4 or 3
+		T.CastBarTicks[SpellName(47540)] = penanceTicks
+	elseif T.class == "MAGE" then
+		-- Arcane Missiles
+		local newTicks = C_SpellBook.IsSpellKnown(236628) and 7 or 5
+		T.CastBarTicks[SpellName(5143)] = newTicks
+	else
 		f:UnregisterAllEvents()
-		return
 	end
-
-	-- Penance
-	local penanceTicks = C_SpellBook.IsSpellKnown(193134) and 4 or 3
-	T.CastBarTicks[SpellName(47540)] = penanceTicks
 end)
