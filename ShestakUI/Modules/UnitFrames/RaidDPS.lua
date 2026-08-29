@@ -254,7 +254,6 @@ local function Shared(self, unit)
 
 		self.Debuffs:AddGroup("HARMFUL", {
 			maxFrameCount = 7,
-			showDebuffBorder = true,
 		})
 	end
 
