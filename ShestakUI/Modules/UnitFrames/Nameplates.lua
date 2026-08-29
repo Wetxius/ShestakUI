@@ -692,6 +692,8 @@ local function callback(self, _, unit)
 			self:Show()
 		end
 
+		UpdateTarget(self)
+
 		if T.unitIsUnit(unit, "player") then
 			self.Name:Hide()
 			self.Castbar:SetAlpha(0)
