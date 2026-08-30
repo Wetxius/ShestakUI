@@ -12,6 +12,7 @@ T.UpdateAllElements = function(frame)
 	--BETA for _, v in ipairs(frame.__elements) do
 		-- v(frame, "UpdateElement", frame.unit)
 	-- end
+	frame:UpdateAllElements("UpdateElement")
 end
 
 T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
@@ -1171,6 +1172,7 @@ T.PostCreateFilgerIcon = function(element, button, options)
 		statusBar:SetStatusBarTexture(C.media.texture)
 		statusBar:SetStatusBarColor(T.color.r, T.color.g, T.color.b, 1)
 		statusBar:SetPoint("BOTTOMLEFT", button, "BOTTOMRIGHT", 5, 2)
+		statusBar:SetFillStyle(Enum.StatusBarFillStyle.StandardNoRangeFill)
 
 		statusBar.bg = CreateFrame("Frame", "$parentBG", statusBar)
 		statusBar.bg:SetAllPoints()
