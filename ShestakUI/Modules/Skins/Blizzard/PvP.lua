@@ -260,7 +260,7 @@ local function LoadSkin()
 	TrainingGroundsFrame.BonusTrainingGroundList:StripTextures()
 	TrainingGroundsFrame.BonusTrainingGroundList.ShadowOverlay:StripTextures()
 
-	for _, i in pairs({"RandomTrainingGroundButton"}) do
+	for _, i in pairs({"RandomTrainingGroundButton", "RandomTrainingGroundArenaButton"}) do
 		local button = TrainingGroundsFrame.BonusTrainingGroundList[i]
 		button:StripTextures()
 		button:SetTemplate("Overlay")
