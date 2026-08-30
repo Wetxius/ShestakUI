@@ -778,17 +778,10 @@ T.PostCreateIcon = function(element, button, options)
 		end
 	end
 
-	-- TODO: add custom stealable border
-
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
 		button.Cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 		button.Cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
-		-- button.parent = CreateFrame("Frame", nil, button)
-		-- button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		-- button.Count:SetParent(button.parent)
-	else
-		-- button.Cooldown:SetAlpha(0)
 	end
 
 	if element.isRaidDebuff then
@@ -861,11 +854,6 @@ T.CreateRaidBuffIcon = function(element, button)
 
 	if C.aura.show_spiral then
 		button.Cooldown:SetReverse(true)
-		-- button.parent = CreateFrame("Frame", nil, button)
-		-- button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
-		-- button.Count:SetParent(button.parent)
-	else
-		-- button.Cooldown:SetAlpha(0)
 	end
 end
 
