@@ -141,3 +141,102 @@ local function LoadHouseListSkin()
 end
 
 T.SkinFuncs["Blizzard_HouseList"] = LoadHouseListSkin
+
+local function LoadBulletinBoard()
+	local frame = _G.HousingBulletinBoardFrame
+	T.SkinFrame(frame)
+
+	frame.Background:SetAlpha(0)
+
+	frame.ResidentsTab:StripTextures()
+	frame.RosterTabButton:StripTextures()
+
+	T.SkinScrollBar(frame.ResidentsTab.ScrollBar)
+end
+
+T.SkinFuncs["Blizzard_HousingBulletinBoard"] = LoadBulletinBoard
+
+local function LoadHouseFinder()
+	local frame = _G.HouseFinderFrame
+	T.SkinFrame(frame, true)
+
+	frame.WoodBorderFrame:Hide()
+
+	frame.PlotInfoFrame.VisitHouseButton:SkinButton()
+
+	local neighborList = frame.NeighborhoodListFrame
+	if neighborList then
+		neighborList:StripTextures()
+
+		T.SkinEditBox(neighborList.BNetFriendSearchBox, nil, 18)
+		neighborList.RefreshButton:SkinButton()
+		neighborList.RefreshButton:SetSize(24, 24)
+		T.SkinScrollBar(neighborList.ScrollFrame.ScrollBar)
+	end
+end
+
+T.SkinFuncs["Blizzard_HousingHouseFinder"] = LoadHouseFinder
+
+local function LoadCornerstone()
+	local frame = _G.HousingCornerstoneVisitorFrame
+	T.SkinFrame(frame)
+
+	frame = _G.HousingCornerstoneHouseInfoFrame
+	T.SkinFrame(frame)
+
+	frame = _G.HousingCornerstonePurchaseFrame
+	T.SkinFrame(frame)
+	frame.ForSaleSign:SetPoint("TOP", 0, -3)
+	frame.BuyButton:SkinButton()
+	frame.MoneyFrameBackdrop.NineSlice:StripTextures()
+
+	frame = _G.MoveHouseConfirmationDialog
+	T.SkinFrame(frame)
+	frame.ConfirmButton:SkinButton()
+	frame.CancelButton:SkinButton()
+
+	frame = _G.BuyHouseConfirmationDialog
+	T.SkinFrame(frame)
+	frame.AcceptButton:SkinButton()
+	frame.CancelButton:SkinButton()
+end
+
+T.SkinFuncs["Blizzard_HousingCornerstone"] = LoadCornerstone
+
+local function LoadHouseSettings()
+	local frame = _G.HousingHouseSettingsFrame
+	T.SkinFrame(frame)
+
+	T.SkinDropDownBox(frame.HouseOwnerDropdown)
+
+	frame.AbandonHouseButton:SkinButton()
+	frame.IgnoreListButton:SkinButton()
+	frame.SaveButton:SkinButton()
+end
+
+T.SkinFuncs["Blizzard_HousingHouseSettings"] = LoadHouseSettings
+
+local function LoadEditor()
+	local storagePanel = HouseEditorFrame.StoragePanel
+	T.SkinFrame(storagePanel)
+
+	T.SkinEditBox(storagePanel.SearchBox, nil, 18)
+
+	T.SkinFilter(storagePanel.Filters.FilterDropdown)
+
+	local categories = storagePanel.Categories
+	if categories then
+		categories.TopBorder:Hide()
+		categories.Background:Hide()
+	end
+
+	for _, tab in next, {storagePanel.TabSystem:GetChildren()} do
+		T.SkinTab(tab)
+	end
+
+	T.SkinScrollBar(storagePanel.OptionsContainer.ScrollBar)
+
+	storagePanel.CollapseButton:SetMovePoint(1)
+end
+
+T.SkinFuncs["Blizzard_HouseEditor"] = LoadEditor
