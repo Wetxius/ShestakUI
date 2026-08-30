@@ -1593,10 +1593,6 @@ C["filger_spells"] = {
 			{spellID = 139, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Prayer of Mending
 			{spellID = 41635, unitID = "target", caster = "player", filter = "BUFF"},
-			-- Guardian Spirit
-			{spellID = 47788, unitID = "target", caster = "player", filter = "BUFF"},
-			-- Pain Suppression
-			{spellID = 33206, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Vampiric Touch
 			{spellID = 34914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shadow Word: Pain
