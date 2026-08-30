@@ -506,6 +506,22 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
 				T.SkinHelpBox(self)
 			end)
+
+			local ReportFrame = _G.ReportFrame
+			T.SkinFrame(ReportFrame)
+
+			ReportFrame.ScreenshotReportingFrame.TakeScreenshotButton:SkinButton()
+
+			T.SkinDropDownBox(ReportFrame.ReportingMajorCategoryDropdown)
+			ReportFrame.ReportButton:SkinButton()
+			T.SkinEditBox(ReportFrame.Comment)
+
+			T.SkinFrame(ReportCheatingDialog)
+
+			_G.ReportCheatingDialogCommentFrame:StripTextures()
+			_G.ReportCheatingDialogReportButton:SkinButton()
+			_G.ReportCheatingDialogCancelButton:SkinButton()
+			T.SkinEditBox(_G.ReportCheatingDialogCommentFrameEditBox)
 		end
 	end
 end)
