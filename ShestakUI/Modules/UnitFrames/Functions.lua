@@ -898,18 +898,6 @@ T.CreateAuraWatch = function(self)
 	end
 end
 
-T.PrivateAurasSetPosition = function(element, aura)
-	aura:ClearAllPoints()
-	aura:SetPoint("CENTER", element, "CENTER", 0, 0)
-end
-
-T.PrivateAurasPostUpdate = function(self)
-	for i = 1, #self do
-		local aura = self[i]
-		aura:SetSize(0.0001, 0.0001)
-	end
-end
-
 T.CreateHealthPrediction = function(self, vertical)
 	-- Player healing
 	local mhpb = CreateFrame("StatusBar", nil, self.Health)

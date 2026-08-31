@@ -220,7 +220,6 @@ L.raidframe_plugins_debuffhighlight_icon = "Debuff-Textur und Symbol hervorheben
 L.raidframe_plugins_debuffs = "'RAID' Buffüberwachung"
 L.raidframe_plugins_debuffs_timer = "Timer auf Schlachtzugsdebuff Icons"
 L.raidframe_plugins_debuffs_filter = "Blizzard-Filter für Schwächungszauber aktivieren" -- Needs review
-L.raidframe_plugins_private_auras = "Blizzard 'Private Auras'"
 L.raidframe_plugins_pvp_debuffs = "Zeige ebenfalls PvP Debuff Symbol (aus der Liste)"
 L.raidframe_plugins_buffs = "Raid-Buff-Symbole (Blizzard-Filter)"
 L.raidframe_plugins_buffs_timer = "Timer auf Raid-Buff-Symbolen"

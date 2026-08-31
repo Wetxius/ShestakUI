@@ -223,7 +223,6 @@ L.raidframe_plugins_debuffhighlight_icon = "Отображать иконку с
 L.raidframe_plugins_debuffs = "Отображать рейдовые дебаффы (из списка)"
 L.raidframe_plugins_debuffs_timer = "Включить цифровой таймер"
 L.raidframe_plugins_debuffs_filter = "Включить фильтры Blizzard для дебаффов"
-L.raidframe_plugins_private_auras = "'Приватные ауры' Blizzard"
 L.raidframe_plugins_pvp_debuffs = "Отображать PvP дебаффы (из списка)"
 L.raidframe_plugins_buffs = "Отображать полезные баффы"
 L.raidframe_plugins_buffs_timer = "Включить цифровой таймер для баффов"
