@@ -10,7 +10,7 @@ SpellBinder:Hide()
 SpellBinder.sbOpen = false
 SpellBinder.spellbuttons = {}
 
-	ClickCastFrames = _G.ClickCastFrames or {}
+ClickCastFrames = _G.ClickCastFrames or {}
 for _, v in pairs({
 	"PlayerFrame", "PetFrame",
 	-- Party members
