@@ -74,6 +74,9 @@ local function LoadSkin()
 				HouseUpgradeFrame.Background:Hide()
 				HouseUpgradeFrame.TrackFrame.Background:Hide()
 				T.SkinCheckBox(HouseUpgradeFrame.WatchFavorButton)
+
+				local button = HouseUpgradeFrame.TeleportToHouseButton
+				button.Icon:SkinIcon()
 			end
 
 			hooksecurefunc(contentFrame, "UpdateTabs", function(frame)
@@ -85,24 +88,39 @@ local function LoadSkin()
 			end)
 
 			hooksecurefunc(HouseUpgradeFrame, "SetRewards", function(self)
-				-- TODO
-				-- for reward in self.rewardPool:EnumerateActive() do
-					-- if not reward.styled then
-						-- reward:CreateBackdrop("Overlay")
-						-- reward.backdrop:SetPoint("TOPLEFT", reward, 18, -8)
-						-- reward.backdrop:SetPoint("BOTTOMRIGHT", reward, -18, 8)
+				for reward in self.rewardPoolLarge:EnumerateActive() do
+					if not reward.styled then
+						reward:CreateBackdrop("Overlay")
+						reward.backdrop:SetPoint("TOPLEFT", reward, 13, -8)
+						reward.backdrop:SetPoint("BOTTOMRIGHT", reward, -18, 8)
+						reward.Background:SetAlpha(0)
 
-						-- reward.RewardCardBG:SetAlpha(0)
+						reward.b = CreateFrame("Frame", nil, reward)
+						reward.b:SetTemplate("Default")
+						reward.b:SetPoint("TOPLEFT", reward.PortraitFrame.Portrait, "TOPLEFT", -2, 2)
+						reward.b:SetPoint("BOTTOMRIGHT", reward.PortraitFrame.Portrait, "BOTTOMRIGHT", 2, -2)
+						reward.PortraitFrame.Overlay:SetAlpha(0)
+						reward.PortraitFrame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						reward.styled = true
+					end
+				end
 
-						-- reward.b = CreateFrame("Frame", nil, reward)
-						-- reward.b:SetTemplate("Default")
-						-- reward.b:SetPoint("TOPLEFT", reward.RewardCardIcon, "TOPLEFT", -2, 2)
-						-- reward.b:SetPoint("BOTTOMRIGHT", reward.RewardCardIcon, "BOTTOMRIGHT", 2, -2)
-						-- reward.RewardCardIcon:SetParent(reward.b)
-						-- reward.RewardCardIcon:SetTexCoord(0.15, 0.85, 0.15, 0.85)
-						-- reward.styled = true
-					-- end
-				-- end
+				for reward in self.rewardPoolSmall:EnumerateActive() do
+					if not reward.styled then
+						reward:CreateBackdrop("Overlay")
+						reward.backdrop:SetPoint("TOPLEFT", reward, 3, -8)
+						reward.backdrop:SetPoint("BOTTOMRIGHT", reward, -10, 8)
+						reward.Background:SetAlpha(0)
+
+						reward.b = CreateFrame("Frame", nil, reward)
+						reward.b:SetTemplate("Default")
+						reward.b:SetPoint("TOPLEFT", reward.PortraitFrame.Portrait, "TOPLEFT", -2, 2)
+						reward.b:SetPoint("BOTTOMRIGHT", reward.PortraitFrame.Portrait, "BOTTOMRIGHT", 2, -2)
+						reward.PortraitFrame.Overlay:SetAlpha(0)
+						reward.PortraitFrame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						reward.styled = true
+					end
+				end
 			end)
 		end
 
@@ -117,20 +135,20 @@ local function LoadSkin()
 			bar.barBackdrop:SetTemplate("Overlay")
 			bar:SetStatusBarTexture(C.media.texture)
 			bar:SetStatusBarColor(0, 0.6, 1)
+			bar.BarBackground:Hide()
 
-			-- TODO
-			-- hooksecurefunc(MonthlyActivitiesRewardButtonMixin, "SetRewardItem", function(self)
-				-- if not self.styled then
-					-- self:ClearAllPoints()
-					-- self:SetPoint("LEFT", monthlyActivities.ThresholdContainer.ThresholdBar.barBackdrop, "RIGHT", -2, -3)
-					-- self.Icon:SkinIcon()
-					-- self.CircleMask:Hide()
-					-- self.NormalTexture:SetAlpha(0)
-					-- self.HighlightTexture:SetAlpha(0)
-					-- self.PushedTexture:SetAlpha(0)
-					-- self.styled = true
-				-- end
-			-- end)
+			hooksecurefunc(ProgressThresholdMixin, "Setup", function(self)
+				if self.isFinalReward and not self.Reward.styled then
+					self.Reward.Icon:SetSize(40, 40)
+					self.Reward.Icon:ClearAllPoints()
+					self.Reward.Icon:SetPoint("LEFT", bar, "RIGHT", 7, 0)
+					self.Reward.Icon:SkinIcon()
+					T.SkinIconBorder(self.Reward.IconBorder, self.Reward)
+					self.Reward.CircleMask:Hide()
+					self.Reward.IconBG:Hide()
+					self.Reward.styled = true
+				end
+			end)
 
 			local tasks = initiativesFrame.InitiativeSetFrame.InitiativeTasks
 			if tasks then
