@@ -400,8 +400,8 @@ ns.HideSpellList = function()
 	InputSpell:SetText("")
 	InputSpell.value = ""
 	InputArg:SetText("")
-	-- UIDropDownMenu_SetText(ShestakUIOptionsPanelfilgercategory_listDropDown, "") -- BETA
-	-- ShestakUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
+	UIDropDownMenu_SetText(ShestakUIOptionsPanelfilgercategory_listDropDown, "")
+	ShestakUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
 	AddSpellButton:Disable()
 	SpellList:Hide()
 end
