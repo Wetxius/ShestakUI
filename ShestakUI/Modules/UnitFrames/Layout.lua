@@ -1178,9 +1178,11 @@ local function Shared(self, unit)
 			growthX = growth
 		})
 		self.Debuffs:SetFrameStrata("HIGH")
-		self.Debuffs.size = T.Scale(31 + T.extraHeight)
 		self.Debuffs.showCount = true
+		self.Debuffs.size = T.Scale(31 + T.extraHeight)
 		self.Debuffs.elementSpacing = T.Scale(3)
+		self.Debuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+		self.Debuffs.tooltipOffsetY = 3
 		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
@@ -1245,11 +1247,11 @@ local function Shared(self, unit)
 			self.Auras = self:CreateAuras({
 				initialAnchor = anchor,
 				growthY = "DOWN",
-				growthX = growth
+				growthX = growth,
+				layoutLimit = 500,
 			})
 			self.Auras.showCount = true
 			self.Auras.elementSpacing = T.Scale(3)
-			self.Auras.groupSpacing = T.Scale(C.aura.debuff_size)
 			self.Auras.tooltipAnchor = "ANCHOR_TOPRIGHT"
 			self.Auras.tooltipOffsetY = 3
 			self.Auras.sortDirection = AuraContainerSortDirection.Reverse
@@ -1262,13 +1264,17 @@ local function Shared(self, unit)
 				self.Auras:SetPoint("LEFT", self, "RIGHT", 5, 0)
 			end
 
-			self.Auras:AddGroup("HELPFUL", {
-				maxFrameCount = C.aura.boss_buffs,
-			})
+			if C.aura.boss_buffs > 0 then
+				self.Auras:AddGroup("HELPFUL", {
+					maxFrameCount = C.aura.boss_buffs,
+				})
+			end
 
-			self.Auras:AddGroup("HARMFUL|PLAYER", {
-				maxFrameCount = C.aura.boss_debuffs,
-			})
+			if C.aura.boss_debuffs > 0 then
+				self.Auras:AddGroup("HARMFUL|PLAYER", {
+					maxFrameCount = C.aura.boss_debuffs,
+				})
+			end
 		end
 
 		-- self:HookScript("OnShow", T.UpdateAllElements)
