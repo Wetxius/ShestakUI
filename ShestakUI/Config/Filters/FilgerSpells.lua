@@ -2367,12 +2367,16 @@ C["filger_spells"] = {
 			Position = {"TOP", SPECIAL_P_BUFF_ICON_Anchor},
 
 			-- Potions: Power
-			-- Tempered Potion
-			{spellID = 431932, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Light's Potential
+			{spellID = 1236616, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Potion of Recklessness
+			{spellID = 1236994, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Alluring Nostrum
+			{spellID = 1295015, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Potions: Miscellaneous
-			-- Invisible [Potion of the Hushed Zephyr]
-			{spellID = 371124, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Shrouded in Void [Void-Shrouded Tincture]
+			{spellID = 1236551, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Treading Lightly [Draught of Silent Footfalls]
 			{spellID = 431424, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
@@ -2493,6 +2497,8 @@ C["filger_spells"] = {
 			{spellID = 130, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Levitate
 			{spellID = 1706, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Enlightened [Enlightenment Tonic]
+			{spellID = 1236652, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "P_BUFF_BAR",
