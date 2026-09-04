@@ -14,9 +14,9 @@ local function Update(object, _, unit)
 	local _, instanceType = IsInInstance()
 	if instanceType == "pvp" then
 		for i = 1, GetNumBattlefieldScores() do
-			local name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-			if T.NotSecretValue(name) and GetUnitName(unit, true) == name then
-				object.EnemySpec:SetText(talentSpec)
+			local data = C_PvP.GetScoreInfo(i)
+			if data and T.NotSecretValue(data.name) and GetUnitName(unit, true) == name then
+				object.EnemySpec:SetText(data.talentSpec)
 			end
 		end
 	elseif instanceType == "arena" then

@@ -111,10 +111,13 @@ if C.nameplate.healer_icon then
 			wipe(healList)
 			local playerFaction = numFactions[UnitFactionGroup("player")]
 			for i = 1, GetNumBattlefieldScores() do
-				local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-				if T.NotSecretValue(name) and name and healerSpecs[talentSpec] and faction == playerFaction then
-					name = name:match("(.+)%-.+") or name
-					healList[name] = talentSpec
+				local data = C_PvP.GetScoreInfo(i)
+				if data then
+					local name, faction, talentSpec = data.name, data.faction, data.talentSpec
+					if T.NotSecretValue(name) and name and healerSpecs[talentSpec] and faction == playerFaction then
+						name = name:match("(.+)%-.+") or name
+						healList[name] = talentSpec
+					end
 				end
 			end
 		end

@@ -1,5 +1,4 @@
 local T, C, L = unpack(ShestakUI)
-if T.Midnight then return end -- BETA not work
 if C.stats.battleground ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -14,28 +13,29 @@ BGFrame:SetScript("OnEnter", function(self)
 	local columns = C_PvP.GetMatchPVPStatColumns()
 
 	for i = 1, GetNumBattlefieldScores() do
-		local name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i) -- Deprecated: local data = C_PvP.GetScoreInfo(i)
-		if name and name == T.name then -- BETA name is secret now
+		local data = C_PvP.GetScoreInfo(i)
+		if data and data.name and data.name == T.name then
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, 1)
 			GameTooltip:ClearLines()
-			GameTooltip:AddDoubleLine(STATISTICS, classcolor..name.."|r")
+			GameTooltip:AddDoubleLine(STATISTICS, classcolor..data.name.."|r")
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills, 1, 1, 1)
-			GameTooltip:AddDoubleLine(DEATHS..":", deaths, 1, 1, 1)
-			GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(damageDone), 1, 1, 1)
-			GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(healingDone), 1, 1, 1)
+			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", data.honorableKills, 1, 1, 1)
+			GameTooltip:AddDoubleLine(DEATHS..":", data.deaths, 1, 1, 1)
+			GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(data.damageDone), 1, 1, 1)
+			GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(data.healingDone), 1, 1, 1)
 
 			-- Add extra statistics depending on what BG you are
 			if columns then
 				for j, stat in ipairs(columns) do
 					local name = stat.name
-					if name and strlen(name) > 0 then
+					if name and T.NotSecretValue(name) and strlen(name) > 0 then
 						GameTooltip:AddDoubleLine(name, GetBattlefieldStatData(i, j), 1, 1, 1)
 					end
 				end
 			end
+			break
 		end
 	end
 	GameTooltip:Show()
@@ -80,16 +80,17 @@ local function Update(_, t)
 		local dmgtxt
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
-			local name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
-			if name and name == T.name then -- BETA name is secret now
-				if healingDone > damageDone then
-					dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
+			local data = C_PvP.GetScoreInfo(i)
+			if data and data.name and data.name == T.name then
+				if T.NotSecretValue(data.healingDone) and (data.healingDone > data.damageDone) then
+					dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(data.healingDone))
 				else
-					dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
+					dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(data.damageDone))
 				end
 				Text1:SetText(dmgtxt)
-				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))
-				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..killingBlows)
+				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", data.honorGained))
+				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..data.killingBlows)
+				break
 			end
 		end
 		int = 2
