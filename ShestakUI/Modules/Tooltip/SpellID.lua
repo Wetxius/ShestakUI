@@ -1,5 +1,5 @@
 local T, C, L = unpack(ShestakUI)
-C_CVar.SetCVar('tooltipShowAuraSpellIDs', C.tooltip.spell_id and 1 or 0)
+C_CVar.SetCVar("tooltipShowAuraSpellIDs", C.tooltip.spell_id and 1 or 0)
 
 if C.tooltip.enable ~= true or C.tooltip.spell_id ~= true then return end
 

@@ -194,6 +194,11 @@ local function AddTargetedBy()
 	end
 end
 
+-- Add caster name line
+if T.newPatch then
+	C_CVar.SetCVar("tooltipShowAuraCasterNames", C.aura.cast_by and 1 or 0)
+end
+
 ----------------------------------------------------------------------------------------
 --	Unit tooltip styling
 ----------------------------------------------------------------------------------------
