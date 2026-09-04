@@ -62,7 +62,8 @@ local function LoadSkin()
 		RecruitAFriendFrame.SplashFrame.OKButton,
 		RecruitAFriendRecruitmentFrame.GenerateOrCopyLinkButton,
 		FriendsFriendsFrame.SendRequestButton,
-		FriendsFriendsFrame.CloseButton
+		FriendsFriendsFrame.CloseButton,
+		AddFriendInfoFrame.OkayButton
 	}
 
 	for i = 1, #buttons do
@@ -199,16 +200,6 @@ local function LoadSkin()
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame:CreateBackdrop("Transparent")
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame.backdrop:SetPoint("TOPLEFT", 4, -4)
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
-
-	if not T.newPatch then
-		BattleTagInviteFrame:SetTemplate("Transparent")
-		for i = 1, BattleTagInviteFrame:GetNumChildren() do
-			local child = select(i, BattleTagInviteFrame:GetChildren())
-			if child:GetObjectType() == "Button" then
-				child:SkinButton()
-			end
-		end
-	end
 
 	FriendsFrame:SetTemplate("Transparent")
 
