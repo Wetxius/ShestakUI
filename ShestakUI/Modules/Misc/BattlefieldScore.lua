@@ -31,7 +31,10 @@ BGFrame:SetScript("OnEnter", function(self)
 				for j, stat in ipairs(columns) do
 					local name = stat.name
 					if name and T.NotSecretValue(name) and strlen(name) > 0 then
-						GameTooltip:AddDoubleLine(name, GetBattlefieldStatData(i, j), 1, 1, 1)
+						local statInfo = data.stats[j]
+						if statInfo then
+							GameTooltip:AddDoubleLine(name, statInfo.pvpStatValue, 1, 1, 1)
+						end
 					end
 				end
 			end
