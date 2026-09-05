@@ -785,6 +785,7 @@ T.PostCreateIcon = function(element, button, options)
 	end
 
 	if element.isRaidDebuff then
+		button.Cooldown:SetCountdownMillisecondsThreshold(0)
 		button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
 	end
 end
@@ -828,6 +829,7 @@ local CountOffSets = {
 T.CreateRaidBuffIcon = function(element, button)
 	T.SkinCooldown(button.Cooldown, "aura")
 
+	button.Cooldown:SetCountdownMillisecondsThreshold(0)
 	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
 
 	button:CreateBorder(nil, true)
