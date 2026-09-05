@@ -905,21 +905,22 @@ local function style(self, unit)
 			initialAnchor = "BOTTOMRIGHT",
 			growthX = "LEFT",
 			growthY = "UP",
-			layoutLimit = 20 + C.nameplate.width,
+			layoutLimit = C.nameplate.width + 20
 		})
 
 		self.Auras:SetPoint("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, C.font.nameplates_font_size + 8)
 		self.Auras.elementSpacing = 5
+		self.Auras.lineSpacing = 5
+		self.Auras.groupLineSpacing = 5
 		self.Auras.size = C.nameplate.auras_size - 3
 		self.Auras.disableMouse = true
 		self.Auras.showCount = true
-
 		self.Auras.PostCreateButton = AurasPostCreateIcon
 
 		if C.nameplate.track_buffs then
 			self.Auras:AddGroup("HELPFUL|RAID_PLAYER_DISPELLABLE", {
 				maxFrameCount = 2,
-				showStealable = true,
+				showStealable = true
 			})
 		end
 
@@ -927,7 +928,7 @@ local function style(self, unit)
 			self.Auras:AddGroup("HARMFUL|PLAYER", {
 				candidateFilters = {includeSpellIDs = T.DebuffWhiteList, excludeSpellIDs = T.DebuffBlackList},
 				maxFrameCount = 6,
-				isDebuff = true,
+				isDebuff = true
 			})
 		end
 	end
