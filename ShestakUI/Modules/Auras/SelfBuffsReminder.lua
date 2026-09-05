@@ -81,14 +81,14 @@ local function OnEvent(self, event, arg1)
 	if ((group.combat and UnitAffectingCombat("player")) or (group.instance and difficultyID ~= 0 and not C_Garrison.IsOnGarrisonMap()) or (group.pvp and (instanceType == "arena" or instanceType == "pvp"))) and
 	specpass == true and rolepass == true and not UnitInVehicle("player") then
 		if group.mainhand then
-			local hasMainHandEnchant = GetWeaponEnchantInfo()
+			local hasMainHandEnchant = C_PaperDollInfo.GetTemporaryEnchantmentInfo(INVSLOT_MAINHAND)
 			if not hasMainHandEnchant then
 				self:Show()
 				if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
 			end
 			return
 		elseif group.offhand then
-			local _, _, _, _, hasOffHandEnchant = GetWeaponEnchantInfo()
+			local hasOffHandEnchant = C_PaperDollInfo.GetTemporaryEnchantmentInfo(INVSLOT_OFFHAND)
 			if not hasOffHandEnchant and (C_PaperDollInfo.OffhandHasWeapon() or C_PaperDollInfo.OffhandHasShield()) then
 				self:Show()
 				if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end

@@ -59,7 +59,8 @@ end
 local function CheckWeaponBuff()
 	local weaponBuff = false
 	local weaponOffBuff = false
-	local hasMainHandEnchant, _, _, _, hasOffHandEnchant = GetWeaponEnchantInfo()
+	local hasMainHandEnchant = C_PaperDollInfo.GetTemporaryEnchantmentInfo(INVSLOT_MAINHAND)
+	local hasOffHandEnchant = C_PaperDollInfo.GetTemporaryEnchantmentInfo(INVSLOT_OFFHAND)
 	if hasMainHandEnchant then
 		weaponBuff = true
 	end
