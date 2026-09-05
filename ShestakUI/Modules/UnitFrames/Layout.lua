@@ -1332,9 +1332,7 @@ local function Shared(self, unit)
 
 	-- Filger auras tracker
 	if C.filger.enable then
-		C_Timer.After(1, function()
-			T.CreateFilgerAuras(self, unit)
-		end)
+		T.CreateFilgerAuras(self, unit)
 	end
 
 	-- Apply expert code

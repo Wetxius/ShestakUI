@@ -1119,6 +1119,14 @@ local function createAnchors()
 	P_BUFF_ICON_Anchor.done = true
 end
 
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_LOGIN")
+frame:SetScript("OnEvent", function()
+	if not P_BUFF_ICON_Anchor.done then
+		createAnchors()
+	end
+end)
+
 T.PostCreateFilgerIcon = function(element, button, options)
 	button:SetTemplate("Default")
 
@@ -1186,32 +1194,29 @@ T.PostCreateFilgerIcon = function(element, button, options)
 end
 
 T.CreateFilgerAuras = function(self, unit)
-	if not P_BUFF_ICON_Anchor.done then
-		createAnchors()
-	end
 	if unit == "player" then
-		-- if C.filger.show_pvp_player then
-			-- -- Crowd controls
-			-- self.CCDebuffs = self:CreateAuras({
-				-- growthX = "LEFT",
-				-- growthY = "UP",
-				-- layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
-				-- initialAnchor = "TOPRIGHT"
-			-- })
-			-- self.CCDebuffs.size = C.filger.pvp_size
-			-- self.CCDebuffs.showCount = true
-			-- self.CCDebuffs.elementSpacing = C.filger.pvp_space
-			-- self.CCDebuffs.sortDirection = AuraContainerSortDirection.Reverse
-			-- self.CCDebuffs.PostCreateButton = T.PostCreateFilgerIcon
-			-- self.CCDebuffs:SetPoint("TOPRIGHT", PVE_PVP_DEBUFF_Anchor)
-			-- self.CCDebuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
-			-- self.CCDebuffs.tooltipOffsetY = 3
-			-- self.CCDebuffs.disableMouse = not C.filger.show_tooltip
+		if C.filger.show_pvp_player then
+			-- Crowd controls
+			self.CCDebuffs = self:CreateAuras({
+				growthX = "LEFT",
+				growthY = "UP",
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+				initialAnchor = "TOPRIGHT"
+			})
+			self.CCDebuffs.size = C.filger.pvp_size
+			self.CCDebuffs.showCount = true
+			self.CCDebuffs.elementSpacing = C.filger.pvp_space
+			self.CCDebuffs.sortDirection = AuraContainerSortDirection.Reverse
+			self.CCDebuffs.PostCreateButton = T.PostCreateFilgerIcon
+			self.CCDebuffs:SetPoint("TOPRIGHT", PVE_PVP_DEBUFF_Anchor)
+			self.CCDebuffs.tooltipAnchor = "ANCHOR_TOPRIGHT"
+			self.CCDebuffs.tooltipOffsetY = 3
+			self.CCDebuffs.disableMouse = not C.filger.show_tooltip
 
-			-- self.CCDebuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
-				-- maxFrameCount = 2,
-			-- })
-		-- end
+			self.CCDebuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
+				maxFrameCount = 2,
+			})
+		end
 		if C.filger.show_special then
 			-- Special buffs on player
 			self.SBuffs = self:CreateAuras({
