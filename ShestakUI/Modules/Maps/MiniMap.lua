@@ -154,6 +154,11 @@ MinimapCluster.ZoneTextButton:Hide()
 
 AddonCompartmentFrame:Kill()
 
+-- Hide coords
+if T.newPatch then
+C_CVar.SetCVar("minimapShowPlayerCoords", 0)
+end
+
 -- Garrison icon
 if C.minimap.garrison_icon == true then
 	ExpansionLandingPageMinimapButton:SetScale(0.6)
