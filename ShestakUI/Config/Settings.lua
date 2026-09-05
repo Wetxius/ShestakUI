@@ -519,7 +519,7 @@ C["filger"] = {
 	-- Icons size
 	["buffs_size"] = 37,						-- Buffs size
 	["buffs_space"] = 3,						-- Buffs space
-	["pvp_size"] = 60,							-- PvP auras size
+	["pvp_size"] = 57,							-- PvP auras size
 	["pvp_space"] = 3,							-- PvP auras space
 	["cooldown_size"] = 30,						-- Cooldowns size
 	["cooldown_space"] = 3,						-- Cooldowns space
