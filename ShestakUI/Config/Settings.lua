@@ -67,7 +67,6 @@ C["skins"] = {
 	["details"] = false,						-- Details skin
 	["dominos"] = false,						-- Dominos skin
 	["flyout_button"] = false,					-- FlyoutButtonCustom skin
-	["mage_nuggets"] = false,					-- MageNuggets skin
 	["my_role_play"] = false,					-- MyRolePlay skin
 	["opie"] = false,							-- OPie skin
 	["plater"] = false,							-- Plater skin

@@ -1472,7 +1472,6 @@ do
 		{"details"},
 		{"dominos"},
 		{"flyout_button"},
-		{"mage_nuggets"},
 		{"my_role_play"},
 		{"opie"},
 		{"plater"},

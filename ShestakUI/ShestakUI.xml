@@ -205,7 +205,6 @@
 	<Script file="Modules\Skins\Details.lua"/>
 	<Script file="Modules\Skins\Dominos.lua"/>
 	<Script file="Modules\Skins\FlyoutButtonCustom.lua"/>
-	<Script file="Modules\Skins\MageNuggets.lua"/>
 	<Script file="Modules\Skins\MyRolePlay.lua"/>
 	<Script file="Modules\Skins\OPie.lua"/>
 	<Script file="Modules\Skins\Plater.lua"/>
