@@ -829,6 +829,7 @@ local CountOffSets = {
 T.CreateRaidBuffIcon = function(element, button)
 	T.SkinCooldown(button.Cooldown, "aura")
 
+	-- TODO: add yellow color below 5 second? (1, 1, 0.2)
 	button.Cooldown:SetCountdownMillisecondsThreshold(0)
 	button.Cooldown:SetHideCountdownNumbers(not C.raidframe.plugins_buffs_timer)
 
@@ -894,7 +895,7 @@ T.CreateAuraWatch = function(self)
 			local filter = spell[4] and "HELPFUL" or "HELPFUL|PLAYER"
 			auras:AddGroup(filter, {
 				candidateFilters = {includeSpellIDs = {[spell[1]] = true}},
-				maxFrameCount = 1,
+				maxFrameCount = 1
 			})
 		end
 	end

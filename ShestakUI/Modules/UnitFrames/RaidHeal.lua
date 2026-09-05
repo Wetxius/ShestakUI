@@ -289,6 +289,11 @@ local function Shared(self, unit)
 		self.Debuffs.sortDirection = AuraContainerSortDirection.Reverse
 		self.Debuffs.PostCreateButton = T.PostCreateIcon
 
+		-- TODO: add in future
+		-- if C.raidframe.plugins_pvp_debuffs then
+			-- self.Debuffs:AddGroup("HARMFUL|CROWD_CONTROL")
+		-- end
+
 		self.Debuffs:AddGroup("HARMFUL|!PLAYER", {
 		  candidateFilters = {
 			isFromPlayerOrPlayerPet = false,
