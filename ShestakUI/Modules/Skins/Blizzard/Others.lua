@@ -479,22 +479,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				end
 			end
 
-			local function SkinIconArray(baseName, numIcons)
-				for i = 1, numIcons do
-					local button = _G[baseName..i]
-					local texture = _G[baseName..i.."Icon"]
-
-					button:StripTextures()
-					button:StyleButton(true)
-					button:SetTemplate("Default")
-
-					texture:ClearAllPoints()
-					texture:SetPoint("TOPLEFT", 2, -2)
-					texture:SetPoint("BOTTOMRIGHT", -2, 2)
-					texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				end
-			end
-
 			hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
 				T.SkinHelpBox(self)
 			end)
