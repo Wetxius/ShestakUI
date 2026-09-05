@@ -221,7 +221,6 @@ L.raidframe_plugins_debuffhighlight = "可驅散時高亮"
 L.raidframe_plugins_debuffhighlight_icon = "顯示可驅散"
 L.raidframe_plugins_debuffs = "團隊法術監視"
 L.raidframe_plugins_debuffs_timer = "團隊減益時間"
-L.raidframe_plugins_debuffs_filter = "啟用暴雪的減益效果過濾器" -- Needs review
 L.raidframe_plugins_pvp_debuffs = "PvP DeBuff圖標"
 L.raidframe_plugins_buffs = "團隊增益圖標 (按暴雪過濾列表)"
 L.raidframe_plugins_buffs_timer = "增益時間"
