@@ -26,6 +26,16 @@ T.Scale = function(x)
 	return T.mult * math.floor(x / T.mult + 0.5)
 end
 
+T.PixelPerfect = function(obj)
+	if obj.SetTexelSnappingBias then
+		obj:SetTexelSnappingBias(0)
+		obj:SetSnapToPixelGrid(false)
+	end
+	if obj.SetRoundLayoutToNearestPixel then -- 12.1.5
+		obj:SetRoundLayoutToNearestPixel(true)
+	end
+end
+
 ----------------------------------------------------------------------------------------
 --	Pixel perfect fonts for high resolution
 ----------------------------------------------------------------------------------------
