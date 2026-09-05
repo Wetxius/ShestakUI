@@ -1200,12 +1200,12 @@ T.CreateFilgerAuras = function(self, unit)
 			self.CCDebuffs = self:CreateAuras({
 				growthX = "LEFT",
 				growthY = "UP",
-				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
-				initialAnchor = "TOPRIGHT"
+				initialAnchor = "TOPRIGHT",
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space
 			})
 			self.CCDebuffs.size = C.filger.pvp_size
 			self.CCDebuffs.showCount = true
-			self.CCDebuffs.elementSpacing = C.filger.pvp_space
+			self.CCDebuffs.lineSpacing = C.filger.pvp_space
 			self.CCDebuffs.sortDirection = AuraContainerSortDirection.Reverse
 			self.CCDebuffs.PostCreateButton = T.PostCreateFilgerIcon
 			self.CCDebuffs:SetPoint("TOPRIGHT", PVE_PVP_DEBUFF_Anchor)
@@ -1214,7 +1214,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.CCDebuffs.disableMouse = not C.filger.show_tooltip
 
 			self.CCDebuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
-				maxFrameCount = 2,
+				maxFrameCount = 2
 			})
 		end
 		if C.filger.show_special then
@@ -1222,7 +1222,8 @@ T.CreateFilgerAuras = function(self, unit)
 			self.SBuffs = self:CreateAuras({
 				growthX = "LEFT",
 				growthY = "UP",
-				initialAnchor = "TOPRIGHT"
+				initialAnchor = "TOPRIGHT",
+				layoutLimit = (C.filger.buffs_size + C.filger.buffs_space) * 6
 			})
 			self.SBuffs.size = C.filger.buffs_size
 			self.SBuffs.showCount = true
@@ -1236,13 +1237,13 @@ T.CreateFilgerAuras = function(self, unit)
 
 			self.SBuffs:AddGroup("HELPFUL|!BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
 				maxFrameCount = 2,
-				candidateFilters = {includeSpellIDs = T.Filger_S_P_BUFF},
+				candidateFilters = {includeSpellIDs = T.Filger_S_P_BUFF}
 			})
 			self.SBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 2,
+				maxFrameCount = 2
 			})
 			self.SBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 1,
+				maxFrameCount = 1
 			})
 		end
 		if C.filger.show_buff then
@@ -1250,7 +1251,8 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PBuffs = self:CreateAuras({
 				growthX = "LEFT",
 				growthY = "UP",
-				initialAnchor = "TOPRIGHT"
+				initialAnchor = "TOPRIGHT",
+				layoutLimit = (C.filger.buffs_size + C.filger.buffs_space) * 6
 			})
 			self.PBuffs.size = C.filger.buffs_size
 			self.PBuffs.showCount = true
@@ -1263,7 +1265,8 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PBuffs.disableMouse = not C.filger.show_tooltip
 
 			self.PBuffs:AddGroup("HELPFUL|PLAYER|!BIG_DEFENSIVE", {
-				candidateFilters = {includeSpellIDs = T.Filger_P_BUFF},
+				maxFrameCount = 6,
+				candidateFilters = {includeSpellIDs = T.Filger_P_BUFF}
 			})
 		end
 		if C.filger.show_proc then
@@ -1271,6 +1274,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PProc = self:CreateAuras({
 				growthX = "RIGHT",
 				growthY = "UP",
+				layoutLimit = (C.filger.buffs_size + C.filger.buffs_space) * 6
 			})
 			self.PProc.size = C.filger.buffs_size
 			self.PProc.showCount = true
@@ -1283,7 +1287,8 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PProc.disableMouse = not C.filger.show_tooltip
 
 			self.PProc:AddGroup("HELPFUL|PLAYER", {
-				candidateFilters = {includeSpellIDs = T.Filger_P_PROC},
+				maxFrameCount = 6,
+				candidateFilters = {includeSpellIDs = T.Filger_P_PROC}
 			})
 		end
 	elseif unit == "target" then
@@ -1292,11 +1297,11 @@ T.CreateFilgerAuras = function(self, unit)
 			self.CCDebuffsT = self:CreateAuras({
 				growthX = "RIGHT",
 				growthY = "UP",
-				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space
 			})
 			self.CCDebuffsT.size = C.filger.pvp_size
 			self.CCDebuffsT.showCount = true
-			self.CCDebuffsT.elementSpacing = C.filger.pvp_space
+			self.CCDebuffsT.lineSpacing = C.filger.pvp_space
 			self.CCDebuffsT.sortDirection = AuraContainerSortDirection.Reverse
 			self.CCDebuffsT.PostCreateButton = T.PostCreateFilgerIcon
 			self.CCDebuffsT:SetPoint("TOPLEFT", T_CC_Anchor)
@@ -1313,11 +1318,11 @@ T.CreateFilgerAuras = function(self, unit)
 			self.TBuffs = self:CreateAuras({
 				growthX = "RIGHT",
 				growthY = "UP",
-				layoutLimit = C.filger.pvp_size + C.filger.pvp_space,
+				layoutLimit = C.filger.pvp_size + C.filger.pvp_space
 			})
 			self.TBuffs.size = C.filger.pvp_size
 			self.TBuffs.showCount = true
-			self.TBuffs.elementSpacing = C.filger.pvp_space
+			self.TBuffs.lineSpacing = C.filger.pvp_space
 			self.TBuffs.sortDirection = AuraContainerSortDirection.Reverse
 			self.TBuffs.PostCreateButton = T.PostCreateFilgerIcon
 			self.TBuffs:SetPoint("TOPLEFT", T_BUFF_Anchor)
@@ -1326,10 +1331,10 @@ T.CreateFilgerAuras = function(self, unit)
 			self.TBuffs.disableMouse = not C.filger.show_tooltip
 
 			self.TBuffs:AddGroup("HELPFUL|BIG_DEFENSIVE|!EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 1,
+				maxFrameCount = 1
 			})
 			self.TBuffs:AddGroup("HELPFUL|EXTERNAL_DEFENSIVE", {
-				maxFrameCount = 1,
+				maxFrameCount = 1
 			})
 		end
 		if C.filger.show_debuff then
@@ -1337,6 +1342,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.PDebuffs = self:CreateAuras({
 				growthX = "RIGHT",
 				growthY = "UP",
+				layoutLimit = (C.filger.buffs_size + C.filger.buffs_space) * 6
 			})
 			self.PDebuffs.size = C.filger.buffs_size
 			self.PDebuffs.showCount = true
@@ -1350,7 +1356,7 @@ T.CreateFilgerAuras = function(self, unit)
 
 			self.PDebuffs:AddGroup("HARMFUL|PLAYER|!CROWD_CONTROL", {
 				maxFrameCount = 6,
-				candidateFilters = {includeSpellIDs = T.Filger_T_DEBUFF},
+				candidateFilters = {includeSpellIDs = T.Filger_T_DEBUFF}
 			})
 		end
 		if C.filger.show_aura_bar then
@@ -1374,13 +1380,13 @@ T.CreateFilgerAuras = function(self, unit)
 			self.BarDebuffs:AddGroup("HARMFUL|PLAYER", {
 				isBar = true,
 				maxFrameCount = 6,
-				candidateFilters = {includeSpellIDs = T.Filger_T_BAR},
+				candidateFilters = {includeSpellIDs = T.Filger_T_BAR}
 			})
 
 			self.BarDebuffs:AddGroup("HELPFUL|PLAYER", {
 				isBar = true,
 				maxFrameCount = 6,
-				candidateFilters = {includeSpellIDs = T.Filger_T_BAR},
+				candidateFilters = {includeSpellIDs = T.Filger_T_BAR}
 			})
 		end
 	elseif unit == "focus" then
@@ -1405,7 +1411,7 @@ T.CreateFilgerAuras = function(self, unit)
 			self.CCBarDebuffs:AddGroup("HARMFUL|CROWD_CONTROL", {
 				isBar = true,
 				isFocus = true,
-				maxFrameCount = 1,
+				maxFrameCount = 1
 			})
 		end
 	end
