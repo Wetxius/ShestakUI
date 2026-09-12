@@ -1125,8 +1125,10 @@ end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if not P_BUFF_ICON_Anchor.done then
+	if C.filger.enable and not P_BUFF_ICON_Anchor.done then
 		createAnchors()
+	else
+		frame:UnregisterAllEvents()
 	end
 end)
 
