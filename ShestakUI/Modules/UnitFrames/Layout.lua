@@ -790,9 +790,6 @@ local function Shared(self, unit)
 				self.Portrait:SetPoint(unpack(C.position.unitframes.target_portrait))
 			end
 
-			self.Portrait.Icon = self.Portrait:CreateTexture(nil, "ARTWORK")
-			self.Portrait.Icon:SetAllPoints()
-
 			if C.unitframe.portrait_type == "ICONS" then
 				self.Portrait.classIcons = true
 			end
@@ -800,6 +797,9 @@ local function Shared(self, unit)
 			self.Portrait:CreateBackdrop("Transparent")
 			self.Portrait.backdrop:SetPoint("TOPLEFT", -2 - T.mult, 2 + T.mult)
 			self.Portrait.backdrop:SetPoint("BOTTOMRIGHT", 2 + T.mult, -2 - T.mult)
+
+			self.Portrait.Icon = self.Portrait:CreateTexture(nil, "ARTWORK")
+			self.Portrait.Icon:SetInside(self.Portrait.backdrop)
 
 			if C.unitframe.portrait_classcolor_border then
 				if unit == "player" then
@@ -819,10 +819,8 @@ local function Shared(self, unit)
 			end
 
 			if C.unitframe.portrait_type == "OVERLAY" then
-				local healthTex = self.Health:GetStatusBarTexture()
 				self.Portrait:ClearAllPoints()
-				self.Portrait:SetPoint("TOPLEFT", healthTex, "TOPLEFT", 0, 0)
-				self.Portrait:SetPoint("BOTTOMRIGHT", healthTex, "BOTTOMRIGHT", 0, 1)
+				self.Portrait:SetAllPoints(self.Health)
 				self.Portrait:SetFrameLevel(self.Health:GetFrameLevel())
 				self.Portrait.backdrop:Hide()
 				self.Portrait:SetAlpha(0.5)
