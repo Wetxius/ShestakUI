@@ -3568,7 +3568,11 @@ local function PositionGameMenuButton()
 		if text and text == HUD_EDIT_MODE_MENU then
 			button:SetScript("OnClick", function()
 				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
-				SlashCmdList.MOVING()
+				if IsModifierKeyDown() then
+					ShowUIPanel(_G.EditModeManagerFrame)
+				else
+					SlashCmdList.MOVING()
+				end
 				HideUIPanel(GameMenuFrame)
 			end)
 		end
