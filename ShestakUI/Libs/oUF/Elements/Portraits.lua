@@ -47,15 +47,13 @@ local function Update(self, event, unit)
 				element:SetUnit(unit)
 			end
 		else
-			local class, _
-			if(element.showClass) then
-				_, class = UnitClass(unit)
-			end
-
-			if(class ~= nil) then
-				element:SetAtlas('classicon-' .. class)
+			-- SheatakUI
+			if element.classIcons then
+				local _, class = UnitClass(unit)
+				element.Icon:SetAtlas("classicon-"..class)
 			else
-				SetPortraitTexture(element, unit)
+				SetPortraitTexture(element.Icon, unit)
+				element.Icon:SetTexCoord(0.15, 0.85, 0.15, 0.85)
 			end
 		end
 
