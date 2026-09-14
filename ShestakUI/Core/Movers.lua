@@ -73,8 +73,6 @@ local unitFrames = {
 	oUF_TargetTarget,
 	oUF_Player_Castbar,
 	oUF_Target_Castbar,
-	oUF_Player_Portrait,
-	oUF_Target_Portrait,
 	PartyAnchor,
 	PartyTargetAnchor,
 	PartyPetAnchor,
@@ -87,6 +85,11 @@ local unitFrames = {
 
 if C.unitframe.castbar_focus_type ~= "NONE" then
 	tinsert(unitFrames,_G["oUF_Focus_Castbar_Icon"])
+end
+
+if C.unitframe.portrait_type ~= "OVERLAY" then
+	tinsert(unitFrames,_G["oUF_Player_Portrait"])
+	tinsert(unitFrames,_G["oUF_Target_Portrait"])
 end
 
 for i = 1, 5 do
