@@ -820,7 +820,7 @@ local function Shared(self, unit)
 
 			if C.unitframe.portrait_type == "OVERLAY" then
 				self.Portrait:ClearAllPoints()
-				self.Portrait:SetAllPoints(self.Health)
+				self.Portrait:SetAllPoints(self.Health:GetStatusBarTexture())
 				self.Portrait:SetFrameLevel(self.Health:GetFrameLevel())
 				self.Portrait.backdrop:Hide()
 				self.Portrait:SetAlpha(0.5)
