@@ -1872,8 +1872,10 @@ if gold.enabled then
 			-- end
 
 			if C.stats.currency_misc then
-				titleName = EXPANSION_NAME10
-				Currency(2803)	-- Undercoin
+				titleName = EXPANSION_NAME11
+				Currency(3418)	-- Nebulous Voidcore
+				Currency(3316)	-- Voidlight Marl
+				Currency(3509)	-- Tidal Spark Dust
 			end
 
 			-- Anima (Shadownlands currency as items in bags credits to StoredAnimaCounter by Falx)

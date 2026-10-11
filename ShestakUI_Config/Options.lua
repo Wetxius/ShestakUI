@@ -3385,7 +3385,7 @@ do
 	local currency_archaeology = ns.CreateCheckBox(parent, "currency_archaeology", L_GUI_STATS_CURRENCY_ARCHAEOLOGY)
 	currency_archaeology:SetPoint("TOPLEFT", currency, "BOTTOMLEFT", 0, -8)
 
-	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME10)
+	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME11)
 	currency_misc:SetPoint("TOPLEFT", currency_archaeology, "BOTTOMLEFT", 0, 0)
 
 	-- local currency_raid = ns.CreateCheckBox(parent, "currency_raid", L_GUI_STATS_CURRENCY_RAID) -- save for future
