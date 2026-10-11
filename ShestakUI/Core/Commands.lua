@@ -272,6 +272,59 @@ SLASH_FRAMELIST3 = "/fl"
 SLASH_FRAMELIST4 = "/ад"
 
 ----------------------------------------------------------------------------------------
+--	Allow to copy frame name via chat
+----------------------------------------------------------------------------------------
+local function OnMouseDown(self, button)
+	if button == "MiddleButton" or button == "RightButton" then
+		local text = self.Text:GetText()
+		print(text)
+		if CopyFrame and CopyFrame:IsShown() then
+			SlashCmdList.COPY_CHAT()
+			SlashCmdList.COPY_CHAT()
+		else
+			SlashCmdList.COPY_CHAT()
+		end
+		if FrameStackTooltip:IsShown() then
+			FrameStackTooltip_Toggle()
+		end
+	else
+		_G.TableAttributeDisplayValueButton_OnMouseDown(self)
+	end
+end
+
+local function UpdateLines(self)
+	local scrollFrame = self.LinesScrollFrame or _G.TableAttributeDisplay.LinesScrollFrame -- tinspect, or fstack ctrl
+	if not scrollFrame then return end
+	for _, child in next, { scrollFrame.LinesContainer:GetChildren() } do
+		if child.ValueButton and child.ValueButton:GetScript("OnMouseDown") ~= OnMouseDown then
+			child.ValueButton:SetScript("OnMouseDown", OnMouseDown)
+		end
+	end
+end
+
+local event = "ADDON_LOADED"
+local function Setup(frame)
+	if frame.Registered then return end
+
+	local debugTools = C_AddOns.IsAddOnLoaded("Blizzard_DebugTools")
+	if debugTools then
+		hooksecurefunc(_G.TableInspectorMixin, "RefreshAllData", UpdateLines) -- /tinspect
+		hooksecurefunc(_G.TableAttributeDisplay.dataProviders[2], "RefreshData", UpdateLines) -- fstack ctrl
+		frame.Registered = true
+
+		if frame:IsEventRegistered(event) then
+			frame:UnregisterEvent(event)
+		end
+	elseif not frame:IsEventRegistered(event) then
+		frame:RegisterEvent(event)
+	end
+end
+
+local frame = CreateFrame("Frame")
+frame:SetScript("OnEvent", Setup)
+Setup(frame)
+
+----------------------------------------------------------------------------------------
 --	Frame Stack on Cyrillic
 ----------------------------------------------------------------------------------------
 SlashCmdList.FSTACK = function()
