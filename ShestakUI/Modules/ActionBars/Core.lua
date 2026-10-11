@@ -70,6 +70,27 @@ frame:SetScript("OnEvent", function()
 end)
 
 ----------------------------------------------------------------------------------------
+--	Enable all bars in option
+----------------------------------------------------------------------------------------
+T:RegisterEvent("PLAYER_LOGOUT", function()	-- this event will prevent taint with editmode
+	local variables = {
+		"PROXY_SHOW_ACTIONBAR_2",
+		"PROXY_SHOW_ACTIONBAR_3",
+		"PROXY_SHOW_ACTIONBAR_4",
+		"PROXY_SHOW_ACTIONBAR_5",
+		"PROXY_SHOW_ACTIONBAR_6",
+		"PROXY_SHOW_ACTIONBAR_7",
+		"PROXY_SHOW_ACTIONBAR_8",
+	}
+
+	for _, variable in ipairs(variables) do
+		if Settings.GetSetting(variable) then
+			Settings.SetValue(variable, true)
+		end
+	end
+end)
+
+----------------------------------------------------------------------------------------
 --	Set mouseover for bars
 ----------------------------------------------------------------------------------------
 function RightBarMouseOver(alpha)

@@ -309,3 +309,41 @@ T.After = function(delay, func, ...)
 	local args = {...}
 	C_Timer.After(delay, function() func(unpack(args)) end)
 end
+
+----------------------------------------------------------------------------------------
+--	Event functions
+----------------------------------------------------------------------------------------
+local EventFrame = CreateFrame("Frame")
+local EventHandlers = {}
+
+function T:RegisterEvent(event, func)
+    if not EventHandlers[event] then
+        EventHandlers[event] = {}
+        EventFrame:RegisterEvent(event)
+    end
+
+    EventHandlers[event][func] = true
+end
+
+function T:UnregisterEvent(event, func)
+    local handlers = EventHandlers[event]
+
+    if not handlers then return end
+
+    handlers[func] = nil
+
+    if not next(handlers) then
+        EventHandlers[event] = nil
+        EventFrame:UnregisterEvent(event)
+    end
+end
+
+EventFrame:SetScript("OnEvent", function(_, event, ...)
+    local handlers = EventHandlers[event]
+
+    if handlers then
+        for func in pairs(handlers) do
+            func(...)
+        end
+    end
+end)
