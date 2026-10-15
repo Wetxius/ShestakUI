@@ -129,9 +129,11 @@ local function LoadSkin()
 		end
 
 		if rewardTexture then
-			local r, g, b = C_Item.GetItemQualityColor(rewardQuaility)
 			rewardFrame.Icon:SetTexture(rewardTexture)
-			rewardFrame:SetBackdropBorderColor(r, g, b)
+			if rewardFrame.SetBackdropBorderColor then
+				local r, g, b = C_Item.GetItemQualityColor(rewardQuaility)
+				rewardFrame:SetBackdropBorderColor(r, g, b)
+			end
 		end
 	end)
 
@@ -260,7 +262,7 @@ local function LoadSkin()
 	TrainingGroundsFrame.BonusTrainingGroundList:StripTextures()
 	TrainingGroundsFrame.BonusTrainingGroundList.ShadowOverlay:StripTextures()
 
-	for _, i in pairs({"RandomTrainingGroundButton", "RandomTrainingGroundArenaButton"}) do
+	for _, i in pairs({"RandomTrainingGroundBGButton", "RandomTrainingGroundArenaButton"}) do
 		local button = TrainingGroundsFrame.BonusTrainingGroundList[i]
 		button:StripTextures()
 		button:SetTemplate("Overlay")
