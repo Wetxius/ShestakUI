@@ -4,20 +4,16 @@ if C.reminder.raid_buffs_enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Raid buffs on player(by Elv22)
 ----------------------------------------------------------------------------------------
-local flaskbuffs = T.ReminderBuffs["Flask"]
 local battleelixirbuffs = T.ReminderBuffs["BattleElixir"]
 local guardianelixirbuffs = T.ReminderBuffs["GuardianElixir"]
-local foodbuffs = T.ReminderBuffs["Food"]
-local staminabuffs = T.ReminderBuffs["Stamina"]
-local versbuffs = T.ReminderBuffs["Vers"]
-local reducebuffs = T.ReminderBuffs["Reduce"]
 local custombuffs = T.ReminderBuffs["Custom"]
-local visible, flask, battleelixir, guardianelixir, food, stamina, vers, spell4, reduce, custom, weapon
+
 local playerBuff = {}
 local icons = {}
 local UpdatePositions
 
 local function CheckElixir()
+	local battleelixir, guardianelixir
 	if #battleelixirbuffs > 0 then
 		for i = 1, #battleelixirbuffs do
 			local name, icon = unpack(battleelixirbuffs[i])
@@ -56,6 +52,27 @@ local function CheckElixir()
 	end
 end
 
+local function CheckBuff(list)
+	local buffList = T.ReminderBuffs[list]
+	local frame = _G[list.."Frame"]
+
+	for i = 1, #buffList do
+		local name, icon = unpack(buffList[i])
+		if i == 1 then
+			frame.t:SetTexture(icon)
+		end
+		if playerBuff[name] then
+			frame:SetAlpha(C.reminder.raid_buffs_alpha)
+			break
+		else
+			frame:SetAlpha(1)
+			if list == "Flask" then
+				CheckElixir()
+			end
+		end
+	end
+end
+
 local function CheckWeaponBuff()
 	local weaponBuff = false
 	local weaponOffBuff = false
@@ -81,6 +98,13 @@ end
 
 local function OnAuraChange(_, event, arg1)
 	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
+
+	-- Hide frame when solo without option
+	local _, instanceType = IsInInstance()
+	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
+		RaidBuffReminder:SetAlpha(0)
+		return
+	end
 
 	wipe(playerBuff)
 	local isSecret
@@ -109,7 +133,7 @@ local function OnAuraChange(_, event, arg1)
 		RaidBuffReminder:SetAlpha(1)
 	end
 
-	-- If We're a caster we may want to see different buffs
+	-- Check for our role
 	if T.Role == "Caster" or T.Role == "Healer" then
 		T.ReminderCasterBuffs()
 	else
@@ -117,140 +141,27 @@ local function OnAuraChange(_, event, arg1)
 	end
 
 	-- Start checking buffs to see if we can find a match from the list
-	for i = 1, #flaskbuffs do
-		local name, icon = unpack(flaskbuffs[i])
-		if i == 1 then
-			FlaskFrame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			FlaskFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-			flask = true
-			break
-		else
-			CheckElixir()
-		end
-	end
-
-	for i = 1, #foodbuffs do
-		local name, icon = unpack(foodbuffs[i])
-		if i == 1 then
-			FoodFrame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			FoodFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-			food = true
-			break
-		else
-			FoodFrame:SetAlpha(1)
-			food = false
-		end
-	end
+	CheckBuff("Flask")
+	CheckBuff("Food")
 
 	do
 		WeaponFrame.t:SetTexture(135250)
 		CheckWeaponBuff()
 	end
 
-	for i = 1, #staminabuffs do
-		local name, icon = unpack(staminabuffs[i])
-		if i == 1 then
-			StaminaFrame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			StaminaFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-			stamina = true
-			break
-		else
-			StaminaFrame:SetAlpha(1)
-			stamina = false
-		end
-	end
-
-	for i = 1, #versbuffs do
-		local name, icon = unpack(versbuffs[i])
-		if i == 1 then
-			VersFrame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			VersFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-			vers = true
-			break
-		else
-			VersFrame:SetAlpha(1)
-			vers = false
-		end
-	end
-
-	for i = 1, #Spell4Buff do
-		local name, icon = unpack(Spell4Buff[i])
-		if i == 1 then
-			Spell4Frame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			Spell4Frame:SetAlpha(C.reminder.raid_buffs_alpha)
-			spell4 = true
-			break
-		else
-			Spell4Frame:SetAlpha(1)
-			spell4 = false
-		end
-	end
-
-	for i = 1, #reducebuffs do
-		local name, icon = unpack(reducebuffs[i])
-		if i == 1 then
-			ReduceFrame.t:SetTexture(icon)
-		end
-		if playerBuff[name] then
-			ReduceFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-			reduce = true
-			break
-		else
-			ReduceFrame:SetAlpha(1)
-			reduce = false
-		end
-	end
+	CheckBuff("Stamina")
+	CheckBuff("Vers")
+	CheckBuff("Spell4")
+	CheckBuff("Reduce")
 
 	if #custombuffs > 0 then
-		for i = 1, #custombuffs do
-			local name, icon = unpack(custombuffs[i])
-			if i == 1 then
-				CustomFrame.t:SetTexture(icon)
-			end
-			if playerBuff[name] then
-				CustomFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-				custom = true
-				break
-			else
-				CustomFrame:SetAlpha(1)
-				custom = false
-			end
-		end
+		CheckBuff("Custom")
 	else
 		CustomFrame:Hide()
 		custom = true
 	end
 
 	UpdatePositions()
-	local _, instanceType = IsInInstance()
-	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
-		RaidBuffReminder:SetAlpha(0)
-		visible = false
-	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and vers == true and reduce == true then
-		if not visible then
-			RaidBuffReminder:SetAlpha(0)
-			visible = false
-		end
-		if visible then
-			UIFrameFadeOut(RaidBuffReminder, 0.5)
-			visible = false
-		end
-	else
-		if not visible then
-			UIFrameFadeIn(RaidBuffReminder, 0.5)
-			visible = true
-		end
-	end
 end
 
 -- Create Anchor

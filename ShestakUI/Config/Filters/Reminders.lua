@@ -51,16 +51,12 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 
 	-- Caster buffs
 	function T.ReminderCasterBuffs()
-		Spell4Buff = {	-- Intellect
-			SpellName(1459),	-- Arcane Intellect
-		}
+		T.ReminderBuffs.Spell4 = {SpellName(1459)}	-- Arcane Intellect
 	end
 
 	-- Physical buffs
 	function T.ReminderPhysicalBuffs()
-		Spell4Buff = {	-- Attack Power
-			SpellName(6673),	-- Battle Shout
-		}
+		T.ReminderBuffs.Spell4 = {SpellName(6673)}	-- Battle Shout
 	end
 end
 
