@@ -52,7 +52,6 @@
 	<Script file="Modules\Reputation.lua"/>
 	<Script file="Modules\SoulFragments.lua"/>
 	<Script file="Modules\SoulShards.lua"/>
-	<Script file="Modules\Swing.lua"/>
 	<Script file="Modules\TotemBar.lua"/>
 	<Script file="Modules\Trinkets.lua"/>
 

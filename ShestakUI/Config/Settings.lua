@@ -118,7 +118,6 @@ C["unitframe"] = {
 	["portrait_width"] = 67,					-- Portrait width
 	-- Plugins
 	["plugins_gcd"] = false,					-- Global cooldown spark on player frame
-	["plugins_swing"] = false,					-- Swing bar
 	["plugins_reputation_bar"] = false,			-- Reputation bar (left from player frame by mouseover, Middle-Click to lock visibility)
 	["plugins_experience_bar"] = false,			-- Experience bar (left from player frame by mouseover, Middle-Click to lock visibility)
 	["plugins_smooth_bar"] = false,				-- Smooth bar

@@ -28,7 +28,7 @@ PVE_PVP_DEBUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
 FOCUS_CC_Anchor:SetPoint(unpack(C.position.filger.focus_cc))
 FOCUS_CC_Anchor:SetSize(221, 25)
 
-COOLDOWN_Anchor:SetPoint(C.position.filger.cooldown[1], C.position.filger.cooldown[2], C.position.filger.cooldown[3], C.position.filger.cooldown[4], C.unitframe.plugins_swing and C.position.filger.cooldown[5] + 12 or C.position.filger.cooldown[5])
+COOLDOWN_Anchor:SetPoint(unpack(C.position.filger.cooldown))
 COOLDOWN_Anchor:SetSize(C.filger.cooldown_size, C.filger.cooldown_size)
 
 local IsPortrait = C.unitframe.portrait_enable and C.unitframe.portrait_type ~= "OVERLAY"

@@ -21,11 +21,7 @@ local EnemyCDAnchor = CreateFrame("Frame", "EnemyCDAnchor", UIParent)
 if C.unitframe.enable ~= true then
 	EnemyCDAnchor:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 else
-	if C.unitframe.plugins_swing == true then
-		EnemyCDAnchor:SetPoint(unpack(C.position.enemy_cooldown))
-	else
-		EnemyCDAnchor:SetPoint(pos[1], pos[2], pos[3], pos[4], pos[5] - 12)
-	end
+	EnemyCDAnchor:SetPoint(pos[1], pos[2], pos[3], pos[4], pos[5] - 12)
 end
 if direction == "UP" or direction == "DOWN" then
 	EnemyCDAnchor:SetSize(C.enemycooldown.size, (C.enemycooldown.size * 5) + 12)

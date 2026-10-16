@@ -57,7 +57,6 @@ end
 
 if C_AddOns.IsAddOnLoaded("Quartz") or C_AddOns.IsAddOnLoaded("AzCastBar") then
 	C.unitframe.unit_castbar = false
-	C.unitframe.plugins_swing = false
 	C.unitframe.plugins_gcd = false
 end
 

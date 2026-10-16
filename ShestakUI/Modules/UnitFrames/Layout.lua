@@ -990,18 +990,10 @@ local function Shared(self, unit)
 			self.Castbar:SetHeight(C.unitframe.castbar_height)
 		elseif unit == "target" then
 			if C.unitframe.castbar_icon then
-				if C.unitframe.plugins_swing then
-					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - C.unitframe.castbar_height - 7, C.position.unitframes.target_castbar[5] + 12)
-				else
-					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - C.unitframe.castbar_height - 7, C.position.unitframes.target_castbar[5])
-				end
+				self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - C.unitframe.castbar_height - 7, C.position.unitframes.target_castbar[5])
 				self.Castbar:SetWidth(C.unitframe.castbar_width)
 			else
-				if C.unitframe.plugins_swing then
-					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4], C.position.unitframes.target_castbar[5] + 12)
-				else
-					self.Castbar:SetPoint(unpack(C.position.unitframes.target_castbar))
-				end
+				self.Castbar:SetPoint(unpack(C.position.unitframes.target_castbar))
 				self.Castbar:SetWidth(C.unitframe.castbar_width + C.unitframe.castbar_height + 7)
 			end
 			self.Castbar:SetHeight(C.unitframe.castbar_height)
@@ -1118,37 +1110,6 @@ local function Shared(self, unit)
 				self.Castbar.Delay:SetTextColor(0.7, 0.3, 0.3)
 			end
 		end
-	end
-
-	-- Swing bar
-	if C.unitframe.plugins_swing and unit == "player" then -- BETA not work
-		self.Swing = CreateFrame("StatusBar", self:GetName().."_Swing", self)
-		self.Swing:CreateBackdrop("Default")
-		if C.unitframe.unit_castbar then
-			self.Swing:SetPoint("BOTTOMRIGHT", "oUF_Player_Castbar", "TOPRIGHT", 0, 7)
-		else
-			self.Swing:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + 23)
-		end
-		self.Swing:SetSize(281, 5)
-		self.Swing:SetStatusBarTexture(C.media.texture)
-		if C.unitframe.own_color then
-			self.Swing:SetStatusBarColor(unpack(C.unitframe.uf_color))
-		else
-			self.Swing:SetStatusBarColor(T.color.r, T.color.g, T.color.b)
-		end
-
-		self.Swing.bg = self.Swing:CreateTexture(nil, "BORDER")
-		self.Swing.bg:SetAllPoints(self.Swing)
-		self.Swing.bg:SetTexture(C.media.texture)
-		if C.unitframe.own_color then
-			self.Swing.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg))
-		else
-			self.Swing.bg:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.2)
-		end
-
-		self.Swing.Text = T.SetFontString(self.Swing, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
-		self.Swing.Text:SetPoint("CENTER", 0, 0)
-		self.Swing.Text:SetTextColor(1, 1, 1)
 	end
 
 	-- Arena trinket/control
