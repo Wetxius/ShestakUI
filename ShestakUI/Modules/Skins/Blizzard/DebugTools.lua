@@ -52,7 +52,12 @@ local function LoadSecondarySkin()
 	ScriptErrorsFrame:StripTextures()
 	ScriptErrorsFrame:SetTemplate("Transparent")
 	ScriptErrorsFrame.Reload:SkinButton()
-	ScriptErrorsFrame.Close:SkinButton()
+
+	if ScriptErrorsFrame.Close then
+		ScriptErrorsFrame.Close:SkinButton() -- BETA
+	elseif ScriptErrorsFrame.CloseButton then
+		ScriptErrorsFrame.CloseButton:SkinButton()
+	end
 
 	T.SkinNextPrevButton(ScriptErrorsFrame.PreviousError, true)
 	T.SkinNextPrevButton(ScriptErrorsFrame.NextError)

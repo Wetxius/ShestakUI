@@ -139,7 +139,9 @@ Minimap:SetFrameLevel(2)
 
 -- Hide Border
 MinimapCompassTexture:Hide()
-MinimapCluster.BorderTop:StripTextures()
+if not T.newPatch then
+	MinimapCluster.BorderTop:StripTextures()
+end
 
 -- Hide Zoom Buttons
 Minimap.ZoomIn:Kill()
@@ -150,14 +152,12 @@ Minimap:SetArchBlobRingScalar(0)
 Minimap:SetQuestBlobRingScalar(0)
 
 -- Hide Zone Frame
-MinimapCluster.ZoneTextButton:Hide()
+MinimapCluster.ZoneTextButton:Kill()
 
 AddonCompartmentFrame:Kill()
 
 -- Hide coords
-if T.newPatch then
 C_CVar.SetCVar("minimapShowPlayerCoords", 0)
-end
 
 -- Garrison icon
 if C.minimap.garrison_icon == true then

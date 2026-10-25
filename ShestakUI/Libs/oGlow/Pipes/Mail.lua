@@ -69,8 +69,13 @@ local enable = function(self)
 	self:RegisterEvent("MAIL_SEND_SUCCESS", send)
 
 	if not hook then
-		hooksecurefunc("OpenMail_Update", hookLetter)
-		hooksecurefunc("InboxFrame_Update", hookInbox)
+		if OpenMailFrame.Update then
+			hooksecurefunc(OpenMailFrame, "Update", hookLetter)
+			hooksecurefunc(InboxFrame, "Update", hookInbox)
+		else
+			hooksecurefunc("OpenMail_Update", hookLetter) -- BETA
+			hooksecurefunc("InboxFrame_Update", hookInbox)
+		end
 		hook = true
 	end
 end

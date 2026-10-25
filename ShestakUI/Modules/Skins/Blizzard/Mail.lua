@@ -39,8 +39,13 @@ local function LoadSkin()
 	end
 
 	T.SkinCloseButton(MailFrameCloseButton, MailFrame.backdrop)
-	T.SkinNextPrevButton(InboxPrevPageButton)
-	T.SkinNextPrevButton(InboxNextPageButton)
+	if T.newPatch then
+		T.SkinNextPrevButton(InboxFrame.PrevPageButton, true)
+		T.SkinNextPrevButton(InboxFrame.NextPageButton)
+	else
+		T.SkinNextPrevButton(InboxPrevPageButton)
+		T.SkinNextPrevButton(InboxNextPageButton)
+	end
 
 	T.SkinTab(MailFrameTab1)
 	T.SkinTab(MailFrameTab2)

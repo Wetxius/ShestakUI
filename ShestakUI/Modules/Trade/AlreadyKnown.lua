@@ -71,7 +71,11 @@ local function OpenMailFrame_UpdateButtonPositions()
 		end
 	end
 end
-hooksecurefunc("OpenMailFrame_UpdateButtonPositions", OpenMailFrame_UpdateButtonPositions)
+if OpenMailFrame.UpdateButtonPositions then
+	hooksecurefunc(OpenMailFrame, "UpdateButtonPositions", OpenMailFrame_UpdateButtonPositions)
+else
+	hooksecurefunc("OpenMailFrame_UpdateButtonPositions", OpenMailFrame_UpdateButtonPositions) -- BETA
+end
 
 -- Loot frame
 local function LootFrame_UpdateButton(self)

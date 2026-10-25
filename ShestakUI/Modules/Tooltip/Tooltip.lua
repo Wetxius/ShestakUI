@@ -195,10 +195,8 @@ local function AddTargetedBy()
 end
 
 -- Add caster name and spell id line
-if T.newPatch then
-	C_CVar.SetCVar("tooltipShowAuraCasterNames", C.aura.cast_by and 1 or 0)
-	C_CVar.SetCVar("tooltipShowAuraSpellIDs", C.tooltip.spell_id and 1 or 0)
-end
+C_CVar.SetCVar("tooltipShowAuraCasterNames", C.aura.cast_by and 1 or 0)
+C_CVar.SetCVar("tooltipShowAuraSpellIDs", C.tooltip.spell_id and 1 or 0)
 
 ----------------------------------------------------------------------------------------
 --	Unit tooltip styling

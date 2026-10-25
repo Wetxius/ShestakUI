@@ -56,14 +56,10 @@ local function LoadFirstSkin()
 		for _, button in pairs(self.buttons) do
 			if not button.styled then
 				if button.Icon then
-					if T.newPatch then
-						button.Icon:SkinIcon()
-						T.PixelPerfect(button.Icon)
-						T.PixelPerfect(button)
-						button:SetScale(0.99)
-					else
-						button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9) -- bad pixel perfect
-					end
+					button.Icon:SkinIcon()
+					T.PixelPerfect(button.Icon)
+					T.PixelPerfect(button)
+					button:SetScale(0.99)
 				end
 
 				button.styled = true
