@@ -44,7 +44,7 @@ for _, tt in pairs(tooltips) do
 
 		local bg = CreateFrame("Frame", nil, tt)
 		bg:SetPoint("TOPLEFT")
-		bg:SetPoint("BOTTOMRIGHT")
+		bg:SetPoint("BOTTOMRIGHT", -T.mult, T.mult)	-- fix compare overlapping
 		if tt:GetFrameLevel() - 1 >= 0 then
 			bg:SetFrameLevel(tt:GetFrameLevel() - 1)
 		else
@@ -56,7 +56,7 @@ for _, tt in pairs(tooltips) do
 		if header then
 			header:StripTextures()
 			header:CreateBackdrop("Overlay")
-			header.backdrop:SetInside(header, 0, 3)
+			header.backdrop:SetInside(header, 0, 2)
 		end
 
 		tt.GetBackdrop = function() return backdrop end
@@ -508,38 +508,6 @@ if C.tooltip.hidebuttons then
 	hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
 	hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
 end
-
-----------------------------------------------------------------------------------------
---	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
-----------------------------------------------------------------------------------------
-hooksecurefunc(TooltipComparisonManager, "AnchorShoppingTooltips", function(self, _, secondaryItemShown)
-	local tooltip = self.tooltip
-	local shoppingTooltip1 = tooltip.shoppingTooltips[1]
-	local shoppingTooltip2 = tooltip.shoppingTooltips[2]
-	local point = shoppingTooltip1:GetPoint(2)
-	if not canaccessvalue(point) then return end
-	if secondaryItemShown then
-		if point == "TOP" then
-			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip2:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPLEFT", self.anchorFrame, "TOPRIGHT", 3, -10)
-			shoppingTooltip2:SetPoint("TOPLEFT", shoppingTooltip1, "TOPRIGHT", 3, 0)
-		elseif point == "RIGHT" then
-			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip2:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPRIGHT", self.anchorFrame, "TOPLEFT", -3, -10)
-			shoppingTooltip2:SetPoint("TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
-		end
-	else
-		if point == "LEFT" then
-			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPLEFT", self.anchorFrame, "TOPRIGHT", 3, -10)
-		elseif point == "RIGHT" then
-			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPRIGHT", self.anchorFrame, "TOPLEFT", -3, -10)
-		end
-	end
-end)
 
 ----------------------------------------------------------------------------------------
 --	Fix GameTooltipMoneyFrame font size
