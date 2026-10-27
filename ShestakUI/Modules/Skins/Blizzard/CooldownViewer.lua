@@ -15,7 +15,11 @@ local function LoadSkin()
 	}
 	for _, tab in pairs(tabs) do
 		T.SkinFrameTab(tab)
+		tab.backdrop:SetPoint("TOPLEFT", -1, -2)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", -5, 2)
 	end
+
+	frame.SpellsTab:SetMovePoint(3)
 
 	T.SkinFrame(CooldownViewerLayoutDialog)
 	CooldownViewerLayoutDialog.AcceptButton:SkinButton()

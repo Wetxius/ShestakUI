@@ -1187,25 +1187,53 @@ function T.SkinFrameTab(frame)
 
 	if frame.SelectedTexture then
 		frame.SelectedTexture:SetDrawLayer("ARTWORK")
-		frame.SelectedTexture:ClearAllPoints()
-		frame.SelectedTexture:SetPoint("TOPLEFT", 4, -4)
-		frame.SelectedTexture:SetPoint("BOTTOMRIGHT", -4, 4)
+		frame.SelectedTexture:SetInside(frame.backdrop)
 		frame.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
 	end
 
 	if frame.HighlightTexture then
+		frame.HighlightTexture:SetInside(frame.backdrop)
 		frame.HighlightTexture:SetColorTexture(1, 1, 1, 0.3)
-		frame.HighlightTexture:ClearAllPoints()
-		frame.HighlightTexture:SetPoint("TOPLEFT", 4, -4)
-		frame.HighlightTexture:SetPoint("BOTTOMRIGHT", -4, 4)
 	end
 
 	if frame.TabGlow then
 		frame.TabGlow:SetAlpha(0)
 	end
+end
+
+function T.SkinSideTabs(tab)
+	tab:CreateBackdrop("Overlay")
+	tab.backdrop:SetPoint("TOPLEFT", 1, -3)
+	tab.backdrop:SetPoint("BOTTOMRIGHT", -2, 3)
+
+	tab.Icon:SetInside(tab.backdrop)
+	tab.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	tab.Icon.SetTexCoord = T.dummy
+
+	if tab.Background then
+		tab.Background:SetAlpha(0)
+	end
+
+	if tab.Mask then
+		tab.Mask:Hide()
+	end
+
+	if tab.SelectedTexture then
+		tab.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+		tab.SelectedTexture:SetInside(tab.backdrop)
+	end
+
+	if tab.HighlightTexture then
+		tab.HighlightTexture:SetColorTexture(1, 1, 1, 0.3)
+		tab.HighlightTexture:SetInside(tab.backdrop)
+	end
+
+	if tab.TabGlow then
+		tab.TabGlow:SetAlpha(0)
+	end
 
 	-- Hover texture
-	for _, region in next, {frame:GetRegions()} do
+	for _, region in next, {tab:GetRegions()} do
 		if region:IsObjectType("Texture") then
 			if region:GetAtlas() == "QuestLog-Tab-side-Glow-hover" then
 				region:SetPoint("TOPLEFT", 4, -4)

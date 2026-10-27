@@ -42,9 +42,11 @@ local function LoadSkin()
 	end
 
 	local LinkButton = frame.CraftingPage.LinkButton
-	LinkButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
-	LinkButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
-	LinkButton:GetHighlightTexture():Kill()
+	if not T.newPatch then -- BETA
+		LinkButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
+		LinkButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
+		LinkButton:GetHighlightTexture():Kill()
+	end
 	LinkButton:CreateBackdrop("Overlay")
 	LinkButton:SetSize(17, 14)
 	LinkButton:SetPoint("LEFT", ProfessionsFrame.CraftingPage.RankBar, "RIGHT", 1, -3)
@@ -62,11 +64,21 @@ local function LoadSkin()
 
 	hooksecurefunc(_G.ProfessionsFrame.CraftingPage.RecipeList.ScrollBox, "Update", function(frame)
 		for _, child in next, {frame.ScrollTarget:GetChildren()} do
-			if child.CenterPiece and not child.isSkinned then
-				child:DisableDrawLayer("BACKGROUND")
-				child:CreateBackdrop("Overlay")
-				child.backdrop:SetPoint("TOPLEFT", child, 6, 0)
-				child.backdrop:SetPoint("BOTTOMRIGHT", child, -6, 4)
+			if child and not child.isSkinned then
+				if child.CenterPiece then -- BETA delete after 12.1.7
+					child:DisableDrawLayer("BACKGROUND")
+					child:CreateBackdrop("Overlay")
+					child.backdrop:SetPoint("TOPLEFT", child, 6, 0)
+					child.backdrop:SetPoint("BOTTOMRIGHT", child, -6, 4)
+				end
+
+				if child.CollapseButton then
+					child:SetNormalTexture(0)
+					child:CreateBackdrop("Overlay")
+					child.backdrop:SetPoint("TOPLEFT", child, 0, -1)
+					child.backdrop:SetPoint("BOTTOMRIGHT", child, -1, 1)
+				end
+
 				child.isSkinned = true
 			end
 		end

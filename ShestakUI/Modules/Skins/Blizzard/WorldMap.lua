@@ -225,11 +225,12 @@ local function LoadSkin()
 	}
 	for _, tab in pairs(tabs) do
 		T.SkinFrameTab(tab)
-		-- tab:SetWidth(30)
+		tab.backdrop:SetPoint("TOPLEFT", -1, -2)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", -5, 2)
 	end
 
 	QuestMapFrame.QuestsTab:ClearAllPoints()
-	QuestMapFrame.QuestsTab:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPRIGHT", 1, 2)
+	QuestMapFrame.QuestsTab:SetPoint("TOPLEFT", QuestMapFrame.backdrop, "TOPRIGHT", 2, 2)
 
 	-- Map Legend frame
 	do

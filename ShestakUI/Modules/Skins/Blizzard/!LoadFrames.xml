@@ -78,6 +78,7 @@
 	<Script file="RaidInfo.lua"/>
 	<Script file="Runeforge.lua"/>
 	<Script file="Scrapping.lua"/>
+	<Script file="Social.lua"/>
 	<Script file="Soulbinds.lua"/>
 	<Script file="Subscription.lua"/>
 	<Script file="Tabard.lua"/>

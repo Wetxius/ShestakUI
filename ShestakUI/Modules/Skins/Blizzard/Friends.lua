@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if C.skins.blizzard_frames ~= true then return end
-
+if T.newPatch then return end -- BETA
 ----------------------------------------------------------------------------------------
 --	Friends skin
 ----------------------------------------------------------------------------------------
