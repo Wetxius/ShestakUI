@@ -330,7 +330,7 @@ if C.tooltip.mount then
 	end
 
 	T.MountSource = function(self, unit)
-		if T.IsSecretAuras() or T.unitIsUnit(unit, "player") then return end
+		if T.IsSecretAuras() or C_Secrets.ShouldAurasBeSecret() or InCombatLockdown() or T.unitIsUnit(unit, "player") then return end
 		for i = 1, 40 do
 			local auraData = C_UnitAuras.GetAuraDataByIndex(unit, i, "HELPFUL")
 			if auraData then
